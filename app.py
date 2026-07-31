@@ -35,6 +35,25 @@ if df is not None:
 
     # 検索フォーム
     st.markdown("---")
+
+    # IOS バージョン選択
+    st.subheader("IOS バージョンから検索")
+
+    # ユニークなバージョンリストを取得
+    all_affected_releases = set()
+    for releases in df["Known Affected Release(s)"].dropna():
+        for release in str(releases).split():
+            all_affected_releases.add(release.strip())
+
+    sorted_releases = sorted([r for r in all_affected_releases if r], reverse=True)
+
+    selected_ios_version = st.selectbox(
+        "IOS バージョンを選択",
+        [""] + sorted_releases,
+        format_func=lambda x: "バージョンを選択..." if x == "" else x
+    )
+
+    st.markdown("---")
     col1, col2 = st.columns(2)
 
     with col1:
@@ -53,6 +72,37 @@ if df is not None:
 
     st.markdown("---")
 
+    # IOS バージョンが選択された場合、リリースノートのバグをチェック
+    if selected_ios_version:
+        st.info(f"📋 **IOS {selected_ios_version} のリリースノート情報**")
+
+        # このバージョンに関連するバグを取得
+        ios_bugs = df[
+            df["Known Affected Release(s)"].str.contains(selected_ios_version, case=False, na=False)
+        ].copy()
+
+        if len(ios_bugs) > 0:
+            st.write(f"**このバージョンに影響するバグ: {len(ios_bugs)} 件**")
+
+            # リリースノート情報を表示
+            with st.expander("🔍 このバージョンのリリースノート内のバグ情報"):
+                for idx, bug in ios_bugs.head(10).iterrows():
+                    col1, col2, col3 = st.columns([2, 1, 1])
+                    with col1:
+                        st.write(f"**{bug['BUG Id']}** - {bug['BUG headline'][:60]}")
+                    with col2:
+                        severity = bug['Bug Severity']
+                        st.write(f"Severity: {severity}")
+                    with col3:
+                        st.write(f"Status: {bug['Bug Status']}")
+
+                if len(ios_bugs) > 10:
+                    st.caption(f"... 他 {len(ios_bugs) - 10} 件")
+        else:
+            st.write("このバージョンのバグ情報がありません")
+
+        st.markdown("---")
+
     # 検索実行
     if search_button or (feature or version):
         results = df.copy()
@@ -68,6 +118,11 @@ if df is not None:
         # バージョンで絞り込み
         if version:
             mask = results["Known Affected Release(s)"].str.contains(version, case=False, na=False)
+            results = results[mask]
+
+        # IOS バージョンが選択されている場合、それで追加絞り込み
+        if selected_ios_version:
+            mask = results["Known Affected Release(s)"].str.contains(selected_ios_version, case=False, na=False)
             results = results[mask]
 
         # 結果表示
