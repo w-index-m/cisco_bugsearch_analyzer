@@ -1,11 +1,75 @@
 import streamlit as st
 import pandas as pd
 import io
+import re
+from html import unescape
 
 st.set_page_config(page_title="Cisco Bug Search Analyzer", layout="wide")
 
 st.title("🔍 Cisco Bug Search Analyzer")
 st.markdown("Cisco バグ検索システム - 機能とバージョンから該当するバグを検索")
+
+# ユーティリティ関数
+def clean_html_tags(text):
+    """HTML タグを削除して日本語対応テキストに変換"""
+    if not text:
+        return ""
+
+    # HTML タグを削除
+    text = re.sub(r'<[^>]+>', '', text)
+    # HTML エンティティをデコード
+    text = unescape(text)
+    # 連続する空白を1つに
+    text = re.sub(r'\s+', ' ', text)
+    return text.strip()
+
+def parse_release_note(note_text):
+    """リリースノートをセクション別に解析"""
+    if not note_text:
+        return {}
+
+    text = clean_html_tags(note_text)
+    sections = {}
+
+    # セクション分け（日本語キー）
+    section_mapping = {
+        'Symptom': '症状',
+        'Symptôme': '症状',
+        'Conditions': '条件',
+        'Conditions d\'activation': '条件',
+        'Workaround': '回避策',
+        'Contournement': '回避策',
+        'Further Problem Description': '詳細説明',
+        'Description additionnelle du problème': '詳細説明'
+    }
+
+    for eng_key, jp_key in section_mapping.items():
+        # セクション名でテキストを分割
+        pattern = f'{eng_key}[:\s]*'
+        if re.search(pattern, text, re.IGNORECASE):
+            parts = re.split(pattern, text, flags=re.IGNORECASE, maxsplit=1)
+            if len(parts) > 1:
+                content = parts[1].split('\n')[0][:200]  # 最初の200文字
+                sections[jp_key] = content
+
+    return sections
+
+def get_cisco_release_notes_url(product, version):
+    """Cisco 公式リリースノート URL を生成"""
+    # 製品別の URL パターン
+    product_lower = product.lower()
+
+    if 'catalyst 9200' in product_lower or '9200' in product_lower:
+        version_short = version.replace('.', '-')
+        return f"https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9200/software/release/{version_short}/release_notes/ol-{version_short}-9200.html"
+    elif 'catalyst 9300' in product_lower or '9300' in product_lower:
+        version_short = version.replace('.', '-')
+        return f"https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9300/software/release/{version_short}/release_notes/ol-{version_short}-9300.html"
+    elif 'catalyst 9400' in product_lower or '9400' in product_lower:
+        version_short = version.replace('.', '-')
+        return f"https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9400/software/release/{version_short}/release_notes/ol-{version_short}-9400.html"
+    else:
+        return None
 
 @st.cache_data
 def load_csv(file_path):
@@ -167,19 +231,52 @@ if df is not None:
                 with col1:
                     st.metric("Bug ID", bug["BUG Id"])
                 with col2:
-                    st.metric("Severity", bug["Bug Severity"])
+                    severity = int(bug["Bug Severity"]) if pd.notna(bug["Bug Severity"]) else 0
+                    st.metric("重要度", severity)
                 with col3:
-                    st.metric("Status", bug["Bug Status"])
+                    st.metric("ステータス", bug["Bug Status"])
 
-                st.write("**Headline:**", bug["BUG headline"])
-                st.write("**URL:**", f"[バグを開く]({bug['URL']})")
-                st.write("**Product Series:**", bug["Product - Series"])
-                st.write("**Affected Releases:**", bug["Known Affected Release(s)"])
-                st.write("**Fixed Releases:**", bug["Known Fixed Releases"])
-                st.write("**Last Modified:**", bug["Last Modified"])
+                st.write("**タイトル:**", bug["BUG headline"])
 
-                with st.expander("詳細説明"):
-                    st.write(bug["Release Note Enclosure"])
+                # リリースノート情報の解析
+                release_note = bug["Release Note Enclosure"]
+                sections = parse_release_note(release_note)
+
+                # リリースノート情報を日本語で表示
+                if sections:
+                    st.markdown("### 📋 リリースノート情報")
+
+                    for section_name, content in sections.items():
+                        st.write(f"**{section_name}:**")
+                        st.caption(content)
+
+                    # Cisco 公式ドキュメントへのリンク
+                    affected_releases = str(bug["Known Affected Release(s)"]).split()
+                    if affected_releases:
+                        first_version = affected_releases[0]
+                        product = bug["Product - Series"].split(',')[0].strip()
+                        release_url = get_cisco_release_notes_url(product, first_version)
+
+                        if release_url:
+                            st.info(
+                                f"📚 **参考資料**: "
+                                f"[Cisco 公式リリースノート - {product} {first_version}]({release_url})"
+                            )
+
+                st.markdown("---")
+                st.write("**製品:**", bug["Product - Series"])
+                st.write("**影響を受けるバージョン:**", bug["Known Affected Release(s)"])
+                st.write("**修正バージョン:**", bug["Known Fixed Releases"])
+                st.write("**最終更新:**", bug["Last Modified"])
+
+                col1, col2 = st.columns(2)
+                with col1:
+                    st.write("**参照リンク:**")
+                    st.write(f"[Cisco Bug Search で詳細を確認]({bug['URL']})")
+
+                with st.expander("📄 リリースノート全体"):
+                    clean_note = clean_html_tags(release_note)
+                    st.text(clean_note)
 
             # CSV ダウンロード
             st.markdown("---")
