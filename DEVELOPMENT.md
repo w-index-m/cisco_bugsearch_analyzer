@@ -190,11 +190,15 @@ streamlit run app.py
 
 ### Streamlit Cloud デプロイ時
 ```
-Settings → Secrets → 以下を追加:
+Settings → Secrets → 以下を追加（全て任意項目、設定した分だけ画面への自動入力が有効になる）:
 
-deepl_api_key = "your-deepl-api-key"
-nvidia_api_key = "your-nvidia-api-key"
+DEEPL_API_KEY = "your-deepl-api-key"
+NVIDIA_API_KEY = "your-nvidia-api-key"
+GROQ_API_KEY = "your-groq-api-key"
+GEMINI_API_KEY = "your-gemini-api-key"
+OPENROUTER_API_KEY = "your-openrouter-api-key"
 ```
+テンプレートは `.streamlit/secrets.toml.example` を参照。
 
 ---
 
@@ -258,20 +262,23 @@ nvidia_api_key = "your-nvidia-api-key"
 
 ```bash
 # 1. GitHub に最終プッシュ
-git push -u origin claude/test-uaolb3
+git push -u origin main
 
 # 2. Streamlit Cloud にサインアップ
 # https://streamlit.io/cloud
 
 # 3. アプリをデプロイ
 # Repository: w-index-m/cisco_bugsearch_analyzer
-# Branch: claude/test-uaolb3 or main
+# Branch: main
 # Main file: app.py
 
-# 4. Secrets を設定
+# 4. Secrets を設定（任意、設定した分だけ画面への自動入力が有効になる）
 # Settings → Secrets
-deepl_api_key = "xxx"
-nvidia_api_key = "xxx"
+DEEPL_API_KEY = "xxx"
+NVIDIA_API_KEY = "xxx"
+GROQ_API_KEY = "xxx"
+GEMINI_API_KEY = "xxx"
+OPENROUTER_API_KEY = "xxx"
 ```
 
 ---
