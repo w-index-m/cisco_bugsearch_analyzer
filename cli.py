@@ -98,10 +98,16 @@ def cmd_search(args):
         if not args.output:
             print("エラー: --format excel には --output <path> が必要です", file=sys.stderr)
             sys.exit(1)
-        excel_bytes = analyzer.create_excel_report(results, analysis_data, search_params)
+        excel_bytes = analyzer.create_excel_report(
+            results, analysis_data, search_params,
+            include_release_notes=args.with_release_notes,
+            translation_engine=args.translate or "google",
+            deepl_api_key=args.deepl_key, nvidia_api_key=args.nvidia_key,
+        )
         with open(args.output, "wb") as f:
             f.write(excel_bytes)
-        print(f"✓ Excel を書き出しました: {args.output} ({len(results)} 件)", file=sys.stderr)
+        note = "（症状/条件/回避策の日本語訳つき）" if args.with_release_notes else ""
+        print(f"✓ Excel を書き出しました: {args.output} ({len(results)} 件){note}", file=sys.stderr)
 
     else:  # table
         display_cols = ["BUG Id", "BUG headline", "Bug Severity", "Bug Status",
@@ -212,8 +218,12 @@ def build_parser():
                            default="table", help="出力形式（既定: table）")
     p_search.add_argument("--output", help="csv/excel 形式の出力先ファイルパス")
     p_search.add_argument("--analysis-json", help="既存の分析結果 JSON を読み込んで結果に付与する")
+    p_search.add_argument("--with-release-notes", action="store_true",
+                           help="--format excel 使用時、検索結果全件の症状/条件/回避策/詳細説明を"
+                                "日本語訳して列に追加する（件数が多いと生成に時間がかかる）")
     p_search.add_argument("--translate", choices=["google", "deepl", "nvidia"],
-                           help="指定すると headline を翻訳して列を追加する")
+                           help="指定すると headline を翻訳して列を追加する"
+                                "（--with-release-notes 使用時はリリースノートの翻訳エンジンにもなる）")
     p_search.add_argument("--deepl-key", help="DeepL API キー（--translate deepl 使用時）")
     p_search.add_argument("--nvidia-key", help="NVIDIA API キー（--translate nvidia 使用時）")
     p_search.set_defaults(func=cmd_search)

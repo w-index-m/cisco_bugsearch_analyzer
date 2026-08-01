@@ -48,8 +48,8 @@ def load_csv(file_path):
 # ==================== リリースノート処理 ====================
 
 def clean_html_tags(text):
-    """HTML タグを削除して日本語対応テキストに変換"""
-    if not text:
+    """HTML タグを削除して日本語対応テキストに変換（NaN/非文字列も安全に空文字として扱う）"""
+    if not isinstance(text, str) or not text:
         return ""
     text = re.sub(r'<[^>]+>', '', text)
     text = unescape(text)
@@ -86,10 +86,10 @@ def parse_release_note(note_text):
     切り出す（固定文字数での打ち切りは、次の見出し文字列がそのまま本文に
     混入してしまうため使わない）。
     """
-    if not note_text:
+    text = clean_html_tags(note_text)
+    if not text:
         return {}
 
-    text = clean_html_tags(note_text)
     sections = {}
 
     matches = list(_RELEASE_NOTE_SPLIT_RE.finditer(text))
@@ -554,14 +554,21 @@ def list_affected_releases(df):
 
 # ==================== Excel レポート生成 ====================
 
-def create_excel_report(results, analysis_data, search_params):
+def create_excel_report(results, analysis_data, search_params, include_release_notes=False,
+                         translation_engine='google', deepl_api_key=None, nvidia_api_key=None):
     """
     Excel 形式のレポートを生成
 
     複数シート構成:
-    - Sheet1 検索結果: バグ情報 + 分析結果
+    - Sheet1 検索結果: バグ情報 + 分析結果（include_release_notes=True で症状/条件/回避策/詳細説明を日本語で追加）
     - Sheet2 分析詳細: 分析結果のみ
     - Sheet3 検索パラメータ: 検索条件とメタデータ
+
+    Args:
+        include_release_notes: True にすると、results の各行の "Release Note Enclosure" を
+            parse_release_note() で解析し、翻訳した症状/条件/回避策/詳細説明を列として追加する。
+            件数が多いと翻訳API呼び出しが増えて生成に時間がかかる点に注意。
+        translation_engine, deepl_api_key, nvidia_api_key: include_release_notes=True の際に使う翻訳設定
     """
     wb = Workbook()
     ws1 = wb.active
@@ -581,6 +588,10 @@ def create_excel_report(results, analysis_data, search_params):
     # Sheet1: 検索結果
     headers = ["Bug ID", "Headline (日本語)", "Severity", "Status",
                "Affected Releases", "Fixed Releases", "発生可能性", "関連機能", "コメント"]
+    release_note_cols = ["症状 (日本語)", "条件 (日本語)", "回避策 (日本語)", "詳細説明 (日本語)"]
+    release_note_keys = ["症状", "条件", "回避策", "詳細説明"]
+    if include_release_notes:
+        headers = headers + release_note_cols
 
     for col, header in enumerate(headers, 1):
         cell = ws1.cell(row=1, column=col)
@@ -609,6 +620,20 @@ def create_excel_report(results, analysis_data, search_params):
             analysis.get("comment", "")
         ]
 
+        if include_release_notes:
+            raw_note = bug_row.get("Release Note Enclosure", "")
+            if pd.isna(raw_note):
+                raw_note = ""
+            sections = parse_release_note(raw_note)
+            for key in release_note_keys:
+                content = sections.get(key, "")
+                if content:
+                    content = translate_headline(
+                        content, engine=translation_engine,
+                        deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key
+                    )
+                row_data.append(content)
+
         for col, value in enumerate(row_data, 1):
             cell = ws1.cell(row=row, column=col)
             cell.value = value
@@ -624,6 +649,9 @@ def create_excel_report(results, analysis_data, search_params):
     ws1.column_dimensions['G'].width = 12
     ws1.column_dimensions['H'].width = 20
     ws1.column_dimensions['I'].width = 30
+    if include_release_notes:
+        for col_letter in ['J', 'K', 'L', 'M']:
+            ws1.column_dimensions[col_letter].width = 35
 
     # Sheet2: 分析詳細
     analysis_headers = ["Bug ID", "発生可能性", "関連機能", "コメント"]
