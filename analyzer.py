@@ -422,21 +422,32 @@ def version_affects_bug(affected_str, fixed_str, target_version):
 
 # ==================== バグ検索 ====================
 
-_FEATURE_DELIMITER_RE = re.compile(r'[,，、]+')
+_FEATURE_QUOTED_RE = re.compile(r'["“”](.+?)["“”]')
+_FEATURE_DELIMITER_RE = re.compile(r'[,，、\s]+')
 
 
 def split_feature_terms(feature):
     """
-    機能検索文字列を区切り文字（全角/半角カンマ「,」「，」「、」）で複数のキーワードに分割する。
+    機能検索文字列を複数のキーワードに分割する。
 
-    スペース（全角/半角）は区切り文字として扱わず、各キーワードの一部として残す
-    （例: "Catalyst 9300" は1語として保持される）。前後の空白は自動的に除去する。
-    区切り文字が無ければ元の文字列1語のリストを返す。空文字列や空白のみの語は除外する。
+    区切り文字: 全角/半角カンマ（, ， 、）およびスペース（全角/半角）。
+    「"Catalyst 9300"」のようにダブルクォート（全角/半角）で囲むと、
+    中にスペースが含まれていても1つのキーワードとして保持される。
+
+    例:
+        "VPN Multicast"       -> ["VPN", "Multicast"]（スペース区切りでOR）
+        "VPN,Multicast"       -> ["VPN", "Multicast"]（カンマ区切りでOR）
+        '"Catalyst 9300" VPN' -> ["Catalyst 9300", "VPN"]（クォート部分は1語のまま）
+        "Catalyst 9300"（クォート無し） -> ["Catalyst", "9300"]（スペースで分割される）
     """
     if not feature:
         return []
-    terms = _FEATURE_DELIMITER_RE.split(feature)
-    return [t.strip() for t in terms if t.strip()]
+
+    terms = [m.group(1).strip() for m in _FEATURE_QUOTED_RE.finditer(feature) if m.group(1).strip()]
+    remainder = _FEATURE_QUOTED_RE.sub(' ', feature)
+    terms += [t.strip() for t in _FEATURE_DELIMITER_RE.split(remainder) if t.strip()]
+
+    return terms
 
 
 def search_bugs(df, feature=None, version=None, severity=None, ios_version=None, sort_by=None):
@@ -446,9 +457,10 @@ def search_bugs(df, feature=None, version=None, severity=None, ios_version=None,
     Args:
         df: バグデータ全体
         feature: Product - Series / BUG headline に対する部分一致。
-            全角/半角カンマ（, ， 、）区切りで複数キーワードを指定すると OR 検索になる
-            （例: "VPN,Multicast" や "Catalyst 9300、BGP"）。スペースは区切り文字ではなく
-            キーワードの一部として扱われる。
+            カンマ（, ， 、）またはスペース（全角/半角）区切りで複数キーワードを指定すると
+            OR 検索になる（例: "VPN Multicast" や "VPN,Multicast" はどちらも同じ）。
+            スペースを含む語をそのまま1語として検索したい場合はダブルクォートで囲む
+            （例: '"Catalyst 9300" VPN'）。split_feature_terms 参照。
         version: 検索バージョン。同トレイン内で「これ以前のバージョンから影響していて、
             まだ修正版が出ていない」バグも含めてマッチする（version_affects_bug 参照）。
             数値として解釈できない文字列を渡した場合は部分一致にフォールバックする。
