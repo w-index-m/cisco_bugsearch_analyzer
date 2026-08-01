@@ -351,8 +351,13 @@ if df is not None:
                 if pd.isna(note):
                     note = ""
                 sections = parse_release_note(note)
+                symptom = sections.get("症状", "")
                 workaround = sections.get("回避策", "")
                 detail = sections.get("詳細説明", "")
+                symptom_ja = translate_headline(
+                    symptom, engine=translation_engine_key,
+                    deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key
+                ) if symptom else ""
                 workaround_ja = translate_headline(
                     workaround, engine=translation_engine_key,
                     deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key
@@ -361,7 +366,11 @@ if df is not None:
                     detail, engine=translation_engine_key,
                     deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key
                 ) if detail else ""
-                return pd.Series({"回避策 (日本語)": workaround_ja, "詳細説明 (日本語)": detail_ja})
+                return pd.Series({
+                    "症状 (日本語)": symptom_ja,
+                    "回避策 (日本語)": workaround_ja,
+                    "詳細説明 (日本語)": detail_ja,
+                })
 
             display_results = pd.concat(
                 [display_results, display_results["Release Note Enclosure"].apply(_extract_ja_release_note_fields)],
@@ -370,12 +379,12 @@ if df is not None:
 
             display_cols = ["BUG Id", "BUG headline (日本語)", "BUG headline (英語原文)", "Bug Severity", "Bug Status",
                           "Known Affected Release(s)", "Known Fixed Releases",
-                          "回避策 (日本語)", "詳細説明 (日本語)", "発生可能性"]
+                          "症状 (日本語)", "回避策 (日本語)", "詳細説明 (日本語)", "発生可能性"]
 
             st.caption(
                 "「発生可能性」は下の「詳細情報」でバグを選択して手動評価するか、AI分析を行うと更新されます"
                 "（未評価は「-」）。実際のヒット件数に基づく統計値ではなく、目安としてご利用ください。"
-                "「回避策」「詳細説明」はリリースノートから抽出・翻訳したものです（無い場合は空欄）。"
+                "「症状」「回避策」「詳細説明」はリリースノートから抽出・翻訳したものです（無い場合は空欄）。"
                 "件数が多いと翻訳に時間がかかることがあります。"
             )
             st.dataframe(
@@ -384,6 +393,93 @@ if df is not None:
                 hide_index=True
             )
 
+            st.markdown("---")
+            st.markdown("### 📥 結果のエクスポート")
+
+            export_results = display_results[display_cols].copy()
+            export_results["関連機能"] = export_results["BUG Id"].apply(
+                lambda x: ", ".join(st.session_state.bug_analysis.get(x, {}).get("tags", []))
+            )
+            export_results["コメント"] = export_results["BUG Id"].apply(
+                lambda x: st.session_state.bug_analysis.get(x, {}).get("comment", "")
+            )
+
+            csv_data = export_results.to_csv(index=False)
+
+            # Excel エクスポート用パラメータ
+            search_params = {
+                "feature": feature,
+                "version": version,
+                "severity": severity_filter
+            }
+
+            include_release_notes_export = st.checkbox(
+                f"Excelに検索結果全 {len(display_results)} 件の症状/条件/回避策（日本語）を含める"
+                "（件数が多いと生成に時間がかかります）",
+                value=False,
+                key="include_release_notes_export"
+            )
+
+            # Excel ファイルを生成（display_results には翻訳済み見出し列が入っている）
+            excel_data = create_excel_report(
+                display_results, st.session_state.bug_analysis, search_params,
+                include_release_notes=include_release_notes_export,
+                translation_engine=translation_engine_key,
+                deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key,
+            )
+
+            # 統合Excel出力（Palo Alto / YAMAHA 等との合体）用に、最新の検索結果を保持しておく
+            st.session_state["combined_export_cisco"] = {
+                "results": display_results,
+                "analysis_data": dict(st.session_state.bug_analysis),
+                "search_params": search_params,
+                "include_release_notes": include_release_notes_export,
+                "translation_engine": translation_engine_key,
+                "deepl_api_key": deepl_api_key,
+                "nvidia_api_key": nvidia_api_key,
+            }
+
+            col1, col2, col3, col4 = st.columns(4)
+
+            with col1:
+                st.download_button(
+                    label="📊 Excel でダウンロード",
+                    data=excel_data,
+                    file_name=f"cisco_bug_report_{datetime.now().strftime('%Y%m%d_%H%M%S')}.xlsx",
+                    mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                )
+
+            with col2:
+                st.download_button(
+                    label="📄 CSV でダウンロード",
+                    data=csv_data,
+                    file_name=f"bug_search_results_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv",
+                    mime="text/csv"
+                )
+
+            with col3:
+                analysis_json = save_analysis_to_json(st.session_state.bug_analysis)
+                st.download_button(
+                    label="📋 分析結果を JSON で",
+                    data=analysis_json,
+                    file_name=f"bug_analysis_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json",
+                    mime="application/json"
+                )
+
+            with col4:
+                combined_export = {
+                    "timestamp": datetime.now().isoformat(),
+                    "search_params": search_params,
+                    "results": export_results.to_dict('records')
+                }
+                st.download_button(
+                    label="📦 完全レポート",
+                    data=json.dumps(combined_export, ensure_ascii=False, indent=2),
+                    file_name=f"bug_report_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json",
+                    mime="application/json"
+                )
+
+            st.markdown("---")
             st.markdown("### 詳細情報")
             selected_idx = st.selectbox(
                 "詳細を見るバグを選択",
@@ -523,92 +619,6 @@ if df is not None:
                 with st.expander("📄 リリースノート全体"):
                     clean_note = clean_html_tags(release_note)
                     st.text(clean_note)
-
-            st.markdown("---")
-            st.markdown("### 📥 結果のエクスポート")
-
-            export_results = display_results[display_cols].copy()
-            export_results["関連機能"] = export_results["BUG Id"].apply(
-                lambda x: ", ".join(st.session_state.bug_analysis.get(x, {}).get("tags", []))
-            )
-            export_results["コメント"] = export_results["BUG Id"].apply(
-                lambda x: st.session_state.bug_analysis.get(x, {}).get("comment", "")
-            )
-
-            csv_data = export_results.to_csv(index=False)
-
-            # Excel エクスポート用パラメータ
-            search_params = {
-                "feature": feature,
-                "version": version,
-                "severity": severity_filter
-            }
-
-            include_release_notes_export = st.checkbox(
-                f"Excelに検索結果全 {len(display_results)} 件の症状/条件/回避策（日本語）を含める"
-                "（件数が多いと生成に時間がかかります）",
-                value=False,
-                key="include_release_notes_export"
-            )
-
-            # Excel ファイルを生成（display_results には翻訳済み見出し列が入っている）
-            excel_data = create_excel_report(
-                display_results, st.session_state.bug_analysis, search_params,
-                include_release_notes=include_release_notes_export,
-                translation_engine=translation_engine_key,
-                deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key,
-            )
-
-            # 統合Excel出力（Palo Alto / YAMAHA 等との合体）用に、最新の検索結果を保持しておく
-            st.session_state["combined_export_cisco"] = {
-                "results": display_results,
-                "analysis_data": dict(st.session_state.bug_analysis),
-                "search_params": search_params,
-                "include_release_notes": include_release_notes_export,
-                "translation_engine": translation_engine_key,
-                "deepl_api_key": deepl_api_key,
-                "nvidia_api_key": nvidia_api_key,
-            }
-
-            col1, col2, col3, col4 = st.columns(4)
-
-            with col1:
-                st.download_button(
-                    label="📊 Excel でダウンロード",
-                    data=excel_data,
-                    file_name=f"cisco_bug_report_{datetime.now().strftime('%Y%m%d_%H%M%S')}.xlsx",
-                    mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-                )
-
-            with col2:
-                st.download_button(
-                    label="📄 CSV でダウンロード",
-                    data=csv_data,
-                    file_name=f"bug_search_results_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv",
-                    mime="text/csv"
-                )
-
-            with col3:
-                analysis_json = save_analysis_to_json(st.session_state.bug_analysis)
-                st.download_button(
-                    label="📋 分析結果を JSON で",
-                    data=analysis_json,
-                    file_name=f"bug_analysis_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json",
-                    mime="application/json"
-                )
-
-            with col4:
-                combined_export = {
-                    "timestamp": datetime.now().isoformat(),
-                    "search_params": search_params,
-                    "results": export_results.to_dict('records')
-                }
-                st.download_button(
-                    label="📦 完全レポート",
-                    data=json.dumps(combined_export, ensure_ascii=False, indent=2),
-                    file_name=f"bug_report_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json",
-                    mime="application/json"
-                )
         else:
             st.warning("該当するバグが見つかりませんでした")
 else:
