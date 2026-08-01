@@ -79,11 +79,24 @@ def load_analysis_from_json_ui(json_str):
 default_csv = "bugSearch.csv"
 
 # ファイルアップロード or デフォルトを使用
-uploaded_file = st.file_uploader("CSV ファイルをアップロード（オプション）", type=["csv"])
+uploaded_file = st.file_uploader(
+    "CSV / Excel ファイルをアップロード（オプション）",
+    type=["csv", "xls", "xlsx"],
+    help="Nexus 等、Catalyst と列名が異なるエクスポートも自動で列名を認識します"
+)
 
 if uploaded_file is not None:
-    df = pd.read_csv(uploaded_file)
-    df.columns = df.columns.str.strip()
+    try:
+        filename = uploaded_file.name.lower()
+        if filename.endswith(".csv"):
+            df = pd.read_csv(uploaded_file)
+        else:
+            df = pd.read_excel(uploaded_file)
+        df.columns = df.columns.str.strip()
+        df = analyzer.normalize_bug_columns(df)
+    except Exception as e:
+        st.error(f"ファイル読み込みエラー: {e}")
+        df = None
 else:
     df = load_csv(default_csv)
 
@@ -378,9 +391,39 @@ if df is not None:
                 axis=1
             )
 
+            display_results["利用機能"] = display_results["BUG headline"].apply(analyzer.classify_bug_feature)
+            display_results["素因"] = display_results["BUG headline"].apply(analyzer.classify_bug_symptom)
+
+            # 指定バージョンへの影響有無（IOSバージョン選択 or バージョン入力のいずれか）を
+            # 「発生しやすさ」推定の補足情報として使う
+            _impact_target = selected_ios_version or version or None
+            if _impact_target:
+                display_results["_target_affected"] = display_results.apply(
+                    lambda row: version_affects_bug(
+                        row["Known Affected Release(s)"], row.get("Known Fixed Releases"), _impact_target
+                    ), axis=1
+                )
+                impact_col_name = f"{_impact_target}影響"
+                display_results[impact_col_name] = display_results["_target_affected"].map(
+                    {True: "影響あり", False: "対象外"}
+                )
+            else:
+                impact_col_name = None
+
+            display_results["発生しやすさ (推定)"] = display_results.apply(
+                lambda row: analyzer.estimate_occurrence_likelihood(
+                    row["Bug Status"], row["BUG headline"],
+                    target_affected=(row["_target_affected"] if _impact_target else None)
+                ), axis=1
+            )
+
             display_cols = ["BUG Id", "BUG headline (日本語)", "BUG headline (英語原文)", "Bug Severity", "Bug Status",
                           "Known Affected Release(s)", "Known Fixed Releases",
-                          "症状 (日本語)", "回避策 (日本語)", "詳細説明 (日本語)", "発生可能性"]
+                          "利用機能", "素因"]
+            if impact_col_name:
+                display_cols.append(impact_col_name)
+            display_cols += ["症状 (日本語)", "回避策 (日本語)", "詳細説明 (日本語)",
+                              "発生可能性", "発生しやすさ (推定)", "URL"]
 
             ai_summary_note = (
                 "「AI による可能性判定を使用」がONでキー設定済みの場合、これらはログの詳細を除いた"
@@ -393,6 +436,8 @@ if df is not None:
                 "「発生可能性」は下の「詳細情報」でバグを選択して手動評価するか、AI分析を行うと更新されます"
                 "（未評価は「-」）。実際のヒット件数に基づく統計値ではなく、目安としてご利用ください。"
                 "「症状」「回避策」「詳細説明」はリリースノートから抽出したものです（無い場合は空欄）。"
+                "「利用機能」「素因」「発生しやすさ(推定)」はヘッドラインのキーワードとステータスからの"
+                "自動推定であり、統計的根拠のある値ではありません。"
                 "件数が多いと翻訳に時間がかかることがあります。 " + ai_summary_note
             )
             st.dataframe(
@@ -437,6 +482,7 @@ if df is not None:
                 deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key,
                 groq_api_key=groq_api_key, gemini_api_key=gemini_api_key,
                 open_router_api_key=open_router_api_key,
+                target_version=_impact_target,
             )
 
             # 統合Excel出力（Palo Alto / YAMAHA 等との合体）用に、最新の検索結果を保持しておく
@@ -451,6 +497,7 @@ if df is not None:
                 "groq_api_key": groq_api_key,
                 "gemini_api_key": gemini_api_key,
                 "open_router_api_key": open_router_api_key,
+                "target_version": _impact_target,
             }
 
             col1, col2, col3, col4 = st.columns(4)

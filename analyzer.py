@@ -48,6 +48,65 @@ def load_csv(file_path):
     return df
 
 
+# Cisco Bug Search のエクスポートに必要な標準列名。この名前で他の処理が参照するため、
+# アップロードされたファイルの列名がこれと違う場合は normalize_bug_columns() で正規化する
+REQUIRED_BUG_COLUMNS = [
+    "BUG Id", "BUG headline", "URL", "Bug Status", "Bug Severity",
+    "Known Fixed Releases", "Last Modified", "Product - Series",
+    "Known Affected Release(s)", "Release Note Enclosure",
+]
+
+# 製品ライン（Catalyst/Nexus等）によってエクスポートの列名が微妙に異なることがある
+# （例: Nexus では "Bug Status"/"Bug Severity" ではなく単に "Status"/"Severity"）ため、
+# よくある別名から標準列名への変換テーブル
+_COLUMN_ALIASES = {
+    "bug id": "BUG Id",
+    "bug headline": "BUG headline",
+    "headline": "BUG headline",
+    "url": "URL",
+    "bug status": "Bug Status",
+    "status": "Bug Status",
+    "bug severity": "Bug Severity",
+    "severity": "Bug Severity",
+    "known fixed releases": "Known Fixed Releases",
+    "known fixed": "Known Fixed Releases",
+    "known affected release(s)": "Known Affected Release(s)",
+    "known affected releases": "Known Affected Release(s)",
+    "known affected": "Known Affected Release(s)",
+    "last modified": "Last Modified",
+    "product - series": "Product - Series",
+    "product": "Product - Series",
+    "release note enclosure": "Release Note Enclosure",
+}
+
+
+def normalize_bug_columns(df):
+    """
+    アップロードされたバグ一覧の列名を Cisco Bug Search の標準形式に正規化する。
+
+    製品ライン（Nexus等）によっては "Bug Status"/"Bug Severity" ではなく
+    "Status"/"Severity" のように短縮された列名でエクスポートされることがあるため、
+    既知の別名（_COLUMN_ALIASES）を介して標準列名へリネームする。
+    標準列がリネーム後も見つからない場合は、空文字列の列として補い、
+    以降の処理（列への直接アクセス）で KeyError にならないようにする。
+    """
+    df = df.copy()
+    lower_cols = {str(c).strip().lower(): c for c in df.columns}
+    rename_map = {}
+    for alias, canonical in _COLUMN_ALIASES.items():
+        if canonical in df.columns:
+            continue
+        if alias in lower_cols:
+            rename_map[lower_cols[alias]] = canonical
+    df = df.rename(columns=rename_map)
+
+    for col in REQUIRED_BUG_COLUMNS:
+        if col not in df.columns:
+            df[col] = ""
+
+    return df
+
+
 # ==================== リリースノート処理 ====================
 
 def clean_html_tags(text):
@@ -829,7 +888,7 @@ def _write_simple_sheet(wb, sheet_name, headers, rows):
 def create_excel_report(results, analysis_data, search_params, include_release_notes=False,
                          translation_engine='google', deepl_api_key=None, nvidia_api_key=None,
                          extra_sheets=None, groq_api_key=None, gemini_api_key=None,
-                         open_router_api_key=None):
+                         open_router_api_key=None, target_version=None):
     """
     Excel 形式のレポートを生成
 
@@ -850,6 +909,8 @@ def create_excel_report(results, analysis_data, search_params, include_release_n
         groq_api_key, gemini_api_key, open_router_api_key: 指定があれば、症状/回避策/詳細説明を
             翻訳の代わりに AI で日本語要約する（生ログ・スタックトレース等を除いた要点のみ）。
             いずれも無ければ通常の翻訳結果を使う。
+        target_version: 指定すると "{target_version}影響" 列を追加し、そのバージョンへの
+            影響有無を version_affects_bug() で判定して記載する（省略可）。
     """
     wb = Workbook()
     ws1 = wb.active
@@ -874,7 +935,10 @@ def create_excel_report(results, analysis_data, search_params, include_release_n
     sorted_results = sorted_results.sort_values(by="_severity_sort", ascending=True, na_position="last")
 
     headers = ["Bug ID", "Headline (日本語)", "Headline (英語原文・参考)", "Severity", "Status",
-               "Affected Releases", "Fixed Releases", "発生可能性", "関連機能", "コメント"]
+               "Affected Releases", "Fixed Releases", "利用機能", "素因"]
+    if target_version:
+        headers.append(f"{target_version}影響")
+    headers += ["発生可能性", "発生しやすさ(推定)", "関連機能", "コメント", "URL"]
     release_note_cols = ["症状 (日本語)", "条件 (日本語)", "回避策 (日本語)", "詳細説明 (日本語)"]
     release_note_keys = ["症状", "条件", "回避策", "詳細説明"]
     if include_release_notes:
@@ -896,6 +960,7 @@ def create_excel_report(results, analysis_data, search_params, include_release_n
         if headline is None or (isinstance(headline, float) and pd.isna(headline)):
             headline = headline_en
 
+        target_affected = None
         row_data = [
             bug_id,
             headline,
@@ -904,9 +969,20 @@ def create_excel_report(results, analysis_data, search_params, include_release_n
             bug_row["Bug Status"],
             bug_row["Known Affected Release(s)"],
             bug_row["Known Fixed Releases"],
+            classify_bug_feature(headline_en),
+            classify_bug_symptom(headline_en),
+        ]
+        if target_version:
+            target_affected = version_affects_bug(
+                bug_row["Known Affected Release(s)"], bug_row.get("Known Fixed Releases"), target_version
+            )
+            row_data.append("影響あり" if target_affected else "対象外")
+        row_data += [
             analysis.get("possibility", "-"),
+            estimate_occurrence_likelihood(bug_row["Bug Status"], headline_en, target_affected=target_affected),
             ", ".join(analysis.get("tags", [])),
-            analysis.get("comment", "")
+            analysis.get("comment", ""),
+            bug_row.get("URL", ""),
         ]
 
         if include_release_notes:
@@ -936,20 +1012,16 @@ def create_excel_report(results, analysis_data, search_params, include_release_n
             cell.alignment = Alignment(wrap_text=True, vertical="top")
             cell.border = border
 
-    ws1.column_dimensions['A'].width = 15
-    ws1.column_dimensions['B'].width = 40
-    ws1.column_dimensions['C'].width = 40
-    ws1.column_dimensions['D'].width = 10
-    ws1.column_dimensions['E'].width = 12
-    ws1.column_dimensions['F'].width = 25
-    ws1.column_dimensions['G'].width = 25
-    ws1.column_dimensions['H'].width = 12
-    ws1.column_dimensions['I'].width = 20
-    ws1.column_dimensions['J'].width = 30
-    if include_release_notes:
-        for col_letter in ['K', 'L', 'M', 'N']:
-            ws1.column_dimensions[col_letter].width = 35
-        ws1.column_dimensions['O'].width = 45
+    _col_widths = {
+        "Bug ID": 15, "Headline (日本語)": 40, "Headline (英語原文・参考)": 40, "Severity": 10,
+        "Status": 12, "Affected Releases": 25, "Fixed Releases": 25, "利用機能": 22, "素因": 18,
+        "発生可能性": 12, "発生しやすさ(推定)": 42, "関連機能": 20, "コメント": 30, "URL": 30,
+        "症状 (日本語)": 35, "条件 (日本語)": 35, "回避策 (日本語)": 35, "詳細説明 (日本語)": 35,
+        "リリースノート原文（英語・参考）": 45,
+    }
+    for col_idx, header in enumerate(headers, 1):
+        width = 15 if header.endswith("影響") else _col_widths.get(header, 20)
+        ws1.column_dimensions[get_column_letter(col_idx)].width = width
 
     # Sheet2: 分析詳細
     analysis_headers = ["Bug ID", "発生可能性", "関連機能", "コメント"]
@@ -1038,7 +1110,7 @@ def create_combined_excel_report(cisco=None, extra_sheets=None):
              "include_release_notes": bool（省略可）, "translation_engine": str（省略可）,
              "deepl_api_key": str（省略可）, "nvidia_api_key": str（省略可）,
              "groq_api_key": str（省略可）, "gemini_api_key": str（省略可）,
-             "open_router_api_key": str（省略可）}
+             "open_router_api_key": str（省略可）, "target_version": str（省略可）}
         extra_sheets: [{"name": str, "headers": [...], "rows": [[...], ...]}, ...] または None
 
     Returns:
@@ -1052,6 +1124,7 @@ def create_combined_excel_report(cisco=None, extra_sheets=None):
             deepl_api_key=cisco.get("deepl_api_key"), nvidia_api_key=cisco.get("nvidia_api_key"),
             groq_api_key=cisco.get("groq_api_key"), gemini_api_key=cisco.get("gemini_api_key"),
             open_router_api_key=cisco.get("open_router_api_key"),
+            target_version=cisco.get("target_version"),
             extra_sheets=extra_sheets,
         )
 
