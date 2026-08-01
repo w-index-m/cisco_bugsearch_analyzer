@@ -57,32 +57,57 @@ def clean_html_tags(text):
     return text.strip()
 
 
+_RELEASE_NOTE_SECTION_MAPPING = {
+    'Symptom': '症状',
+    'Symptôme': '症状',
+    'Conditions': '条件',
+    "Conditions d'activation": '条件',
+    'Workaround': '回避策',
+    'Contournement': '回避策',
+    'Further Problem Description': '詳細説明',
+    'Description additionnelle du problème': '詳細説明',
+}
+
+# 長いキーワードから先にマッチさせる（"Conditions d'activation" が "Conditions" に
+# 食われて誤分割されるのを防ぐため）
+_RELEASE_NOTE_KEYWORDS_SORTED = sorted(_RELEASE_NOTE_SECTION_MAPPING.keys(), key=len, reverse=True)
+_RELEASE_NOTE_SPLIT_RE = re.compile(
+    r'(' + '|'.join(re.escape(k) for k in _RELEASE_NOTE_KEYWORDS_SORTED) + r')[:\s]*',
+    re.IGNORECASE,
+)
+
+
 def parse_release_note(note_text):
-    """リリースノートをセクション別に解析"""
+    """
+    リリースノートをセクション別（症状/条件/回避策/詳細説明）に解析する。
+
+    clean_html_tags() が改行を含む空白を全てスペースに正規化するため、
+    各セクションの本文は「次のセクション見出しが現れる直前まで」を境界として
+    切り出す（固定文字数での打ち切りは、次の見出し文字列がそのまま本文に
+    混入してしまうため使わない）。
+    """
     if not note_text:
         return {}
 
     text = clean_html_tags(note_text)
     sections = {}
 
-    section_mapping = {
-        'Symptom': '症状',
-        'Symptôme': '症状',
-        'Conditions': '条件',
-        'Conditions d\'activation': '条件',
-        'Workaround': '回避策',
-        'Contournement': '回避策',
-        'Further Problem Description': '詳細説明',
-        'Description additionnelle du problème': '詳細説明'
-    }
+    matches = list(_RELEASE_NOTE_SPLIT_RE.finditer(text))
 
-    for eng_key, jp_key in section_mapping.items():
-        pattern = f'{eng_key}[:\s]*'
-        if re.search(pattern, text, re.IGNORECASE):
-            parts = re.split(pattern, text, flags=re.IGNORECASE, maxsplit=1)
-            if len(parts) > 1:
-                content = parts[1].split('\n')[0][:200]
-                sections[jp_key] = content
+    for i, m in enumerate(matches):
+        jp_key = next(
+            (v for k, v in _RELEASE_NOTE_SECTION_MAPPING.items() if k.lower() == m.group(1).lower()),
+            None,
+        )
+        if jp_key is None:
+            continue
+
+        start = m.end()
+        end = matches[i + 1].start() if i + 1 < len(matches) else len(text)
+        content = text[start:end].strip()
+
+        if content and jp_key not in sections:
+            sections[jp_key] = content
 
     return sections
 
