@@ -219,10 +219,12 @@ if df is not None:
     with col1:
         feature = st.text_input(
             "機能を入力（Product / Headline）",
+            value="crash, reload, hang, memory leak, traceback",
             placeholder='例：VPN Multicast BGP、または "Catalyst 9300" VPN',
             help="カンマまたはスペース（全角/半角）区切りで複数キーワードを指定するとOR検索になります。"
                  "スペースを含む語をそのまま1語で検索したい場合はダブルクォートで囲んでください"
                  "（例: '\"Catalyst 9300\" VPN' なら Catalyst 9300 を1語として、VPNを別語としてOR検索）。"
+                 "初期値は重大バグを拾いやすい代表的な症状キーワードです。必要に応じて書き換えてください。"
         )
 
     with col2:
