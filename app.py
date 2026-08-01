@@ -141,14 +141,14 @@ if df is not None:
         if translation_engine == "DeepL":
             if DEEPL_AVAILABLE:
                 deepl_secret = get_secret("DEEPL_API_KEY")
-                deepl_api_key = st.text_input(
+                deepl_input = st.text_input(
                     "DeepL API キー",
                     type="password",
-                    value=deepl_secret or "",
-                    placeholder="API キーを入力"
+                    placeholder="Secrets 未設定の場合のみ入力" if deepl_secret else "API キーを入力"
                 )
+                deepl_api_key = deepl_input or deepl_secret
                 if deepl_secret:
-                    st.caption("✓ Secrets から読み込み済み（手入力で上書き可能）")
+                    st.caption("✓ Secrets から読み込み済み（未入力ならこちらを使用）")
                 if not deepl_api_key:
                     st.warning("DeepL API キーを入力してください")
             else:
@@ -157,14 +157,14 @@ if df is not None:
 
         elif translation_engine == "NVIDIA Riva":
             nvidia_secret = get_secret("NVIDIA_API_KEY")
-            nvidia_api_key = st.text_input(
+            nvidia_input = st.text_input(
                 "NVIDIA API キー",
                 type="password",
-                value=nvidia_secret or "",
-                placeholder="API キーを入力"
+                placeholder="Secrets 未設定の場合のみ入力" if nvidia_secret else "API キーを入力"
             )
+            nvidia_api_key = nvidia_input or nvidia_secret
             if nvidia_secret:
-                st.caption("✓ Secrets から読み込み済み（手入力で上書き可能）")
+                st.caption("✓ Secrets から読み込み済み（未入力ならこちらを使用）")
             if not nvidia_api_key:
                 st.warning("NVIDIA API キーを入力してください")
 
@@ -192,37 +192,37 @@ if df is not None:
             st.markdown("API キーを入力（持っているもののみ）:")
 
             groq_secret = get_secret("GROQ_API_KEY")
-            groq_api_key = st.text_input(
+            groq_input = st.text_input(
                 "Groq API キー",
                 type="password",
-                value=groq_secret or "",
-                placeholder="gsk_...",
+                placeholder="Secrets 設定済み" if groq_secret else "gsk_...",
                 label_visibility="collapsed"
             )
+            groq_api_key = groq_input or groq_secret
             if groq_secret:
-                st.caption("✓ Secrets から読み込み済み（手入力で上書き可能）")
+                st.caption("✓ Secrets から読み込み済み（未入力ならこちらを使用）")
 
             gemini_secret = get_secret("GEMINI_API_KEY")
-            gemini_api_key = st.text_input(
+            gemini_input = st.text_input(
                 "Gemini API キー",
                 type="password",
-                value=gemini_secret or "",
-                placeholder="AIza...",
+                placeholder="Secrets 設定済み" if gemini_secret else "AIza...",
                 label_visibility="collapsed"
             )
+            gemini_api_key = gemini_input or gemini_secret
             if gemini_secret:
-                st.caption("✓ Secrets から読み込み済み（手入力で上書き可能）")
+                st.caption("✓ Secrets から読み込み済み（未入力ならこちらを使用）")
 
             open_router_secret = get_secret("OPENROUTER_API_KEY")
-            open_router_api_key = st.text_input(
+            open_router_input = st.text_input(
                 "Open Router キー",
                 type="password",
-                value=open_router_secret or "",
-                placeholder="sk-or-...",
+                placeholder="Secrets 設定済み" if open_router_secret else "sk-or-...",
                 label_visibility="collapsed"
             )
+            open_router_api_key = open_router_input or open_router_secret
             if open_router_secret:
-                st.caption("✓ Secrets から読み込み済み（手入力で上書き可能）")
+                st.caption("✓ Secrets から読み込み済み（未入力ならこちらを使用）")
 
     st.markdown("---")
     st.subheader("IOS バージョンから検索")
@@ -651,11 +651,12 @@ with st.expander("🌐 Cisco 以外のベンダー（Palo Alto / YAMAHA 等）�
     nvd_api_key_input = st.text_input(
         "NVD API キー（任意、無くても検索可・レート制限が緩和される）",
         type="password",
-        value=nvd_secret or "",
+        placeholder="Secrets 設定済み" if nvd_secret else "",
         key="nvd_api_key_input"
     )
+    nvd_api_key = nvd_api_key_input or nvd_secret
     if nvd_secret:
-        st.caption("✓ Secrets から読み込み済み（手入力で上書き可能）")
+        st.caption("✓ Secrets から読み込み済み（未入力ならこちらを使用）")
 
     if st.button("🔎 CVE を検索", key="cve_search_btn"):
         if not cve_keyword:
@@ -666,7 +667,7 @@ with st.expander("🌐 Cisco 以外のベンダー（Palo Alto / YAMAHA 等）�
                     cve_keyword,
                     engine=translation_engine_key,
                     deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key,
-                    api_key=nvd_api_key_input or None,
+                    api_key=nvd_api_key or None,
                     target_version=cve_target_version or None,
                 )
 
