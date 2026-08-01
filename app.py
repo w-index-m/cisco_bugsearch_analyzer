@@ -5,6 +5,12 @@ import re
 from html import unescape
 from deep_translator import GoogleTranslator
 
+try:
+    import deepl
+    DEEPL_AVAILABLE = True
+except ImportError:
+    DEEPL_AVAILABLE = False
+
 st.set_page_config(page_title="Cisco Bug Search Analyzer", layout="wide")
 
 st.title("🔍 Cisco Bug Search Analyzer")
@@ -49,16 +55,43 @@ def parse_release_note(note_text):
     return sections
 
 @st.cache_data
-def translate_headline(text, target_lang='ja'):
-    """バグ Headline を日本語に翻訳"""
+def translate_headline_deepl(text, api_key):
+    """DeepL API を使用して日本語に翻訳"""
     if not text or len(text) < 3:
         return text
     try:
-        translator = GoogleTranslator(source_language='en', target_language=target_lang)
+        translator = deepl.Translator(api_key)
+        result = translator.translate_text(text, source_lang="EN", target_lang="JA")
+        return result.text
+    except Exception as e:
+        return None
+
+@st.cache_data
+def translate_headline_google(text):
+    """Google Translate を使用して日本語に翻訳"""
+    if not text or len(text) < 3:
+        return text
+    try:
+        translator = GoogleTranslator(source_language='en', target_language='ja')
         return translator.translate(text)
     except Exception as e:
-        st.warning(f"翻訳エラー: {e}")
+        return None
+
+def translate_headline(text, engine='google', deepl_api_key=None):
+    """翻訳エンジンを指定してヘッドラインを翻訳"""
+    if not text or len(text) < 3:
         return text
+
+    if engine == 'deepl' and deepl_api_key and DEEPL_AVAILABLE:
+        result = translate_headline_deepl(text, deepl_api_key)
+        if result:
+            return result
+
+    result = translate_headline_google(text)
+    if result:
+        return result
+
+    return text
 
 def get_cisco_release_notes_url(product, version):
     """Cisco 公式リリースノート URL を生成"""
@@ -100,6 +133,37 @@ else:
 
 if df is not None:
     st.success(f"✓ {len(df)} 件のバグ情報を読み込みました")
+
+    st.markdown("---")
+
+    col1, col2 = st.columns([2, 1])
+    with col1:
+        st.subheader("IOS バージョンから検索")
+    with col2:
+        st.subheader("翻訳設定")
+
+    col1, col2 = st.columns([2, 1])
+    with col2:
+        translation_engine = st.radio(
+            "翻訳エンジン",
+            ["Google", "DeepL"],
+            horizontal=True,
+            index=0
+        )
+
+        deepl_api_key = None
+        if translation_engine == "DeepL":
+            if DEEPL_AVAILABLE:
+                deepl_api_key = st.text_input(
+                    "DeepL API キー",
+                    type="password",
+                    placeholder="API キーを入力"
+                )
+                if not deepl_api_key:
+                    st.warning("DeepL API キーを入力してください")
+            else:
+                st.warning("deepl ライブラリがインストールされていません")
+                translation_engine = "Google"
 
     st.markdown("---")
     st.subheader("IOS バージョンから検索")
@@ -198,7 +262,9 @@ if df is not None:
                 results = results.sort_values("BUG Id")
 
             display_results = results.copy()
-            display_results["BUG headline (日本語)"] = display_results["BUG headline"].apply(translate_headline)
+            display_results["BUG headline (日本語)"] = display_results["BUG headline"].apply(
+                lambda x: translate_headline(x, engine=translation_engine, deepl_api_key=deepl_api_key)
+            )
 
             display_cols = ["BUG Id", "BUG headline (日本語)", "Bug Severity", "Bug Status",
                           "Known Affected Release(s)", "Known Fixed Releases"]
@@ -213,7 +279,7 @@ if df is not None:
             selected_idx = st.selectbox(
                 "詳細を見るバグを選択",
                 range(len(results)),
-                format_func=lambda x: f"{results.iloc[x]['BUG Id']} - {translate_headline(results.iloc[x]['BUG headline'])}"
+                format_func=lambda x: f"{results.iloc[x]['BUG Id']} - {translate_headline(results.iloc[x]['BUG headline'], engine=translation_engine, deepl_api_key=deepl_api_key)}"
             )
 
             if selected_idx is not None:
@@ -229,7 +295,7 @@ if df is not None:
                     st.metric("ステータス", bug["Bug Status"])
 
                 headline_en = bug["BUG headline"]
-                headline_ja = translate_headline(headline_en)
+                headline_ja = translate_headline(headline_en, engine=translation_engine, deepl_api_key=deepl_api_key)
 
                 st.write("**タイトル（日本語）:**", headline_ja)
                 st.caption(f"英語: {headline_en}")

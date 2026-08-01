@@ -1,3 +1,4 @@
 streamlit==1.40.0
 pandas==2.2.3
 deep-translator==1.11.4
+deepl==1.17.0
