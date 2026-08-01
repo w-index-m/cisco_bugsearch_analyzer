@@ -416,11 +416,17 @@ if df is not None:
                 sections = parse_release_note(release_note)
 
                 if sections:
-                    st.markdown("### 📋 リリースノート情報")
+                    st.markdown("### 📋 リリースノート情報（日本語）")
 
                     for section_name, content in sections.items():
+                        content_ja = translate_headline(
+                            content, engine=translation_engine,
+                            deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key
+                        )
                         st.write(f"**{section_name}:**")
-                        st.caption(content)
+                        st.caption(content_ja)
+                        with st.expander("英語原文"):
+                            st.caption(content)
 
                     # Cisco 公式ドキュメントへのリンク
                     affected_releases = str(bug["Known Affected Release(s)"]).split()
