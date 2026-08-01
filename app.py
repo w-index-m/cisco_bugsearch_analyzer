@@ -357,79 +357,98 @@ if df is not None:
                 key="show_release_note_cols"
             )
 
-            with st.spinner(f"{len(results)} 件のバグを翻訳・分類中です..."):
-                display_results = results.copy()
-                display_results["BUG headline (日本語)"] = display_results["BUG headline"].apply(
-                    lambda x: translate_headline(x, engine=translation_engine_key, deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key)
+            display_results = results.copy()
+            total_rows = len(display_results)
+
+            def _translate_or_summarize_ja(text):
+                if not text:
+                    return ""
+                if use_ai_analysis and (groq_api_key or gemini_api_key or open_router_api_key):
+                    summary = analyzer.summarize_technical_text_ja(
+                        text, groq_key=groq_api_key, gemini_key=gemini_api_key,
+                        open_router_key=open_router_api_key
+                    )
+                    if summary:
+                        return summary
+                return translate_headline(
+                    text, engine=translation_engine_key,
+                    deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key
                 )
-                display_results["BUG headline (英語原文)"] = display_results["BUG headline"]
-                display_results["発生可能性"] = display_results["BUG Id"].apply(
-                    lambda x: st.session_state.bug_analysis.get(x, {}).get("possibility", "-")
+
+            def _extract_ja_release_note_fields(note):
+                if pd.isna(note):
+                    note = ""
+                sections = parse_release_note(note)
+                symptom_ja = _translate_or_summarize_ja(sections.get("症状", ""))
+                workaround_ja = _translate_or_summarize_ja(sections.get("回避策", ""))
+                detail_ja = _translate_or_summarize_ja(sections.get("詳細説明", ""))
+                return pd.Series({
+                    "症状 (日本語)": symptom_ja,
+                    "回避策 (日本語)": workaround_ja,
+                    "詳細説明 (日本語)": detail_ja,
+                })
+
+            # 見出しの翻訳（バグ1件につき翻訳API 1回）: 進捗バー付きで1件ずつ処理する
+            progress_bar = st.progress(0.0, text=f"見出しを翻訳中... (0/{total_rows})")
+            headlines_ja = []
+            for i, headline in enumerate(display_results["BUG headline"], 1):
+                headlines_ja.append(translate_headline(
+                    headline, engine=translation_engine_key,
+                    deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key
+                ))
+                progress_bar.progress(i / total_rows, text=f"見出しを翻訳中... ({i}/{total_rows})")
+            progress_bar.empty()
+
+            display_results["BUG headline (日本語)"] = headlines_ja
+            display_results["BUG headline (英語原文)"] = display_results["BUG headline"]
+            display_results["発生可能性"] = display_results["BUG Id"].apply(
+                lambda x: st.session_state.bug_analysis.get(x, {}).get("possibility", "-")
+            )
+
+            if show_release_note_cols:
+                # 症状/回避策/詳細説明の翻訳（バグ1件につき翻訳API 最大3回）: こちらも進捗バー付き
+                progress_bar2 = st.progress(0.0, text=f"症状/回避策/詳細説明を翻訳中... (0/{total_rows})")
+                release_note_rows = []
+                for i, note in enumerate(display_results["Release Note Enclosure"], 1):
+                    release_note_rows.append(_extract_ja_release_note_fields(note))
+                    progress_bar2.progress(i / total_rows, text=f"症状/回避策/詳細説明を翻訳中... ({i}/{total_rows})")
+                progress_bar2.empty()
+
+                display_results = pd.concat(
+                    [display_results.reset_index(drop=True), pd.DataFrame(release_note_rows).reset_index(drop=True)],
+                    axis=1
                 )
+                display_results.index = results.index
+            else:
+                display_results["症状 (日本語)"] = ""
+                display_results["回避策 (日本語)"] = ""
+                display_results["詳細説明 (日本語)"] = ""
 
-                def _translate_or_summarize_ja(text):
-                    if not text:
-                        return ""
-                    if use_ai_analysis and (groq_api_key or gemini_api_key or open_router_api_key):
-                        summary = analyzer.summarize_technical_text_ja(
-                            text, groq_key=groq_api_key, gemini_key=gemini_api_key,
-                            open_router_key=open_router_api_key
-                        )
-                        if summary:
-                            return summary
-                    return translate_headline(
-                        text, engine=translation_engine_key,
-                        deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key
-                    )
+            display_results["利用機能"] = display_results["BUG headline"].apply(analyzer.classify_bug_feature)
+            display_results["素因"] = display_results["BUG headline"].apply(analyzer.classify_bug_symptom)
 
-                def _extract_ja_release_note_fields(note):
-                    if pd.isna(note):
-                        note = ""
-                    sections = parse_release_note(note)
-                    symptom_ja = _translate_or_summarize_ja(sections.get("症状", ""))
-                    workaround_ja = _translate_or_summarize_ja(sections.get("回避策", ""))
-                    detail_ja = _translate_or_summarize_ja(sections.get("詳細説明", ""))
-                    return pd.Series({
-                        "症状 (日本語)": symptom_ja,
-                        "回避策 (日本語)": workaround_ja,
-                        "詳細説明 (日本語)": detail_ja,
-                    })
-
-                if show_release_note_cols:
-                    display_results = pd.concat(
-                        [display_results, display_results["Release Note Enclosure"].apply(_extract_ja_release_note_fields)],
-                        axis=1
-                    )
-                else:
-                    display_results["症状 (日本語)"] = ""
-                    display_results["回避策 (日本語)"] = ""
-                    display_results["詳細説明 (日本語)"] = ""
-
-                display_results["利用機能"] = display_results["BUG headline"].apply(analyzer.classify_bug_feature)
-                display_results["素因"] = display_results["BUG headline"].apply(analyzer.classify_bug_symptom)
-
-                # 指定バージョンへの影響有無（IOSバージョン選択 or バージョン入力のいずれか）を
-                # 「発生しやすさ」推定の補足情報として使う
-                _impact_target = selected_ios_version or version or None
-                if _impact_target:
-                    display_results["_target_affected"] = display_results.apply(
-                        lambda row: version_affects_bug(
-                            row["Known Affected Release(s)"], row.get("Known Fixed Releases"), _impact_target
-                        ), axis=1
-                    )
-                    impact_col_name = f"{_impact_target}影響"
-                    display_results[impact_col_name] = display_results["_target_affected"].map(
-                        {True: "影響あり", False: "対象外"}
-                    )
-                else:
-                    impact_col_name = None
-
-                display_results["発生しやすさ (推定)"] = display_results.apply(
-                    lambda row: analyzer.estimate_occurrence_likelihood(
-                        row["Bug Status"], row["BUG headline"],
-                        target_affected=(row["_target_affected"] if _impact_target else None)
+            # 指定バージョンへの影響有無（IOSバージョン選択 or バージョン入力のいずれか）を
+            # 「発生しやすさ」推定の補足情報として使う
+            _impact_target = selected_ios_version or version or None
+            if _impact_target:
+                display_results["_target_affected"] = display_results.apply(
+                    lambda row: version_affects_bug(
+                        row["Known Affected Release(s)"], row.get("Known Fixed Releases"), _impact_target
                     ), axis=1
                 )
+                impact_col_name = f"{_impact_target}影響"
+                display_results[impact_col_name] = display_results["_target_affected"].map(
+                    {True: "影響あり", False: "対象外"}
+                )
+            else:
+                impact_col_name = None
+
+            display_results["発生しやすさ (推定)"] = display_results.apply(
+                lambda row: analyzer.estimate_occurrence_likelihood(
+                    row["Bug Status"], row["BUG headline"],
+                    target_affected=(row["_target_affected"] if _impact_target else None)
+                ), axis=1
+            )
 
             display_cols = ["BUG Id", "BUG headline (日本語)", "BUG headline (英語原文)", "Bug Severity", "Bug Status",
                           "Known Affected Release(s)", "Known Fixed Releases",
