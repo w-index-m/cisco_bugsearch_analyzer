@@ -2,7 +2,9 @@ import streamlit as st
 import pandas as pd
 import io
 import re
+import json
 from html import unescape
+from datetime import datetime
 from deep_translator import GoogleTranslator
 
 try:
@@ -143,6 +145,40 @@ def translate_headline(text, engine='google', deepl_api_key=None, nvidia_api_key
 
     return text
 
+def save_analysis_to_json(analysis_data):
+    """分析結果を JSON に変換"""
+    output = {
+        "timestamp": datetime.now().isoformat(),
+        "analysis_count": len(analysis_data),
+        "bugs": []
+    }
+
+    for bug_id, data in analysis_data.items():
+        output["bugs"].append({
+            "bug_id": bug_id,
+            "possibility": data.get("possibility", "-"),
+            "tags": data.get("tags", []),
+            "comment": data.get("comment", "")
+        })
+
+    return json.dumps(output, ensure_ascii=False, indent=2)
+
+def load_analysis_from_json(json_str):
+    """JSON から分析結果を読み込み"""
+    try:
+        data = json.loads(json_str)
+        analysis = {}
+        for bug in data.get("bugs", []):
+            analysis[bug["bug_id"]] = {
+                "possibility": bug.get("possibility", "Medium"),
+                "tags": bug.get("tags", []),
+                "comment": bug.get("comment", "")
+            }
+        return analysis
+    except Exception as e:
+        st.error(f"JSON 読み込みエラー: {e}")
+        return {}
+
 def get_cisco_release_notes_url(product, version):
     """Cisco 公式リリースノート URL を生成"""
     product_lower = product.lower()
@@ -186,6 +222,35 @@ if df is not None:
 
     if "bug_analysis" not in st.session_state:
         st.session_state.bug_analysis = {}
+
+    st.markdown("---")
+
+    with st.expander("💾 分析データの管理"):
+        col1, col2 = st.columns(2)
+
+        with col1:
+            st.write("**分析データをアップロード**")
+            uploaded_json = st.file_uploader(
+                "JSON ファイルを選択",
+                type=["json"],
+                key="analysis_uploader"
+            )
+            if uploaded_json is not None:
+                json_content = uploaded_json.read().decode('utf-8')
+                loaded_analysis = load_analysis_from_json(json_content)
+                if loaded_analysis:
+                    st.session_state.bug_analysis.update(loaded_analysis)
+                    st.success(f"✓ {len(loaded_analysis)} 件の分析データを読み込みました")
+
+        with col2:
+            st.write("**分析データをダウンロード**")
+            analysis_json = save_analysis_to_json(st.session_state.bug_analysis)
+            st.download_button(
+                label="📥 分析結果を JSON でダウンロード",
+                data=analysis_json,
+                file_name=f"bug_analysis_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json",
+                mime="application/json"
+            )
 
     st.markdown("---")
 
@@ -458,6 +523,7 @@ if df is not None:
                     st.text(clean_note)
 
             st.markdown("---")
+            st.markdown("### 📥 結果のエクスポート")
 
             export_results = results[display_cols].copy()
             export_results["発生可能性"] = export_results["BUG Id"].apply(
@@ -474,12 +540,41 @@ if df is not None:
             export_results.to_csv(csv_buffer, index=False)
             csv_data = csv_buffer.getvalue()
 
-            st.download_button(
-                label="📥 検索結果を CSV でダウンロード（分析情報付き）",
-                data=csv_data,
-                file_name="bug_search_results_with_analysis.csv",
-                mime="text/csv"
-            )
+            col1, col2, col3 = st.columns(3)
+
+            with col1:
+                st.download_button(
+                    label="📊 CSV でダウンロード",
+                    data=csv_data,
+                    file_name=f"bug_search_results_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv",
+                    mime="text/csv"
+                )
+
+            with col2:
+                analysis_json = save_analysis_to_json(st.session_state.bug_analysis)
+                st.download_button(
+                    label="📋 分析結果を JSON で",
+                    data=analysis_json,
+                    file_name=f"bug_analysis_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json",
+                    mime="application/json"
+                )
+
+            with col3:
+                combined_export = {
+                    "timestamp": datetime.now().isoformat(),
+                    "search_params": {
+                        "feature": feature,
+                        "version": version,
+                        "severity": severity_filter
+                    },
+                    "results": export_results.to_dict('records')
+                }
+                st.download_button(
+                    label="📦 完全レポート",
+                    data=json.dumps(combined_export, ensure_ascii=False, indent=2),
+                    file_name=f"bug_report_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json",
+                    mime="application/json"
+                )
         else:
             st.warning("該当するバグが見つかりませんでした")
 else:
