@@ -39,11 +39,21 @@ https://streamlit.io/cloud にアクセスして、GitHub アカウントで新�
 2. **「New app」** をクリック
 3. リポジトリ選択
    - Repository: `w-index-m/cisco_bugsearch_analyzer`
-   - Branch: `claude/test-uaolb3` または `main`
+   - Branch: `main`
    - Main file path: `app.py`
 4. **「Deploy」** をクリック
 
-### 3. デプロイ後
+### 3. API キーの自動入力（任意）
+毎回画面で手入力する代わりに、Settings → Secrets に登録しておくと自動入力されます（`.streamlit/secrets.toml.example` 参照）。
+```toml
+DEEPL_API_KEY = "xxx"
+NVIDIA_API_KEY = "xxx"
+GROQ_API_KEY = "xxx"
+GEMINI_API_KEY = "xxx"
+OPENROUTER_API_KEY = "xxx"
+```
+
+### 4. デプロイ後
 - アプリが自動的に起動します
 - URL が発行されます
 - 共有可能な Web URL で利用可能に

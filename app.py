@@ -34,6 +34,14 @@ def load_csv(file_path):
         return None
 
 
+def get_secret(key):
+    """Streamlit Cloud の Settings → Secrets から API キーを取得（未設定なら None）"""
+    try:
+        return st.secrets.get(key)
+    except Exception:
+        return None
+
+
 def load_analysis_from_json_ui(json_str):
     """JSON から分析結果を読み込み。失敗時は画面にエラー表示"""
     try:
@@ -115,11 +123,15 @@ if df is not None:
 
         if translation_engine == "DeepL":
             if DEEPL_AVAILABLE:
+                deepl_secret = get_secret("DEEPL_API_KEY")
                 deepl_api_key = st.text_input(
                     "DeepL API キー",
                     type="password",
+                    value=deepl_secret or "",
                     placeholder="API キーを入力"
                 )
+                if deepl_secret:
+                    st.caption("✓ Secrets から読み込み済み（手入力で上書き可能）")
                 if not deepl_api_key:
                     st.warning("DeepL API キーを入力してください")
             else:
@@ -127,11 +139,15 @@ if df is not None:
                 translation_engine = "Google"
 
         elif translation_engine == "NVIDIA Riva":
+            nvidia_secret = get_secret("NVIDIA_API_KEY")
             nvidia_api_key = st.text_input(
                 "NVIDIA API キー",
                 type="password",
+                value=nvidia_secret or "",
                 placeholder="API キーを入力"
             )
+            if nvidia_secret:
+                st.caption("✓ Secrets から読み込み済み（手入力で上書き可能）")
             if not nvidia_api_key:
                 st.warning("NVIDIA API キーを入力してください")
 
@@ -152,24 +168,39 @@ if df is not None:
 
         if use_ai_analysis:
             st.markdown("API キーを入力（持っているもののみ）:")
+
+            groq_secret = get_secret("GROQ_API_KEY")
             groq_api_key = st.text_input(
                 "Groq API キー",
                 type="password",
+                value=groq_secret or "",
                 placeholder="gsk_...",
                 label_visibility="collapsed"
             )
+            if groq_secret:
+                st.caption("✓ Secrets から読み込み済み（手入力で上書き可能）")
+
+            gemini_secret = get_secret("GEMINI_API_KEY")
             gemini_api_key = st.text_input(
                 "Gemini API キー",
                 type="password",
+                value=gemini_secret or "",
                 placeholder="AIza...",
                 label_visibility="collapsed"
             )
+            if gemini_secret:
+                st.caption("✓ Secrets から読み込み済み（手入力で上書き可能）")
+
+            open_router_secret = get_secret("OPENROUTER_API_KEY")
             open_router_api_key = st.text_input(
                 "Open Router キー",
                 type="password",
+                value=open_router_secret or "",
                 placeholder="sk-or-...",
                 label_visibility="collapsed"
             )
+            if open_router_secret:
+                st.caption("✓ Secrets から読み込み済み（手入力で上書き可能）")
 
     st.markdown("---")
     st.subheader("IOS バージョンから検索")
