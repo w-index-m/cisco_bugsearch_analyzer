@@ -604,3 +604,59 @@ with st.expander("🌐 Cisco 以外のベンダー（Palo Alto / YAMAHA 等）�
                         published = r["published"][:10] if r["published"] else "-"
                         st.write(f"CVSS: {r['cvss_score'] if r['cvss_score'] is not None else '-'}　公開日: {published}")
                         st.write(f"[参考リンク]({r['url']})")
+
+    st.markdown("---")
+    st.markdown("**一般的な既知の問題を貼り付けて分析**")
+    st.caption(
+        "Palo Alto の「Known and Addressed Issues」ページ等、自動取得できない公式ドキュメントの"
+        "内容をブラウザからコピーしてここに貼り付けると、ID単位に分解してカテゴリ分け・日本語訳します。"
+        "NVD検索はセキュリティ脆弱性（CVE）のみが対象のため、こちらは一般的な不具合情報を扱います。"
+    )
+
+    pasted_issues_text = st.text_area(
+        "「ISSUE ID」+ 説明文の形式で貼り付け（例: PAN-332943 の下に説明文、その下に次のID...）",
+        height=180,
+        key="pasted_issues_text"
+    )
+
+    if st.button("📋 貼り付けたテキストを解析", key="parse_pasted_issues_btn"):
+        if not pasted_issues_text.strip():
+            st.warning("テキストを貼り付けてください")
+        else:
+            parsed_issues = analyzer.parse_vendor_known_issues(pasted_issues_text)
+            if not parsed_issues:
+                st.warning(
+                    "ID（例: PAN-332943, PLUG-23656）を検出できませんでした。"
+                    "各IDが単独の行になっているか確認してください。"
+                )
+            else:
+                st.success(f"✓ {len(parsed_issues)} 件検出しました")
+
+                grouped = {}
+                for issue in parsed_issues:
+                    for cat in analyzer.categorize_vendor_issue(issue["description"]):
+                        grouped.setdefault(cat, []).append(issue)
+
+                # カテゴリの表示順を固定（一般/その他は最後）
+                category_order = list(analyzer.VENDOR_ISSUE_CATEGORY_KEYWORDS.keys()) + ["一般 / その他"]
+                for cat in category_order:
+                    if cat not in grouped:
+                        continue
+                    st.markdown(f"#### {cat}（{len(grouped[cat])} 件）")
+                    for issue in grouped[cat]:
+                        desc_ja = translate_headline(
+                            issue["description"], engine=translation_engine_key,
+                            deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key
+                        )
+                        with st.expander(issue["id"]):
+                            st.write(desc_ja)
+                            if issue["workaround"]:
+                                wa_ja = translate_headline(
+                                    issue["workaround"], engine=translation_engine_key,
+                                    deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key
+                                )
+                                st.caption(f"回避策: {wa_ja}")
+                            with st.expander("英語原文"):
+                                st.caption(issue["description"])
+                                if issue["workaround"]:
+                                    st.caption(f"Workaround: {issue['workaround']}")
