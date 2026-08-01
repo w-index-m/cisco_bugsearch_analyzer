@@ -156,8 +156,11 @@ def build_parser():
     p_search = subparsers.add_parser("search", help="バグを検索する")
     p_search.add_argument("--csv", default="bugSearch.csv", help="読み込む CSV ファイル（既定: bugSearch.csv）")
     p_search.add_argument("--feature", help="Product / Headline に対する部分一致検索")
-    p_search.add_argument("--version", help="Known Affected Release(s) に対する部分一致検索")
-    p_search.add_argument("--ios-version", help="特定 IOS バージョンで絞り込み")
+    p_search.add_argument("--version",
+                           help="検索バージョン。同トレイン内で旧バージョンから未修正のまま "
+                                "続いている可能性があるバグも推測で含む（中間バージョンでの "
+                                "発生を保証するものではない）")
+    p_search.add_argument("--ios-version", help="特定 IOS バージョンで絞り込み（--version と同じ判定ロジック）")
     p_search.add_argument("--severity", type=int, nargs="+", default=[1, 2, 3],
                            help="対象 Severity（既定: 1 2 3）")
     p_search.add_argument("--sort-by", choices=["severity", "last_modified", "bug_id"],

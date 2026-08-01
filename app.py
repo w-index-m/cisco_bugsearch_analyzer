@@ -214,6 +214,10 @@ if df is not None:
 
         if len(ios_bugs) > 0:
             st.write(f"**このバージョンに影響するバグ: {len(ios_bugs)} 件**")
+            st.caption(
+                "⚠️ 旧バージョンから未修正のまま続いている推測分を含みます。"
+                "中間バージョンで実際に発生するとは限りません。"
+            )
 
             with st.expander("🔍 このバージョンのリリースノート内のバグ情報"):
                 for idx, bug in ios_bugs.head(10).iterrows():
@@ -254,6 +258,14 @@ if df is not None:
         )
 
         st.subheader(f"検索結果: {len(results)} 件")
+
+        if version or selected_ios_version:
+            st.caption(
+                "⚠️ バージョン検索は「これ以前のバージョンから影響していて、まだ修正版が"
+                "出ていない」バグも推測で含めています。中間バージョン（例: 17.15.2 のみ"
+                "記載されている場合の 17.15.4 など）で実際に発生するとは限らないため、"
+                "重要な判断の前に各バグページで実際の影響バージョンを確認してください。"
+            )
 
         if len(results) > 0:
             display_results = results.copy()

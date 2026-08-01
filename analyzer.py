@@ -376,6 +376,16 @@ def version_affects_bug(affected_str, fixed_str, target_version):
        無ければ「まだ直っていない」と判定し True を返す
     3. target_version が数値として解析できない場合（例: "master" 等）は、
        従来通り Known Affected Release(s) への部分文字列一致にフォールバックする
+
+    注意（推測ロジックである点）:
+    これは「Known Affected Release(s) に載っている最も古いバージョンから、
+    修正版が出るまでの間はずっと影響が続いている」という前提に基づく推測であり、
+    CSVデータ上の裏付けではない。例えば 17.15.2 のみが Known Affected Release(s)
+    に記載されていて 17.15.5 で本関数が True を返した場合でも、実際には中間の
+    17.15.3 や 17.15.4 では別の変更により症状が出なくなっている可能性があり、
+    その逆に 17.15.4 では発生しないが 17.15.5 で再発している可能性もある。
+    「発生する可能性がある」という注意喚起として使い、確定情報としては
+    Cisco Bug Search の該当バグページやリリースノートで必ず裏取りすること。
     """
     target = _parse_version_tuple(target_version)
 
@@ -422,6 +432,9 @@ def search_bugs(df, feature=None, version=None, severity=None, ios_version=None,
         version: 検索バージョン。同トレイン内で「これ以前のバージョンから影響していて、
             まだ修正版が出ていない」バグも含めてマッチする（version_affects_bug 参照）。
             数値として解釈できない文字列を渡した場合は部分一致にフォールバックする。
+            ※ これは推測ロジックであり、中間バージョン（例: 17.15.2 のみ記載の場合の
+            17.15.3 や 17.15.4）で実際に発生するかどうかを保証するものではない。
+            「発生する可能性がある」候補として扱い、確定判断は個別バグページで確認すること。
         severity: 対象とする Severity のリスト（例: [1, 2, 3]）
         ios_version: 特定 IOS バージョンでの絞り込み（version と併用可、判定ロジックは同じ）
         sort_by: "severity" | "last_modified" | "bug_id"
@@ -591,6 +604,11 @@ def create_excel_report(results, analysis_data, search_params):
         ["", ""],
         ["分析情報", ""],
         ["分析済みバグ数", len(analysis_data)],
+        ["", ""],
+        ["注意事項", ""],
+        ["バージョン検索について",
+         "旧バージョンから未修正のまま続いている可能性があるバグを推測で含みます。"
+         "中間バージョンで実際に発生するとは限らないため、重要な判断の前に各バグページで確認してください。"],
     ]
 
     for row, (key, value) in enumerate(params_data, 1):
@@ -599,8 +617,9 @@ def create_excel_report(results, analysis_data, search_params):
 
         cell_key.value = key
         cell_value.value = value
+        cell_value.alignment = Alignment(wrap_text=True, vertical="top")
 
-        if key in ["検索パラメータ", "分析情報"]:
+        if key in ["検索パラメータ", "分析情報", "注意事項"]:
             cell_key.fill = PatternFill(start_color="D9E1F2", end_color="D9E1F2", fill_type="solid")
             cell_key.font = Font(bold=True)
 
@@ -608,7 +627,7 @@ def create_excel_report(results, analysis_data, search_params):
         cell_value.border = border
 
     ws3.column_dimensions['A'].width = 20
-    ws3.column_dimensions['B'].width = 40
+    ws3.column_dimensions['B'].width = 60
 
     excel_buffer = io.BytesIO()
     wb.save(excel_buffer)
