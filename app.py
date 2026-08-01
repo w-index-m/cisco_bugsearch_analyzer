@@ -16,6 +16,18 @@ except ImportError:
 import requests
 import os
 
+try:
+    import google.generativeai as genai
+    GEMINI_AVAILABLE = True
+except ImportError:
+    GEMINI_AVAILABLE = False
+
+try:
+    from groq import Groq
+    GROQ_AVAILABLE = True
+except ImportError:
+    GROQ_AVAILABLE = False
+
 st.set_page_config(page_title="Cisco Bug Search Analyzer", layout="wide")
 
 st.title("🔍 Cisco Bug Search Analyzer")
@@ -179,6 +191,141 @@ def load_analysis_from_json(json_str):
         st.error(f"JSON 読み込みエラー: {e}")
         return {}
 
+def assess_bug_with_groq(headline, release_note, user_comment, api_key):
+    """Groq API を使用して発生可能性を判定"""
+    if not api_key:
+        return None
+
+    try:
+        client = Groq(api_key=api_key)
+        prompt = f"""以下のバグ情報から、発生の可能性を High/Medium/Low で判定してください。
+
+【バグタイトル（日本語）】
+{headline}
+
+【リリースノート】
+{release_note[:500]}
+
+【ユーザーコメント】
+{user_comment if user_comment else "（コメントなし）"}
+
+【判定フォーマット】
+可能性: [High/Medium/Low]
+理由: [簡潔な理由]
+
+日本語で回答してください。"""
+
+        message = client.messages.create(
+            model="mixtral-8x7b-32768",
+            max_tokens=200,
+            messages=[
+                {"role": "user", "content": prompt}
+            ]
+        )
+        return message.content[0].text
+    except Exception as e:
+        return None
+
+def assess_bug_with_gemini(headline, release_note, user_comment, api_key):
+    """Gemini API を使用して発生可能性を判定"""
+    if not api_key or not GEMINI_AVAILABLE:
+        return None
+
+    try:
+        genai.configure(api_key=api_key)
+        model = genai.GenerativeModel('gemini-pro')
+
+        prompt = f"""以下のバグ情報から、発生の可能性を High/Medium/Low で判定してください。
+
+【バグタイトル（日本語）】
+{headline}
+
+【リリースノート】
+{release_note[:500]}
+
+【ユーザーコメント】
+{user_comment if user_comment else "（コメントなし）"}
+
+【判定フォーマット】
+可能性: [High/Medium/Low]
+理由: [簡潔な理由]
+
+日本語で回答してください。"""
+
+        response = model.generate_content(prompt)
+        return response.text
+    except Exception as e:
+        return None
+
+def assess_bug_with_open_router(headline, release_note, user_comment, api_key):
+    """Open Router API を使用して発生可能性を判定"""
+    if not api_key:
+        return None
+
+    try:
+        prompt = f"""以下のバグ情報から、発生の可能性を High/Medium/Low で判定してください。
+
+【バグタイトル（日本語）】
+{headline}
+
+【リリースノート】
+{release_note[:500]}
+
+【ユーザーコメント】
+{user_comment if user_comment else "（コメントなし）"}
+
+【判定フォーマット】
+可能性: [High/Medium/Low]
+理由: [簡潔な理由]
+
+日本語で回答してください。"""
+
+        response = requests.post(
+            url="https://openrouter.ai/api/v1/chat/completions",
+            headers={
+                "Authorization": f"Bearer {api_key}",
+                "HTTP-Referer": "https://streamlit.io",
+                "X-Title": "Cisco Bug Search Analyzer"
+            },
+            json={
+                "model": "mistralai/mistral-7b-instruct",
+                "messages": [
+                    {"role": "user", "content": prompt}
+                ],
+                "max_tokens": 200
+            },
+            timeout=10
+        )
+
+        if response.status_code == 200:
+            result = response.json()
+            if "choices" in result and len(result["choices"]) > 0:
+                return result["choices"][0]["message"]["content"]
+        return None
+    except Exception as e:
+        return None
+
+def assess_bug_possibility(headline_ja, release_note, user_comment, groq_key=None, gemini_key=None, open_router_key=None):
+    """
+    複数の AI を試してバグの発生可能性を判定
+
+    フォールバック順:
+    1. Groq
+    2. Gemini
+    3. Open Router
+    """
+    assessments = [
+        ("Groq", assess_bug_with_groq(headline_ja, release_note, user_comment, groq_key)),
+        ("Gemini", assess_bug_with_gemini(headline_ja, release_note, user_comment, gemini_key)),
+        ("Open Router", assess_bug_with_open_router(headline_ja, release_note, user_comment, open_router_key))
+    ]
+
+    for engine_name, result in assessments:
+        if result:
+            return {"engine": engine_name, "result": result}
+
+    return None
+
 def get_cisco_release_notes_url(product, version):
     """Cisco 公式リリースノート URL を生成"""
     product_lower = product.lower()
@@ -303,6 +450,34 @@ if df is not None:
             default=[1, 2, 3],
             label_visibility="collapsed"
         )
+
+        st.markdown("**AI 分析エンジン**")
+        use_ai_analysis = st.checkbox("AI による可能性判定を使用", value=False)
+
+        groq_api_key = None
+        gemini_api_key = None
+        open_router_api_key = None
+
+        if use_ai_analysis:
+            st.markdown("API キーを入力（持っているもののみ）:")
+            groq_api_key = st.text_input(
+                "Groq API キー",
+                type="password",
+                placeholder="gsk_...",
+                label_visibility="collapsed"
+            )
+            gemini_api_key = st.text_input(
+                "Gemini API キー",
+                type="password",
+                placeholder="AIza...",
+                label_visibility="collapsed"
+            )
+            open_router_api_key = st.text_input(
+                "Open Router キー",
+                type="password",
+                placeholder="sk-or-...",
+                label_visibility="collapsed"
+            )
 
     st.markdown("---")
     st.subheader("IOS バージョンから検索")
@@ -452,11 +627,39 @@ if df is not None:
                     st.session_state.bug_analysis[bug_id] = {
                         "possibility": "Medium",
                         "tags": [],
-                        "comment": ""
+                        "comment": "",
+                        "ai_assessment": None
                     }
 
                 analysis = st.session_state.bug_analysis[bug_id]
 
+                col1, col2 = st.columns(2)
+                with col1:
+                    if use_ai_analysis and (groq_api_key or gemini_api_key or open_router_api_key):
+                        if st.button("🤖 AI で分析", key=f"ai_btn_{bug_id}"):
+                            with st.spinner("AI が分析中..."):
+                                assessment = assess_bug_possibility(
+                                    headline_ja,
+                                    release_note,
+                                    analysis["comment"],
+                                    groq_key=groq_api_key,
+                                    gemini_key=gemini_api_key,
+                                    open_router_key=open_router_api_key
+                                )
+
+                                if assessment:
+                                    st.session_state.bug_analysis[bug_id]["ai_assessment"] = assessment
+                                    st.success(f"✓ {assessment['engine']} で分析完了")
+                                else:
+                                    st.error("AI による分析に失敗しました。API キーを確認してください。")
+
+                    if analysis["ai_assessment"]:
+                        st.info(f"**AI 分析結果（{analysis['ai_assessment']['engine']}）:**\n\n{analysis['ai_assessment']['result']}")
+
+                with col2:
+                    pass
+
+                st.markdown("---")
                 col1, col2 = st.columns(2)
                 with col1:
                     possibility = st.selectbox(
