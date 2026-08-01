@@ -1014,8 +1014,18 @@ def create_excel_report(results, analysis_data, search_params, include_release_n
             raw_note = bug_row.get("Release Note Enclosure", "")
             if pd.isna(raw_note):
                 raw_note = ""
-            sections = parse_release_note(raw_note)
-            for key in release_note_keys:
+            sections = None
+            for key, col_name in zip(release_note_keys, release_note_cols):
+                # 呼び出し側（app.py）で既に日本語訳/AI要約済みの列があれば、それをそのまま使い、
+                # 二重に翻訳APIを呼ばない。無ければ（条件列、または results にまだ無い場合）
+                # ここで初めて parse_release_note + 翻訳を行う
+                existing = bug_row.get(col_name)
+                if existing is not None and not (isinstance(existing, float) and pd.isna(existing)) and existing != "":
+                    row_data.append(existing)
+                    continue
+
+                if sections is None:
+                    sections = parse_release_note(raw_note)
                 content = sections.get(key, "")
                 if content:
                     summary = None
