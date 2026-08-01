@@ -11,6 +11,9 @@ try:
 except ImportError:
     DEEPL_AVAILABLE = False
 
+import requests
+import os
+
 st.set_page_config(page_title="Cisco Bug Search Analyzer", layout="wide")
 
 st.title("🔍 Cisco Bug Search Analyzer")
@@ -77,10 +80,57 @@ def translate_headline_google(text):
     except Exception as e:
         return None
 
-def translate_headline(text, engine='google', deepl_api_key=None):
+def translate_headline_nvidia(text, api_key):
+    """NVIDIA Riva Translation を使用して日本語に翻訳"""
+    if not text or len(text) < 3:
+        return None
+    if not api_key:
+        return None
+
+    try:
+        headers = {
+            "Authorization": f"Bearer {api_key}",
+            "Content-Type": "application/json"
+        }
+
+        payload = {
+            "model": "nvidia/riva-translate-4b-instruct-v2",
+            "messages": [
+                {
+                    "role": "user",
+                    "content": f"Translate the following text from English to Japanese. Only return the translated text without any explanation.\n\nText: {text}"
+                }
+            ],
+            "temperature": 0.5,
+            "top_p": 0.9,
+            "max_tokens": 512
+        }
+
+        response = requests.post(
+            "https://integrate.api.nvidia.com/v1/chat/completions",
+            headers=headers,
+            json=payload,
+            timeout=10
+        )
+
+        if response.status_code == 200:
+            result = response.json()
+            if "choices" in result and len(result["choices"]) > 0:
+                return result["choices"][0]["message"]["content"].strip()
+        return None
+
+    except Exception as e:
+        return None
+
+def translate_headline(text, engine='google', deepl_api_key=None, nvidia_api_key=None):
     """翻訳エンジンを指定してヘッドラインを翻訳"""
     if not text or len(text) < 3:
         return text
+
+    if engine == 'nvidia' and nvidia_api_key:
+        result = translate_headline_nvidia(text, nvidia_api_key)
+        if result:
+            return result
 
     if engine == 'deepl' and deepl_api_key and DEEPL_AVAILABLE:
         result = translate_headline_deepl(text, deepl_api_key)
@@ -146,12 +196,14 @@ if df is not None:
     with col2:
         translation_engine = st.radio(
             "翻訳エンジン",
-            ["Google", "DeepL"],
-            horizontal=True,
+            ["Google", "DeepL", "NVIDIA Riva"],
+            horizontal=False,
             index=0
         )
 
         deepl_api_key = None
+        nvidia_api_key = None
+
         if translation_engine == "DeepL":
             if DEEPL_AVAILABLE:
                 deepl_api_key = st.text_input(
@@ -164,6 +216,15 @@ if df is not None:
             else:
                 st.warning("deepl ライブラリがインストールされていません")
                 translation_engine = "Google"
+
+        elif translation_engine == "NVIDIA Riva":
+            nvidia_api_key = st.text_input(
+                "NVIDIA API キー",
+                type="password",
+                placeholder="API キーを入力"
+            )
+            if not nvidia_api_key:
+                st.warning("NVIDIA API キーを入力してください")
 
     st.markdown("---")
     st.subheader("IOS バージョンから検索")
@@ -263,7 +324,7 @@ if df is not None:
 
             display_results = results.copy()
             display_results["BUG headline (日本語)"] = display_results["BUG headline"].apply(
-                lambda x: translate_headline(x, engine=translation_engine, deepl_api_key=deepl_api_key)
+                lambda x: translate_headline(x, engine=translation_engine, deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key)
             )
 
             display_cols = ["BUG Id", "BUG headline (日本語)", "Bug Severity", "Bug Status",
@@ -279,7 +340,7 @@ if df is not None:
             selected_idx = st.selectbox(
                 "詳細を見るバグを選択",
                 range(len(results)),
-                format_func=lambda x: f"{results.iloc[x]['BUG Id']} - {translate_headline(results.iloc[x]['BUG headline'], engine=translation_engine, deepl_api_key=deepl_api_key)}"
+                format_func=lambda x: f"{results.iloc[x]['BUG Id']} - {translate_headline(results.iloc[x]['BUG headline'], engine=translation_engine, deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key)}"
             )
 
             if selected_idx is not None:
@@ -295,10 +356,12 @@ if df is not None:
                     st.metric("ステータス", bug["Bug Status"])
 
                 headline_en = bug["BUG headline"]
-                headline_ja = translate_headline(headline_en, engine=translation_engine, deepl_api_key=deepl_api_key)
+                headline_ja = translate_headline(headline_en, engine=translation_engine, deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key)
 
                 st.write("**タイトル（日本語）:**", headline_ja)
                 st.caption(f"英語: {headline_en}")
+                if translation_engine != "Google":
+                    st.caption(f"翻訳エンジン: {translation_engine}")
 
                 release_note = bug["Release Note Enclosure"]
                 sections = parse_release_note(release_note)
