@@ -14,6 +14,7 @@ from analyzer import (
     create_excel_report,
     search_bugs,
     list_affected_releases,
+    version_affects_bug,
     DEEPL_AVAILABLE,
 )
 
@@ -203,9 +204,13 @@ if df is not None:
     if selected_ios_version:
         st.info(f"📋 **IOS {selected_ios_version} のリリースノート情報**")
 
-        ios_bugs = df[
-            df["Known Affected Release(s)"].str.contains(selected_ios_version, case=False, na=False)
-        ].copy()
+        ios_mask = df.apply(
+            lambda row: version_affects_bug(
+                row["Known Affected Release(s)"], row.get("Known Fixed Releases"), selected_ios_version
+            ),
+            axis=1,
+        )
+        ios_bugs = df[ios_mask].copy()
 
         if len(ios_bugs) > 0:
             st.write(f"**このバージョンに影響するバグ: {len(ios_bugs)} 件**")

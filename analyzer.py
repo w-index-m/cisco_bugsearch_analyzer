@@ -343,6 +343,73 @@ def assess_bug_possibility(headline_ja, release_note, user_comment, groq_key=Non
     return None
 
 
+# ==================== バージョン比較 ====================
+
+_VERSION_DIGITS_RE = re.compile(r'\d+')
+
+
+def _parse_version_tuple(token):
+    """
+    バージョン文字列から (major, minor, patch) の整数タプルを抽出する。
+
+    コードネーム接頭辞（Dublin-17.12.5）、括弧表記（17.12(4.2)）、
+    末尾の英字サフィックス（17.12.4a）、旧 IOS 表記（3.10.1E_ngwc）などを許容する。
+    数値が2つ未満しか取れない場合（sdk-master など）は None を返す。
+    """
+    digits = _VERSION_DIGITS_RE.findall(str(token))
+    if len(digits) < 2:
+        return None
+    nums = [int(d) for d in digits[:3]]
+    while len(nums) < 3:
+        nums.append(0)
+    return tuple(nums)
+
+
+def version_affects_bug(affected_str, fixed_str, target_version):
+    """
+    target_version 時点でバグが「影響あり（未修正）」かどうかを判定する。
+
+    ロジック:
+    1. target と同じトレイン（major.minor）の Known Affected Release(s) の中に
+       target 以前（同じか古い）のバージョンがあれば、そのトレインで「影響が始まっている」とみなす
+    2. 同じトレインの Known Fixed Releases の中に target 以前（同じか古い）の修正版が
+       無ければ「まだ直っていない」と判定し True を返す
+    3. target_version が数値として解析できない場合（例: "master" 等）は、
+       従来通り Known Affected Release(s) への部分文字列一致にフォールバックする
+    """
+    target = _parse_version_tuple(target_version)
+
+    if target is None:
+        return str(target_version).lower() in str(affected_str).lower()
+
+    train = target[:2]
+
+    affected_tokens = str(affected_str).split() if pd.notna(affected_str) else []
+    affected_versions = [
+        v for v in (_parse_version_tuple(t) for t in affected_tokens)
+        if v is not None and v[:2] == train
+    ]
+
+    if not affected_versions:
+        return False
+
+    if not any(v <= target for v in affected_versions):
+        # 同トレインの影響開始バージョンが target より後 → まだそのバージョンに到達していない
+        return False
+
+    fixed_tokens = str(fixed_str).split() if pd.notna(fixed_str) else []
+    fixed_versions = [
+        v for v in (_parse_version_tuple(t) for t in fixed_tokens)
+        if v is not None and v[:2] == train
+    ]
+
+    if any(v <= target for v in fixed_versions):
+        # 同トレインで target 以前に修正版がリリース済み → 既に直っている
+        return False
+
+    return True
+
+
 # ==================== バグ検索 ====================
 
 def search_bugs(df, feature=None, version=None, severity=None, ios_version=None, sort_by=None):
@@ -352,9 +419,11 @@ def search_bugs(df, feature=None, version=None, severity=None, ios_version=None,
     Args:
         df: バグデータ全体
         feature: Product - Series / BUG headline に対する部分一致
-        version: Known Affected Release(s) に対する部分一致
+        version: 検索バージョン。同トレイン内で「これ以前のバージョンから影響していて、
+            まだ修正版が出ていない」バグも含めてマッチする（version_affects_bug 参照）。
+            数値として解釈できない文字列を渡した場合は部分一致にフォールバックする。
         severity: 対象とする Severity のリスト（例: [1, 2, 3]）
-        ios_version: 特定 IOS バージョンでの絞り込み（version と併用可）
+        ios_version: 特定 IOS バージョンでの絞り込み（version と併用可、判定ロジックは同じ）
         sort_by: "severity" | "last_modified" | "bug_id"
 
     Returns:
@@ -373,11 +442,21 @@ def search_bugs(df, feature=None, version=None, severity=None, ios_version=None,
         results = results[mask]
 
     if version:
-        mask = results["Known Affected Release(s)"].str.contains(version, case=False, na=False)
+        mask = results.apply(
+            lambda row: version_affects_bug(
+                row["Known Affected Release(s)"], row.get("Known Fixed Releases"), version
+            ),
+            axis=1,
+        )
         results = results[mask]
 
     if ios_version:
-        mask = results["Known Affected Release(s)"].str.contains(ios_version, case=False, na=False)
+        mask = results.apply(
+            lambda row: version_affects_bug(
+                row["Known Affected Release(s)"], row.get("Known Fixed Releases"), ios_version
+            ),
+            axis=1,
+        )
         results = results[mask]
 
     if sort_by == "severity":
