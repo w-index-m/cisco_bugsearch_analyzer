@@ -21,6 +21,10 @@ Web を介さず、同一マシン/コンテナ内のエージェントやスク
 
     # 利用可能な IOS バージョン一覧
     python cli.py versions
+
+    # Cisco 以外のベンダー（Palo Alto / YAMAHA 等）は NVD をキーワード検索
+    python cli.py cve-search "PAN-OS 11.1.2"
+    python cli.py cve-search "Yamaha RTX830" --translate google --format json
 """
 import argparse
 import json
@@ -145,6 +149,36 @@ def cmd_assess(args):
         sys.exit(1)
 
 
+def cmd_cve_search(args):
+    results = analyzer.search_cve_with_translation(
+        args.keyword,
+        engine=args.translate,
+        deepl_api_key=args.deepl_key,
+        nvidia_api_key=args.nvidia_key,
+        results_limit=args.limit,
+        api_key=args.nvd_api_key,
+    )
+
+    if isinstance(results, dict) and "error" in results:
+        print(f"エラー: NVD への問い合わせに失敗しました - {results['error']}", file=sys.stderr)
+        sys.exit(1)
+
+    if not results:
+        print(f"「{args.keyword}」に該当する CVE が見つかりませんでした", file=sys.stderr)
+        sys.exit(1)
+
+    if args.format == "json":
+        print(json.dumps(results, ensure_ascii=False, indent=2))
+    else:
+        print(f"検索結果: {len(results)} 件（キーワード: {args.keyword}）\n")
+        for r in results:
+            score = r["cvss_score"] if r["cvss_score"] is not None else "-"
+            print(f"[{r['severity_ja']}] {r['cve_id']}  (CVSS {score})")
+            print(f"  {r['description_ja']}")
+            print(f"  公開日: {r['published'][:10] if r['published'] else '-'}  参考: {r['url']}")
+            print()
+
+
 def build_parser():
     parser = argparse.ArgumentParser(
         prog="cli.py",
@@ -203,6 +237,24 @@ def build_parser():
     p_assess.add_argument("--gemini-key", help="Gemini API キー")
     p_assess.add_argument("--open-router-key", help="Open Router API キー")
     p_assess.set_defaults(func=cmd_assess)
+
+    # cve-search（Cisco 以外のベンダー向け：NVD をキーワード検索）
+    p_cve = subparsers.add_parser(
+        "cve-search",
+        help="NVD（脆弱性データベース）をキーワード検索。Palo Alto / YAMAHA など、"
+             "構造化データを持たないベンダーの調査に使う",
+    )
+    p_cve.add_argument("keyword", help="検索キーワード（例: 'PAN-OS 11.1.2', 'Yamaha RTX830'）")
+    p_cve.add_argument("--limit", type=int, default=20, help="取得件数上限（既定: 20）")
+    p_cve.add_argument("--format", choices=["table", "json"], default="table")
+    p_cve.add_argument("--translate", choices=["google", "deepl", "nvidia"], default="google",
+                        help="説明文の翻訳エンジン（既定: google）")
+    p_cve.add_argument("--deepl-key", help="DeepL API キー（--translate deepl 使用時）")
+    p_cve.add_argument("--nvidia-key", help="NVIDIA API キー（--translate nvidia 使用時）")
+    p_cve.add_argument("--nvd-api-key",
+                        help="NVD API キー（省略可。指定するとレート制限が緩和される。"
+                             "https://nvd.nist.gov/developers/request-an-api-key）")
+    p_cve.set_defaults(func=cmd_cve_search)
 
     return parser
 

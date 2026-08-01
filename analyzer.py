@@ -670,3 +670,112 @@ def create_excel_report(results, analysis_data, search_params):
     excel_buffer.seek(0)
 
     return excel_buffer.getvalue()
+
+
+# ==================== NVD 検索（Cisco 以外のベンダー向け） ====================
+#
+# Cisco は bugSearch.csv という構造化データがあるため search_bugs() で高速に
+# 検索できるが、Palo Alto や YAMAHA のようにそれに相当するデータセットを
+# 持たないベンダーについては、NVD（米国立脆弱性データベース）の公開APIを
+# キーワード検索することで代替する。CVE は全ベンダー共通でNVDに登録されており、
+# CVSS スコア（＝緊急度）も構造化データとして取得できる。
+# API仕様: https://nvd.nist.gov/developers/vulnerabilities
+
+NVD_API_BASE = "https://services.nvd.nist.gov/rest/json/cves/2.0"
+
+CVSS_SEVERITY_LABELS = {
+    "CRITICAL": "緊急 (Critical)",
+    "HIGH": "重要 (High)",
+    "MEDIUM": "警告 (Medium)",
+    "LOW": "注意 (Low)",
+    "NONE": "情報 (None)",
+}
+
+
+def _extract_cvss(metrics):
+    """CVE の metrics ブロックから CVSS スコアと深刻度を取り出す（v3.1 → v3.0 → v2 の優先順）"""
+    for key in ("cvssMetricV31", "cvssMetricV30", "cvssMetricV2"):
+        entries = metrics.get(key)
+        if entries:
+            cvss_data = entries[0].get("cvssData", {})
+            score = cvss_data.get("baseScore")
+            severity = entries[0].get("baseSeverity") or cvss_data.get("baseSeverity")
+            return score, severity
+    return None, None
+
+
+def search_cve_by_keyword(keyword, results_limit=20, api_key=None, timeout=20):
+    """
+    NVD の公開APIをキーワード検索し、該当する CVE の一覧を返す。
+
+    Args:
+        keyword: 検索キーワード（例: "PAN-OS 11.1.2", "Yamaha RTX830"）
+        results_limit: 取得件数上限（NVD 側の resultsPerPage）
+        api_key: NVD API キー（省略可。無しだと 5リクエスト/30秒 とレート制限が厳しい。
+            https://nvd.nist.gov/developers/request-an-api-key から無料取得可能）
+        timeout: リクエストタイムアウト秒数
+
+    Returns:
+        成功時: [{"cve_id", "description_en", "cvss_score", "severity",
+                  "severity_ja", "published", "url"}, ...]
+        失敗時: {"error": "エラーメッセージ"}
+    """
+    headers = {"apiKey": api_key} if api_key else {}
+    params = {"keywordSearch": keyword, "resultsPerPage": results_limit}
+
+    try:
+        response = requests.get(NVD_API_BASE, params=params, headers=headers, timeout=timeout)
+        response.raise_for_status()
+        data = response.json()
+    except Exception as e:
+        return {"error": str(e)}
+
+    return _parse_nvd_response(data)
+
+
+def _parse_nvd_response(data):
+    """NVD API v2.0 の生JSONレスポンスを扱いやすい辞書のリストに変換する"""
+    results = []
+
+    for item in data.get("vulnerabilities", []):
+        cve = item.get("cve", {})
+        cve_id = cve.get("id", "")
+
+        descriptions = cve.get("descriptions", [])
+        description_en = next((d["value"] for d in descriptions if d.get("lang") == "en"), "")
+
+        score, severity = _extract_cvss(cve.get("metrics", {}))
+
+        references = cve.get("references", [])
+        url = references[0]["url"] if references else f"https://nvd.nist.gov/vuln/detail/{cve_id}"
+
+        results.append({
+            "cve_id": cve_id,
+            "description_en": description_en,
+            "cvss_score": score,
+            "severity": severity,
+            "severity_ja": CVSS_SEVERITY_LABELS.get(severity, severity or "不明"),
+            "published": cve.get("published", ""),
+            "url": url,
+        })
+
+    return results
+
+
+def search_cve_with_translation(keyword, engine='google', deepl_api_key=None, nvidia_api_key=None,
+                                 results_limit=20, api_key=None):
+    """
+    search_cve_by_keyword() の結果に日本語訳（description_ja）を付けて、
+    CVSS スコアの高い順（緊急度が高い順）にソートして返す。
+    """
+    results = search_cve_by_keyword(keyword, results_limit=results_limit, api_key=api_key)
+    if isinstance(results, dict) and "error" in results:
+        return results
+
+    for r in results:
+        r["description_ja"] = translate_headline(
+            r["description_en"], engine=engine, deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key
+        )
+
+    results.sort(key=lambda r: r["cvss_score"] or 0, reverse=True)
+    return results
