@@ -151,6 +151,11 @@ if df is not None:
             if not nvidia_api_key:
                 st.warning("NVIDIA API キーを入力してください")
 
+        # 表示ラベル（"Google"/"DeepL"/"NVIDIA Riva"）を translate_headline() が期待する
+        # 内部キー（'google'/'deepl'/'nvidia'）に変換する
+        engine_key_map = {"Google": "google", "DeepL": "deepl", "NVIDIA Riva": "nvidia"}
+        translation_engine_key = engine_key_map.get(translation_engine, "google")
+
         st.markdown("**Severity フィルタ**")
         severity_filter = st.multiselect(
             "Severity を選択",
@@ -304,7 +309,7 @@ if df is not None:
         if len(results) > 0:
             display_results = results.copy()
             display_results["BUG headline (日本語)"] = display_results["BUG headline"].apply(
-                lambda x: translate_headline(x, engine=translation_engine, deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key)
+                lambda x: translate_headline(x, engine=translation_engine_key, deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key)
             )
 
             display_cols = ["BUG Id", "BUG headline (日本語)", "Bug Severity", "Bug Status",
@@ -320,7 +325,7 @@ if df is not None:
             selected_idx = st.selectbox(
                 "詳細を見るバグを選択",
                 range(len(results)),
-                format_func=lambda x: f"{results.iloc[x]['BUG Id']} - {translate_headline(results.iloc[x]['BUG headline'], engine=translation_engine, deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key)}"
+                format_func=lambda x: f"{results.iloc[x]['BUG Id']} - {translate_headline(results.iloc[x]['BUG headline'], engine=translation_engine_key, deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key)}"
             )
 
             if selected_idx is not None:
@@ -336,7 +341,7 @@ if df is not None:
                     st.metric("ステータス", bug["Bug Status"])
 
                 headline_en = bug["BUG headline"]
-                headline_ja = translate_headline(headline_en, engine=translation_engine, deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key)
+                headline_ja = translate_headline(headline_en, engine=translation_engine_key, deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key)
 
                 st.write("**タイトル（日本語）:**", headline_ja)
                 st.caption(f"英語: {headline_en}")
@@ -420,7 +425,7 @@ if df is not None:
 
                     for section_name, content in sections.items():
                         content_ja = translate_headline(
-                            content, engine=translation_engine,
+                            content, engine=translation_engine_key,
                             deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key
                         )
                         st.write(f"**{section_name}:**")
@@ -479,8 +484,20 @@ if df is not None:
                 "severity": severity_filter
             }
 
+            include_release_notes_export = st.checkbox(
+                f"Excelに検索結果全 {len(display_results)} 件の症状/条件/回避策（日本語）を含める"
+                "（件数が多いと生成に時間がかかります）",
+                value=False,
+                key="include_release_notes_export"
+            )
+
             # Excel ファイルを生成（display_results には翻訳済み見出し列が入っている）
-            excel_data = create_excel_report(display_results, st.session_state.bug_analysis, search_params)
+            excel_data = create_excel_report(
+                display_results, st.session_state.bug_analysis, search_params,
+                include_release_notes=include_release_notes_export,
+                translation_engine=translation_engine_key,
+                deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key,
+            )
 
             col1, col2, col3, col4 = st.columns(4)
 
