@@ -279,6 +279,8 @@ if df is not None:
         )
 
     search_button = st.button("🔎 バグを検索", type="primary")
+    if search_button:
+        st.session_state["has_run_search"] = True
 
     st.markdown("---")
 
@@ -318,7 +320,7 @@ if df is not None:
 
         st.markdown("---")
 
-    if search_button or (feature or version):
+    if st.session_state.get("has_run_search", False):
         sort_by_ui = st.selectbox(
             "ソート順",
             ["Bug Severity (高い順)", "Last Modified (新しい順)", "Bug ID"]
@@ -725,6 +727,11 @@ with st.expander("🌐 Cisco 以外のベンダー（Palo Alto / YAMAHA 等）�
         "キーワード検索します。バージョンを指定すると、NVD のバージョン範囲データから"
         "「影響あり / 対象外・修正済みの可能性」を判定します（データが無い場合は判定不可）。"
     )
+    st.caption(
+        "💡 検索キーワード・バージョンの確認先（参考）: "
+        "PAN-OS リリースノート一覧 → https://docs.paloaltonetworks.com/pan-os ／ "
+        "YAMAHA リリースノート・ファームウェア情報 → https://network.yamaha.com/"
+    )
 
     cve_col1, cve_col2 = st.columns(2)
     with cve_col1:
@@ -858,45 +865,63 @@ with st.expander("🌐 Cisco 以外のベンダー（Palo Alto / YAMAHA 等）�
                     # カテゴリの表示順を固定（一般/その他は最後）
                     category_order = list(analyzer.VENDOR_ISSUE_CATEGORY_KEYWORDS.keys()) + ["一般 / その他"]
 
-                vendor_issue_rows = []
+                # カテゴリ順にフラット化してから、1件ずつ翻訳（進捗バー付き）。
+                # 1件ごとの展開表示はせず、まとめて一覧表として表示する
+                ordered_issues = []
                 for cat in category_order:
                     if cat not in grouped:
                         continue
-                    st.markdown(f"#### {cat}（{len(grouped[cat])} 件）")
                     for issue in grouped[cat]:
-                        desc_ja = translate_headline(
-                            issue["description"], engine=translation_engine_key,
+                        ordered_issues.append((cat, issue))
+
+                total_issues = len(ordered_issues)
+                progress_bar3 = st.progress(0.0, text=f"翻訳中... (0/{total_issues})")
+                vendor_issue_rows = []
+                for i, (cat, issue) in enumerate(ordered_issues, 1):
+                    desc_ja = translate_headline(
+                        issue["description"], engine=translation_engine_key,
+                        deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key
+                    )
+                    wa_ja = ""
+                    if issue["workaround"]:
+                        wa_ja = translate_headline(
+                            issue["workaround"], engine=translation_engine_key,
                             deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key
                         )
-                        wa_ja = ""
-                        if issue["workaround"]:
-                            wa_ja = translate_headline(
-                                issue["workaround"], engine=translation_engine_key,
-                                deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key
-                            )
-                        with st.expander(issue["id"]):
-                            st.write(desc_ja)
-                            if wa_ja:
-                                st.caption(f"回避策: {wa_ja}")
-                            with st.expander("英語原文"):
-                                st.caption(issue["description"])
-                                if issue["workaround"]:
-                                    st.caption(f"Workaround: {issue['workaround']}")
+                    original_ref = issue["description"]
+                    if issue["workaround"]:
+                        original_ref += f" / Workaround: {issue['workaround']}"
 
-                        original_ref = issue["description"]
-                        if issue["workaround"]:
-                            original_ref += f" / Workaround: {issue['workaround']}"
+                    vendor_issue_rows.append([
+                        issue["id"], issue["section"] or cat, desc_ja, wa_ja, original_ref,
+                    ])
+                    progress_bar3.progress(i / total_issues, text=f"翻訳中... ({i}/{total_issues})")
+                progress_bar3.empty()
 
-                        vendor_issue_rows.append([
-                            issue["id"], issue["section"] or cat, desc_ja, wa_ja, original_ref,
-                        ])
+                vendor_issue_cols = ["ID", "分類", "概要(日本語)", "回避策(日本語)", "原文(英語・参考)"]
+                st.dataframe(
+                    pd.DataFrame(vendor_issue_rows, columns=vendor_issue_cols),
+                    use_container_width=True,
+                    hide_index=True
+                )
 
                 # 統合Excel出力用に、貼り付け解析結果を保持しておく（日本語訳をメイン列、英語原文は参考列として末尾に）
                 st.session_state["combined_export_vendor_issues"] = {
                     "name": "貼り付け解析結果",
-                    "headers": ["ID", "分類", "概要(日本語)", "回避策(日本語)", "原文(英語・参考)"],
+                    "headers": vendor_issue_cols,
                     "rows": vendor_issue_rows,
                 }
+
+                vendor_excel_data = analyzer.create_combined_excel_report(
+                    extra_sheets=[st.session_state["combined_export_vendor_issues"]]
+                )
+                st.download_button(
+                    label="📊 この解析結果をExcelでダウンロード",
+                    data=vendor_excel_data,
+                    file_name=f"vendor_issues_report_{datetime.now().strftime('%Y%m%d_%H%M%S')}.xlsx",
+                    mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                    key="vendor_issues_excel_download_btn"
+                )
 
     st.markdown("---")
     st.markdown("**バージョン系統ごとのEOL（サポート終了日）を調べる**")
@@ -955,6 +980,17 @@ with st.expander("🌐 Cisco 以外のベンダー（Palo Alto / YAMAHA 等）�
                     "headers": ["対応期限(EOL)", "状態", "系統", "リリース日", "最新パッチ", "リンク"],
                     "rows": eol_rows,
                 }
+
+                eol_excel_data = analyzer.create_combined_excel_report(
+                    extra_sheets=[st.session_state["combined_export_eol"]]
+                )
+                st.download_button(
+                    label="📊 このEOL情報をExcelでダウンロード",
+                    data=eol_excel_data,
+                    file_name=f"eol_report_{eol_product.strip()[:15]}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.xlsx",
+                    mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                    key="eol_excel_download_btn"
+                )
 
                 st.info(
                     "💡 **お願い**: 上表の「リンク」先ページ（バグ一覧・Known and Addressed Issues等）は"
