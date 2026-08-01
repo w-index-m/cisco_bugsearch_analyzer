@@ -342,10 +342,18 @@ if df is not None:
             display_results["BUG headline (日本語)"] = display_results["BUG headline"].apply(
                 lambda x: translate_headline(x, engine=translation_engine_key, deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key)
             )
+            display_results["BUG headline (英語原文)"] = display_results["BUG headline"]
+            display_results["発生可能性"] = display_results["BUG Id"].apply(
+                lambda x: st.session_state.bug_analysis.get(x, {}).get("possibility", "-")
+            )
 
-            display_cols = ["BUG Id", "BUG headline (日本語)", "Bug Severity", "Bug Status",
-                          "Known Affected Release(s)", "Known Fixed Releases"]
+            display_cols = ["BUG Id", "BUG headline (日本語)", "BUG headline (英語原文)", "Bug Severity", "Bug Status",
+                          "Known Affected Release(s)", "Known Fixed Releases", "発生可能性"]
 
+            st.caption(
+                "「発生可能性」は下の「詳細情報」でバグを選択して手動評価するか、AI分析を行うと更新されます"
+                "（未評価は「-」）。実際のヒット件数に基づく統計値ではなく、目安としてご利用ください。"
+            )
             st.dataframe(
                 display_results[display_cols],
                 use_container_width=True,
@@ -496,9 +504,6 @@ if df is not None:
             st.markdown("### 📥 結果のエクスポート")
 
             export_results = display_results[display_cols].copy()
-            export_results["発生可能性"] = export_results["BUG Id"].apply(
-                lambda x: st.session_state.bug_analysis.get(x, {}).get("possibility", "-")
-            )
             export_results["関連機能"] = export_results["BUG Id"].apply(
                 lambda x: ", ".join(st.session_state.bug_analysis.get(x, {}).get("tags", []))
             )
