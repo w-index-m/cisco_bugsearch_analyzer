@@ -9,17 +9,12 @@ st.set_page_config(page_title="Cisco Bug Search Analyzer", layout="wide")
 st.title("🔍 Cisco Bug Search Analyzer")
 st.markdown("Cisco バグ検索システム - 機能とバージョンから該当するバグを検索")
 
-# ユーティリティ関数
 def clean_html_tags(text):
     """HTML タグを削除して日本語対応テキストに変換"""
     if not text:
         return ""
-
-    # HTML タグを削除
     text = re.sub(r'<[^>]+>', '', text)
-    # HTML エンティティをデコード
     text = unescape(text)
-    # 連続する空白を1つに
     text = re.sub(r'\s+', ' ', text)
     return text.strip()
 
@@ -31,7 +26,6 @@ def parse_release_note(note_text):
     text = clean_html_tags(note_text)
     sections = {}
 
-    # セクション分け（日本語キー）
     section_mapping = {
         'Symptom': '症状',
         'Symptôme': '症状',
@@ -44,21 +38,18 @@ def parse_release_note(note_text):
     }
 
     for eng_key, jp_key in section_mapping.items():
-        # セクション名でテキストを分割
         pattern = f'{eng_key}[:\s]*'
         if re.search(pattern, text, re.IGNORECASE):
             parts = re.split(pattern, text, flags=re.IGNORECASE, maxsplit=1)
             if len(parts) > 1:
-                content = parts[1].split('\n')[0][:200]  # 最初の200文字
+                content = parts[1].split('\n')[0][:200]
                 sections[jp_key] = content
 
     return sections
 
 def get_cisco_release_notes_url(product, version):
     """Cisco 公式リリースノート URL を生成"""
-    # 製品別の URL パターン
     product_lower = product.lower()
-
     if 'catalyst 9200' in product_lower or '9200' in product_lower:
         version_short = version.replace('.', '-')
         return f"https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9200/software/release/{version_short}/release_notes/ol-{version_short}-9200.html"
@@ -97,13 +88,9 @@ else:
 if df is not None:
     st.success(f"✓ {len(df)} 件のバグ情報を読み込みました")
 
-    # 検索フォーム
     st.markdown("---")
-
-    # IOS バージョン選択
     st.subheader("IOS バージョンから検索")
 
-    # ユニークなバージョンリストを取得
     all_affected_releases = set()
     for releases in df["Known Affected Release(s)"].dropna():
         for release in str(releases).split():
@@ -136,11 +123,9 @@ if df is not None:
 
     st.markdown("---")
 
-    # IOS バージョンが選択された場合、リリースノートのバグをチェック
     if selected_ios_version:
         st.info(f"📋 **IOS {selected_ios_version} のリリースノート情報**")
 
-        # このバージョンに関連するバグを取得
         ios_bugs = df[
             df["Known Affected Release(s)"].str.contains(selected_ios_version, case=False, na=False)
         ].copy()
@@ -148,7 +133,6 @@ if df is not None:
         if len(ios_bugs) > 0:
             st.write(f"**このバージョンに影響するバグ: {len(ios_bugs)} 件**")
 
-            # リリースノート情報を表示
             with st.expander("🔍 このバージョンのリリースノート内のバグ情報"):
                 for idx, bug in ios_bugs.head(10).iterrows():
                     col1, col2, col3 = st.columns([2, 1, 1])
@@ -167,11 +151,9 @@ if df is not None:
 
         st.markdown("---")
 
-    # 検索実行
     if search_button or (feature or version):
         results = df.copy()
 
-        # 機能で絞り込み
         if feature:
             mask = (
                 results["Product - Series"].str.contains(feature, case=False, na=False) |
@@ -179,21 +161,17 @@ if df is not None:
             )
             results = results[mask]
 
-        # バージョンで絞り込み
         if version:
             mask = results["Known Affected Release(s)"].str.contains(version, case=False, na=False)
             results = results[mask]
 
-        # IOS バージョンが選択されている場合、それで追加絞り込み
         if selected_ios_version:
             mask = results["Known Affected Release(s)"].str.contains(selected_ios_version, case=False, na=False)
             results = results[mask]
 
-        # 結果表示
         st.subheader(f"検索結果: {len(results)} 件")
 
         if len(results) > 0:
-            # ソート
             sort_by = st.selectbox(
                 "ソート順",
                 ["Bug Severity (高い順)", "Last Modified (新しい順)", "Bug ID"]
@@ -206,7 +184,6 @@ if df is not None:
             else:
                 results = results.sort_values("BUG Id")
 
-            # 結果をテーブルで表示
             display_cols = ["BUG Id", "BUG headline", "Bug Severity", "Bug Status",
                           "Known Affected Release(s)", "Known Fixed Releases"]
 
@@ -216,7 +193,6 @@ if df is not None:
                 hide_index=True
             )
 
-            # 詳細表示
             st.markdown("### 詳細情報")
             selected_idx = st.selectbox(
                 "詳細を見るバグを選択",
@@ -238,11 +214,9 @@ if df is not None:
 
                 st.write("**タイトル:**", bug["BUG headline"])
 
-                # リリースノート情報の解析
                 release_note = bug["Release Note Enclosure"]
                 sections = parse_release_note(release_note)
 
-                # リリースノート情報を日本語で表示
                 if sections:
                     st.markdown("### 📋 リリースノート情報")
 
@@ -278,7 +252,6 @@ if df is not None:
                     clean_note = clean_html_tags(release_note)
                     st.text(clean_note)
 
-            # CSV ダウンロード
             st.markdown("---")
             csv_buffer = io.StringIO()
             results[display_cols].to_csv(csv_buffer, index=False)
