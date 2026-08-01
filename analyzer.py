@@ -447,6 +447,127 @@ def version_affects_bug(affected_str, fixed_str, target_version):
     return True
 
 
+# ==================== バグの自動分類・発生しやすさ推定 ====================
+# ユーザーが手元で使っていた集計スクリプト（Nexus/Catalyst 向け）のキーワード分類・
+# 発生しやすさ推定ロジックを移植し、製品を問わず使えるよう分類ルールを統合したもの。
+# いずれもヘッドライン中のキーワードマッチによる目安であり、実際のヒット件数等の
+# 統計データに基づくものではない。
+
+_BUG_FEATURE_RULES = [
+    ("IPsec/VPN", r"\bipsec\b|\bvpn\b|\bike\b|\bl2tp\b|\bpptp\b|dmvpn"),
+    ("vPC/ピアリンク", r"\bvpc\b|peer[- ]?link|peer[- ]?keepalive|peer[- ]?gateway"),
+    ("VXLAN/EVPN", r"vxlan|evpn|\bnve\b|vtep|type-5|type-2|anycast gateway|l3vni|l2vni"),
+    ("BGP", r"\bbgp\b"),
+    ("OSPF", r"\bospf\b|ospfv3"),
+    ("EIGRP", r"\beigrp\b"),
+    ("IS-IS", r"\bisis\b|is-is"),
+    ("PIM/マルチキャスト", r"\bpim\b|multicast|igmp|msdp|\bmroute"),
+    ("HSRP/VRRP/冗長化/スタック", r"\bhsrp\b|\bvrrp\b|\bglbp\b|first hop|fhrp|redundan|stackwise|\bsvl\b|\bstack\b|switchover"),
+    ("STP/L2/MACアドレス学習", r"spanning[- ]?tree|\bstp\b|\bmst\b|bpdu|\bvlan\b|mac address|\bl2\b"),
+    ("LACP/EtherChannel", r"port[- ]?channel|\blacp\b|\blag\b|ether[- ]?channel"),
+    ("FEX", r"\bfex\b|fabric extender|satellite"),
+    ("OTV", r"\botv\b|overlay transport"),
+    ("MPLS/SR", r"\bmpls\b|segment routing|\bsr-?te\b|\bldp\b|\bl3vpn\b"),
+    ("QoS", r"\bqos\b|policy[- ]?map|class[- ]?map|policer|\bdscp\b"),
+    ("TrustSec(CTS/SGACL)", r"\bcts\b|sgacl|trustsec|security[- ]?group"),
+    ("FCoE/ストレージ", r"\bfcoe\b|fibre channel|\bfc\b san|\bnpv\b|\bnpiv\b"),
+    ("SNMP", r"\bsnmp\b"),
+    ("NTP/PTP", r"\bntp\b|\bptp\b|precision time"),
+    ("Syslog/ログ", r"syslog|logging\b|\blog\b"),
+    ("SD-WAN/クラウド", r"sd-?wan|vmanage|vsmart|vbond|\bgcp\b|\bazure\b|\bnsi\b|gvnic|onboarding"),
+    ("NX-API/プログラマビリティ", r"nx-?api|netconf|restconf|\byang\b|grpc|gnmi|telemetry|\bapi\b"),
+    ("DHCP/IPアドレス", r"\bdhcp\b|dhcpv6|ip address|\barp\b|\bnd\b"),
+    ("SPAN/ERSPAN/監視", r"\bspan\b|erspan|sflow|netflow|\bmirror\b"),
+    ("認証(AAA/802.1X)", r"\bmacsec\b|\bmka\b|\bdot1x\b|802\.1x|\baaa\b|tacacs|radius|radsec|control plane|\bcopp\b"),
+    ("無線(WLC/AP)", r"\bwlc\b|wireless|access point|\bap\b joined|\bcapwap\b"),
+    ("ライセンス/システム/リソース", r"licens|\bcpu\b|memory|\bmem\b|\bprocess\b|kernel|\bcore\b|resource|\bdisk\b"),
+    ("ハードウェア/転送(ASIC/FED/OEF)", r"\basic\b|forwarding|\bfib\b|\btcam\b|\bfed\b|\boef\b|hardware|linecard|line card|\bsup\b|module|transceiver|\bsfp\b|\bqsfp\b|\bpoe\b"),
+    ("ISSU/インストール/ブート", r"\bissu\b|install|upgrade|downgrade|\bboot\b|bios|\bepld\b|\bimage\b"),
+    ("CLI/管理", r"\bcli\b|show tech|show command|management|webui|web gui"),
+]
+
+_BUG_SYMPTOM_RULES = [
+    ("脆弱性(DoS/セキュリティ)", r"vulnerabilit|\bcve\b|denial of service|\bdos\b|exploit|security advisory|unauthenticated"),
+    ("クラッシュ", r"crash|\bcore\b|coredump|core file|segfault|signal 11|sigabrt"),
+    ("予期しないリロード/再起動", r"unexpected(ly)? (reload|reboot|restart)|reset(s)? unexpected|reload(s)? unexpected"),
+    ("リロード/再起動", r"\breload|\breboot|restart|reset\b"),
+    ("メモリリーク", r"memory leak|mem leak|\bleak\b"),
+    ("高CPU", r"high cpu|cpu (spike|util|high)|100% cpu"),
+    ("ハング/無応答", r"hang|unresponsive|stuck|freeze|deadlock|not respond"),
+    ("フラップ/不安定", r"flap|unstable|bounce"),
+    ("トレースバック", r"traceback|back[- ]?trace"),
+    ("パケットドロップ/損失", r"packet (drop|loss)|drop(s|ped|ping)?\b|black[- ]?hole|traffic loss"),
+    ("誤動作/表示", r"incorrect|wrong|mismatch|inconsistent|stale|not update|does not (show|display|reflect)"),
+    ("誤動作/失敗", r"fail|error|unable|not work|does not work|not function|broken"),
+]
+
+
+def classify_bug_feature(text):
+    """ヘッドラインのキーワードから利用機能カテゴリを推定する（最大2件、"/"区切り）"""
+    if not text:
+        return "その他/システム"
+    hits = [name for name, pattern in _BUG_FEATURE_RULES if re.search(pattern, text, re.IGNORECASE)]
+    return " / ".join(hits[:2]) if hits else "その他/システム"
+
+
+def classify_bug_symptom(text):
+    """ヘッドラインのキーワードから症状カテゴリ（素因）を推定する（最大2件、"/"区切り）"""
+    if not text:
+        return "その他"
+    hits = [name for name, pattern in _BUG_SYMPTOM_RULES if re.search(pattern, text, re.IGNORECASE)]
+    return " / ".join(hits[:2]) if hits else "その他"
+
+
+_OCCURRENCE_RARE_KEYWORDS = [
+    "multiple", "repeated", "aggressive", "stress", "scale", "scaled", "race",
+    "corner", "rare", "intermittent", "specific", "continuous", "flap",
+    "churn", "soak", "overnight", "thousand", "back-to-back", "iteration",
+    "toggl", "burst", "bulk", "endlessly", "high scale", "under load",
+]
+_OCCURRENCE_COMMON_KEYWORDS = [
+    "memory leak", "leak", "on reload", "after upgrade", "after reboot",
+    "on boot", "at boot", "on startup", "every ", "always", "over time",
+    "gradually", "high cpu",
+]
+
+
+def estimate_occurrence_likelihood(status, headline, target_affected=None):
+    """
+    バグの発生しやすさを Bug Status とヘッドラインのキーワードから推定する。
+
+    実際のヒット件数や統計データに基づくものではなく、あくまで目安。重要な判断の
+    前には必ずバグページ本文で実際の発生条件を確認すること。
+
+    Args:
+        status: Bug Status（Open/Fixed/Duplicate/Terminated 等）
+        headline: BUG headline（英語原文）
+        target_affected: 指定バージョンへの影響有無（True/False）。None なら注記なし
+    """
+    s = (status or "").strip().lower()
+    h = (headline or "").lower()
+    tail = "（※指定バージョンでは影響なし・参考情報）" if target_affected is False else ""
+
+    if s == "duplicate":
+        return "懸念低: 別バグに統合(Duplicate)＝実質クローズ" + tail
+    if s == "terminated":
+        return "懸念低: 打ち切り(Terminated)" + tail
+    if s == "unreproducible":
+        return "懸念低: 再現不可(Unreproducible)＝発生性低い" + tail
+    if s in ("fixed", "resolved", "closed", "verified"):
+        return "修正済: 該当リリースで解消(懸念なし)" + tail
+
+    if re.search(r"vulnerabilit|denial of service|\bdos\b|unauthenticated", h):
+        return "中〜高（未修正/脆弱性）: 設定・攻撃条件が揃えば発生し得る。SMU/修正版の早期適用を推奨" + tail
+
+    rare = next((k for k in _OCCURRENCE_RARE_KEYWORDS if k in h), None)
+    common = next((k for k in _OCCURRENCE_COMMON_KEYWORDS if k in h), None)
+    if common and not rare:
+        return f"中〜高（未修正）: 通常操作/時間経過で発生し得る（条件: {common.strip()}）" + tail
+    if rare:
+        return f"低〜中（未修正）: 特定条件/反復・高負荷時に発生（条件: {rare}）＝通常運用では起きにくい" + tail
+    return "中（未修正）: 明確な高頻度要因は少。発生条件は原文/URL参照" + tail
+
+
 # ==================== バグ検索 ====================
 
 _FEATURE_QUOTED_RE = re.compile(r'["“”](.+?)["“”]')
