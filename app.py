@@ -519,3 +519,65 @@ if df is not None:
             st.warning("該当するバグが見つかりませんでした")
 else:
     st.error("CSV ファイルを読み込めません")
+
+st.markdown("---")
+
+with st.expander("🌐 Cisco 以外のベンダー（Palo Alto / YAMAHA 等）を検索"):
+    st.caption(
+        "Cisco のような構造化データが無いベンダーは、NVD（米国立脆弱性データベース）を"
+        "キーワード検索します。バージョンを指定すると、NVD のバージョン範囲データから"
+        "「影響あり / 対象外・修正済みの可能性」を判定します（データが無い場合は判定不可）。"
+    )
+
+    cve_col1, cve_col2 = st.columns(2)
+    with cve_col1:
+        cve_keyword = st.text_input(
+            "検索キーワード",
+            placeholder="例: PAN-OS 11.1.2 / Yamaha RTX830",
+            key="cve_keyword"
+        )
+    with cve_col2:
+        cve_target_version = st.text_input(
+            "バージョン（任意、影響有無を判定したい場合）",
+            placeholder="例: 11.1.2",
+            key="cve_target_version"
+        )
+
+    nvd_secret = get_secret("NVD_API_KEY")
+    nvd_api_key_input = st.text_input(
+        "NVD API キー（任意、無くても検索可・レート制限が緩和される）",
+        type="password",
+        value=nvd_secret or "",
+        key="nvd_api_key_input"
+    )
+    if nvd_secret:
+        st.caption("✓ Secrets から読み込み済み（手入力で上書き可能）")
+
+    if st.button("🔎 CVE を検索", key="cve_search_btn"):
+        if not cve_keyword:
+            st.warning("検索キーワードを入力してください")
+        else:
+            with st.spinner("NVD を検索中..."):
+                cve_results = analyzer.search_cve_with_translation(
+                    cve_keyword,
+                    engine="google",
+                    api_key=nvd_api_key_input or None,
+                    target_version=cve_target_version or None,
+                )
+
+            if isinstance(cve_results, dict) and "error" in cve_results:
+                st.error(f"NVD への問い合わせに失敗しました: {cve_results['error']}")
+            elif not cve_results:
+                st.warning("該当する CVE が見つかりませんでした")
+            else:
+                st.success(f"✓ {len(cve_results)} 件見つかりました")
+                for r in cve_results:
+                    label = f"[{r['severity_ja']}] {r['cve_id']}"
+                    if cve_target_version:
+                        label += f" - {r['affected_ja']}"
+                    with st.expander(label):
+                        st.write(r["description_ja"])
+                        st.caption(f"英語原文: {r['description_en']}")
+                        published = r["published"][:10] if r["published"] else "-"
+                        st.write(f"CVSS: {r['cvss_score'] if r['cvss_score'] is not None else '-'}　公開日: {published}")
+                        st.write(f"[参考リンク]({r['url']})")

@@ -704,7 +704,101 @@ def _extract_cvss(metrics):
     return None, None
 
 
-def search_cve_by_keyword(keyword, results_limit=20, api_key=None, timeout=20):
+AFFECTED_LABELS = {
+    True: "影響あり",
+    False: "対象外 / 修正済みの可能性",
+    None: "判定不可（データ不足）",
+}
+
+
+def _version_in_cpe_match(target, cpe_match):
+    """
+    target: _parse_version_tuple() で得た (major, minor, patch) タプル
+    cpe_match: NVD configurations 内の1つの cpeMatch エントリ
+
+    target が cpe_match の示すバージョン範囲に含まれるか判定する。
+    範囲指定（versionStart/EndIncluding/Excluding）が無い場合は、
+    criteria 文字列自体に埋め込まれた具体的なバージョンと比較する。
+    """
+    start_inc = cpe_match.get("versionStartIncluding")
+    start_exc = cpe_match.get("versionStartExcluding")
+    end_inc = cpe_match.get("versionEndIncluding")
+    end_exc = cpe_match.get("versionEndExcluding")
+
+    if not any([start_inc, start_exc, end_inc, end_exc]):
+        # 範囲指定なし → criteria (cpe:2.3:o:vendor:product:VERSION:...) 内の
+        # バージョン部分（6番目のコロン区切り要素）と直接比較する
+        parts = cpe_match.get("criteria", "").split(":")
+        if len(parts) > 5:
+            specific_version = parts[5]
+            if specific_version not in ("*", "-", ""):
+                v = _parse_version_tuple(specific_version)
+                if v:
+                    return v == target
+        # 具体的なバージョンが取れない（ワイルドカードのみ）→ 判定材料なし
+        return None
+
+    if start_inc:
+        v = _parse_version_tuple(start_inc)
+        if v and target < v:
+            return False
+    if start_exc:
+        v = _parse_version_tuple(start_exc)
+        if v and target <= v:
+            return False
+    if end_inc:
+        v = _parse_version_tuple(end_inc)
+        if v and target > v:
+            return False
+    if end_exc:
+        v = _parse_version_tuple(end_exc)
+        if v and target >= v:
+            return False
+
+    return True
+
+
+def check_version_affected(cve, target_version):
+    """
+    1件の NVD CVE 生データ（configurations を含む）に対して、
+    target_version が影響を受けるかどうかを判定する。
+
+    NVD の configurations には、CPE（対象製品・バージョン範囲）単位で
+    「脆弱かどうか」と「どのバージョン範囲か」が構造化データとして入っている。
+    Cisco の version_affects_bug() と同様の考え方で、指定バージョンが
+    その範囲内かどうかをバージョン番号として比較する。
+
+    Returns:
+        True  : 影響を受ける可能性が高い（脆弱なバージョン範囲に含まれる）
+        False : 影響を受けない（対象範囲外、＝修正済みの可能性）
+        None  : configurations が無い、またはバージョン範囲が特定できず判定不可
+    """
+    target = _parse_version_tuple(target_version)
+    if target is None:
+        return None
+
+    configurations = cve.get("configurations", [])
+    if not configurations:
+        return None
+
+    saw_definitive_match = False
+    for config in configurations:
+        for node in config.get("nodes", []):
+            for cpe_match in node.get("cpeMatch", []):
+                if not cpe_match.get("vulnerable", True):
+                    continue
+                verdict = _version_in_cpe_match(target, cpe_match)
+                if verdict is True:
+                    return True
+                if verdict is False:
+                    saw_definitive_match = True
+
+    if saw_definitive_match:
+        return False
+    return None
+
+
+def search_cve_by_keyword(keyword, results_limit=20, api_key=None, timeout=20, target_version=None):
     """
     NVD の公開APIをキーワード検索し、該当する CVE の一覧を返す。
 
@@ -714,10 +808,15 @@ def search_cve_by_keyword(keyword, results_limit=20, api_key=None, timeout=20):
         api_key: NVD API キー（省略可。無しだと 5リクエスト/30秒 とレート制限が厳しい。
             https://nvd.nist.gov/developers/request-an-api-key から無料取得可能）
         timeout: リクエストタイムアウト秒数
+        target_version: 指定すると、各 CVE が該当バージョンに影響するかどうかを
+            NVD の configurations（CPEバージョン範囲）から判定して affected / affected_ja
+            を結果に追加する（Cisco の version_affects_bug 相当）。数値として
+            解釈できないバージョンを渡した場合や configurations が無い CVE では
+            affected は None（判定不可）になる。
 
     Returns:
         成功時: [{"cve_id", "description_en", "cvss_score", "severity",
-                  "severity_ja", "published", "url"}, ...]
+                  "severity_ja", "published", "url", ["affected", "affected_ja"]}, ...]
         失敗時: {"error": "エラーメッセージ"}
     """
     headers = {"apiKey": api_key} if api_key else {}
@@ -730,10 +829,10 @@ def search_cve_by_keyword(keyword, results_limit=20, api_key=None, timeout=20):
     except Exception as e:
         return {"error": str(e)}
 
-    return _parse_nvd_response(data)
+    return _parse_nvd_response(data, target_version=target_version)
 
 
-def _parse_nvd_response(data):
+def _parse_nvd_response(data, target_version=None):
     """NVD API v2.0 の生JSONレスポンスを扱いやすい辞書のリストに変換する"""
     results = []
 
@@ -749,7 +848,7 @@ def _parse_nvd_response(data):
         references = cve.get("references", [])
         url = references[0]["url"] if references else f"https://nvd.nist.gov/vuln/detail/{cve_id}"
 
-        results.append({
+        entry = {
             "cve_id": cve_id,
             "description_en": description_en,
             "cvss_score": score,
@@ -757,18 +856,31 @@ def _parse_nvd_response(data):
             "severity_ja": CVSS_SEVERITY_LABELS.get(severity, severity or "不明"),
             "published": cve.get("published", ""),
             "url": url,
-        })
+        }
+
+        if target_version:
+            affected = check_version_affected(cve, target_version)
+            entry["affected"] = affected
+            entry["affected_ja"] = AFFECTED_LABELS[affected]
+
+        results.append(entry)
 
     return results
 
 
 def search_cve_with_translation(keyword, engine='google', deepl_api_key=None, nvidia_api_key=None,
-                                 results_limit=20, api_key=None):
+                                 results_limit=20, api_key=None, target_version=None):
     """
-    search_cve_by_keyword() の結果に日本語訳（description_ja）を付けて、
-    CVSS スコアの高い順（緊急度が高い順）にソートして返す。
+    search_cve_by_keyword() の結果に日本語訳（description_ja）を付けて返す。
+
+    target_version を指定した場合は、影響あり（affected=True）のCVEを最優先、
+    次に判定不可（None）、最後に対象外（False）の順に並べ、各グループ内では
+    CVSS スコアの高い順にソートする。target_version を指定しない場合は
+    単純に CVSS スコアの高い順（緊急度が高い順）にソートする。
     """
-    results = search_cve_by_keyword(keyword, results_limit=results_limit, api_key=api_key)
+    results = search_cve_by_keyword(
+        keyword, results_limit=results_limit, api_key=api_key, target_version=target_version
+    )
     if isinstance(results, dict) and "error" in results:
         return results
 
@@ -777,5 +889,10 @@ def search_cve_with_translation(keyword, engine='google', deepl_api_key=None, nv
             r["description_en"], engine=engine, deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key
         )
 
-    results.sort(key=lambda r: r["cvss_score"] or 0, reverse=True)
+    if target_version:
+        affected_rank = {True: 0, None: 1, False: 2}
+        results.sort(key=lambda r: (affected_rank[r["affected"]], -(r["cvss_score"] or 0)))
+    else:
+        results.sort(key=lambda r: r["cvss_score"] or 0, reverse=True)
+
     return results

@@ -157,6 +157,7 @@ def cmd_cve_search(args):
         nvidia_api_key=args.nvidia_key,
         results_limit=args.limit,
         api_key=args.nvd_api_key,
+        target_version=args.target_version,
     )
 
     if isinstance(results, dict) and "error" in results:
@@ -173,7 +174,10 @@ def cmd_cve_search(args):
         print(f"検索結果: {len(results)} 件（キーワード: {args.keyword}）\n")
         for r in results:
             score = r["cvss_score"] if r["cvss_score"] is not None else "-"
-            print(f"[{r['severity_ja']}] {r['cve_id']}  (CVSS {score})")
+            label = f"[{r['severity_ja']}] {r['cve_id']}  (CVSS {score})"
+            if args.target_version:
+                label += f"  - {r['affected_ja']}"
+            print(label)
             print(f"  {r['description_ja']}")
             print(f"  公開日: {r['published'][:10] if r['published'] else '-'}  参考: {r['url']}")
             print()
@@ -254,6 +258,9 @@ def build_parser():
     p_cve.add_argument("--nvd-api-key",
                         help="NVD API キー（省略可。指定するとレート制限が緩和される。"
                              "https://nvd.nist.gov/developers/request-an-api-key）")
+    p_cve.add_argument("--target-version",
+                        help="指定すると、各CVEがこのバージョンに影響するか（NVDのバージョン範囲データから"
+                             "判定した Fixed/Affected）を結果に付与する（例: '11.1.2'）")
     p_cve.set_defaults(func=cmd_cve_search)
 
     return parser
