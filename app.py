@@ -345,25 +345,28 @@ if df is not None:
                 lambda x: st.session_state.bug_analysis.get(x, {}).get("possibility", "-")
             )
 
+            def _translate_or_summarize_ja(text):
+                if not text:
+                    return ""
+                if use_ai_analysis and (groq_api_key or gemini_api_key or open_router_api_key):
+                    summary = analyzer.summarize_technical_text_ja(
+                        text, groq_key=groq_api_key, gemini_key=gemini_api_key,
+                        open_router_key=open_router_api_key
+                    )
+                    if summary:
+                        return summary
+                return translate_headline(
+                    text, engine=translation_engine_key,
+                    deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key
+                )
+
             def _extract_ja_release_note_fields(note):
                 if pd.isna(note):
                     note = ""
                 sections = parse_release_note(note)
-                symptom = sections.get("症状", "")
-                workaround = sections.get("回避策", "")
-                detail = sections.get("詳細説明", "")
-                symptom_ja = translate_headline(
-                    symptom, engine=translation_engine_key,
-                    deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key
-                ) if symptom else ""
-                workaround_ja = translate_headline(
-                    workaround, engine=translation_engine_key,
-                    deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key
-                ) if workaround else ""
-                detail_ja = translate_headline(
-                    detail, engine=translation_engine_key,
-                    deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key
-                ) if detail else ""
+                symptom_ja = _translate_or_summarize_ja(sections.get("症状", ""))
+                workaround_ja = _translate_or_summarize_ja(sections.get("回避策", ""))
+                detail_ja = _translate_or_summarize_ja(sections.get("詳細説明", ""))
                 return pd.Series({
                     "症状 (日本語)": symptom_ja,
                     "回避策 (日本語)": workaround_ja,
@@ -379,11 +382,18 @@ if df is not None:
                           "Known Affected Release(s)", "Known Fixed Releases",
                           "症状 (日本語)", "回避策 (日本語)", "詳細説明 (日本語)", "発生可能性"]
 
+            ai_summary_note = (
+                "「AI による可能性判定を使用」がONでキー設定済みの場合、これらはログの詳細を除いた"
+                "AI要約（そのキーのAPI利用量を消費）になります。OFFの場合は通常の機械翻訳です。"
+                if (use_ai_analysis and (groq_api_key or gemini_api_key or open_router_api_key))
+                else "「AI による可能性判定を使用」をONにしキーを設定すると、これらをAIが生ログを除いた"
+                     "要点のみに要約するようになります（そのキーのAPI利用量を消費）。"
+            )
             st.caption(
                 "「発生可能性」は下の「詳細情報」でバグを選択して手動評価するか、AI分析を行うと更新されます"
                 "（未評価は「-」）。実際のヒット件数に基づく統計値ではなく、目安としてご利用ください。"
-                "「症状」「回避策」「詳細説明」はリリースノートから抽出・翻訳したものです（無い場合は空欄）。"
-                "件数が多いと翻訳に時間がかかることがあります。"
+                "「症状」「回避策」「詳細説明」はリリースノートから抽出したものです（無い場合は空欄）。"
+                "件数が多いと翻訳に時間がかかることがあります。 " + ai_summary_note
             )
             st.dataframe(
                 display_results[display_cols],
@@ -419,11 +429,14 @@ if df is not None:
             )
 
             # Excel ファイルを生成（display_results には翻訳済み見出し列が入っている）
+            # AI キーが設定されていれば、症状/回避策/詳細説明はAI要約（生ログ等を除いた要点のみ）を使う
             excel_data = create_excel_report(
                 display_results, st.session_state.bug_analysis, search_params,
                 include_release_notes=include_release_notes_export,
                 translation_engine=translation_engine_key,
                 deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key,
+                groq_api_key=groq_api_key, gemini_api_key=gemini_api_key,
+                open_router_api_key=open_router_api_key,
             )
 
             # 統合Excel出力（Palo Alto / YAMAHA 等との合体）用に、最新の検索結果を保持しておく
@@ -435,6 +448,9 @@ if df is not None:
                 "translation_engine": translation_engine_key,
                 "deepl_api_key": deepl_api_key,
                 "nvidia_api_key": nvidia_api_key,
+                "groq_api_key": groq_api_key,
+                "gemini_api_key": gemini_api_key,
+                "open_router_api_key": open_router_api_key,
             }
 
             col1, col2, col3, col4 = st.columns(4)
