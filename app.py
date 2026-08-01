@@ -700,3 +700,8 @@ with st.expander("🌐 Cisco 以外のベンダー（Palo Alto / YAMAHA 等）�
                     for r in eol_results
                 ])
                 st.dataframe(eol_table, use_container_width=True, hide_index=True)
+                st.info(
+                    "💡 **お願い**: 上表の「リンク」先ページ（バグ一覧・Known and Addressed Issues等）は"
+                    "自動取得できません。お手数ですが、リンクをブラウザで開いて該当箇所をコピーし、"
+                    "上の「一般的な既知の問題を貼り付けて分析」欄に貼り付けてください。"
+                )
