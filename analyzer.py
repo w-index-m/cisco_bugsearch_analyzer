@@ -949,3 +949,86 @@ def search_cve_with_translation(keyword, engine='google', deepl_api_key=None, nv
         results.sort(key=lambda r: r["cvss_score"] or 0, reverse=True)
 
     return results
+
+
+# ==================== ベンダー公式ドキュメントの手動貼り付け解析 ====================
+#
+# Palo Alto の "Known and Addressed Issues" ページのように、公式サイトが
+# ボット対策で自動取得できないベンダーのバグ一覧に対応するための機能。
+# ユーザーがブラウザで開いてコピーしたテキストを解析し、ID単位に分解・
+# カテゴリ分け・翻訳する。NVD 検索（セキュリティCVEのみ）ではカバーできない、
+# 一般的な不具合情報を扱う。
+
+_ISSUE_ID_RE = re.compile(r'^([A-Z][A-Z0-9]*-\d+)\s*$', re.MULTILINE)
+_WORKAROUND_RE = re.compile(r'Workaround\s*:\s*', re.IGNORECASE)
+
+
+def parse_vendor_known_issues(raw_text):
+    """
+    "ISSUE ID" + 説明文（+ 任意で "Workaround:" 以降）の形式で貼り付けられた
+    テキストを、課題単位のリストに分解する。
+
+    ID は "PAN-332943" や "PLUG-23656" のように「英大文字始まりの接頭辞 + ハイフン + 数字」
+    という行を区切りとして検出する（Palo Alto の Known Issues ページの形式に準拠）。
+
+    Args:
+        raw_text: ブラウザからコピーした生テキスト
+
+    Returns:
+        [{"id": "PAN-332943", "description": "...", "workaround": "..."}, ...]
+        （Workaround が無ければ workaround は空文字列）
+    """
+    if not raw_text or not raw_text.strip():
+        return []
+
+    matches = list(_ISSUE_ID_RE.finditer(raw_text))
+    issues = []
+
+    for i, m in enumerate(matches):
+        issue_id = m.group(1)
+        start = m.end()
+        end = matches[i + 1].start() if i + 1 < len(matches) else len(raw_text)
+        block = raw_text[start:end].strip()
+
+        wa_match = _WORKAROUND_RE.search(block)
+        if wa_match:
+            description = block[:wa_match.start()].strip()
+            workaround = block[wa_match.end():].strip()
+        else:
+            description = block
+            workaround = ""
+
+        if description:
+            issues.append({"id": issue_id, "description": description, "workaround": workaround})
+
+    return issues
+
+
+# カテゴリ名 → 判定に使う英語キーワード（説明文の小文字化テキストに対して部分一致で判定）
+# 1件が複数カテゴリに該当することもある。どれにも該当しなければ「一般 / その他」
+VENDOR_ISSUE_CATEGORY_KEYWORDS = {
+    "Panorama": ["panorama", "m-700", "template", "log collector"],
+    "HA / クラスタ": [
+        "ha pair", "high availability", "cluster", "hsf", "hsci",
+        " leader", "follower", "standalone", "split brain", "active/passive",
+    ],
+    "クラウド (GCP/Azure)": ["gcp", "azure", " nsi ", "gvnic", "vm-series", "hotplug"],
+    "GlobalProtect": ["globalprotect", "portal", "gateway"],
+    "5G / セルラー": [
+        "cellular", "5g", "apn", "ztp", "fail-to-wire", "fail-open",
+        "zero touch provisioning", "-r-poe", "410r", "450r",
+    ],
+}
+
+
+def categorize_vendor_issue(description):
+    """
+    説明文（英語）からキーワードマッチで該当カテゴリを判定する。
+    複数該当する場合は全て返す。どれにも該当しなければ ["一般 / その他"]。
+    """
+    text_lower = f" {description.lower()} "
+    categories = [
+        category for category, keywords in VENDOR_ISSUE_CATEGORY_KEYWORDS.items()
+        if any(kw in text_lower for kw in keywords)
+    ]
+    return categories or ["一般 / その他"]
