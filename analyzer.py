@@ -636,12 +636,18 @@ def create_excel_report(results, analysis_data, search_params, include_release_n
     )
 
     # Sheet1: 検索結果
-    headers = ["Bug ID", "Headline (日本語)", "Severity", "Status",
+    # 深刻度順（Severity 数字の小さい順 = 重大な順）に並べ替えてから出力する。
+    # 数字以外や欠損は末尾に回す
+    sorted_results = results.copy()
+    sorted_results["_severity_sort"] = pd.to_numeric(sorted_results.get("Bug Severity"), errors="coerce")
+    sorted_results = sorted_results.sort_values(by="_severity_sort", ascending=True, na_position="last")
+
+    headers = ["Bug ID", "Headline (日本語)", "Headline (英語原文・参考)", "Severity", "Status",
                "Affected Releases", "Fixed Releases", "発生可能性", "関連機能", "コメント"]
     release_note_cols = ["症状 (日本語)", "条件 (日本語)", "回避策 (日本語)", "詳細説明 (日本語)"]
     release_note_keys = ["症状", "条件", "回避策", "詳細説明"]
     if include_release_notes:
-        headers = headers + release_note_cols
+        headers = headers + release_note_cols + ["リリースノート原文（英語・参考）"]
 
     for col, header in enumerate(headers, 1):
         cell = ws1.cell(row=1, column=col)
@@ -651,16 +657,18 @@ def create_excel_report(results, analysis_data, search_params, include_release_n
         cell.alignment = Alignment(horizontal="center", vertical="center", wrap_text=True)
         cell.border = border
 
-    for row, (idx, bug_row) in enumerate(results.iterrows(), 2):
+    for row, (idx, bug_row) in enumerate(sorted_results.iterrows(), 2):
         bug_id = bug_row["BUG Id"]
         analysis = analysis_data.get(bug_id, {})
+        headline_en = bug_row.get("BUG headline", "")
         headline = bug_row.get("BUG headline (日本語)")
         if headline is None or (isinstance(headline, float) and pd.isna(headline)):
-            headline = bug_row.get("BUG headline", "")
+            headline = headline_en
 
         row_data = [
             bug_id,
             headline,
+            headline_en,
             bug_row["Bug Severity"],
             bug_row["Bug Status"],
             bug_row["Known Affected Release(s)"],
@@ -683,6 +691,7 @@ def create_excel_report(results, analysis_data, search_params, include_release_n
                         deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key
                     )
                 row_data.append(content)
+            row_data.append(clean_html_tags(raw_note))
 
         for col, value in enumerate(row_data, 1):
             cell = ws1.cell(row=row, column=col)
@@ -692,16 +701,18 @@ def create_excel_report(results, analysis_data, search_params, include_release_n
 
     ws1.column_dimensions['A'].width = 15
     ws1.column_dimensions['B'].width = 40
-    ws1.column_dimensions['C'].width = 10
-    ws1.column_dimensions['D'].width = 12
-    ws1.column_dimensions['E'].width = 25
+    ws1.column_dimensions['C'].width = 40
+    ws1.column_dimensions['D'].width = 10
+    ws1.column_dimensions['E'].width = 12
     ws1.column_dimensions['F'].width = 25
-    ws1.column_dimensions['G'].width = 12
-    ws1.column_dimensions['H'].width = 20
-    ws1.column_dimensions['I'].width = 30
+    ws1.column_dimensions['G'].width = 25
+    ws1.column_dimensions['H'].width = 12
+    ws1.column_dimensions['I'].width = 20
+    ws1.column_dimensions['J'].width = 30
     if include_release_notes:
-        for col_letter in ['J', 'K', 'L', 'M']:
+        for col_letter in ['K', 'L', 'M', 'N']:
             ws1.column_dimensions[col_letter].width = 35
+        ws1.column_dimensions['O'].width = 45
 
     # Sheet2: 分析詳細
     analysis_headers = ["Bug ID", "発生可能性", "関連機能", "コメント"]

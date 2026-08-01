@@ -102,13 +102,8 @@ if df is not None:
     st.markdown("---")
 
     col1, col2 = st.columns([2, 1])
-    with col1:
-        st.subheader("IOS バージョンから検索")
     with col2:
         st.subheader("翻訳設定 & Severity")
-
-    col1, col2 = st.columns([2, 1])
-    with col2:
         st.markdown("**翻訳エンジン**")
         translation_engine = st.radio(
             "翻訳エンジン",
@@ -594,7 +589,8 @@ with st.expander("🌐 Cisco 以外のベンダー（Palo Alto / YAMAHA 等）�
             with st.spinner("NVD を検索中..."):
                 cve_results = analyzer.search_cve_with_translation(
                     cve_keyword,
-                    engine="google",
+                    engine=translation_engine_key,
+                    deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key,
                     api_key=nvd_api_key_input or None,
                     target_version=cve_target_version or None,
                 )
@@ -604,6 +600,13 @@ with st.expander("🌐 Cisco 以外のベンダー（Palo Alto / YAMAHA 等）�
             elif not cve_results:
                 st.warning("該当する CVE が見つかりませんでした")
             else:
+                # 深刻度（CVSS）の高い順に並べ替える。CVSS 不明のものは末尾へ
+                cve_results = sorted(
+                    cve_results,
+                    key=lambda r: r["cvss_score"] if r["cvss_score"] is not None else -1,
+                    reverse=True,
+                )
+
                 st.success(f"✓ {len(cve_results)} 件見つかりました")
                 for r in cve_results:
                     label = f"[{r['severity_ja']}] {r['cve_id']}"
@@ -616,18 +619,20 @@ with st.expander("🌐 Cisco 以外のベンダー（Palo Alto / YAMAHA 等）�
                         st.write(f"CVSS: {r['cvss_score'] if r['cvss_score'] is not None else '-'}　公開日: {published}")
                         st.write(f"[参考リンク]({r['url']})")
 
-                # 統合Excel出力用に、CVE検索結果を保持しておく
+                # 統合Excel出力用に、CVE検索結果を保持しておく（日本語訳をメイン列、英語原文は参考列として末尾に）
                 cve_rows = [
                     [
                         r["cve_id"], r["severity_ja"], r["cvss_score"],
                         r.get("affected_ja", "-"), r["description_ja"],
                         r["published"][:10] if r["published"] else "-", r["url"],
+                        r["description_en"],
                     ]
                     for r in cve_results
                 ]
                 st.session_state["combined_export_cve"] = {
                     "name": f"CVE検索({cve_keyword[:15]})",
-                    "headers": ["CVE ID", "深刻度", "CVSS", "影響有無", "概要(日本語)", "公開日", "参考リンク"],
+                    "headers": ["CVE ID", "深刻度", "CVSS", "影響有無", "概要(日本語)", "公開日", "参考リンク",
+                                "概要(英語原文・参考)"],
                     "rows": cve_rows,
                 }
 
@@ -709,14 +714,18 @@ with st.expander("🌐 Cisco 以外のベンダー（Palo Alto / YAMAHA 等）�
                                 if issue["workaround"]:
                                     st.caption(f"Workaround: {issue['workaround']}")
 
+                        original_ref = issue["description"]
+                        if issue["workaround"]:
+                            original_ref += f" / Workaround: {issue['workaround']}"
+
                         vendor_issue_rows.append([
-                            issue["id"], issue["section"] or cat, desc_ja, wa_ja,
+                            issue["id"], issue["section"] or cat, desc_ja, wa_ja, original_ref,
                         ])
 
-                # 統合Excel出力用に、貼り付け解析結果を保持しておく
+                # 統合Excel出力用に、貼り付け解析結果を保持しておく（日本語訳をメイン列、英語原文は参考列として末尾に）
                 st.session_state["combined_export_vendor_issues"] = {
                     "name": "貼り付け解析結果",
-                    "headers": ["ID", "分類", "概要(日本語)", "回避策(日本語)"],
+                    "headers": ["ID", "分類", "概要(日本語)", "回避策(日本語)", "原文(英語・参考)"],
                     "rows": vendor_issue_rows,
                 }
 
@@ -747,18 +756,37 @@ with st.expander("🌐 Cisco 以外のベンダー（Palo Alto / YAMAHA 等）�
             elif not eol_results:
                 st.warning("該当するEOL情報が見つかりませんでした")
             else:
+                # 対応期限（EOL）が近い順に並べ替える。EOL未定（現役）は最後に回す
+                eol_results = sorted(eol_results, key=lambda r: r["eol"] or "9999-99-99")
+
                 eol_table = pd.DataFrame([
                     {
+                        "対応期限(EOL)": r["eol"] or "未定（現役）",
                         "状態": "🔴 EOL済み" if r["is_eol"] else "🟢 サポート中",
                         "系統": r["release_cycle"],
                         "リリース日": r["release_date"],
-                        "EOL": r["eol"] or "未定（現役）",
                         "最新パッチ": r["latest"],
                         "リンク": r["link"],
                     }
                     for r in eol_results
                 ])
                 st.dataframe(eol_table, use_container_width=True, hide_index=True)
+
+                # 統合Excel出力用に、EOL情報を保持しておく（対応期限を先頭列にして優先度を分かりやすく）
+                eol_rows = [
+                    [
+                        r["eol"] or "未定（現役）",
+                        "EOL済み" if r["is_eol"] else "サポート中",
+                        r["release_cycle"], r["release_date"], r["latest"], r["link"],
+                    ]
+                    for r in eol_results
+                ]
+                st.session_state["combined_export_eol"] = {
+                    "name": f"EOL情報({eol_product.strip()[:15]})",
+                    "headers": ["対応期限(EOL)", "状態", "系統", "リリース日", "最新パッチ", "リンク"],
+                    "rows": eol_rows,
+                }
+
                 st.info(
                     "💡 **お願い**: 上表の「リンク」先ページ（バグ一覧・Known and Addressed Issues等）は"
                     "自動取得できません。お手数ですが、リンクをブラウザで開いて該当箇所をコピーし、"
@@ -775,9 +803,11 @@ if "combined_export_cve" in st.session_state:
     _combined_sources.append(f"{st.session_state['combined_export_cve']['name']}（{len(st.session_state['combined_export_cve']['rows'])} 件）")
 if "combined_export_vendor_issues" in st.session_state:
     _combined_sources.append(f"貼り付け解析結果（{len(st.session_state['combined_export_vendor_issues']['rows'])} 件）")
+if "combined_export_eol" in st.session_state:
+    _combined_sources.append(f"{st.session_state['combined_export_eol']['name']}（{len(st.session_state['combined_export_eol']['rows'])} 件）")
 
 if not _combined_sources:
-    st.caption("Cisco検索・CVE検索・貼り付け解析のいずれかを実行すると、ここでまとめてExcel出力できるようになります。")
+    st.caption("Cisco検索・CVE検索・貼り付け解析・EOL取得のいずれかを実行すると、ここでまとめてExcel出力できるようになります。")
 else:
     st.caption("この画面で今までに実行した検索結果を、1つのExcelファイルにシート分けして出力します: " + " / ".join(_combined_sources))
 
@@ -787,6 +817,8 @@ else:
             combined_extra_sheets.append(st.session_state["combined_export_cve"])
         if "combined_export_vendor_issues" in st.session_state:
             combined_extra_sheets.append(st.session_state["combined_export_vendor_issues"])
+        if "combined_export_eol" in st.session_state:
+            combined_extra_sheets.append(st.session_state["combined_export_eol"])
 
         combined_excel_data = analyzer.create_combined_excel_report(
             cisco=st.session_state.get("combined_export_cisco"),
