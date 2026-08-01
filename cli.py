@@ -155,7 +155,10 @@ def build_parser():
     # search
     p_search = subparsers.add_parser("search", help="バグを検索する")
     p_search.add_argument("--csv", default="bugSearch.csv", help="読み込む CSV ファイル（既定: bugSearch.csv）")
-    p_search.add_argument("--feature", help="Product / Headline に対する部分一致検索")
+    p_search.add_argument("--feature",
+                           help="Product / Headline に対する部分一致検索。"
+                                "カンマ（, ， 、）区切りで複数指定するとOR検索になる "
+                                "（例: 'VPN,Multicast'）。スペースは区切りではなくキーワードの一部")
     p_search.add_argument("--version",
                            help="検索バージョン。同トレイン内で旧バージョンから未修正のまま "
                                 "続いている可能性があるバグも推測で含む（中間バージョンでの "
