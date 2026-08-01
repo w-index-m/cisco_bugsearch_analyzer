@@ -15,6 +15,9 @@ except ImportError:
 
 import requests
 import os
+from openpyxl import Workbook
+from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
+from openpyxl.utils import get_column_letter
 
 try:
     import google.generativeai as genai
@@ -325,6 +328,142 @@ def assess_bug_possibility(headline_ja, release_note, user_comment, groq_key=Non
             return {"engine": engine_name, "result": result}
 
     return None
+
+def create_excel_report(results, analysis_data, search_params):
+    """
+    Excel 形式のレポートを生成
+
+    複数シート構成:
+    - Sheet1: 検索結果
+    - Sheet2: 分析詳細
+    - Sheet3: 検索パラメータ
+    """
+    wb = Workbook()
+    ws1 = wb.active
+    ws1.title = "検索結果"
+    ws2 = wb.create_sheet("分析詳細")
+    ws3 = wb.create_sheet("検索パラメータ")
+
+    # スタイル定義
+    header_fill = PatternFill(start_color="4472C4", end_color="4472C4", fill_type="solid")
+    header_font = Font(bold=True, color="FFFFFF")
+    border = Border(
+        left=Side(style='thin'),
+        right=Side(style='thin'),
+        top=Side(style='thin'),
+        bottom=Side(style='thin')
+    )
+
+    # Sheet1: 検索結果
+    headers = ["Bug ID", "Headline (日本語)", "Severity", "Status",
+               "Affected Releases", "Fixed Releases", "発生可能性", "関連機能", "コメント"]
+
+    for col, header in enumerate(headers, 1):
+        cell = ws1.cell(row=1, column=col)
+        cell.value = header
+        cell.fill = header_fill
+        cell.font = header_font
+        cell.alignment = Alignment(horizontal="center", vertical="center", wrap_text=True)
+        cell.border = border
+
+    for row, (idx, bug_row) in enumerate(results.iterrows(), 2):
+        bug_id = bug_row["BUG Id"]
+        analysis = analysis_data.get(bug_id, {})
+
+        row_data = [
+            bug_id,
+            bug_row["BUG headline (日本語)"],
+            bug_row["Bug Severity"],
+            bug_row["Bug Status"],
+            bug_row["Known Affected Release(s)"],
+            bug_row["Known Fixed Releases"],
+            analysis.get("possibility", "-"),
+            ", ".join(analysis.get("tags", [])),
+            analysis.get("comment", "")
+        ]
+
+        for col, value in enumerate(row_data, 1):
+            cell = ws1.cell(row=row, column=col)
+            cell.value = value
+            cell.alignment = Alignment(wrap_text=True, vertical="top")
+            cell.border = border
+
+    # 列幅設定
+    ws1.column_dimensions['A'].width = 15
+    ws1.column_dimensions['B'].width = 40
+    ws1.column_dimensions['C'].width = 10
+    ws1.column_dimensions['D'].width = 12
+    ws1.column_dimensions['E'].width = 25
+    ws1.column_dimensions['F'].width = 25
+    ws1.column_dimensions['G'].width = 12
+    ws1.column_dimensions['H'].width = 20
+    ws1.column_dimensions['I'].width = 30
+
+    # Sheet2: 分析詳細
+    analysis_headers = ["Bug ID", "発生可能性", "関連機能", "コメント"]
+
+    for col, header in enumerate(analysis_headers, 1):
+        cell = ws2.cell(row=1, column=col)
+        cell.value = header
+        cell.fill = header_fill
+        cell.font = header_font
+        cell.border = border
+
+    for row, (bug_id, data) in enumerate(analysis_data.items(), 2):
+        row_data = [
+            bug_id,
+            data.get("possibility", "-"),
+            ", ".join(data.get("tags", [])),
+            data.get("comment", "")
+        ]
+
+        for col, value in enumerate(row_data, 1):
+            cell = ws2.cell(row=row, column=col)
+            cell.value = value
+            cell.alignment = Alignment(wrap_text=True, vertical="top")
+            cell.border = border
+
+    ws2.column_dimensions['A'].width = 15
+    ws2.column_dimensions['B'].width = 15
+    ws2.column_dimensions['C'].width = 25
+    ws2.column_dimensions['D'].width = 40
+
+    # Sheet3: 検索パラメータ
+    params_data = [
+        ["検索パラメータ", ""],
+        ["", ""],
+        ["タイムスタンプ", datetime.now().isoformat()],
+        ["機能", search_params.get("feature", "（なし）")],
+        ["バージョン", search_params.get("version", "（なし）")],
+        ["Severity フィルタ", ", ".join(map(str, search_params.get("severity", [])))],
+        ["", ""],
+        ["分析情報", ""],
+        ["分析済みバグ数", len(analysis_data)],
+    ]
+
+    for row, (key, value) in enumerate(params_data, 1):
+        cell_key = ws3.cell(row=row, column=1)
+        cell_value = ws3.cell(row=row, column=2)
+
+        cell_key.value = key
+        cell_value.value = value
+
+        if key in ["検索パラメータ", "分析情報"]:
+            cell_key.fill = PatternFill(start_color="D9E1F2", end_color="D9E1F2", fill_type="solid")
+            cell_key.font = Font(bold=True)
+
+        cell_key.border = border
+        cell_value.border = border
+
+    ws3.column_dimensions['A'].width = 20
+    ws3.column_dimensions['B'].width = 40
+
+    # Excel ファイルをバイト列に変換
+    excel_buffer = io.BytesIO()
+    wb.save(excel_buffer)
+    excel_buffer.seek(0)
+
+    return excel_buffer.getvalue()
 
 def get_cisco_release_notes_url(product, version):
     """Cisco 公式リリースノート URL を生成"""
@@ -743,17 +882,35 @@ if df is not None:
             export_results.to_csv(csv_buffer, index=False)
             csv_data = csv_buffer.getvalue()
 
-            col1, col2, col3 = st.columns(3)
+            # Excel エクスポート用パラメータ
+            search_params = {
+                "feature": feature,
+                "version": version,
+                "severity": severity_filter
+            }
+
+            # Excel ファイルを生成
+            excel_data = create_excel_report(results, st.session_state.bug_analysis, search_params)
+
+            col1, col2, col3, col4 = st.columns(4)
 
             with col1:
                 st.download_button(
-                    label="📊 CSV でダウンロード",
+                    label="📊 Excel でダウンロード",
+                    data=excel_data,
+                    file_name=f"cisco_bug_report_{datetime.now().strftime('%Y%m%d_%H%M%S')}.xlsx",
+                    mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                )
+
+            with col2:
+                st.download_button(
+                    label="📄 CSV でダウンロード",
                     data=csv_data,
                     file_name=f"bug_search_results_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv",
                     mime="text/csv"
                 )
 
-            with col2:
+            with col3:
                 analysis_json = save_analysis_to_json(st.session_state.bug_analysis)
                 st.download_button(
                     label="📋 分析結果を JSON で",
@@ -762,14 +919,10 @@ if df is not None:
                     mime="application/json"
                 )
 
-            with col3:
+            with col4:
                 combined_export = {
                     "timestamp": datetime.now().isoformat(),
-                    "search_params": {
-                        "feature": feature,
-                        "version": version,
-                        "severity": severity_filter
-                    },
+                    "search_params": search_params,
                     "results": export_results.to_dict('records')
                 }
                 st.download_button(
