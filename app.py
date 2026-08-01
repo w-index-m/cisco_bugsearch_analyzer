@@ -660,3 +660,43 @@ with st.expander("🌐 Cisco 以外のベンダー（Palo Alto / YAMAHA 等）�
                                 st.caption(issue["description"])
                                 if issue["workaround"]:
                                     st.caption(f"Workaround: {issue['workaround']}")
+
+    st.markdown("---")
+    st.markdown("**バージョン系統ごとのEOL（サポート終了日）を調べる**")
+    st.caption(
+        "endoflife.date のデータを使い、メジャーバージョン系統ごとのリリース日・EOL日・"
+        "最新パッチと関連リンクを一覧表示します。"
+    )
+
+    eol_product = st.text_input(
+        "プロダクトスラッグ",
+        value="pan-os",
+        placeholder="例: pan-os",
+        help="endoflife.date 上のプロダクト識別子（一覧: https://endoflife.date/）",
+        key="eol_product"
+    )
+
+    if st.button("📅 EOL情報を取得", key="eol_info_btn"):
+        if not eol_product.strip():
+            st.warning("プロダクトスラッグを入力してください")
+        else:
+            with st.spinner("EOL情報を取得中..."):
+                eol_results = analyzer.get_eol_info(eol_product.strip())
+
+            if isinstance(eol_results, dict) and "error" in eol_results:
+                st.error(f"EOL情報の取得に失敗しました: {eol_results['error']}")
+            elif not eol_results:
+                st.warning("該当するEOL情報が見つかりませんでした")
+            else:
+                eol_table = pd.DataFrame([
+                    {
+                        "状態": "🔴 EOL済み" if r["is_eol"] else "🟢 サポート中",
+                        "系統": r["release_cycle"],
+                        "リリース日": r["release_date"],
+                        "EOL": r["eol"] or "未定（現役）",
+                        "最新パッチ": r["latest"],
+                        "リンク": r["link"],
+                    }
+                    for r in eol_results
+                ])
+                st.dataframe(eol_table, use_container_width=True, hide_index=True)

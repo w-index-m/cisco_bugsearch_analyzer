@@ -25,6 +25,9 @@ Web を介さず、同一マシン/コンテナ内のエージェントやスク
     # Cisco 以外のベンダー（Palo Alto / YAMAHA 等）は NVD をキーワード検索
     python cli.py cve-search "PAN-OS 11.1.2"
     python cli.py cve-search "Yamaha RTX830" --translate google --format json
+
+    # バージョン系統ごとのEOL（サポート終了日）と関連リンクを取得
+    python cli.py eol-info pan-os
 """
 import argparse
 import json
@@ -189,6 +192,31 @@ def cmd_cve_search(args):
             print()
 
 
+def cmd_eol_info(args):
+    results = analyzer.get_eol_info(args.product)
+
+    if isinstance(results, dict) and "error" in results:
+        print(f"エラー: EOL情報の取得に失敗しました - {results['error']}", file=sys.stderr)
+        sys.exit(1)
+
+    if not results:
+        print(f"「{args.product}」のEOL情報が見つかりませんでした", file=sys.stderr)
+        sys.exit(1)
+
+    if args.format == "json":
+        print(json.dumps(results, ensure_ascii=False, indent=2))
+    else:
+        print(f"EOL情報: {args.product}（{len(results)} 系統）\n")
+        for r in results:
+            status = "🔴 EOL済み" if r["is_eol"] else "🟢 サポート中"
+            eol_display = r["eol"] or "未定（現役）"
+            print(f"[{status}] {r['release_cycle']} 系統  最新: {r['latest']}")
+            print(f"  リリース日: {r['release_date']}　EOL: {eol_display}")
+            if r["link"]:
+                print(f"  参考: {r['link']}")
+            print()
+
+
 def build_parser():
     parser = argparse.ArgumentParser(
         prog="cli.py",
@@ -272,6 +300,15 @@ def build_parser():
                         help="指定すると、各CVEがこのバージョンに影響するか（NVDのバージョン範囲データから"
                              "判定した Fixed/Affected）を結果に付与する（例: '11.1.2'）")
     p_cve.set_defaults(func=cmd_cve_search)
+
+    # eol-info（バージョン系統ごとのEOL情報）
+    p_eol = subparsers.add_parser(
+        "eol-info",
+        help="endoflife.date からバージョン系統ごとのリリース日・EOL日・関連リンクを取得",
+    )
+    p_eol.add_argument("product", help="プロダクトスラッグ（例: 'pan-os'。一覧は https://endoflife.date/ 参照）")
+    p_eol.add_argument("--format", choices=["table", "json"], default="table")
+    p_eol.set_defaults(func=cmd_eol_info)
 
     return parser
 
