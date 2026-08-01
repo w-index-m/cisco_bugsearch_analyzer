@@ -17,6 +17,7 @@ import yaml
 from deep_translator import GoogleTranslator
 from openpyxl import Workbook
 from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
+from openpyxl.utils import get_column_letter
 
 try:
     import deepl
@@ -555,8 +556,52 @@ def list_affected_releases(df):
 
 # ==================== Excel レポート生成 ====================
 
+def _write_simple_sheet(wb, sheet_name, headers, rows):
+    """
+    見出し行 + 単純な表形式データを1シートとして追加する共通ヘルパー。
+    Palo Alto の CVE 検索結果や YAMAHA 等の貼り付け解析結果など、
+    Cisco 固有ではないデータをシート分けしてExcelに含めるのに使う。
+
+    Args:
+        wb: openpyxl の Workbook
+        sheet_name: シート名（31文字を超える場合は自動的に切り詰める）
+        headers: 列見出しのリスト
+        rows: 各行のリストのリスト（列数は headers と揃える）
+    """
+    # Excel のシート名は31文字までという制約があるため切り詰める
+    ws = wb.create_sheet(sheet_name[:31])
+
+    header_fill = PatternFill(start_color="4472C4", end_color="4472C4", fill_type="solid")
+    header_font = Font(bold=True, color="FFFFFF")
+    border = Border(
+        left=Side(style='thin'), right=Side(style='thin'),
+        top=Side(style='thin'), bottom=Side(style='thin'),
+    )
+
+    for col, header in enumerate(headers, 1):
+        cell = ws.cell(row=1, column=col)
+        cell.value = header
+        cell.fill = header_fill
+        cell.font = header_font
+        cell.alignment = Alignment(horizontal="center", vertical="center", wrap_text=True)
+        cell.border = border
+
+    for row_idx, row_values in enumerate(rows, 2):
+        for col, value in enumerate(row_values, 1):
+            cell = ws.cell(row=row_idx, column=col)
+            cell.value = value
+            cell.alignment = Alignment(wrap_text=True, vertical="top")
+            cell.border = border
+
+    for col_idx in range(1, len(headers) + 1):
+        ws.column_dimensions[get_column_letter(col_idx)].width = 32
+
+    return ws
+
+
 def create_excel_report(results, analysis_data, search_params, include_release_notes=False,
-                         translation_engine='google', deepl_api_key=None, nvidia_api_key=None):
+                         translation_engine='google', deepl_api_key=None, nvidia_api_key=None,
+                         extra_sheets=None):
     """
     Excel 形式のレポートを生成
 
@@ -564,8 +609,12 @@ def create_excel_report(results, analysis_data, search_params, include_release_n
     - Sheet1 検索結果: バグ情報 + 分析結果（include_release_notes=True で症状/条件/回避策/詳細説明を日本語で追加）
     - Sheet2 分析詳細: 分析結果のみ
     - Sheet3 検索パラメータ: 検索条件とメタデータ
+    - extra_sheets で指定した分、追加のシート（例: Palo Alto の CVE検索結果、
+      YAMAHA等の貼り付け解析結果）
 
     Args:
+        extra_sheets: [{"name": str, "headers": [...], "rows": [[...], ...]}, ...] の形式で
+            追加シートを指定する（省略可）。複数ベンダーの結果を1つのExcelにまとめたい場合に使う。
         include_release_notes: True にすると、results の各行の "Release Note Enclosure" を
             parse_release_note() で解析し、翻訳した症状/条件/回避策/詳細説明を列として追加する。
             件数が多いと翻訳API呼び出しが増えて生成に時間がかかる点に注意。
@@ -718,6 +767,50 @@ def create_excel_report(results, analysis_data, search_params, include_release_n
 
     ws3.column_dimensions['A'].width = 20
     ws3.column_dimensions['B'].width = 60
+
+    for sheet_spec in (extra_sheets or []):
+        _write_simple_sheet(wb, sheet_spec["name"], sheet_spec["headers"], sheet_spec["rows"])
+
+    excel_buffer = io.BytesIO()
+    wb.save(excel_buffer)
+    excel_buffer.seek(0)
+
+    return excel_buffer.getvalue()
+
+
+def create_combined_excel_report(cisco=None, extra_sheets=None):
+    """
+    Cisco（構造化検索結果）と、Palo Alto の CVE 検索結果・YAMAHA 等の貼り付け解析結果
+    （どちらも extra_sheets 側）を、1つのExcelファイルにシート分けしてまとめる。
+    どちらも省略可（両方 None なら空のExcelを返す）。
+
+    Args:
+        cisco: None、または以下の形式の dict:
+            {"results": DataFrame, "analysis_data": dict, "search_params": dict,
+             "include_release_notes": bool（省略可）, "translation_engine": str（省略可）,
+             "deepl_api_key": str（省略可）, "nvidia_api_key": str（省略可）}
+        extra_sheets: [{"name": str, "headers": [...], "rows": [[...], ...]}, ...] または None
+
+    Returns:
+        Excel ファイルのバイト列
+    """
+    if cisco is not None:
+        return create_excel_report(
+            cisco["results"], cisco["analysis_data"], cisco["search_params"],
+            include_release_notes=cisco.get("include_release_notes", False),
+            translation_engine=cisco.get("translation_engine", "google"),
+            deepl_api_key=cisco.get("deepl_api_key"), nvidia_api_key=cisco.get("nvidia_api_key"),
+            extra_sheets=extra_sheets,
+        )
+
+    wb = Workbook()
+    wb.remove(wb.active)  # デフォルトで作られる空シートを削除
+
+    for sheet_spec in (extra_sheets or []):
+        _write_simple_sheet(wb, sheet_spec["name"], sheet_spec["headers"], sheet_spec["rows"])
+
+    if not wb.sheetnames:
+        wb.create_sheet("結果なし")  # シートが1つも無いとExcelファイルとして不正になるため
 
     excel_buffer = io.BytesIO()
     wb.save(excel_buffer)

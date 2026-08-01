@@ -499,6 +499,17 @@ if df is not None:
                 deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key,
             )
 
+            # 統合Excel出力（Palo Alto / YAMAHA 等との合体）用に、最新の検索結果を保持しておく
+            st.session_state["combined_export_cisco"] = {
+                "results": display_results,
+                "analysis_data": dict(st.session_state.bug_analysis),
+                "search_params": search_params,
+                "include_release_notes": include_release_notes_export,
+                "translation_engine": translation_engine_key,
+                "deepl_api_key": deepl_api_key,
+                "nvidia_api_key": nvidia_api_key,
+            }
+
             col1, col2, col3, col4 = st.columns(4)
 
             with col1:
@@ -605,6 +616,21 @@ with st.expander("🌐 Cisco 以外のベンダー（Palo Alto / YAMAHA 等）�
                         st.write(f"CVSS: {r['cvss_score'] if r['cvss_score'] is not None else '-'}　公開日: {published}")
                         st.write(f"[参考リンク]({r['url']})")
 
+                # 統合Excel出力用に、CVE検索結果を保持しておく
+                cve_rows = [
+                    [
+                        r["cve_id"], r["severity_ja"], r["cvss_score"],
+                        r.get("affected_ja", "-"), r["description_ja"],
+                        r["published"][:10] if r["published"] else "-", r["url"],
+                    ]
+                    for r in cve_results
+                ]
+                st.session_state["combined_export_cve"] = {
+                    "name": f"CVE検索({cve_keyword[:15]})",
+                    "headers": ["CVE ID", "深刻度", "CVSS", "影響有無", "概要(日本語)", "公開日", "参考リンク"],
+                    "rows": cve_rows,
+                }
+
     st.markdown("---")
     st.markdown("**一般的な既知の問題を貼り付けて分析**")
     st.caption(
@@ -650,6 +676,7 @@ with st.expander("🌐 Cisco 以外のベンダー（Palo Alto / YAMAHA 等）�
                     # カテゴリの表示順を固定（一般/その他は最後）
                     category_order = list(analyzer.VENDOR_ISSUE_CATEGORY_KEYWORDS.keys()) + ["一般 / その他"]
 
+                vendor_issue_rows = []
                 for cat in category_order:
                     if cat not in grouped:
                         continue
@@ -659,18 +686,31 @@ with st.expander("🌐 Cisco 以外のベンダー（Palo Alto / YAMAHA 等）�
                             issue["description"], engine=translation_engine_key,
                             deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key
                         )
+                        wa_ja = ""
+                        if issue["workaround"]:
+                            wa_ja = translate_headline(
+                                issue["workaround"], engine=translation_engine_key,
+                                deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key
+                            )
                         with st.expander(issue["id"]):
                             st.write(desc_ja)
-                            if issue["workaround"]:
-                                wa_ja = translate_headline(
-                                    issue["workaround"], engine=translation_engine_key,
-                                    deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key
-                                )
+                            if wa_ja:
                                 st.caption(f"回避策: {wa_ja}")
                             with st.expander("英語原文"):
                                 st.caption(issue["description"])
                                 if issue["workaround"]:
                                     st.caption(f"Workaround: {issue['workaround']}")
+
+                        vendor_issue_rows.append([
+                            issue["id"], issue["section"] or cat, desc_ja, wa_ja,
+                        ])
+
+                # 統合Excel出力用に、貼り付け解析結果を保持しておく
+                st.session_state["combined_export_vendor_issues"] = {
+                    "name": "貼り付け解析結果",
+                    "headers": ["ID", "分類", "概要(日本語)", "回避策(日本語)"],
+                    "rows": vendor_issue_rows,
+                }
 
     st.markdown("---")
     st.markdown("**バージョン系統ごとのEOL（サポート終了日）を調べる**")
@@ -716,3 +756,39 @@ with st.expander("🌐 Cisco 以外のベンダー（Palo Alto / YAMAHA 等）�
                     "自動取得できません。お手数ですが、リンクをブラウザで開いて該当箇所をコピーし、"
                     "上の「一般的な既知の問題を貼り付けて分析」欄に貼り付けてください。"
                 )
+
+st.markdown("---")
+st.markdown("### 🗂️ 全ベンダーまとめてExcel出力")
+
+_combined_sources = []
+if "combined_export_cisco" in st.session_state:
+    _combined_sources.append(f"Cisco（{len(st.session_state['combined_export_cisco']['results'])} 件）")
+if "combined_export_cve" in st.session_state:
+    _combined_sources.append(f"{st.session_state['combined_export_cve']['name']}（{len(st.session_state['combined_export_cve']['rows'])} 件）")
+if "combined_export_vendor_issues" in st.session_state:
+    _combined_sources.append(f"貼り付け解析結果（{len(st.session_state['combined_export_vendor_issues']['rows'])} 件）")
+
+if not _combined_sources:
+    st.caption("Cisco検索・CVE検索・貼り付け解析のいずれかを実行すると、ここでまとめてExcel出力できるようになります。")
+else:
+    st.caption("この画面で今までに実行した検索結果を、1つのExcelファイルにシート分けして出力します: " + " / ".join(_combined_sources))
+
+    if st.button("📦 統合Excelを生成", key="combined_excel_btn"):
+        combined_extra_sheets = []
+        if "combined_export_cve" in st.session_state:
+            combined_extra_sheets.append(st.session_state["combined_export_cve"])
+        if "combined_export_vendor_issues" in st.session_state:
+            combined_extra_sheets.append(st.session_state["combined_export_vendor_issues"])
+
+        combined_excel_data = analyzer.create_combined_excel_report(
+            cisco=st.session_state.get("combined_export_cisco"),
+            extra_sheets=combined_extra_sheets or None,
+        )
+
+        st.download_button(
+            label="📦 統合Excelをダウンロード",
+            data=combined_excel_data,
+            file_name=f"combined_vendor_report_{datetime.now().strftime('%Y%m%d_%H%M%S')}.xlsx",
+            mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+            key="combined_excel_download_btn",
+        )
