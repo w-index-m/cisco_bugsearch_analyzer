@@ -8,11 +8,12 @@ import io
 import re
 import json
 from html import unescape
-from datetime import datetime
+from datetime import datetime, date as _date
 from functools import lru_cache
 
 import pandas as pd
 import requests
+import yaml
 from deep_translator import GoogleTranslator
 from openpyxl import Workbook
 from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
@@ -1032,3 +1033,87 @@ def categorize_vendor_issue(description):
         if any(kw in text_lower for kw in keywords)
     ]
     return categories or ["一般 / その他"]
+
+
+# ==================== EOL（サポート終了）情報取得 ====================
+#
+# ベンダー公式のEOLページ（例: paloaltonetworks.com）は自動取得できないことが多いが、
+# endoflife.date プロジェクトが GitHub 上で構造化データ（YAML）として公開しており、
+# raw.githubusercontent.com は本セッションでもブロックされずアクセスできることを確認済み。
+
+ENDOFLIFE_RAW_BASE = "https://raw.githubusercontent.com/endoflife-date/endoflife.date/master/products"
+
+
+def _yaml_value_to_str(value):
+    """YAML パース後の値（datetime.date や bool 等）を文字列 or None に正規化する"""
+    if value is None or value is False:
+        return None
+    if isinstance(value, _date):
+        return value.isoformat()
+    return str(value)
+
+
+def get_eol_info(product_slug, timeout=15):
+    """
+    endoflife.date（GitHub上のYAMLデータ）から、指定プロダクトのバージョン系統ごとの
+    リリース日・EOL日・最新パッチ・関連リンクを取得する。
+
+    Args:
+        product_slug: endoflife.date 上のプロダクトスラッグ
+            （例: "pan-os" = Palo Alto PAN-OS。一覧は https://endoflife.date/ 参照）
+        timeout: リクエストタイムアウト秒数
+
+    Returns:
+        成功時: [{"release_cycle": "12.2", "release_date": "2026-07-30",
+                  "eol": "2028-08-28" または None（現役でEOL未定）,
+                  "is_eol": bool（今日時点でEOL済みか）,
+                  "latest": "12.2.2", "latest_release_date": "...", "link": "https://..."}, ...]
+            release_date の新しい順（降順）で返す
+        失敗時: {"error": "エラーメッセージ"}
+    """
+    url = f"{ENDOFLIFE_RAW_BASE}/{product_slug}.md"
+
+    try:
+        response = requests.get(url, timeout=timeout)
+        response.raise_for_status()
+        raw = response.text
+    except Exception as e:
+        return {"error": str(e)}
+
+    parts = raw.split("---", 2)
+    if len(parts) < 3:
+        return {"error": f"'{product_slug}' の YAML frontmatter が見つかりませんでした"}
+
+    try:
+        data = yaml.safe_load(parts[1])
+    except Exception as e:
+        return {"error": f"YAML 解析エラー: {e}"}
+
+    if not data or "releases" not in data:
+        return {"error": f"'{product_slug}' の releases データが見つかりませんでした"}
+
+    today = datetime.now().date()
+    results = []
+
+    for r in data["releases"]:
+        eol_str = _yaml_value_to_str(r.get("eol"))
+        is_eol = False
+        if eol_str:
+            try:
+                is_eol = _date.fromisoformat(eol_str) <= today
+            except ValueError:
+                is_eol = False
+
+        results.append({
+            "release_cycle": str(r.get("releaseCycle", "")),
+            "release_label": r.get("releaseLabel"),
+            "release_date": _yaml_value_to_str(r.get("releaseDate")),
+            "eol": eol_str,
+            "is_eol": is_eol,
+            "latest": r.get("latest"),
+            "latest_release_date": _yaml_value_to_str(r.get("latestReleaseDate")),
+            "link": r.get("link"),
+        })
+
+    results.sort(key=lambda r: r["release_date"] or "", reverse=True)
+    return results
