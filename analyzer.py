@@ -10,7 +10,7 @@ import json
 import time
 from html import unescape
 from datetime import datetime, date as _date
-from functools import lru_cache
+from functools import wraps
 
 import pandas as pd
 import requests
@@ -192,7 +192,32 @@ def get_cisco_release_notes_url(product, version):
 
 # ==================== 翻訳 ====================
 
-@lru_cache(maxsize=4096)
+def _cache_success_only(fn):
+    """
+    lru_cache と違い、翻訳の失敗（None）はキャッシュしない。
+
+    無料の翻訳エンドポイントは一時的なレート制限等で稀に失敗するが、
+    lru_cache でそのまま失敗結果をキャッシュすると、同じ見出しが二度と
+    再翻訳されず永久に英語のまま表示され続けてしまう
+    （実際にこの不具合が発生し、複数バグのヘッドラインが一括で
+    未翻訳になる原因になっていた）。成功した結果のみキャッシュすることで、
+    次回呼び出し時に再試行のチャンスを残す。
+    """
+    cache = {}
+
+    @wraps(fn)
+    def wrapper(*args):
+        if args in cache:
+            return cache[args]
+        result = fn(*args)
+        if result:
+            cache[args] = result
+        return result
+
+    return wrapper
+
+
+@_cache_success_only
 def translate_headline_deepl(text, api_key):
     """DeepL API を使用して日本語に翻訳"""
     if not text or len(text) < 3:
@@ -205,7 +230,7 @@ def translate_headline_deepl(text, api_key):
         return None
 
 
-@lru_cache(maxsize=4096)
+@_cache_success_only
 def translate_headline_google(text):
     """
     Google Translate を使用して日本語に翻訳する。
