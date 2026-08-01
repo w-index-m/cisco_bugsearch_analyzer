@@ -7,6 +7,7 @@ Streamlit に依存しないため、エージェントやスクリプトから�
 import io
 import re
 import json
+import time
 from html import unescape
 from datetime import datetime, date as _date
 from functools import lru_cache
@@ -147,14 +148,22 @@ def translate_headline_deepl(text, api_key):
 
 @lru_cache(maxsize=4096)
 def translate_headline_google(text):
-    """Google Translate を使用して日本語に翻訳"""
+    """
+    Google Translate を使用して日本語に翻訳する。
+
+    無料エンドポイントは一時的なレート制限等で稀に失敗することがあるため、
+    短い間隔を空けて最大3回まで再試行する。
+    """
     if not text or len(text) < 3:
         return text
-    try:
-        translator = GoogleTranslator(source='en', target='ja')
-        return translator.translate(text)
-    except Exception:
-        return None
+    for attempt in range(3):
+        try:
+            translator = GoogleTranslator(source='en', target='ja')
+            return translator.translate(text)
+        except Exception:
+            if attempt < 2:
+                time.sleep(0.5 * (attempt + 1))
+    return None
 
 
 def translate_headline_nvidia(text, api_key):
@@ -366,6 +375,103 @@ def assess_bug_possibility(headline_ja, release_note, user_comment, groq_key=Non
     for engine_name, result in assessments:
         if result:
             return {"engine": engine_name, "result": result}
+
+    return None
+
+
+# ==================== AI による技術文の要約 ====================
+# リリースノートの症状/回避策/詳細説明には、16進アドレスやスタックトレース、
+# プロセスダンプ等の生ログがそのまま含まれることが多く、翻訳しただけでは
+# レポートとして冗長になりがち。AI（Groq → Gemini → Open Router の順で試行、
+# いずれも「AI 分析エンジン」に設定済みのキーを流用）で日本語の要点のみに要約する。
+# キー未設定の場合は None を返し、呼び出し側は通常の翻訳結果にフォールバックする。
+
+_SUMMARY_MAX_INPUT_CHARS = 2000
+
+
+def _build_summary_prompt(text):
+    return (
+        "以下はCisco機器のバグに関する技術的な説明文（英語）です。"
+        "16進数のメモリアドレス・スタックトレース・プロセスダンプ等の細かいログ情報は"
+        "無視し、実際に何が起きるかという要点だけを日本語で1〜2文（80文字程度）に"
+        "要約してください。要約文以外は出力しないでください。\n\n"
+        f"{text[:_SUMMARY_MAX_INPUT_CHARS]}"
+    )
+
+
+def summarize_with_groq(text, api_key):
+    if not api_key or not GROQ_AVAILABLE:
+        return None
+    try:
+        client = Groq(api_key=api_key)
+        message = client.chat.completions.create(
+            model="mixtral-8x7b-32768",
+            max_tokens=150,
+            messages=[{"role": "user", "content": _build_summary_prompt(text)}]
+        )
+        return message.choices[0].message.content.strip()
+    except Exception:
+        return None
+
+
+def summarize_with_gemini(text, api_key):
+    if not api_key or not GEMINI_AVAILABLE:
+        return None
+    try:
+        genai.configure(api_key=api_key)
+        model = genai.GenerativeModel('gemini-pro')
+        response = model.generate_content(_build_summary_prompt(text))
+        return response.text.strip()
+    except Exception:
+        return None
+
+
+def summarize_with_open_router(text, api_key):
+    if not api_key:
+        return None
+    try:
+        response = requests.post(
+            url="https://openrouter.ai/api/v1/chat/completions",
+            headers={
+                "Authorization": f"Bearer {api_key}",
+                "HTTP-Referer": "https://streamlit.io",
+                "X-Title": "Cisco Bug Search Analyzer"
+            },
+            json={
+                "model": "mistralai/mistral-7b-instruct",
+                "messages": [{"role": "user", "content": _build_summary_prompt(text)}],
+                "max_tokens": 150
+            },
+            timeout=15
+        )
+        if response.status_code == 200:
+            result = response.json()
+            if "choices" in result and len(result["choices"]) > 0:
+                return result["choices"][0]["message"]["content"].strip()
+        return None
+    except Exception:
+        return None
+
+
+def summarize_technical_text_ja(text, groq_key=None, gemini_key=None, open_router_key=None):
+    """
+    技術的な説明文（英語）を、AI で日本語の要点のみに要約する。
+
+    フォールバック順: Groq → Gemini → Open Router。いずれのキーも無い、または
+    いずれも失敗した場合は None を返す（呼び出し側で通常の翻訳結果にフォールバック
+    すること）。短い文（100文字未満）は要約の必要が薄いため None を返す。
+    """
+    if not text or len(text) < 100:
+        return None
+
+    for summarizer, key in (
+        (summarize_with_groq, groq_key),
+        (summarize_with_gemini, gemini_key),
+        (summarize_with_open_router, open_router_key),
+    ):
+        result = summarizer(text, key)
+        if result:
+            return result
 
     return None
 
@@ -722,7 +828,8 @@ def _write_simple_sheet(wb, sheet_name, headers, rows):
 
 def create_excel_report(results, analysis_data, search_params, include_release_notes=False,
                          translation_engine='google', deepl_api_key=None, nvidia_api_key=None,
-                         extra_sheets=None):
+                         extra_sheets=None, groq_api_key=None, gemini_api_key=None,
+                         open_router_api_key=None):
     """
     Excel 形式のレポートを生成
 
@@ -740,6 +847,9 @@ def create_excel_report(results, analysis_data, search_params, include_release_n
             parse_release_note() で解析し、翻訳した症状/条件/回避策/詳細説明を列として追加する。
             件数が多いと翻訳API呼び出しが増えて生成に時間がかかる点に注意。
         translation_engine, deepl_api_key, nvidia_api_key: include_release_notes=True の際に使う翻訳設定
+        groq_api_key, gemini_api_key, open_router_api_key: 指定があれば、症状/回避策/詳細説明を
+            翻訳の代わりに AI で日本語要約する（生ログ・スタックトレース等を除いた要点のみ）。
+            いずれも無ければ通常の翻訳結果を使う。
     """
     wb = Workbook()
     ws1 = wb.active
@@ -807,7 +917,13 @@ def create_excel_report(results, analysis_data, search_params, include_release_n
             for key in release_note_keys:
                 content = sections.get(key, "")
                 if content:
-                    content = translate_headline(
+                    summary = None
+                    if groq_api_key or gemini_api_key or open_router_api_key:
+                        summary = summarize_technical_text_ja(
+                            content, groq_key=groq_api_key, gemini_key=gemini_api_key,
+                            open_router_key=open_router_api_key
+                        )
+                    content = summary or translate_headline(
                         content, engine=translation_engine,
                         deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key
                     )
@@ -920,7 +1036,9 @@ def create_combined_excel_report(cisco=None, extra_sheets=None):
         cisco: None、または以下の形式の dict:
             {"results": DataFrame, "analysis_data": dict, "search_params": dict,
              "include_release_notes": bool（省略可）, "translation_engine": str（省略可）,
-             "deepl_api_key": str（省略可）, "nvidia_api_key": str（省略可）}
+             "deepl_api_key": str（省略可）, "nvidia_api_key": str（省略可）,
+             "groq_api_key": str（省略可）, "gemini_api_key": str（省略可）,
+             "open_router_api_key": str（省略可）}
         extra_sheets: [{"name": str, "headers": [...], "rows": [[...], ...]}, ...] または None
 
     Returns:
@@ -932,6 +1050,8 @@ def create_combined_excel_report(cisco=None, extra_sheets=None):
             include_release_notes=cisco.get("include_release_notes", False),
             translation_engine=cisco.get("translation_engine", "google"),
             deepl_api_key=cisco.get("deepl_api_key"), nvidia_api_key=cisco.get("nvidia_api_key"),
+            groq_api_key=cisco.get("groq_api_key"), gemini_api_key=cisco.get("gemini_api_key"),
+            open_router_api_key=cisco.get("open_router_api_key"),
             extra_sheets=extra_sheets,
         )
 
