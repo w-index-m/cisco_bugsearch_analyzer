@@ -48,6 +48,65 @@ def load_csv(file_path):
     return df
 
 
+# Cisco Bug Search のエクスポートに必要な標準列名。この名前で他の処理が参照するため、
+# アップロードされたファイルの列名がこれと違う場合は normalize_bug_columns() で正規化する
+REQUIRED_BUG_COLUMNS = [
+    "BUG Id", "BUG headline", "URL", "Bug Status", "Bug Severity",
+    "Known Fixed Releases", "Last Modified", "Product - Series",
+    "Known Affected Release(s)", "Release Note Enclosure",
+]
+
+# 製品ライン（Catalyst/Nexus等）によってエクスポートの列名が微妙に異なることがある
+# （例: Nexus では "Bug Status"/"Bug Severity" ではなく単に "Status"/"Severity"）ため、
+# よくある別名から標準列名への変換テーブル
+_COLUMN_ALIASES = {
+    "bug id": "BUG Id",
+    "bug headline": "BUG headline",
+    "headline": "BUG headline",
+    "url": "URL",
+    "bug status": "Bug Status",
+    "status": "Bug Status",
+    "bug severity": "Bug Severity",
+    "severity": "Bug Severity",
+    "known fixed releases": "Known Fixed Releases",
+    "known fixed": "Known Fixed Releases",
+    "known affected release(s)": "Known Affected Release(s)",
+    "known affected releases": "Known Affected Release(s)",
+    "known affected": "Known Affected Release(s)",
+    "last modified": "Last Modified",
+    "product - series": "Product - Series",
+    "product": "Product - Series",
+    "release note enclosure": "Release Note Enclosure",
+}
+
+
+def normalize_bug_columns(df):
+    """
+    アップロードされたバグ一覧の列名を Cisco Bug Search の標準形式に正規化する。
+
+    製品ライン（Nexus等）によっては "Bug Status"/"Bug Severity" ではなく
+    "Status"/"Severity" のように短縮された列名でエクスポートされることがあるため、
+    既知の別名（_COLUMN_ALIASES）を介して標準列名へリネームする。
+    標準列がリネーム後も見つからない場合は、空文字列の列として補い、
+    以降の処理（列への直接アクセス）で KeyError にならないようにする。
+    """
+    df = df.copy()
+    lower_cols = {str(c).strip().lower(): c for c in df.columns}
+    rename_map = {}
+    for alias, canonical in _COLUMN_ALIASES.items():
+        if canonical in df.columns:
+            continue
+        if alias in lower_cols:
+            rename_map[lower_cols[alias]] = canonical
+    df = df.rename(columns=rename_map)
+
+    for col in REQUIRED_BUG_COLUMNS:
+        if col not in df.columns:
+            df[col] = ""
+
+    return df
+
+
 # ==================== リリースノート処理 ====================
 
 def clean_html_tags(text):

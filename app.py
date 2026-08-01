@@ -79,11 +79,24 @@ def load_analysis_from_json_ui(json_str):
 default_csv = "bugSearch.csv"
 
 # ファイルアップロード or デフォルトを使用
-uploaded_file = st.file_uploader("CSV ファイルをアップロード（オプション）", type=["csv"])
+uploaded_file = st.file_uploader(
+    "CSV / Excel ファイルをアップロード（オプション）",
+    type=["csv", "xls", "xlsx"],
+    help="Nexus 等、Catalyst と列名が異なるエクスポートも自動で列名を認識します"
+)
 
 if uploaded_file is not None:
-    df = pd.read_csv(uploaded_file)
-    df.columns = df.columns.str.strip()
+    try:
+        filename = uploaded_file.name.lower()
+        if filename.endswith(".csv"):
+            df = pd.read_csv(uploaded_file)
+        else:
+            df = pd.read_excel(uploaded_file)
+        df.columns = df.columns.str.strip()
+        df = analyzer.normalize_bug_columns(df)
+    except Exception as e:
+        st.error(f"ファイル読み込みエラー: {e}")
+        df = None
 else:
     df = load_csv(default_csv)
 
