@@ -347,12 +347,36 @@ if df is not None:
                 lambda x: st.session_state.bug_analysis.get(x, {}).get("possibility", "-")
             )
 
+            def _extract_ja_release_note_fields(note):
+                if pd.isna(note):
+                    note = ""
+                sections = parse_release_note(note)
+                workaround = sections.get("回避策", "")
+                detail = sections.get("詳細説明", "")
+                workaround_ja = translate_headline(
+                    workaround, engine=translation_engine_key,
+                    deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key
+                ) if workaround else ""
+                detail_ja = translate_headline(
+                    detail, engine=translation_engine_key,
+                    deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key
+                ) if detail else ""
+                return pd.Series({"回避策 (日本語)": workaround_ja, "詳細説明 (日本語)": detail_ja})
+
+            display_results = pd.concat(
+                [display_results, display_results["Release Note Enclosure"].apply(_extract_ja_release_note_fields)],
+                axis=1
+            )
+
             display_cols = ["BUG Id", "BUG headline (日本語)", "BUG headline (英語原文)", "Bug Severity", "Bug Status",
-                          "Known Affected Release(s)", "Known Fixed Releases", "発生可能性"]
+                          "Known Affected Release(s)", "Known Fixed Releases",
+                          "回避策 (日本語)", "詳細説明 (日本語)", "発生可能性"]
 
             st.caption(
                 "「発生可能性」は下の「詳細情報」でバグを選択して手動評価するか、AI分析を行うと更新されます"
                 "（未評価は「-」）。実際のヒット件数に基づく統計値ではなく、目安としてご利用ください。"
+                "「回避策」「詳細説明」はリリースノートから抽出・翻訳したものです（無い場合は空欄）。"
+                "件数が多いと翻訳に時間がかかることがあります。"
             )
             st.dataframe(
                 display_results[display_cols],
