@@ -499,18 +499,17 @@ if df is not None:
                 "severity": severity_filter
             }
 
-            include_release_notes_export = st.checkbox(
-                f"Excelに検索結果全 {len(display_results)} 件の症状/条件/回避策（日本語）を含める"
-                "（件数が多いと生成に時間がかかります）",
-                value=False,
-                key="include_release_notes_export"
-            )
+            # 上の一覧表の「症状/回避策/詳細説明を表示する」チェックボックス（show_release_note_cols）
+            # の結果をそのまま使う。display_results に既に日本語訳/AI要約が入っているため、
+            # Excel側で二重に翻訳APIを呼び直すことはしない（以前は別チェックボックスで
+            # 独立に再翻訳しており、両方ONの場合に翻訳が2倍走っていた）
+            if show_release_note_cols:
+                st.caption("Excelにも上の「症状/回避策/詳細説明」列を含めます（一覧表と同じ内容、再翻訳はしません）。")
 
-            # Excel ファイルを生成（display_results には翻訳済み見出し列が入っている）
-            # AI キーが設定されていれば、症状/回避策/詳細説明はAI要約（生ログ等を除いた要点のみ）を使う
+            # Excel ファイルを生成（display_results には翻訳済み見出し列・症状等が入っている）
             excel_data = create_excel_report(
                 display_results, st.session_state.bug_analysis, search_params,
-                include_release_notes=include_release_notes_export,
+                include_release_notes=show_release_note_cols,
                 translation_engine=translation_engine_key,
                 deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key,
                 groq_api_key=groq_api_key, gemini_api_key=gemini_api_key,
@@ -523,7 +522,7 @@ if df is not None:
                 "results": display_results,
                 "analysis_data": dict(st.session_state.bug_analysis),
                 "search_params": search_params,
-                "include_release_notes": include_release_notes_export,
+                "include_release_notes": show_release_note_cols,
                 "translation_engine": translation_engine_key,
                 "deepl_api_key": deepl_api_key,
                 "nvidia_api_key": nvidia_api_key,
