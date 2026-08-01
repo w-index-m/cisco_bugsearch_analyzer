@@ -3,6 +3,7 @@ import pandas as pd
 import io
 import re
 from html import unescape
+from deep_translator import GoogleTranslator
 
 st.set_page_config(page_title="Cisco Bug Search Analyzer", layout="wide")
 
@@ -46,6 +47,18 @@ def parse_release_note(note_text):
                 sections[jp_key] = content
 
     return sections
+
+@st.cache_data
+def translate_headline(text, target_lang='ja'):
+    """バグ Headline を日本語に翻訳"""
+    if not text or len(text) < 3:
+        return text
+    try:
+        translator = GoogleTranslator(source_language='en', target_language=target_lang)
+        return translator.translate(text)
+    except Exception as e:
+        st.warning(f"翻訳エラー: {e}")
+        return text
 
 def get_cisco_release_notes_url(product, version):
     """Cisco 公式リリースノート URL を生成"""
@@ -184,11 +197,14 @@ if df is not None:
             else:
                 results = results.sort_values("BUG Id")
 
-            display_cols = ["BUG Id", "BUG headline", "Bug Severity", "Bug Status",
+            display_results = results.copy()
+            display_results["BUG headline (日本語)"] = display_results["BUG headline"].apply(translate_headline)
+
+            display_cols = ["BUG Id", "BUG headline (日本語)", "Bug Severity", "Bug Status",
                           "Known Affected Release(s)", "Known Fixed Releases"]
 
             st.dataframe(
-                results[display_cols],
+                display_results[display_cols],
                 use_container_width=True,
                 hide_index=True
             )
@@ -197,7 +213,7 @@ if df is not None:
             selected_idx = st.selectbox(
                 "詳細を見るバグを選択",
                 range(len(results)),
-                format_func=lambda x: f"{results.iloc[x]['BUG Id']} - {results.iloc[x]['BUG headline'][:50]}"
+                format_func=lambda x: f"{results.iloc[x]['BUG Id']} - {translate_headline(results.iloc[x]['BUG headline'])}"
             )
 
             if selected_idx is not None:
@@ -212,7 +228,11 @@ if df is not None:
                 with col3:
                     st.metric("ステータス", bug["Bug Status"])
 
-                st.write("**タイトル:**", bug["BUG headline"])
+                headline_en = bug["BUG headline"]
+                headline_ja = translate_headline(headline_en)
+
+                st.write("**タイトル（日本語）:**", headline_ja)
+                st.caption(f"英語: {headline_en}")
 
                 release_note = bug["Release Note Enclosure"]
                 sections = parse_release_note(release_note)
