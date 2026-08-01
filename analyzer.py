@@ -151,7 +151,7 @@ def translate_headline_google(text):
     if not text or len(text) < 3:
         return text
     try:
-        translator = GoogleTranslator(source_language='en', target_language='ja')
+        translator = GoogleTranslator(source='en', target='ja')
         return translator.translate(text)
     except Exception:
         return None
