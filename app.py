@@ -638,6 +638,14 @@ with st.expander("🌐 Cisco 以外のベンダー（Palo Alto / YAMAHA 等）�
         "内容をブラウザからコピーしてここに貼り付けると、ID単位に分解してカテゴリ分け・日本語訳します。"
         "NVD検索はセキュリティ脆弱性（CVE）のみが対象のため、こちらは一般的な不具合情報を扱います。"
     )
+    st.info(
+        "💡 **お願い**: 以下のような公式ページはこちらで自動取得できないため、"
+        "ご自身のブラウザで開いてページ内のテキストをコピーし、下の欄に貼り付けてください。\n\n"
+        "- Palo Alto（PAN-OS Known and Addressed Issues、バージョンごとに存在）例:\n"
+        "  👉 https://docs.paloaltonetworks.com/ngfw/release-notes/12-2/pan-os-12-2-2-known-and-addressed-issues\n"
+        "- YAMAHA（RTX/RTシリーズ リリースノート）例: 該当バージョンの「ファームウェアリビジョン」ページ\n\n"
+        "他のバージョン・製品を調べたい場合も、同様に該当ページを開いて本文をコピーしてお知らせください。"
+    )
 
     pasted_issues_text = st.text_area(
         "「ISSUE ID」+ 説明文の形式で貼り付け（例: PAN-332943 の下に説明文、その下に次のID...）",
