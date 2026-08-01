@@ -969,6 +969,11 @@ _ISSUE_ID_LINE_RE = re.compile(r'^([A-Z][A-Z0-9]*-\d+)\s*$', re.MULTILINE)
 # 説明文が続く（例: "[12] IKEv2で、鍵交換の始動パケットを受信しない機能を追加した。"）
 _BRACKET_ITEM_RE = re.compile(r'^\[(\d+)\]\s*', re.MULTILINE)
 
+# YAMAHA形式内のセクション見出し（例: "■バグ修正", "■新機能"）。
+# 連番は見出しをまたいでリセットされる（新機能側の [1] とバグ修正側の [1] は別物）ため、
+# どのセクション配下かを識別してIDの衝突を防ぐ
+_SECTION_HEADER_RE = re.compile(r'^■\s*(.+?)\s*$', re.MULTILINE)
+
 _WORKAROUND_RE = re.compile(r'Workaround\s*:\s*', re.IGNORECASE)
 _WHITESPACE_RE = re.compile(r'\s+')
 
@@ -1013,9 +1018,13 @@ def parse_vendor_known_issues(raw_text):
         raw_text: ブラウザからコピーした生テキスト
 
     Returns:
-        [{"id": "PAN-332943", "description": "...", "workaround": "..."}, ...]
+        [{"id": "PAN-332943", "description": "...", "workaround": "...", "section": None or "バグ修正"}, ...]
         YAMAHA形式の場合 id は "[12]" のようになり、workaround は常に空文字列
-        （YAMAHAのリリースノートに Workaround の概念が無いため）
+        （YAMAHAのリリースノートに Workaround の概念が無いため）。
+        "■バグ修正" 等のセクション見出しが検出できた場合、その配下の項目には
+        section にその見出し文字列が入る（無ければ None）。YAMAHA形式は見出しを
+        またいで連番がリセットされる（新機能側の [1] とバグ修正側の [1] は別物）ため、
+        同じ ID の項目を区別する際は id 単独ではなく section と組み合わせて使うこと。
     """
     if not raw_text or not raw_text.strip():
         return []
@@ -1038,11 +1047,22 @@ def parse_vendor_known_issues(raw_text):
                 workaround = ""
 
             if description:
-                issues.append({"id": issue_id, "description": description, "workaround": workaround})
+                issues.append({"id": issue_id, "description": description, "workaround": workaround, "section": None})
         return issues
 
     matches = list(_BRACKET_ITEM_RE.finditer(raw_text))
     if matches:
+        section_headers = list(_SECTION_HEADER_RE.finditer(raw_text))
+
+        def _section_at(pos):
+            current = None
+            for sm in section_headers:
+                if sm.start() <= pos:
+                    current = sm.group(1)
+                else:
+                    break
+            return current
+
         issues = []
         for i, m in enumerate(matches):
             issue_id = f"[{m.group(1)}]"
@@ -1051,7 +1071,12 @@ def parse_vendor_known_issues(raw_text):
             description = _normalize_block_text(raw_text[start:end])
 
             if description:
-                issues.append({"id": issue_id, "description": description, "workaround": ""})
+                issues.append({
+                    "id": issue_id,
+                    "description": description,
+                    "workaround": "",
+                    "section": _section_at(m.start()),
+                })
         return issues
 
     return []
