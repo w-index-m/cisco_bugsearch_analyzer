@@ -626,19 +626,30 @@ with st.expander("🌐 Cisco 以外のベンダー（Palo Alto / YAMAHA 等）�
             parsed_issues = analyzer.parse_vendor_known_issues(pasted_issues_text)
             if not parsed_issues:
                 st.warning(
-                    "ID（例: PAN-332943, PLUG-23656）を検出できませんでした。"
-                    "各IDが単独の行になっているか確認してください。"
+                    "ID（例: PAN-332943, [12]）を検出できませんでした。"
+                    "各IDが単独の行になっているか、行頭が角括弧の連番になっているか確認してください。"
                 )
             else:
                 st.success(f"✓ {len(parsed_issues)} 件検出しました")
 
-                grouped = {}
-                for issue in parsed_issues:
-                    for cat in analyzer.categorize_vendor_issue(issue["description"]):
-                        grouped.setdefault(cat, []).append(issue)
+                has_sections = any(issue["section"] for issue in parsed_issues)
 
-                # カテゴリの表示順を固定（一般/その他は最後）
-                category_order = list(analyzer.VENDOR_ISSUE_CATEGORY_KEYWORDS.keys()) + ["一般 / その他"]
+                grouped = {}
+                if has_sections:
+                    # YAMAHA形式で "■バグ修正" 等の見出しが検出できた場合は、
+                    # ベンダー自身の分類（新機能/バグ修正等）を優先してグループ化する
+                    # （キーワード推測より確実なため）。見出しが無い項目は最後にまとめる
+                    for issue in parsed_issues:
+                        key = issue["section"] or "（見出し無し）"
+                        grouped.setdefault(key, []).append(issue)
+                    category_order = [k for k in grouped.keys() if k != "（見出し無し）"] + ["（見出し無し）"]
+                else:
+                    for issue in parsed_issues:
+                        for cat in analyzer.categorize_vendor_issue(issue["description"]):
+                            grouped.setdefault(cat, []).append(issue)
+                    # カテゴリの表示順を固定（一般/その他は最後）
+                    category_order = list(analyzer.VENDOR_ISSUE_CATEGORY_KEYWORDS.keys()) + ["一般 / その他"]
+
                 for cat in category_order:
                     if cat not in grouped:
                         continue
