@@ -20,6 +20,28 @@ from analyzer import (
 
 st.set_page_config(page_title="Cisco Bug Search Analyzer", layout="wide")
 
+# 「機能を入力」欄にチェックボックスでまとめて追記できる用語カテゴリ。
+# 増やす場合はここに 1 行追加するだけでチェックボックスも増える
+FEATURE_KEYWORD_CATEGORIES = {
+    "重大障害系": ["crash", "reload", "reboot", "hang", "memory leak", "traceback",
+              "panic", "deadlock", "watchdog", "corrupt", "freeze", "down", "abort"],
+    "監視系": ["syslog", "snmp", "snmp polling", "snmp trap", "netflow"],
+}
+
+
+def _rebuild_feature_keywords():
+    """チェックされているカテゴリの用語をすべて集めて「機能を入力」欄を再構成する"""
+    terms = []
+    for cat, keywords in FEATURE_KEYWORD_CATEGORIES.items():
+        if st.session_state.get(f"feature_cat_{cat}"):
+            terms.extend(keywords)
+    st.session_state["feature"] = ", ".join(terms)
+
+
+if "feature" not in st.session_state:
+    st.session_state["feature_cat_重大障害系"] = True
+    _rebuild_feature_keywords()
+
 st.title("🔍 Cisco Bug Search Analyzer")
 st.markdown("Cisco バグ検索システム - 機能とバージョンから該当するバグを検索")
 
@@ -214,17 +236,29 @@ if df is not None:
     )
 
     st.markdown("---")
+
+    st.caption("キーワードを一括追加:")
+    cat_cols = st.columns(len(FEATURE_KEYWORD_CATEGORIES))
+    for cat_col, cat in zip(cat_cols, FEATURE_KEYWORD_CATEGORIES):
+        with cat_col:
+            st.checkbox(
+                cat,
+                key=f"feature_cat_{cat}",
+                on_change=_rebuild_feature_keywords,
+                help=", ".join(FEATURE_KEYWORD_CATEGORIES[cat]),
+            )
+
     col1, col2 = st.columns(2)
 
     with col1:
         feature = st.text_input(
             "機能を入力（Product / Headline）",
-            value="crash, reload, reboot, hang, memory leak, traceback, panic, deadlock, watchdog, corrupt, freeze, down, abort",
+            key="feature",
             placeholder='例：VPN Multicast BGP、または "Catalyst 9300" VPN',
             help="カンマまたはスペース（全角/半角）区切りで複数キーワードを指定するとOR検索になります。"
                  "スペースを含む語をそのまま1語で検索したい場合はダブルクォートで囲んでください"
                  "（例: '\"Catalyst 9300\" VPN' なら Catalyst 9300 を1語として、VPNを別語としてOR検索）。"
-                 "初期値は重大バグを拾いやすい代表的な症状キーワードです。必要に応じて書き換えてください。"
+                 "上のチェックボックスでカテゴリ用語を一括追加できます（手入力した内容は消えます）。"
         )
 
     with col2:
