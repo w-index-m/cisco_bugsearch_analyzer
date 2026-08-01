@@ -960,52 +960,106 @@ def search_cve_with_translation(keyword, engine='google', deepl_api_key=None, nv
 # カテゴリ分け・翻訳する。NVD 検索（セキュリティCVEのみ）ではカバーできない、
 # 一般的な不具合情報を扱う。
 
-_ISSUE_ID_RE = re.compile(r'^([A-Z][A-Z0-9]*-\d+)\s*$', re.MULTILINE)
+
+# 形式1: Palo Alto の Known Issues 形式。ID がそれだけで1行を占める
+# （例: "PAN-332943" という行の次の行から説明文が始まる）
+_ISSUE_ID_LINE_RE = re.compile(r'^([A-Z][A-Z0-9]*-\d+)\s*$', re.MULTILINE)
+
+# 形式2: YAMAHA RT シリーズのリリースノート形式。角括弧の連番の直後（同じ行）に
+# 説明文が続く（例: "[12] IKEv2で、鍵交換の始動パケットを受信しない機能を追加した。"）
+_BRACKET_ITEM_RE = re.compile(r'^\[(\d+)\]\s*', re.MULTILINE)
+
 _WORKAROUND_RE = re.compile(r'Workaround\s*:\s*', re.IGNORECASE)
+_WHITESPACE_RE = re.compile(r'\s+')
+
+
+def _normalize_block_text(text):
+    """
+    複数行にまたがるブロックの空白を正規化する。
+
+    改行を含む空白は、前後の文字が両方とも非ASCII（日本語等）の場合はスペースを
+    挟まずに連結する（例: 行折り返しで分かれた「処理するよ」+「うにした」を
+    「処理するように した」ではなく「処理するようにした」に戻す）。
+    それ以外（英語の行折り返し等）は単一スペースに圧縮する。
+    """
+    text = text.strip()
+
+    def _replace(m):
+        ws = m.group(0)
+        if '\n' not in ws:
+            return ' '
+        before = m.string[m.start() - 1] if m.start() > 0 else ''
+        after = m.string[m.end()] if m.end() < len(m.string) else ''
+        if before and after and not before.isascii() and not after.isascii():
+            return ''
+        return ' '
+
+    return _WHITESPACE_RE.sub(_replace, text)
 
 
 def parse_vendor_known_issues(raw_text):
     """
-    "ISSUE ID" + 説明文（+ 任意で "Workaround:" 以降）の形式で貼り付けられた
-    テキストを、課題単位のリストに分解する。
+    ベンダー公式ページからコピーしたテキストを、課題単位のリストに分解する。
+    2つの形式を自動判定する:
 
-    ID は "PAN-332943" や "PLUG-23656" のように「英大文字始まりの接頭辞 + ハイフン + 数字」
-    という行を区切りとして検出する（Palo Alto の Known Issues ページの形式に準拠）。
+    1. Palo Alto 形式: "PAN-332943" のように ID が単独で1行を占め、
+       次の行から説明文（+ 任意で "Workaround:" 以降）が続く
+    2. YAMAHA 形式: "[12] 説明文..." のように角括弧の連番の直後に説明文が
+       同じ行から続く（連番はそのリリースノート内でのみ一意）
+
+    どちらのIDパターンにも一致しなければ空リストを返す。
 
     Args:
         raw_text: ブラウザからコピーした生テキスト
 
     Returns:
         [{"id": "PAN-332943", "description": "...", "workaround": "..."}, ...]
-        （Workaround が無ければ workaround は空文字列）
+        YAMAHA形式の場合 id は "[12]" のようになり、workaround は常に空文字列
+        （YAMAHAのリリースノートに Workaround の概念が無いため）
     """
     if not raw_text or not raw_text.strip():
         return []
 
-    matches = list(_ISSUE_ID_RE.finditer(raw_text))
-    issues = []
+    matches = list(_ISSUE_ID_LINE_RE.finditer(raw_text))
+    if matches:
+        issues = []
+        for i, m in enumerate(matches):
+            issue_id = m.group(1)
+            start = m.end()
+            end = matches[i + 1].start() if i + 1 < len(matches) else len(raw_text)
+            block = raw_text[start:end].strip()
 
-    for i, m in enumerate(matches):
-        issue_id = m.group(1)
-        start = m.end()
-        end = matches[i + 1].start() if i + 1 < len(matches) else len(raw_text)
-        block = raw_text[start:end].strip()
+            wa_match = _WORKAROUND_RE.search(block)
+            if wa_match:
+                description = _normalize_block_text(block[:wa_match.start()])
+                workaround = _normalize_block_text(block[wa_match.end():])
+            else:
+                description = _normalize_block_text(block)
+                workaround = ""
 
-        wa_match = _WORKAROUND_RE.search(block)
-        if wa_match:
-            description = block[:wa_match.start()].strip()
-            workaround = block[wa_match.end():].strip()
-        else:
-            description = block
-            workaround = ""
+            if description:
+                issues.append({"id": issue_id, "description": description, "workaround": workaround})
+        return issues
 
-        if description:
-            issues.append({"id": issue_id, "description": description, "workaround": workaround})
+    matches = list(_BRACKET_ITEM_RE.finditer(raw_text))
+    if matches:
+        issues = []
+        for i, m in enumerate(matches):
+            issue_id = f"[{m.group(1)}]"
+            start = m.end()
+            end = matches[i + 1].start() if i + 1 < len(matches) else len(raw_text)
+            description = _normalize_block_text(raw_text[start:end])
 
-    return issues
+            if description:
+                issues.append({"id": issue_id, "description": description, "workaround": ""})
+        return issues
+
+    return []
 
 
-# カテゴリ名 → 判定に使う英語キーワード（説明文の小文字化テキストに対して部分一致で判定）
+# カテゴリ名 → 判定に使うキーワード（説明文の小文字化テキストに対して部分一致で判定）。
+# 技術用語（ipsec, vpn 等）は日本語の文章中でも半角英数字で書かれることが多いため、
+# 英語（Palo Alto）・日本語（YAMAHA）どちらの説明文にも同じキーワードセットで対応できる。
 # 1件が複数カテゴリに該当することもある。どれにも該当しなければ「一般 / その他」
 VENDOR_ISSUE_CATEGORY_KEYWORDS = {
     "Panorama": ["panorama", "m-700", "template", "log collector"],
@@ -1019,12 +1073,14 @@ VENDOR_ISSUE_CATEGORY_KEYWORDS = {
         "cellular", "5g", "apn", "ztp", "fail-to-wire", "fail-open",
         "zero touch provisioning", "-r-poe", "410r", "450r",
     ],
+    "VPN / IPsec": ["ipsec", "vpn", "ike", "l2tp", "pptp"],
+    "スイッチ連携 (L2MS)": ["l2ms", "swx", "wlx", "スイッチ"],
 }
 
 
 def categorize_vendor_issue(description):
     """
-    説明文（英語）からキーワードマッチで該当カテゴリを判定する。
+    説明文（英語・日本語どちらも可）からキーワードマッチで該当カテゴリを判定する。
     複数該当する場合は全て返す。どれにも該当しなければ ["一般 / その他"]。
     """
     text_lower = f" {description.lower()} "
