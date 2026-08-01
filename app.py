@@ -184,21 +184,26 @@ else:
 if df is not None:
     st.success(f"✓ {len(df)} 件のバグ情報を読み込みました")
 
+    if "bug_analysis" not in st.session_state:
+        st.session_state.bug_analysis = {}
+
     st.markdown("---")
 
     col1, col2 = st.columns([2, 1])
     with col1:
         st.subheader("IOS バージョンから検索")
     with col2:
-        st.subheader("翻訳設定")
+        st.subheader("翻訳設定 & Severity")
 
     col1, col2 = st.columns([2, 1])
     with col2:
+        st.markdown("**翻訳エンジン**")
         translation_engine = st.radio(
             "翻訳エンジン",
             ["Google", "DeepL", "NVIDIA Riva"],
             horizontal=False,
-            index=0
+            index=0,
+            label_visibility="collapsed"
         )
 
         deepl_api_key = None
@@ -225,6 +230,14 @@ if df is not None:
             )
             if not nvidia_api_key:
                 st.warning("NVIDIA API キーを入力してください")
+
+        st.markdown("**Severity フィルタ**")
+        severity_filter = st.multiselect(
+            "Severity を選択",
+            options=[1, 2, 3, 4, 5],
+            default=[1, 2, 3],
+            label_visibility="collapsed"
+        )
 
     st.markdown("---")
     st.subheader("IOS バージョンから検索")
@@ -291,6 +304,9 @@ if df is not None:
 
     if search_button or (feature or version):
         results = df.copy()
+
+        if severity_filter:
+            results = results[results["Bug Severity"].astype(int).isin(severity_filter)]
 
         if feature:
             mask = (
@@ -363,6 +379,46 @@ if df is not None:
                 if translation_engine != "Google":
                     st.caption(f"翻訳エンジン: {translation_engine}")
 
+                st.markdown("---")
+                st.markdown("### 📊 バグ分析")
+
+                bug_id = bug["BUG Id"]
+                if bug_id not in st.session_state.bug_analysis:
+                    st.session_state.bug_analysis[bug_id] = {
+                        "possibility": "Medium",
+                        "tags": [],
+                        "comment": ""
+                    }
+
+                analysis = st.session_state.bug_analysis[bug_id]
+
+                col1, col2 = st.columns(2)
+                with col1:
+                    possibility = st.selectbox(
+                        "発生の可能性",
+                        ["Low", "Medium", "High"],
+                        index=["Low", "Medium", "High"].index(analysis["possibility"]),
+                        key=f"possibility_{bug_id}"
+                    )
+                    analysis["possibility"] = possibility
+
+                with col2:
+                    tags = st.multiselect(
+                        "関連機能タグ",
+                        ["VPN", "Routing", "Multicast", "Security", "DHCP", "Access List", "QoS", "OSPF", "BGP", "その他"],
+                        default=analysis["tags"],
+                        key=f"tags_{bug_id}"
+                    )
+                    analysis["tags"] = tags
+
+                comment = st.text_area(
+                    "このバグについてのコメント",
+                    value=analysis["comment"],
+                    height=80,
+                    key=f"comment_{bug_id}"
+                )
+                analysis["comment"] = comment
+
                 release_note = bug["Release Note Enclosure"]
                 sections = parse_release_note(release_note)
 
@@ -402,14 +458,26 @@ if df is not None:
                     st.text(clean_note)
 
             st.markdown("---")
+
+            export_results = results[display_cols].copy()
+            export_results["発生可能性"] = export_results["BUG Id"].apply(
+                lambda x: st.session_state.bug_analysis.get(x, {}).get("possibility", "-")
+            )
+            export_results["関連機能"] = export_results["BUG Id"].apply(
+                lambda x: ", ".join(st.session_state.bug_analysis.get(x, {}).get("tags", []))
+            )
+            export_results["コメント"] = export_results["BUG Id"].apply(
+                lambda x: st.session_state.bug_analysis.get(x, {}).get("comment", "")
+            )
+
             csv_buffer = io.StringIO()
-            results[display_cols].to_csv(csv_buffer, index=False)
+            export_results.to_csv(csv_buffer, index=False)
             csv_data = csv_buffer.getvalue()
 
             st.download_button(
-                label="📥 検索結果を CSV でダウンロード",
+                label="📥 検索結果を CSV でダウンロード（分析情報付き）",
                 data=csv_data,
-                file_name="bug_search_results.csv",
+                file_name="bug_search_results_with_analysis.csv",
                 mime="text/csv"
             )
         else:
