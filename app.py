@@ -935,8 +935,14 @@ eol_product = st.text_input(
     value="pan-os",
     placeholder="例: pan-os, cisco-ios-xe",
     help="endoflife.date 上のプロダクト識別子。Cisco IOS XE は \"cisco-ios-xe\"（\"iosxe\" ではない）。"
-         "一覧: https://endoflife.date/",
+         "Cisco NX-OS はendoflife.dateに対応が無いため、下の「Cisco公式EOL通知を貼り付けて解析」を"
+         "ご利用ください。一覧: https://endoflife.date/",
     key="eol_product"
+)
+st.caption(
+    "💡 **Cisco NX-OSをお探しの方へ**: NX-OSはendoflife.dateに対応が無いため、ここでは取得できません。"
+    "下にある「Cisco公式EOL通知を貼り付けて解析」で、Cisco公式の\"NX-OS EoL Milestones\"表を"
+    "貼り付けてください（EoSWM Date / EoVSS・LDoS を自動抽出します）。"
 )
 
 if st.button("📅 EOL情報を取得", key="eol_info_btn"):
@@ -947,7 +953,14 @@ if st.button("📅 EOL情報を取得", key="eol_info_btn"):
             eol_results = analyzer.get_eol_info(eol_product.strip())
 
         if isinstance(eol_results, dict) and "error" in eol_results:
-            st.error(f"EOL情報の取得に失敗しました: {eol_results['error']}")
+            if "nx" in eol_product.strip().lower() or "nexus" in eol_product.strip().lower():
+                st.error(
+                    "Cisco NX-OS / Nexus はendoflife.dateに対応が無いため取得できません。"
+                    "下の「Cisco公式EOL通知を貼り付けて解析」でCisco公式の"
+                    "\"NX-OS EoL Milestones\"表を貼り付けてください。"
+                )
+            else:
+                st.error(f"EOL情報の取得に失敗しました: {eol_results['error']}")
         elif not eol_results:
             st.warning("該当するEOL情報が見つかりませんでした")
         else:
