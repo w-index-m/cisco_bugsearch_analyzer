@@ -1611,6 +1611,11 @@ def get_eol_info(product_slug, timeout=15):
         response = requests.get(url, timeout=timeout)
         response.raise_for_status()
         raw = response.text
+    except requests.exceptions.HTTPError as e:
+        if e.response is not None and e.response.status_code == 404:
+            return {"error": f"'{product_slug}' が見つかりません（例: Cisco IOS XE は 'cisco-ios-xe'）。"
+                              "正しいスラッグは https://endoflife.date/ で確認してください。"}
+        return {"error": str(e)}
     except Exception as e:
         return {"error": str(e)}
 

@@ -925,8 +925,9 @@ st.caption(
 eol_product = st.text_input(
     "プロダクトスラッグ",
     value="pan-os",
-    placeholder="例: pan-os",
-    help="endoflife.date 上のプロダクト識別子（一覧: https://endoflife.date/）",
+    placeholder="例: pan-os, cisco-ios-xe",
+    help="endoflife.date 上のプロダクト識別子。Cisco IOS XE は \"cisco-ios-xe\"（\"iosxe\" ではない）。"
+         "一覧: https://endoflife.date/",
     key="eol_product"
 )
 
