@@ -692,8 +692,25 @@ _BUG_SYMPTOM_RULES = [
 ]
 
 
+def _safe_str(value):
+    """
+    None/NaN(float)/非文字列を安全に空文字列（またはstr化）へ変換する。
+
+    実データのCSV/Excelには欠損セルがNaN（float）として入ってくることがあり、
+    `not value` や `value or ""` では NaN が真値扱いされて素通りしてしまうため
+    （NaNは0ではないため）、その後の .strip()/re.search() 等で例外になる。
+    テキストを扱う分類・推定系の関数は入力を必ずこれに通してから処理する。
+    """
+    if value is None:
+        return ""
+    if isinstance(value, float) and pd.isna(value):
+        return ""
+    return str(value)
+
+
 def classify_bug_feature(text):
     """ヘッドラインのキーワードから利用機能カテゴリを推定する（最大2件、"/"区切り）"""
+    text = _safe_str(text)
     if not text:
         return "その他/システム"
     hits = [name for name, pattern in _BUG_FEATURE_RULES if re.search(pattern, text, re.IGNORECASE)]
@@ -702,6 +719,7 @@ def classify_bug_feature(text):
 
 def classify_bug_symptom(text):
     """ヘッドラインのキーワードから症状カテゴリ（素因）を推定する（最大2件、"/"区切り）"""
+    text = _safe_str(text)
     if not text:
         return "その他"
     hits = [name for name, pattern in _BUG_SYMPTOM_RULES if re.search(pattern, text, re.IGNORECASE)]
@@ -733,8 +751,8 @@ def estimate_occurrence_likelihood(status, headline, target_affected=None):
         headline: BUG headline（英語原文）
         target_affected: 指定バージョンへの影響有無（True/False）。None なら注記なし
     """
-    s = (status or "").strip().lower()
-    h = (headline or "").lower()
+    s = _safe_str(status).strip().lower()
+    h = _safe_str(headline).lower()
     tail = "（※指定バージョンでは影響なし・参考情報）" if target_affected is False else ""
 
     if s == "duplicate":
