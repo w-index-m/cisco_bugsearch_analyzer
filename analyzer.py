@@ -483,61 +483,81 @@ def _build_summary_prompt(text):
     )
 
 
+_AI_CALL_RETRIES = 3
+
+
 def _call_groq_prompt(prompt, api_key, max_tokens=150):
-    """Groq に任意のプロンプトを投げ、テキスト応答を返す共通ヘルパー"""
+    """
+    Groq に任意のプロンプトを投げ、テキスト応答を返す共通ヘルパー。
+
+    レート制限やタイムアウト等の一時的な失敗で内容が欠落したままにならないよう、
+    短い間隔を空けて最大3回まで再試行する（Google翻訳のリトライと同じ方針）。
+    """
     if not api_key or not GROQ_AVAILABLE:
         return None
-    try:
-        client = Groq(api_key=api_key)
-        message = client.chat.completions.create(
-            model="mixtral-8x7b-32768",
-            max_tokens=max_tokens,
-            messages=[{"role": "user", "content": prompt}]
-        )
-        return message.choices[0].message.content.strip()
-    except Exception:
-        return None
+    for attempt in range(_AI_CALL_RETRIES):
+        try:
+            client = Groq(api_key=api_key)
+            message = client.chat.completions.create(
+                model="mixtral-8x7b-32768",
+                max_tokens=max_tokens,
+                messages=[{"role": "user", "content": prompt}]
+            )
+            return message.choices[0].message.content.strip()
+        except Exception:
+            if attempt < _AI_CALL_RETRIES - 1:
+                time.sleep(0.5 * (attempt + 1))
+    return None
 
 
 def _call_gemini_prompt(prompt, api_key):
-    """Gemini に任意のプロンプトを投げ、テキスト応答を返す共通ヘルパー"""
+    """Gemini に任意のプロンプトを投げ、テキスト応答を返す共通ヘルパー（最大3回まで再試行）"""
     if not api_key or not GEMINI_AVAILABLE:
         return None
-    try:
-        genai.configure(api_key=api_key)
-        model = genai.GenerativeModel('gemini-pro')
-        response = model.generate_content(prompt)
-        return response.text.strip()
-    except Exception:
-        return None
+    for attempt in range(_AI_CALL_RETRIES):
+        try:
+            genai.configure(api_key=api_key)
+            model = genai.GenerativeModel('gemini-pro')
+            response = model.generate_content(prompt)
+            return response.text.strip()
+        except Exception:
+            if attempt < _AI_CALL_RETRIES - 1:
+                time.sleep(0.5 * (attempt + 1))
+    return None
 
 
 def _call_open_router_prompt(prompt, api_key, max_tokens=150):
-    """Open Router に任意のプロンプトを投げ、テキスト応答を返す共通ヘルパー"""
+    """Open Router に任意のプロンプトを投げ、テキスト応答を返す共通ヘルパー（最大3回まで再試行）"""
     if not api_key:
         return None
-    try:
-        response = requests.post(
-            url="https://openrouter.ai/api/v1/chat/completions",
-            headers={
-                "Authorization": f"Bearer {api_key}",
-                "HTTP-Referer": "https://streamlit.io",
-                "X-Title": "Cisco Bug Search Analyzer"
-            },
-            json={
-                "model": "mistralai/mistral-7b-instruct",
-                "messages": [{"role": "user", "content": prompt}],
-                "max_tokens": max_tokens
-            },
-            timeout=15
-        )
-        if response.status_code == 200:
-            result = response.json()
-            if "choices" in result and len(result["choices"]) > 0:
-                return result["choices"][0]["message"]["content"].strip()
-        return None
-    except Exception:
-        return None
+    for attempt in range(_AI_CALL_RETRIES):
+        try:
+            response = requests.post(
+                url="https://openrouter.ai/api/v1/chat/completions",
+                headers={
+                    "Authorization": f"Bearer {api_key}",
+                    "HTTP-Referer": "https://streamlit.io",
+                    "X-Title": "Cisco Bug Search Analyzer"
+                },
+                json={
+                    "model": "mistralai/mistral-7b-instruct",
+                    "messages": [{"role": "user", "content": prompt}],
+                    "max_tokens": max_tokens
+                },
+                timeout=15
+            )
+            if response.status_code == 200:
+                result = response.json()
+                if "choices" in result and len(result["choices"]) > 0:
+                    return result["choices"][0]["message"]["content"].strip()
+                return None
+            if response.status_code in (401, 403):
+                return None  # 認証エラーは再試行しても無駄
+        except Exception:
+            pass
+        if attempt < _AI_CALL_RETRIES - 1:
+            time.sleep(0.5 * (attempt + 1))
+    return None
 
 
 def summarize_with_groq(text, api_key):
