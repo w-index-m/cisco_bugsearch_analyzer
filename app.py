@@ -23,10 +23,19 @@ st.set_page_config(page_title="Cisco Bug Search Analyzer", layout="wide")
 # 「機能を入力」欄にチェックボックスでまとめて追記できる用語カテゴリ。
 # 増やす場合はここに 1 行追加するだけでチェックボックスも増える
 FEATURE_KEYWORD_CATEGORIES = {
-    "重大障害系": ["leak", "panic", "crash", "exception", "reboot", "reload", "memory",
-              "cpu", "cam", "tcam", "static route", "snmp", "syslog", "snmppolling",
-              "stack", "traceback", "iosd", "linu", "cause", "core", "dump"],
-    "監視系": ["syslog", "snmp", "snmp polling", "snmp trap", "netflow"],
+    "重大障害系": ["reload", "reboot", "crash", "traceback", "dump", "leak", "stuck",
+              "stop", "remove", "down", "hung", "deadlock", "watchdog"],
+    "インターフェース/L2/L3系": [
+        "1gbps", "1G", "ethernet", "10gbps", "10G", "fiber", "speed", "duplex",
+        "lacp", "vlan", "802.1q", "trunk", "ipv4", "svi",
+        "flowcontrol", "flow control", "flow-control",
+        "mac aging-time", "mac-aging-time", "mac aging time",
+        "static-route", "staticroute", "static route",
+        "defaultstaticroute", "default-static-route", "default static route",
+        "floatingstaticroute", "floating-static-route", "floating static route",
+        "vrf", "access-list",
+    ],
+    "監視系": ["snmp", "read", "write", "trap", "syslog", "ntp", "ssh", "netflow", "cdp", "span", "issu"],
 }
 
 
@@ -36,7 +45,10 @@ def _rebuild_feature_keywords():
     for cat, keywords in FEATURE_KEYWORD_CATEGORIES.items():
         if st.session_state.get(f"feature_cat_{cat}"):
             terms.extend(keywords)
-    st.session_state["feature"] = ", ".join(terms)
+    # スペースを含む語（"flow control" 等）はダブルクォートで囲み、split_feature_terms で
+    # 1語のフレーズとして保持されるようにする（囲まないと空白区切りで分解されてしまう）
+    quoted_terms = [f'"{t}"' if " " in t else t for t in terms]
+    st.session_state["feature"] = ", ".join(quoted_terms)
 
 
 if "feature" not in st.session_state:

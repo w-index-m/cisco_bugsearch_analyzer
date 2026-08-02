@@ -82,10 +82,18 @@ OPENROUTER_API_KEY = "xxx"
 2. **翻訳エンジン**（Google / DeepL / NVIDIA Riva）を選択
 3. **「IOS バージョンから検索」** でドロップダウンからバージョンを選ぶか、**「機能を入力」「バージョンを入力」** で条件を指定して **「🔎 バグを検索」** をクリック
    - 「機能を入力」はカンマ/スペース区切りでOR検索、ダブルクォートで囲むとスペース込み1語として扱われます
-   - 上部のチェックボックス（重大障害系・監視系）でよく使うキーワードを一括追加できます
+   - 上部のチェックボックス（重大障害系・インターフェース/L2/L3系・監視系）で下記のおすすめキーワードを一括追加できます（自動検索は実行されないため、追加後に「🔎 バグを検索」を押してください）
 4. 検索結果一覧で日本語訳された見出し・自動分類（利用機能／素因／発生しやすさ（推定））・指定バージョンへの影響有無を確認
 5. 一覧からバグを選択すると、症状・条件・回避策（日本語）、AI分析、Cisco公式リリースノートへのリンクなど詳細情報を表示
 6. 発生の可能性・関連機能タグ・コメントを入力して分析データとして保存可能（JSONでダウンロード/アップロードして再利用）
+
+#### デフォルトおすすめキーワード
+
+以前あった「機能を入力」欄への自動デフォルト値は、ページ読み込みのたびに検索が走ってしまう不具合の原因だったため廃止しました。代わりに、以下のおすすめキーワードをカテゴリ別チェックボックスからいつでも一括追加できます（`app.py` の `FEATURE_KEYWORD_CATEGORIES` で管理）。
+
+- **重大障害系**: reload, reboot, crash, traceback, dump, leak, stuck, stop, remove, down, hung, deadlock, watchdog
+- **インターフェース/L2/L3系**: 1gbps, 1G, ethernet, 10gbps, 10G, fiber, speed, duplex, lacp, vlan, 802.1q, trunk, ipv4, svi, flowcontrol, flow control, flow-control, mac aging-time, mac-aging-time, mac aging time, static-route, staticroute, static route, defaultstaticroute, default-static-route, default static route, floatingstaticroute, floating-static-route, floating static route, vrf, access-list
+- **監視系**: snmp, read, write, trap, syslog, ntp, ssh, netflow, cdp, span, issu
 
 ### 2. Cisco 以外のベンダー（Palo Alto / YAMAHA / FortiGate 等）
 - **CVE検索**: キーワード（例:「PAN-OS 11.1.2」「FortiOS 7.4.8」）でNVDを検索し、深刻度（CVSS）順に一覧表示。バージョンを指定すると影響有無も判定
