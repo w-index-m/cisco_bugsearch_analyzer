@@ -722,7 +722,7 @@ st.caption(
 st.caption(
     "💡 検索キーワード・バージョンの確認先（参考）: "
     "PAN-OS リリースノート一覧 → https://docs.paloaltonetworks.com/pan-os ／ "
-    "YAMAHA リリースノート・ファームウェア情報 → https://network.yamaha.com/"
+    "YAMAHA ファームウェアダウンロード・リビジョン情報 → https://network.yamaha.com/support/download"
 )
 
 cve_col1, cve_col2 = st.columns(2)
@@ -1088,6 +1088,13 @@ st.caption(
     "（\"End-of-life milestones\" の表、「サポート終了日（最終・実質的なEOL）」＝Last Date of Support "
     "が全サポート終了日）と、NX-OS形式（\"NX-OS Major Release\" の一覧表、EoVSS/LDoS列が"
     "最終サポート終了日）のどちらも自動判定して解析します。"
+)
+st.caption(
+    "💡 **Firepower / FTD / FMC / FXOS / ASA をお探しの方へ**: これらもendoflife.dateには"
+    "対応が無いため自動取得できませんが、Cisco公式のEOL/EOS通知ページ（例: "
+    "https://www.cisco.com/c/en/us/products/security/firepower-ngfw/eos-eol-notice-listing.html ）は"
+    "IOS XEと同じ\"End-of-life milestones\"表の形式のため、上と同じ手順で貼り付ければ"
+    "自動解析できます。"
 )
 cisco_eol_product_name = st.text_input(
     "製品名（任意、ラベル用）",
