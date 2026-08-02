@@ -921,6 +921,14 @@ st.caption(
     "endoflife.date のデータを使い、メジャーバージョン系統ごとのリリース日・EOL日・"
     "最新パッチと関連リンクを一覧表示します。"
 )
+st.warning(
+    "⚠️ **注意**: 一部の製品（特にCisco系）では、endoflife.dateの「EOL」がベンダー公式発表ではなく"
+    "「リリース日 + 固定期間」の推定式で計算されていることがあります。"
+    "実際に Cisco IOS XE 17.17 で検証したところ、endoflife.dateは EOL を 2026-03-31 としていましたが、"
+    "Cisco公式のEOL通知では最終サポート終了日（Last Date of Support）は 2029-01-30 でした。"
+    "重要な判断には、下の「Cisco公式EOL通知を貼り付けて解析」または各ベンダーの公式EOL/EOSページで"
+    "必ず裏取りしてください。"
+)
 
 eol_product = st.text_input(
     "プロダクトスラッグ",
@@ -985,6 +993,64 @@ if st.button("📅 EOL情報を取得", key="eol_info_btn"):
                 key="eol_excel_download_btn"
             )
 
+st.markdown("---")
+st.markdown("**Cisco公式EOL通知を貼り付けて解析**")
+st.caption(
+    "Cisco公式のEOL/EOS通知ページ（\"End-of-life milestones\" の表）は自動取得できないため、"
+    "ご自身のブラウザで開いてページ内のテキストをコピーし、下の欄に貼り付けてください。"
+    "「サポート終了日（最終・実質的なEOL）」（Last Date of Support）が、全サポートが終了する"
+    "実質的な最終EOL日です。"
+)
+cisco_eol_product_name = st.text_input(
+    "製品名（任意、ラベル用）",
+    placeholder="例: Cisco IOS XE 17.17",
+    key="cisco_eol_product_name"
+)
+cisco_eol_text = st.text_area(
+    "EOL通知ページのテキストを貼り付け",
+    height=180,
+    key="cisco_eol_text"
+)
+
+if st.button("📋 貼り付けたEOL通知を解析", key="parse_cisco_eol_btn"):
+    if not cisco_eol_text.strip():
+        st.warning("テキストを貼り付けてください")
+    else:
+        cisco_eol_rows_parsed = analyzer.parse_cisco_eol_milestones(cisco_eol_text)
+        if not cisco_eol_rows_parsed:
+            st.warning(
+                "マイルストーンを検出できませんでした。"
+                "\"End-of-Life Announcement Date\" や \"Last Date of Support\" 等の項目名を"
+                "含む範囲を貼り付けてください。"
+            )
+        else:
+            st.success(f"✓ {len(cisco_eol_rows_parsed)} 件のマイルストーンを検出しました")
+            st.dataframe(
+                pd.DataFrame(cisco_eol_rows_parsed, columns=["milestone", "date"])
+                .rename(columns={"milestone": "マイルストーン", "date": "日付"}),
+                use_container_width=True,
+                hide_index=True
+            )
+
+            cisco_eol_export_rows = [[r["milestone"], r["date"]] for r in cisco_eol_rows_parsed]
+            label = cisco_eol_product_name.strip() or "Cisco EOL通知"
+            st.session_state["combined_export_cisco_eol"] = {
+                "name": f"{label[:20]}(EOL通知)",
+                "headers": ["マイルストーン", "日付"],
+                "rows": cisco_eol_export_rows,
+            }
+
+            cisco_eol_excel_data = analyzer.create_combined_excel_report(
+                extra_sheets=[st.session_state["combined_export_cisco_eol"]]
+            )
+            st.download_button(
+                label="📊 このEOL通知をExcelでダウンロード",
+                data=cisco_eol_excel_data,
+                file_name=f"cisco_eol_notice_{datetime.now().strftime('%Y%m%d_%H%M%S')}.xlsx",
+                mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                key="cisco_eol_excel_download_btn"
+            )
+
             st.info(
                 "💡 **お願い**: 上表の「リンク」先ページ（バグ一覧・Known and Addressed Issues等）は"
                 "自動取得できません。お手数ですが、リンクをブラウザで開いて該当箇所をコピーし、"
@@ -1003,6 +1069,8 @@ if "combined_export_vendor_issues" in st.session_state:
     _combined_sources.append(f"貼り付け解析結果（{len(st.session_state['combined_export_vendor_issues']['rows'])} 件）")
 if "combined_export_eol" in st.session_state:
     _combined_sources.append(f"{st.session_state['combined_export_eol']['name']}（{len(st.session_state['combined_export_eol']['rows'])} 件）")
+if "combined_export_cisco_eol" in st.session_state:
+    _combined_sources.append(f"{st.session_state['combined_export_cisco_eol']['name']}（{len(st.session_state['combined_export_cisco_eol']['rows'])} 件）")
 
 if not _combined_sources:
     st.caption("Cisco検索・CVE検索・貼り付け解析・EOL取得のいずれかを実行すると、ここでまとめてExcel出力できるようになります。")
@@ -1017,6 +1085,8 @@ else:
             combined_extra_sheets.append(st.session_state["combined_export_vendor_issues"])
         if "combined_export_eol" in st.session_state:
             combined_extra_sheets.append(st.session_state["combined_export_eol"])
+        if "combined_export_cisco_eol" in st.session_state:
+            combined_extra_sheets.append(st.session_state["combined_export_cisco_eol"])
 
         combined_excel_data = analyzer.create_combined_excel_report(
             cisco=st.session_state.get("combined_export_cisco"),

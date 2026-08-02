@@ -1656,3 +1656,60 @@ def get_eol_info(product_slug, timeout=15):
 
     results.sort(key=lambda r: r["release_date"] or "", reverse=True)
     return results
+
+
+# ==================== Cisco 公式 EOL/EOS 通知の貼り付け解析 ====================
+# endoflife.date の Cisco 製品データは実測ではなく「リリース日 + 固定オフセット」の
+# 推定式であることがあり、Cisco 公式のEOL通知（例: IOS XE 17.17 の Last Date of
+# Support が実際には2029-01-30なのに、endoflife.date 側は2026-03-31という推定式の
+# 値になっていた）と大きくずれることが確認されている。Cisco公式のEOL/EOS通知ページ
+# （"End-of-life milestones" の表）は自動取得できないため、貼り付けたテキストから
+# マイルストーンと日付を抽出する。
+
+_CISCO_EOL_DATE_RE = re.compile(
+    r'(?:January|February|March|April|May|June|July|August|September|October|November|December)'
+    r'\s+\d{1,2},\s*\d{4}'
+)
+
+# (内部キー, 表示名（日本語）, ラベルを検出する正規表現)
+_CISCO_EOL_MILESTONE_PATTERNS = [
+    ("announcement", "EOL発表日", r'End-of-Life Announcement Date'),
+    ("end_of_sale", "販売終了日(EOS)", r'End-of-Sale Date'),
+    ("last_ship", "最終出荷日", r'Last Ship Date'),
+    ("end_of_sw_maintenance", "SWメンテナンスリリース終了日", r'End of SW Maintenance Releases Date'),
+    ("end_of_security_support", "脆弱性/セキュリティサポート終了日", r'End of Vulnerability/Security Support'),
+    ("end_of_service_contract_renewal", "サービス契約更新終了日", r'End of Service Contract Renewal'),
+    ("last_date_of_support", "サポート終了日（最終・実質的なEOL）", r'Last Date of Support'),
+]
+
+
+def parse_cisco_eol_milestones(raw_text):
+    """
+    Cisco公式のEOL/EOS通知ページ（"End-of-life milestones" の表）からコピーした
+    テキストを解析し、マイルストーン名と日付のペアを抽出する。
+
+    "Last Date of Support"（サポート終了日）が実質的な最終EOL日にあたる。
+    endoflife.date 等の推定値より、こちらの方が正確な公式情報である点に注意。
+
+    Args:
+        raw_text: Cisco公式ページからコピーした生テキスト
+
+    Returns:
+        [{"milestone": "サポート終了日（最終・実質的なEOL）", "date": "January 30, 2029"}, ...]
+        （表示順は _CISCO_EOL_MILESTONE_PATTERNS の並び順）
+        該当するマイルストーンが1つも見つからなければ空リストを返す
+    """
+    if not raw_text or not raw_text.strip():
+        return []
+
+    rows = []
+    for key, label_ja, label_pattern in _CISCO_EOL_MILESTONE_PATTERNS:
+        m = re.search(label_pattern, raw_text, re.IGNORECASE)
+        if not m:
+            continue
+        tail = raw_text[m.end():m.end() + 1000]
+        date_match = _CISCO_EOL_DATE_RE.search(tail)
+        if date_match:
+            rows.append({"milestone": label_ja, "date": date_match.group(0)})
+
+    return rows
