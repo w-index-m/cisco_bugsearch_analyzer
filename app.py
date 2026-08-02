@@ -87,6 +87,56 @@ if uploaded_file is not None:
 else:
     df = None
 
+# 翻訳エンジン設定は Cisco 検索・Cisco 以外のベンダー検索の両方で使うため、
+# CSV/Excel の読み込み有無に関わらず常に表示する
+st.subheader("翻訳設定")
+st.markdown("**翻訳エンジン**")
+translation_engine = st.radio(
+    "翻訳エンジン",
+    ["Google", "DeepL", "NVIDIA Riva"],
+    horizontal=False,
+    index=0,
+    label_visibility="collapsed"
+)
+
+deepl_api_key = None
+nvidia_api_key = None
+
+if translation_engine == "DeepL":
+    if DEEPL_AVAILABLE:
+        deepl_secret = get_secret("DEEPL_API_KEY")
+        if deepl_secret:
+            st.caption("✓ Secrets から読み込み済み")
+            deepl_api_key = deepl_secret
+        else:
+            deepl_api_key = st.text_input(
+                "DeepL API キー", type="password", placeholder="API キーを入力"
+            )
+        if not deepl_api_key:
+            st.warning("DeepL API キーを入力してください")
+    else:
+        st.warning("deepl ライブラリがインストールされていません")
+        translation_engine = "Google"
+
+elif translation_engine == "NVIDIA Riva":
+    nvidia_secret = get_secret("NVIDIA_API_KEY")
+    if nvidia_secret:
+        st.caption("✓ Secrets から読み込み済み")
+        nvidia_api_key = nvidia_secret
+    else:
+        nvidia_api_key = st.text_input(
+            "NVIDIA API キー", type="password", placeholder="API キーを入力"
+        )
+    if not nvidia_api_key:
+        st.warning("NVIDIA API キーを入力してください")
+
+# 表示ラベル（"Google"/"DeepL"/"NVIDIA Riva"）を translate_headline() が期待する
+# 内部キー（'google'/'deepl'/'nvidia'）に変換する
+engine_key_map = {"Google": "google", "DeepL": "deepl", "NVIDIA Riva": "nvidia"}
+translation_engine_key = engine_key_map.get(translation_engine, "google")
+
+st.markdown("---")
+
 if df is not None:
     st.success(f"✓ {len(df)} 件のバグ情報を読み込みました")
 
@@ -126,52 +176,7 @@ if df is not None:
 
     col1, col2 = st.columns([2, 1])
     with col2:
-        st.subheader("翻訳設定 & Severity")
-        st.markdown("**翻訳エンジン**")
-        translation_engine = st.radio(
-            "翻訳エンジン",
-            ["Google", "DeepL", "NVIDIA Riva"],
-            horizontal=False,
-            index=0,
-            label_visibility="collapsed"
-        )
-
-        deepl_api_key = None
-        nvidia_api_key = None
-
-        if translation_engine == "DeepL":
-            if DEEPL_AVAILABLE:
-                deepl_secret = get_secret("DEEPL_API_KEY")
-                if deepl_secret:
-                    st.caption("✓ Secrets から読み込み済み")
-                    deepl_api_key = deepl_secret
-                else:
-                    deepl_api_key = st.text_input(
-                        "DeepL API キー", type="password", placeholder="API キーを入力"
-                    )
-                if not deepl_api_key:
-                    st.warning("DeepL API キーを入力してください")
-            else:
-                st.warning("deepl ライブラリがインストールされていません")
-                translation_engine = "Google"
-
-        elif translation_engine == "NVIDIA Riva":
-            nvidia_secret = get_secret("NVIDIA_API_KEY")
-            if nvidia_secret:
-                st.caption("✓ Secrets から読み込み済み")
-                nvidia_api_key = nvidia_secret
-            else:
-                nvidia_api_key = st.text_input(
-                    "NVIDIA API キー", type="password", placeholder="API キーを入力"
-                )
-            if not nvidia_api_key:
-                st.warning("NVIDIA API キーを入力してください")
-
-        # 表示ラベル（"Google"/"DeepL"/"NVIDIA Riva"）を translate_headline() が期待する
-        # 内部キー（'google'/'deepl'/'nvidia'）に変換する
-        engine_key_map = {"Google": "google", "DeepL": "deepl", "NVIDIA Riva": "nvidia"}
-        translation_engine_key = engine_key_map.get(translation_engine, "google")
-
+        st.subheader("Severity & AI 設定")
         st.markdown("**Severity フィルタ**")
         severity_filter = st.multiselect(
             "Severity を選択",
