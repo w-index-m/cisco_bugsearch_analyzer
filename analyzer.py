@@ -1758,3 +1758,93 @@ def parse_cisco_nxos_eol_table(raw_text):
         })
 
     return rows
+
+
+# Cisco公式のEOL/EOS通知ページから貼り付けて確認済みの実データ。
+# endoflife.date は Cisco 製品の EOL を推定式で計算しており不正確なことがあるため、
+# 貼り付け解析で検証済みの値をここに蓄積し、OS名+バージョン入力だけで即座に参照できるようにする。
+CISCO_EOL_KNOWN_DATA = {
+    "cisco-ios-xe": {
+        "17.14": {
+            "milestones": [
+                {"milestone": "EOL発表日", "date": "August 30, 2024"},
+                {"milestone": "販売終了日(EOS)", "date": "August 30, 2024"},
+                {"milestone": "最終出荷日", "date": "November 28, 2024"},
+                {"milestone": "SWメンテナンスリリース終了日", "date": "August 30, 2025"},
+                {"milestone": "脆弱性/セキュリティサポート終了日", "date": "August 30, 2025"},
+                {"milestone": "サービス契約更新終了日", "date": "August 30, 2028"},
+                {"milestone": "サポート終了日（最終・実質的なEOL）", "date": "August 30, 2028"},
+            ],
+            "note": None,
+        },
+        "17.15": {
+            "milestones": [
+                {"milestone": "EOL発表日", "date": "October 28, 2024"},
+                {"milestone": "販売終了日(EOS)", "date": "October 28, 2024"},
+                {"milestone": "最終出荷日", "date": "January 26, 2025"},
+                {"milestone": "SWメンテナンスリリース終了日", "date": "October 28, 2025"},
+                {"milestone": "脆弱性/セキュリティサポート終了日", "date": "October 28, 2025"},
+                {"milestone": "サービス契約更新終了日", "date": "October 28, 2028"},
+                {"milestone": "サポート終了日（最終・実質的なEOL）", "date": "October 28, 2028"},
+            ],
+            "note": "Cisco は 17.18 への移行を推奨（マイグレーション対象）。",
+        },
+        "17.16": {
+            "milestones": [
+                {"milestone": "EOL発表日", "date": "January 30, 2025"},
+                {"milestone": "販売終了日(EOS)", "date": "January 30, 2025"},
+                {"milestone": "最終出荷日", "date": "April 30, 2025"},
+                {"milestone": "SWメンテナンスリリース終了日", "date": "January 30, 2026"},
+                {"milestone": "脆弱性/セキュリティサポート終了日", "date": "January 30, 2026"},
+                {"milestone": "サービス契約更新終了日", "date": "January 30, 2029"},
+                {"milestone": "サポート終了日（最終・実質的なEOL）", "date": "January 30, 2029"},
+            ],
+            "note": None,
+        },
+        "17.17": {
+            "milestones": [
+                {"milestone": "EOL発表日", "date": "March 31, 2025"},
+                {"milestone": "販売終了日(EOS)", "date": "March 31, 2025"},
+                {"milestone": "最終出荷日", "date": "June 29, 2025"},
+                {"milestone": "SWメンテナンスリリース終了日", "date": "March 31, 2026"},
+                {"milestone": "脆弱性/セキュリティサポート終了日", "date": "March 31, 2026"},
+                {"milestone": "サービス契約更新終了日", "date": "January 30, 2029"},
+                {"milestone": "サポート終了日（最終・実質的なEOL）", "date": "January 30, 2029"},
+            ],
+            "note": None,
+        },
+    },
+    "cisco-nx-os": {
+        "10.2": {"eoswm": "Nov 30 2023", "eovss_ldos": "Nov 30 2025"},
+        "10.3": {"eoswm": "May 31 2024", "eovss_ldos": "May 31 2026"},
+        "10.4": {"eoswm": "Nov 30 2024", "eovss_ldos": "Nov 30 2026"},
+        "10.5": {"eoswm": "May 31 2025", "eovss_ldos": "May 31 2027"},
+        "10.6": {"eoswm": "Nov 30 2025", "eovss_ldos": "Nov 30 2027"},
+        "10.7": {"eoswm": "May 31 2026", "eovss_ldos": "May 31 2028"},
+    },
+}
+
+
+def _normalize_cisco_eol_version(version):
+    """バージョン表記のゆらぎ（末尾の "(x)"、前後空白、大文字小文字）を吸収する。"""
+    if not version:
+        return ""
+    v = version.strip().lower()
+    v = re.sub(r'\(x\)\s*$', '', v)
+    return v.strip()
+
+
+def lookup_cisco_eol(os_family, version):
+    """OS名(cisco-ios-xe / cisco-nx-os)とバージョンから、貼り付け解析で検証済みの
+    EOLデータを直接返す。データが無ければ None を返す（呼び出し側で貼り付け解析への
+    誘導メッセージを表示する）。"""
+    if not os_family or not version:
+        return None
+    family_data = CISCO_EOL_KNOWN_DATA.get(os_family)
+    if not family_data:
+        return None
+    key = _normalize_cisco_eol_version(version)
+    for known_version, data in family_data.items():
+        if _normalize_cisco_eol_version(known_version) == key:
+            return {"os_family": os_family, "version": known_version, **data}
+    return None
