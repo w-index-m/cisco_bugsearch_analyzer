@@ -47,16 +47,6 @@ st.title("🔍 Cisco Bug Search Analyzer")
 st.markdown("Cisco バグ検索システム - 機能とバージョンから該当するバグを検索")
 
 
-@st.cache_data
-def load_csv(file_path):
-    """CSV ファイルを読み込み（Streamlit キャッシュ付き）"""
-    try:
-        return analyzer.load_csv(file_path)
-    except Exception as e:
-        st.error(f"ファイル読み込みエラー: {e}")
-        return None
-
-
 def get_secret(key):
     """Streamlit Cloud の Settings → Secrets から API キーを取得（未設定なら None）"""
     try:
@@ -75,12 +65,9 @@ def load_analysis_from_json_ui(json_str):
     return analyzer.load_analysis_from_json(json_str)
 
 
-# CSV ファイル読み込み（デフォルト）
-default_csv = "bugSearch.csv"
-
-# ファイルアップロード or デフォルトを使用
+# ファイルアップロード（必須。デフォルトのバグ一覧は読み込まない）
 uploaded_file = st.file_uploader(
-    "CSV / Excel ファイルをアップロード（オプション）",
+    "CSV / Excel ファイルをアップロード",
     type=["csv", "xls", "xlsx"],
     help="Nexus 等、Catalyst と列名が異なるエクスポートも自動で列名を認識します"
 )
@@ -98,7 +85,7 @@ if uploaded_file is not None:
         st.error(f"ファイル読み込みエラー: {e}")
         df = None
 else:
-    df = load_csv(default_csv)
+    df = None
 
 if df is not None:
     st.success(f"✓ {len(df)} 件のバグ情報を読み込みました")
@@ -716,8 +703,8 @@ if df is not None:
                     st.text(clean_note)
         else:
             st.warning("該当するバグが見つかりませんでした")
-else:
-    st.error("CSV ファイルを読み込めません")
+elif uploaded_file is None:
+    st.info("👆 CSV / Excel ファイルをアップロードしてください。")
 
 st.markdown("---")
 
