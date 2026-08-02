@@ -728,7 +728,7 @@ _BUG_FEATURE_RULES = [
     ("OTV", r"\botv\b|overlay transport"),
     ("MPLS/SR", r"\bmpls\b|segment routing|\bsr-?te\b|\bldp\b|\bl3vpn\b"),
     ("QoS", r"\bqos\b|policy[- ]?map|class[- ]?map|policer|\bdscp\b"),
-    ("TrustSec(CTS/SGACL)", r"\bcts\b|sgacl|trustsec|security[- ]?group"),
+    ("TrustSec(CTS/SGACL/SGT)", r"\bcts\b|sgacl|\bsgt\b|trustsec|security[- ]?group"),
     ("FCoE/ストレージ", r"\bfcoe\b|fibre channel|\bfc\b san|\bnpv\b|\bnpiv\b"),
     ("SNMP", r"\bsnmp\b"),
     ("NTP/PTP", r"\bntp\b|\bptp\b|precision time"),
