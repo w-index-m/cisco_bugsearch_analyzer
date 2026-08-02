@@ -2008,3 +2008,39 @@ def lookup_cisco_eol(os_family, version):
         if _normalize_cisco_eol_version(known_version) == key:
             return {"os_family": os_family, "version": known_version, **data}
     return None
+
+
+def _cisco_eol_version_matches(known_version, query):
+    """
+    query が known_version に一致する（完全一致、または上位系統としての前方一致）かを
+    バージョン要素（ドット区切り）単位で判定する。
+
+    例: query="17" は "17.14"/"17.15" 等すべてに一致するが、query="17.1" は
+    "17.14" には一致しない（文字列としての前方一致だと "17.1" が "17.14" に
+    誤って一致してしまうため、ドット区切りの要素単位で比較する）。
+    """
+    kv_parts = _normalize_cisco_eol_version(known_version).split(".")
+    q_parts = _normalize_cisco_eol_version(query).split(".")
+    if not q_parts or not q_parts[0]:
+        return False
+    if len(q_parts) > len(kv_parts):
+        return False
+    return kv_parts[:len(q_parts)] == q_parts
+
+
+def lookup_cisco_eol_matches(os_family, version):
+    """
+    lookup_cisco_eol() の複数マッチ版。完全一致が無くても、"17" のようにバージョン
+    系統の上位側だけを入力した場合、その系統に属する収録済みバージョン（例:
+    17.14/17.15/17.16/17.17）を全て返す。1件もマッチしなければ空リストを返す。
+    """
+    if not os_family or not version:
+        return []
+    family_data = CISCO_EOL_KNOWN_DATA.get(os_family)
+    if not family_data:
+        return []
+    return [
+        {"os_family": os_family, "version": known_version, **data}
+        for known_version, data in family_data.items()
+        if _cisco_eol_version_matches(known_version, version)
+    ]

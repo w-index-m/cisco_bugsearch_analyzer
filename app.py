@@ -980,38 +980,45 @@ if eol_lookup_btn:
         st.warning("バージョンを入力してください")
     else:
         _os_family = "cisco-ios-xe" if eol_lookup_os == "Cisco IOS XE" else "cisco-nx-os"
-        _lookup_result = analyzer.lookup_cisco_eol(_os_family, eol_lookup_version.strip())
-        if _lookup_result is None:
+        _lookup_results = analyzer.lookup_cisco_eol_matches(_os_family, eol_lookup_version.strip())
+        if not _lookup_results:
             st.warning(
                 f"{eol_lookup_os} {eol_lookup_version.strip()} の検証済みEOLデータはまだ収録されていません。"
                 "下の「Cisco公式EOL通知を貼り付けて解析」でCisco公式ページのテキストを貼り付けてください"
                 "（一度解析すると、今後このアプリにデータを追加できます）。"
             )
         elif _os_family == "cisco-ios-xe":
-            if _lookup_result.get("note"):
-                st.info(_lookup_result["note"])
-            _lookup_table = pd.DataFrame(_lookup_result["milestones"])
-            _lookup_table.columns = ["マイルストーン", "日付"]
+            if len(_lookup_results) > 1:
+                st.caption(f"「{eol_lookup_version.strip()}」系統として {len(_lookup_results)} バージョン見つかりました。")
+            _lookup_rows = []
+            for r in _lookup_results:
+                if r.get("note"):
+                    st.info(f"**{r['version']}**: {r['note']}")
+                for m in r["milestones"]:
+                    _lookup_rows.append([r["version"], m["milestone"], m["date"]])
+            _lookup_table = pd.DataFrame(_lookup_rows, columns=["バージョン", "マイルストーン", "日付"])
             st.dataframe(_lookup_table, use_container_width=True, hide_index=True)
+            _label = eol_lookup_version.strip() if len(_lookup_results) > 1 else _lookup_results[0]["version"]
             st.session_state["combined_export_cisco_eol"] = {
-                "name": f"EOL({eol_lookup_os} {_lookup_result['version']})",
-                "headers": ["マイルストーン", "日付"],
-                "rows": [[m["milestone"], m["date"]] for m in _lookup_result["milestones"]],
+                "name": f"EOL({eol_lookup_os} {_label})",
+                "headers": ["バージョン", "マイルストーン", "日付"],
+                "rows": _lookup_rows,
             }
         else:
-            _lookup_table = pd.DataFrame([{
-                "NX-OSメジャーリリース": _lookup_result["version"],
-                "EoSWM": _lookup_result["eoswm"],
-                "EoVSS/LDoS": _lookup_result["eovss_ldos"],
-            }])
+            _lookup_rows = [
+                [r["version"], r["eoswm"], r["eovss_ldos"]]
+                for r in _lookup_results
+            ]
+            _lookup_table = pd.DataFrame(_lookup_rows, columns=["NX-OSメジャーリリース", "EoSWM", "EoVSS/LDoS"])
             st.dataframe(_lookup_table, use_container_width=True, hide_index=True)
+            _label = eol_lookup_version.strip() if len(_lookup_results) > 1 else _lookup_results[0]["version"]
             st.session_state["combined_export_cisco_eol"] = {
-                "name": f"EOL({eol_lookup_os} {_lookup_result['version']})",
+                "name": f"EOL({eol_lookup_os} {_label})",
                 "headers": ["NX-OSメジャーリリース", "EoSWM", "EoVSS/LDoS"],
-                "rows": [[_lookup_result["version"], _lookup_result["eoswm"], _lookup_result["eovss_ldos"]]],
+                "rows": _lookup_rows,
             }
 
-        if _lookup_result is not None:
+        if _lookup_results:
             _lookup_excel_data = analyzer.create_combined_excel_report(
                 extra_sheets=[st.session_state["combined_export_cisco_eol"]]
             )
