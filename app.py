@@ -708,282 +708,282 @@ elif uploaded_file is None:
 
 st.markdown("---")
 
-with st.expander("🌐 Cisco 以外のベンダー（Palo Alto / YAMAHA 等）を検索"):
-    st.caption(
-        "Cisco のような構造化データが無いベンダーは、NVD（米国立脆弱性データベース）を"
-        "キーワード検索します。バージョンを指定すると、NVD のバージョン範囲データから"
-        "「影響あり / 対象外・修正済みの可能性」を判定します（データが無い場合は判定不可）。"
+st.markdown("### 🌐 Cisco 以外のベンダー（Palo Alto / YAMAHA 等）を検索")
+st.caption(
+    "Cisco のような構造化データが無いベンダーは、NVD（米国立脆弱性データベース）を"
+    "キーワード検索します。バージョンを指定すると、NVD のバージョン範囲データから"
+    "「影響あり / 対象外・修正済みの可能性」を判定します（データが無い場合は判定不可）。"
+)
+st.caption(
+    "💡 検索キーワード・バージョンの確認先（参考）: "
+    "PAN-OS リリースノート一覧 → https://docs.paloaltonetworks.com/pan-os ／ "
+    "YAMAHA リリースノート・ファームウェア情報 → https://network.yamaha.com/"
+)
+
+cve_col1, cve_col2 = st.columns(2)
+with cve_col1:
+    cve_keyword = st.text_input(
+        "検索キーワード",
+        placeholder="例: PAN-OS 11.1.2 / Yamaha RTX830",
+        key="cve_keyword"
     )
-    st.caption(
-        "💡 検索キーワード・バージョンの確認先（参考）: "
-        "PAN-OS リリースノート一覧 → https://docs.paloaltonetworks.com/pan-os ／ "
-        "YAMAHA リリースノート・ファームウェア情報 → https://network.yamaha.com/"
+with cve_col2:
+    cve_target_version = st.text_input(
+        "バージョン（任意、影響有無を判定したい場合）",
+        placeholder="例: 11.1.2",
+        key="cve_target_version"
     )
 
-    cve_col1, cve_col2 = st.columns(2)
-    with cve_col1:
-        cve_keyword = st.text_input(
-            "検索キーワード",
-            placeholder="例: PAN-OS 11.1.2 / Yamaha RTX830",
-            key="cve_keyword"
-        )
-    with cve_col2:
-        cve_target_version = st.text_input(
-            "バージョン（任意、影響有無を判定したい場合）",
-            placeholder="例: 11.1.2",
-            key="cve_target_version"
-        )
+nvd_secret = get_secret("NVD_API_KEY")
+if nvd_secret:
+    st.caption("✓ NVD API キー: Secrets から読み込み済み")
+    nvd_api_key = nvd_secret
+else:
+    nvd_api_key = st.text_input(
+        "NVD API キー（任意、無くても検索可・レート制限が緩和される）",
+        type="password",
+        key="nvd_api_key_input"
+    )
 
-    nvd_secret = get_secret("NVD_API_KEY")
-    if nvd_secret:
-        st.caption("✓ NVD API キー: Secrets から読み込み済み")
-        nvd_api_key = nvd_secret
+if st.button("🔎 CVE を検索", key="cve_search_btn"):
+    if not cve_keyword:
+        st.warning("検索キーワードを入力してください")
     else:
-        nvd_api_key = st.text_input(
-            "NVD API キー（任意、無くても検索可・レート制限が緩和される）",
-            type="password",
-            key="nvd_api_key_input"
-        )
+        with st.spinner("NVD を検索中..."):
+            cve_results = analyzer.search_cve_with_translation(
+                cve_keyword,
+                engine=translation_engine_key,
+                deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key,
+                api_key=nvd_api_key or None,
+                target_version=cve_target_version or None,
+            )
 
-    if st.button("🔎 CVE を検索", key="cve_search_btn"):
-        if not cve_keyword:
-            st.warning("検索キーワードを入力してください")
+        if isinstance(cve_results, dict) and "error" in cve_results:
+            st.error(f"NVD への問い合わせに失敗しました: {cve_results['error']}")
+        elif not cve_results:
+            st.warning("該当する CVE が見つかりませんでした")
         else:
-            with st.spinner("NVD を検索中..."):
-                cve_results = analyzer.search_cve_with_translation(
-                    cve_keyword,
-                    engine=translation_engine_key,
-                    deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key,
-                    api_key=nvd_api_key or None,
-                    target_version=cve_target_version or None,
-                )
+            # 深刻度（CVSS）の高い順に並べ替える。CVSS 不明のものは末尾へ
+            cve_results = sorted(
+                cve_results,
+                key=lambda r: r["cvss_score"] if r["cvss_score"] is not None else -1,
+                reverse=True,
+            )
 
-            if isinstance(cve_results, dict) and "error" in cve_results:
-                st.error(f"NVD への問い合わせに失敗しました: {cve_results['error']}")
-            elif not cve_results:
-                st.warning("該当する CVE が見つかりませんでした")
-            else:
-                # 深刻度（CVSS）の高い順に並べ替える。CVSS 不明のものは末尾へ
-                cve_results = sorted(
-                    cve_results,
-                    key=lambda r: r["cvss_score"] if r["cvss_score"] is not None else -1,
-                    reverse=True,
-                )
+            st.success(f"✓ {len(cve_results)} 件見つかりました")
+            for r in cve_results:
+                label = f"[{r['severity_ja']}] {r['cve_id']}"
+                if cve_target_version:
+                    label += f" - {r['affected_ja']}"
+                with st.expander(label):
+                    st.write(r["description_ja"])
+                    st.caption(f"英語原文: {r['description_en']}")
+                    published = r["published"][:10] if r["published"] else "-"
+                    st.write(f"CVSS: {r['cvss_score'] if r['cvss_score'] is not None else '-'}　公開日: {published}")
+                    st.write(f"[参考リンク]({r['url']})")
 
-                st.success(f"✓ {len(cve_results)} 件見つかりました")
-                for r in cve_results:
-                    label = f"[{r['severity_ja']}] {r['cve_id']}"
-                    if cve_target_version:
-                        label += f" - {r['affected_ja']}"
-                    with st.expander(label):
-                        st.write(r["description_ja"])
-                        st.caption(f"英語原文: {r['description_en']}")
-                        published = r["published"][:10] if r["published"] else "-"
-                        st.write(f"CVSS: {r['cvss_score'] if r['cvss_score'] is not None else '-'}　公開日: {published}")
-                        st.write(f"[参考リンク]({r['url']})")
-
-                # 統合Excel出力用に、CVE検索結果を保持しておく（日本語訳をメイン列、英語原文は参考列として末尾に）
-                cve_rows = [
-                    [
-                        r["cve_id"], r["severity_ja"], r["cvss_score"],
-                        r.get("affected_ja", "-"), r["description_ja"],
-                        r["published"][:10] if r["published"] else "-", r["url"],
-                        r["description_en"],
-                    ]
-                    for r in cve_results
+            # 統合Excel出力用に、CVE検索結果を保持しておく（日本語訳をメイン列、英語原文は参考列として末尾に）
+            cve_rows = [
+                [
+                    r["cve_id"], r["severity_ja"], r["cvss_score"],
+                    r.get("affected_ja", "-"), r["description_ja"],
+                    r["published"][:10] if r["published"] else "-", r["url"],
+                    r["description_en"],
                 ]
-                st.session_state["combined_export_cve"] = {
-                    "name": f"CVE検索({cve_keyword[:15]})",
-                    "headers": ["CVE ID", "深刻度", "CVSS", "影響有無", "概要(日本語)", "公開日", "参考リンク",
-                                "概要(英語原文・参考)"],
-                    "rows": cve_rows,
-                }
+                for r in cve_results
+            ]
+            st.session_state["combined_export_cve"] = {
+                "name": f"CVE検索({cve_keyword[:15]})",
+                "headers": ["CVE ID", "深刻度", "CVSS", "影響有無", "概要(日本語)", "公開日", "参考リンク",
+                            "概要(英語原文・参考)"],
+                "rows": cve_rows,
+            }
 
-    st.markdown("---")
-    st.markdown("**一般的な既知の問題を貼り付けて分析**")
-    st.caption(
-        "Palo Alto の「Known and Addressed Issues」ページ等、自動取得できない公式ドキュメントの"
-        "内容をブラウザからコピーしてここに貼り付けると、ID単位に分解してカテゴリ分け・日本語訳します。"
-        "NVD検索はセキュリティ脆弱性（CVE）のみが対象のため、こちらは一般的な不具合情報を扱います。"
-    )
-    st.info(
-        "💡 **お願い**: 以下のような公式ページはこちらで自動取得できないため、"
-        "ご自身のブラウザで開いてページ内のテキストをコピーし、下の欄に貼り付けてください。\n\n"
-        "- Palo Alto（PAN-OS Known and Addressed Issues、バージョンごとに存在）例:\n"
-        "  👉 https://docs.paloaltonetworks.com/ngfw/release-notes/12-2/pan-os-12-2-2-known-and-addressed-issues\n"
-        "- YAMAHA（RTX/RTシリーズ リリースノート）例: 該当バージョンの「ファームウェアリビジョン」ページ\n\n"
-        "他のバージョン・製品を調べたい場合も、同様に該当ページを開いて本文をコピーしてお知らせください。"
-    )
+st.markdown("---")
+st.markdown("**一般的な既知の問題を貼り付けて分析**")
+st.caption(
+    "Palo Alto の「Known and Addressed Issues」ページ等、自動取得できない公式ドキュメントの"
+    "内容をブラウザからコピーしてここに貼り付けると、ID単位に分解してカテゴリ分け・日本語訳します。"
+    "NVD検索はセキュリティ脆弱性（CVE）のみが対象のため、こちらは一般的な不具合情報を扱います。"
+)
+st.info(
+    "💡 **お願い**: 以下のような公式ページはこちらで自動取得できないため、"
+    "ご自身のブラウザで開いてページ内のテキストをコピーし、下の欄に貼り付けてください。\n\n"
+    "- Palo Alto（PAN-OS Known and Addressed Issues、バージョンごとに存在）例:\n"
+    "  👉 https://docs.paloaltonetworks.com/ngfw/release-notes/12-2/pan-os-12-2-2-known-and-addressed-issues\n"
+    "- YAMAHA（RTX/RTシリーズ リリースノート）例: 該当バージョンの「ファームウェアリビジョン」ページ\n\n"
+    "他のバージョン・製品を調べたい場合も、同様に該当ページを開いて本文をコピーしてお知らせください。"
+)
 
-    pasted_issues_text = st.text_area(
-        "「ISSUE ID」+ 説明文の形式で貼り付け（例: PAN-332943 の下に説明文、その下に次のID...）",
-        height=180,
-        key="pasted_issues_text"
-    )
+pasted_issues_text = st.text_area(
+    "「ISSUE ID」+ 説明文の形式で貼り付け（例: PAN-332943 の下に説明文、その下に次のID...）",
+    height=180,
+    key="pasted_issues_text"
+)
 
-    if st.button("📋 貼り付けたテキストを解析", key="parse_pasted_issues_btn"):
-        if not pasted_issues_text.strip():
-            st.warning("テキストを貼り付けてください")
+if st.button("📋 貼り付けたテキストを解析", key="parse_pasted_issues_btn"):
+    if not pasted_issues_text.strip():
+        st.warning("テキストを貼り付けてください")
+    else:
+        parsed_issues = analyzer.parse_vendor_known_issues(pasted_issues_text)
+        if not parsed_issues:
+            st.warning(
+                "ID（例: PAN-332943, [12]）を検出できませんでした。"
+                "各IDが単独の行になっているか、行頭が角括弧の連番になっているか確認してください。"
+            )
         else:
-            parsed_issues = analyzer.parse_vendor_known_issues(pasted_issues_text)
-            if not parsed_issues:
-                st.warning(
-                    "ID（例: PAN-332943, [12]）を検出できませんでした。"
-                    "各IDが単独の行になっているか、行頭が角括弧の連番になっているか確認してください。"
-                )
+            st.success(f"✓ {len(parsed_issues)} 件検出しました")
+
+            has_sections = any(issue["section"] for issue in parsed_issues)
+
+            grouped = {}
+            if has_sections:
+                # YAMAHA形式で "■バグ修正" 等の見出しが検出できた場合は、
+                # ベンダー自身の分類（新機能/バグ修正等）を優先してグループ化する
+                # （キーワード推測より確実なため）。見出しが無い項目は最後にまとめる
+                for issue in parsed_issues:
+                    key = issue["section"] or "（見出し無し）"
+                    grouped.setdefault(key, []).append(issue)
+                category_order = [k for k in grouped.keys() if k != "（見出し無し）"] + ["（見出し無し）"]
             else:
-                st.success(f"✓ {len(parsed_issues)} 件検出しました")
+                for issue in parsed_issues:
+                    for cat in analyzer.categorize_vendor_issue(issue["description"]):
+                        grouped.setdefault(cat, []).append(issue)
+                # カテゴリの表示順を固定（一般/その他は最後）
+                category_order = list(analyzer.VENDOR_ISSUE_CATEGORY_KEYWORDS.keys()) + ["一般 / その他"]
 
-                has_sections = any(issue["section"] for issue in parsed_issues)
+            # カテゴリ順にフラット化してから、1件ずつ翻訳（進捗バー付き）。
+            # 1件ごとの展開表示はせず、まとめて一覧表として表示する
+            ordered_issues = []
+            for cat in category_order:
+                if cat not in grouped:
+                    continue
+                for issue in grouped[cat]:
+                    ordered_issues.append((cat, issue))
 
-                grouped = {}
-                if has_sections:
-                    # YAMAHA形式で "■バグ修正" 等の見出しが検出できた場合は、
-                    # ベンダー自身の分類（新機能/バグ修正等）を優先してグループ化する
-                    # （キーワード推測より確実なため）。見出しが無い項目は最後にまとめる
-                    for issue in parsed_issues:
-                        key = issue["section"] or "（見出し無し）"
-                        grouped.setdefault(key, []).append(issue)
-                    category_order = [k for k in grouped.keys() if k != "（見出し無し）"] + ["（見出し無し）"]
-                else:
-                    for issue in parsed_issues:
-                        for cat in analyzer.categorize_vendor_issue(issue["description"]):
-                            grouped.setdefault(cat, []).append(issue)
-                    # カテゴリの表示順を固定（一般/その他は最後）
-                    category_order = list(analyzer.VENDOR_ISSUE_CATEGORY_KEYWORDS.keys()) + ["一般 / その他"]
-
-                # カテゴリ順にフラット化してから、1件ずつ翻訳（進捗バー付き）。
-                # 1件ごとの展開表示はせず、まとめて一覧表として表示する
-                ordered_issues = []
-                for cat in category_order:
-                    if cat not in grouped:
-                        continue
-                    for issue in grouped[cat]:
-                        ordered_issues.append((cat, issue))
-
-                total_issues = len(ordered_issues)
-                progress_bar3 = st.progress(0.0, text=f"翻訳中... (0/{total_issues})")
-                vendor_issue_rows = []
-                for i, (cat, issue) in enumerate(ordered_issues, 1):
-                    desc_ja = translate_headline(
-                        issue["description"], engine=translation_engine_key,
+            total_issues = len(ordered_issues)
+            progress_bar3 = st.progress(0.0, text=f"翻訳中... (0/{total_issues})")
+            vendor_issue_rows = []
+            for i, (cat, issue) in enumerate(ordered_issues, 1):
+                desc_ja = translate_headline(
+                    issue["description"], engine=translation_engine_key,
+                    deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key
+                )
+                wa_ja = ""
+                if issue["workaround"]:
+                    wa_ja = translate_headline(
+                        issue["workaround"], engine=translation_engine_key,
                         deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key
                     )
-                    wa_ja = ""
-                    if issue["workaround"]:
-                        wa_ja = translate_headline(
-                            issue["workaround"], engine=translation_engine_key,
-                            deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key
-                        )
-                    original_ref = issue["description"]
-                    if issue["workaround"]:
-                        original_ref += f" / Workaround: {issue['workaround']}"
+                original_ref = issue["description"]
+                if issue["workaround"]:
+                    original_ref += f" / Workaround: {issue['workaround']}"
 
-                    vendor_issue_rows.append([
-                        issue["id"], issue["section"] or cat, desc_ja, wa_ja, original_ref,
-                    ])
-                    progress_bar3.progress(i / total_issues, text=f"翻訳中... ({i}/{total_issues})")
-                progress_bar3.empty()
-
-                vendor_issue_cols = ["ID", "分類", "概要(日本語)", "回避策(日本語)", "原文(英語・参考)"]
-                st.dataframe(
-                    pd.DataFrame(vendor_issue_rows, columns=vendor_issue_cols),
-                    use_container_width=True,
-                    hide_index=True
-                )
-
-                # 統合Excel出力用に、貼り付け解析結果を保持しておく（日本語訳をメイン列、英語原文は参考列として末尾に）
-                st.session_state["combined_export_vendor_issues"] = {
-                    "name": "貼り付け解析結果",
-                    "headers": vendor_issue_cols,
-                    "rows": vendor_issue_rows,
-                }
-
-                vendor_excel_data = analyzer.create_combined_excel_report(
-                    extra_sheets=[st.session_state["combined_export_vendor_issues"]]
-                )
-                st.download_button(
-                    label="📊 この解析結果をExcelでダウンロード",
-                    data=vendor_excel_data,
-                    file_name=f"vendor_issues_report_{datetime.now().strftime('%Y%m%d_%H%M%S')}.xlsx",
-                    mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-                    key="vendor_issues_excel_download_btn"
-                )
-
-    st.markdown("---")
-    st.markdown("**バージョン系統ごとのEOL（サポート終了日）を調べる**")
-    st.caption(
-        "endoflife.date のデータを使い、メジャーバージョン系統ごとのリリース日・EOL日・"
-        "最新パッチと関連リンクを一覧表示します。"
-    )
-
-    eol_product = st.text_input(
-        "プロダクトスラッグ",
-        value="pan-os",
-        placeholder="例: pan-os",
-        help="endoflife.date 上のプロダクト識別子（一覧: https://endoflife.date/）",
-        key="eol_product"
-    )
-
-    if st.button("📅 EOL情報を取得", key="eol_info_btn"):
-        if not eol_product.strip():
-            st.warning("プロダクトスラッグを入力してください")
-        else:
-            with st.spinner("EOL情報を取得中..."):
-                eol_results = analyzer.get_eol_info(eol_product.strip())
-
-            if isinstance(eol_results, dict) and "error" in eol_results:
-                st.error(f"EOL情報の取得に失敗しました: {eol_results['error']}")
-            elif not eol_results:
-                st.warning("該当するEOL情報が見つかりませんでした")
-            else:
-                # 対応期限（EOL）が近い順に並べ替える。EOL未定（現役）は最後に回す
-                eol_results = sorted(eol_results, key=lambda r: r["eol"] or "9999-99-99")
-
-                eol_table = pd.DataFrame([
-                    {
-                        "対応期限(EOL)": r["eol"] or "未定（現役）",
-                        "状態": "🔴 EOL済み" if r["is_eol"] else "🟢 サポート中",
-                        "系統": r["release_cycle"],
-                        "リリース日": r["release_date"],
-                        "最新パッチ": r["latest"],
-                        "リンク": r["link"],
-                    }
-                    for r in eol_results
+                vendor_issue_rows.append([
+                    issue["id"], issue["section"] or cat, desc_ja, wa_ja, original_ref,
                 ])
-                st.dataframe(eol_table, use_container_width=True, hide_index=True)
+                progress_bar3.progress(i / total_issues, text=f"翻訳中... ({i}/{total_issues})")
+            progress_bar3.empty()
 
-                # 統合Excel出力用に、EOL情報を保持しておく（対応期限を先頭列にして優先度を分かりやすく）
-                eol_rows = [
-                    [
-                        r["eol"] or "未定（現役）",
-                        "EOL済み" if r["is_eol"] else "サポート中",
-                        r["release_cycle"], r["release_date"], r["latest"], r["link"],
-                    ]
-                    for r in eol_results
-                ]
-                st.session_state["combined_export_eol"] = {
-                    "name": f"EOL情報({eol_product.strip()[:15]})",
-                    "headers": ["対応期限(EOL)", "状態", "系統", "リリース日", "最新パッチ", "リンク"],
-                    "rows": eol_rows,
+            vendor_issue_cols = ["ID", "分類", "概要(日本語)", "回避策(日本語)", "原文(英語・参考)"]
+            st.dataframe(
+                pd.DataFrame(vendor_issue_rows, columns=vendor_issue_cols),
+                use_container_width=True,
+                hide_index=True
+            )
+
+            # 統合Excel出力用に、貼り付け解析結果を保持しておく（日本語訳をメイン列、英語原文は参考列として末尾に）
+            st.session_state["combined_export_vendor_issues"] = {
+                "name": "貼り付け解析結果",
+                "headers": vendor_issue_cols,
+                "rows": vendor_issue_rows,
+            }
+
+            vendor_excel_data = analyzer.create_combined_excel_report(
+                extra_sheets=[st.session_state["combined_export_vendor_issues"]]
+            )
+            st.download_button(
+                label="📊 この解析結果をExcelでダウンロード",
+                data=vendor_excel_data,
+                file_name=f"vendor_issues_report_{datetime.now().strftime('%Y%m%d_%H%M%S')}.xlsx",
+                mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                key="vendor_issues_excel_download_btn"
+            )
+
+st.markdown("---")
+st.markdown("**バージョン系統ごとのEOL（サポート終了日）を調べる**")
+st.caption(
+    "endoflife.date のデータを使い、メジャーバージョン系統ごとのリリース日・EOL日・"
+    "最新パッチと関連リンクを一覧表示します。"
+)
+
+eol_product = st.text_input(
+    "プロダクトスラッグ",
+    value="pan-os",
+    placeholder="例: pan-os",
+    help="endoflife.date 上のプロダクト識別子（一覧: https://endoflife.date/）",
+    key="eol_product"
+)
+
+if st.button("📅 EOL情報を取得", key="eol_info_btn"):
+    if not eol_product.strip():
+        st.warning("プロダクトスラッグを入力してください")
+    else:
+        with st.spinner("EOL情報を取得中..."):
+            eol_results = analyzer.get_eol_info(eol_product.strip())
+
+        if isinstance(eol_results, dict) and "error" in eol_results:
+            st.error(f"EOL情報の取得に失敗しました: {eol_results['error']}")
+        elif not eol_results:
+            st.warning("該当するEOL情報が見つかりませんでした")
+        else:
+            # 対応期限（EOL）が近い順に並べ替える。EOL未定（現役）は最後に回す
+            eol_results = sorted(eol_results, key=lambda r: r["eol"] or "9999-99-99")
+
+            eol_table = pd.DataFrame([
+                {
+                    "対応期限(EOL)": r["eol"] or "未定（現役）",
+                    "状態": "🔴 EOL済み" if r["is_eol"] else "🟢 サポート中",
+                    "系統": r["release_cycle"],
+                    "リリース日": r["release_date"],
+                    "最新パッチ": r["latest"],
+                    "リンク": r["link"],
                 }
+                for r in eol_results
+            ])
+            st.dataframe(eol_table, use_container_width=True, hide_index=True)
 
-                eol_excel_data = analyzer.create_combined_excel_report(
-                    extra_sheets=[st.session_state["combined_export_eol"]]
-                )
-                st.download_button(
-                    label="📊 このEOL情報をExcelでダウンロード",
-                    data=eol_excel_data,
-                    file_name=f"eol_report_{eol_product.strip()[:15]}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.xlsx",
-                    mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-                    key="eol_excel_download_btn"
-                )
+            # 統合Excel出力用に、EOL情報を保持しておく（対応期限を先頭列にして優先度を分かりやすく）
+            eol_rows = [
+                [
+                    r["eol"] or "未定（現役）",
+                    "EOL済み" if r["is_eol"] else "サポート中",
+                    r["release_cycle"], r["release_date"], r["latest"], r["link"],
+                ]
+                for r in eol_results
+            ]
+            st.session_state["combined_export_eol"] = {
+                "name": f"EOL情報({eol_product.strip()[:15]})",
+                "headers": ["対応期限(EOL)", "状態", "系統", "リリース日", "最新パッチ", "リンク"],
+                "rows": eol_rows,
+            }
 
-                st.info(
-                    "💡 **お願い**: 上表の「リンク」先ページ（バグ一覧・Known and Addressed Issues等）は"
-                    "自動取得できません。お手数ですが、リンクをブラウザで開いて該当箇所をコピーし、"
-                    "上の「一般的な既知の問題を貼り付けて分析」欄に貼り付けてください。"
-                )
+            eol_excel_data = analyzer.create_combined_excel_report(
+                extra_sheets=[st.session_state["combined_export_eol"]]
+            )
+            st.download_button(
+                label="📊 このEOL情報をExcelでダウンロード",
+                data=eol_excel_data,
+                file_name=f"eol_report_{eol_product.strip()[:15]}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.xlsx",
+                mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                key="eol_excel_download_btn"
+            )
+
+            st.info(
+                "💡 **お願い**: 上表の「リンク」先ページ（バグ一覧・Known and Addressed Issues等）は"
+                "自動取得できません。お手数ですが、リンクをブラウザで開いて該当箇所をコピーし、"
+                "上の「一般的な既知の問題を貼り付けて分析」欄に貼り付けてください。"
+            )
 
 st.markdown("---")
 st.markdown("### 🗂️ 全ベンダーまとめてExcel出力")
