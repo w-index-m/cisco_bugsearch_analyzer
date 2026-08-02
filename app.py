@@ -996,10 +996,11 @@ if st.button("📅 EOL情報を取得", key="eol_info_btn"):
 st.markdown("---")
 st.markdown("**Cisco公式EOL通知を貼り付けて解析**")
 st.caption(
-    "Cisco公式のEOL/EOS通知ページ（\"End-of-life milestones\" の表）は自動取得できないため、"
-    "ご自身のブラウザで開いてページ内のテキストをコピーし、下の欄に貼り付けてください。"
-    "「サポート終了日（最終・実質的なEOL）」（Last Date of Support）が、全サポートが終了する"
-    "実質的な最終EOL日です。"
+    "Cisco公式のEOL/EOS通知ページは自動取得できないため、ご自身のブラウザで開いて"
+    "ページ内のテキストをコピーし、下の欄に貼り付けてください。IOS XE形式"
+    "（\"End-of-life milestones\" の表、「サポート終了日（最終・実質的なEOL）」＝Last Date of Support "
+    "が全サポート終了日）と、NX-OS形式（\"NX-OS Major Release\" の一覧表、EoVSS/LDoS列が"
+    "最終サポート終了日）のどちらも自動判定して解析します。"
 )
 cisco_eol_product_name = st.text_input(
     "製品名（任意、ラベル用）",
@@ -1016,14 +1017,18 @@ if st.button("📋 貼り付けたEOL通知を解析", key="parse_cisco_eol_btn"
     if not cisco_eol_text.strip():
         st.warning("テキストを貼り付けてください")
     else:
+        # IOS XE形式（1バージョン=1ページのマイルストーン表）を先に試し、
+        # 該当しなければ NX-OS形式（全メジャーリリースをまとめた一覧表）を試す
         cisco_eol_rows_parsed = analyzer.parse_cisco_eol_milestones(cisco_eol_text)
-        if not cisco_eol_rows_parsed:
+        nxos_rows_parsed = None if cisco_eol_rows_parsed else analyzer.parse_cisco_nxos_eol_table(cisco_eol_text)
+
+        if not cisco_eol_rows_parsed and not nxos_rows_parsed:
             st.warning(
                 "マイルストーンを検出できませんでした。"
-                "\"End-of-Life Announcement Date\" や \"Last Date of Support\" 等の項目名を"
-                "含む範囲を貼り付けてください。"
+                "\"End-of-Life Announcement Date\" や \"Last Date of Support\" 等の項目名を含む"
+                "IOS XE形式、または \"NX-OS Major Release\" の一覧表（NX-OS形式）を貼り付けてください。"
             )
-        else:
+        elif cisco_eol_rows_parsed:
             st.success(f"✓ {len(cisco_eol_rows_parsed)} 件のマイルストーンを検出しました")
             st.dataframe(
                 pd.DataFrame(cisco_eol_rows_parsed, columns=["milestone", "date"])
@@ -1049,6 +1054,37 @@ if st.button("📋 貼り付けたEOL通知を解析", key="parse_cisco_eol_btn"
                 file_name=f"cisco_eol_notice_{datetime.now().strftime('%Y%m%d_%H%M%S')}.xlsx",
                 mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
                 key="cisco_eol_excel_download_btn"
+            )
+        else:
+            st.success(f"✓ NX-OS形式で {len(nxos_rows_parsed)} 件のリリース系統を検出しました")
+            st.dataframe(
+                pd.DataFrame(nxos_rows_parsed, columns=["release", "eoswm", "eovss_ldos"])
+                .rename(columns={
+                    "release": "NX-OSメジャーリリース",
+                    "eoswm": "EoSWM（ソフトウェアメンテナンス終了日）",
+                    "eovss_ldos": "EoVSS/LDoS（脆弱性サポート/最終サポート終了日）",
+                }),
+                use_container_width=True,
+                hide_index=True
+            )
+
+            nxos_export_rows = [[r["release"], r["eoswm"], r["eovss_ldos"]] for r in nxos_rows_parsed]
+            label = cisco_eol_product_name.strip() or "NX-OS EoL"
+            st.session_state["combined_export_cisco_eol"] = {
+                "name": f"{label[:20]}(EOL通知)",
+                "headers": ["NX-OSメジャーリリース", "EoSWM", "EoVSS/LDoS"],
+                "rows": nxos_export_rows,
+            }
+
+            nxos_eol_excel_data = analyzer.create_combined_excel_report(
+                extra_sheets=[st.session_state["combined_export_cisco_eol"]]
+            )
+            st.download_button(
+                label="📊 このEOL通知をExcelでダウンロード",
+                data=nxos_eol_excel_data,
+                file_name=f"cisco_eol_notice_{datetime.now().strftime('%Y%m%d_%H%M%S')}.xlsx",
+                mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                key="nxos_eol_excel_download_btn"
             )
 
             st.info(

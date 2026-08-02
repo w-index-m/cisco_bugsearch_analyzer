@@ -1713,3 +1713,48 @@ def parse_cisco_eol_milestones(raw_text):
             rows.append({"milestone": label_ja, "date": date_match.group(0)})
 
     return rows
+
+
+# NX-OS は IOS XE と違い、バージョン専用ページではなく「NX-OS EoL Milestones」という
+# 全メジャーリリース分をまとめた1つの表（NX-OS Major Release / EoSWM Date / EoVSS/LDoS）
+# で公開されている。日付表記も "Nov 30 2023" のようにカンマ無しの短縮月名。
+_CISCO_NXOS_RELEASE_RE = re.compile(r'\d+\.\d+\(x\)')
+_CISCO_NXOS_DATE_RE = re.compile(
+    r'(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Sept|Oct|Nov|Dec)[a-z]*\.?\s+\d{1,2},?\s*\d{4}',
+    re.IGNORECASE
+)
+
+
+def parse_cisco_nxos_eol_table(raw_text):
+    """
+    Cisco NX-OS ソフトウェアの「NX-OS EoL Milestones」表（全メジャーリリースをまとめた
+    一覧表）からコピーしたテキストを解析する。IOS XEの「1バージョン=1ページ」形式とは
+    異なり、こちらは "10.2(x)" のようなメジャーリリース番号ごとに
+    EoSWM（ソフトウェアメンテナンス終了日）と EoVSS/LDoS（脆弱性サポート終了日/
+    最終サポート終了日、2つの日付が "/" 区切りで書かれることがある）が並ぶ。
+
+    Returns:
+        [{"release": "10.2(x)", "eoswm": "Nov 30 2023",
+          "eovss_ldos": "Feb 28 2025/Aug 31 2025"}, ...]
+        該当するリリース行が1つも見つからなければ空リストを返す
+    """
+    if not raw_text or not raw_text.strip():
+        return []
+
+    matches = list(_CISCO_NXOS_RELEASE_RE.finditer(raw_text))
+    rows = []
+    for i, m in enumerate(matches):
+        release = m.group(0)
+        start = m.end()
+        end = matches[i + 1].start() if i + 1 < len(matches) else min(len(raw_text), start + 300)
+        chunk = raw_text[start:end]
+        dates = _CISCO_NXOS_DATE_RE.findall(chunk)
+        if not dates:
+            continue
+        rows.append({
+            "release": release,
+            "eoswm": dates[0],
+            "eovss_ldos": "/".join(dates[1:]),
+        })
+
+    return rows
