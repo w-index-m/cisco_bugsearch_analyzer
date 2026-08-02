@@ -1557,6 +1557,9 @@ _BRACKET_ITEM_RE = re.compile(r'^\[(\d+)\]\s*', re.MULTILINE)
 # どのセクション配下かを識別してIDの衝突を防ぐ
 _SECTION_HEADER_RE = re.compile(r'^■\s*(.+?)\s*$', re.MULTILINE)
 
+# 空行（\n\s*\n）で項目を区切る境界。形式3（後述）で使用
+_BLANK_LINE_RE = re.compile(r'\n[ \t]*\n+')
+
 _WORKAROUND_RE = re.compile(r'Workaround\s*:\s*', re.IGNORECASE)
 _WHITESPACE_RE = re.compile(r'\s+')
 
@@ -1588,22 +1591,26 @@ def _normalize_block_text(text):
 def parse_vendor_known_issues(raw_text):
     """
     ベンダー公式ページからコピーしたテキストを、課題単位のリストに分解する。
-    2つの形式を自動判定する:
+    3つの形式を自動判定する:
 
     1. Palo Alto 形式: "PAN-332943" のように ID が単独で1行を占め、
        次の行から説明文（+ 任意で "Workaround:" 以降）が続く
-    2. YAMAHA 形式: "[12] 説明文..." のように角括弧の連番の直後に説明文が
-       同じ行から続く（連番はそのリリースノート内でのみ一意）
+    2. YAMAHA 形式（連番あり）: "[12] 説明文..." のように角括弧の連番の直後に
+       説明文が同じ行から続く（連番はそのリリースノート内でのみ一意）
+    3. YAMAHA 形式（連番なし・新形式）: RTX1300等の新しいリリースノートで採用されている
+       形式で、"■機能追加"/"■バグ修正" 等のセクション見出しの下に、連番の無い項目が
+       空行区切りで並ぶ（例: 見出しの直後の段落が1項目、次の空行の後がまた1項目）。
+       形式1・2のどちらにも一致しないが "■" 見出しは存在する場合にこの形式として扱う。
 
-    どちらのIDパターンにも一致しなければ空リストを返す。
+    いずれのパターンにも一致しなければ空リストを返す。
 
     Args:
         raw_text: ブラウザからコピーした生テキスト
 
     Returns:
         [{"id": "PAN-332943", "description": "...", "workaround": "...", "section": None or "バグ修正"}, ...]
-        YAMAHA形式の場合 id は "[12]" のようになり、workaround は常に空文字列
-        （YAMAHAのリリースノートに Workaround の概念が無いため）。
+        YAMAHA形式（2・3どちらも）の場合 id は "[1]" のような連番になり、workaround は
+        常に空文字列（YAMAHAのリリースノートに Workaround の概念が無いため）。
         "■バグ修正" 等のセクション見出しが検出できた場合、その配下の項目には
         section にその見出し文字列が入る（無ければ None）。YAMAHA形式は見出しを
         またいで連番がリセットされる（新機能側の [1] とバグ修正側の [1] は別物）ため、
@@ -1659,6 +1666,29 @@ def parse_vendor_known_issues(raw_text):
                     "description": description,
                     "workaround": "",
                     "section": _section_at(m.start()),
+                })
+        return issues
+
+    section_headers = list(_SECTION_HEADER_RE.finditer(raw_text))
+    if section_headers:
+        issues = []
+        for i, sm in enumerate(section_headers):
+            section_name = sm.group(1)
+            start = sm.end()
+            end = section_headers[i + 1].start() if i + 1 < len(section_headers) else len(raw_text)
+            section_text = raw_text[start:end]
+
+            item_num = 0
+            for chunk in _BLANK_LINE_RE.split(section_text):
+                description = _normalize_block_text(chunk)
+                if not description:
+                    continue
+                item_num += 1
+                issues.append({
+                    "id": f"[{item_num}]",
+                    "description": description,
+                    "workaround": "",
+                    "section": section_name,
                 })
         return issues
 
