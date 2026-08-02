@@ -91,6 +91,48 @@ OPENROUTER_API_KEY = "xxx"
 ### 4. 結果をエクスポート
 - **「📥 検索結果を CSV でダウンロード」** でデータをダウンロード
 
+## CLI ツール
+
+Web UI を介さず、`cli.py` から直接コマンドラインで呼び出すこともできます（他のスクリプトへのパイプや自動実行向け）。
+
+```bash
+# バグを検索して表で表示
+python cli.py search --feature "Catalyst 9300" --version 17.12.4
+
+# 検索して Excel でエクスポート
+python cli.py search --feature multicast --severity 1 2 3 --format excel --output result.xlsx
+
+# JSON で標準出力に出す（他のエージェント/スクリプトへパイプ）
+python cli.py search --version 17.12.4 --format json
+
+# 見出しを翻訳するだけ
+python cli.py translate "Device may reload unexpectedly"
+
+# 利用可能な IOS バージョン一覧
+python cli.py versions
+
+# Cisco 以外のベンダー（Palo Alto / YAMAHA / FortiGate 等）は NVD をキーワード検索
+python cli.py cve-search "PAN-OS 11.1.2"
+python cli.py cve-search "FortiOS 7.4.8" --format json
+
+# バージョン系統ごとのEOL（サポート終了日）と関連リンクを取得
+python cli.py eol-info pan-os
+python cli.py eol-info fortios
+
+# OS名+バージョンで検証済みのCisco EOL情報を直接取得（貼り付け不要）
+python cli.py eol-lookup cisco-ios-xe 17.17
+python cli.py eol-lookup nxos 10.6
+
+# Cisco公式EOL通知ページのテキストを貼り付けて解析（IOS XE/NX-OS自動判定）
+python cli.py cisco-eol-parse --file eol_notice.txt
+pbpaste | python cli.py cisco-eol-parse --format json
+
+# Palo Alto / YAMAHA 等の「既知の問題」ページを貼り付けて解析
+python cli.py parse-issues --file known_issues.txt --translate google
+```
+
+各コマンドの詳細は `python cli.py <コマンド> --help` を参照してください。
+
 ## バグデータについて
 
 ### データソース
