@@ -186,65 +186,63 @@ if df is not None:
 
     st.markdown("---")
 
-    col1, col2 = st.columns([2, 1])
-    with col2:
-        st.subheader("Severity & AI 設定")
-        st.markdown("**Severity フィルタ**")
-        severity_filter = st.multiselect(
-            "Severity を選択",
-            options=[1, 2, 3, 4, 5],
-            default=[1, 2, 3],
-            label_visibility="collapsed"
+    st.subheader("Severity & AI 設定")
+    st.markdown("**Severity フィルタ**")
+    severity_filter = st.multiselect(
+        "Severity を選択",
+        options=[1, 2, 3, 4, 5],
+        default=[1, 2, 3],
+        label_visibility="collapsed"
+    )
+
+    st.markdown("**AI 分析エンジン**")
+    use_ai_analysis = st.checkbox("AI による可能性判定を使用", value=False)
+    if use_ai_analysis:
+        st.caption(
+            "✓ ONの場合、Excel出力の末尾に「AI解説（内容の解釈）」列が追加され、"
+            "各バグについて「何が起きる不具合か」「どんな環境で影響が出得るか」を"
+            "AIが日本語で解説します（1行につきAPI呼び出しが1回増えるため、件数が"
+            "多いと生成に時間がかかります）。"
         )
 
-        st.markdown("**AI 分析エンジン**")
-        use_ai_analysis = st.checkbox("AI による可能性判定を使用", value=False)
-        if use_ai_analysis:
-            st.caption(
-                "✓ ONの場合、Excel出力の末尾に「AI解説（内容の解釈）」列が追加され、"
-                "各バグについて「何が起きる不具合か」「どんな環境で影響が出得るか」を"
-                "AIが日本語で解説します（1行につきAPI呼び出しが1回増えるため、件数が"
-                "多いと生成に時間がかかります）。"
+    groq_api_key = None
+    gemini_api_key = None
+    open_router_api_key = None
+
+    if use_ai_analysis:
+        groq_secret = get_secret("GROQ_API_KEY")
+        gemini_secret = get_secret("GEMINI_API_KEY")
+        open_router_secret = get_secret("OPENROUTER_API_KEY")
+
+        if not (groq_secret and gemini_secret and open_router_secret):
+            st.markdown("API キーを入力（持っているもののみ）:")
+
+        if groq_secret:
+            st.caption("✓ Groq: Secrets から読み込み済み")
+            groq_api_key = groq_secret
+        else:
+            groq_api_key = st.text_input(
+                "Groq API キー", type="password", placeholder="gsk_...",
+                label_visibility="collapsed"
             )
 
-        groq_api_key = None
-        gemini_api_key = None
-        open_router_api_key = None
+        if gemini_secret:
+            st.caption("✓ Gemini: Secrets から読み込み済み")
+            gemini_api_key = gemini_secret
+        else:
+            gemini_api_key = st.text_input(
+                "Gemini API キー", type="password", placeholder="AIza...",
+                label_visibility="collapsed"
+            )
 
-        if use_ai_analysis:
-            groq_secret = get_secret("GROQ_API_KEY")
-            gemini_secret = get_secret("GEMINI_API_KEY")
-            open_router_secret = get_secret("OPENROUTER_API_KEY")
-
-            if not (groq_secret and gemini_secret and open_router_secret):
-                st.markdown("API キーを入力（持っているもののみ）:")
-
-            if groq_secret:
-                st.caption("✓ Groq: Secrets から読み込み済み")
-                groq_api_key = groq_secret
-            else:
-                groq_api_key = st.text_input(
-                    "Groq API キー", type="password", placeholder="gsk_...",
-                    label_visibility="collapsed"
-                )
-
-            if gemini_secret:
-                st.caption("✓ Gemini: Secrets から読み込み済み")
-                gemini_api_key = gemini_secret
-            else:
-                gemini_api_key = st.text_input(
-                    "Gemini API キー", type="password", placeholder="AIza...",
-                    label_visibility="collapsed"
-                )
-
-            if open_router_secret:
-                st.caption("✓ Open Router: Secrets から読み込み済み")
-                open_router_api_key = open_router_secret
-            else:
-                open_router_api_key = st.text_input(
-                    "Open Router キー", type="password", placeholder="sk-or-...",
-                    label_visibility="collapsed"
-                )
+        if open_router_secret:
+            st.caption("✓ Open Router: Secrets から読み込み済み")
+            open_router_api_key = open_router_secret
+        else:
+            open_router_api_key = st.text_input(
+                "Open Router キー", type="password", placeholder="sk-or-...",
+                label_visibility="collapsed"
+            )
 
     st.markdown("---")
     st.subheader("IOS バージョンから検索")
