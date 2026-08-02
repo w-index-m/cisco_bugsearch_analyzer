@@ -930,6 +930,80 @@ st.warning(
     "必ず裏取りしてください。"
 )
 
+st.markdown("**OS名とバージョンからEOLを直接表示（貼り付け不要）**")
+st.caption(
+    "これまでCisco公式のEOL通知を貼り付けて検証済みのバージョンは、貼り付け作業なしで"
+    "ここに直接入力するだけでEOL情報を表示できます。未収録のバージョンは下の"
+    "「Cisco公式EOL通知を貼り付けて解析」をご利用ください。"
+)
+_eol_lookup_cols = st.columns([2, 1, 1])
+with _eol_lookup_cols[0]:
+    eol_lookup_os = st.selectbox(
+        "OS",
+        options=["Cisco IOS XE", "Cisco NX-OS"],
+        key="eol_lookup_os"
+    )
+with _eol_lookup_cols[1]:
+    eol_lookup_version = st.text_input(
+        "バージョン",
+        placeholder="例: 17.17 / 10.6",
+        key="eol_lookup_version"
+    )
+with _eol_lookup_cols[2]:
+    st.write("")
+    st.write("")
+    eol_lookup_btn = st.button("🔎 EOLを表示", key="eol_lookup_btn")
+
+if eol_lookup_btn:
+    if not eol_lookup_version.strip():
+        st.warning("バージョンを入力してください")
+    else:
+        _os_family = "cisco-ios-xe" if eol_lookup_os == "Cisco IOS XE" else "cisco-nx-os"
+        _lookup_result = analyzer.lookup_cisco_eol(_os_family, eol_lookup_version.strip())
+        if _lookup_result is None:
+            st.warning(
+                f"{eol_lookup_os} {eol_lookup_version.strip()} の検証済みEOLデータはまだ収録されていません。"
+                "下の「Cisco公式EOL通知を貼り付けて解析」でCisco公式ページのテキストを貼り付けてください"
+                "（一度解析すると、今後このアプリにデータを追加できます）。"
+            )
+        elif _os_family == "cisco-ios-xe":
+            if _lookup_result.get("note"):
+                st.info(_lookup_result["note"])
+            _lookup_table = pd.DataFrame(_lookup_result["milestones"])
+            _lookup_table.columns = ["マイルストーン", "日付"]
+            st.dataframe(_lookup_table, use_container_width=True, hide_index=True)
+            st.session_state["combined_export_cisco_eol"] = {
+                "name": f"EOL({eol_lookup_os} {_lookup_result['version']})",
+                "headers": ["マイルストーン", "日付"],
+                "rows": [[m["milestone"], m["date"]] for m in _lookup_result["milestones"]],
+            }
+        else:
+            _lookup_table = pd.DataFrame([{
+                "NX-OSメジャーリリース": _lookup_result["version"],
+                "EoSWM": _lookup_result["eoswm"],
+                "EoVSS/LDoS": _lookup_result["eovss_ldos"],
+            }])
+            st.dataframe(_lookup_table, use_container_width=True, hide_index=True)
+            st.session_state["combined_export_cisco_eol"] = {
+                "name": f"EOL({eol_lookup_os} {_lookup_result['version']})",
+                "headers": ["NX-OSメジャーリリース", "EoSWM", "EoVSS/LDoS"],
+                "rows": [[_lookup_result["version"], _lookup_result["eoswm"], _lookup_result["eovss_ldos"]]],
+            }
+
+        if _lookup_result is not None:
+            _lookup_excel_data = analyzer.create_combined_excel_report(
+                extra_sheets=[st.session_state["combined_export_cisco_eol"]]
+            )
+            st.download_button(
+                label="📊 このEOL情報をExcelでダウンロード",
+                data=_lookup_excel_data,
+                file_name=f"eol_lookup_{_os_family}_{eol_lookup_version.strip()}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.xlsx",
+                mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                key="eol_lookup_excel_download_btn"
+            )
+
+st.markdown("---")
+
 eol_product = st.text_input(
     "プロダクトスラッグ",
     value="pan-os",
