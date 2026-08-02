@@ -483,34 +483,37 @@ def _build_summary_prompt(text):
     )
 
 
-def summarize_with_groq(text, api_key):
+def _call_groq_prompt(prompt, api_key, max_tokens=150):
+    """Groq に任意のプロンプトを投げ、テキスト応答を返す共通ヘルパー"""
     if not api_key or not GROQ_AVAILABLE:
         return None
     try:
         client = Groq(api_key=api_key)
         message = client.chat.completions.create(
             model="mixtral-8x7b-32768",
-            max_tokens=150,
-            messages=[{"role": "user", "content": _build_summary_prompt(text)}]
+            max_tokens=max_tokens,
+            messages=[{"role": "user", "content": prompt}]
         )
         return message.choices[0].message.content.strip()
     except Exception:
         return None
 
 
-def summarize_with_gemini(text, api_key):
+def _call_gemini_prompt(prompt, api_key):
+    """Gemini に任意のプロンプトを投げ、テキスト応答を返す共通ヘルパー"""
     if not api_key or not GEMINI_AVAILABLE:
         return None
     try:
         genai.configure(api_key=api_key)
         model = genai.GenerativeModel('gemini-pro')
-        response = model.generate_content(_build_summary_prompt(text))
+        response = model.generate_content(prompt)
         return response.text.strip()
     except Exception:
         return None
 
 
-def summarize_with_open_router(text, api_key):
+def _call_open_router_prompt(prompt, api_key, max_tokens=150):
+    """Open Router に任意のプロンプトを投げ、テキスト応答を返す共通ヘルパー"""
     if not api_key:
         return None
     try:
@@ -523,8 +526,8 @@ def summarize_with_open_router(text, api_key):
             },
             json={
                 "model": "mistralai/mistral-7b-instruct",
-                "messages": [{"role": "user", "content": _build_summary_prompt(text)}],
-                "max_tokens": 150
+                "messages": [{"role": "user", "content": prompt}],
+                "max_tokens": max_tokens
             },
             timeout=15
         )
@@ -535,6 +538,18 @@ def summarize_with_open_router(text, api_key):
         return None
     except Exception:
         return None
+
+
+def summarize_with_groq(text, api_key):
+    return _call_groq_prompt(_build_summary_prompt(text), api_key)
+
+
+def summarize_with_gemini(text, api_key):
+    return _call_gemini_prompt(_build_summary_prompt(text), api_key)
+
+
+def summarize_with_open_router(text, api_key):
+    return _call_open_router_prompt(_build_summary_prompt(text), api_key)
 
 
 def summarize_technical_text_ja(text, groq_key=None, gemini_key=None, open_router_key=None):
@@ -556,6 +571,60 @@ def summarize_technical_text_ja(text, groq_key=None, gemini_key=None, open_route
         result = summarizer(text, key)
         if result:
             return result
+
+    return None
+
+
+# ==================== AI によるバグ内容の解釈 ====================
+# 見出し・ステータス・重要度・影響/修正バージョン・自動分類結果から、
+# 「何が起きる不具合で、どのような環境・条件で影響が出得るか」を
+# AI に日本語の解説文として生成させる（症状/回避策等の要約とは別軸で、
+# 一覧表だけでは読み取りにくい実務上の解釈を補うことが目的）。
+
+def _build_bug_interpretation_prompt(headline_en, status, severity, affected, fixed,
+                                      feature_category, symptom_category, occurrence_estimate):
+    return (
+        "以下はCiscoバグの情報です。ネットワーク運用者向けに「何が起きる不具合か」"
+        "「どのような環境・条件で影響が出得るか」を日本語で2〜3文（150文字程度）に"
+        "まとめて解説してください。項目の翻訳や値の羅列ではなく、内容の解釈・実務上の"
+        "注意点を書いてください。出力は解説文のみとし、見出しや箇条書き記号は付けないでください。\n\n"
+        f"【見出し(英語)】{headline_en}\n"
+        f"【ステータス】{status or '不明'}\n"
+        f"【重要度(Severity)】{severity or '不明'}\n"
+        f"【影響バージョン】{affected or '記載なし'}\n"
+        f"【修正バージョン】{fixed or '（未記載）'}\n"
+        f"【自動分類: 利用機能】{feature_category}\n"
+        f"【自動分類: 素因】{symptom_category}\n"
+        f"【自動推定: 発生しやすさ】{occurrence_estimate}\n"
+    )
+
+
+def interpret_bug_ja(headline_en, status, severity, affected, fixed,
+                      feature_category, symptom_category, occurrence_estimate,
+                      groq_key=None, gemini_key=None, open_router_key=None):
+    """
+    バグ情報一式から、AI に「何が起きるか・どんな環境で影響が出得るか」を
+    日本語で解説させる。フォールバック順: Groq → Gemini → Open Router。
+    いずれのキーも無い、または全て失敗した場合は None を返す。
+    """
+    headline_en = _safe_str(headline_en)
+    if not headline_en:
+        return None
+
+    prompt = _build_bug_interpretation_prompt(
+        headline_en, _safe_str(status), _safe_str(severity),
+        _safe_str(affected), _safe_str(fixed), feature_category, symptom_category, occurrence_estimate
+    )
+
+    result = _call_groq_prompt(prompt, groq_key, max_tokens=250)
+    if result:
+        return result
+    result = _call_gemini_prompt(prompt, gemini_key)
+    if result:
+        return result
+    result = _call_open_router_prompt(prompt, open_router_key, max_tokens=250)
+    if result:
+        return result
 
     return None
 
@@ -954,7 +1023,13 @@ def create_excel_report(results, analysis_data, search_params, include_release_n
             いずれも無ければ通常の翻訳結果を使う。
         target_version: 指定すると "{target_version}影響" 列を追加し、そのバージョンへの
             影響有無を version_affects_bug() で判定して記載する（省略可）。
+        groq_api_key/gemini_api_key/open_router_api_key のいずれかがあれば、末尾に
+            「AI解説（内容の解釈）」列を追加し、見出し・ステータス・重要度・影響/修正
+            バージョン・自動分類結果から「何が起きる不具合か」「どんな環境で影響が
+            出得るか」をAIに日本語で解説させる（1行につきAPI呼び出しが1回増えるため、
+            件数が多いと生成に時間がかかる）。キーが無ければこの列自体を追加しない。
     """
+    include_ai_interpretation = bool(groq_api_key or gemini_api_key or open_router_api_key)
     wb = Workbook()
     ws1 = wb.active
     ws1.title = "検索結果"
@@ -986,6 +1061,8 @@ def create_excel_report(results, analysis_data, search_params, include_release_n
     release_note_keys = ["症状", "条件", "回避策", "詳細説明"]
     if include_release_notes:
         headers = headers + release_note_cols + ["リリースノート原文（英語・参考）"]
+    if include_ai_interpretation:
+        headers = headers + ["AI解説（内容の解釈）"]
 
     for col, header in enumerate(headers, 1):
         cell = ws1.cell(row=1, column=col)
@@ -1003,6 +1080,9 @@ def create_excel_report(results, analysis_data, search_params, include_release_n
         if headline is None or (isinstance(headline, float) and pd.isna(headline)):
             headline = headline_en
 
+        feature_cat = classify_bug_feature(headline_en)
+        symptom_cat = classify_bug_symptom(headline_en)
+
         target_affected = None
         row_data = [
             bug_id,
@@ -1012,17 +1092,20 @@ def create_excel_report(results, analysis_data, search_params, include_release_n
             bug_row["Bug Status"],
             bug_row["Known Affected Release(s)"],
             bug_row["Known Fixed Releases"],
-            classify_bug_feature(headline_en),
-            classify_bug_symptom(headline_en),
+            feature_cat,
+            symptom_cat,
         ]
         if target_version:
             target_affected = version_affects_bug(
                 bug_row["Known Affected Release(s)"], bug_row.get("Known Fixed Releases"), target_version
             )
             row_data.append("影響あり" if target_affected else "対象外")
+        occurrence_est = estimate_occurrence_likelihood(
+            bug_row["Bug Status"], headline_en, target_affected=target_affected
+        )
         row_data += [
             analysis.get("possibility", "-"),
-            estimate_occurrence_likelihood(bug_row["Bug Status"], headline_en, target_affected=target_affected),
+            occurrence_est,
             ", ".join(analysis.get("tags", [])),
             analysis.get("comment", ""),
             bug_row.get("URL", ""),
@@ -1059,6 +1142,15 @@ def create_excel_report(results, analysis_data, search_params, include_release_n
                 row_data.append(content)
             row_data.append(clean_html_tags(raw_note))
 
+        if include_ai_interpretation:
+            interpretation = interpret_bug_ja(
+                headline_en, bug_row["Bug Status"], bug_row["Bug Severity"],
+                bug_row["Known Affected Release(s)"], bug_row.get("Known Fixed Releases"),
+                feature_cat, symptom_cat, occurrence_est,
+                groq_key=groq_api_key, gemini_key=gemini_api_key, open_router_key=open_router_api_key,
+            )
+            row_data.append(interpretation or "")
+
         for col, value in enumerate(row_data, 1):
             cell = ws1.cell(row=row, column=col)
             cell.value = value
@@ -1070,7 +1162,7 @@ def create_excel_report(results, analysis_data, search_params, include_release_n
         "Status": 12, "Affected Releases": 25, "Fixed Releases": 25, "利用機能": 22, "素因": 18,
         "発生可能性": 12, "発生しやすさ(推定)": 42, "関連機能": 20, "コメント": 30, "URL": 30,
         "症状 (日本語)": 35, "条件 (日本語)": 35, "回避策 (日本語)": 35, "詳細説明 (日本語)": 35,
-        "リリースノート原文（英語・参考）": 45,
+        "リリースノート原文（英語・参考）": 45, "AI解説（内容の解釈）": 55,
     }
     for col_idx, header in enumerate(headers, 1):
         width = 15 if header.endswith("影響") else _col_widths.get(header, 20)

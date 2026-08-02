@@ -199,6 +199,13 @@ if df is not None:
 
         st.markdown("**AI 分析エンジン**")
         use_ai_analysis = st.checkbox("AI による可能性判定を使用", value=False)
+        if use_ai_analysis:
+            st.caption(
+                "✓ ONの場合、Excel出力の末尾に「AI解説（内容の解釈）」列が追加され、"
+                "各バグについて「何が起きる不具合か」「どんな環境で影響が出得るか」を"
+                "AIが日本語で解説します（1行につきAPI呼び出しが1回増えるため、件数が"
+                "多いと生成に時間がかかります）。"
+            )
 
         groq_api_key = None
         gemini_api_key = None
