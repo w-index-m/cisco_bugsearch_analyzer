@@ -824,9 +824,10 @@ if st.button("🔎 CVE を検索", key="cve_search_btn"):
 st.markdown("---")
 st.markdown("**一般的な既知の問題を貼り付けて分析**")
 st.caption(
-    "Palo Alto の「Known and Addressed Issues」ページ等、自動取得できない公式ドキュメントの"
-    "内容をブラウザからコピーしてここに貼り付けると、ID単位に分解してカテゴリ分け・日本語訳します。"
-    "NVD検索はセキュリティ脆弱性（CVE）のみが対象のため、こちらは一般的な不具合情報を扱います。"
+    "Palo Alto の「Known and Addressed Issues」や YAMAHA のリリースノート等、自動取得できない"
+    "公式ドキュメントの内容をブラウザからコピーしてここに貼り付けると、項目単位に分解して"
+    "カテゴリ分け・日本語訳します。NVD検索はセキュリティ脆弱性（CVE）のみが対象のため、"
+    "こちらは一般的な不具合情報を扱います。"
 )
 st.info(
     "💡 **お願い**: 以下のような公式ページはこちらで自動取得できないため、"
@@ -838,7 +839,9 @@ st.info(
 )
 
 pasted_issues_text = st.text_area(
-    "「ISSUE ID」+ 説明文の形式で貼り付け（例: PAN-332943 の下に説明文、その下に次のID...）",
+    "公式ページの本文を貼り付け（Palo Alto形式「PAN-332943」が単独行、"
+    "YAMAHA形式「[12] 説明文」、または YAMAHA新形式「■バグ修正」等の見出し配下に"
+    "項目が並ぶ形式のいずれも自動判定します）",
     height=180,
     key="pasted_issues_text"
 )
@@ -850,8 +853,9 @@ if st.button("📋 貼り付けたテキストを解析", key="parse_pasted_issu
         parsed_issues = analyzer.parse_vendor_known_issues(pasted_issues_text)
         if not parsed_issues:
             st.warning(
-                "ID（例: PAN-332943, [12]）を検出できませんでした。"
-                "各IDが単独の行になっているか、行頭が角括弧の連番になっているか確認してください。"
+                "項目を検出できませんでした。Palo Alto形式（例: PAN-332943 が単独の行）、"
+                "YAMAHA形式（行頭が角括弧の連番 [12]）、YAMAHA新形式（「■バグ修正」等の"
+                "見出しが行頭にある）のいずれかになっているか確認してください。"
             )
         else:
             st.success(f"✓ {len(parsed_issues)} 件検出しました")
