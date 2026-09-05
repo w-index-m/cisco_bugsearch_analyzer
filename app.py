@@ -122,7 +122,8 @@ if translation_engine == "DeepL":
             deepl_api_key = deepl_secret
         else:
             deepl_api_key = st.text_input(
-                "DeepL API キー", type="password", placeholder="API キーを入力"
+                "DeepL API キー", type="password", placeholder="API キーを入力",
+                key="deepl_api_key_input"
             )
         if not deepl_api_key:
             st.warning("DeepL API キーを入力してください")
@@ -137,7 +138,8 @@ elif translation_engine == "NVIDIA Riva":
         nvidia_api_key = nvidia_secret
     else:
         nvidia_api_key = st.text_input(
-            "NVIDIA API キー", type="password", placeholder="API キーを入力"
+            "NVIDIA API キー", type="password", placeholder="API キーを入力",
+            key="nvidia_api_key_input"
         )
     if not nvidia_api_key:
         st.warning("NVIDIA API キーを入力してください")
@@ -146,6 +148,96 @@ elif translation_engine == "NVIDIA Riva":
 # 内部キー（'google'/'deepl'/'nvidia'）に変換する
 engine_key_map = {"Google": "google", "DeepL": "deepl", "NVIDIA Riva": "nvidia"}
 translation_engine_key = engine_key_map.get(translation_engine, "google")
+
+st.markdown("---")
+
+# Severity フィルタ・AI設定も、Cisco検索・Cisco以外のベンダー貼り付け解析の両方で
+# 使うため、CSV/Excel の読み込み有無に関わらず常に表示する
+st.subheader("Severity & AI 設定")
+st.markdown("**Severity フィルタ**")
+severity_filter = st.multiselect(
+    "Severity を選択",
+    options=[1, 2, 3, 4, 5],
+    default=[1, 2, 3],
+    label_visibility="collapsed"
+)
+
+st.markdown("**AI 分析エンジン**")
+use_ai_analysis = st.checkbox("AI による可能性判定を使用", value=False)
+if use_ai_analysis:
+    st.caption(
+        "✓ ONの場合、Excel出力の末尾に「AI解説（内容の解釈）」列が追加され、"
+        "各バグについて「何が起きる不具合か」「どんな環境で影響が出得るか」を"
+        "AIが日本語で解説します（1行につきAPI呼び出しが1回増えるため、件数が"
+        "多いと生成に時間がかかります）。下の「一般的な既知の問題を貼り付けて分析」"
+        "でも同様にAI解説列が追加されます。"
+    )
+
+groq_api_key = None
+gemini_api_key = None
+open_router_api_key = None
+
+if use_ai_analysis:
+    groq_secret = get_secret("GROQ_API_KEY")
+    gemini_secret = get_secret("GEMINI_API_KEY")
+    open_router_secret = get_secret("OPENROUTER_API_KEY")
+
+    if not (groq_secret and gemini_secret and open_router_secret):
+        st.markdown("API キーを入力（持っているもののみ）:")
+
+    if groq_secret:
+        st.caption("✓ Groq: Secrets から読み込み済み")
+        groq_api_key = groq_secret
+    else:
+        groq_api_key = st.text_input(
+            "Groq API キー", type="password", placeholder="gsk_...",
+            label_visibility="collapsed", key="groq_api_key_input"
+        )
+
+    if gemini_secret:
+        st.caption("✓ Gemini: Secrets から読み込み済み")
+        gemini_api_key = gemini_secret
+    else:
+        gemini_api_key = st.text_input(
+            "Gemini API キー", type="password", placeholder="AIza...",
+            label_visibility="collapsed", key="gemini_api_key_input"
+        )
+
+    if open_router_secret:
+        st.caption("✓ Open Router: Secrets から読み込み済み")
+        open_router_api_key = open_router_secret
+    else:
+        open_router_api_key = st.text_input(
+            "Open Router キー", type="password", placeholder="sk-or-...",
+            label_visibility="collapsed", key="open_router_api_key_input"
+        )
+
+st.markdown("**テキストを翻訳（単体ツール）**")
+st.caption(
+    "バグ検索とは独立して、任意のテキストを上で選んだ翻訳エンジンで日本語に翻訳できます。"
+    "対応パーサーがまだ無いベンダーの文章を一時的に訳したい場合などにお使いください。"
+)
+standalone_translate_text = st.text_area(
+    "翻訳したいテキストを貼り付け",
+    height=120,
+    key="standalone_translate_text"
+)
+if st.button("🌍 翻訳する", key="standalone_translate_btn"):
+    if not standalone_translate_text.strip():
+        st.warning("テキストを貼り付けてください")
+    else:
+        with st.spinner("翻訳中..."):
+            _standalone_translated = translate_headline(
+                standalone_translate_text, engine=translation_engine_key,
+                deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key
+            )
+        if _standalone_translated:
+            st.text_area(
+                "翻訳結果（日本語）", value=_standalone_translated, height=120,
+                key="standalone_translate_result"
+            )
+        else:
+            st.error("翻訳に失敗しました。しばらく待ってから再度お試しください。")
 
 st.markdown("---")
 
@@ -182,66 +274,6 @@ if df is not None:
                 data=analysis_json,
                 file_name=f"bug_analysis_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json",
                 mime="application/json"
-            )
-
-    st.markdown("---")
-
-    st.subheader("Severity & AI 設定")
-    st.markdown("**Severity フィルタ**")
-    severity_filter = st.multiselect(
-        "Severity を選択",
-        options=[1, 2, 3, 4, 5],
-        default=[1, 2, 3],
-        label_visibility="collapsed"
-    )
-
-    st.markdown("**AI 分析エンジン**")
-    use_ai_analysis = st.checkbox("AI による可能性判定を使用", value=False)
-    if use_ai_analysis:
-        st.caption(
-            "✓ ONの場合、Excel出力の末尾に「AI解説（内容の解釈）」列が追加され、"
-            "各バグについて「何が起きる不具合か」「どんな環境で影響が出得るか」を"
-            "AIが日本語で解説します（1行につきAPI呼び出しが1回増えるため、件数が"
-            "多いと生成に時間がかかります）。"
-        )
-
-    groq_api_key = None
-    gemini_api_key = None
-    open_router_api_key = None
-
-    if use_ai_analysis:
-        groq_secret = get_secret("GROQ_API_KEY")
-        gemini_secret = get_secret("GEMINI_API_KEY")
-        open_router_secret = get_secret("OPENROUTER_API_KEY")
-
-        if not (groq_secret and gemini_secret and open_router_secret):
-            st.markdown("API キーを入力（持っているもののみ）:")
-
-        if groq_secret:
-            st.caption("✓ Groq: Secrets から読み込み済み")
-            groq_api_key = groq_secret
-        else:
-            groq_api_key = st.text_input(
-                "Groq API キー", type="password", placeholder="gsk_...",
-                label_visibility="collapsed"
-            )
-
-        if gemini_secret:
-            st.caption("✓ Gemini: Secrets から読み込み済み")
-            gemini_api_key = gemini_secret
-        else:
-            gemini_api_key = st.text_input(
-                "Gemini API キー", type="password", placeholder="AIza...",
-                label_visibility="collapsed"
-            )
-
-        if open_router_secret:
-            st.caption("✓ Open Router: Secrets から読み込み済み")
-            open_router_api_key = open_router_secret
-        else:
-            open_router_api_key = st.text_input(
-                "Open Router キー", type="password", placeholder="sk-or-...",
-                label_visibility="collapsed"
             )
 
     st.markdown("---")
@@ -887,8 +919,11 @@ if st.button("📋 貼り付けたテキストを解析", key="parse_pasted_issu
                 for issue in grouped[cat]:
                     ordered_issues.append((cat, issue))
 
+            include_ai_interpretation = use_ai_analysis and (groq_api_key or gemini_api_key or open_router_api_key)
+            _progress_label = "翻訳・AI解説生成中..." if include_ai_interpretation else "翻訳中..."
+
             total_issues = len(ordered_issues)
-            progress_bar3 = st.progress(0.0, text=f"翻訳中... (0/{total_issues})")
+            progress_bar3 = st.progress(0.0, text=f"{_progress_label} (0/{total_issues})")
             vendor_issue_rows = []
             for i, (cat, issue) in enumerate(ordered_issues, 1):
                 desc_ja = translate_headline(
@@ -905,13 +940,20 @@ if st.button("📋 貼り付けたテキストを解析", key="parse_pasted_issu
                 if issue["workaround"]:
                     original_ref += f" / Workaround: {issue['workaround']}"
 
-                vendor_issue_rows.append([
-                    issue["id"], issue["section"] or cat, desc_ja, wa_ja, original_ref,
-                ])
-                progress_bar3.progress(i / total_issues, text=f"翻訳中... ({i}/{total_issues})")
+                row = [issue["id"], issue["section"] or cat, desc_ja, wa_ja, original_ref]
+                if include_ai_interpretation:
+                    ai_note = analyzer.interpret_vendor_issue_ja(
+                        issue["description"], issue["workaround"], issue["section"] or cat,
+                        groq_key=groq_api_key, gemini_key=gemini_api_key, open_router_key=open_router_api_key,
+                    )
+                    row.append(ai_note or "")
+                vendor_issue_rows.append(row)
+                progress_bar3.progress(i / total_issues, text=f"{_progress_label} ({i}/{total_issues})")
             progress_bar3.empty()
 
             vendor_issue_cols = ["ID", "分類", "概要(日本語)", "回避策(日本語)", "原文(英語・参考)"]
+            if include_ai_interpretation:
+                vendor_issue_cols = vendor_issue_cols + ["AI解説（内容の解釈）"]
             st.dataframe(
                 pd.DataFrame(vendor_issue_rows, columns=vendor_issue_cols),
                 use_container_width=True,
