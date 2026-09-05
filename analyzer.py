@@ -649,6 +649,47 @@ def interpret_bug_ja(headline_en, status, severity, affected, fixed,
     return None
 
 
+def _build_vendor_issue_interpretation_prompt(description, workaround, category):
+    return (
+        "以下はネットワーク機器ベンダー（Palo Alto、YAMAHA等）の公式ドキュメントに"
+        "記載された既知の問題です。ネットワーク運用者向けに「どういう状況・条件で"
+        "発生するか」「何が起きるか」を日本語で2〜3文（150文字程度）にまとめて"
+        "解説してください。原文の翻訳ではなく、内容の解釈・実務上の注意点を書いて"
+        "ください。出力は解説文のみとし、見出しや箇条書き記号は付けないでください。\n\n"
+        f"【分類】{category or '一般 / その他'}\n"
+        f"【説明】{description}\n"
+        f"【回避策】{workaround or '（記載なし）'}\n"
+    )
+
+
+def interpret_vendor_issue_ja(description, workaround, category,
+                               groq_key=None, gemini_key=None, open_router_key=None):
+    """
+    Palo Alto / YAMAHA 等、Cisco以外のベンダーの貼り付け解析結果（description/workaround）
+    から、AI に「どういうときに発生するか・何が起きるか」を日本語で解説させる。
+    interpret_bug_ja() のCisco専用フィールド（Status/Severity等）に依存しない版。
+    フォールバック順: Groq → Gemini → Open Router。いずれのキーも無い、または
+    全て失敗した場合は None を返す。
+    """
+    description = _safe_str(description)
+    if not description:
+        return None
+
+    prompt = _build_vendor_issue_interpretation_prompt(description, _safe_str(workaround), category)
+
+    result = _call_groq_prompt(prompt, groq_key, max_tokens=250)
+    if result:
+        return result
+    result = _call_gemini_prompt(prompt, gemini_key)
+    if result:
+        return result
+    result = _call_open_router_prompt(prompt, open_router_key, max_tokens=250)
+    if result:
+        return result
+
+    return None
+
+
 # ==================== バージョン比較 ====================
 
 _VERSION_DIGITS_RE = re.compile(r'\d+')
