@@ -1,6 +1,6 @@
 {
   "label": "F5 BIG-IP",
-  "generated_at": "2026-09-24T10:11:05+00:00",
+  "generated_at": "2026-09-24T17:58:36+00:00",
   "count": 300,
   "rows": [
     {
@@ -12,16 +12,6 @@
       "product": "BIG_IP_NEXT(BNK), BIG_IP_NEXT(BNK) BNK",
       "url": "https://cdn.f5.com/product/bugtracker/ID2501773.html",
       "date": "2026-09-21"
-    },
-    {
-      "source": "F5 Bug Tracker",
-      "id": "ID2524745",
-      "headline_en": "Serverside Client Hello's may rarely be delayed with SSL mirroring",
-      "headline_ja": "Serverside Client Hello's may rarely be delayed with SSL mirroring",
-      "versions": "17.1.0, 17.1.0.1, 17.1.0.2, 17.1.0.3, 17.1.1, 17.1.1.1, 17.1.1.2, 17.1.1.3, 17.1.1.4, 17.1.2, 17.1.2.1, 17.1.2.2, 17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5, 17.5.0, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 21.1.0, 21.1.0.1, 21.1.0.2",
-      "product": "BIG-IP, BIG-IP TMOS",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2524745.html",
-      "date": "2026-09-19"
     },
     {
       "source": "F5 Bug Tracker",
@@ -981,6 +971,16 @@
       "versions": "21.1.0, 21.1.0.1, 21.1.0.2",
       "product": "BIG-IP, BIG-IP SSLO",
       "url": "https://cdn.f5.com/product/bugtracker/ID2346977.html",
+      "date": "2026-07-10"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2345869",
+      "headline_en": "APM Portal Access Fails to Parse ES13 Class field syntax",
+      "headline_ja": "APM Portal Access Fails to Parse ES13 Class field syntax",
+      "versions": "(本文から検出できず)",
+      "product": "BIG-IP, BIG-IP APM",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2345869.html",
       "date": "2026-07-10"
     },
     {

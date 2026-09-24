@@ -1,6 +1,6 @@
 {
   "label": "Palo Alto (PAN-OS)",
-  "generated_at": "2026-09-24T10:20:22+00:00",
+  "generated_at": "2026-09-24T18:09:05+00:00",
   "count": 200,
   "rows": [
     {
@@ -13,7 +13,7 @@
       "date": "2026-09-10",
       "cvss": null,
       "kev": false,
-      "epss": 0.00337
+      "epss": 0.0037
     },
     {
       "source": "NVD (CVSS -)",
@@ -157,7 +157,7 @@
       "date": "2026-07-09",
       "cvss": 4.9,
       "kev": false,
-      "epss": 0.00229
+      "epss": 0.00432
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -265,7 +265,7 @@
       "date": "2026-05-13",
       "cvss": 9.1,
       "kev": true,
-      "epss": 0.95156
+      "epss": 0.96895
     },
     {
       "source": "NVD (CVSS 8.1)",
@@ -313,7 +313,7 @@
       "date": "2026-05-13",
       "cvss": 7.8,
       "kev": false,
-      "epss": 0.00153
+      "epss": 0.00185
     },
     {
       "source": "NVD (CVSS 7.8)",
@@ -1117,7 +1117,7 @@
       "date": "2025-02-12",
       "cvss": 9.1,
       "kev": true,
-      "epss": 0.98455
+      "epss": 0.98141
     },
     {
       "source": "NVD (CVSS 6.5)",
@@ -1261,7 +1261,7 @@
       "date": "2024-11-18",
       "cvss": 9.8,
       "kev": true,
-      "epss": 0.99718
+      "epss": 0.99848
     },
     {
       "source": "NVD (CVSS 7.2)",

@@ -1,6 +1,6 @@
 {
   "label": "FortiGate (FortiOS)",
-  "generated_at": "2026-09-24T10:29:34+00:00",
+  "generated_at": "2026-09-24T18:19:33+00:00",
   "count": 200,
   "rows": [
     {
@@ -13,7 +13,7 @@
       "date": "2026-09-08",
       "cvss": 8.1,
       "kev": false,
-      "epss": 0.00155
+      "epss": 0.00247
     },
     {
       "source": "NVD (CVSS 2.7)",
@@ -25,7 +25,7 @@
       "date": "2026-09-08",
       "cvss": 2.7,
       "kev": false,
-      "epss": 0.00281
+      "epss": 0.00495
     },
     {
       "source": "NVD (CVSS 5.6)",
@@ -37,7 +37,7 @@
       "date": "2026-08-12",
       "cvss": 5.6,
       "kev": false,
-      "epss": 0.0054
+      "epss": 0.00421
     },
     {
       "source": "NVD (CVSS 5.3)",
@@ -49,7 +49,7 @@
       "date": "2026-08-12",
       "cvss": 5.3,
       "kev": false,
-      "epss": 0.00529
+      "epss": 0.00402
     },
     {
       "source": "NVD (CVSS 6.6)",
@@ -253,7 +253,7 @@
       "date": "2026-02-05",
       "cvss": 3.2,
       "kev": false,
-      "epss": 0.00108
+      "epss": 0.00094
     },
     {
       "source": "NVD (CVSS 9.8)",
@@ -265,7 +265,7 @@
       "date": "2026-01-27",
       "cvss": 9.8,
       "kev": true,
-      "epss": 0.86088
+      "epss": 0.85796
     },
     {
       "source": "NVD (CVSS 8.1)",
@@ -277,7 +277,7 @@
       "date": "2026-01-13",
       "cvss": 8.1,
       "kev": true,
-      "epss": 0.02403
+      "epss": 0.03859
     },
     {
       "source": "NVD (CVSS 6.0)",
@@ -937,7 +937,7 @@
       "date": "2025-01-14",
       "cvss": 9.8,
       "kev": true,
-      "epss": 0.98259
+      "epss": 0.94149
     },
     {
       "source": "NVD (CVSS 9.0)",
