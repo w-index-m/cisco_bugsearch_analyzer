@@ -2190,20 +2190,37 @@ def _clean_f5_bug_title(raw):
     return title
 
 
+def _f5_meta_content(html, name):
+    """
+    F5バグトラッカーページの <meta name="..." content="..."> の値を取り出す。
+    見つからなければ None。
+    """
+    m = re.search(
+        rf'<meta\s+name=["\']{re.escape(name)}["\']\s+content=["\'](.*?)["\']',
+        html, re.IGNORECASE | re.DOTALL,
+    )
+    if not m:
+        return None
+    return unescape(m.group(1)).strip()
+
+
 def fetch_f5_bug_page(bug_id, timeout=15):
     """
     F5公式バグトラッカーの個別ページ（ID<bug_id>.html）を取得し、
     Bug ID・見出し（英語）・本文・対象OS（バージョン）候補・日付候補を抽出する。
 
-    ページの正確なHTML構造は未確認のため、複数の候補箇所（<title>タグ、
-    og:title/twitter:title/descriptionのメタタグ、最初の<h1>）から
-    "Bug ID <番号>: <見出し>" 形式の見出しを抜き出せるものを順に試す。
-    <title>タグ自体が "Bug ID <番号>" のプレースホルダのみで、実際の見出しが
-    JavaScriptで後から描画される（サーバ側の生HTMLには含まれない）ページである
-    可能性があるため、単純な<title>抽出だけに頼らないようにしている。
-    本文全体からBIG-IPバージョン/日付らしき文字列を拾う方式とあわせて、
-    どちらも失敗に強い（見つからなければ空文字列/空リスト/Noneを返すだけで
-    例外にしない）実装にしている。
+    実際のページのHTMLをGitHub Actions経由で確認したところ、サーバ側で
+    完全にレンダリングされた静的HTMLであり（JavaScriptでの描画ではない）、
+    以下のメタタグに構造化データが入っていることが分かった:
+      - <meta name="title" content="<見出し>">（<title>タグ自体は
+        "Bug ID <番号>" のプレースホルダのみで見出しは入っていない）
+      - <meta name="product_known_affected_versions" content="v1, v2, ...">
+      - <meta name="original_date" content="YYYY-MM-DD HH:MM:SS">（Opened日時。
+        本文中の最初の日付らしき文字列を拾う方式だと "Last Modified" 等の
+        別の日付を誤って拾ってしまうため、こちらを優先する）
+    本文の <h2 class="bug-title">Bug ID <番号>: <見出し></h2> をフォールバックに
+    使う。どちらのメタタグも取得できない場合は、従来通り本文全体からの
+    正規表現抽出にフォールバックする（サイト構造が将来変わった場合の保険）。
 
     Returns:
         {"bug_id": str, "headline_en": str, "versions": [...], "url": str,
@@ -2218,46 +2235,40 @@ def fetch_f5_bug_page(bug_id, timeout=15):
         return {"bug_id": bug_id, "url": url, "error": str(e)}
 
     html = response.text
-    headline_en = ""
 
-    title_match = re.search(r'<title[^>]*>(.*?)</title>', html, re.IGNORECASE | re.DOTALL)
-    if title_match:
-        headline_en = _clean_f5_bug_title(title_match.group(1))
-
+    headline_en = _f5_meta_content(html, "title") or ""
     if not headline_en:
-        for pattern in (
-            r'<meta[^>]+property=["\']og:title["\'][^>]+content=["\'](.*?)["\']',
-            r'<meta[^>]+name=["\']twitter:title["\'][^>]+content=["\'](.*?)["\']',
-            r'<meta[^>]+name=["\']description["\'][^>]+content=["\'](.*?)["\']',
-            r'<meta[^>]+property=["\']og:description["\'][^>]+content=["\'](.*?)["\']',
-        ):
-            m = re.search(pattern, html, re.IGNORECASE | re.DOTALL)
-            if m:
-                candidate = _clean_f5_bug_title(m.group(1))
-                if candidate:
-                    headline_en = candidate
-                    break
+        h2_match = re.search(
+            r'<h2[^>]+class=["\']bug-title["\'][^>]*>(.*?)</h2>', html, re.IGNORECASE | re.DOTALL
+        )
+        if h2_match:
+            h2_text = re.sub(r'<[^>]+>', ' ', h2_match.group(1))
+            headline_en = _clean_f5_bug_title(h2_text)
 
-    if not headline_en:
-        h1_match = re.search(r'<h1[^>]*>(.*?)</h1>', html, re.IGNORECASE | re.DOTALL)
-        if h1_match:
-            h1_text = re.sub(r'<[^>]+>', ' ', h1_match.group(1))
-            headline_en = _clean_f5_bug_title(h1_text)
+    versions_raw = _f5_meta_content(html, "product_known_affected_versions")
+    versions = (
+        [v.strip() for v in versions_raw.split(",") if v.strip()] if versions_raw else None
+    )
 
-    # HTMLタグを大まかに除去して本文テキストを取り出す（厳密なパースはしない）
+    original_date = _f5_meta_content(html, "original_date")
+    bug_date = original_date.split(" ")[0] if original_date else None
+
+    # HTMLタグを大まかに除去して本文テキストを取り出す（メタタグが無かった場合の
+    # フォールバック抽出、および将来的なデバッグ用に保持しておく）
     body_text = re.sub(r'<script.*?</script>', ' ', html, flags=re.DOTALL | re.IGNORECASE)
     body_text = re.sub(r'<style.*?</style>', ' ', body_text, flags=re.DOTALL | re.IGNORECASE)
     body_text = re.sub(r'<[^>]+>', ' ', body_text)
     body_text = re.sub(r'\s+', ' ', body_text).strip()
 
-    versions = _extract_bigip_versions(body_text)
-    bug_date = _extract_first_date(body_text)
+    if versions is None:
+        versions = _extract_bigip_versions(body_text)
+    if bug_date is None:
+        bug_date = _extract_first_date(body_text)
 
     return {
         "bug_id": bug_id,
         "headline_en": headline_en or (
-            "(見出しを取得できませんでした。ページがJavaScriptで見出しを描画しており、"
-            "単純な取得では読み取れない可能性があります。参考リンクから直接ご確認ください)"
+            "(見出しを取得できませんでした。参考リンクから直接ご確認ください)"
         ),
         "versions": versions,
         "url": url,
