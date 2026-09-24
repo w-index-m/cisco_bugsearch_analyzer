@@ -35,10 +35,14 @@ jobs:
         env:
           NVD_API_KEY: ${{ secrets.NVD_API_KEY }}
           DEEPL_API_KEY: ${{ secrets.DEEPL_API_KEY }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
         run: |
           python scripts/collect_vendor_bug_cache.py \
             ${NVD_API_KEY:+--nvd-api-key "$NVD_API_KEY"} \
-            ${DEEPL_API_KEY:+--deepl-api-key "$DEEPL_API_KEY"}
+            ${DEEPL_API_KEY:+--deepl-api-key "$DEEPL_API_KEY"} \
+            ${GROQ_API_KEY:+--groq-api-key "$GROQ_API_KEY"} \
+            ${OPENROUTER_API_KEY:+--openrouter-api-key "$OPENROUTER_API_KEY"}
 
       # if: always() で、上の収集ステップが一部ベンダーの失敗（NVDタイムアウト等）
       # で失敗扱いになった場合でも実行する。3ベンダーのうち1つが失敗しても、
