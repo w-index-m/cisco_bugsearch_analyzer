@@ -9,6 +9,8 @@ import os
 import re
 import json
 import time
+import shlex
+import concurrent.futures
 from html import unescape
 from datetime import datetime, date as _date
 from functools import wraps
@@ -296,7 +298,16 @@ def translate_headline_nvidia(text, api_key):
 
 
 def translate_headline(text, engine='google', deepl_api_key=None, nvidia_api_key=None):
-    """翻訳エンジンを指定してヘッドラインを翻訳（フォールバック: 指定エンジン → Google）"""
+    """
+    翻訳エンジンを指定してヘッドラインを翻訳する。
+    フォールバック順: 指定エンジン → Google → （Googleが失敗し、指定エンジンが
+    DeepLでなくDeepLキーがあれば）DeepL → 原文のまま。
+
+    Google翻訳の無料エンドポイントはクラウド環境（共有IP）からのアクセスで
+    レート制限やブロックにより失敗することがあるため、DeepLキーが設定されて
+    いれば最後の砦として使う（DeepLを明示選択している場合は既に上で試行済み
+    のため二重には呼ばない）。
+    """
     if not text or len(text) < 3:
         return text
 
@@ -313,6 +324,11 @@ def translate_headline(text, engine='google', deepl_api_key=None, nvidia_api_key
     result = translate_headline_google(text)
     if result:
         return result
+
+    if engine != 'deepl' and deepl_api_key and DEEPL_AVAILABLE:
+        result = translate_headline_deepl(text, deepl_api_key)
+        if result:
+            return result
 
     return text
 
@@ -2154,15 +2170,40 @@ def _extract_first_date(text):
         return None
 
 
+_BUG_ID_ONLY_RE = re.compile(r'^Bug ID\s*\d+\s*$', re.IGNORECASE)
+
+
+def _clean_f5_bug_title(raw):
+    """
+    "Bug ID <番号>[: <見出し>][ - F5]" 形式の文字列から見出し部分だけを取り出す。
+    見出し部分が無く "Bug ID <番号>" だけの場合は、見出しが取得できなかったものと
+    みなして空文字列を返す（呼び出し側で他の候補ソースを試すため）。
+    """
+    if not raw:
+        return ""
+    title = unescape(re.sub(r'\s+', ' ', raw)).strip()
+    title = re.sub(r'^Bug ID\s*\d+\s*:\s*', '', title, flags=re.IGNORECASE)
+    title = re.sub(r'\s*[-|]\s*F5\s*$', '', title, flags=re.IGNORECASE)
+    title = title.strip()
+    if not title or _BUG_ID_ONLY_RE.match(title):
+        return ""
+    return title
+
+
 def fetch_f5_bug_page(bug_id, timeout=15):
     """
     F5公式バグトラッカーの個別ページ（ID<bug_id>.html）を取得し、
     Bug ID・見出し（英語）・本文・対象OS（バージョン）候補・日付候補を抽出する。
 
-    ページの正確なHTML構造は未確認のため、<title>タグから
-    "Bug ID <番号>: <見出し>" 形式を抜き出す方式と、本文全体から
-    BIG-IPバージョン/日付らしき文字列を拾う方式の、どちらも失敗に強い
-    （見つからなければ空文字列/空リスト/Noneを返すだけで例外にしない）実装にしている。
+    ページの正確なHTML構造は未確認のため、複数の候補箇所（<title>タグ、
+    og:title/twitter:title/descriptionのメタタグ、最初の<h1>）から
+    "Bug ID <番号>: <見出し>" 形式の見出しを抜き出せるものを順に試す。
+    <title>タグ自体が "Bug ID <番号>" のプレースホルダのみで、実際の見出しが
+    JavaScriptで後から描画される（サーバ側の生HTMLには含まれない）ページである
+    可能性があるため、単純な<title>抽出だけに頼らないようにしている。
+    本文全体からBIG-IPバージョン/日付らしき文字列を拾う方式とあわせて、
+    どちらも失敗に強い（見つからなければ空文字列/空リスト/Noneを返すだけで
+    例外にしない）実装にしている。
 
     Returns:
         {"bug_id": str, "headline_en": str, "versions": [...], "url": str,
@@ -2177,15 +2218,31 @@ def fetch_f5_bug_page(bug_id, timeout=15):
         return {"bug_id": bug_id, "url": url, "error": str(e)}
 
     html = response.text
+    headline_en = ""
 
     title_match = re.search(r'<title[^>]*>(.*?)</title>', html, re.IGNORECASE | re.DOTALL)
-    headline_en = ""
     if title_match:
-        title = re.sub(r'\s+', ' ', title_match.group(1)).strip()
-        # "Bug ID 1006509: TMM memory leak - F5" -> "TMM memory leak"
-        title = re.sub(r'^Bug ID\s*\d+\s*:\s*', '', title, flags=re.IGNORECASE)
-        title = re.sub(r'\s*-\s*F5\s*$', '', title, flags=re.IGNORECASE)
-        headline_en = title.strip()
+        headline_en = _clean_f5_bug_title(title_match.group(1))
+
+    if not headline_en:
+        for pattern in (
+            r'<meta[^>]+property=["\']og:title["\'][^>]+content=["\'](.*?)["\']',
+            r'<meta[^>]+name=["\']twitter:title["\'][^>]+content=["\'](.*?)["\']',
+            r'<meta[^>]+name=["\']description["\'][^>]+content=["\'](.*?)["\']',
+            r'<meta[^>]+property=["\']og:description["\'][^>]+content=["\'](.*?)["\']',
+        ):
+            m = re.search(pattern, html, re.IGNORECASE | re.DOTALL)
+            if m:
+                candidate = _clean_f5_bug_title(m.group(1))
+                if candidate:
+                    headline_en = candidate
+                    break
+
+    if not headline_en:
+        h1_match = re.search(r'<h1[^>]*>(.*?)</h1>', html, re.IGNORECASE | re.DOTALL)
+        if h1_match:
+            h1_text = re.sub(r'<[^>]+>', ' ', h1_match.group(1))
+            headline_en = _clean_f5_bug_title(h1_text)
 
     # HTMLタグを大まかに除去して本文テキストを取り出す（厳密なパースはしない）
     body_text = re.sub(r'<script.*?</script>', ' ', html, flags=re.DOTALL | re.IGNORECASE)
@@ -2198,7 +2255,10 @@ def fetch_f5_bug_page(bug_id, timeout=15):
 
     return {
         "bug_id": bug_id,
-        "headline_en": headline_en or "(見出しを取得できませんでした。ページ構造が想定と異なる可能性があります)",
+        "headline_en": headline_en or (
+            "(見出しを取得できませんでした。ページがJavaScriptで見出しを描画しており、"
+            "単純な取得では読み取れない可能性があります。参考リンクから直接ご確認ください)"
+        ),
         "versions": versions,
         "url": url,
         "date": bug_date,
@@ -2266,9 +2326,121 @@ def _extract_generic_versions(text):
     return seen
 
 
+# ==================== CISA KEV / FIRST EPSS（優先度判断の補助情報） ====================
+#
+# CVSSだけでは「本当に急ぐべきか」が分からないため、実際に悪用が確認された
+# 既知の脆弱性カタログ（CISA KEV）と、悪用予測確率スコア（FIRST EPSS）を
+# 合わせて表示する。どちらも取得に失敗しても致命的にせず、判定不可（None）
+# として扱う（F5/NVDへの通信がブロックされる開発環境でも動作を止めないため）。
+
+CISA_KEV_URL = "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json"
+FIRST_EPSS_API = "https://api.first.org/data/v1/epss"
+
+_kev_cache = {"ids": None}
+
+
+def fetch_cisa_kev_ids(timeout=15, force_refresh=False):
+    """
+    CISA KEV（Known Exploited Vulnerabilities）カタログから、実際に悪用が
+    確認されているCVE IDの集合を取得する。プロセス内で一度取得した結果は
+    キャッシュして使い回す。
+
+    Returns:
+        成功時: {"CVE-xxxx-xxxxx", ...} という set
+        失敗時: None（KEV判定不可を意味する。False（KEV入りでない）とは区別する）
+    """
+    if not force_refresh and _kev_cache["ids"] is not None:
+        return _kev_cache["ids"]
+    try:
+        response = requests.get(CISA_KEV_URL, timeout=timeout)
+        response.raise_for_status()
+        data = response.json()
+        ids = {v["cveID"] for v in data.get("vulnerabilities", []) if v.get("cveID")}
+    except Exception:
+        return None
+    _kev_cache["ids"] = ids
+    return ids
+
+
+def fetch_epss_scores(cve_ids, timeout=15, batch_size=100):
+    """
+    FIRST EPSS API から、各CVEの悪用予測確率（EPSSスコア、0〜1）を取得する。
+    まとめて問い合わせできるよう batch_size 件ずつに分割してリクエストする。
+
+    Returns:
+        {cve_id: score(float)} の辞書。取得できなかったCVEは含まれない
+        （呼び出し側は .get(cve_id) が None なら「判定不可」として扱う）。
+    """
+    scores = {}
+    ids = [c for c in dict.fromkeys(cve_ids) if c]
+    for i in range(0, len(ids), batch_size):
+        batch = ids[i:i + batch_size]
+        try:
+            response = requests.get(
+                FIRST_EPSS_API, params={"cve": ",".join(batch)}, timeout=timeout
+            )
+            response.raise_for_status()
+            data = response.json()
+        except Exception:
+            continue
+        for item in data.get("data", []):
+            try:
+                scores[item["cve"]] = float(item["epss"])
+            except (KeyError, ValueError, TypeError):
+                continue
+    return scores
+
+
+def _split_or_terms(keyword):
+    """
+    キーワードをOR検索の単位（語）に分解する。ダブルクォートで囲んだ部分は
+    「Palo Alto」のような複合名として1つの語（単語同士はNVD側でAND扱い）に
+    まとめ、それ以外はスペース区切りで個別の語にする。
+    例: '"Palo Alto" PAN-OS' -> ['Palo Alto', 'PAN-OS']
+    """
+    try:
+        terms = shlex.split(keyword)
+    except ValueError:
+        # 引用符の閉じ忘れ等、shlexで解釈できない場合は単純な空白区切りにフォールバックする
+        terms = keyword.split()
+    return [t for t in terms if t]
+
+
+def _fetch_nvd_results_or(keyword, fetch_limit, api_key, target_version):
+    """
+    キーワードを複数語に分解し（_split_or_terms 参照）、語ごとに個別にNVDへ
+    問い合わせて和集合（OR、CVE ID重複除去）にする。1語だけの場合は通常どおり
+    1回の問い合わせで済ます。
+
+    NVDの keywordSearch はスペース区切りの複数語を渡すとAND（すべての語を含むものだけ）
+    になる仕様のため、「Fortinet FortiOS」のように片方の単語しか説明文に無いCVEを
+    取りこぼさないよう、ここではOR（いずれかの語を含む）に広げている。
+    ただし「Palo Alto」のように2語で1つの固有名詞になっているものをそのまま
+    バラバラに分けてしまうと「Palo」「Alto」単体という無意味に広い検索語に
+    なってしまうため、ダブルクォートで囲んだ部分は1つの語として扱う。
+    """
+    terms = _split_or_terms(keyword)
+    if len(terms) <= 1:
+        return search_cve_by_keyword(
+            keyword, results_limit=fetch_limit, api_key=api_key, target_version=target_version,
+        )
+
+    merged = {}
+    for term in terms:
+        result = search_cve_by_keyword(
+            term, results_limit=fetch_limit, api_key=api_key, target_version=target_version,
+        )
+        if isinstance(result, dict) and "error" in result:
+            return result
+        for r in result:
+            merged[r["cve_id"]] = r
+    return list(merged.values())
+
+
 def collect_nvd_vendor_rows(keyword, version_extractor=_extract_generic_versions,
                              translate_engine=None, deepl_api_key=None, nvidia_api_key=None,
-                             api_key=None, results_limit=20, target_version=None, fetch_limit=250):
+                             api_key=None, results_limit=20, target_version=None, fetch_limit=250,
+                             include_kev_epss=True):
     """
     NVD（CVE/CVSSを集約する米国立脆弱性データベース）をキーワード検索し、
     このモジュール共通の行フォーマットに変換する。
@@ -2277,12 +2449,12 @@ def collect_nvd_vendor_rows(keyword, version_extractor=_extract_generic_versions
     まず fetch_limit 件を未翻訳のまま取得し、published 日付が新しい順に並べ替えてから
     実際に表示する results_limit 件だけを切り出す。翻訳は、この切り出し後の件数分
     だけ行うことで、後で捨てられる古い行への無駄な翻訳API呼び出しを避ける。
+    キーワードにスペースが含まれる場合は単語ごとのOR検索になる
+    （_fetch_nvd_results_or 参照。NVD本来のAND仕様より広く拾う）。
     version_extractor を差し替えることで、ベンダーごとのバージョン表記の
     抽出方法を変えられる（既定は汎用の X.Y.Z 抽出）。
     """
-    results = search_cve_by_keyword(
-        keyword, results_limit=fetch_limit, api_key=api_key, target_version=target_version,
-    )
+    results = _fetch_nvd_results_or(keyword, fetch_limit, api_key, target_version)
 
     if isinstance(results, dict) and "error" in results:
         return {"error": results["error"]}
@@ -2301,6 +2473,9 @@ def collect_nvd_vendor_rows(keyword, version_extractor=_extract_generic_versions
         affected_rank = {True: 0, None: 1, False: 2}
         results.sort(key=lambda r: (affected_rank[r["affected"]], -(r["cvss_score"] or 0)))
 
+    kev_ids = fetch_cisa_kev_ids() if include_kev_epss else None
+    epss_scores = fetch_epss_scores([r["cve_id"] for r in results]) if include_kev_epss and results else {}
+
     rows = []
     for r in results:
         versions = version_extractor(r["description_en"])
@@ -2312,6 +2487,10 @@ def collect_nvd_vendor_rows(keyword, version_extractor=_extract_generic_versions
             "versions": ", ".join(versions) if versions else "(本文から検出できず)",
             "url": r["url"],
             "date": r["published"][:10] if r.get("published") else None,
+            # KEV: True=CISA KEV入り（実際に悪用確認済み） / False=KEV入りでない / None=判定不可（取得失敗）
+            "kev": (r["cve_id"] in kev_ids) if kev_ids is not None else None,
+            # EPSS: 悪用予測確率（0〜1）。取得できなければ None
+            "epss": epss_scores.get(r["cve_id"]),
         }
         if target_version:
             row["source"] += f" / {r.get('affected_ja', '判定不可')}"
@@ -2321,18 +2500,21 @@ def collect_nvd_vendor_rows(keyword, version_extractor=_extract_generic_versions
 
 
 def collect_nvd_tmm_rows(keyword, translate_engine=None, deepl_api_key=None, nvidia_api_key=None,
-                          api_key=None, results_limit=20, target_version=None, fetch_limit=250):
+                          api_key=None, results_limit=20, target_version=None, fetch_limit=250,
+                          include_kev_epss=True):
     """collect_nvd_vendor_rows() のF5 BIG-IP専用版（バージョン抽出にBIG-IP形式を使う）"""
     return collect_nvd_vendor_rows(
         keyword, version_extractor=_extract_bigip_versions,
         translate_engine=translate_engine, deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key,
         api_key=api_key, results_limit=results_limit, target_version=target_version, fetch_limit=fetch_limit,
+        include_kev_epss=include_kev_epss,
     )
 
 
 def search_vendor_bugs(nvd_keyword, version_extractor=_extract_generic_versions,
                         translate_engine=None, deepl_api_key=None, nvidia_api_key=None,
-                        nvd_api_key=None, target_version=None, results_limit=20, fetch_limit=250):
+                        nvd_api_key=None, target_version=None, results_limit=20, fetch_limit=250,
+                        include_kev_epss=True):
     """
     汎用のベンダーバグ収集（NVDのみ）。Palo Alto / FortiGate 等、F5のような
     個別バグIDページの公開トラッカーが確認できていないベンダー向け。
@@ -2343,6 +2525,7 @@ def search_vendor_bugs(nvd_keyword, version_extractor=_extract_generic_versions,
         nvd_keyword, version_extractor=version_extractor,
         translate_engine=translate_engine, deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key,
         api_key=nvd_api_key, results_limit=results_limit, target_version=target_version, fetch_limit=fetch_limit,
+        include_kev_epss=include_kev_epss,
     )
     if isinstance(rows, dict) and "error" in rows:
         return rows
@@ -2357,9 +2540,10 @@ def sort_bug_rows_by_date_desc(rows):
     return sorted(rows, key=lambda r: r.get("date") or "0000-00-00", reverse=True)
 
 
-def search_f5_bigip_tmm_bugs(source="both", nvd_keyword="F5 BIG-IP TMM", bug_ids=None,
+def search_f5_bigip_tmm_bugs(source="both", nvd_keyword="BIG-IP LTM", bug_ids=None,
                               translate_engine=None, deepl_api_key=None, nvidia_api_key=None,
-                              nvd_api_key=None, target_version=None, fetch_limit=250):
+                              nvd_api_key=None, target_version=None, fetch_limit=250,
+                              include_kev_epss=True):
     """
     F5 BIG-IP TMM関連バグを NVD / F5公式バグトラッカーの指定した組み合わせで収集し、
     最近の日付順（新しい順、日付不明は末尾）に並べて返す。
@@ -2379,6 +2563,7 @@ def search_f5_bigip_tmm_bugs(source="both", nvd_keyword="F5 BIG-IP TMM", bug_ids
             nvd_keyword, translate_engine=translate_engine,
             deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key,
             api_key=nvd_api_key, target_version=target_version, fetch_limit=fetch_limit,
+            include_kev_epss=include_kev_epss,
         )
         if isinstance(nvd_rows, dict) and "error" in nvd_rows:
             return nvd_rows
@@ -2392,6 +2577,42 @@ def search_f5_bigip_tmm_bugs(source="both", nvd_keyword="F5 BIG-IP TMM", bug_ids
         )
 
     return sort_bug_rows_by_date_desc(all_rows)
+
+
+def search_vendor_bugs_parallel(jobs, max_workers=None):
+    """
+    複数ベンダーのバグ検索（search_f5_bigip_tmm_bugs / search_vendor_bugs 等）を
+    スレッドで並列実行する。いずれもNVD等へのHTTP通信待ちが支配的なI/Oバウンドな
+    処理のため、GILがあってもスレッド並列化で総待ち時間を短縮できる
+    （3ベンダーを順番に検索する場合の「一番遅い1件を待つだけ」に近づく）。
+
+    Args:
+        jobs: {"キー": (関数, {キーワード引数}), ...} の辞書。
+              例: {"f5": (search_f5_bigip_tmm_bugs, {...}), "paloalto": (search_vendor_bugs, {...})}
+        max_workers: 同時実行数（省略時はジョブ数に合わせる）
+
+    Returns:
+        {"キー": 結果（行のリスト、または失敗時は {"error": ...}）, ...}
+        個別のジョブで例外が発生した場合も、そのキーの結果を {"error": str(e)} にするだけで
+        他のジョブの結果には影響しない。
+    """
+    if not jobs:
+        return {}
+
+    results = {}
+    with concurrent.futures.ThreadPoolExecutor(max_workers=max_workers or len(jobs)) as executor:
+        future_to_key = {
+            executor.submit(func, **kwargs): key
+            for key, (func, kwargs) in jobs.items()
+        }
+        for future in concurrent.futures.as_completed(future_to_key):
+            key = future_to_key[future]
+            try:
+                results[key] = future.result()
+            except Exception as e:
+                results[key] = {"error": str(e)}
+
+    return results
 
 
 # GitHub Actions（.github/workflows/collect-vendor-bugs.yml）が定期的に
