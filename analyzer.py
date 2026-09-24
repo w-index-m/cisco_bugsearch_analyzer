@@ -5,6 +5,7 @@ Streamlit (app.py) と CLI (cli.py) の両方から利用する共通処理。
 Streamlit に依存しないため、エージェントやスクリプトから直接 import して使える。
 """
 import io
+import os
 import re
 import json
 import time
@@ -2375,3 +2376,30 @@ def search_f5_bigip_tmm_bugs(source="both", nvd_keyword="F5 BIG-IP TMM", bug_ids
         )
 
     return sort_bug_rows_by_date_desc(all_rows)
+
+
+# GitHub Actions（.github/workflows/collect-vendor-bugs.yml）が定期的に
+# scripts/collect_vendor_bug_cache.py を実行し、書き出す先のディレクトリ。
+# この開発・実行環境（サンドボックス）からはNVDやF5公式サイトへの通信が
+# ネットワークポリシーでブロックされることがあるため、ネットワーク制限の
+# 無いGitHub Actions上で事前収集したデータをここから読み込み、Streamlit
+# アプリはまずこのキャッシュを表示してから、必要に応じてライブ検索する。
+VENDOR_BUG_CACHE_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "vendor_bugs")
+
+
+def load_vendor_bug_cache(key):
+    """
+    data/vendor_bugs/<key>.json を読み込む。
+
+    Returns:
+        {"label": str, "generated_at": str, "count": int, "rows": [...]}
+        ファイルが無い、または壊れている場合は None
+    """
+    path = os.path.join(VENDOR_BUG_CACHE_DIR, f"{key}.json")
+    if not os.path.exists(path):
+        return None
+    try:
+        with open(path, encoding="utf-8") as f:
+            return json.load(f)
+    except Exception:
+        return None

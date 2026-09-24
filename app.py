@@ -77,6 +77,66 @@ def load_analysis_from_json_ui(json_str):
     return analyzer.load_analysis_from_json(json_str)
 
 
+def display_bug_rows_table(rows, session_key, name, key_suffix):
+    """
+    F5/Palo Alto/FortiGateのバグ収集結果（新しい順ソート済み）を、テーブル表示・
+    統合Excel出力用のsession_state登録・単独Excelダウンロードボタンまでまとめて
+    行う共通関数。キャッシュ表示・ライブ検索結果表示の両方から呼ばれるため、
+    ウィジェットkeyが重複しないよう key_suffix で呼び出し元を区別する。
+    """
+    table = pd.DataFrame([
+        {
+            "日付": r.get("date") or "不明",
+            "出所": r["source"],
+            "ID": r["id"],
+            "対象OS(バージョン)": r["versions"],
+            "見出し": r.get("headline_ja") or r["headline_en"],
+            "参考リンク": r["url"],
+        }
+        for r in rows
+    ])
+    st.dataframe(table, use_container_width=True, hide_index=True)
+
+    export_rows = [
+        [r.get("date") or "不明", r["source"], r["id"], r["versions"],
+         r.get("headline_ja", ""), r["headline_en"], r["url"]]
+        for r in rows
+    ]
+    st.session_state[f"combined_export_{session_key}"] = {
+        "name": name,
+        "headers": ["日付", "出所", "ID", "対象OS(バージョン)", "見出し(日本語)", "見出し(原文)", "参考リンク"],
+        "rows": export_rows,
+    }
+
+    excel_data = analyzer.create_combined_excel_report(
+        extra_sheets=[st.session_state[f"combined_export_{session_key}"]]
+    )
+    st.download_button(
+        label="📊 この検索結果をExcelでダウンロード",
+        data=excel_data,
+        file_name=f"{session_key}_bugs_{datetime.now().strftime('%Y%m%d_%H%M%S')}.xlsx",
+        mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        key=f"{session_key}_excel_download_btn_{key_suffix}"
+    )
+
+
+def display_vendor_bug_cache(session_key, label):
+    """
+    GitHub Actionsが定期収集したキャッシュ（data/vendor_bugs/<session_key>.json）が
+    あれば、最終更新時刻とともに即座に表示する。無ければ何も表示しない。
+    """
+    cache = analyzer.load_vendor_bug_cache(session_key)
+    if not cache or not cache.get("rows"):
+        return
+    generated_at = (cache.get("generated_at") or "")[:19].replace("T", " ")
+    st.caption(
+        f"📦 キャッシュ済みデータ（最終更新: {generated_at} UTC、GitHub Actionsで自動収集、"
+        f"{cache.get('count', len(cache['rows']))} 件）。ライブでの最新検索は下のフォームから実行できます。"
+    )
+    display_bug_rows_table(cache["rows"], session_key, f"{label}(キャッシュ)", "cache")
+    st.markdown("---")
+
+
 # ファイルアップロード（必須。デフォルトのバグ一覧は読み込まない）
 uploaded_file = st.file_uploader(
     "CSV / Excel ファイルをアップロード",
@@ -869,6 +929,8 @@ st.info(
     "います。ご自身で見つけたBug IDがあれば下の欄に追加できます。"
 )
 
+display_vendor_bug_cache("f5", "F5 BIG-IP TMM")
+
 f5_col1, f5_col2 = st.columns(2)
 with f5_col1:
     f5_source = st.selectbox(
@@ -921,41 +983,7 @@ if st.button("🔎 F5 BIG-IP TMM バグを検索", key="f5_search_btn"):
         st.warning("該当するバグ/CVEが見つかりませんでした")
     else:
         st.success(f"✓ {len(f5_results)} 件見つかりました（新しい順）")
-
-        f5_table = pd.DataFrame([
-            {
-                "日付": r.get("date") or "不明",
-                "出所": r["source"],
-                "ID": r["id"],
-                "対象OS(バージョン)": r["versions"],
-                "見出し": r["headline_ja"] or r["headline_en"],
-                "参考リンク": r["url"],
-            }
-            for r in f5_results
-        ])
-        st.dataframe(f5_table, use_container_width=True, hide_index=True)
-
-        f5_rows = [
-            [r.get("date") or "不明", r["source"], r["id"], r["versions"],
-             r.get("headline_ja", ""), r["headline_en"], r["url"]]
-            for r in f5_results
-        ]
-        st.session_state["combined_export_f5"] = {
-            "name": f"F5 BIG-IP TMM({f5_nvd_keyword[:15]})",
-            "headers": ["日付", "出所", "ID", "対象OS(バージョン)", "見出し(日本語)", "見出し(原文)", "参考リンク"],
-            "rows": f5_rows,
-        }
-
-        f5_excel_data = analyzer.create_combined_excel_report(
-            extra_sheets=[st.session_state["combined_export_f5"]]
-        )
-        st.download_button(
-            label="📊 この検索結果をExcelでダウンロード",
-            data=f5_excel_data,
-            file_name=f"f5_bigip_tmm_bugs_{datetime.now().strftime('%Y%m%d_%H%M%S')}.xlsx",
-            mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-            key="f5_excel_download_btn"
-        )
+        display_bug_rows_table(f5_results, "f5", f"F5 BIG-IP TMM({f5_nvd_keyword[:15]})", "live")
 
 st.markdown("---")
 
@@ -972,6 +1000,8 @@ def render_vendor_bug_search(title, icon, session_key, default_keyword, version_
         "対象OS（バージョン）と見出し（日本語）を新しい順（日付が新しいもの順、"
         "不明なものは末尾）に一覧表示します。"
     )
+
+    display_vendor_bug_cache(session_key, title)
 
     col1, col2 = st.columns(2)
     with col1:
@@ -1003,41 +1033,7 @@ def render_vendor_bug_search(title, icon, session_key, default_keyword, version_
             st.warning("該当するCVEが見つかりませんでした")
         else:
             st.success(f"✓ {len(results)} 件見つかりました（新しい順）")
-
-            table = pd.DataFrame([
-                {
-                    "日付": r.get("date") or "不明",
-                    "出所": r["source"],
-                    "ID": r["id"],
-                    "対象OS(バージョン)": r["versions"],
-                    "見出し": r["headline_ja"] or r["headline_en"],
-                    "参考リンク": r["url"],
-                }
-                for r in results
-            ])
-            st.dataframe(table, use_container_width=True, hide_index=True)
-
-            rows = [
-                [r.get("date") or "不明", r["source"], r["id"], r["versions"],
-                 r.get("headline_ja", ""), r["headline_en"], r["url"]]
-                for r in results
-            ]
-            st.session_state[f"combined_export_{session_key}"] = {
-                "name": f"{title}({keyword[:15]})",
-                "headers": ["日付", "出所", "ID", "対象OS(バージョン)", "見出し(日本語)", "見出し(原文)", "参考リンク"],
-                "rows": rows,
-            }
-
-            excel_data = analyzer.create_combined_excel_report(
-                extra_sheets=[st.session_state[f"combined_export_{session_key}"]]
-            )
-            st.download_button(
-                label="📊 この検索結果をExcelでダウンロード",
-                data=excel_data,
-                file_name=f"{session_key}_bugs_{datetime.now().strftime('%Y%m%d_%H%M%S')}.xlsx",
-                mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-                key=f"{session_key}_excel_download_btn"
-            )
+            display_bug_rows_table(results, session_key, f"{title}({keyword[:15]})", "live")
 
     st.markdown("---")
 
