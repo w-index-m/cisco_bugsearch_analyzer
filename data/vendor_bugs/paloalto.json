@@ -1,0 +1,227 @@
+{
+  "label": "Palo Alto (PAN-OS)",
+  "generated_at": "2026-09-24T04:33:03+00:00",
+  "count": 20,
+  "rows": [
+    {
+      "source": "NVD (CVSS -)",
+      "id": "CVE-2026-0309",
+      "headline_en": "A command injection vulnerability in Palo Alto Networks PAN-OS® software enables an authenticated administrator to bypass system restrictions and run arbitrary commands as a root user. To be able to exploit this issue, the user must have access to the PAN-OS CLI and the device must be configured with a Luna Hardware Security Module (HSM). \n\nThe security risk posed by this issue is significantly minimized when CLI access is restricted to a limited group of administrators.\n\nPanorama, Cloud NGFW, and Prisma® Access are not impacted by this vulnerability.",
+      "headline_ja": "A command injection vulnerability in Palo Alto Networks PAN-OS® software enables an authenticated administrator to bypass system restrictions and run arbitrary commands as a root user. To be able to exploit this issue, the user must have access to the PAN-OS CLI and the device must be configured with a Luna Hardware Security Module (HSM). \n\nThe security risk posed by this issue is significantly minimized when CLI access is restricted to a limited group of administrators.\n\nPanorama, Cloud NGFW, and Prisma® Access are not impacted by this vulnerability.",
+      "versions": "(本文から検出できず)",
+      "url": "https://security.paloaltonetworks.com/CVE-2026-0309",
+      "date": "2026-09-10",
+      "kev": false,
+      "epss": 0.00447
+    },
+    {
+      "source": "NVD (CVSS -)",
+      "id": "CVE-2026-0308",
+      "headline_en": "A stored cross-site scripting (XSS) vulnerability in Palo Alto Networks PAN-OS® software enables a malicious authenticated administrator to store or execute a JavaScript payload using the web interface. \n\nThis issue is applicable to PAN-OS software on PA-Series and VM-Series firewalls and on Panorama (virtual and M-Series). \n\nCloud NGFW and Prisma® Access are not affected by this vulnerability.",
+      "headline_ja": "A stored cross-site scripting (XSS) vulnerability in Palo Alto Networks PAN-OS® software enables a malicious authenticated administrator to store or execute a JavaScript payload using the web interface. \n\nThis issue is applicable to PAN-OS software on PA-Series and VM-Series firewalls and on Panorama (virtual and M-Series). \n\nCloud NGFW and Prisma® Access are not affected by this vulnerability.",
+      "versions": "(本文から検出できず)",
+      "url": "https://security.paloaltonetworks.com/CVE-2026-0308",
+      "date": "2026-09-10",
+      "kev": false,
+      "epss": 0.00265
+    },
+    {
+      "source": "NVD (CVSS 7.5)",
+      "id": "CVE-2026-0301",
+      "headline_en": "An information disclosure vulnerability in the URL Filtering feature of Palo Alto Networks PAN-OS® software enables an unauthenticated user with network access to obtain sensitive information.\n\nPanorama is not impacted by this vulnerability.",
+      "headline_ja": "An information disclosure vulnerability in the URL Filtering feature of Palo Alto Networks PAN-OS® software enables an unauthenticated user with network access to obtain sensitive information.\n\nPanorama is not impacted by this vulnerability.",
+      "versions": "(本文から検出できず)",
+      "url": "https://security.paloaltonetworks.com/CVE-2026-0301",
+      "date": "2026-08-13",
+      "kev": false,
+      "epss": 0.00316
+    },
+    {
+      "source": "NVD (CVSS 7.5)",
+      "id": "CVE-2026-0287",
+      "headline_en": "Multiple denial of service vulnerabilities in Palo Alto Networks PAN-OS® software allow an unauthenticated attacker with network access to cause a denial of service (DoS) condition by sending specially crafted network traffic to or through a dataplane interface. Repeated attempts to trigger this condition result in the firewall entering maintenance mode.\n\nPanorama is not impacted by these vulnerabilities.",
+      "headline_ja": "Multiple denial of service vulnerabilities in Palo Alto Networks PAN-OS® software allow an unauthenticated attacker with network access to cause a denial of service (DoS) condition by sending specially crafted network traffic to or through a dataplane interface. Repeated attempts to trigger this condition result in the firewall entering maintenance mode.\n\nPanorama is not impacted by these vulnerabilities.",
+      "versions": "(本文から検出できず)",
+      "url": "https://security.paloaltonetworks.com/CVE-2026-0287",
+      "date": "2026-07-09",
+      "kev": false,
+      "epss": 0.00621
+    },
+    {
+      "source": "NVD (CVSS 7.2)",
+      "id": "CVE-2026-0286",
+      "headline_en": "A command injection vulnerability in the management plane of Palo Alto Networks PAN-OS® software enables an authenticated administrator to execute arbitrary OS commands as root.\n\n\n\nThe security risk posed by this issue is significantly minimized when CLI access is restricted to a limited group of administrators.\n\n\n\nThis issue is applicable to PAN-OS software on PA-Series and VM-Series firewalls and on Panorama (virtual and M-Series).\n\n\n\nCloud NGFW and Prisma Access®  are not impacted by this vulnerability.",
+      "headline_ja": "A command injection vulnerability in the management plane of Palo Alto Networks PAN-OS® software enables an authenticated administrator to execute arbitrary OS commands as root.\n\n\n\nThe security risk posed by this issue is significantly minimized when CLI access is restricted to a limited group of administrators.\n\n\n\nThis issue is applicable to PAN-OS software on PA-Series and VM-Series firewalls and on Panorama (virtual and M-Series).\n\n\n\nCloud NGFW and Prisma Access®  are not impacted by this vulnerability.",
+      "versions": "(本文から検出できず)",
+      "url": "https://security.paloaltonetworks.com/CVE-2026-0286",
+      "date": "2026-07-09",
+      "kev": false,
+      "epss": 0.01673
+    },
+    {
+      "source": "NVD (CVSS 4.9)",
+      "id": "CVE-2026-0285",
+      "headline_en": "A server-side request forgery (SSRF) vulnerability in Palo Alto Networks PAN-OS software enables an authenticated administrator with network access to the management web interface to make unauthorized requests from the firewall to internal services.\n\n\n\nThe security risk posed by this issue is minimized when the management interface is restricted to only trusted internal IP addresses according to our recommended  best practice deployment guidelines https://live.paloaltonetworks.com/t5/community-blogs/tips-amp-tricks-how-to-secure-the-management-access-of-your-palo/ba-p/464431 . \n\nPanorama, Cloud NGFW, and Prisma® Access are not impacted by this vulnerability.",
+      "headline_ja": "A server-side request forgery (SSRF) vulnerability in Palo Alto Networks PAN-OS software enables an authenticated administrator with network access to the management web interface to make unauthorized requests from the firewall to internal services.\n\n\n\nThe security risk posed by this issue is minimized when the management interface is restricted to only trusted internal IP addresses according to our recommended  best practice deployment guidelines https://live.paloaltonetworks.com/t5/community-blogs/tips-amp-tricks-how-to-secure-the-management-access-of-your-palo/ba-p/464431 . \n\nPanorama, Cloud NGFW, and Prisma® Access are not impacted by this vulnerability.",
+      "versions": "(本文から検出できず)",
+      "url": "https://security.paloaltonetworks.com/CVE-2026-0285",
+      "date": "2026-07-09",
+      "kev": false,
+      "epss": 0.00229
+    },
+    {
+      "source": "NVD (CVSS 9.9)",
+      "id": "CVE-2026-0284",
+      "headline_en": "An XML injection vulnerability in the Large Scale VPN (LSVPN) functionality of Palo Alto Networks PAN-OS® software enables an unauthenticated attacker with network access to inject malicious XML content, potentially leading to information disclosure or corruption of internal LSVPN satellite data.\n\nPanorama, Cloud NGFW, and Prisma® Access are not impacted by this vulnerability.",
+      "headline_ja": "An XML injection vulnerability in the Large Scale VPN (LSVPN) functionality of Palo Alto Networks PAN-OS® software enables an unauthenticated attacker with network access to inject malicious XML content, potentially leading to information disclosure or corruption of internal LSVPN satellite data.\n\nPanorama, Cloud NGFW, and Prisma® Access are not impacted by this vulnerability.",
+      "versions": "(本文から検出できず)",
+      "url": "https://security.paloaltonetworks.com/CVE-2026-0284",
+      "date": "2026-07-09",
+      "kev": false,
+      "epss": 0.00465
+    },
+    {
+      "source": "NVD (CVSS 7.2)",
+      "id": "CVE-2026-0283",
+      "headline_en": "An authentication bypass vulnerability in Large Scale VPN ( LSVPN) functionality of Palo Alto Networks PAN-OS software allows an attacker with network access to bypass security restrictions and establish an unauthorized site-to-site VPN connection.\n\nPanorama, Cloud NGFW, and Prisma® Access are not impacted by this vulnerability.",
+      "headline_ja": "An authentication bypass vulnerability in Large Scale VPN ( LSVPN) functionality of Palo Alto Networks PAN-OS software allows an attacker with network access to bypass security restrictions and establish an unauthorized site-to-site VPN connection.\n\nPanorama, Cloud NGFW, and Prisma® Access are not impacted by this vulnerability.",
+      "versions": "(本文から検出できず)",
+      "url": "https://security.paloaltonetworks.com/CVE-2026-0283",
+      "date": "2026-07-09",
+      "kev": false,
+      "epss": 0.00376
+    },
+    {
+      "source": "NVD (CVSS 6.5)",
+      "id": "CVE-2026-0282",
+      "headline_en": "A file deletion vulnerability in Palo Alto Networks PAN-OS® software enables an unauthenticated attacker with network access to the management web interface to delete files from a temporary directory.\n\nThe security risk posed by this issue is minimized by restricting access to the management web interface to only trusted internal IP addresses according to our recommended  best practice deployment guidelines https://live.paloaltonetworks.com/t5/community-blogs/tips-amp-tricks-how-to-secure-the-management-access-of-your-palo/ba-p/464431 .\n\nThis issue is applicable to PAN-OS software on PA-Series and VM-Series firewalls and on Panorama (virtual and M-Series).\n\nCloud NGFW and Prisma® Access are not impacted by this vulnerability.",
+      "headline_ja": "A file deletion vulnerability in Palo Alto Networks PAN-OS® software enables an unauthenticated attacker with network access to the management web interface to delete files from a temporary directory.\n\nThe security risk posed by this issue is minimized by restricting access to the management web interface to only trusted internal IP addresses according to our recommended  best practice deployment guidelines https://live.paloaltonetworks.com/t5/community-blogs/tips-amp-tricks-how-to-secure-the-management-access-of-your-palo/ba-p/464431 .\n\nThis issue is applicable to PAN-OS software on PA-Series and VM-Series firewalls and on Panorama (virtual and M-Series).\n\nCloud NGFW and Prisma® Access are not impacted by this vulnerability.",
+      "versions": "(本文から検出できず)",
+      "url": "https://security.paloaltonetworks.com/CVE-2026-0282",
+      "date": "2026-07-09",
+      "kev": false,
+      "epss": 0.00293
+    },
+    {
+      "source": "NVD (CVSS 7.1)",
+      "id": "CVE-2026-0281",
+      "headline_en": "An information disclosure vulnerability in Palo Alto Networks PAN-OS® software enables an unauthenticated attacker with network access to the management web interface to obtain web session tokens. This requires a legitimate user to first click on a malicious link provided by the attacker.\n\nThe security risk posed by this issue is minimized by restricting access to the management web interface to only trusted internal IP addresses according to our recommended  best practice deployment guidelines https://live.paloaltonetworks.com/t5/community-blogs/tips-amp-tricks-how-to-secure-the-management-access-of-your-palo/ba-p/464431 .\n\nThis issue is applicable to PAN-OS software on PA-Series and VM-Series firewalls and on Panorama (virtual and M-Series).\n\nCloud NGFW and Prisma® Access are not impacted by this vulnerability.",
+      "headline_ja": "An information disclosure vulnerability in Palo Alto Networks PAN-OS® software enables an unauthenticated attacker with network access to the management web interface to obtain web session tokens. This requires a legitimate user to first click on a malicious link provided by the attacker.\n\nThe security risk posed by this issue is minimized by restricting access to the management web interface to only trusted internal IP addresses according to our recommended  best practice deployment guidelines https://live.paloaltonetworks.com/t5/community-blogs/tips-amp-tricks-how-to-secure-the-management-access-of-your-palo/ba-p/464431 .\n\nThis issue is applicable to PAN-OS software on PA-Series and VM-Series firewalls and on Panorama (virtual and M-Series).\n\nCloud NGFW and Prisma® Access are not impacted by this vulnerability.",
+      "versions": "(本文から検出できず)",
+      "url": "https://security.paloaltonetworks.com/CVE-2026-0281",
+      "date": "2026-07-09",
+      "kev": false,
+      "epss": 0.00284
+    },
+    {
+      "source": "NVD (CVSS 7.2)",
+      "id": "CVE-2026-0280",
+      "headline_en": "An IPv6 packet processing vulnerability in the dataplane of Palo Alto Networks PAN-OS® software enables an unauthenticated attacker to bypass firewall security policy enforcement, allowing network traffic that should be blocked to reach protected services.\n\nCloud NGFW and Panorama are not impacted by this vulnerability.",
+      "headline_ja": "An IPv6 packet processing vulnerability in the dataplane of Palo Alto Networks PAN-OS® software enables an unauthenticated attacker to bypass firewall security policy enforcement, allowing network traffic that should be blocked to reach protected services.\n\nCloud NGFW and Panorama are not impacted by this vulnerability.",
+      "versions": "(本文から検出できず)",
+      "url": "https://security.paloaltonetworks.com/CVE-2026-0280",
+      "date": "2026-07-09",
+      "kev": false,
+      "epss": 0.00337
+    },
+    {
+      "source": "NVD (CVSS 6.1)",
+      "id": "CVE-2026-0279",
+      "headline_en": "Multiple cross site scripting vulnerabilities in the User-ID™ Authentication Portal (aka Captive Portal) service, GlobalProtect™ gateway/portal features and Clientless VPN of Palo Alto Networks PAN-OS® software enables a malicious unauthenticated user to store or execute malicious JavaScript payload.\n\n\nThe security risk posed by this issue is minimized when the management interface and access to the User-ID™ Authentication Portal is restricted to only trusted internal IP addresses according to our recommended  best practice deployment guidelines https://live.paloaltonetworks.com/t5/community-blogs/tips-amp-tricks-how-to-secure-the-management-access-of-your-palo/ba-p/464431 .\n\nThis issue is applicable to PAN-OS software on PA-Series and VM-Series firewalls and on Panorama (virtual and M-Series).\n\nCloud NGFW is not affected by this vulnerability.",
+      "headline_ja": "Multiple cross site scripting vulnerabilities in the User-ID™ Authentication Portal (aka Captive Portal) service, GlobalProtect™ gateway/portal features and Clientless VPN of Palo Alto Networks PAN-OS® software enables a malicious unauthenticated user to store or execute malicious JavaScript payload.\n\n\nThe security risk posed by this issue is minimized when the management interface and access to the User-ID™ Authentication Portal is restricted to only trusted internal IP addresses according to our recommended  best practice deployment guidelines https://live.paloaltonetworks.com/t5/community-blogs/tips-amp-tricks-how-to-secure-the-management-access-of-your-palo/ba-p/464431 .\n\nThis issue is applicable to PAN-OS software on PA-Series and VM-Series firewalls and on Panorama (virtual and M-Series).\n\nCloud NGFW is not affected by this vulnerability.",
+      "versions": "(本文から検出できず)",
+      "url": "https://security.paloaltonetworks.com/CVE-2026-0279",
+      "date": "2026-07-09",
+      "kev": false,
+      "epss": 0.0075
+    },
+    {
+      "source": "NVD (CVSS 7.5)",
+      "id": "CVE-2026-0288",
+      "headline_en": "Multiple buffer overflow vulnerabilities in the User-ID Terminal Server Agent (TSA) component of Palo Alto Networks PAN-OS software allow an unauthenticated attacker with network access to cause a denial of service (DoS) condition or potentially execute arbitrary code by sending specially crafted network traffic.\n\nThe security risk posed by this issue is minimized when the User-ID Terminal Server Agent connectivity is restricted to only trusted internal IP addresses according to our recommended  best practice deployment guidelines https://docs.paloaltonetworks.com/ngfw/help/10-2/user-identification/device-user-identification-terminal-services-agents#:~:text=To%20minimize%20security%20risk%2C%20restrict%20TS%20Agent%20connectivity%20to%20trusted%20internal%20IP%20addresses%20only. .\n\nPanorama is not impacted by this vulnerability.",
+      "headline_ja": "Multiple buffer overflow vulnerabilities in the User-ID Terminal Server Agent (TSA) component of Palo Alto Networks PAN-OS software allow an unauthenticated attacker with network access to cause a denial of service (DoS) condition or potentially execute arbitrary code by sending specially crafted network traffic.\n\nThe security risk posed by this issue is minimized when the User-ID Terminal Server Agent connectivity is restricted to only trusted internal IP addresses according to our recommended  best practice deployment guidelines https://docs.paloaltonetworks.com/ngfw/help/10-2/user-identification/device-user-identification-terminal-services-agents#:~:text=To%20minimize%20security%20risk%2C%20restrict%20TS%20Agent%20connectivity%20to%20trusted%20internal%20IP%20addresses%20only. .\n\nPanorama is not impacted by this vulnerability.",
+      "versions": "(本文から検出できず)",
+      "url": "https://security.paloaltonetworks.com/",
+      "date": "2026-07-08",
+      "kev": false,
+      "epss": 0.00832
+    },
+    {
+      "source": "NVD (CVSS 7.2)",
+      "id": "CVE-2026-0273",
+      "headline_en": "A command injection vulnerability in Palo Alto Networks PAN-OS® software enables an authenticated administrator to bypass system restrictions and run arbitrary commands as a root user. To be able to exploit this issue, the user must have access to the PAN-OS CLI or Web UI.\n\nThe security risk posed by this issue is significantly minimized when CLI access is restricted to a limited group of administrators and by restricting access to the management web interface to only trusted internal IP addresses according to our recommended  best practice deployment guidelines https://live.paloaltonetworks.com/t5/community-blogs/tips-amp-tricks-how-to-secure-the-management-access-of-your-palo/ba-p/464431 .\n\nThis issue is applicable to PAN-OS software on PA-Series and VM-Series firewalls and on Panorama (virtual and M-Series).\n\nCloud NGFW and Prisma® Access are not affected by this vulnerability.",
+      "headline_ja": "A command injection vulnerability in Palo Alto Networks PAN-OS® software enables an authenticated administrator to bypass system restrictions and run arbitrary commands as a root user. To be able to exploit this issue, the user must have access to the PAN-OS CLI or Web UI.\n\nThe security risk posed by this issue is significantly minimized when CLI access is restricted to a limited group of administrators and by restricting access to the management web interface to only trusted internal IP addresses according to our recommended  best practice deployment guidelines https://live.paloaltonetworks.com/t5/community-blogs/tips-amp-tricks-how-to-secure-the-management-access-of-your-palo/ba-p/464431 .\n\nThis issue is applicable to PAN-OS software on PA-Series and VM-Series firewalls and on Panorama (virtual and M-Series).\n\nCloud NGFW and Prisma® Access are not affected by this vulnerability.",
+      "versions": "(本文から検出できず)",
+      "url": "https://security.paloaltonetworks.com/CVE-2026-0273",
+      "date": "2026-06-10",
+      "kev": false,
+      "epss": 0.01339
+    },
+    {
+      "source": "NVD (CVSS 7.2)",
+      "id": "CVE-2026-0272",
+      "headline_en": "A privilege escalation vulnerability in Palo Alto Networks PAN-OS® software allows an authenticated administrator with access to the Command Line Interface (CLI) to perform actions on the device with root privileges.\n\n\n\nThe security risk posed by this issue is significantly minimized when CLI access is restricted to a limited group of administrators and by restricting access to the management interface to only trusted internal IP addresses according to our recommended  best practice deployment guidelines https://live.paloaltonetworks.com/t5/community-blogs/tips-amp-tricks-how-to-secure-the-management-access-of-your-palo/ba-p/464431 .\n\n\n\nThis issue is applicable to PAN-OS software on PA-Series and VM-Series firewalls and on Panorama (virtual and M-Series).\n\nCloud NGFW, and Prisma® Access are not impacted by this vulnerability.",
+      "headline_ja": "A privilege escalation vulnerability in Palo Alto Networks PAN-OS® software allows an authenticated administrator with access to the Command Line Interface (CLI) to perform actions on the device with root privileges.\n\n\n\nThe security risk posed by this issue is significantly minimized when CLI access is restricted to a limited group of administrators and by restricting access to the management interface to only trusted internal IP addresses according to our recommended  best practice deployment guidelines https://live.paloaltonetworks.com/t5/community-blogs/tips-amp-tricks-how-to-secure-the-management-access-of-your-palo/ba-p/464431 .\n\n\n\nThis issue is applicable to PAN-OS software on PA-Series and VM-Series firewalls and on Panorama (virtual and M-Series).\n\nCloud NGFW, and Prisma® Access are not impacted by this vulnerability.",
+      "versions": "(本文から検出できず)",
+      "url": "https://security.paloaltonetworks.com/CVE-2026-0272",
+      "date": "2026-06-10",
+      "kev": false,
+      "epss": 0.00261
+    },
+    {
+      "source": "NVD (CVSS 5.7)",
+      "id": "CVE-2026-0269",
+      "headline_en": "A memory corruption vulnerability in the processing of tunnel traffic in Palo Alto Networks PAN-OS® software allows an authenticated user to initiate system reboots using a maliciously crafted packet. Repeated attempts to initiate a reboot causes the firewall to enter maintenance mode.\n\n\n\nPanorama, Cloud NGFW, and Prisma® Access are not impacted by this vulnerability.",
+      "headline_ja": "A memory corruption vulnerability in the processing of tunnel traffic in Palo Alto Networks PAN-OS® software allows an authenticated user to initiate system reboots using a maliciously crafted packet. Repeated attempts to initiate a reboot causes the firewall to enter maintenance mode.\n\n\n\nPanorama, Cloud NGFW, and Prisma® Access are not impacted by this vulnerability.",
+      "versions": "(本文から検出できず)",
+      "url": "https://security.paloaltonetworks.com/CVE-2026-0269",
+      "date": "2026-06-10",
+      "kev": false,
+      "epss": 0.00224
+    },
+    {
+      "source": "NVD (CVSS 4.8)",
+      "id": "CVE-2026-0266",
+      "headline_en": "A cross-site scripting (XSS) vulnerability in Palo Alto Networks PAN-OS® software enables a malicious authenticated administrator to store a JavaScript payload using the web interface. \n\nThis issue is applicable to PAN-OS software on PA-Series and VM-Series firewalls and on Panorama (virtual and M-Series).\n\nCloud NGFW and Prisma® Access are not affected by this vulnerability.",
+      "headline_ja": "A cross-site scripting (XSS) vulnerability in Palo Alto Networks PAN-OS® software enables a malicious authenticated administrator to store a JavaScript payload using the web interface. \n\nThis issue is applicable to PAN-OS software on PA-Series and VM-Series firewalls and on Panorama (virtual and M-Series).\n\nCloud NGFW and Prisma® Access are not affected by this vulnerability.",
+      "versions": "(本文から検出できず)",
+      "url": "https://security.paloaltonetworks.com/CVE-2026-0266",
+      "date": "2026-06-10",
+      "kev": false,
+      "epss": 0.00138
+    },
+    {
+      "source": "NVD (CVSS 7.5)",
+      "id": "CVE-2026-0262",
+      "headline_en": "Multiple denial of service vulnerabilities in Palo Alto Networks PAN-OS® software allow an unauthenticated attacker with network access to cause a denial of service (DoS) condition by sending specially crafted network traffic. \n\nPanorama and Cloud NGFW are not impacted by these vulnerabilities.",
+      "headline_ja": "Multiple denial of service vulnerabilities in Palo Alto Networks PAN-OS® software allow an unauthenticated attacker with network access to cause a denial of service (DoS) condition by sending specially crafted network traffic. \n\nPanorama and Cloud NGFW are not impacted by these vulnerabilities.",
+      "versions": "(本文から検出できず)",
+      "url": "https://security.paloaltonetworks.com/CVE-2026-0262",
+      "date": "2026-05-13",
+      "kev": false,
+      "epss": 0.00359
+    },
+    {
+      "source": "NVD (CVSS 7.2)",
+      "id": "CVE-2026-0261",
+      "headline_en": "Multiple command injection vulnerabilities in Palo Alto Networks PAN-OS® software enable an authenticated administrator to bypass system restrictions and run arbitrary commands as a root user. To be able to exploit this issue, the user must have access to the PAN-OS CLI or Web UI.\n\n\n\nThe security risk posed by this issue is significantly minimized when CLI access is restricted to a limited group of administrators and by restricting access to the management web interface to only trusted internal IP addresses according to our recommended  best practice deployment guidelines https://live.paloaltonetworks.com/t5/community-blogs/tips-amp-tricks-how-to-secure-the-management-access-of-your-palo/ba-p/464431 .\n\n\n\nThis issue is applicable to PAN-OS software on PA-Series and VM-Series firewalls and on Panorama (virtual and M-Series).\n\n\n\nCloud NGFW and Prisma Access® are not impacted by these vulnerabilities.",
+      "headline_ja": "Multiple command injection vulnerabilities in Palo Alto Networks PAN-OS® software enable an authenticated administrator to bypass system restrictions and run arbitrary commands as a root user. To be able to exploit this issue, the user must have access to the PAN-OS CLI or Web UI.\n\n\n\nThe security risk posed by this issue is significantly minimized when CLI access is restricted to a limited group of administrators and by restricting access to the management web interface to only trusted internal IP addresses according to our recommended  best practice deployment guidelines https://live.paloaltonetworks.com/t5/community-blogs/tips-amp-tricks-how-to-secure-the-management-access-of-your-palo/ba-p/464431 .\n\n\n\nThis issue is applicable to PAN-OS software on PA-Series and VM-Series firewalls and on Panorama (virtual and M-Series).\n\n\n\nCloud NGFW and Prisma Access® are not impacted by these vulnerabilities.",
+      "versions": "(本文から検出できず)",
+      "url": "https://security.paloaltonetworks.com/CVE-2026-0261",
+      "date": "2026-05-13",
+      "kev": false,
+      "epss": 0.01403
+    },
+    {
+      "source": "NVD (CVSS 9.1)",
+      "id": "CVE-2026-0258",
+      "headline_en": "A server-side request forgery (SSRF) vulnerability in the IKEv2 implementation of Palo Alto Networks PAN-OS® software allows an unauthenticated attacker to cause the firewall to send network requests to unintended destinations or cause a denial of service (DoS) condition.\n\n\n\nPanorama, Cloud NGFW and Prisma® Access are not impacted by these vulnerabilities.",
+      "headline_ja": "A server-side request forgery (SSRF) vulnerability in the IKEv2 implementation of Palo Alto Networks PAN-OS® software allows an unauthenticated attacker to cause the firewall to send network requests to unintended destinations or cause a denial of service (DoS) condition.\n\n\n\nPanorama, Cloud NGFW and Prisma® Access are not impacted by these vulnerabilities.",
+      "versions": "(本文から検出できず)",
+      "url": "https://security.paloaltonetworks.com/CVE-2026-0258",
+      "date": "2026-05-13",
+      "kev": false,
+      "epss": 0.00328
+    }
+  ]
+}

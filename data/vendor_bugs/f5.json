@@ -1,0 +1,281 @@
+{
+  "label": "F5 BIG-IP TMM",
+  "generated_at": "2026-09-24T04:30:05+00:00",
+  "count": 26,
+  "rows": [
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID1000973",
+      "headline_en": "(見出しを取得できませんでした。ページがJavaScriptで見出しを描画しており、単純な取得では読み取れない可能性があります。参考リンクから直接ご確認ください)",
+      "headline_ja": "(見出しを取得できませんでした。ページがJavaScriptで見出しを描画しており、単純な取得では読み取れない可能性があります。参考リンクから直接ご確認ください)",
+      "versions": "16.0.1.1, 16.0.1, 16.0.0, 15.1.3.1, 15.1.3, 15.1.2.1, 15.1.2, 15.1.1, 15.1.0.5, 15.1.0.4, 15.1.0.3, 15.1.0.2, 15.1.0.1, 15.1.0, 15.0.1, 15.0.0, 14.1.4.2, 14.1.4.1, 14.1.4, 14.1.3.1, 14.1.3, 14.1.2.8, 14.1.2.7, 14.1.2.6, 14.1.2.5, 14.1.2.4, 14.1.2.3, 14.1.2.2, 13.1.4, 13.1.3.6, 13.1.3.5, 13.1.3.4, 13.1.3.3, 16.1.0, 16.0.1.2, 15.1.4, 14.1.4.3, 13.1.4.1",
+      "url": "https://cdn.f5.com/product/bugtracker/ID1000973.html",
+      "date": "2026-09-24"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID1006509",
+      "headline_en": "(見出しを取得できませんでした。ページがJavaScriptで見出しを描画しており、単純な取得では読み取れない可能性があります。参考リンクから直接ご確認ください)",
+      "headline_ja": "(見出しを取得できませんでした。ページがJavaScriptで見出しを描画しており、単純な取得では読み取れない可能性があります。参考リンクから直接ご確認ください)",
+      "versions": "15.1.3, 15.1.3.1, 15.1.4, 15.1.4.1, 15.1.5, 15.1.5.1, 15.1.6, 15.1.6.1, 16.1.3, 16.1.3.1, 16.1.3.2, 16.1.3.3, 16.1.3.4, 16.1.3.5, 16.1.4, 16.1.4.1, 16.1.4.2, 16.1.4.3, 17.1.1.4, 17.1.2, 17.1.2.1, 17.1.2.2, 17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5, 17.5.0, 16.1.5, 15.1.7, 15.1.0.4",
+      "url": "https://cdn.f5.com/product/bugtracker/ID1006509.html",
+      "date": "2026-09-02"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID993921",
+      "headline_en": "(見出しを取得できませんでした。ページがJavaScriptで見出しを描画しており、単純な取得では読み取れない可能性があります。参考リンクから直接ご確認ください)",
+      "headline_ja": "(見出しを取得できませんでした。ページがJavaScriptで見出しを描画しており、単純な取得では読み取れない可能性があります。参考リンクから直接ご確認ください)",
+      "versions": "13.1.0, 13.1.0.1, 13.1.0.2, 13.1.0.3, 13.1.0.4, 13.1.0.5, 13.1.0.6, 13.1.0.7, 13.1.0.8, 13.1.1, 13.1.1.2, 13.1.1.3, 13.1.1.4, 13.1.1.5, 13.1.3, 13.1.3.1, 13.1.3.2, 13.1.3.3, 13.1.3.4, 13.1.3.5, 13.1.3.6, 13.1.4, 13.1.4.1, 13.1.5, 13.1.5.1, 14.0.0, 14.0.0.1, 14.0.0.2, 14.0.0.3, 14.0.0.4, 14.0.0.5, 14.0.1, 14.0.1.1, 14.1.0, 14.1.0.1, 14.1.0.2, 14.1.0.3, 14.1.0.5, 14.1.0.6, 14.1.2, 14.1.2.1, 14.1.2.2, 14.1.2.3, 14.1.2.4, 14.1.2.5, 14.1.2.6, 14.1.2.7, 14.1.2.8, 14.1.3, 14.1.3.1, 14.1.4, 14.1.4.1, 14.1.4.2, 14.1.4.3, 14.1.4.4, 14.1.4.5, 14.1.4.6, 14.1.5, 15.0.0, 15.0.1, 15.0.1.1, 15.0.1.2, 15.0.1.3, 15.0.1.4, 15.1.0, 15.1.0.1, 15.1.0.2, 15.1.0.3, 15.1.0.4, 15.1.0.5, 15.1.1, 15.1.2, 15.1.2.1, 15.1.3, 15.1.3.1, 15.1.4, 15.1.4.1, 15.1.5, 15.1.5.1, 15.1.6, 16.0.0, 16.0.0.1, 16.0.1, 16.0.1.1, 16.0.1.2, 16.1.0, 15.1.6.1, 14.1.5.1",
+      "url": "https://cdn.f5.com/product/bugtracker/ID993921.html",
+      "date": "2026-08-19"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID912425",
+      "headline_en": "(見出しを取得できませんでした。ページがJavaScriptで見出しを描画しており、単純な取得では読み取れない可能性があります。参考リンクから直接ご確認ください)",
+      "headline_ja": "(見出しを取得できませんでした。ページがJavaScriptで見出しを描画しており、単純な取得では読み取れない可能性があります。参考リンクから直接ご確認ください)",
+      "versions": "14.1.2, 14.1.2.1, 14.1.2.2, 14.1.2.3, 14.1.2.4, 14.1.2.5, 14.1.2.6, 14.1.2.7, 14.1.2.8, 14.1.3, 14.1.3.1, 14.1.4, 14.1.4.1, 15.0.0, 15.0.1, 15.0.1.1, 15.0.1.2, 15.0.1.3, 15.0.1.4, 15.1.0, 15.1.0.1, 15.1.0.2, 15.1.0.3, 15.1.0.4, 15.1.0.5, 15.1.1, 15.1.2, 15.1.2.1, 15.1.3, 15.1.3.1, 16.0.0, 16.0.0.1, 16.0.1, 16.0.1.1, 16.1.0, 16.0.1.2, 15.1.4, 14.1.4.2",
+      "url": "https://cdn.f5.com/product/bugtracker/ID912425.html",
+      "date": "2026-08-19"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID822245",
+      "headline_en": "(見出しを取得できませんでした。ページがJavaScriptで見出しを描画しており、単純な取得では読み取れない可能性があります。参考リンクから直接ご確認ください)",
+      "headline_ja": "(見出しを取得できませんでした。ページがJavaScriptで見出しを描画しており、単純な取得では読み取れない可能性があります。参考リンクから直接ご確認ください)",
+      "versions": "13.1.0, 13.1.0.1, 13.1.0.2, 13.1.0.3, 13.1.0.4, 13.1.0.5, 13.1.0.6, 13.1.0.7, 13.1.0.8, 13.1.1, 13.1.1.2, 13.1.1.3, 13.1.1.4, 13.1.1.5, 13.1.3, 13.1.3.1, 13.1.3.2, 13.1.3.3, 13.1.3.4, 13.1.3.5, 13.1.3.6, 13.1.4, 13.1.4.1, 13.1.5, 13.1.5.1, 14.0.1, 14.0.1.1, 14.1.0, 14.1.0.1, 14.1.0.2, 14.1.0.3, 14.1.0.5, 14.1.0.6, 14.1.2, 14.1.2.1, 14.1.2.2, 14.1.2.3, 14.1.2.4, 14.1.2.5, 14.1.2.6, 14.1.2.7, 14.1.2.8, 14.1.3, 14.1.3.1, 14.1.4, 14.1.4.1, 14.1.4.2, 14.1.4.3, 15.0.0, 15.0.1, 15.0.1.1, 15.0.1.2, 15.0.1.3, 15.0.1.4, 15.1.0, 15.1.0.1, 15.1.0.2, 15.1.0.3, 15.1.0.4, 15.1.0.5, 15.1.1, 15.1.2, 15.1.2.1, 15.1.3, 15.1.3.1, 16.0.0, 16.0.0.1, 16.0.1, 16.0.1.1, 16.0.1.2, 16.1.0, 15.1.4, 14.1.4.4",
+      "url": "https://cdn.f5.com/product/bugtracker/ID822245.html",
+      "date": "2026-08-19"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID1319365",
+      "headline_en": "(見出しを取得できませんでした。ページがJavaScriptで見出しを描画しており、単純な取得では読み取れない可能性があります。参考リンクから直接ご確認ください)",
+      "headline_ja": "(見出しを取得できませんでした。ページがJavaScriptで見出しを描画しており、単純な取得では読み取れない可能性があります。参考リンクから直接ご確認ください)",
+      "versions": "14.0.0, 14.0.0.1, 14.0.0.2, 14.0.0.3, 14.0.0.4, 14.0.0.5, 14.0.1, 14.0.1.1, 14.1.0, 14.1.0.1, 14.1.0.2, 14.1.0.3, 14.1.0.5, 14.1.0.6, 14.1.2, 14.1.2.1, 14.1.2.2, 14.1.2.3, 14.1.2.4, 14.1.2.5, 14.1.2.6, 14.1.2.7, 14.1.2.8, 14.1.3, 14.1.3.1, 14.1.4, 14.1.4.1, 14.1.4.2, 14.1.4.3, 14.1.4.4, 14.1.4.5, 14.1.4.6, 14.1.5, 14.1.5.1, 14.1.5.2, 14.1.5.3, 14.1.5.4, 14.1.5.6, 15.0.0, 15.0.1, 15.0.1.1, 15.0.1.2, 15.0.1.3, 15.0.1.4, 15.1.0, 15.1.0.1, 15.1.0.2, 15.1.0.3, 15.1.0.4, 15.1.0.5, 15.1.1, 15.1.2, 15.1.2.1, 15.1.3, 15.1.3.1, 15.1.4, 15.1.4.1, 15.1.5, 15.1.5.1, 15.1.6, 15.1.6.1, 15.1.7, 15.1.8, 15.1.8.1, 15.1.8.2, 15.1.9, 15.1.9.1, 15.1.10, 15.1.10.2, 15.1.10.3, 15.1.10.4, 15.1.10.5, 15.1.10.6, 15.1.10.7, 15.1.10.8, 16.0.0, 16.0.0.1, 16.0.1, 16.0.1.1, 16.0.1.2, 16.1.0, 16.1.1, 16.1.2, 16.1.2.1, 16.1.2.2, 16.1.3, 16.1.3.1, 16.1.3.2, 16.1.3.3, 16.1.3.4, 16.1.3.5, 16.1.4, 16.1.4.1, 16.1.4.2, 16.1.4.3, 17.0.0, 17.0.0.1, 17.0.0.2, 17.1.0, 17.1.0.1, 17.1.0.2, 17.1.0.3, 17.5.0, 17.1.1, 16.1.5",
+      "url": "https://cdn.f5.com/product/bugtracker/ID1319365.html",
+      "date": "2026-08-19"
+    },
+    {
+      "source": "NVD (CVSS 7.8)",
+      "id": "CVE-2025-24990",
+      "headline_en": "Microsoft is aware of vulnerabilities in the third party Agere Modem driver that ships natively with supported Windows operating systems.  This is an announcement of the upcoming removal of ltmdm64.sys driver.  The driver has been removed in the October cumulative update.\nFax modem hardware dependent on this specific driver will no longer work on Windows.\nMicrosoft recommends removing any existing dependencies on this hardware.",
+      "headline_ja": "Microsoft is aware of vulnerabilities in the third party Agere Modem driver that ships natively with supported Windows operating systems.  This is an announcement of the upcoming removal of ltmdm64.sys driver.  The driver has been removed in the October cumulative update.\nFax modem hardware dependent on this specific driver will no longer work on Windows.\nMicrosoft recommends removing any existing dependencies on this hardware.",
+      "versions": "(本文から検出できず)",
+      "url": "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2025-24990",
+      "date": "2025-10-14",
+      "kev": true,
+      "epss": 0.06369
+    },
+    {
+      "source": "NVD (CVSS 7.8)",
+      "id": "CVE-2025-24052",
+      "headline_en": "Microsoft is aware of vulnerabilities in the third party Agere Modem driver that ships natively with supported Windows operating systems.  This is an announcement of the upcoming removal of ltmdm64.sys driver.  The driver has been removed in the October cumulative update.\nFax modem hardware dependent on this specific driver will no longer work on Windows.\nMicrosoft recommends removing any existing dependencies on this hardware.",
+      "headline_ja": "Microsoft is aware of vulnerabilities in the third party Agere Modem driver that ships natively with supported Windows operating systems.  This is an announcement of the upcoming removal of ltmdm64.sys driver.  The driver has been removed in the October cumulative update.\nFax modem hardware dependent on this specific driver will no longer work on Windows.\nMicrosoft recommends removing any existing dependencies on this hardware.",
+      "versions": "(本文から検出できず)",
+      "url": "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2025-24052",
+      "date": "2025-10-14",
+      "kev": false,
+      "epss": 0.02454
+    },
+    {
+      "source": "NVD (CVSS 7.5)",
+      "id": "CVE-2025-52585",
+      "headline_en": "When a BIG-IP LTM Client SSL profile is configured on a virtual server with SSL Forward Proxy enabled and Anonymous Diffie-Hellman (ADH) ciphers enabled, undisclosed requests can cause the Traffic Management Microkernel (TMM) to terminate.\n\n \n\n\nNote: Software versions which have reached End of Technical Support (EoTS) are not evaluated.",
+      "headline_ja": "When a BIG-IP LTM Client SSL profile is configured on a virtual server with SSL Forward Proxy enabled and Anonymous Diffie-Hellman (ADH) ciphers enabled, undisclosed requests can cause the Traffic Management Microkernel (TMM) to terminate.\n\n \n\n\nNote: Software versions which have reached End of Technical Support (EoTS) are not evaluated.",
+      "versions": "(本文から検出できず)",
+      "url": "https://my.f5.com/manage/s/article/K000141436",
+      "date": "2025-08-13",
+      "kev": false,
+      "epss": 0.00335
+    },
+    {
+      "source": "NVD (CVSS 7.4)",
+      "id": "CVE-2024-32049",
+      "headline_en": "BIG-IP Next Central Manager (CM) may allow an unauthenticated, remote attacker to obtain the BIG-IP Next LTM/WAF instance credentials. \n\nNote: Software versions which have reached End of Technical Support (EoTS) are not evaluated.\n",
+      "headline_ja": "BIG-IP Next Central Manager (CM) may allow an unauthenticated, remote attacker to obtain the BIG-IP Next LTM/WAF instance credentials. \n\nNote: Software versions which have reached End of Technical Support (EoTS) are not evaluated.\n",
+      "versions": "(本文から検出できず)",
+      "url": "https://my.f5.com/manage/s/article/K000138634",
+      "date": "2024-05-08",
+      "kev": false,
+      "epss": 0.00548
+    },
+    {
+      "source": "NVD (CVSS 7.1)",
+      "id": "CVE-2023-48705",
+      "headline_en": "Nautobot is a Network Source of Truth and Network Automation Platform built as a web application All users of Nautobot versions earlier than 1.6.6 or 2.0.5 are potentially affected by a cross-site scripting vulnerability. Due to incorrect usage of Django's `mark_safe()` API when rendering certain types of user-authored content; including custom links, job buttons, and computed fields; it is possible that users with permission to create or edit these types of content could craft a malicious payload (such as JavaScript code) that would be executed when rendering pages containing this content. The maintainers have fixed the incorrect uses of `mark_safe()` (generally by replacing them with appropriate use of `format_html()` instead) to prevent such malicious data from being executed. Users on Nautobot 1.6.x LTM should upgrade to v1.6.6 and users on Nautobot 2.0.x should upgrade to v2.0.5. Appropriate object permissions can and should be applied to restrict which users are permitted to create or edit the aforementioned types of user-authored content. Other than that, there is no direct workaround available.",
+      "headline_ja": "Nautobot is a Network Source of Truth and Network Automation Platform built as a web application All users of Nautobot versions earlier than 1.6.6 or 2.0.5 are potentially affected by a cross-site scripting vulnerability. Due to incorrect usage of Django's `mark_safe()` API when rendering certain types of user-authored content; including custom links, job buttons, and computed fields; it is possible that users with permission to create or edit these types of content could craft a malicious payload (such as JavaScript code) that would be executed when rendering pages containing this content. The maintainers have fixed the incorrect uses of `mark_safe()` (generally by replacing them with appropriate use of `format_html()` instead) to prevent such malicious data from being executed. Users on Nautobot 1.6.x LTM should upgrade to v1.6.6 and users on Nautobot 2.0.x should upgrade to v2.0.5. Appropriate object permissions can and should be applied to restrict which users are permitted to create or edit the aforementioned types of user-authored content. Other than that, there is no direct workaround available.",
+      "versions": "(本文から検出できず)",
+      "url": "https://docs.djangoproject.com/en/3.2/ref/utils/#django.utils.html.format_html",
+      "date": "2023-11-22",
+      "kev": false,
+      "epss": 0.00543
+    },
+    {
+      "source": "NVD (CVSS 5.5)",
+      "id": "CVE-2023-41253",
+      "headline_en": "\nWhen on BIG-IP DNS or BIG-IP LTM enabled with DNS Services License, and a TSIG key is created, it is logged in plaintext in the audit log.  Note: Software versions which have reached End of Technical Support (EoTS) are not evaluated.",
+      "headline_ja": "\nWhen on BIG-IP DNS or BIG-IP LTM enabled with DNS Services License, and a TSIG key is created, it is logged in plaintext in the audit log.  Note: Software versions which have reached End of Technical Support (EoTS) are not evaluated.",
+      "versions": "(本文から検出できず)",
+      "url": "https://my.f5.com/manage/s/article/K98334513",
+      "date": "2023-10-10",
+      "kev": false,
+      "epss": 0.00171
+    },
+    {
+      "source": "NVD (CVSS 5.3)",
+      "id": "CVE-2022-36795",
+      "headline_en": "In BIG-IP versions 17.0.x before 17.0.0.1, 16.1.x before 16.1.3.1, 15.1.x before 15.1.7, and 14.1.x before 14.1.5.1, when an LTM TCP profile with Auto Receive Window Enabled is configured on a virtual server, undisclosed traffic can cause the virtual server to stop processing new client connections.",
+      "headline_ja": "In BIG-IP versions 17.0.x before 17.0.0.1, 16.1.x before 16.1.3.1, 15.1.x before 15.1.7, and 14.1.x before 14.1.5.1, when an LTM TCP profile with Auto Receive Window Enabled is configured on a virtual server, undisclosed traffic can cause the virtual server to stop processing new client connections.",
+      "versions": "17.0, 17.0.0.1, 16.1, 16.1.3.1, 15.1, 15.1.7, 14.1, 14.1.5.1",
+      "url": "https://support.f5.com/csp/article/K52494562",
+      "date": "2022-10-19",
+      "kev": false,
+      "epss": 0.00657
+    },
+    {
+      "source": "NVD (CVSS 7.5)",
+      "id": "CVE-2022-34862",
+      "headline_en": "In BIG-IP Versions 16.1.x before 16.1.3.1, 15.1.x before 15.1.6.1, 14.1.x before 14.1.5, and all versions of 13.1.x, when an LTM virtual server is configured to perform normalization, undisclosed requests can cause the Traffic Management Microkernel (TMM) to terminate. Note: Software versions which have reached End of Technical Support (EoTS) are not evaluated.",
+      "headline_ja": "In BIG-IP Versions 16.1.x before 16.1.3.1, 15.1.x before 15.1.6.1, 14.1.x before 14.1.5, and all versions of 13.1.x, when an LTM virtual server is configured to perform normalization, undisclosed requests can cause the Traffic Management Microkernel (TMM) to terminate. Note: Software versions which have reached End of Technical Support (EoTS) are not evaluated.",
+      "versions": "16.1, 16.1.3.1, 15.1, 15.1.6.1, 14.1, 14.1.5, 13.1",
+      "url": "https://support.f5.com/csp/article/K66510514",
+      "date": "2022-08-04",
+      "kev": false,
+      "epss": 0.01267
+    },
+    {
+      "source": "NVD (CVSS 7.5)",
+      "id": "CVE-2022-34651",
+      "headline_en": "In BIG-IP Versions 16.1.x before 16.1.3.1 and 15.1.x before 15.1.6.1, when an LTM Client or Server SSL profile with TLS 1.3 enabled is configured on a virtual server, along with an iRule that calls HTTP::respond, undisclosed requests can cause the Traffic Management Microkernel (TMM) to terminate. Note: Software versions which have reached End of Technical Support (EoTS) are not evaluated.",
+      "headline_ja": "In BIG-IP Versions 16.1.x before 16.1.3.1 and 15.1.x before 15.1.6.1, when an LTM Client or Server SSL profile with TLS 1.3 enabled is configured on a virtual server, along with an iRule that calls HTTP::respond, undisclosed requests can cause the Traffic Management Microkernel (TMM) to terminate. Note: Software versions which have reached End of Technical Support (EoTS) are not evaluated.",
+      "versions": "16.1, 16.1.3.1, 15.1, 15.1.6.1",
+      "url": "https://support.f5.com/csp/article/K59197053",
+      "date": "2022-08-04",
+      "kev": false,
+      "epss": 0.00746
+    },
+    {
+      "source": "NVD (CVSS 3.7)",
+      "id": "CVE-2022-33968",
+      "headline_en": "In BIG-IP Versions 17.0.x before 17.0.0.1, 16.1.x before 16.1.3.1, 15.1.x before 15.1.6.1, 14.1.x before 14.1.5.1, and all versions of 13.1.x, when an LTM monitor or APM SSO is configured on a virtual server, and NTLM challenge-response is in use, undisclosed traffic can cause a buffer over-read. Note: Software versions which have reached End of Technical Support (EoTS) are not evaluated.",
+      "headline_ja": "In BIG-IP Versions 17.0.x before 17.0.0.1, 16.1.x before 16.1.3.1, 15.1.x before 15.1.6.1, 14.1.x before 14.1.5.1, and all versions of 13.1.x, when an LTM monitor or APM SSO is configured on a virtual server, and NTLM challenge-response is in use, undisclosed traffic can cause a buffer over-read. Note: Software versions which have reached End of Technical Support (EoTS) are not evaluated.",
+      "versions": "17.0, 17.0.0.1, 16.1, 16.1.3.1, 15.1, 15.1.6.1, 14.1, 14.1.5.1, 13.1",
+      "url": "https://support.f5.com/csp/article/K23465404",
+      "date": "2022-08-04",
+      "kev": false,
+      "epss": 0.00516
+    },
+    {
+      "source": "NVD (CVSS 7.5)",
+      "id": "CVE-2022-32455",
+      "headline_en": "In BIG-IP Versions 16.1.x before 16.1.2.2, 15.1.x before 15.1.6.1, 14.1.x before 14.1.5, and all versions of 13.1.x, when a BIG-IP LTM Client SSL profile is configured on a virtual server to perform client certificate authentication with session tickets enabled, undisclosed requests cause the Traffic Management Microkernel (TMM) to terminate. Note: Software versions which have reached End of Technical Support (EoTS) are not evaluated.",
+      "headline_ja": "In BIG-IP Versions 16.1.x before 16.1.2.2, 15.1.x before 15.1.6.1, 14.1.x before 14.1.5, and all versions of 13.1.x, when a BIG-IP LTM Client SSL profile is configured on a virtual server to perform client certificate authentication with session tickets enabled, undisclosed requests cause the Traffic Management Microkernel (TMM) to terminate. Note: Software versions which have reached End of Technical Support (EoTS) are not evaluated.",
+      "versions": "16.1, 16.1.2.2, 15.1, 15.1.6.1, 14.1, 14.1.5, 13.1",
+      "url": "https://support.f5.com/csp/article/K16852653",
+      "date": "2022-08-04",
+      "kev": false,
+      "epss": 0.00495
+    },
+    {
+      "source": "NVD (CVSS 7.5)",
+      "id": "CVE-2022-29491",
+      "headline_en": "On F5 BIG-IP LTM, Advanced WAF, ASM, or APM 16.1.x versions prior to 16.1.2.2, 15.1.x versions prior to 15.1.5, 14.1.x versions prior to 14.1.4.6, and all versions of 13.1.x, 12.1.x, and 11.6.x, when a virtual server is configured with HTTP, TCP on one side (client/server), and DTLS on the other (server/client), undisclosed requests can cause the TMM process to terminate. Note: Software versions which have reached End of Technical Support (EoTS) are not evaluated",
+      "headline_ja": "On F5 BIG-IP LTM, Advanced WAF, ASM, or APM 16.1.x versions prior to 16.1.2.2, 15.1.x versions prior to 15.1.5, 14.1.x versions prior to 14.1.4.6, and all versions of 13.1.x, 12.1.x, and 11.6.x, when a virtual server is configured with HTTP, TCP on one side (client/server), and DTLS on the other (server/client), undisclosed requests can cause the TMM process to terminate. Note: Software versions which have reached End of Technical Support (EoTS) are not evaluated",
+      "versions": "16.1, 16.1.2.2, 15.1, 15.1.5, 14.1, 14.1.4.6, 13.1, 12.1",
+      "url": "https://support.f5.com/csp/article/K14229426",
+      "date": "2022-05-05",
+      "kev": false,
+      "epss": 0.00916
+    },
+    {
+      "source": "NVD (CVSS 7.5)",
+      "id": "CVE-2022-23021",
+      "headline_en": "On BIG-IP version 16.1.x before 16.1.2, when any of the following configurations are configured on a virtual server, undisclosed requests can cause the Traffic Management Microkernel (TMM) to terminate: HTTP redirect rule in an LTM policy, BIG-IP APM Access Profile, and Explicit HTTP Proxy in HTTP Profile. Note: Software versions which have reached End of Technical Support (EoTS) are not evaluated.",
+      "headline_ja": "On BIG-IP version 16.1.x before 16.1.2, when any of the following configurations are configured on a virtual server, undisclosed requests can cause the Traffic Management Microkernel (TMM) to terminate: HTTP redirect rule in an LTM policy, BIG-IP APM Access Profile, and Explicit HTTP Proxy in HTTP Profile. Note: Software versions which have reached End of Technical Support (EoTS) are not evaluated.",
+      "versions": "16.1, 16.1.2",
+      "url": "https://support.f5.com/csp/article/K57111075",
+      "date": "2022-01-25",
+      "kev": false,
+      "epss": 0.0092
+    },
+    {
+      "source": "NVD (CVSS 7.5)",
+      "id": "CVE-2020-27720",
+      "headline_en": "On BIG-IP LTM/CGNAT version 16.0.0-16.0.0.1, 15.1.0-15.1.0.5, 14.1.0-14.1.3, and 13.1.0-13.1.3.5, when processing NAT66 traffic with Port Block Allocation (PBA) mode and SP-DAG enabled, and dag-ipv6-prefix-len configured with a value less than the default of 128, an undisclosed traffic pattern may cause the Traffic Management Microkernel (TMM) to restart.",
+      "headline_ja": "On BIG-IP LTM/CGNAT version 16.0.0-16.0.0.1, 15.1.0-15.1.0.5, 14.1.0-14.1.3, and 13.1.0-13.1.3.5, when processing NAT66 traffic with Port Block Allocation (PBA) mode and SP-DAG enabled, and dag-ipv6-prefix-len configured with a value less than the default of 128, an undisclosed traffic pattern may cause the Traffic Management Microkernel (TMM) to restart.",
+      "versions": "16.0.0, 16.0.0.1, 15.1.0, 15.1.0.5, 14.1.0, 14.1.3, 13.1.0, 13.1.3.5",
+      "url": "https://support.f5.com/csp/article/K04048104",
+      "date": "2020-12-24",
+      "kev": false,
+      "epss": 0.0144
+    },
+    {
+      "source": "NVD (CVSS 7.5)",
+      "id": "CVE-2020-27721",
+      "headline_en": "In versions 16.0.0-16.0.0.1, 15.1.0-15.1.1, 14.1.0-14.1.3, 13.1.0-13.1.3.5, 12.1.0-12.1.5.2, and 11.6.1-11.6.5.2, in a BIG-IP DNS / BIG-IP LTM GSLB deployment, under certain circumstances, the BIG-IP DNS system may stop using a BIG-IP LTM virtual server for DNS response.",
+      "headline_ja": "In versions 16.0.0-16.0.0.1, 15.1.0-15.1.1, 14.1.0-14.1.3, 13.1.0-13.1.3.5, 12.1.0-12.1.5.2, and 11.6.1-11.6.5.2, in a BIG-IP DNS / BIG-IP LTM GSLB deployment, under certain circumstances, the BIG-IP DNS system may stop using a BIG-IP LTM virtual server for DNS response.",
+      "versions": "16.0.0, 16.0.0.1, 15.1.0, 15.1.1, 14.1.0, 14.1.3, 13.1.0, 13.1.3.5, 12.1.0, 12.1.5.2",
+      "url": "https://support.f5.com/csp/article/K52035247",
+      "date": "2020-12-24",
+      "kev": false,
+      "epss": 0.01014
+    },
+    {
+      "source": "NVD (CVSS 7.5)",
+      "id": "CVE-2020-5936",
+      "headline_en": "On BIG-IP LTM 15.1.0-15.1.0.5, 14.1.0-14.1.2.7, 13.1.0-13.1.3.4, and 12.1.0-12.1.5.1, the Traffic Management Microkernel (TMM) process may consume excessive resources when processing SSL traffic and client authentication are enabled on the client SSL profile.",
+      "headline_ja": "On BIG-IP LTM 15.1.0-15.1.0.5, 14.1.0-14.1.2.7, 13.1.0-13.1.3.4, and 12.1.0-12.1.5.1, the Traffic Management Microkernel (TMM) process may consume excessive resources when processing SSL traffic and client authentication are enabled on the client SSL profile.",
+      "versions": "15.1.0, 15.1.0.5, 14.1.0, 14.1.2.7, 13.1.0, 13.1.3.4, 12.1.0, 12.1.5.1",
+      "url": "https://support.f5.com/csp/article/K44020030",
+      "date": "2020-10-29",
+      "kev": false,
+      "epss": 0.01103
+    },
+    {
+      "source": "NVD (CVSS 8.8)",
+      "id": "CVE-2019-6646",
+      "headline_en": "On BIG-IP 11.5.2-11.6.4 and Enterprise Manager 3.1.1, REST users with guest privileges may be able to escalate their privileges and run commands with admin privileges.",
+      "headline_ja": "On BIG-IP 11.5.2-11.6.4 and Enterprise Manager 3.1.1, REST users with guest privileges may be able to escalate their privileges and run commands with admin privileges.",
+      "versions": "(本文から検出できず)",
+      "url": "https://support.f5.com/csp/article/K53990093",
+      "date": "2019-09-04",
+      "kev": false,
+      "epss": 0.01513
+    },
+    {
+      "source": "NVD (CVSS 7.5)",
+      "id": "CVE-2019-6643",
+      "headline_en": "On versions 14.1.0-14.1.0.5, 14.0.0-14.0.0.4, 13.0.0-13.1.2, 12.1.0-12.1.4.1, and 11.5.2-11.6.4, an attacker sending specifically crafted DHCPv6 requests through a BIG-IP virtual server configured with a DHCPv6 profile may be able to cause the TMM process to produce a core file.",
+      "headline_ja": "On versions 14.1.0-14.1.0.5, 14.0.0-14.0.0.4, 13.0.0-13.1.2, 12.1.0-12.1.4.1, and 11.5.2-11.6.4, an attacker sending specifically crafted DHCPv6 requests through a BIG-IP virtual server configured with a DHCPv6 profile may be able to cause the TMM process to produce a core file.",
+      "versions": "14.1.0, 14.1.0.5, 14.0.0, 14.0.0.4, 13.0.0, 13.1.2, 12.1.0, 12.1.4.1",
+      "url": "https://support.f5.com/csp/article/K36228121",
+      "date": "2019-09-04",
+      "kev": false,
+      "epss": 0.01348
+    },
+    {
+      "source": "NVD (CVSS 5.3)",
+      "id": "CVE-2019-6647",
+      "headline_en": "On BIG-IP 14.1.0-14.1.0.5, 14.0.0-14.0.0.4, 13.0.0-13.1.2, 12.1.0-12.1.4.1, 11.5.2-11.6.4, when processing authentication attempts for control-plane users MCPD leaks a small amount of memory. Under rare conditions attackers with access to the management interface could eventually deplete memory on the system.",
+      "headline_ja": "On BIG-IP 14.1.0-14.1.0.5, 14.0.0-14.0.0.4, 13.0.0-13.1.2, 12.1.0-12.1.4.1, 11.5.2-11.6.4, when processing authentication attempts for control-plane users MCPD leaks a small amount of memory. Under rare conditions attackers with access to the management interface could eventually deplete memory on the system.",
+      "versions": "14.1.0, 14.1.0.5, 14.0.0, 14.0.0.4, 13.0.0, 13.1.2, 12.1.0, 12.1.4.1",
+      "url": "https://support.f5.com/csp/article/K87920510",
+      "date": "2019-09-04",
+      "kev": false,
+      "epss": 0.01361
+    },
+    {
+      "source": "NVD (CVSS 9.4)",
+      "id": "CVE-2019-6644",
+      "headline_en": "Similar to the issue identified in CVE-2018-12120, on versions 14.1.0-14.1.0.5, 14.0.0-14.0.0.4, 13.0.0-13.1.2, and 12.1.0-12.1.4 BIG-IP will bind a debug nodejs process to all interfaces when invoked. This may expose the process to unauthorized users if the plugin is left in debug mode and the port is accessible.",
+      "headline_ja": "Similar to the issue identified in CVE-2018-12120, on versions 14.1.0-14.1.0.5, 14.0.0-14.0.0.4, 13.0.0-13.1.2, and 12.1.0-12.1.4 BIG-IP will bind a debug nodejs process to all interfaces when invoked. This may expose the process to unauthorized users if the plugin is left in debug mode and the port is accessible.",
+      "versions": "14.1.0, 14.1.0.5, 14.0.0, 14.0.0.4, 13.0.0, 13.1.2, 12.1.0, 12.1.4",
+      "url": "https://support.f5.com/csp/article/K75532331",
+      "date": "2019-09-04",
+      "kev": false,
+      "epss": 0.01404
+    }
+  ]
+}
