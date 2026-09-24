@@ -37,7 +37,13 @@ jobs:
         run: |
           python scripts/collect_vendor_bug_cache.py ${NVD_API_KEY:+--nvd-api-key "$NVD_API_KEY"}
 
+      # if: always() で、上の収集ステップが一部ベンダーの失敗（NVDタイムアウト等）
+      # で失敗扱いになった場合でも実行する。3ベンダーのうち1つが失敗しても、
+      # 成功した他のベンダーのデータは data/vendor_bugs/ に書き出されている
+      # ため、それを無駄にせずコミットする（ジョブ自体は収集ステップの失敗を
+      # 反映して failure のままになるため、失敗自体は見逃されない）。
       - name: Commit and push if changed
+        if: always()
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
