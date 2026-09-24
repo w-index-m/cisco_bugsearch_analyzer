@@ -300,6 +300,13 @@ OPENROUTER_API_KEY = "xxx"
 2. API キーの有効期限を確認
 3. ネットワークプロキシの設定を確認
 
+### Q: NVD/F5/CISA等の外部サイトに接続できないとClaudeが言っている
+**A**: Claude Code の開発サンドボックスは外部通信がプロキシで制限されており、
+多くの外部サイトへの接続がブロックされる。これは本番環境（GitHub Actions /
+Streamlit Cloud）の制約ではないため、実際に動くかどうかは GitHub Actions
+（`.github/workflows/collect-vendor-bugs.yml` を手動実行）で確認すること。
+詳細は `CLAUDE.md` を参照。
+
 ---
 
 ## 🔄 更新履歴
