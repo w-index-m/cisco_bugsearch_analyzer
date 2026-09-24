@@ -990,18 +990,19 @@ if st.button("🚀 3ベンダーをまとめて検索（並列実行）", key="c
                 target_version=st.session_state.get("fortigate_target_version") or None,
             )),
         })
-    for _key, _label in [("f5", "F5 BIG-IP TMM"), ("paloalto", "Palo Alto (PAN-OS)"), ("fortigate", "FortiGate (FortiOS)")]:
+    for _key, _label in [("f5", "F5 BIG-IP"), ("paloalto", "Palo Alto (PAN-OS)"), ("fortigate", "FortiGate (FortiOS)")]:
         st.session_state[f"{_key}_live_results"] = _combo_results.get(_key)
         st.session_state[f"{_key}_live_label"] = f"{_label}(並列検索)"
     st.success("並列検索が完了しました。各セクションの結果表示をご確認ください。")
 
 st.markdown("---")
-st.markdown("### 🔧 F5 BIG-IP TMM バグ検索")
+st.markdown("### 🔧 F5 BIG-IP バグ検索")
 st.caption(
     "NVD（CVE/CVSSを集約する米国立脆弱性データベース）と、F5公式バグトラッカー"
-    "（CVEにならない一般的な既知の問題）の両方から、TMM（Traffic Management "
-    "Microkernel）関連のバグを収集し、対象OS（BIG-IPバージョン）と見出しを"
-    "新しい順（日付が新しいもの順、不明なものは末尾）に一覧表示します。"
+    "（CVEにならない一般的な既知の問題）の両方から、BIG-IP全般（TMM/TMOS/ASM/APM/"
+    "AFM/vCMP等、特定モジュールに限定しない）のバグを収集し、対象OS（BIG-IP"
+    "バージョン）と見出しを新しい順（日付が新しいもの順、不明なものは末尾）に"
+    "一覧表示します。"
 )
 st.info(
     "💡 F5公式バグトラッカーには検索フォームがある想定ですが、この環境からは "
@@ -1017,7 +1018,7 @@ st.info(
     "- F5 Quarterly/Out-of-band Security Notification（要ログイン）: https://my.f5.com/manage/s/"
 )
 
-display_vendor_bug_cache("f5", "F5 BIG-IP TMM")
+display_vendor_bug_cache("f5", "F5 BIG-IP")
 
 f5_col1, f5_col2 = st.columns(2)
 with f5_col1:
@@ -1050,7 +1051,7 @@ f5_nvd_api_key = get_secret("NVD_API_KEY") or st.text_input(
     type="password", key="f5_nvd_api_key_input"
 )
 
-if st.button("🔎 F5 BIG-IP TMM バグを検索", key="f5_search_btn"):
+if st.button("🔎 F5 BIG-IP バグを検索", key="f5_search_btn"):
     _f5_source_map = {"両方": "both", "NVDのみ": "nvd", "F5バグトラッカーのみ": "bugtracker"}
     _f5_bug_ids = (
         [b.strip() for b in f5_bug_ids_input.split(",") if b.strip()] or None
@@ -1067,7 +1068,7 @@ if st.button("🔎 F5 BIG-IP TMM バグを検索", key="f5_search_btn"):
             target_version=f5_target_version or None,
         )
     st.session_state["f5_live_results"] = f5_results
-    st.session_state["f5_live_label"] = f"F5 BIG-IP TMM({f5_nvd_keyword[:15]})"
+    st.session_state["f5_live_label"] = f"F5 BIG-IP({f5_nvd_keyword[:15]})"
 
 # ライブ検索結果は session_state に保持し、他ベンダーのボタン操作等で
 # スクリプトが再実行されても表示が消えないようにする
@@ -1079,7 +1080,7 @@ if f5_live_results is not None:
         st.warning("該当するバグ/CVEが見つかりませんでした")
     else:
         st.success(f"✓ {len(f5_live_results)} 件見つかりました（新しい順）")
-        display_bug_rows_table(f5_live_results, "f5", st.session_state.get("f5_live_label", "F5 BIG-IP TMM"), "live")
+        display_bug_rows_table(f5_live_results, "f5", st.session_state.get("f5_live_label", "F5 BIG-IP"), "live")
 
 st.markdown("---")
 
