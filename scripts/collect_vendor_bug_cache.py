@@ -33,6 +33,11 @@ OUTPUT_DIR = Path(__file__).resolve().parent.parent / "data" / "vendor_bugs"
 CACHE_RESULTS_LIMIT = 200
 CACHE_FETCH_LIMIT = 300
 
+# F5公式バグトラッカーの全件一覧（数千件）から、実際に個別ページを取得する
+# 件数の上限。1件ごとにHTTPリクエストが発生する（0.5秒間隔）ため、大きくする
+# ほどF5サーバーへの負荷・収集時間が増える。
+CACHE_F5_BUGTRACKER_LIMIT = 100
+
 # (session_key, ファイル名, 表示名, 収集関数を呼ぶための設定)
 # 翻訳は既定でGoogle Translate（無料の非公式エンドポイント）を使うが、
 # GitHub Actionsランナーの共有IPからはボット対策でブロックされ翻訳できない
@@ -41,11 +46,12 @@ CACHE_FETCH_LIMIT = 300
 TARGETS = [
     {
         "key": "f5",
-        "label": "F5 BIG-IP TMM",
+        "label": "F5 BIG-IP",
         "collect": lambda nvd_api_key, deepl_api_key: analyzer.search_f5_bigip_tmm_bugs(
             source="both", nvd_keyword="BIG-IP",
             translate_engine="google", nvd_api_key=nvd_api_key, deepl_api_key=deepl_api_key,
             results_limit=CACHE_RESULTS_LIMIT, fetch_limit=CACHE_FETCH_LIMIT,
+            bugtracker_limit=CACHE_F5_BUGTRACKER_LIMIT,
         ),
     },
     {
