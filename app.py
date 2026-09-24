@@ -77,12 +77,26 @@ def load_analysis_from_json_ui(json_str):
     return analyzer.load_analysis_from_json(json_str)
 
 
+def _format_kev_flag(v):
+    if v is True:
+        return "🔴 KEV入り"
+    if v is False:
+        return "-"
+    return "不明"
+
+
+def _format_epss_score(v):
+    return f"{v * 100:.1f}%" if isinstance(v, (int, float)) else "不明"
+
+
 def display_bug_rows_table(rows, session_key, name, key_suffix):
     """
     F5/Palo Alto/FortiGateのバグ収集結果（新しい順ソート済み）を、テーブル表示・
     統合Excel出力用のsession_state登録・単独Excelダウンロードボタンまでまとめて
     行う共通関数。キャッシュ表示・ライブ検索結果表示の両方から呼ばれるため、
     ウィジェットkeyが重複しないよう key_suffix で呼び出し元を区別する。
+    KEV/EPSS は NVD 由来の行にのみ付与される情報（F5公式バグトラッカー由来の
+    行はCVEではないため対象外）で、無い場合は「不明」と表示する。
     """
     table = pd.DataFrame([
         {
@@ -90,21 +104,34 @@ def display_bug_rows_table(rows, session_key, name, key_suffix):
             "出所": r["source"],
             "ID": r["id"],
             "対象OS(バージョン)": r["versions"],
-            "見出し": r.get("headline_ja") or r["headline_en"],
+            # Ciscoバグ検索の表（BUG headline (日本語)/(英語原文)）と同じく、
+            # 日本語訳と英語原文を別カラムに分けて両方見えるようにする
+            "見出し(日本語)": r.get("headline_ja") or "(翻訳できませんでした)",
+            "見出し(原文)": r["headline_en"],
+            "KEV": _format_kev_flag(r.get("kev")),
+            "EPSS": _format_epss_score(r.get("epss")),
             "参考リンク": r["url"],
         }
         for r in rows
     ])
-    st.dataframe(table, use_container_width=True, hide_index=True)
+    st.dataframe(
+        table,
+        use_container_width=True,
+        hide_index=True,
+        column_config={
+            "参考リンク": st.column_config.LinkColumn("参考リンク", display_text="開く ↗"),
+        },
+    )
 
     export_rows = [
         [r.get("date") or "不明", r["source"], r["id"], r["versions"],
-         r.get("headline_ja", ""), r["headline_en"], r["url"]]
+         r.get("headline_ja", ""), r["headline_en"],
+         _format_kev_flag(r.get("kev")), _format_epss_score(r.get("epss")), r["url"]]
         for r in rows
     ]
     st.session_state[f"combined_export_{session_key}"] = {
         "name": name,
-        "headers": ["日付", "出所", "ID", "対象OS(バージョン)", "見出し(日本語)", "見出し(原文)", "参考リンク"],
+        "headers": ["日付", "出所", "ID", "対象OS(バージョン)", "見出し(日本語)", "見出し(原文)", "KEV", "EPSS", "参考リンク"],
         "rows": export_rows,
     }
 
@@ -914,6 +941,61 @@ if st.button("🔎 CVE を検索", key="cve_search_btn"):
             }
 
 st.markdown("---")
+st.markdown("### 🌐 各ベンダー共通の参考サイト")
+st.caption(
+    "CVSSだけでなく、実際に悪用されているか（KEV）・悪用される確率（EPSS）も踏まえて"
+    "優先度を判断することをおすすめします。以下は各行の「KEV」「EPSS」列のもとになって"
+    "いる情報源、および調査に便利な一般的なサイトです。"
+)
+st.info(
+    "- CISA KEV（実際に悪用が確認された既知の脆弱性カタログ）: https://www.cisa.gov/known-exploited-vulnerabilities-catalog\n"
+    "- FIRST EPSS（悪用予測確率スコア）: https://www.first.org/epss/\n"
+    "- CVE Details（CVSS・EPSS・製品別統計など、調査初動に見やすいまとめサイト）: https://www.cvedetails.com/\n"
+    "- Cisco Security Advisories（Cisco公式セキュリティアドバイザリ）: https://sec.cloudapps.cisco.com/security/center/publicationListing.x\n"
+    "- Cisco Bug Search Tool（Cisco公式バグ検索、要ログイン）: https://bst.cloudapps.cisco.com/bugsearch/"
+)
+
+st.markdown("### ⚡ F5 / Palo Alto / FortiGate をまとめて検索")
+st.caption(
+    "3ベンダーのNVD検索をスレッドで並列実行します。1件ずつ検索ボタンを押す場合に"
+    "比べ、待ち時間が『3件の合計』ではなく『一番遅い1件』に近くなります。"
+    "各セクションの検索キーワード・対象バージョンの入力欄はそのまま使われます。"
+)
+if st.button("🚀 3ベンダーをまとめて検索（並列実行）", key="combo_vendor_search_btn"):
+    with st.spinner("F5 / Palo Alto / FortiGate を並列検索中..."):
+        _combo_results = analyzer.search_vendor_bugs_parallel({
+            "f5": (analyzer.search_f5_bigip_tmm_bugs, dict(
+                source={"両方": "both", "NVDのみ": "nvd", "F5バグトラッカーのみ": "bugtracker"}[st.session_state.get("f5_source", "両方")],
+                nvd_keyword=st.session_state.get("f5_nvd_keyword", "BIG-IP LTM"),
+                bug_ids=(
+                    [b.strip() for b in st.session_state.get("f5_bug_ids_input", "").split(",") if b.strip()] or None
+                ),
+                translate_engine=translation_engine_key,
+                deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key,
+                nvd_api_key=get_secret("NVD_API_KEY") or st.session_state.get("f5_nvd_api_key_input") or None,
+                target_version=st.session_state.get("f5_target_version") or None,
+            )),
+            "paloalto": (analyzer.search_vendor_bugs, dict(
+                nvd_keyword=st.session_state.get("paloalto_keyword", "\"Palo Alto\" PAN-OS"),
+                translate_engine=translation_engine_key,
+                deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key,
+                nvd_api_key=get_secret("NVD_API_KEY") or st.session_state.get("paloalto_nvd_api_key_input") or None,
+                target_version=st.session_state.get("paloalto_target_version") or None,
+            )),
+            "fortigate": (analyzer.search_vendor_bugs, dict(
+                nvd_keyword=st.session_state.get("fortigate_keyword", "Fortinet FortiOS"),
+                translate_engine=translation_engine_key,
+                deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key,
+                nvd_api_key=get_secret("NVD_API_KEY") or st.session_state.get("fortigate_nvd_api_key_input") or None,
+                target_version=st.session_state.get("fortigate_target_version") or None,
+            )),
+        })
+    for _key, _label in [("f5", "F5 BIG-IP TMM"), ("paloalto", "Palo Alto (PAN-OS)"), ("fortigate", "FortiGate (FortiOS)")]:
+        st.session_state[f"{_key}_live_results"] = _combo_results.get(_key)
+        st.session_state[f"{_key}_live_label"] = f"{_label}(並列検索)"
+    st.success("並列検索が完了しました。各セクションの結果表示をご確認ください。")
+
+st.markdown("---")
 st.markdown("### 🔧 F5 BIG-IP TMM バグ検索")
 st.caption(
     "NVD（CVE/CVSSを集約する米国立脆弱性データベース）と、F5公式バグトラッカー"
@@ -945,8 +1027,8 @@ with f5_col1:
         key="f5_source"
     )
     f5_nvd_keyword = st.text_input(
-        "NVD検索キーワード",
-        value="F5 BIG-IP TMM",
+        "NVD検索キーワード（スペース区切りでOR検索。例: 「BIG-IP LTM」→BIG-IPまたはLTMを含むCVE）",
+        value="BIG-IP LTM",
         key="f5_nvd_keyword"
     )
 with f5_col2:
@@ -982,14 +1064,20 @@ if st.button("🔎 F5 BIG-IP TMM バグを検索", key="f5_search_btn"):
             nvd_api_key=f5_nvd_api_key or None,
             target_version=f5_target_version or None,
         )
+    st.session_state["f5_live_results"] = f5_results
+    st.session_state["f5_live_label"] = f"F5 BIG-IP TMM({f5_nvd_keyword[:15]})"
 
-    if isinstance(f5_results, dict) and "error" in f5_results:
-        st.error(f"NVDへの問い合わせに失敗しました: {f5_results['error']}")
-    elif not f5_results:
+# ライブ検索結果は session_state に保持し、他ベンダーのボタン操作等で
+# スクリプトが再実行されても表示が消えないようにする
+f5_live_results = st.session_state.get("f5_live_results")
+if f5_live_results is not None:
+    if isinstance(f5_live_results, dict) and "error" in f5_live_results:
+        st.error(f"NVDへの問い合わせに失敗しました: {f5_live_results['error']}")
+    elif not f5_live_results:
         st.warning("該当するバグ/CVEが見つかりませんでした")
     else:
-        st.success(f"✓ {len(f5_results)} 件見つかりました（新しい順）")
-        display_bug_rows_table(f5_results, "f5", f"F5 BIG-IP TMM({f5_nvd_keyword[:15]})", "live")
+        st.success(f"✓ {len(f5_live_results)} 件見つかりました（新しい順）")
+        display_bug_rows_table(f5_live_results, "f5", st.session_state.get("f5_live_label", "F5 BIG-IP TMM"), "live")
 
 st.markdown("---")
 
@@ -1022,7 +1110,11 @@ def render_vendor_bug_search(title, icon, session_key, default_keyword, version_
 
     col1, col2 = st.columns(2)
     with col1:
-        keyword = st.text_input("NVD検索キーワード", value=default_keyword, key=f"{session_key}_keyword")
+        keyword = st.text_input(
+            "NVD検索キーワード（スペース区切りでOR検索。\"Palo Alto\"のようにダブルクォートで"
+            "囲むと複合名として1語扱い）",
+            value=default_keyword, key=f"{session_key}_keyword"
+        )
     with col2:
         target_version = st.text_input(
             "対象バージョン（任意、影響有無を判定したい場合）",
@@ -1043,20 +1135,30 @@ def render_vendor_bug_search(title, icon, session_key, default_keyword, version_
                 nvd_api_key=nvd_api_key or None,
                 target_version=target_version or None,
             )
+        st.session_state[f"{session_key}_live_results"] = results
+        st.session_state[f"{session_key}_live_label"] = f"{title}({keyword[:15]})"
 
-        if isinstance(results, dict) and "error" in results:
-            st.error(f"NVDへの問い合わせに失敗しました: {results['error']}")
-        elif not results:
+    # ライブ検索結果は session_state に保持し、別ベンダーのボタン操作等で
+    # スクリプトが再実行されても表示が消えないようにする（st.button の判定は
+    # そのボタンが押された回のスクリプト実行でしか True にならないため）。
+    live_results = st.session_state.get(f"{session_key}_live_results")
+    if live_results is not None:
+        if isinstance(live_results, dict) and "error" in live_results:
+            st.error(f"NVDへの問い合わせに失敗しました: {live_results['error']}")
+        elif not live_results:
             st.warning("該当するCVEが見つかりませんでした")
         else:
-            st.success(f"✓ {len(results)} 件見つかりました（新しい順）")
-            display_bug_rows_table(results, session_key, f"{title}({keyword[:15]})", "live")
+            st.success(f"✓ {len(live_results)} 件見つかりました（新しい順）")
+            display_bug_rows_table(
+                live_results, session_key,
+                st.session_state.get(f"{session_key}_live_label", title), "live"
+            )
 
     st.markdown("---")
 
 
 render_vendor_bug_search(
-    "Palo Alto (PAN-OS) バグ検索", "🔥", "paloalto", "Palo Alto PAN-OS", version_placeholder="例: 11.1.2",
+    "Palo Alto (PAN-OS) バグ検索", "🔥", "paloalto", "\"Palo Alto\" PAN-OS", version_placeholder="例: 11.1.2",
     official_links=[
         ("Palo Alto Networks セキュリティアドバイザリ（PSIRT、CVE別ページ）", "https://security.paloaltonetworks.com/"),
         ("PAN-OS リリースノート（Known and Addressed Issues、バージョン別）", "https://docs.paloaltonetworks.com/ngfw/release-notes"),
