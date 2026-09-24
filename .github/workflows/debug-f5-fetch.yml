@@ -1,0 +1,28 @@
+name: Debug F5 bug page fetch (temporary)
+
+# F5公式バグトラッカーの個別ページの実際のHTML構造を調査するための一時的な
+# ワークフロー。目的を達したら削除する。
+
+on:
+  workflow_dispatch:
+    inputs:
+      bug_id:
+        description: "調査するBug ID"
+        required: false
+        default: "1000973"
+
+jobs:
+  debug:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install requests
+        run: pip install requests
+
+      - name: Dump raw HTML
+        run: python scripts/debug_fetch_f5_page.py "${{ inputs.bug_id }}"
