@@ -26,27 +26,33 @@ import analyzer  # noqa: E402
 OUTPUT_DIR = Path(__file__).resolve().parent.parent / "data" / "vendor_bugs"
 
 # (session_key, ファイル名, 表示名, 収集関数を呼ぶための設定)
+# 翻訳は既定でGoogle Translate（無料の非公式エンドポイント）を使うが、
+# GitHub Actionsランナーの共有IPからはボット対策でブロックされ翻訳できない
+# ことが多いため、--deepl-api-key を渡した場合はGoogle失敗時にDeepLへ
+# フォールバックする（analyzer.translate_headline の既存フォールバック機構）。
 TARGETS = [
     {
         "key": "f5",
         "label": "F5 BIG-IP TMM",
-        "collect": lambda nvd_api_key: analyzer.search_f5_bigip_tmm_bugs(
+        "collect": lambda nvd_api_key, deepl_api_key: analyzer.search_f5_bigip_tmm_bugs(
             source="both", nvd_keyword='"BIG-IP LTM"',
-            translate_engine="google", nvd_api_key=nvd_api_key,
+            translate_engine="google", nvd_api_key=nvd_api_key, deepl_api_key=deepl_api_key,
         ),
     },
     {
         "key": "paloalto",
         "label": "Palo Alto (PAN-OS)",
-        "collect": lambda nvd_api_key: analyzer.search_vendor_bugs(
-            nvd_keyword="Palo Alto PAN-OS", translate_engine="google", nvd_api_key=nvd_api_key,
+        "collect": lambda nvd_api_key, deepl_api_key: analyzer.search_vendor_bugs(
+            nvd_keyword='"Palo Alto" PAN-OS', translate_engine="google",
+            nvd_api_key=nvd_api_key, deepl_api_key=deepl_api_key,
         ),
     },
     {
         "key": "fortigate",
         "label": "FortiGate (FortiOS)",
-        "collect": lambda nvd_api_key: analyzer.search_vendor_bugs(
-            nvd_keyword="Fortinet FortiOS", translate_engine="google", nvd_api_key=nvd_api_key,
+        "collect": lambda nvd_api_key, deepl_api_key: analyzer.search_vendor_bugs(
+            nvd_keyword="Fortinet FortiOS", translate_engine="google",
+            nvd_api_key=nvd_api_key, deepl_api_key=deepl_api_key,
         ),
     },
 ]
@@ -55,6 +61,10 @@ TARGETS = [
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--nvd-api-key", help="NVD APIキー（任意、無くても収集可・レート制限が厳しくなる）")
+    parser.add_argument(
+        "--deepl-api-key",
+        help="DeepL APIキー（任意。指定すると、Google翻訳が失敗した場合のフォールバックとして使われる）"
+    )
     parser.add_argument("--only", help="収集対象を絞る（カンマ区切り、例: f5,paloalto）")
     args = parser.parse_args()
 
@@ -68,7 +78,7 @@ def main():
 
         print(f"[{target['key']}] {target['label']} を収集中...", file=sys.stderr)
         try:
-            rows = target["collect"](args.nvd_api_key)
+            rows = target["collect"](args.nvd_api_key, args.deepl_api_key)
         except Exception as e:
             print(f"  -> 収集中に例外が発生しました: {e}", file=sys.stderr)
             exit_code = 1
