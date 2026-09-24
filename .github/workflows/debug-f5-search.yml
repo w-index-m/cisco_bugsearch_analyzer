@@ -1,0 +1,24 @@
+name: Debug F5 bug tracker search/listing (temporary)
+
+# F5公式バグトラッカーの個別Bug IDページ以外に、検索/一覧ページやサイトマップ
+# など大量のBug IDを見つける手がかりが無いか調査するための一時的なワークフロー。
+# 目的を達したら削除する。
+
+on:
+  workflow_dispatch: {}
+
+jobs:
+  debug:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install requests
+        run: pip install requests
+
+      - name: Dump candidate URLs
+        run: python scripts/debug_fetch_f5_search.py
