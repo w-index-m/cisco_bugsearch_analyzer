@@ -104,6 +104,10 @@ def display_bug_rows_table(rows, session_key, name, key_suffix):
             "出所": r["source"],
             "ID": r["id"],
             "対象OS(バージョン)": r["versions"],
+            # F5公式バグトラッカー由来の行にのみ付与される情報（例: "BIG-IP TMOS,
+            # BIG-IP vCMP" や、BIG-IP以外の製品の場合は "BIG-IP Next (BNK)" 等）。
+            # NVD由来の行には無いため「-」にする
+            "対象製品": r.get("product") or "-",
             # Ciscoバグ検索の表（BUG headline (日本語)/(英語原文)）と同じく、
             # 日本語訳と英語原文を別カラムに分けて両方見えるようにする
             "見出し(日本語)": r.get("headline_ja") or "(翻訳できませんでした)",
@@ -141,14 +145,14 @@ def display_bug_rows_table(rows, session_key, name, key_suffix):
     )
 
     export_rows = [
-        [r.get("date") or "不明", r["source"], r["id"], r["versions"],
+        [r.get("date") or "不明", r["source"], r["id"], r["versions"], r.get("product") or "-",
          r.get("headline_ja", ""), r["headline_en"],
          _format_kev_flag(r.get("kev")), _format_epss_score(r.get("epss")), r["url"]]
         for r in rows
     ]
     st.session_state[f"combined_export_{session_key}"] = {
         "name": name,
-        "headers": ["日付", "出所", "ID", "対象OS(バージョン)", "見出し(日本語)", "見出し(原文)", "KEV", "EPSS", "参考リンク"],
+        "headers": ["日付", "出所", "ID", "対象OS(バージョン)", "対象製品", "見出し(日本語)", "見出し(原文)", "KEV", "EPSS", "参考リンク"],
         "rows": export_rows,
     }
 
