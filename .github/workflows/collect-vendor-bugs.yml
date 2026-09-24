@@ -1,0 +1,50 @@
+name: Collect vendor bug/CVE cache
+
+# F5 BIG-IP TMM / Palo Alto (PAN-OS) / FortiGate (FortiOS) のバグ・CVE情報を
+# NVD等から定期的に収集し、data/vendor_bugs/ 配下のJSONとしてコミットしておく。
+#
+# アプリの開発・実行環境（サンドボックス）からは NVD や F5公式サイトへの通信が
+# ネットワークポリシーでブロックされていることがあるため、通常インターネットに
+# 制限のないGitHub Actionsのランナー上でこの収集を行い、結果をリポジトリに
+# キャッシュしておくことで、Streamlit アプリ側はまずこのキャッシュを読み込んで
+# 即座に表示できるようにする（ライブ検索が使えない環境でも動作する）。
+
+on:
+  schedule:
+    # 毎日 09:00 JST (00:00 UTC) に実行
+    - cron: "0 0 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Collect vendor bug/CVE data
+        env:
+          NVD_API_KEY: ${{ secrets.NVD_API_KEY }}
+        run: |
+          python scripts/collect_vendor_bug_cache.py ${NVD_API_KEY:+--nvd-api-key "$NVD_API_KEY"}
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/vendor_bugs/
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "chore: update vendor bug/CVE cache ($(date -u +%Y-%m-%d))"
+            git push
+          fi
