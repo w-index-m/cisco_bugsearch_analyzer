@@ -2561,7 +2561,7 @@ def sort_bug_rows_by_date_desc(rows):
 
 def search_f5_bigip_tmm_bugs(source="both", nvd_keyword="BIG-IP", bug_ids=None,
                               translate_engine=None, deepl_api_key=None, nvidia_api_key=None,
-                              nvd_api_key=None, target_version=None, fetch_limit=250,
+                              nvd_api_key=None, target_version=None, results_limit=20, fetch_limit=250,
                               include_kev_epss=True):
     """
     F5 BIG-IP TMM関連バグを NVD / F5公式バグトラッカーの指定した組み合わせで収集し、
@@ -2581,7 +2581,8 @@ def search_f5_bigip_tmm_bugs(source="both", nvd_keyword="BIG-IP", bug_ids=None,
         nvd_rows = collect_nvd_tmm_rows(
             nvd_keyword, translate_engine=translate_engine,
             deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key,
-            api_key=nvd_api_key, target_version=target_version, fetch_limit=fetch_limit,
+            api_key=nvd_api_key, target_version=target_version,
+            results_limit=results_limit, fetch_limit=fetch_limit,
             include_kev_epss=include_kev_epss,
         )
         if isinstance(nvd_rows, dict) and "error" in nvd_rows:
