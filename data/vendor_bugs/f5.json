@@ -1,61 +1,907 @@
 {
-  "label": "F5 BIG-IP TMM",
-  "generated_at": "2026-09-24T07:14:38+00:00",
-  "count": 206,
+  "label": "F5 BIG-IP",
+  "generated_at": "2026-09-24T08:38:06+00:00",
+  "count": 300,
   "rows": [
     {
       "source": "F5 Bug Tracker",
-      "id": "ID1319365",
-      "headline_en": "Policy with external data group may crash TMM or return nothing with search contains",
-      "headline_ja": "Policy with external data group may crash TMM or return nothing with search contains",
-      "versions": "14.0.0, 14.0.0.1, 14.0.0.2, 14.0.0.3, 14.0.0.4, 14.0.0.5, 14.0.1, 14.0.1.1, 14.1.0, 14.1.0.1, 14.1.0.2, 14.1.0.3, 14.1.0.5, 14.1.0.6, 14.1.2, 14.1.2.1, 14.1.2.2, 14.1.2.3, 14.1.2.4, 14.1.2.5, 14.1.2.6, 14.1.2.7, 14.1.2.8, 14.1.3, 14.1.3.1, 14.1.4, 14.1.4.1, 14.1.4.2, 14.1.4.3, 14.1.4.4, 14.1.4.5, 14.1.4.6, 14.1.5, 14.1.5.1, 14.1.5.2, 14.1.5.3, 14.1.5.4, 14.1.5.6, 15.0.0, 15.0.1, 15.0.1.1, 15.0.1.2, 15.0.1.3, 15.0.1.4, 15.1.0, 15.1.0.1, 15.1.0.2, 15.1.0.3, 15.1.0.4, 15.1.0.5, 15.1.1, 15.1.2, 15.1.2.1, 15.1.3, 15.1.3.1, 15.1.4, 15.1.4.1, 15.1.5, 15.1.5.1, 15.1.6, 15.1.6.1, 15.1.7, 15.1.8, 15.1.8.1, 15.1.8.2, 15.1.9, 15.1.9.1, 15.1.10, 15.1.10.2, 15.1.10.3, 15.1.10.4, 15.1.10.5, 15.1.10.6, 15.1.10.7, 15.1.10.8, 16.0.0, 16.0.0.1, 16.0.1, 16.0.1.1, 16.0.1.2, 16.1.0, 16.1.1, 16.1.2, 16.1.2.1, 16.1.2.2, 16.1.3, 16.1.3.1, 16.1.3.2, 16.1.3.3, 16.1.3.4, 16.1.3.5, 16.1.4, 16.1.4.1, 16.1.4.2, 16.1.4.3, 17.0.0, 17.0.0.1, 17.0.0.2, 17.1.0, 17.1.0.1, 17.1.0.2, 17.1.0.3",
-      "url": "https://cdn.f5.com/product/bugtracker/ID1319365.html",
-      "date": "2023-08-11"
+      "id": "ID2501773",
+      "headline_en": "NAT46/DNS64 translation entries expire during active use, causing intermittent connection failures",
+      "headline_ja": "NAT46/DNS64 translation entries expire during active use, causing intermittent connection failures",
+      "versions": "2.2.3",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2501773.html",
+      "date": "2026-09-21"
     },
     {
       "source": "F5 Bug Tracker",
-      "id": "ID1006509",
-      "headline_en": "TMM memory leak",
-      "headline_ja": "TMM memory leak",
-      "versions": "15.1.3, 15.1.3.1, 15.1.4, 15.1.4.1, 15.1.5, 15.1.5.1, 15.1.6, 15.1.6.1, 16.1.3, 16.1.3.1, 16.1.3.2, 16.1.3.3, 16.1.3.4, 16.1.3.5, 16.1.4, 16.1.4.1, 16.1.4.2, 16.1.4.3, 17.1.1.4, 17.1.2, 17.1.2.1, 17.1.2.2, 17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5",
-      "url": "https://cdn.f5.com/product/bugtracker/ID1006509.html",
-      "date": "2021-04-28"
+      "id": "ID2524745",
+      "headline_en": "Serverside Client Hello's may rarely be delayed with SSL mirroring",
+      "headline_ja": "Serverside Client Hello's may rarely be delayed with SSL mirroring",
+      "versions": "17.1.0, 17.1.0.1, 17.1.0.2, 17.1.0.3, 17.1.1, 17.1.1.1, 17.1.1.2, 17.1.1.3, 17.1.1.4, 17.1.2, 17.1.2.1, 17.1.2.2, 17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5, 17.5.0, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 21.1.0, 21.1.0.1, 21.1.0.2",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2524745.html",
+      "date": "2026-09-19"
     },
     {
       "source": "F5 Bug Tracker",
-      "id": "ID1000973",
-      "headline_en": "Unanticipated restart of TMM due to heartbeat failure",
-      "headline_ja": "Unanticipated restart of TMM due to heartbeat failure",
-      "versions": "16.0.1.1, 16.0.1, 16.0.0, 15.1.3.1, 15.1.3, 15.1.2.1, 15.1.2, 15.1.1, 15.1.0.5, 15.1.0.4, 15.1.0.3, 15.1.0.2, 15.1.0.1, 15.1.0, 15.0.1, 15.0.0, 14.1.4.2, 14.1.4.1, 14.1.4, 14.1.3.1, 14.1.3, 14.1.2.8, 14.1.2.7, 14.1.2.6, 14.1.2.5, 14.1.2.4, 14.1.2.3, 14.1.2.2, 13.1.4, 13.1.3.6, 13.1.3.5, 13.1.3.4, 13.1.3.3",
-      "url": "https://cdn.f5.com/product/bugtracker/ID1000973.html",
-      "date": "2021-03-10"
+      "id": "ID2515105",
+      "headline_en": "Tenant images uploaded by WinSCP are not detected",
+      "headline_ja": "Tenant images uploaded by WinSCP are not detected",
+      "versions": "F5OS-A 1.8.0, F5OS-A 1.8.1, F5OS-A 1.8.2, F5OS-A 1.8.3, F5OS-A 1.8.4, F5OS-A 1.8.4-HR1, F5OS-A 1.8.4-HR2, F5OS-C 1.8.0, F5OS-C 1.8.1, F5OS-C 1.8.2, F5OS-C 1.8.2-HR1, F5OS-C 1.8.2-HR2",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2515105.html",
+      "date": "2026-09-17"
     },
     {
       "source": "F5 Bug Tracker",
-      "id": "ID993921",
-      "headline_en": "TMM SIGSEGV",
-      "headline_ja": "TMM SIGSEGV",
-      "versions": "13.1.0, 13.1.0.1, 13.1.0.2, 13.1.0.3, 13.1.0.4, 13.1.0.5, 13.1.0.6, 13.1.0.7, 13.1.0.8, 13.1.1, 13.1.1.2, 13.1.1.3, 13.1.1.4, 13.1.1.5, 13.1.3, 13.1.3.1, 13.1.3.2, 13.1.3.3, 13.1.3.4, 13.1.3.5, 13.1.3.6, 13.1.4, 13.1.4.1, 13.1.5, 13.1.5.1, 14.0.0, 14.0.0.1, 14.0.0.2, 14.0.0.3, 14.0.0.4, 14.0.0.5, 14.0.1, 14.0.1.1, 14.1.0, 14.1.0.1, 14.1.0.2, 14.1.0.3, 14.1.0.5, 14.1.0.6, 14.1.2, 14.1.2.1, 14.1.2.2, 14.1.2.3, 14.1.2.4, 14.1.2.5, 14.1.2.6, 14.1.2.7, 14.1.2.8, 14.1.3, 14.1.3.1, 14.1.4, 14.1.4.1, 14.1.4.2, 14.1.4.3, 14.1.4.4, 14.1.4.5, 14.1.4.6, 14.1.5, 15.0.0, 15.0.1, 15.0.1.1, 15.0.1.2, 15.0.1.3, 15.0.1.4, 15.1.0, 15.1.0.1, 15.1.0.2, 15.1.0.3, 15.1.0.4, 15.1.0.5, 15.1.1, 15.1.2, 15.1.2.1, 15.1.3, 15.1.3.1, 15.1.4, 15.1.4.1, 15.1.5, 15.1.5.1, 15.1.6, 16.0.0, 16.0.0.1, 16.0.1, 16.0.1.1, 16.0.1.2",
-      "url": "https://cdn.f5.com/product/bugtracker/ID993921.html",
-      "date": "2021-02-22"
+      "id": "ID2471597",
+      "headline_en": "ACME: Account Status remains Updating after updating account for ACME Provider",
+      "headline_ja": "ACME: Account Status remains Updating after updating account for ACME Provider",
+      "versions": "21.1.0, 21.1.0.1, 21.1.0.2",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2471597.html",
+      "date": "2026-09-14"
     },
     {
       "source": "F5 Bug Tracker",
-      "id": "ID912425",
-      "headline_en": "Modifying in-TMM monitor configuration may not take effect, or may result in a TMM crash",
-      "headline_ja": "Modifying in-TMM monitor configuration may not take effect, or may result in a TMM crash",
-      "versions": "14.1.2, 14.1.2.1, 14.1.2.2, 14.1.2.3, 14.1.2.4, 14.1.2.5, 14.1.2.6, 14.1.2.7, 14.1.2.8, 14.1.3, 14.1.3.1, 14.1.4, 14.1.4.1, 15.0.0, 15.0.1, 15.0.1.1, 15.0.1.2, 15.0.1.3, 15.0.1.4, 15.1.0, 15.1.0.1, 15.1.0.2, 15.1.0.3, 15.1.0.4, 15.1.0.5, 15.1.1, 15.1.2, 15.1.2.1, 15.1.3, 15.1.3.1, 16.0.0, 16.0.0.1, 16.0.1, 16.0.1.1",
-      "url": "https://cdn.f5.com/product/bugtracker/ID912425.html",
-      "date": "2020-06-05"
+      "id": "ID2482505",
+      "headline_en": "HA (High Availability) peers are unable to connect when ConfigSync uses the management IP",
+      "headline_ja": "HA (High Availability) peers are unable to connect when ConfigSync uses the management IP",
+      "versions": "17.1.3.4, 17.5.1.8, 21.0.0.3, 21.1.0.1",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2482505.html",
+      "date": "2026-09-08"
     },
     {
       "source": "F5 Bug Tracker",
-      "id": "ID822245",
-      "headline_en": "Large number of in-TMM monitors results in some monitors being marked down or delay in marking node down",
-      "headline_ja": "Large number of in-TMM monitors results in some monitors being marked down or delay in marking node down",
-      "versions": "13.1.0, 13.1.0.1, 13.1.0.2, 13.1.0.3, 13.1.0.4, 13.1.0.5, 13.1.0.6, 13.1.0.7, 13.1.0.8, 13.1.1, 13.1.1.2, 13.1.1.3, 13.1.1.4, 13.1.1.5, 13.1.3, 13.1.3.1, 13.1.3.2, 13.1.3.3, 13.1.3.4, 13.1.3.5, 13.1.3.6, 13.1.4, 13.1.4.1, 13.1.5, 13.1.5.1, 14.0.1, 14.0.1.1, 14.1.0, 14.1.0.1, 14.1.0.2, 14.1.0.3, 14.1.0.5, 14.1.0.6, 14.1.2, 14.1.2.1, 14.1.2.2, 14.1.2.3, 14.1.2.4, 14.1.2.5, 14.1.2.6, 14.1.2.7, 14.1.2.8, 14.1.3, 14.1.3.1, 14.1.4, 14.1.4.1, 14.1.4.2, 14.1.4.3, 15.0.0, 15.0.1, 15.0.1.1, 15.0.1.2, 15.0.1.3, 15.0.1.4, 15.1.0, 15.1.0.1, 15.1.0.2, 15.1.0.3, 15.1.0.4, 15.1.0.5, 15.1.1, 15.1.2, 15.1.2.1, 15.1.3, 15.1.3.1, 16.0.0, 16.0.0.1, 16.0.1, 16.0.1.1, 16.0.1.2",
-      "url": "https://cdn.f5.com/product/bugtracker/ID822245.html",
-      "date": "2020-04-07"
+      "id": "ID2460921",
+      "headline_en": "Malformed `tmctl --csv` output from embedded commas in text columns",
+      "headline_ja": "Malformed `tmctl --csv` output from embedded commas in text columns",
+      "versions": "2.2.0, 2.2.1, 2.2.2, 2.2.3",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2460921.html",
+      "date": "2026-09-04"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2365137",
+      "headline_en": "Cron job and systemd unit failures occur due to SELinux confd_cli denials",
+      "headline_ja": "Cron job and systemd unit failures occur due to SELinux confd_cli denials",
+      "versions": "F5OS v2.0.0, F5OS v2.0.0-HR1, F5OS v2.0.0-HR2, F5OS-A 1.8.4, F5OS-A 1.8.4-HR1, F5OS-A 1.8.4-HR2",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2365137.html",
+      "date": "2026-09-04"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2487809",
+      "headline_en": "TMM may restart after a geolocation database update when a FastL4 virtual server collects city or postal code analytics",
+      "headline_ja": "TMM may restart after a geolocation database update when a FastL4 virtual server collects city or postal code analytics",
+      "versions": "17.1.0, 17.1.0.1, 17.1.0.2, 17.1.0.3, 17.1.1, 17.1.1.1, 17.1.1.2, 17.1.1.3, 17.1.1.4, 17.1.2, 17.1.2.1, 17.1.2.2, 17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5, 17.5.0, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 21.1.0, 21.1.0.1, 21.1.0.2",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2487809.html",
+      "date": "2026-09-02"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2493409",
+      "headline_en": "DNS queries forwarded with duplicate EDNS0 OPT records when ECS insertion is enabled and process-rd is disabled",
+      "headline_ja": "DNS queries forwarded with duplicate EDNS0 OPT records when ECS insertion is enabled and process-rd is disabled",
+      "versions": "17.1.3.4, 17.1.3.5, 17.5.1.8, 17.5.1.9, 21.1.0.1, 21.1.0.2",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2493409.html",
+      "date": "2026-09-01"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2441121",
+      "headline_en": "Auto Last Hop updates established flow MAC on failover GARP, causing brief traffic disruption on long-lived connections",
+      "headline_ja": "Auto Last Hop updates established flow MAC on failover GARP, causing brief traffic disruption on long-lived connections",
+      "versions": "17.5.0, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2441121.html",
+      "date": "2026-09-01"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2489085",
+      "headline_en": "Fix For encrypted UCS archive failing from UI",
+      "headline_ja": "Fix For encrypted UCS archive failing from UI",
+      "versions": "17.1.3.4, 17.1.3.5",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2489085.html",
+      "date": "2026-08-31"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2483197",
+      "headline_en": "For BIGIPAuthCookie/BIGIPAuthUsernameCookie  change SameSite value to Lax",
+      "headline_ja": "For BIGIPAuthCookie/BIGIPAuthUsernameCookie  change SameSite value to Lax",
+      "versions": "17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 21.0.0.1, 21.0.0.2, 21.0.0.3",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2483197.html",
+      "date": "2026-08-31"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2456769",
+      "headline_en": "Gradual increase in TMM memory usage",
+      "headline_ja": "Gradual increase in TMM memory usage",
+      "versions": "2.1.0, 2.1.1, 2.2.0, 2.2.1, 2.2.2, 2.2.3, 2.3.0, 2.3.1, 2.3.2",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2456769.html",
+      "date": "2026-08-28"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2433669",
+      "headline_en": "DNS cache is not created when a local zone record contains double quotes",
+      "headline_ja": "DNS cache is not created when a local zone record contains double quotes",
+      "versions": "2.2.0, 2.2.1, 2.2.2, 2.2.3",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2433669.html",
+      "date": "2026-08-28"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2382985",
+      "headline_en": "BX520 blades spuriouisly reboot with a \"pin reset\" message in the pel log",
+      "headline_ja": "BX520 blades spuriouisly reboot with a \"pin reset\" message in the pel log",
+      "versions": "F5OS v2.0.0, F5OS v2.0.0-HR1, F5OS v2.0.0-HR2, F5OS-C 1.8.2, F5OS-C 1.8.2-HR1, F5OS-C 1.8.2-HR2",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2382985.html",
+      "date": "2026-08-28"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2349689",
+      "headline_en": "Unable to recover Gateway CR after configuring with invalid TLS secret for Client-Side TLS",
+      "headline_ja": "Unable to recover Gateway CR after configuring with invalid TLS secret for Client-Side TLS",
+      "versions": "2.2.0, 2.2.1, 2.2.2, 2.2.3, 2.3.0, 2.3.1, 2.3.2",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2349689.html",
+      "date": "2026-08-28"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2488345",
+      "headline_en": "FQDN pool member stays offline if the FQDN template node object is forced down and then re-enabled",
+      "headline_ja": "FQDN pool member stays offline if the FQDN template node object is forced down and then re-enabled",
+      "versions": "17.1.3.4, 17.1.3.5, 17.5.1.8, 17.5.1.9, 21.0.0.3, 21.1.0.1, 21.1.0.2",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2488345.html",
+      "date": "2026-08-27"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2359009",
+      "headline_en": "While using bdt_cli incorrect routeECMP routes are displayed",
+      "headline_ja": "While using bdt_cli incorrect routeECMP routes are displayed",
+      "versions": "1.4.0, 1.4.1, 1.4.2, 1.4.3",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2359009.html",
+      "date": "2026-08-27"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2358997",
+      "headline_en": "After BGP routing re-convergence ECMP routes can be incorrect",
+      "headline_ja": "After BGP routing re-convergence ECMP routes can be incorrect",
+      "versions": "1.4.0, 1.4.1, 1.4.2, 1.4.3",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2358997.html",
+      "date": "2026-08-27"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2349797",
+      "headline_en": "Configuring dynamicCapacityReduction in F5BigAnalyzer CR triggers \"Invalid request schema\" in the custom analyzer plugin",
+      "headline_ja": "Configuring dynamicCapacityReduction in F5BigAnalyzer CR triggers \"Invalid request schema\" in the custom analyzer plugin",
+      "versions": "2.3.0, 2.3.1, 2.3.2",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2349797.html",
+      "date": "2026-08-27"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2461325",
+      "headline_en": "Removing or adding monitors to a FQDN pool on the Active device will result in a config-sync failure that does not self-heal",
+      "headline_ja": "Removing or adding monitors to a FQDN pool on the Active device will result in a config-sync failure that does not self-heal",
+      "versions": "17.5.1.6, 17.5.1.8, 17.5.1.9, 21.1.0, 21.1.0.1, 21.1.0.2",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2461325.html",
+      "date": "2026-08-26"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2348521",
+      "headline_en": "F5 r5K/10K device second PSU reports phantom/stale without PSU connected",
+      "headline_ja": "F5 r5K/10K device second PSU reports phantom/stale without PSU connected",
+      "versions": "(本文から検出できず)",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2348521.html",
+      "date": "2026-08-26"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2472301",
+      "headline_en": "TMM may produce a core file when you update the IP geolocation database on a system processing traffic",
+      "headline_ja": "TMM may produce a core file when you update the IP geolocation database on a system processing traffic",
+      "versions": "17.1.0, 17.1.0.1, 17.1.0.2, 17.1.0.3, 17.1.1, 17.1.1.1, 17.1.1.2, 17.1.1.3, 17.1.1.4, 17.1.2, 17.1.2.1, 17.1.2.2, 17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5, 17.5.0, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 21.1.0, 21.1.0.1, 21.1.0.2",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2472301.html",
+      "date": "2026-08-25"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2472169",
+      "headline_en": "Advanced WAF restarts repeatedly after changing TMM count",
+      "headline_ja": "Advanced WAF restarts repeatedly after changing TMM count",
+      "versions": "21.1.0, 21.1.0.1, 21.1.0.2",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2472169.html",
+      "date": "2026-08-25"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2471853",
+      "headline_en": "SSL Orchestrator Traffic Summary log policy-rule shows the individual policy item not the policy rule",
+      "headline_ja": "SSL Orchestrator Traffic Summary log policy-rule shows the individual policy item not the policy rule",
+      "versions": "17.1.0, 17.1.0.1, 17.1.0.2, 17.1.0.3, 17.1.1, 17.1.1.1, 17.1.1.2, 17.1.1.3, 17.1.1.4, 17.1.2, 17.1.2.1, 17.1.2.2, 17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5, 17.5.0, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 21.1.0, 21.1.0.1, 21.1.0.2",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2471853.html",
+      "date": "2026-08-25"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2471725",
+      "headline_en": "[TMM]TMM cored because accesses invalid state",
+      "headline_ja": "[TMM]TMM cored because accesses invalid state",
+      "versions": "17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2471725.html",
+      "date": "2026-08-25"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2471421",
+      "headline_en": "Stale iControlPortal.cgi processes accumulate after repeated httpd restarts on BIG-IP 21.1.x",
+      "headline_ja": "Stale iControlPortal.cgi processes accumulate after repeated httpd restarts on BIG-IP 21.1.x",
+      "versions": "21.1.0, 21.1.0.1, 21.1.0.2",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2471421.html",
+      "date": "2026-08-25"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2461221",
+      "headline_en": "The workaround for Bug ID 694707 (Hardware Crypto Offload is not compatible with HTTP/3 / QUIC) may result in performance degradation for other virtual servers that use encryption.",
+      "headline_ja": "The workaround for Bug ID 694707 (Hardware Crypto Offload is not compatible with HTTP/3 / QUIC) may result in performance degradation for other virtual servers that use encryption.",
+      "versions": "16.1.6.1, 17.1.3.4, 17.1.3.5, 17.5.1.8, 17.5.1.9, 21.0.0.3, 21.1.0.1, 21.1.0.2",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2461221.html",
+      "date": "2026-08-25"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2460741",
+      "headline_en": "FDB entries may not always be deleted when a tenant is rebooted or upgraded",
+      "headline_ja": "FDB entries may not always be deleted when a tenant is rebooted or upgraded",
+      "versions": "17.1.3.5, 21.1.0.2",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2460741.html",
+      "date": "2026-08-25"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2460637",
+      "headline_en": "Intermittent MCPD database errors for partition_object_join on BIG-IP VE HA pairs",
+      "headline_ja": "Intermittent MCPD database errors for partition_object_join on BIG-IP VE HA pairs",
+      "versions": "17.1.2, 17.1.2.1, 17.1.2.2, 17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2460637.html",
+      "date": "2026-08-25"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2459393",
+      "headline_en": "TMM crash when PEM policy tcl-filter uses PEM::session info attr on multi-blade system",
+      "headline_ja": "TMM crash when PEM policy tcl-filter uses PEM::session info attr on multi-blade system",
+      "versions": "17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2459393.html",
+      "date": "2026-08-25"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2457377",
+      "headline_en": "Missing MAILTO=\"\" statement in cron files",
+      "headline_ja": "Missing MAILTO=\"\" statement in cron files",
+      "versions": "21.1.0, 21.1.0.1, 21.1.0.2",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2457377.html",
+      "date": "2026-08-25"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2454733",
+      "headline_en": "[APM][Portal Access] [PA] APM session times out despite user activity in Network Access (NA)",
+      "headline_ja": "[APM][Portal Access] [PA] APM session times out despite user activity in Network Access (NA)",
+      "versions": "17.5.1.6, 17.5.1.8, 17.5.1.9",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2454733.html",
+      "date": "2026-08-25"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2452089",
+      "headline_en": "TMM crashes with FIPS enabled License",
+      "headline_ja": "TMM crashes with FIPS enabled License",
+      "versions": "21.1.0.1",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2452089.html",
+      "date": "2026-08-25"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2450009",
+      "headline_en": "SSL handshake failures between high availability peers when ConfigSync uses the management IP",
+      "headline_ja": "SSL handshake failures between high availability peers when ConfigSync uses the management IP",
+      "versions": "17.1.3.4, 17.5.1.8, 21.0.0.3, 21.1.0.1",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2450009.html",
+      "date": "2026-08-25"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2449693",
+      "headline_en": "Getting \"General database error.\" when trying to add failover network in devices section",
+      "headline_ja": "Getting \"General database error.\" when trying to add failover network in devices section",
+      "versions": "17.5.1.9, 17.1.3.5",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2449693.html",
+      "date": "2026-08-25"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2449661",
+      "headline_en": "ICMP Echo response state is not updated after virtual server or pool availability changes",
+      "headline_ja": "ICMP Echo response state is not updated after virtual server or pool availability changes",
+      "versions": "17.5.1.8",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2449661.html",
+      "date": "2026-08-25"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2449577",
+      "headline_en": "TMM core after running tmsh load sys config default",
+      "headline_ja": "TMM core after running tmsh load sys config default",
+      "versions": "17.5.1.9, 17.1.3.5",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2449577.html",
+      "date": "2026-08-25"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2449389",
+      "headline_en": "AFM DoS Network Events incorrectly show event=Attack None with attack ID=0 during active attacks.",
+      "headline_ja": "AFM DoS Network Events incorrectly show event=Attack None with attack ID=0 during active attacks.",
+      "versions": "17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2449389.html",
+      "date": "2026-08-25"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2448129",
+      "headline_en": "HMAC missing from HMAC DB for few modules in FIPS enabled device",
+      "headline_ja": "HMAC missing from HMAC DB for few modules in FIPS enabled device",
+      "versions": "17.1.3.4, 17.5.1.8, 21.0.0.3, 21.1.0.1",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2448129.html",
+      "date": "2026-08-25"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2447941",
+      "headline_en": "Manager role cannot modify a virtual server that uses a port list or address list",
+      "headline_ja": "Manager role cannot modify a virtual server that uses a port list or address list",
+      "versions": "17.1.0, 17.1.0.1, 17.1.0.2, 17.1.0.3, 17.1.1, 17.1.1.1, 17.1.1.2, 17.1.1.3, 17.1.1.4, 17.1.2, 17.1.2.1, 17.1.2.2, 17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5, 17.5.0, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 21.1.0, 21.1.0.1, 21.1.0.2",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2447941.html",
+      "date": "2026-08-25"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2447897",
+      "headline_en": "Proxy SSL does not forward FINISHED message from client to the server",
+      "headline_ja": "Proxy SSL does not forward FINISHED message from client to the server",
+      "versions": "17.1.0, 17.1.0.1, 17.1.0.2, 17.1.0.3, 17.1.1, 17.1.1.1, 17.1.1.2, 17.1.1.3, 17.1.1.4, 17.1.2, 17.1.2.1, 17.1.2.2, 17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5, 17.5.0, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 21.0.0, 21.0.0.1, 21.0.0.2, 21.0.0.3, 21.1.0, 21.1.0.1, 21.1.0.2",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2447897.html",
+      "date": "2026-08-25"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2447265",
+      "headline_en": "HMAC missing from HMAC DB for few modules in FIPS enabled device",
+      "headline_ja": "HMAC missing from HMAC DB for few modules in FIPS enabled device",
+      "versions": "17.1.3.4, 17.5.1.8, 21.0.0.3, 21.1.0.1",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2447265.html",
+      "date": "2026-08-25"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2446953",
+      "headline_en": "AAAA pool member addresses and service ports are not displayed correctly in the BIG-IQ GUI.",
+      "headline_ja": "AAAA pool member addresses and service ports are not displayed correctly in the BIG-IQ GUI.",
+      "versions": "8.4.1, 8.4.2, 8.4.2.1, 8.4.2.2",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2446953.html",
+      "date": "2026-08-25"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2445469",
+      "headline_en": "BIG-IP may crash when processing HTTP/2 traffic",
+      "headline_ja": "BIG-IP may crash when processing HTTP/2 traffic",
+      "versions": "21.1.0, 21.1.0.1, 21.1.0.2",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2445469.html",
+      "date": "2026-08-25"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2441981",
+      "headline_en": "BIG-IP GUI does not expose supported SNMPv3 SHA-2 and extended AES protocol options",
+      "headline_ja": "BIG-IP GUI does not expose supported SNMPv3 SHA-2 and extended AES protocol options",
+      "versions": "17.1.3.5, 17.5.1.8, 17.5.1.9, 21.0.0.2, 21.0.0.3, 21.1.0.1, 21.1.0.2",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2441981.html",
+      "date": "2026-08-25"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2441381",
+      "headline_en": "[APM] SAML Assertion memory leak",
+      "headline_ja": "[APM] SAML Assertion memory leak",
+      "versions": "16.1.0, 16.1.1, 16.1.2, 16.1.2.1, 16.1.2.2, 16.1.3, 16.1.3.1, 16.1.3.2, 16.1.3.3, 16.1.3.4, 16.1.3.5, 16.1.4, 16.1.4.1, 16.1.4.2, 16.1.4.3, 16.1.5, 16.1.5.1, 16.1.5.2, 16.1.6, 16.1.6.1, 17.1.0, 17.1.0.1, 17.1.0.2, 17.1.0.3, 17.1.1, 17.1.1.1, 17.1.1.2, 17.1.1.3, 17.1.1.4, 17.1.2, 17.1.2.1, 17.1.2.2, 17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5, 17.5.0, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 21.0.0, 21.0.0.1, 21.0.0.2, 21.0.0.3, 21.1.0, 21.1.0.1, 21.1.0.2",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2441381.html",
+      "date": "2026-08-25"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2440609",
+      "headline_en": "BIG-IQ DNS configuration import fails if GTM server names contain a colon.",
+      "headline_ja": "BIG-IQ DNS configuration import fails if GTM server names contain a colon.",
+      "versions": "8.4.0, 8.4.1, 8.4.2, 8.4.2.1, 8.4.2.2",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2440609.html",
+      "date": "2026-08-25"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2438129",
+      "headline_en": "MQTT traffic may cause BIG-IP crash",
+      "headline_ja": "MQTT traffic may cause BIG-IP crash",
+      "versions": "17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2438129.html",
+      "date": "2026-08-25"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2433845",
+      "headline_en": "icontrol/rest failure with response status 404",
+      "headline_ja": "icontrol/rest failure with response status 404",
+      "versions": "17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2433845.html",
+      "date": "2026-08-25"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2432029",
+      "headline_en": "False \"Unable to contact BIG-IP device\" message when switching partitions",
+      "headline_ja": "False \"Unable to contact BIG-IP device\" message when switching partitions",
+      "versions": "17.1.0, 17.1.0.1, 17.1.0.2, 17.1.0.3, 17.1.1, 17.1.1.1, 17.1.1.2, 17.1.1.3, 17.1.1.4, 17.1.2, 17.1.2.1, 17.1.2.2, 17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5, 17.5.0, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 21.1.0, 21.1.0.1, 21.1.0.2",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2432029.html",
+      "date": "2026-08-25"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2431857",
+      "headline_en": "BIG-IP DNS DNSSEC AXFR response incorrectly emits OPT pseudo-record in the Answer section, causing malformed zone-transfer data",
+      "headline_ja": "BIG-IP DNS DNSSEC AXFR response incorrectly emits OPT pseudo-record in the Answer section, causing malformed zone-transfer data",
+      "versions": "17.5.1.6, 17.5.1.8, 17.5.1.9",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2431857.html",
+      "date": "2026-08-25"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2397785",
+      "headline_en": "TCL error \"Invalid index 0 in class\" thrown in ltm log for external data group",
+      "headline_ja": "TCL error \"Invalid index 0 in class\" thrown in ltm log for external data group",
+      "versions": "17.5.1.9, 17.1.3.5",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2397785.html",
+      "date": "2026-08-25"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2389757",
+      "headline_en": "ICMP with ID 0 flows with ipother profile does not work",
+      "headline_ja": "ICMP with ID 0 flows with ipother profile does not work",
+      "versions": "17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 21.0.0, 21.0.0.1, 21.0.0.2, 21.0.0.3, 21.1.0, 21.1.0.1, 21.1.0.2",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2389757.html",
+      "date": "2026-08-25"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2389729",
+      "headline_en": "BIG-IP DNS Wide IP status icon does not update immediately after enable or disable",
+      "headline_ja": "BIG-IP DNS Wide IP status icon does not update immediately after enable or disable",
+      "versions": "17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2389729.html",
+      "date": "2026-08-25"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2388377",
+      "headline_en": "APM Portal Access Fails to Parse \"from\" and \"as\" outside of import export cases",
+      "headline_ja": "APM Portal Access Fails to Parse \"from\" and \"as\" outside of import export cases",
+      "versions": "(本文から検出できず)",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2388377.html",
+      "date": "2026-08-25"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2379841",
+      "headline_en": "F5OS does not send LAG information to tenant when LAG is configured with virtual wire",
+      "headline_ja": "F5OS does not send LAG information to tenant when LAG is configured with virtual wire",
+      "versions": "F5OS v2.0.0, F5OS v2.0.0-HR1, F5OS v2.0.0-HR2, F5OS-A 1.8.2, F5OS-A 1.8.3, F5OS-A 1.8.4, F5OS-A 1.8.4-HR1, F5OS-A 1.8.4-HR2, F5OS-C 1.8.2, F5OS-C 1.8.2-HR1, F5OS-C 1.8.2-HR2",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2379841.html",
+      "date": "2026-08-25"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2377749",
+      "headline_en": "'answer-default-zones'  set to 'no' makes DNS transparent cache respond locally to _dns.resolver.arpa instead of forwarding to the pool",
+      "headline_ja": "'answer-default-zones'  set to 'no' makes DNS transparent cache respond locally to _dns.resolver.arpa instead of forwarding to the pool",
+      "versions": "17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5, 17.5.0, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 21.1.0, 21.1.0.1, 21.1.0.2",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2377749.html",
+      "date": "2026-08-25"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2376465",
+      "headline_en": "BGP process may restart/crash due to insufficient buffer space validation when encoding MP-BGP NLRI attributes",
+      "headline_ja": "BGP process may restart/crash due to insufficient buffer space validation when encoding MP-BGP NLRI attributes",
+      "versions": "17.1.0, 17.1.0.1, 17.1.0.2, 17.1.0.3, 17.1.1, 17.1.1.1, 17.1.1.2, 17.1.1.3, 17.1.1.4, 17.1.2, 17.1.2.1, 17.1.2.2, 17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5, 17.5.0, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 21.0.0, 21.0.0.1, 21.0.0.2, 21.0.0.3, 21.1.0, 21.1.0.1, 21.1.0.2",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2376465.html",
+      "date": "2026-08-25"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2355241",
+      "headline_en": "AOM fault alarm is not raised, when LOP health checks failed",
+      "headline_ja": "AOM fault alarm is not raised, when LOP health checks failed",
+      "versions": "(本文から検出できず)",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2355241.html",
+      "date": "2026-08-25"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2390833",
+      "headline_en": "An unexpected connection error occurs when accessing servers.",
+      "headline_ja": "An unexpected connection error occurs when accessing servers.",
+      "versions": "7.2.7, 7.2.7.1",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2390833.html",
+      "date": "2026-08-18"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2449625",
+      "headline_en": "On restart, TMM reserves NAT IP ranges used by another active TMM",
+      "headline_ja": "On restart, TMM reserves NAT IP ranges used by another active TMM",
+      "versions": "2.2.1, 2.2.2, 2.2.3, 2.3.0, 2.3.1, 2.3.2",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2449625.html",
+      "date": "2026-08-15"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2448133",
+      "headline_en": "MCP Fails to Validate Dos Profile while attaching to a Virtual Server",
+      "headline_ja": "MCP Fails to Validate Dos Profile while attaching to a Virtual Server",
+      "versions": "17.5.1.8, 17.5.1.9",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2448133.html",
+      "date": "2026-08-15"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2457541",
+      "headline_en": "Warning: The current license is not valid - Fault code: 51133",
+      "headline_ja": "Warning: The current license is not valid - Fault code: 51133",
+      "versions": "8.1.0, 8.1.0.1, 8.1.0.2, 8.2.0, 8.2.0.1, 8.3.0, 8.4.0, 8.4.1, 8.4.2, 8.4.2.1, 8.4.2.2",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2457541.html",
+      "date": "2026-08-14"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2449393",
+      "headline_en": "Unable to create a certificate/CSR in BIG-IQ",
+      "headline_ja": "Unable to create a certificate/CSR in BIG-IQ",
+      "versions": "8.4.2.1, 8.4.2.2",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2449393.html",
+      "date": "2026-08-14"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2405133",
+      "headline_en": "Fix for external/database monitor status issue",
+      "headline_ja": "Fix for external/database monitor status issue",
+      "versions": "17.1.3.4, 17.5.1.8, 21.0.0.3, 21.1.0.1",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2405133.html",
+      "date": "2026-08-14"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2384197",
+      "headline_en": "TLS handshake failure when intermediate CA certificates are used as Trusted CA in SSL profile",
+      "headline_ja": "TLS handshake failure when intermediate CA certificates are used as Trusted CA in SSL profile",
+      "versions": "17.1.3.4, 17.5.1.8, 21.0.0.3, 21.1.0.1",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2384197.html",
+      "date": "2026-08-13"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2449609",
+      "headline_en": "Installing a hotfix via TMUI fails with \"Hotfix test failed due to version incompatibility\"",
+      "headline_ja": "Installing a hotfix via TMUI fails with \"Hotfix test failed due to version incompatibility\"",
+      "versions": "21.1.0, 21.1.0.1, 21.1.0.2",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2449609.html",
+      "date": "2026-08-07"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2399785",
+      "headline_en": "Using a mac masquerade address of 02:F5:F5:xx:xx:xx causes traffic degradation.",
+      "headline_ja": "Using a mac masquerade address of 02:F5:F5:xx:xx:xx causes traffic degradation.",
+      "versions": "F5OS v2.0.0, F5OS v2.0.0-HR1, F5OS v2.0.0-HR2, F5OS-A 1.8.3, F5OS-A 1.8.4, F5OS-A 1.8.4-HR1, F5OS-A 1.8.4-HR2, F5OS-C 1.8.2, F5OS-C 1.8.2-HR1, F5OS-C 1.8.2-HR2",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2399785.html",
+      "date": "2026-08-05"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2447237",
+      "headline_en": "R4000 or r2000 may cause MAC address flapping on upstream switches due to MLD reports coming from unconfigured VF interfaces",
+      "headline_ja": "R4000 or r2000 may cause MAC address flapping on upstream switches due to MLD reports coming from unconfigured VF interfaces",
+      "versions": "F5OS v2.0.0, F5OS v2.0.0-HR1, F5OS v2.0.0-HR2, F5OS-A 1.8.0, F5OS-A 1.8.1, F5OS-A 1.8.2, F5OS-A 1.8.3, F5OS-A 1.8.4, F5OS-A 1.8.4-HR1, F5OS-A 1.8.4-HR2",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2447237.html",
+      "date": "2026-07-29"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2433793",
+      "headline_en": "Tenant image or F5OS ISO upload fails with \"Copy failed\" error in the GUI",
+      "headline_ja": "Tenant image or F5OS ISO upload fails with \"Copy failed\" error in the GUI",
+      "versions": "F5OS-C 1.8.0, F5OS-C 1.6.2, F5OS-C 1.6.1, F5OS-C 1.6.0, F5OS-C 1.5.1, F5OS-C 1.5.0, F5OS-A 1.8.4-HR1, F5OS-A 1.7.0, F5OS-A 1.5.4, F5OS-A 1.5.3, F5OS-A 1.5.2, F5OS-A 1.5.1, F5OS-A 1.5.0, F5OS v2.0.0-HR1, F5OS v2.0.0",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2433793.html",
+      "date": "2026-07-29"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2384665",
+      "headline_en": "F5OS-A 1.8.4 allows SNMP user names with trailing spaces, causing GUI 404 error",
+      "headline_ja": "F5OS-A 1.8.4 allows SNMP user names with trailing spaces, causing GUI 404 error",
+      "versions": "F5OS-A 1.8.4, F5OS-A 1.8.4-HR1, F5OS-A 1.8.4-HR2",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2384665.html",
+      "date": "2026-07-29"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2395777",
+      "headline_en": "Radius monitor password encryption is incorrect",
+      "headline_ja": "Radius monitor password encryption is incorrect",
+      "versions": "21.1.0, 21.1.0.1, 21.1.0.2",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2395777.html",
+      "date": "2026-07-16"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2391145",
+      "headline_en": "HTTP/2 egress traffic is not forwarded on OpenShift 4.18.39 with ConnectX-7 (CX7) adapters",
+      "headline_ja": "HTTP/2 egress traffic is not forwarded on OpenShift 4.18.39 with ConnectX-7 (CX7) adapters",
+      "versions": "2.3.2",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2391145.html",
+      "date": "2026-07-16"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2389713",
+      "headline_en": "Intermittent retention of HTTP profile settings after detachment",
+      "headline_ja": "Intermittent retention of HTTP profile settings after detachment",
+      "versions": "2.3.2",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2389713.html",
+      "date": "2026-07-16"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2391333",
+      "headline_en": "Bigd: Failed to find EAV pinger script file for imported external monitor",
+      "headline_ja": "Bigd: Failed to find EAV pinger script file for imported external monitor",
+      "versions": "17.1.3.4, 17.5.1.8, 21.0.0.3, 21.1.0.1",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2391333.html",
+      "date": "2026-07-15"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2391209",
+      "headline_en": "Intermittent traffic failures when tenant is running BIG-IP v17.5.1.6 or above and host is on version prior to F5OS-A 1.8.0 or F5OS-C 1.8.0",
+      "headline_ja": "Intermittent traffic failures when tenant is running BIG-IP v17.5.1.6 or above and host is on version prior to F5OS-A 1.8.0 or F5OS-C 1.8.0",
+      "versions": "17.5.1.6, 17.5.1.8, 17.5.1.9",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2391209.html",
+      "date": "2026-07-15"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2389797",
+      "headline_en": "Subscriber ID is missing in the `rsyslog` logs following the termination of all DSSM pods",
+      "headline_ja": "Subscriber ID is missing in the `rsyslog` logs following the termination of all DSSM pods",
+      "versions": "2.3.2",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2389797.html",
+      "date": "2026-07-15"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2389277",
+      "headline_en": "ASM GUI Learning and Blocking page search result returning extra unnecessary items",
+      "headline_ja": "ASM GUI Learning and Blocking page search result returning extra unnecessary items",
+      "versions": "17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 21.1.0, 21.1.0.1, 21.1.0.2",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2389277.html",
+      "date": "2026-07-15"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2389273",
+      "headline_en": "Incorrect GUI HTTP Protocol Sub-Violation counts under Learning and Blocking Settings",
+      "headline_ja": "Incorrect GUI HTTP Protocol Sub-Violation counts under Learning and Blocking Settings",
+      "versions": "17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 21.1.0, 21.1.0.1, 21.1.0.2",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2389273.html",
+      "date": "2026-07-15"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2388333",
+      "headline_en": "BIG-IP terminates HTTP/2 with GOAWAY/PROTOCOL_ERROR when client sends empty initial SETTINGS frame",
+      "headline_ja": "BIG-IP terminates HTTP/2 with GOAWAY/PROTOCOL_ERROR when client sends empty initial SETTINGS frame",
+      "versions": "21.1.0, 21.1.0.1, 21.1.0.2",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2388333.html",
+      "date": "2026-07-15"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2386237",
+      "headline_en": "Traffic-matching-criteria with no route-domain specified fails to match traffic in non-default route-domain partition",
+      "headline_ja": "Traffic-matching-criteria with no route-domain specified fails to match traffic in non-default route-domain partition",
+      "versions": "17.1.0, 17.1.0.1, 17.1.0.2, 17.1.0.3, 17.1.1, 17.1.1.1, 17.1.1.2, 17.1.1.3, 17.1.1.4, 17.1.2, 17.1.2.1, 17.1.2.2, 17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5, 17.5.0, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 21.0.0, 21.0.0.1, 21.0.0.2, 21.0.0.3, 21.1.0, 21.1.0.1, 21.1.0.2",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2386237.html",
+      "date": "2026-07-15"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2380665",
+      "headline_en": "FIPS Key Deletion via tmsh/GUI/iControl Fails When /config/filestore/.trash_bin_d Path is Missing.",
+      "headline_ja": "FIPS Key Deletion via tmsh/GUI/iControl Fails When /config/filestore/.trash_bin_d Path is Missing.",
+      "versions": "17.5.1.9, 17.1.3.5",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2380665.html",
+      "date": "2026-07-15"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2388309",
+      "headline_en": "Error (TypeError: \"x\" is not a function) in jquery-ui-1.8.17.min.js:49:4075",
+      "headline_ja": "Error (TypeError: \"x\" is not a function) in jquery-ui-1.8.17.min.js:49:4075",
+      "versions": "17.1.3.2, 17.1.3.4, 17.1.3.5, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 21.1.0, 21.1.0.1, 21.1.0.2",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2388309.html",
+      "date": "2026-07-10"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2386137",
+      "headline_en": "Remote SNMPv3 fails to connect",
+      "headline_ja": "Remote SNMPv3 fails to connect",
+      "versions": "17.1.0, 17.1.0.1, 17.1.0.2, 17.1.0.3, 17.1.1, 17.1.1.1, 17.1.1.2, 17.1.1.3, 17.1.1.4, 17.1.2, 17.1.2.1, 17.1.2.2, 17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5, 17.5.0, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 21.0.0, 21.0.0.1, 21.0.0.2, 21.0.0.3, 21.1.0, 21.1.0.1, 21.1.0.2",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2386137.html",
+      "date": "2026-07-10"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2386021",
+      "headline_en": "TMM fails to load large number of bot defense signatures",
+      "headline_ja": "TMM fails to load large number of bot defense signatures",
+      "versions": "17.1.0, 17.1.0.1, 17.1.0.2, 17.1.0.3, 17.1.1, 17.1.1.1, 17.1.1.2, 17.1.1.3, 17.1.1.4, 17.1.2, 17.1.2.1, 17.1.2.2, 17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5, 17.5.0, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 21.0.0, 21.0.0.1, 21.0.0.2, 21.0.0.3, 21.1.0, 21.1.0.1, 21.1.0.2",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2386021.html",
+      "date": "2026-07-10"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2384421",
+      "headline_en": "False positive with BruteForce in certain configuration",
+      "headline_ja": "False positive with BruteForce in certain configuration",
+      "versions": "17.5.1.8, 17.1.3.4",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2384421.html",
+      "date": "2026-07-10"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2377817",
+      "headline_en": "TMM may ignore certain DOS L7 config objects",
+      "headline_ja": "TMM may ignore certain DOS L7 config objects",
+      "versions": "17.1.0, 17.1.0.1, 17.1.0.2, 17.1.0.3, 17.1.1, 17.1.1.1, 17.1.1.2, 17.1.1.3, 17.1.1.4, 17.1.2, 17.1.2.1, 17.1.2.2, 17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5, 17.5.0, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 21.0.0, 21.0.0.1, 21.0.0.2, 21.0.0.3, 21.1.0, 21.1.0.1, 21.1.0.2",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2377817.html",
+      "date": "2026-07-10"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2368593",
+      "headline_en": "DNS RPZ policies are not applied when upstream server returns error responses",
+      "headline_ja": "DNS RPZ policies are not applied when upstream server returns error responses",
+      "versions": "21.1.0, 21.1.0.1, 21.1.0.2",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2368593.html",
+      "date": "2026-07-10"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2366693",
+      "headline_en": "MM may enter a crash loop when handling large configurations.",
+      "headline_ja": "MM may enter a crash loop when handling large configurations.",
+      "versions": "17.1.0, 17.1.0.1, 17.1.0.2, 17.1.0.3, 17.1.1, 17.1.1.1, 17.1.1.2, 17.1.1.3, 17.1.1.4, 17.1.2, 17.1.2.1, 17.1.2.2, 17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5, 17.5.0, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 21.0.0, 21.0.0.1, 21.0.0.2, 21.0.0.3, 21.1.0, 21.1.0.1, 21.1.0.2",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2366693.html",
+      "date": "2026-07-10"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2365469",
+      "headline_en": "Mdmsyncmgr truncates SAS signature when following Intune redirect to Azure Blob Storage, leading to NonCompliantDevice retrieval failure",
+      "headline_ja": "Mdmsyncmgr truncates SAS signature when following Intune redirect to Azure Blob Storage, leading to NonCompliantDevice retrieval failure",
+      "versions": "17.1.0, 17.1.0.1, 17.1.0.2, 17.1.0.3, 17.1.1, 17.1.1.1, 17.1.1.2, 17.1.1.3, 17.1.1.4, 17.1.2, 17.1.2.1, 17.1.2.2, 17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.5.0, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 21.0.0, 21.0.0.1, 21.0.0.2, 21.0.0.3, 21.1.0, 21.1.0.1",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2365469.html",
+      "date": "2026-07-10"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2365353",
+      "headline_en": "Snat-translation object may get orphaned after running \"tmsh delete ltm snat all\" command.",
+      "headline_ja": "Snat-translation object may get orphaned after running \"tmsh delete ltm snat all\" command.",
+      "versions": "21.1.0, 21.1.0.1",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2365353.html",
+      "date": "2026-07-10"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2358897",
+      "headline_en": "After upgrading to version 17.5.1.6, APM rejects HTTP requests containing unencoded double quotes in the URI.",
+      "headline_ja": "After upgrading to version 17.5.1.6, APM rejects HTTP requests containing unencoded double quotes in the URI.",
+      "versions": "17.5.1.6, 17.5.1.8",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2358897.html",
+      "date": "2026-07-10"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2355265",
+      "headline_en": "Creating a TMC-based IPv6 virtual server with a port list fails if other IPv6 wildcard listeners are present.",
+      "headline_ja": "Creating a TMC-based IPv6 virtual server with a port list fails if other IPv6 wildcard listeners are present.",
+      "versions": "17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2355265.html",
+      "date": "2026-07-10"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2354021",
+      "headline_en": "An LTM policy configured to only disable AVR (avr disable) cannot be applied to a virtual server unless an AVR (analytics) profile is attached.",
+      "headline_ja": "An LTM policy configured to only disable AVR (avr disable) cannot be applied to a virtual server unless an AVR (analytics) profile is attached.",
+      "versions": "17.1.1, 17.1.1.1, 17.1.1.2, 17.1.1.3, 17.1.1.4, 17.1.2, 17.1.2.1, 17.1.2.2, 17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 21.1.0, 21.1.0.1, 21.1.0.2",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2354021.html",
+      "date": "2026-07-10"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2347033",
+      "headline_en": "[APM] Kerberos authentication fails after upgrading from version 17.5.1.3 to 17.5.1.6.",
+      "headline_ja": "[APM] Kerberos authentication fails after upgrading from version 17.5.1.3 to 17.5.1.6.",
+      "versions": "17.5.1.6, 17.5.1.8, 17.5.1.9",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2347033.html",
+      "date": "2026-07-10"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2347029",
+      "headline_en": "Light memoy leak after signatures detected attack ended",
+      "headline_ja": "Light memoy leak after signatures detected attack ended",
+      "versions": "17.5.1.8, 17.1.3.4",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2347029.html",
+      "date": "2026-07-10"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2346977",
+      "headline_en": "Virtual Servers with an SSL Orchestrator Access profile don't send Server Hello to the client",
+      "headline_ja": "Virtual Servers with an SSL Orchestrator Access profile don't send Server Hello to the client",
+      "versions": "21.1.0, 21.1.0.1, 21.1.0.2",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2346977.html",
+      "date": "2026-07-10"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2358921",
+      "headline_en": "Large JWTs causes tmm core while encoding",
+      "headline_ja": "Large JWTs causes tmm core while encoding",
+      "versions": "17.5.1.6, 17.5.1.8, 17.5.1.9",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2358921.html",
+      "date": "2026-07-09"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2355433",
+      "headline_en": "Cron entries after the first one in file do not run",
+      "headline_ja": "Cron entries after the first one in file do not run",
+      "versions": "F5OS-A 1.8.4",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2355433.html",
+      "date": "2026-06-28"
     },
     {
       "source": "NVD (CVSS 8.1)",
