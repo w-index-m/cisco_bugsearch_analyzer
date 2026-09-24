@@ -114,8 +114,25 @@ def display_bug_rows_table(rows, session_key, name, key_suffix):
         }
         for r in rows
     ])
+
+    # st.dataframe はCanvas描画のグリッドのため、ブラウザの通常のページ内検索
+    # （Ctrl+F等）では中身のテキストを見つけられない（表右上の🔍アイコンが
+    # 表専用の検索だが気づかれにくい）。CVE ID等で「見つからない」と誤解
+    # されないよう、表の直前に絞り込み用の検索ボックスを用意する。
+    filter_text = st.text_input(
+        "🔍 この表をキーワードで絞り込み（CVE ID・バージョン・見出し等）",
+        key=f"{session_key}_table_filter_{key_suffix}",
+    )
+    display_table = table
+    if filter_text:
+        mask = table.apply(
+            lambda col: col.astype(str).str.contains(filter_text, case=False, na=False)
+        ).any(axis=1)
+        display_table = table[mask]
+        st.caption(f"「{filter_text}」に一致: {len(display_table)} / {len(table)} 件")
+
     st.dataframe(
-        table,
+        display_table,
         use_container_width=True,
         hide_index=True,
         column_config={
