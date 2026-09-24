@@ -44,7 +44,28 @@ jobs:
           git add data/vendor_bugs/
           if git diff --cached --quiet; then
             echo "No changes to commit"
-          else
-            git commit -m "chore: update vendor bug/CVE cache ($(date -u +%Y-%m-%d))"
-            git push
+            exit 0
           fi
+
+          git commit -m "chore: update vendor bug/CVE cache ($(date -u +%Y-%m-%d))"
+
+          # 収集ジョブの実行中に他のコミットがmainへpushされていると、単純な
+          # git pushは "fetch first" で拒否される。その場合は最新のリモート
+          # 状態の上にこのコミット（data/vendor_bugs/ のみの差分）をrebaseで
+          # 積み直して再試行する。rebaseなら他ファイルへの無関係な変更を
+          # 巻き戻すことなく、このコミットの差分だけを安全に積み直せる。
+          for i in 1 2 3 4 5; do
+            if git push; then
+              exit 0
+            fi
+            echo "push rejected (attempt $i/5), rebasing onto latest ${GITHUB_REF_NAME} and retrying..."
+            sleep $((i * 3))
+            git fetch origin "${GITHUB_REF_NAME}"
+            if ! git rebase "origin/${GITHUB_REF_NAME}"; then
+              git rebase --abort
+              echo "::error::rebase conflict while retrying push; aborting"
+              exit 1
+            fi
+          done
+          echo "::error::failed to push vendor bug/CVE cache after 5 attempts"
+          exit 1
