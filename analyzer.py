@@ -2498,6 +2498,9 @@ def collect_nvd_vendor_rows(keyword, version_extractor=_extract_generic_versions
             "versions": ", ".join(versions) if versions else "(本文から検出できず)",
             "url": r["url"],
             "date": r["published"][:10] if r.get("published") else None,
+            # CVSSスコア（数値、無ければNone）。sort_bug_rows_by_date_desc の
+            # 同日内ソートで使う
+            "cvss": r["cvss_score"],
             # KEV: True=CISA KEV入り（実際に悪用確認済み） / False=KEV入りでない / None=判定不可（取得失敗）
             "kev": (r["cve_id"] in kev_ids) if kev_ids is not None else None,
             # EPSS: 悪用予測確率（0〜1）。取得できなければ None
@@ -2547,8 +2550,13 @@ def sort_bug_rows_by_date_desc(rows):
     """
     F5 BIG-IP バグ収集結果（NVD・F5バグトラッカー混在）を、日付が新しい順に
     並べ替える。日付が取得できなかった行（date=None）は末尾にまとめる。
+    同じ日付の行同士は、CVSSスコアが高い順（CVSSが無い行は最後）にする。
     """
-    return sorted(rows, key=lambda r: r.get("date") or "0000-00-00", reverse=True)
+    return sorted(
+        rows,
+        key=lambda r: (r.get("date") or "0000-00-00", r.get("cvss") if r.get("cvss") is not None else -1),
+        reverse=True,
+    )
 
 
 def search_f5_bigip_tmm_bugs(source="both", nvd_keyword="BIG-IP LTM", bug_ids=None,
