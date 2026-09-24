@@ -2268,22 +2268,38 @@ def _extract_generic_versions(text):
 
 def collect_nvd_vendor_rows(keyword, version_extractor=_extract_generic_versions,
                              translate_engine=None, deepl_api_key=None, nvidia_api_key=None,
-                             api_key=None, results_limit=20, target_version=None):
+                             api_key=None, results_limit=20, target_version=None, fetch_limit=250):
     """
     NVD（CVE/CVSSを集約する米国立脆弱性データベース）をキーワード検索し、
-    search_cve_with_translation() の結果を、このモジュール共通の行フォーマットに変換する。
+    このモジュール共通の行フォーマットに変換する。
+
+    NVD のキーワード検索は日付降順で結果を返すとは限らない（古い順・ID順など）ため、
+    まず fetch_limit 件を未翻訳のまま取得し、published 日付が新しい順に並べ替えてから
+    実際に表示する results_limit 件だけを切り出す。翻訳は、この切り出し後の件数分
+    だけ行うことで、後で捨てられる古い行への無駄な翻訳API呼び出しを避ける。
     version_extractor を差し替えることで、ベンダーごとのバージョン表記の
     抽出方法を変えられる（既定は汎用の X.Y.Z 抽出）。
     """
-    results = search_cve_with_translation(
-        keyword,
-        engine=translate_engine or "google",
-        deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key,
-        api_key=api_key, results_limit=results_limit, target_version=target_version,
+    results = search_cve_by_keyword(
+        keyword, results_limit=fetch_limit, api_key=api_key, target_version=target_version,
     )
 
     if isinstance(results, dict) and "error" in results:
         return {"error": results["error"]}
+
+    results.sort(key=lambda r: r.get("published") or "", reverse=True)
+    results = results[:results_limit]
+
+    if translate_engine:
+        for r in results:
+            r["description_ja"] = translate_headline(
+                r["description_en"], engine=translate_engine,
+                deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key,
+            )
+
+    if target_version:
+        affected_rank = {True: 0, None: 1, False: 2}
+        results.sort(key=lambda r: (affected_rank[r["affected"]], -(r["cvss_score"] or 0)))
 
     rows = []
     for r in results:
@@ -2292,7 +2308,7 @@ def collect_nvd_vendor_rows(keyword, version_extractor=_extract_generic_versions
             "source": f"NVD (CVSS {r['cvss_score'] if r['cvss_score'] is not None else '-'})",
             "id": r["cve_id"],
             "headline_en": r["description_en"],
-            "headline_ja": r["description_ja"] if translate_engine else "",
+            "headline_ja": r.get("description_ja", "") if translate_engine else "",
             "versions": ", ".join(versions) if versions else "(本文から検出できず)",
             "url": r["url"],
             "date": r["published"][:10] if r.get("published") else None,
@@ -2305,18 +2321,18 @@ def collect_nvd_vendor_rows(keyword, version_extractor=_extract_generic_versions
 
 
 def collect_nvd_tmm_rows(keyword, translate_engine=None, deepl_api_key=None, nvidia_api_key=None,
-                          api_key=None, results_limit=20, target_version=None):
+                          api_key=None, results_limit=20, target_version=None, fetch_limit=250):
     """collect_nvd_vendor_rows() のF5 BIG-IP専用版（バージョン抽出にBIG-IP形式を使う）"""
     return collect_nvd_vendor_rows(
         keyword, version_extractor=_extract_bigip_versions,
         translate_engine=translate_engine, deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key,
-        api_key=api_key, results_limit=results_limit, target_version=target_version,
+        api_key=api_key, results_limit=results_limit, target_version=target_version, fetch_limit=fetch_limit,
     )
 
 
 def search_vendor_bugs(nvd_keyword, version_extractor=_extract_generic_versions,
                         translate_engine=None, deepl_api_key=None, nvidia_api_key=None,
-                        nvd_api_key=None, target_version=None, results_limit=20):
+                        nvd_api_key=None, target_version=None, results_limit=20, fetch_limit=250):
     """
     汎用のベンダーバグ収集（NVDのみ）。Palo Alto / FortiGate 等、F5のような
     個別バグIDページの公開トラッカーが確認できていないベンダー向け。
@@ -2326,7 +2342,7 @@ def search_vendor_bugs(nvd_keyword, version_extractor=_extract_generic_versions,
     rows = collect_nvd_vendor_rows(
         nvd_keyword, version_extractor=version_extractor,
         translate_engine=translate_engine, deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key,
-        api_key=nvd_api_key, results_limit=results_limit, target_version=target_version,
+        api_key=nvd_api_key, results_limit=results_limit, target_version=target_version, fetch_limit=fetch_limit,
     )
     if isinstance(rows, dict) and "error" in rows:
         return rows
@@ -2343,7 +2359,7 @@ def sort_bug_rows_by_date_desc(rows):
 
 def search_f5_bigip_tmm_bugs(source="both", nvd_keyword="F5 BIG-IP TMM", bug_ids=None,
                               translate_engine=None, deepl_api_key=None, nvidia_api_key=None,
-                              nvd_api_key=None, target_version=None):
+                              nvd_api_key=None, target_version=None, fetch_limit=250):
     """
     F5 BIG-IP TMM関連バグを NVD / F5公式バグトラッカーの指定した組み合わせで収集し、
     最近の日付順（新しい順、日付不明は末尾）に並べて返す。
@@ -2362,7 +2378,7 @@ def search_f5_bigip_tmm_bugs(source="both", nvd_keyword="F5 BIG-IP TMM", bug_ids
         nvd_rows = collect_nvd_tmm_rows(
             nvd_keyword, translate_engine=translate_engine,
             deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key,
-            api_key=nvd_api_key, target_version=target_version,
+            api_key=nvd_api_key, target_version=target_version, fetch_limit=fetch_limit,
         )
         if isinstance(nvd_rows, dict) and "error" in nvd_rows:
             return nvd_rows

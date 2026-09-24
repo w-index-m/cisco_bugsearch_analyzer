@@ -928,6 +928,12 @@ st.info(
     "TMM関連と確認済みのものをデフォルトで収録）を1件ずつ取得する方式にして"
     "います。ご自身で見つけたBug IDがあれば下の欄に追加できます。"
 )
+st.info(
+    "💡 NVDへの登録はF5公式発表より遅れることがあります。最新のセキュリティ情報は"
+    "下記のF5公式ページも合わせてご確認ください。\n\n"
+    "- F5セキュリティ通知の概要（K12201527）: https://my.f5.com/manage/s/article/K12201527\n"
+    "- F5 Quarterly/Out-of-band Security Notification（要ログイン）: https://my.f5.com/manage/s/"
+)
 
 display_vendor_bug_cache("f5", "F5 BIG-IP TMM")
 
@@ -988,11 +994,16 @@ if st.button("🔎 F5 BIG-IP TMM バグを検索", key="f5_search_btn"):
 st.markdown("---")
 
 
-def render_vendor_bug_search(title, icon, session_key, default_keyword, version_placeholder="例: 11.1.2"):
+def render_vendor_bug_search(title, icon, session_key, default_keyword, version_placeholder="例: 11.1.2",
+                              official_links=None):
     """
     Palo Alto / FortiGate 等、F5のような個別バグIDページの公開トラッカーが
     確認できていないベンダー向けの、NVDベースのバグ検索UIを描画する共通関数。
     対象OS（バージョン）・見出し（日本語）を新しい順に一覧表示する。
+
+    official_links: [(表示名, URL), ...]。NVDはセキュリティ脆弱性（CVE）のみを
+        対象とするため、ベンダー公式のセキュリティアドバイザリ一覧など、
+        NVDより早く・網羅的に情報が出る参考リンクがあれば併せて案内する。
     """
     st.markdown(f"### {icon} {title}")
     st.caption(
@@ -1000,6 +1011,12 @@ def render_vendor_bug_search(title, icon, session_key, default_keyword, version_
         "対象OS（バージョン）と見出し（日本語）を新しい順（日付が新しいもの順、"
         "不明なものは末尾）に一覧表示します。"
     )
+    if official_links:
+        links_md = "\n".join(f"- {label}: {url}" for label, url in official_links)
+        st.info(
+            "💡 NVDへの登録はベンダー公式発表より遅れることがあります。"
+            f"最新情報は下記のベンダー公式ページも合わせてご確認ください。\n\n{links_md}"
+        )
 
     display_vendor_bug_cache(session_key, title)
 
@@ -1038,8 +1055,19 @@ def render_vendor_bug_search(title, icon, session_key, default_keyword, version_
     st.markdown("---")
 
 
-render_vendor_bug_search("Palo Alto (PAN-OS) バグ検索", "🔥", "paloalto", "Palo Alto PAN-OS", version_placeholder="例: 11.1.2")
-render_vendor_bug_search("FortiGate (FortiOS) バグ検索", "🛡️", "fortigate", "Fortinet FortiOS", version_placeholder="例: 7.4.8")
+render_vendor_bug_search(
+    "Palo Alto (PAN-OS) バグ検索", "🔥", "paloalto", "Palo Alto PAN-OS", version_placeholder="例: 11.1.2",
+    official_links=[
+        ("Palo Alto Networks セキュリティアドバイザリ（PSIRT、CVE別ページ）", "https://security.paloaltonetworks.com/"),
+        ("PAN-OS リリースノート（Known and Addressed Issues、バージョン別）", "https://docs.paloaltonetworks.com/ngfw/release-notes"),
+    ],
+)
+render_vendor_bug_search(
+    "FortiGate (FortiOS) バグ検索", "🛡️", "fortigate", "Fortinet FortiOS", version_placeholder="例: 7.4.8",
+    official_links=[
+        ("Fortinet PSIRT アドバイザリ一覧", "https://www.fortiguard.com/psirt"),
+    ],
+)
 
 st.markdown("**一般的な既知の問題を貼り付けて分析**")
 st.caption(
