@@ -2105,19 +2105,23 @@ def lookup_cisco_eol_matches(os_family, version):
     ]
 
 
-# ==================== F5 BIG-IP TMM バグ収集 ====================
+# ==================== F5 BIG-IP バグ収集 ====================
 #
-# F5 BIG-IP の TMM（Traffic Management Microkernel）関連バグを、
-# NVD（CVE/CVSSを集約する米国立脆弱性データベース）と、F5公式バグトラッカー
-# （cdn.f5.com/product/bugtracker/ID<番号>.html、CVEにならない一般的な
-# 既知の問題）の両方から収集する。
+# F5 BIG-IP 関連バグを、NVD（CVE/CVSSを集約する米国立脆弱性データベース）と、
+# F5公式バグトラッカー（cdn.f5.com/product/bugtracker/ID<番号>.html、CVEに
+# ならない一般的な既知の問題）の両方から収集する。
 #
-# 注意: cdn.f5.com は開発環境からの通信がネットワークポリシーでブロックされて
-# おり、バグトラッカーの検索ページの実際のHTML構造を確認できていない。
-# そのため検索フォームは使わず、個別のBug IDページ（構造はWeb検索の
-# スニペットで確認済み）を1件ずつ取得する方式にしている。KNOWN_TMM_BUG_IDS
-# は本機能作成時点でTMM関連と確認できたBug IDのスナップショットであり、
-# 網羅的な一覧ではない（ユーザーが任意のBug IDを追加指定できる）。
+# バグトラッカーには https://cdn.f5.com/product/bugtracker/index.html に
+# 全件一覧ページ（数千件のBug IDへのリンクを列挙した単純なHTML）があることが
+# GitHub Actions経由の調査で判明した。fetch_f5_bug_tracker_index() でこの
+# 一覧からBug ID全体を取得し、そのうち数値が大きい（＝新しく採番された）
+# 上位 bugtracker_limit 件だけを実際に取得する。1件ずつ個別ページを取得する
+# 方式は変わらないため、全件（数千件）を毎回取得するのはF5サーバーへの
+# 負荷・収集ジョブの実行時間の両面で現実的でなく、上限を設けている。
+# 一覧の取得自体に失敗した場合（開発環境からのブロック等）は、
+# 従来通りKNOWN_TMM_BUG_IDS（本機能作成時点でTMM関連と確認できたBug IDの
+# スナップショット）にフォールバックする。ユーザーが任意のBug IDを追加
+# 指定することもできる。
 
 KNOWN_TMM_BUG_IDS = [
     "1006509",  # TMM memory leak
@@ -2129,6 +2133,29 @@ KNOWN_TMM_BUG_IDS = [
 ]
 
 F5_BUGTRACKER_URL = "https://cdn.f5.com/product/bugtracker/ID{bug_id}.html"
+F5_BUG_LIST_URL = "https://cdn.f5.com/product/bugtracker/index.html"
+
+
+def fetch_f5_bug_tracker_index(timeout=20):
+    """
+    F5公式バグトラッカーの全件一覧ページから、収録されている全Bug IDを取得する。
+    このページには数千件のBug IDへのリンクが列挙されており、Web検索で偶然
+    見つけた数件だけに限定されない、より広い範囲の収集が可能になる。
+
+    Returns:
+        Bug ID文字列のリスト。新しいものを優先する目安として、Bug ID数値が
+        大きい順（F5では概ね新しいバグほど大きい番号が採番される）にソート
+        済み。取得に失敗した場合や1件も見つからない場合は None。
+    """
+    try:
+        response = requests.get(F5_BUG_LIST_URL, timeout=timeout, headers={"User-Agent": "Mozilla/5.0"})
+        response.raise_for_status()
+    except Exception:
+        return None
+    ids = re.findall(r'ID(\d+)\.html', response.text)
+    if not ids:
+        return None
+    return sorted(set(ids), key=int, reverse=True)
 
 # BIG-IPのバージョン表記（例: 17.1.2, 16.1.0, 15.1.4.1）を抽出する正規表現。
 # メジャーバージョンは実在するリリース系統（12〜17番台）に絞り、日付や
@@ -2573,14 +2600,19 @@ def sort_bug_rows_by_date_desc(rows):
 def search_f5_bigip_tmm_bugs(source="both", nvd_keyword="BIG-IP", bug_ids=None,
                               translate_engine=None, deepl_api_key=None, nvidia_api_key=None,
                               nvd_api_key=None, target_version=None, results_limit=20, fetch_limit=250,
-                              include_kev_epss=True):
+                              include_kev_epss=True, bugtracker_limit=100):
     """
-    F5 BIG-IP TMM関連バグを NVD / F5公式バグトラッカーの指定した組み合わせで収集し、
+    F5 BIG-IP関連バグを NVD / F5公式バグトラッカーの指定した組み合わせで収集し、
     最近の日付順（新しい順、日付不明は末尾）に並べて返す。
 
     Args:
         source: "both" | "nvd" | "bugtracker"
-        bug_ids: F5バグトラッカーから取得するBug IDのリスト（省略時は KNOWN_TMM_BUG_IDS）
+        bug_ids: F5バグトラッカーから取得するBug IDのリスト。省略時は
+            fetch_f5_bug_tracker_index() で全件一覧を取得し、Bug ID数値が
+            大きい（＝新しい）順に bugtracker_limit 件を使う。一覧の取得に
+            失敗した場合は KNOWN_TMM_BUG_IDS にフォールバックする。
+        bugtracker_limit: bug_ids省略時に、一覧から実際に取得する件数の上限
+            （多いほどF5サーバーへのリクエスト数・収集時間が増える）
 
     Returns:
         行のリスト（sort_bug_rows_by_date_desc 済み）。NVD検索でエラーが
@@ -2601,7 +2633,10 @@ def search_f5_bigip_tmm_bugs(source="both", nvd_keyword="BIG-IP", bug_ids=None,
         all_rows += nvd_rows
 
     if source in ("both", "bugtracker"):
-        ids = bug_ids if bug_ids else KNOWN_TMM_BUG_IDS
+        ids = bug_ids
+        if not ids:
+            index_ids = fetch_f5_bug_tracker_index()
+            ids = index_ids[:bugtracker_limit] if index_ids else KNOWN_TMM_BUG_IDS
         all_rows += collect_f5_bugtracker_rows(
             ids, translate_engine=translate_engine,
             deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key,

@@ -1,26 +1,28 @@
 #!/usr/bin/env python3
 """
-F5 BIG-IP TMM（Traffic Management Microkernel）関連バグ収集スクリプト（CLI）
+F5 BIG-IP バグ収集スクリプト（CLI）
 
 コアロジックは analyzer.py の search_f5_bigip_tmm_bugs() 等に実装されており、
-Streamlit の app.py（「F5 BIG-IP TMM バグ検索」セクション）からも同じロジックを
+Streamlit の app.py（「F5 BIG-IP バグ検索」セクション）からも同じロジックを
 利用できる。
 
 2つのデータソースから収集し、最近の日付順（新しい順）に並べて表示する:
 
 1. NVD（CVE/CVSSを集約している米国立脆弱性データベース）
 2. F5公式バグトラッカー（https://cdn.f5.com/product/bugtracker/ID<番号>.html）
-   - 検索ページの実際のHTML構造は開発環境から確認できなかったため、個別の
-     Bug IDページを1件ずつ取得する方式。既定では analyzer.KNOWN_TMM_BUG_IDS
-     （Web検索で確認済みのTMM関連Bug IDのスナップショット）を使う。
-     --bug-ids で任意のBug IDを追加指定できる。
+   - 全件一覧ページ（https://cdn.f5.com/product/bugtracker/index.html）から
+     Bug ID一覧を取得し、新しい順に --bugtracker-limit 件の個別ページを
+     1件ずつ取得する方式。一覧の取得に失敗した場合は
+     analyzer.KNOWN_TMM_BUG_IDS（Web検索で確認済みのTMM関連Bug IDの
+     スナップショット）にフォールバックする。--bug-ids で任意のBug IDを
+     直接指定することもできる。
 
 使用例:
     python f5_bigip_tmm_bugs.py
-    python f5_bigip_tmm_bugs.py --nvd-keyword "F5 BIG-IP TMM buffer overflow"
+    python f5_bigip_tmm_bugs.py --nvd-keyword "BIG-IP buffer overflow"
     python f5_bigip_tmm_bugs.py --bug-ids 1006509,993921,1000973
     python f5_bigip_tmm_bugs.py --source nvd
-    python f5_bigip_tmm_bugs.py --format excel --output f5_tmm_bugs.xlsx
+    python f5_bigip_tmm_bugs.py --format excel --output f5_bugs.xlsx
     python f5_bigip_tmm_bugs.py --translate google
 """
 import argparse
@@ -35,7 +37,7 @@ import analyzer
 def build_parser():
     parser = argparse.ArgumentParser(
         prog="f5_bigip_tmm_bugs.py",
-        description="F5 BIG-IP TMM関連バグを収集し、対象OS（バージョン）と見出しを新しい順に一覧表示する",
+        description="F5 BIG-IP関連バグを収集し、対象OS（バージョン）と見出しを新しい順に一覧表示する",
     )
     parser.add_argument(
         "--source", choices=["both", "nvd", "bugtracker"], default="both",
@@ -49,8 +51,14 @@ def build_parser():
     parser.add_argument("--target-version", help="対象バージョンを指定すると、NVD側の結果に影響有無の判定を付与する（例: 17.1.1）")
     parser.add_argument(
         "--bug-ids",
-        help="F5公式バグトラッカーで追加取得したいBug ID（カンマ区切り、例: 1006509,993921）。"
-             "省略時は既知のTMM関連Bug ID一覧（analyzer.KNOWN_TMM_BUG_IDS）を使う"
+        help="F5公式バグトラッカーで取得したいBug ID（カンマ区切り、例: 1006509,993921）。"
+             "省略時は全件一覧ページ（cdn.f5.com/product/bugtracker/index.html）を取得し、"
+             "新しい順に --bugtracker-limit 件を使う（一覧取得に失敗した場合は既知の"
+             "TMM関連Bug ID一覧 analyzer.KNOWN_TMM_BUG_IDS にフォールバック）"
+    )
+    parser.add_argument(
+        "--bugtracker-limit", type=int, default=100,
+        help="--bug-ids省略時に、全件一覧から実際に取得するBug ID数の上限（既定: 100）"
     )
     parser.add_argument("--translate", choices=["google", "deepl", "nvidia"], help="指定すると見出しを日本語訳する（既定: 翻訳しない）")
     parser.add_argument("--deepl-key", help="DeepL APIキー（--translate deepl 使用時）")
@@ -70,6 +78,7 @@ def main():
         source=args.source, nvd_keyword=args.nvd_keyword, bug_ids=bug_ids,
         translate_engine=args.translate, deepl_api_key=args.deepl_key, nvidia_api_key=args.nvidia_key,
         nvd_api_key=args.nvd_api_key, target_version=args.target_version,
+        bugtracker_limit=args.bugtracker_limit,
     )
 
     if isinstance(all_rows, dict) and "error" in all_rows:
@@ -108,7 +117,7 @@ def main():
             for r in all_rows
         ]
         excel_data = analyzer.create_combined_excel_report(
-            extra_sheets=[{"name": "F5 BIG-IP TMM", "headers": headers, "rows": rows}]
+            extra_sheets=[{"name": "F5 BIG-IP", "headers": headers, "rows": rows}]
         )
         with open(args.output, "wb") as f:
             f.write(excel_data)
