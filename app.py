@@ -854,6 +854,197 @@ if st.button("🔎 CVE を検索", key="cve_search_btn"):
             }
 
 st.markdown("---")
+st.markdown("### 🔧 F5 BIG-IP TMM バグ検索")
+st.caption(
+    "NVD（CVE/CVSSを集約する米国立脆弱性データベース）と、F5公式バグトラッカー"
+    "（CVEにならない一般的な既知の問題）の両方から、TMM（Traffic Management "
+    "Microkernel）関連のバグを収集し、対象OS（BIG-IPバージョン）と見出しを"
+    "新しい順（日付が新しいもの順、不明なものは末尾）に一覧表示します。"
+)
+st.info(
+    "💡 F5公式バグトラッカーには検索フォームがある想定ですが、この環境からは "
+    "cdn.f5.com への通信がネットワークポリシーでブロックされており、検索ページの"
+    "実際のHTML構造を確認できていません。そのため個別のBug IDページ（Web検索で"
+    "TMM関連と確認済みのものをデフォルトで収録）を1件ずつ取得する方式にして"
+    "います。ご自身で見つけたBug IDがあれば下の欄に追加できます。"
+)
+
+f5_col1, f5_col2 = st.columns(2)
+with f5_col1:
+    f5_source = st.selectbox(
+        "収集元",
+        options=["両方", "NVDのみ", "F5バグトラッカーのみ"],
+        key="f5_source"
+    )
+    f5_nvd_keyword = st.text_input(
+        "NVD検索キーワード",
+        value="F5 BIG-IP TMM",
+        key="f5_nvd_keyword"
+    )
+with f5_col2:
+    f5_target_version = st.text_input(
+        "対象バージョン（任意、NVD結果の影響有無を判定したい場合）",
+        placeholder="例: 17.1.1",
+        key="f5_target_version"
+    )
+    f5_bug_ids_input = st.text_input(
+        "追加のBug ID（任意、カンマ区切り）",
+        placeholder="例: 1006509, 993921",
+        key="f5_bug_ids_input"
+    )
+
+f5_nvd_api_key = get_secret("NVD_API_KEY") or st.text_input(
+    "NVD API キー（任意、無くても検索可・レート制限が緩和される）",
+    type="password", key="f5_nvd_api_key_input"
+)
+
+if st.button("🔎 F5 BIG-IP TMM バグを検索", key="f5_search_btn"):
+    _f5_source_map = {"両方": "both", "NVDのみ": "nvd", "F5バグトラッカーのみ": "bugtracker"}
+    _f5_bug_ids = (
+        [b.strip() for b in f5_bug_ids_input.split(",") if b.strip()] or None
+        if f5_bug_ids_input else None
+    )
+    with st.spinner("収集中..."):
+        f5_results = analyzer.search_f5_bigip_tmm_bugs(
+            source=_f5_source_map[f5_source],
+            nvd_keyword=f5_nvd_keyword,
+            bug_ids=_f5_bug_ids,
+            translate_engine=translation_engine_key,
+            deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key,
+            nvd_api_key=f5_nvd_api_key or None,
+            target_version=f5_target_version or None,
+        )
+
+    if isinstance(f5_results, dict) and "error" in f5_results:
+        st.error(f"NVDへの問い合わせに失敗しました: {f5_results['error']}")
+    elif not f5_results:
+        st.warning("該当するバグ/CVEが見つかりませんでした")
+    else:
+        st.success(f"✓ {len(f5_results)} 件見つかりました（新しい順）")
+
+        f5_table = pd.DataFrame([
+            {
+                "日付": r.get("date") or "不明",
+                "出所": r["source"],
+                "ID": r["id"],
+                "対象OS(バージョン)": r["versions"],
+                "見出し": r["headline_ja"] or r["headline_en"],
+                "参考リンク": r["url"],
+            }
+            for r in f5_results
+        ])
+        st.dataframe(f5_table, use_container_width=True, hide_index=True)
+
+        f5_rows = [
+            [r.get("date") or "不明", r["source"], r["id"], r["versions"],
+             r.get("headline_ja", ""), r["headline_en"], r["url"]]
+            for r in f5_results
+        ]
+        st.session_state["combined_export_f5"] = {
+            "name": f"F5 BIG-IP TMM({f5_nvd_keyword[:15]})",
+            "headers": ["日付", "出所", "ID", "対象OS(バージョン)", "見出し(日本語)", "見出し(原文)", "参考リンク"],
+            "rows": f5_rows,
+        }
+
+        f5_excel_data = analyzer.create_combined_excel_report(
+            extra_sheets=[st.session_state["combined_export_f5"]]
+        )
+        st.download_button(
+            label="📊 この検索結果をExcelでダウンロード",
+            data=f5_excel_data,
+            file_name=f"f5_bigip_tmm_bugs_{datetime.now().strftime('%Y%m%d_%H%M%S')}.xlsx",
+            mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+            key="f5_excel_download_btn"
+        )
+
+st.markdown("---")
+
+
+def render_vendor_bug_search(title, icon, session_key, default_keyword, version_placeholder="例: 11.1.2"):
+    """
+    Palo Alto / FortiGate 等、F5のような個別バグIDページの公開トラッカーが
+    確認できていないベンダー向けの、NVDベースのバグ検索UIを描画する共通関数。
+    対象OS（バージョン）・見出し（日本語）を新しい順に一覧表示する。
+    """
+    st.markdown(f"### {icon} {title}")
+    st.caption(
+        "NVD（CVE/CVSSを集約する米国立脆弱性データベース）をキーワード検索し、"
+        "対象OS（バージョン）と見出し（日本語）を新しい順（日付が新しいもの順、"
+        "不明なものは末尾）に一覧表示します。"
+    )
+
+    col1, col2 = st.columns(2)
+    with col1:
+        keyword = st.text_input("NVD検索キーワード", value=default_keyword, key=f"{session_key}_keyword")
+    with col2:
+        target_version = st.text_input(
+            "対象バージョン（任意、影響有無を判定したい場合）",
+            placeholder=version_placeholder, key=f"{session_key}_target_version"
+        )
+
+    nvd_api_key = get_secret("NVD_API_KEY") or st.text_input(
+        "NVD API キー（任意、無くても検索可・レート制限が緩和される）",
+        type="password", key=f"{session_key}_nvd_api_key_input"
+    )
+
+    if st.button(f"🔎 {title}", key=f"{session_key}_search_btn"):
+        with st.spinner("検索中..."):
+            results = analyzer.search_vendor_bugs(
+                nvd_keyword=keyword,
+                translate_engine=translation_engine_key,
+                deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key,
+                nvd_api_key=nvd_api_key or None,
+                target_version=target_version or None,
+            )
+
+        if isinstance(results, dict) and "error" in results:
+            st.error(f"NVDへの問い合わせに失敗しました: {results['error']}")
+        elif not results:
+            st.warning("該当するCVEが見つかりませんでした")
+        else:
+            st.success(f"✓ {len(results)} 件見つかりました（新しい順）")
+
+            table = pd.DataFrame([
+                {
+                    "日付": r.get("date") or "不明",
+                    "出所": r["source"],
+                    "ID": r["id"],
+                    "対象OS(バージョン)": r["versions"],
+                    "見出し": r["headline_ja"] or r["headline_en"],
+                    "参考リンク": r["url"],
+                }
+                for r in results
+            ])
+            st.dataframe(table, use_container_width=True, hide_index=True)
+
+            rows = [
+                [r.get("date") or "不明", r["source"], r["id"], r["versions"],
+                 r.get("headline_ja", ""), r["headline_en"], r["url"]]
+                for r in results
+            ]
+            st.session_state[f"combined_export_{session_key}"] = {
+                "name": f"{title}({keyword[:15]})",
+                "headers": ["日付", "出所", "ID", "対象OS(バージョン)", "見出し(日本語)", "見出し(原文)", "参考リンク"],
+                "rows": rows,
+            }
+
+            excel_data = analyzer.create_combined_excel_report(
+                extra_sheets=[st.session_state[f"combined_export_{session_key}"]]
+            )
+            st.download_button(
+                label="📊 この検索結果をExcelでダウンロード",
+                data=excel_data,
+                file_name=f"{session_key}_bugs_{datetime.now().strftime('%Y%m%d_%H%M%S')}.xlsx",
+                mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                key=f"{session_key}_excel_download_btn"
+            )
+
+    st.markdown("---")
+
+
+render_vendor_bug_search("Palo Alto (PAN-OS) バグ検索", "🔥", "paloalto", "Palo Alto PAN-OS", version_placeholder="例: 11.1.2")
+render_vendor_bug_search("FortiGate (FortiOS) バグ検索", "🛡️", "fortigate", "Fortinet FortiOS", version_placeholder="例: 7.4.8")
+
 st.markdown("**一般的な既知の問題を貼り付けて分析**")
 st.caption(
     "Palo Alto の「Known and Addressed Issues」や YAMAHA のリリースノート等、自動取得できない"
@@ -1271,6 +1462,12 @@ if "combined_export_eol" in st.session_state:
     _combined_sources.append(f"{st.session_state['combined_export_eol']['name']}（{len(st.session_state['combined_export_eol']['rows'])} 件）")
 if "combined_export_cisco_eol" in st.session_state:
     _combined_sources.append(f"{st.session_state['combined_export_cisco_eol']['name']}（{len(st.session_state['combined_export_cisco_eol']['rows'])} 件）")
+if "combined_export_f5" in st.session_state:
+    _combined_sources.append(f"{st.session_state['combined_export_f5']['name']}（{len(st.session_state['combined_export_f5']['rows'])} 件）")
+if "combined_export_paloalto" in st.session_state:
+    _combined_sources.append(f"{st.session_state['combined_export_paloalto']['name']}（{len(st.session_state['combined_export_paloalto']['rows'])} 件）")
+if "combined_export_fortigate" in st.session_state:
+    _combined_sources.append(f"{st.session_state['combined_export_fortigate']['name']}（{len(st.session_state['combined_export_fortigate']['rows'])} 件）")
 
 if not _combined_sources:
     st.caption("Cisco検索・CVE検索・貼り付け解析・EOL取得のいずれかを実行すると、ここでまとめてExcel出力できるようになります。")
@@ -1287,6 +1484,12 @@ else:
             combined_extra_sheets.append(st.session_state["combined_export_eol"])
         if "combined_export_cisco_eol" in st.session_state:
             combined_extra_sheets.append(st.session_state["combined_export_cisco_eol"])
+        if "combined_export_f5" in st.session_state:
+            combined_extra_sheets.append(st.session_state["combined_export_f5"])
+        if "combined_export_paloalto" in st.session_state:
+            combined_extra_sheets.append(st.session_state["combined_export_paloalto"])
+        if "combined_export_fortigate" in st.session_state:
+            combined_extra_sheets.append(st.session_state["combined_export_fortigate"])
 
         combined_excel_data = analyzer.create_combined_excel_report(
             cisco=st.session_state.get("combined_export_cisco"),
