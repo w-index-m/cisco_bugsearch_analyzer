@@ -297,16 +297,41 @@ def translate_headline_nvidia(text, api_key):
         return None
 
 
-def translate_headline(text, engine='google', deepl_api_key=None, nvidia_api_key=None):
+def translate_headline_groq(text, api_key):
+    """Groq（高速LLM推論API）を使用して日本語に翻訳する"""
+    if not text or len(text) < 3:
+        return None
+    prompt = (
+        "Translate the following text from English to Japanese. "
+        "Only return the translated text without any explanation.\n\n"
+        f"Text: {text}"
+    )
+    return _call_groq_prompt(prompt, api_key, max_tokens=1024)
+
+
+def translate_headline_openrouter(text, api_key):
+    """OpenRouter経由のLLMを使用して日本語に翻訳する"""
+    if not text or len(text) < 3:
+        return None
+    prompt = (
+        "Translate the following text from English to Japanese. "
+        "Only return the translated text without any explanation.\n\n"
+        f"Text: {text}"
+    )
+    return _call_open_router_prompt(prompt, api_key, max_tokens=1024)
+
+
+def translate_headline(text, engine='google', deepl_api_key=None, nvidia_api_key=None,
+                        groq_api_key=None, open_router_api_key=None):
     """
     翻訳エンジンを指定してヘッドラインを翻訳する。
-    フォールバック順: 指定エンジン → Google → （Googleが失敗し、指定エンジンが
-    DeepLでなくDeepLキーがあれば）DeepL → 原文のまま。
+    フォールバック順: 指定エンジン → Google → （Googleが失敗した場合）DeepL →
+    Groq → OpenRouter → 原文のまま（指定エンジンとして既に試したものは
+    フォールバックで二重に試さない）。
 
-    Google翻訳の無料エンドポイントはクラウド環境（共有IP）からのアクセスで
-    レート制限やブロックにより失敗することがあるため、DeepLキーが設定されて
-    いれば最後の砦として使う（DeepLを明示選択している場合は既に上で試行済み
-    のため二重には呼ばない）。
+    Google翻訳の無料エンドポイントはクラウド環境（共有IP、特にGitHub Actions
+    ランナー）からのアクセスでボット対策によりブロックされることが多いため、
+    他のAPIキーが設定されていれば最後の砦として順に試す。
     """
     if not text or len(text) < 3:
         return text
@@ -321,12 +346,32 @@ def translate_headline(text, engine='google', deepl_api_key=None, nvidia_api_key
         if result:
             return result
 
+    if engine == 'groq' and groq_api_key:
+        result = translate_headline_groq(text, groq_api_key)
+        if result:
+            return result
+
+    if engine == 'openrouter' and open_router_api_key:
+        result = translate_headline_openrouter(text, open_router_api_key)
+        if result:
+            return result
+
     result = translate_headline_google(text)
     if result:
         return result
 
     if engine != 'deepl' and deepl_api_key and DEEPL_AVAILABLE:
         result = translate_headline_deepl(text, deepl_api_key)
+        if result:
+            return result
+
+    if engine != 'groq' and groq_api_key:
+        result = translate_headline_groq(text, groq_api_key)
+        if result:
+            return result
+
+    if engine != 'openrouter' and open_router_api_key:
+        result = translate_headline_openrouter(text, open_router_api_key)
         if result:
             return result
 
@@ -2333,7 +2378,8 @@ def fetch_f5_bug_page(bug_id, timeout=15):
     }
 
 
-def collect_f5_bugtracker_rows(bug_ids, translate_engine=None, deepl_api_key=None, nvidia_api_key=None, delay=0.5):
+def collect_f5_bugtracker_rows(bug_ids, translate_engine=None, deepl_api_key=None, nvidia_api_key=None,
+                                groq_api_key=None, open_router_api_key=None, delay=0.5):
     """
     複数のBug IDを取得し、翻訳もあわせて共通の行フォーマットのリストにする。
     F5への連続アクセスで負荷をかけすぎないよう、1件ごとに short delay を入れる。
@@ -2359,7 +2405,8 @@ def collect_f5_bugtracker_rows(bug_ids, translate_engine=None, deepl_api_key=Non
             if translate_engine:
                 headline_ja = translate_headline(
                     result["headline_en"], engine=translate_engine,
-                    deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key
+                    deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key,
+                    groq_api_key=groq_api_key, open_router_api_key=open_router_api_key,
                 )
             rows.append({
                 "source": "F5 Bug Tracker",
@@ -2519,6 +2566,7 @@ def _fetch_nvd_results_or(keyword, fetch_limit, api_key, target_version, timeout
 
 def collect_nvd_vendor_rows(keyword, version_extractor=_extract_generic_versions,
                              translate_engine=None, deepl_api_key=None, nvidia_api_key=None,
+                             groq_api_key=None, open_router_api_key=None,
                              api_key=None, results_limit=20, target_version=None, fetch_limit=250,
                              include_kev_epss=True):
     """
@@ -2547,6 +2595,7 @@ def collect_nvd_vendor_rows(keyword, version_extractor=_extract_generic_versions
             r["description_ja"] = translate_headline(
                 r["description_en"], engine=translate_engine,
                 deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key,
+                groq_api_key=groq_api_key, open_router_api_key=open_router_api_key,
             )
 
     if target_version:
@@ -2583,12 +2632,14 @@ def collect_nvd_vendor_rows(keyword, version_extractor=_extract_generic_versions
 
 
 def collect_nvd_tmm_rows(keyword, translate_engine=None, deepl_api_key=None, nvidia_api_key=None,
+                          groq_api_key=None, open_router_api_key=None,
                           api_key=None, results_limit=20, target_version=None, fetch_limit=250,
                           include_kev_epss=True):
     """collect_nvd_vendor_rows() のF5 BIG-IP専用版（バージョン抽出にBIG-IP形式を使う）"""
     return collect_nvd_vendor_rows(
         keyword, version_extractor=_extract_bigip_versions,
         translate_engine=translate_engine, deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key,
+        groq_api_key=groq_api_key, open_router_api_key=open_router_api_key,
         api_key=api_key, results_limit=results_limit, target_version=target_version, fetch_limit=fetch_limit,
         include_kev_epss=include_kev_epss,
     )
@@ -2596,6 +2647,7 @@ def collect_nvd_tmm_rows(keyword, translate_engine=None, deepl_api_key=None, nvi
 
 def search_vendor_bugs(nvd_keyword, version_extractor=_extract_generic_versions,
                         translate_engine=None, deepl_api_key=None, nvidia_api_key=None,
+                        groq_api_key=None, open_router_api_key=None,
                         nvd_api_key=None, target_version=None, results_limit=20, fetch_limit=250,
                         include_kev_epss=True):
     """
@@ -2607,6 +2659,7 @@ def search_vendor_bugs(nvd_keyword, version_extractor=_extract_generic_versions,
     rows = collect_nvd_vendor_rows(
         nvd_keyword, version_extractor=version_extractor,
         translate_engine=translate_engine, deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key,
+        groq_api_key=groq_api_key, open_router_api_key=open_router_api_key,
         api_key=nvd_api_key, results_limit=results_limit, target_version=target_version, fetch_limit=fetch_limit,
         include_kev_epss=include_kev_epss,
     )
@@ -2630,6 +2683,7 @@ def sort_bug_rows_by_date_desc(rows):
 
 def search_f5_bigip_tmm_bugs(source="both", nvd_keyword="BIG-IP", bug_ids=None,
                               translate_engine=None, deepl_api_key=None, nvidia_api_key=None,
+                              groq_api_key=None, open_router_api_key=None,
                               nvd_api_key=None, target_version=None, results_limit=20, fetch_limit=250,
                               include_kev_epss=True, bugtracker_limit=100):
     """
@@ -2655,6 +2709,7 @@ def search_f5_bigip_tmm_bugs(source="both", nvd_keyword="BIG-IP", bug_ids=None,
         nvd_rows = collect_nvd_tmm_rows(
             nvd_keyword, translate_engine=translate_engine,
             deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key,
+            groq_api_key=groq_api_key, open_router_api_key=open_router_api_key,
             api_key=nvd_api_key, target_version=target_version,
             results_limit=results_limit, fetch_limit=fetch_limit,
             include_kev_epss=include_kev_epss,
@@ -2671,6 +2726,7 @@ def search_f5_bigip_tmm_bugs(source="both", nvd_keyword="BIG-IP", bug_ids=None,
         all_rows += collect_f5_bugtracker_rows(
             ids, translate_engine=translate_engine,
             deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key,
+            groq_api_key=groq_api_key, open_router_api_key=open_router_api_key,
         )
 
     return sort_bug_rows_by_date_desc(all_rows)
