@@ -25,6 +25,14 @@ import analyzer  # noqa: E402
 
 OUTPUT_DIR = Path(__file__).resolve().parent.parent / "data" / "vendor_bugs"
 
+# キャッシュには、ライブ検索の既定件数（20件）より多めに保持しておき、
+# 必要に応じて多くの履歴をブラウズできるようにする。翻訳はこの件数分だけ
+# 呼び出すため、CACHE_RESULTS_LIMIT を増やすと翻訳API呼び出し回数もほぼ
+# 比例して増える（DeepL無料枠は月間約50万文字）。まずは200件（従来の10倍）
+# から様子を見る。
+CACHE_RESULTS_LIMIT = 200
+CACHE_FETCH_LIMIT = 300
+
 # (session_key, ファイル名, 表示名, 収集関数を呼ぶための設定)
 # 翻訳は既定でGoogle Translate（無料の非公式エンドポイント）を使うが、
 # GitHub Actionsランナーの共有IPからはボット対策でブロックされ翻訳できない
@@ -37,6 +45,7 @@ TARGETS = [
         "collect": lambda nvd_api_key, deepl_api_key: analyzer.search_f5_bigip_tmm_bugs(
             source="both", nvd_keyword="BIG-IP",
             translate_engine="google", nvd_api_key=nvd_api_key, deepl_api_key=deepl_api_key,
+            results_limit=CACHE_RESULTS_LIMIT, fetch_limit=CACHE_FETCH_LIMIT,
         ),
     },
     {
@@ -45,6 +54,7 @@ TARGETS = [
         "collect": lambda nvd_api_key, deepl_api_key: analyzer.search_vendor_bugs(
             nvd_keyword='"Palo Alto" PAN-OS', translate_engine="google",
             nvd_api_key=nvd_api_key, deepl_api_key=deepl_api_key,
+            results_limit=CACHE_RESULTS_LIMIT, fetch_limit=CACHE_FETCH_LIMIT,
         ),
     },
     {
@@ -53,6 +63,7 @@ TARGETS = [
         "collect": lambda nvd_api_key, deepl_api_key: analyzer.search_vendor_bugs(
             nvd_keyword="Fortinet FortiOS", translate_engine="google",
             nvd_api_key=nvd_api_key, deepl_api_key=deepl_api_key,
+            results_limit=CACHE_RESULTS_LIMIT, fetch_limit=CACHE_FETCH_LIMIT,
         ),
     },
 ]
