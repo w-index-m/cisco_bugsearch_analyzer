@@ -2231,6 +2231,24 @@ def _f5_meta_content(html, name):
     return unescape(m.group(1)).strip()
 
 
+def _f5_meta_content_all(html, name):
+    """
+    _f5_meta_content() と同様だが、同じ name の <meta> タグが複数存在する場合
+    （例: <meta name="product" content="..."> がBIG-IP/BIG-IP TMOS/BIG-IP vCMP
+    のように製品ごとに複数出現する）すべての値を重複除去して返す。
+    """
+    matches = re.findall(
+        rf'<meta\s+name=["\']{re.escape(name)}["\']\s+content=["\'](.*?)["\']',
+        html, re.IGNORECASE | re.DOTALL,
+    )
+    seen = []
+    for v in matches:
+        v = unescape(v).strip()
+        if v and v not in seen:
+            seen.append(v)
+    return seen
+
+
 def fetch_f5_bug_page(bug_id, timeout=15):
     """
     F5公式バグトラッカーの個別ページ（ID<bug_id>.html）を取得し、
@@ -2280,6 +2298,16 @@ def fetch_f5_bug_page(bug_id, timeout=15):
     original_date = _f5_meta_content(html, "original_date")
     bug_date = original_date.split(" ")[0] if original_date else None
 
+    # 対象製品（<meta name="product" content="..."> は製品ごとに複数出現する。
+    # 例: "BIG-IP", "BIG-IP TMOS", "BIG-IP vCMP" や、BIG-IP以外の製品
+    # （例: "BIG-IP Next (BNK)"）の場合もある。取得できなければ
+    # product_family（単一値）にフォールバックする）
+    products = _f5_meta_content_all(html, "product")
+    if not products:
+        product_family = _f5_meta_content(html, "product_family")
+        products = [product_family] if product_family else []
+    product = ", ".join(products) if products else None
+
     # HTMLタグを大まかに除去して本文テキストを取り出す（メタタグが無かった場合の
     # フォールバック抽出、および将来的なデバッグ用に保持しておく）
     body_text = re.sub(r'<script.*?</script>', ' ', html, flags=re.DOTALL | re.IGNORECASE)
@@ -2298,6 +2326,7 @@ def fetch_f5_bug_page(bug_id, timeout=15):
             "(見出しを取得できませんでした。参考リンクから直接ご確認ください)"
         ),
         "versions": versions,
+        "product": product,
         "url": url,
         "date": bug_date,
         "body_text": body_text,
@@ -2321,6 +2350,7 @@ def collect_f5_bugtracker_rows(bug_ids, translate_engine=None, deepl_api_key=Non
                 "headline_en": "(取得失敗)",
                 "headline_ja": "",
                 "versions": "",
+                "product": None,
                 "url": F5_BUGTRACKER_URL.format(bug_id=bug_id),
                 "date": None,
             })
@@ -2337,6 +2367,7 @@ def collect_f5_bugtracker_rows(bug_ids, translate_engine=None, deepl_api_key=Non
                 "headline_en": result["headline_en"],
                 "headline_ja": headline_ja,
                 "versions": ", ".join(result["versions"]) if result["versions"] else "(本文から検出できず)",
+                "product": result.get("product"),
                 "url": result["url"],
                 "date": result["date"],
             })
