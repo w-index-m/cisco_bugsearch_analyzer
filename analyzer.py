@@ -15,6 +15,7 @@ from functools import wraps
 import pandas as pd
 import requests
 import yaml
+from dateutil import parser as _date_parser
 from deep_translator import GoogleTranslator
 from openpyxl import Workbook
 from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
@@ -2085,3 +2086,292 @@ def lookup_cisco_eol_matches(os_family, version):
         for known_version, data in family_data.items()
         if _cisco_eol_version_matches(known_version, version)
     ]
+
+
+# ==================== F5 BIG-IP TMM バグ収集 ====================
+#
+# F5 BIG-IP の TMM（Traffic Management Microkernel）関連バグを、
+# NVD（CVE/CVSSを集約する米国立脆弱性データベース）と、F5公式バグトラッカー
+# （cdn.f5.com/product/bugtracker/ID<番号>.html、CVEにならない一般的な
+# 既知の問題）の両方から収集する。
+#
+# 注意: cdn.f5.com は開発環境からの通信がネットワークポリシーでブロックされて
+# おり、バグトラッカーの検索ページの実際のHTML構造を確認できていない。
+# そのため検索フォームは使わず、個別のBug IDページ（構造はWeb検索の
+# スニペットで確認済み）を1件ずつ取得する方式にしている。KNOWN_TMM_BUG_IDS
+# は本機能作成時点でTMM関連と確認できたBug IDのスナップショットであり、
+# 網羅的な一覧ではない（ユーザーが任意のBug IDを追加指定できる）。
+
+KNOWN_TMM_BUG_IDS = [
+    "1006509",  # TMM memory leak
+    "993921",   # TMM SIGSEGV
+    "1000973",  # Unanticipated restart of TMM due to heartbeat failure
+    "912425",   # Modifying in-TMM monitor configuration may not take effect, or may result in a TMM crash
+    "822245",   # Large number of in-TMM monitors results in some monitors being marked down
+    "1319365",  # TMM may crash or return no result found when using contains external data group
+]
+
+F5_BUGTRACKER_URL = "https://cdn.f5.com/product/bugtracker/ID{bug_id}.html"
+
+# BIG-IPのバージョン表記（例: 17.1.2, 16.1.0, 15.1.4.1）を抽出する正規表現。
+# メジャーバージョンは実在するリリース系統（12〜17番台）に絞り、日付や
+# 無関係な数字の羅列を誤って拾わないようにする
+_BIGIP_VERSION_RE = re.compile(r'\b(1[2-7]\.\d+(?:\.\d+){0,2})\b')
+
+# F5バグトラッカーのページ本文から日付らしき文字列を拾うための正規表現。
+# ラベル名（"Opened:" 等）が不明なため、英語の月名を含む日付表記を
+# 汎用的に検出する（例: "January 15, 2025", "Jan 15 2025"）
+_DATE_TEXT_RE = re.compile(
+    r'\b(?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|'
+    r'Aug(?:ust)?|Sep(?:t(?:ember)?)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)\.?\s+'
+    r'\d{1,2},?\s+\d{4}\b'
+)
+
+
+def _extract_bigip_versions(text):
+    """本文中からBIG-IPのバージョンらしき文字列を抽出し、重複を除いて返す"""
+    if not text:
+        return []
+    seen = []
+    for v in _BIGIP_VERSION_RE.findall(text):
+        if v not in seen:
+            seen.append(v)
+    return seen
+
+
+def _extract_first_date(text):
+    """本文中から最初に見つかった日付らしき文字列を ISO 8601 (YYYY-MM-DD) に変換する。
+    見つからない/パースできない場合は None を返す。"""
+    if not text:
+        return None
+    m = _DATE_TEXT_RE.search(text)
+    if not m:
+        return None
+    try:
+        return _date_parser.parse(m.group(0)).date().isoformat()
+    except Exception:
+        return None
+
+
+def fetch_f5_bug_page(bug_id, timeout=15):
+    """
+    F5公式バグトラッカーの個別ページ（ID<bug_id>.html）を取得し、
+    Bug ID・見出し（英語）・本文・対象OS（バージョン）候補・日付候補を抽出する。
+
+    ページの正確なHTML構造は未確認のため、<title>タグから
+    "Bug ID <番号>: <見出し>" 形式を抜き出す方式と、本文全体から
+    BIG-IPバージョン/日付らしき文字列を拾う方式の、どちらも失敗に強い
+    （見つからなければ空文字列/空リスト/Noneを返すだけで例外にしない）実装にしている。
+
+    Returns:
+        {"bug_id": str, "headline_en": str, "versions": [...], "url": str,
+         "date": str または None, "body_text": str}
+        失敗時は {"bug_id": str, "url": str, "error": str}
+    """
+    url = F5_BUGTRACKER_URL.format(bug_id=bug_id)
+    try:
+        response = requests.get(url, timeout=timeout, headers={"User-Agent": "Mozilla/5.0"})
+        response.raise_for_status()
+    except Exception as e:
+        return {"bug_id": bug_id, "url": url, "error": str(e)}
+
+    html = response.text
+
+    title_match = re.search(r'<title[^>]*>(.*?)</title>', html, re.IGNORECASE | re.DOTALL)
+    headline_en = ""
+    if title_match:
+        title = re.sub(r'\s+', ' ', title_match.group(1)).strip()
+        # "Bug ID 1006509: TMM memory leak - F5" -> "TMM memory leak"
+        title = re.sub(r'^Bug ID\s*\d+\s*:\s*', '', title, flags=re.IGNORECASE)
+        title = re.sub(r'\s*-\s*F5\s*$', '', title, flags=re.IGNORECASE)
+        headline_en = title.strip()
+
+    # HTMLタグを大まかに除去して本文テキストを取り出す（厳密なパースはしない）
+    body_text = re.sub(r'<script.*?</script>', ' ', html, flags=re.DOTALL | re.IGNORECASE)
+    body_text = re.sub(r'<style.*?</style>', ' ', body_text, flags=re.DOTALL | re.IGNORECASE)
+    body_text = re.sub(r'<[^>]+>', ' ', body_text)
+    body_text = re.sub(r'\s+', ' ', body_text).strip()
+
+    versions = _extract_bigip_versions(body_text)
+    bug_date = _extract_first_date(body_text)
+
+    return {
+        "bug_id": bug_id,
+        "headline_en": headline_en or "(見出しを取得できませんでした。ページ構造が想定と異なる可能性があります)",
+        "versions": versions,
+        "url": url,
+        "date": bug_date,
+        "body_text": body_text,
+    }
+
+
+def collect_f5_bugtracker_rows(bug_ids, translate_engine=None, deepl_api_key=None, nvidia_api_key=None, delay=0.5):
+    """
+    複数のBug IDを取得し、翻訳もあわせて共通の行フォーマットのリストにする。
+    F5への連続アクセスで負荷をかけすぎないよう、1件ごとに short delay を入れる。
+    """
+    rows = []
+    total = len(bug_ids)
+    for i, bug_id in enumerate(bug_ids, 1):
+        result = fetch_f5_bug_page(bug_id)
+
+        if "error" in result:
+            rows.append({
+                "source": "F5 Bug Tracker",
+                "id": f"ID{bug_id}",
+                "headline_en": "(取得失敗)",
+                "headline_ja": "",
+                "versions": "",
+                "url": F5_BUGTRACKER_URL.format(bug_id=bug_id),
+                "date": None,
+            })
+        else:
+            headline_ja = ""
+            if translate_engine:
+                headline_ja = translate_headline(
+                    result["headline_en"], engine=translate_engine,
+                    deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key
+                )
+            rows.append({
+                "source": "F5 Bug Tracker",
+                "id": f"ID{result['bug_id']}",
+                "headline_en": result["headline_en"],
+                "headline_ja": headline_ja,
+                "versions": ", ".join(result["versions"]) if result["versions"] else "(本文から検出できず)",
+                "url": result["url"],
+                "date": result["date"],
+            })
+
+        if i < total:
+            time.sleep(delay)
+
+    return rows
+
+
+# CVSSスコア（例: "8.1"）のような2要素の小数と誤認識しないよう、3要素
+# （X.Y.Z）のバージョン表記のみを対象にする汎用バージョン抽出正規表現。
+# F5 BIG-IP以外（Palo Alto PAN-OS、FortiGate FortiOS等）で使う
+_GENERIC_VERSION_RE = re.compile(r'\b(\d{1,2}\.\d+\.\d+)\b')
+
+
+def _extract_generic_versions(text):
+    """本文中から X.Y.Z 形式のバージョンらしき文字列を抽出する（重複除去）"""
+    if not text:
+        return []
+    seen = []
+    for v in _GENERIC_VERSION_RE.findall(text):
+        if v not in seen:
+            seen.append(v)
+    return seen
+
+
+def collect_nvd_vendor_rows(keyword, version_extractor=_extract_generic_versions,
+                             translate_engine=None, deepl_api_key=None, nvidia_api_key=None,
+                             api_key=None, results_limit=20, target_version=None):
+    """
+    NVD（CVE/CVSSを集約する米国立脆弱性データベース）をキーワード検索し、
+    search_cve_with_translation() の結果を、このモジュール共通の行フォーマットに変換する。
+    version_extractor を差し替えることで、ベンダーごとのバージョン表記の
+    抽出方法を変えられる（既定は汎用の X.Y.Z 抽出）。
+    """
+    results = search_cve_with_translation(
+        keyword,
+        engine=translate_engine or "google",
+        deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key,
+        api_key=api_key, results_limit=results_limit, target_version=target_version,
+    )
+
+    if isinstance(results, dict) and "error" in results:
+        return {"error": results["error"]}
+
+    rows = []
+    for r in results:
+        versions = version_extractor(r["description_en"])
+        row = {
+            "source": f"NVD (CVSS {r['cvss_score'] if r['cvss_score'] is not None else '-'})",
+            "id": r["cve_id"],
+            "headline_en": r["description_en"],
+            "headline_ja": r["description_ja"] if translate_engine else "",
+            "versions": ", ".join(versions) if versions else "(本文から検出できず)",
+            "url": r["url"],
+            "date": r["published"][:10] if r.get("published") else None,
+        }
+        if target_version:
+            row["source"] += f" / {r.get('affected_ja', '判定不可')}"
+        rows.append(row)
+
+    return rows
+
+
+def collect_nvd_tmm_rows(keyword, translate_engine=None, deepl_api_key=None, nvidia_api_key=None,
+                          api_key=None, results_limit=20, target_version=None):
+    """collect_nvd_vendor_rows() のF5 BIG-IP専用版（バージョン抽出にBIG-IP形式を使う）"""
+    return collect_nvd_vendor_rows(
+        keyword, version_extractor=_extract_bigip_versions,
+        translate_engine=translate_engine, deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key,
+        api_key=api_key, results_limit=results_limit, target_version=target_version,
+    )
+
+
+def search_vendor_bugs(nvd_keyword, version_extractor=_extract_generic_versions,
+                        translate_engine=None, deepl_api_key=None, nvidia_api_key=None,
+                        nvd_api_key=None, target_version=None, results_limit=20):
+    """
+    汎用のベンダーバグ収集（NVDのみ）。Palo Alto / FortiGate 等、F5のような
+    個別バグIDページの公開トラッカーが確認できていないベンダー向け。
+    見出し・対象OS（バージョン）を新しい順（日付降順、不明なものは末尾）に
+    ソートして返す。NVD検索でエラーが発生した場合は {"error": ...} を返す。
+    """
+    rows = collect_nvd_vendor_rows(
+        nvd_keyword, version_extractor=version_extractor,
+        translate_engine=translate_engine, deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key,
+        api_key=nvd_api_key, results_limit=results_limit, target_version=target_version,
+    )
+    if isinstance(rows, dict) and "error" in rows:
+        return rows
+    return sort_bug_rows_by_date_desc(rows)
+
+
+def sort_bug_rows_by_date_desc(rows):
+    """
+    F5 BIG-IP バグ収集結果（NVD・F5バグトラッカー混在）を、日付が新しい順に
+    並べ替える。日付が取得できなかった行（date=None）は末尾にまとめる。
+    """
+    return sorted(rows, key=lambda r: r.get("date") or "0000-00-00", reverse=True)
+
+
+def search_f5_bigip_tmm_bugs(source="both", nvd_keyword="F5 BIG-IP TMM", bug_ids=None,
+                              translate_engine=None, deepl_api_key=None, nvidia_api_key=None,
+                              nvd_api_key=None, target_version=None):
+    """
+    F5 BIG-IP TMM関連バグを NVD / F5公式バグトラッカーの指定した組み合わせで収集し、
+    最近の日付順（新しい順、日付不明は末尾）に並べて返す。
+
+    Args:
+        source: "both" | "nvd" | "bugtracker"
+        bug_ids: F5バグトラッカーから取得するBug IDのリスト（省略時は KNOWN_TMM_BUG_IDS）
+
+    Returns:
+        行のリスト（sort_bug_rows_by_date_desc 済み）。NVD検索でエラーが
+        発生した場合は {"error": ...} を返す。
+    """
+    all_rows = []
+
+    if source in ("both", "nvd"):
+        nvd_rows = collect_nvd_tmm_rows(
+            nvd_keyword, translate_engine=translate_engine,
+            deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key,
+            api_key=nvd_api_key, target_version=target_version,
+        )
+        if isinstance(nvd_rows, dict) and "error" in nvd_rows:
+            return nvd_rows
+        all_rows += nvd_rows
+
+    if source in ("both", "bugtracker"):
+        ids = bug_ids if bug_ids else KNOWN_TMM_BUG_IDS
+        all_rows += collect_f5_bugtracker_rows(
+            ids, translate_engine=translate_engine,
+            deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key,
+        )
+
+    return sort_bug_rows_by_date_desc(all_rows)
