@@ -1,6 +1,6 @@
 {
   "label": "FortiGate (FortiOS)",
-  "generated_at": "2026-09-24T04:35:21+00:00",
+  "generated_at": "2026-09-24T04:49:39+00:00",
   "count": 20,
   "rows": [
     {
@@ -11,6 +11,7 @@
       "versions": "7.6.0, 7.6.3, 7.4.0, 7.4.8, 7.2.0, 7.2.11, 7.0.0, 7.0.17, 7.2.6, 7.0.5",
       "url": "https://fortiguard.fortinet.com/psirt/FG-IR-25-084",
       "date": "2026-01-13",
+      "cvss": 8.1,
       "kev": true,
       "epss": 0.02403
     },
@@ -22,19 +23,9 @@
       "versions": "7.4.0, 7.4.2, 7.2.0, 7.2.5, 7.6.0, 7.4.4, 7.2.7, 7.0.14",
       "url": "https://fortiguard.fortinet.com/psirt/FG-IR-24-133",
       "date": "2025-12-11",
+      "cvss": 6.0,
       "kev": false,
       "epss": 0.00109
-    },
-    {
-      "source": "NVD (CVSS 5.6)",
-      "id": "CVE-2025-62631",
-      "headline_en": "An insufficient session expiration vulnerability [CWE-613] vulnerability in Fortinet FortiOS 7.4.0, FortiOS 7.2 all versions, FortiOS 7.0 all versions, FortiOS 6.4 all versions allows attacker to maintain access to network resources via an active SSLVPN session not terminated after a user's password change under particular conditions outside of the attacker's control",
-      "headline_ja": "An insufficient session expiration vulnerability [CWE-613] vulnerability in Fortinet FortiOS 7.4.0, FortiOS 7.2 all versions, FortiOS 7.0 all versions, FortiOS 6.4 all versions allows attacker to maintain access to network resources via an active SSLVPN session not terminated after a user's password change under particular conditions outside of the attacker's control",
-      "versions": "7.4.0",
-      "url": "https://fortiguard.fortinet.com/psirt/FG-IR-25-411",
-      "date": "2025-12-09",
-      "kev": false,
-      "epss": 0.00301
     },
     {
       "source": "NVD (CVSS 9.8)",
@@ -44,6 +35,7 @@
       "versions": "7.6.0, 7.6.3, 7.4.0, 7.4.8, 7.2.0, 7.2.11, 7.0.0, 7.0.17, 7.4.10, 7.2.14, 7.0.21, 7.2.6, 7.0.5",
       "url": "https://fortiguard.fortinet.com/psirt/FG-IR-25-647",
       "date": "2025-12-09",
+      "cvss": 9.8,
       "kev": true,
       "epss": 0.68293
     },
@@ -55,8 +47,21 @@
       "versions": "7.4.0, 7.4.3, 7.2.0, 7.2.7, 7.2.11",
       "url": "https://fortiguard.fortinet.com/psirt/FG-IR-24-268",
       "date": "2025-12-09",
+      "cvss": 6.6,
       "kev": false,
       "epss": 0.00405
+    },
+    {
+      "source": "NVD (CVSS 5.6)",
+      "id": "CVE-2025-62631",
+      "headline_en": "An insufficient session expiration vulnerability [CWE-613] vulnerability in Fortinet FortiOS 7.4.0, FortiOS 7.2 all versions, FortiOS 7.0 all versions, FortiOS 6.4 all versions allows attacker to maintain access to network resources via an active SSLVPN session not terminated after a user's password change under particular conditions outside of the attacker's control",
+      "headline_ja": "An insufficient session expiration vulnerability [CWE-613] vulnerability in Fortinet FortiOS 7.4.0, FortiOS 7.2 all versions, FortiOS 7.0 all versions, FortiOS 6.4 all versions allows attacker to maintain access to network resources via an active SSLVPN session not terminated after a user's password change under particular conditions outside of the attacker's control",
+      "versions": "7.4.0",
+      "url": "https://fortiguard.fortinet.com/psirt/FG-IR-25-411",
+      "date": "2025-12-09",
+      "cvss": 5.6,
+      "kev": false,
+      "epss": 0.00301
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -66,19 +71,9 @@
       "versions": "7.6.0, 7.6.3, 7.4.0, 7.4.8",
       "url": "https://fortiguard.fortinet.com/psirt/FG-IR-25-632",
       "date": "2025-11-18",
+      "cvss": 7.5,
       "kev": false,
       "epss": 0.00317
-    },
-    {
-      "source": "NVD (CVSS 1.9)",
-      "id": "CVE-2025-54821",
-      "headline_en": "An Improper Privilege Management vulnerability [CWE-269] vulnerability in Fortinet FortiOS 7.6.0 through 7.6.3, FortiOS 7.4.0 through 7.4.11, FortiOS 7.2 all versions, FortiOS 7.0 all versions, FortiOS 6.4 all versions, FortiPAM 1.6.0, FortiPAM 1.5 all versions, FortiPAM 1.4 all versions, FortiPAM 1.3 all versions, FortiPAM 1.2 all versions, FortiPAM 1.1 all versions, FortiPAM 1.0 all versions, FortiSASE 25.2.91 may allow an authenticated administrator to bypass the trusted host policy via crafted CLI command.",
-      "headline_ja": "An Improper Privilege Management vulnerability [CWE-269] vulnerability in Fortinet FortiOS 7.6.0 through 7.6.3, FortiOS 7.4.0 through 7.4.11, FortiOS 7.2 all versions, FortiOS 7.0 all versions, FortiOS 6.4 all versions, FortiPAM 1.6.0, FortiPAM 1.5 all versions, FortiPAM 1.4 all versions, FortiPAM 1.3 all versions, FortiPAM 1.2 all versions, FortiPAM 1.1 all versions, FortiPAM 1.0 all versions, FortiSASE 25.2.91 may allow an authenticated administrator to bypass the trusted host policy via crafted CLI command.",
-      "versions": "7.6.0, 7.6.3, 7.4.0, 7.4.11, 1.6.0, 25.2.91",
-      "url": "https://fortiguard.fortinet.com/psirt/FG-IR-25-545",
-      "date": "2025-11-18",
-      "kev": false,
-      "epss": 0.00152
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -88,19 +83,21 @@
       "versions": "7.6.0, 7.6.3, 7.4.0, 7.4.8",
       "url": "https://fortiguard.fortinet.com/psirt/FG-IR-25-358",
       "date": "2025-11-18",
+      "cvss": 7.5,
       "kev": false,
       "epss": 0.00585
     },
     {
-      "source": "NVD (CVSS 2.7)",
-      "id": "CVE-2025-58903",
-      "headline_en": "An Unchecked Return Value vulnerability [CWE-252] in Fortinet FortiOS version 7.6.0 through 7.6.3 and before 7.4.8 API allows an authenticated user to cause a  Null Pointer Dereference, crashing the http daemon via a specialy crafted request.",
-      "headline_ja": "An Unchecked Return Value vulnerability [CWE-252] in Fortinet FortiOS version 7.6.0 through 7.6.3 and before 7.4.8 API allows an authenticated user to cause a  Null Pointer Dereference, crashing the http daemon via a specialy crafted request.",
-      "versions": "7.6.0, 7.6.3, 7.4.8",
-      "url": "https://fortiguard.fortinet.com/psirt/FG-IR-25-653",
-      "date": "2025-10-14",
+      "source": "NVD (CVSS 1.9)",
+      "id": "CVE-2025-54821",
+      "headline_en": "An Improper Privilege Management vulnerability [CWE-269] vulnerability in Fortinet FortiOS 7.6.0 through 7.6.3, FortiOS 7.4.0 through 7.4.11, FortiOS 7.2 all versions, FortiOS 7.0 all versions, FortiOS 6.4 all versions, FortiPAM 1.6.0, FortiPAM 1.5 all versions, FortiPAM 1.4 all versions, FortiPAM 1.3 all versions, FortiPAM 1.2 all versions, FortiPAM 1.1 all versions, FortiPAM 1.0 all versions, FortiSASE 25.2.91 may allow an authenticated administrator to bypass the trusted host policy via crafted CLI command.",
+      "headline_ja": "An Improper Privilege Management vulnerability [CWE-269] vulnerability in Fortinet FortiOS 7.6.0 through 7.6.3, FortiOS 7.4.0 through 7.4.11, FortiOS 7.2 all versions, FortiOS 7.0 all versions, FortiOS 6.4 all versions, FortiPAM 1.6.0, FortiPAM 1.5 all versions, FortiPAM 1.4 all versions, FortiPAM 1.3 all versions, FortiPAM 1.2 all versions, FortiPAM 1.1 all versions, FortiPAM 1.0 all versions, FortiSASE 25.2.91 may allow an authenticated administrator to bypass the trusted host policy via crafted CLI command.",
+      "versions": "7.6.0, 7.6.3, 7.4.0, 7.4.11, 1.6.0, 25.2.91",
+      "url": "https://fortiguard.fortinet.com/psirt/FG-IR-25-545",
+      "date": "2025-11-18",
+      "cvss": 1.9,
       "kev": false,
-      "epss": 0.00618
+      "epss": 0.00152
     },
     {
       "source": "NVD (CVSS 8.2)",
@@ -110,6 +107,7 @@
       "versions": "7.6.0, 7.4.0, 7.4.5, 7.2.5, 7.2.10, 7.0.0, 7.0.15",
       "url": "https://fortiguard.fortinet.com/psirt/FG-IR-24-361",
       "date": "2025-10-14",
+      "cvss": 8.2,
       "kev": false,
       "epss": 0.00287
     },
@@ -121,63 +119,9 @@
       "versions": "7.6.2, 7.4.7, 7.2.10, 1.5.0, 1.4.2, 7.4.3",
       "url": "https://fortiguard.fortinet.com/psirt/FG-IR-25-756",
       "date": "2025-10-14",
+      "cvss": 7.5,
       "kev": false,
       "epss": 0.00676
-    },
-    {
-      "source": "NVD (CVSS 4.3)",
-      "id": "CVE-2025-54822",
-      "headline_en": "An improper authorization vulnerability [CWE-285] vulnerability in Fortinet FortiOS 7.4.0 through 7.4.1, FortiOS 7.2.0 through 7.2.8, FortiOS 7.0.0 through 7.0.11, FortiProxy 7.4.0 through 7.4.8, FortiProxy 7.2 all versions, FortiProxy 7.0 all versions, FortiProxy 2.0 all versions allows an authenticated attacker to access static files of others VDOMs via crafted HTTP or HTTPS requests.",
-      "headline_ja": "An improper authorization vulnerability [CWE-285] vulnerability in Fortinet FortiOS 7.4.0 through 7.4.1, FortiOS 7.2.0 through 7.2.8, FortiOS 7.0.0 through 7.0.11, FortiProxy 7.4.0 through 7.4.8, FortiProxy 7.2 all versions, FortiProxy 7.0 all versions, FortiProxy 2.0 all versions allows an authenticated attacker to access static files of others VDOMs via crafted HTTP or HTTPS requests.",
-      "versions": "7.4.0, 7.4.1, 7.2.0, 7.2.8, 7.0.0, 7.0.11, 7.4.8",
-      "url": "https://fortiguard.fortinet.com/psirt/FG-IR-25-684",
-      "date": "2025-10-14",
-      "kev": false,
-      "epss": 0.00317
-    },
-    {
-      "source": "NVD (CVSS 2.6)",
-      "id": "CVE-2025-47890",
-      "headline_en": "An URL Redirection to Untrusted Site vulnerabilities [CWE-601] vulnerability in Fortinet FortiOS 7.6.0 through 7.6.3, FortiOS 7.4.0 through 7.4.8, FortiOS 7.2 all versions, FortiOS 7.0 all versions, FortiOS 6.4 all versions, FortiProxy 7.6.0 through 7.6.3, FortiProxy 7.4 all versions, FortiProxy 7.2 all versions, FortiProxy 7.0 all versions, FortiSASE 25.2.a may allow an unauthenticated attacker to perform an open redirect attack via crafted HTTP requests.",
-      "headline_ja": "An URL Redirection to Untrusted Site vulnerabilities [CWE-601] vulnerability in Fortinet FortiOS 7.6.0 through 7.6.3, FortiOS 7.4.0 through 7.4.8, FortiOS 7.2 all versions, FortiOS 7.0 all versions, FortiOS 6.4 all versions, FortiProxy 7.6.0 through 7.6.3, FortiProxy 7.4 all versions, FortiProxy 7.2 all versions, FortiProxy 7.0 all versions, FortiSASE 25.2.a may allow an unauthenticated attacker to perform an open redirect attack via crafted HTTP requests.",
-      "versions": "7.6.0, 7.6.3, 7.4.0, 7.4.8",
-      "url": "https://fortiguard.fortinet.com/psirt/FG-IR-24-542",
-      "date": "2025-10-14",
-      "kev": false,
-      "epss": 0.00251
-    },
-    {
-      "source": "NVD (CVSS 2.7)",
-      "id": "CVE-2025-31514",
-      "headline_en": "A insertion of sensitive information into log file vulnerability in Fortinet FortiOS 7.6.0 through 7.6.3, FortiOS 7.4 all versions, FortiOS 7.2 all versions, FortiOS 7.0 all versions, FortiOS 6.4 all versions, FortiProxy 7.6.0 through 7.6.3, FortiProxy 7.4.0 through 7.4.13, FortiProxy 7.2 all versions, FortiProxy 7.0 all versions may allow attacker to information disclosure via <insert attack vector here>",
-      "headline_ja": "A insertion of sensitive information into log file vulnerability in Fortinet FortiOS 7.6.0 through 7.6.3, FortiOS 7.4 all versions, FortiOS 7.2 all versions, FortiOS 7.0 all versions, FortiOS 6.4 all versions, FortiProxy 7.6.0 through 7.6.3, FortiProxy 7.4.0 through 7.4.13, FortiProxy 7.2 all versions, FortiProxy 7.0 all versions may allow attacker to information disclosure via <insert attack vector here>",
-      "versions": "7.6.0, 7.6.3, 7.4.0, 7.4.13",
-      "url": "https://fortiguard.fortinet.com/psirt/FG-IR-24-452",
-      "date": "2025-10-14",
-      "kev": false,
-      "epss": 0.00361
-    },
-    {
-      "source": "NVD (CVSS 4.7)",
-      "id": "CVE-2025-31366",
-      "headline_en": "An Improper Neutralization of Input During Web Page Generation vulnerability [CWE-79] vulnerability in Fortinet FortiOS 7.6.0 through 7.6.3, FortiOS 7.4.0 through 7.4.8, FortiOS 7.2 all versions, FortiOS 7.0 all versions, FortiOS 6.4 all versions, FortiProxy 7.6.0 through 7.6.3, FortiProxy 7.4 all versions, FortiProxy 7.2 all versions, FortiProxy 7.0 all versions, FortiSASE 25.2.a may allow an unauthenticated attacker to perform a reflected cross site scripting (XSS) via crafted HTTP requests.",
-      "headline_ja": "An Improper Neutralization of Input During Web Page Generation vulnerability [CWE-79] vulnerability in Fortinet FortiOS 7.6.0 through 7.6.3, FortiOS 7.4.0 through 7.4.8, FortiOS 7.2 all versions, FortiOS 7.0 all versions, FortiOS 6.4 all versions, FortiProxy 7.6.0 through 7.6.3, FortiProxy 7.4 all versions, FortiProxy 7.2 all versions, FortiProxy 7.0 all versions, FortiSASE 25.2.a may allow an unauthenticated attacker to perform a reflected cross site scripting (XSS) via crafted HTTP requests.",
-      "versions": "7.6.0, 7.6.3, 7.4.0, 7.4.8",
-      "url": "https://fortiguard.fortinet.com/psirt/FG-IR-24-542",
-      "date": "2025-10-14",
-      "kev": false,
-      "epss": 0.00398
-    },
-    {
-      "source": "NVD (CVSS 5.3)",
-      "id": "CVE-2025-25255",
-      "headline_en": "An Improperly Implemented Security Check for Standard vulnerability [CWE-358] vulnerability in Fortinet FortiOS 7.6.0 through 7.6.3, FortiProxy 7.6.0 through 7.6.3, FortiProxy 7.4.0 through 7.4.11, FortiProxy 7.2 all versions, FortiProxy 7.0.1 through 7.0.22 may allow an unauthenticated proxy user to bypass the domain fronting protection feature via crafted HTTP requests.",
-      "headline_ja": "An Improperly Implemented Security Check for Standard vulnerability [CWE-358] vulnerability in Fortinet FortiOS 7.6.0 through 7.6.3, FortiProxy 7.6.0 through 7.6.3, FortiProxy 7.4.0 through 7.4.11, FortiProxy 7.2 all versions, FortiProxy 7.0.1 through 7.0.22 may allow an unauthenticated proxy user to bypass the domain fronting protection feature via crafted HTTP requests.",
-      "versions": "7.6.0, 7.6.3, 7.4.0, 7.4.11, 7.0.1, 7.0.22",
-      "url": "https://fortiguard.fortinet.com/psirt/FG-IR-24-372",
-      "date": "2025-10-14",
-      "kev": false,
-      "epss": 0.00427
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -187,30 +131,9 @@
       "versions": "7.6.1, 7.4.8, 7.6.2",
       "url": "https://fortiguard.fortinet.com/psirt/FG-IR-24-457",
       "date": "2025-10-14",
+      "cvss": 7.5,
       "kev": false,
       "epss": 0.00113
-    },
-    {
-      "source": "NVD (CVSS 4.8)",
-      "id": "CVE-2025-25252",
-      "headline_en": "An Insufficient Session Expiration vulnerability [CWE-613] in FortiOS SSL VPN 7.6.0 through 7.6.2, 7.4.0 through 7.4.6, 7.2.0 through 7.2.10, 7.0.0 through 7.0.16, 6.4 all versions may allow a remote attacker (e.g. a former admin whose account was removed and whose session was terminated) in possession of the SAML record of a user session to access or re-open that session via re-use of SAML record.",
-      "headline_ja": "An Insufficient Session Expiration vulnerability [CWE-613] in FortiOS SSL VPN 7.6.0 through 7.6.2, 7.4.0 through 7.4.6, 7.2.0 through 7.2.10, 7.0.0 through 7.0.16, 6.4 all versions may allow a remote attacker (e.g. a former admin whose account was removed and whose session was terminated) in possession of the SAML record of a user session to access or re-open that session via re-use of SAML record.",
-      "versions": "7.6.0, 7.6.2, 7.4.0, 7.4.6, 7.2.0, 7.2.10, 7.0.0, 7.0.16",
-      "url": "https://fortiguard.fortinet.com/psirt/FG-IR-24-487",
-      "date": "2025-10-14",
-      "kev": false,
-      "epss": 0.00337
-    },
-    {
-      "source": "NVD (CVSS 6.5)",
-      "id": "CVE-2025-22258",
-      "headline_en": "A heap-based buffer overflow in Fortinet FortiSRA 1.5.0, 1.4.0 through 1.4.2, FortiPAM 1.5.0, 1.4.0 through 1.4.2, 1.3.0 through 1.3.1, 1.2.0, 1.1.0 through 1.1.2, 1.0.0 through 1.0.3, FortiProxy 7.6.0 through 7.6.1, 7.4.0 through 7.4.7, FortiOS 7.6.0 through 7.6.2, 7.4.0 through 7.4.6, 7.2.0 through 7.2.10, 7.0.2 through 7.0.16, FortiSwitchManager 7.2.1 through 7.2.5 allows attackers to escalate their privilege via specially crafted http requests.",
-      "headline_ja": "A heap-based buffer overflow in Fortinet FortiSRA 1.5.0, 1.4.0 through 1.4.2, FortiPAM 1.5.0, 1.4.0 through 1.4.2, 1.3.0 through 1.3.1, 1.2.0, 1.1.0 through 1.1.2, 1.0.0 through 1.0.3, FortiProxy 7.6.0 through 7.6.1, 7.4.0 through 7.4.7, FortiOS 7.6.0 through 7.6.2, 7.4.0 through 7.4.6, 7.2.0 through 7.2.10, 7.0.2 through 7.0.16, FortiSwitchManager 7.2.1 through 7.2.5 allows attackers to escalate their privilege via specially crafted http requests.",
-      "versions": "1.5.0, 1.4.0, 1.4.2, 1.3.0, 1.3.1, 1.2.0, 1.1.0, 1.1.2, 1.0.0, 1.0.3, 7.6.0, 7.6.1, 7.4.0, 7.4.7, 7.6.2, 7.4.6, 7.2.0, 7.2.10, 7.0.2, 7.0.16, 7.2.1, 7.2.5",
-      "url": "https://fortiguard.fortinet.com/psirt/FG-IR-24-546",
-      "date": "2025-10-14",
-      "kev": false,
-      "epss": 0.00556
     },
     {
       "source": "NVD (CVSS 7.2)",
@@ -220,8 +143,105 @@
       "versions": "7.6.0, 7.6.2, 7.4.0, 7.4.5, 7.2.0, 7.2.9, 7.0.0, 7.0.13, 7.4.1, 7.2.1, 7.0.1, 7.6.1, 7.4.6, 7.2.10, 7.0.16, 6.4.0, 6.4.15, 7.4.7, 7.2.12, 7.0.19",
       "url": "https://fortiguard.fortinet.com/psirt/FG-IR-24-442",
       "date": "2025-10-14",
+      "cvss": 7.2,
       "kev": false,
       "epss": 0.00536
+    },
+    {
+      "source": "NVD (CVSS 6.5)",
+      "id": "CVE-2025-22258",
+      "headline_en": "A heap-based buffer overflow in Fortinet FortiSRA 1.5.0, 1.4.0 through 1.4.2, FortiPAM 1.5.0, 1.4.0 through 1.4.2, 1.3.0 through 1.3.1, 1.2.0, 1.1.0 through 1.1.2, 1.0.0 through 1.0.3, FortiProxy 7.6.0 through 7.6.1, 7.4.0 through 7.4.7, FortiOS 7.6.0 through 7.6.2, 7.4.0 through 7.4.6, 7.2.0 through 7.2.10, 7.0.2 through 7.0.16, FortiSwitchManager 7.2.1 through 7.2.5 allows attackers to escalate their privilege via specially crafted http requests.",
+      "headline_ja": "A heap-based buffer overflow in Fortinet FortiSRA 1.5.0, 1.4.0 through 1.4.2, FortiPAM 1.5.0, 1.4.0 through 1.4.2, 1.3.0 through 1.3.1, 1.2.0, 1.1.0 through 1.1.2, 1.0.0 through 1.0.3, FortiProxy 7.6.0 through 7.6.1, 7.4.0 through 7.4.7, FortiOS 7.6.0 through 7.6.2, 7.4.0 through 7.4.6, 7.2.0 through 7.2.10, 7.0.2 through 7.0.16, FortiSwitchManager 7.2.1 through 7.2.5 allows attackers to escalate their privilege via specially crafted http requests.",
+      "versions": "1.5.0, 1.4.0, 1.4.2, 1.3.0, 1.3.1, 1.2.0, 1.1.0, 1.1.2, 1.0.0, 1.0.3, 7.6.0, 7.6.1, 7.4.0, 7.4.7, 7.6.2, 7.4.6, 7.2.0, 7.2.10, 7.0.2, 7.0.16, 7.2.1, 7.2.5",
+      "url": "https://fortiguard.fortinet.com/psirt/FG-IR-24-546",
+      "date": "2025-10-14",
+      "cvss": 6.5,
+      "kev": false,
+      "epss": 0.00556
+    },
+    {
+      "source": "NVD (CVSS 5.3)",
+      "id": "CVE-2025-25255",
+      "headline_en": "An Improperly Implemented Security Check for Standard vulnerability [CWE-358] vulnerability in Fortinet FortiOS 7.6.0 through 7.6.3, FortiProxy 7.6.0 through 7.6.3, FortiProxy 7.4.0 through 7.4.11, FortiProxy 7.2 all versions, FortiProxy 7.0.1 through 7.0.22 may allow an unauthenticated proxy user to bypass the domain fronting protection feature via crafted HTTP requests.",
+      "headline_ja": "An Improperly Implemented Security Check for Standard vulnerability [CWE-358] vulnerability in Fortinet FortiOS 7.6.0 through 7.6.3, FortiProxy 7.6.0 through 7.6.3, FortiProxy 7.4.0 through 7.4.11, FortiProxy 7.2 all versions, FortiProxy 7.0.1 through 7.0.22 may allow an unauthenticated proxy user to bypass the domain fronting protection feature via crafted HTTP requests.",
+      "versions": "7.6.0, 7.6.3, 7.4.0, 7.4.11, 7.0.1, 7.0.22",
+      "url": "https://fortiguard.fortinet.com/psirt/FG-IR-24-372",
+      "date": "2025-10-14",
+      "cvss": 5.3,
+      "kev": false,
+      "epss": 0.00427
+    },
+    {
+      "source": "NVD (CVSS 4.8)",
+      "id": "CVE-2025-25252",
+      "headline_en": "An Insufficient Session Expiration vulnerability [CWE-613] in FortiOS SSL VPN 7.6.0 through 7.6.2, 7.4.0 through 7.4.6, 7.2.0 through 7.2.10, 7.0.0 through 7.0.16, 6.4 all versions may allow a remote attacker (e.g. a former admin whose account was removed and whose session was terminated) in possession of the SAML record of a user session to access or re-open that session via re-use of SAML record.",
+      "headline_ja": "An Insufficient Session Expiration vulnerability [CWE-613] in FortiOS SSL VPN 7.6.0 through 7.6.2, 7.4.0 through 7.4.6, 7.2.0 through 7.2.10, 7.0.0 through 7.0.16, 6.4 all versions may allow a remote attacker (e.g. a former admin whose account was removed and whose session was terminated) in possession of the SAML record of a user session to access or re-open that session via re-use of SAML record.",
+      "versions": "7.6.0, 7.6.2, 7.4.0, 7.4.6, 7.2.0, 7.2.10, 7.0.0, 7.0.16",
+      "url": "https://fortiguard.fortinet.com/psirt/FG-IR-24-487",
+      "date": "2025-10-14",
+      "cvss": 4.8,
+      "kev": false,
+      "epss": 0.00337
+    },
+    {
+      "source": "NVD (CVSS 4.7)",
+      "id": "CVE-2025-31366",
+      "headline_en": "An Improper Neutralization of Input During Web Page Generation vulnerability [CWE-79] vulnerability in Fortinet FortiOS 7.6.0 through 7.6.3, FortiOS 7.4.0 through 7.4.8, FortiOS 7.2 all versions, FortiOS 7.0 all versions, FortiOS 6.4 all versions, FortiProxy 7.6.0 through 7.6.3, FortiProxy 7.4 all versions, FortiProxy 7.2 all versions, FortiProxy 7.0 all versions, FortiSASE 25.2.a may allow an unauthenticated attacker to perform a reflected cross site scripting (XSS) via crafted HTTP requests.",
+      "headline_ja": "An Improper Neutralization of Input During Web Page Generation vulnerability [CWE-79] vulnerability in Fortinet FortiOS 7.6.0 through 7.6.3, FortiOS 7.4.0 through 7.4.8, FortiOS 7.2 all versions, FortiOS 7.0 all versions, FortiOS 6.4 all versions, FortiProxy 7.6.0 through 7.6.3, FortiProxy 7.4 all versions, FortiProxy 7.2 all versions, FortiProxy 7.0 all versions, FortiSASE 25.2.a may allow an unauthenticated attacker to perform a reflected cross site scripting (XSS) via crafted HTTP requests.",
+      "versions": "7.6.0, 7.6.3, 7.4.0, 7.4.8",
+      "url": "https://fortiguard.fortinet.com/psirt/FG-IR-24-542",
+      "date": "2025-10-14",
+      "cvss": 4.7,
+      "kev": false,
+      "epss": 0.00398
+    },
+    {
+      "source": "NVD (CVSS 4.3)",
+      "id": "CVE-2025-54822",
+      "headline_en": "An improper authorization vulnerability [CWE-285] vulnerability in Fortinet FortiOS 7.4.0 through 7.4.1, FortiOS 7.2.0 through 7.2.8, FortiOS 7.0.0 through 7.0.11, FortiProxy 7.4.0 through 7.4.8, FortiProxy 7.2 all versions, FortiProxy 7.0 all versions, FortiProxy 2.0 all versions allows an authenticated attacker to access static files of others VDOMs via crafted HTTP or HTTPS requests.",
+      "headline_ja": "An improper authorization vulnerability [CWE-285] vulnerability in Fortinet FortiOS 7.4.0 through 7.4.1, FortiOS 7.2.0 through 7.2.8, FortiOS 7.0.0 through 7.0.11, FortiProxy 7.4.0 through 7.4.8, FortiProxy 7.2 all versions, FortiProxy 7.0 all versions, FortiProxy 2.0 all versions allows an authenticated attacker to access static files of others VDOMs via crafted HTTP or HTTPS requests.",
+      "versions": "7.4.0, 7.4.1, 7.2.0, 7.2.8, 7.0.0, 7.0.11, 7.4.8",
+      "url": "https://fortiguard.fortinet.com/psirt/FG-IR-25-684",
+      "date": "2025-10-14",
+      "cvss": 4.3,
+      "kev": false,
+      "epss": 0.00317
+    },
+    {
+      "source": "NVD (CVSS 2.7)",
+      "id": "CVE-2025-58903",
+      "headline_en": "An Unchecked Return Value vulnerability [CWE-252] in Fortinet FortiOS version 7.6.0 through 7.6.3 and before 7.4.8 API allows an authenticated user to cause a  Null Pointer Dereference, crashing the http daemon via a specialy crafted request.",
+      "headline_ja": "An Unchecked Return Value vulnerability [CWE-252] in Fortinet FortiOS version 7.6.0 through 7.6.3 and before 7.4.8 API allows an authenticated user to cause a  Null Pointer Dereference, crashing the http daemon via a specialy crafted request.",
+      "versions": "7.6.0, 7.6.3, 7.4.8",
+      "url": "https://fortiguard.fortinet.com/psirt/FG-IR-25-653",
+      "date": "2025-10-14",
+      "cvss": 2.7,
+      "kev": false,
+      "epss": 0.00618
+    },
+    {
+      "source": "NVD (CVSS 2.7)",
+      "id": "CVE-2025-31514",
+      "headline_en": "A insertion of sensitive information into log file vulnerability in Fortinet FortiOS 7.6.0 through 7.6.3, FortiOS 7.4 all versions, FortiOS 7.2 all versions, FortiOS 7.0 all versions, FortiOS 6.4 all versions, FortiProxy 7.6.0 through 7.6.3, FortiProxy 7.4.0 through 7.4.13, FortiProxy 7.2 all versions, FortiProxy 7.0 all versions may allow attacker to information disclosure via <insert attack vector here>",
+      "headline_ja": "A insertion of sensitive information into log file vulnerability in Fortinet FortiOS 7.6.0 through 7.6.3, FortiOS 7.4 all versions, FortiOS 7.2 all versions, FortiOS 7.0 all versions, FortiOS 6.4 all versions, FortiProxy 7.6.0 through 7.6.3, FortiProxy 7.4.0 through 7.4.13, FortiProxy 7.2 all versions, FortiProxy 7.0 all versions may allow attacker to information disclosure via <insert attack vector here>",
+      "versions": "7.6.0, 7.6.3, 7.4.0, 7.4.13",
+      "url": "https://fortiguard.fortinet.com/psirt/FG-IR-24-452",
+      "date": "2025-10-14",
+      "cvss": 2.7,
+      "kev": false,
+      "epss": 0.00361
+    },
+    {
+      "source": "NVD (CVSS 2.6)",
+      "id": "CVE-2025-47890",
+      "headline_en": "An URL Redirection to Untrusted Site vulnerabilities [CWE-601] vulnerability in Fortinet FortiOS 7.6.0 through 7.6.3, FortiOS 7.4.0 through 7.4.8, FortiOS 7.2 all versions, FortiOS 7.0 all versions, FortiOS 6.4 all versions, FortiProxy 7.6.0 through 7.6.3, FortiProxy 7.4 all versions, FortiProxy 7.2 all versions, FortiProxy 7.0 all versions, FortiSASE 25.2.a may allow an unauthenticated attacker to perform an open redirect attack via crafted HTTP requests.",
+      "headline_ja": "An URL Redirection to Untrusted Site vulnerabilities [CWE-601] vulnerability in Fortinet FortiOS 7.6.0 through 7.6.3, FortiOS 7.4.0 through 7.4.8, FortiOS 7.2 all versions, FortiOS 7.0 all versions, FortiOS 6.4 all versions, FortiProxy 7.6.0 through 7.6.3, FortiProxy 7.4 all versions, FortiProxy 7.2 all versions, FortiProxy 7.0 all versions, FortiSASE 25.2.a may allow an unauthenticated attacker to perform an open redirect attack via crafted HTTP requests.",
+      "versions": "7.6.0, 7.6.3, 7.4.0, 7.4.8",
+      "url": "https://fortiguard.fortinet.com/psirt/FG-IR-24-542",
+      "date": "2025-10-14",
+      "cvss": 2.6,
+      "kev": false,
+      "epss": 0.00251
     }
   ]
 }
