@@ -42,9 +42,8 @@ def build_parser():
         help="収集元（既定: both = NVD + F5公式バグトラッカー）"
     )
     parser.add_argument(
-        "--nvd-keyword", default='"BIG-IP LTM"',
-        help='NVD検索キーワード（既定: "\\"BIG-IP LTM\\""、ダブルクォートで囲むと'
-             'AND扱い。BIG-IPとLTMの両方を含むCVEのみに絞り込む）'
+        "--nvd-keyword", default="BIG-IP",
+        help='NVD検索キーワード（既定: "BIG-IP"、スペース区切りでOR検索）'
     )
     parser.add_argument("--nvd-api-key", help="NVD APIキー（任意。指定するとレート制限が緩和される）")
     parser.add_argument("--target-version", help="対象バージョンを指定すると、NVD側の結果に影響有無の判定を付与する（例: 17.1.1）")

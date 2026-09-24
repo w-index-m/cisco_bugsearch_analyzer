@@ -966,7 +966,7 @@ if st.button("🚀 3ベンダーをまとめて検索（並列実行）", key="c
         _combo_results = analyzer.search_vendor_bugs_parallel({
             "f5": (analyzer.search_f5_bigip_tmm_bugs, dict(
                 source={"両方": "both", "NVDのみ": "nvd", "F5バグトラッカーのみ": "bugtracker"}[st.session_state.get("f5_source", "両方")],
-                nvd_keyword=st.session_state.get("f5_nvd_keyword", '"BIG-IP LTM"'),
+                nvd_keyword=st.session_state.get("f5_nvd_keyword", "BIG-IP"),
                 bug_ids=(
                     [b.strip() for b in st.session_state.get("f5_bug_ids_input", "").split(",") if b.strip()] or None
                 ),
@@ -1027,9 +1027,10 @@ with f5_col1:
         key="f5_source"
     )
     f5_nvd_keyword = st.text_input(
-        "NVD検索キーワード（スペース区切りでOR検索。ダブルクォートで囲むと"
-        "AND扱い。既定は「\"BIG-IP LTM\"」でBIG-IPとLTMの両方を含むCVEのみに絞り込み）",
-        value='"BIG-IP LTM"',
+        "NVD検索キーワード（スペース区切りでOR検索。ダブルクォートで囲むとAND扱い。"
+        "※NVDのCVE説明文には「LTM」等のモジュール名がほぼ記載されないため、"
+        "LTM限定の絞り込みはできません。LTM関連の既知バグはF5公式バグトラッカー欄をご覧ください）",
+        value="BIG-IP",
         key="f5_nvd_keyword"
     )
 with f5_col2:
