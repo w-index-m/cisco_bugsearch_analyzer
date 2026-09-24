@@ -1,7 +1,8 @@
 name: Collect vendor bug/CVE cache
 
-# F5 BIG-IP TMM / Palo Alto (PAN-OS) / FortiGate (FortiOS) のバグ・CVE情報を
-# NVD等から定期的に収集し、data/vendor_bugs/ 配下のJSONとしてコミットしておく。
+# F5 BIG-IP / Palo Alto (PAN-OS) / FortiGate (FortiOS) / Catalyst 9300 / Cisco IOS XE
+# のバグ・CVE情報をNVD等から定期的に収集し、data/vendor_bugs/ 配下のJSONとして
+# コミットしておく。
 #
 # アプリの開発・実行環境（サンドボックス）からは NVD や F5公式サイトへの通信が
 # ネットワークポリシーでブロックされていることがあるため、通常インターネットに

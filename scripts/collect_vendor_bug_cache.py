@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-F5 BIG-IP TMM / Palo Alto (PAN-OS) / FortiGate (FortiOS) のバグ情報を
-NVD等から収集し、data/vendor_bugs/ 配下にJSONとしてキャッシュするスクリプト。
+F5 BIG-IP / Palo Alto (PAN-OS) / FortiGate (FortiOS) / Catalyst 9300 / Cisco IOS XE
+のバグ情報をNVD等から収集し、data/vendor_bugs/ 配下にJSONとしてキャッシュするスクリプト。
 
 このプロジェクトの開発・実行環境（サンドボックス）からは NVD (services.nvd.nist.gov)
 や F5公式サイト (cdn.f5.com) への通信がネットワークポリシーでブロックされている
@@ -71,6 +71,26 @@ TARGETS = [
         "label": "FortiGate (FortiOS)",
         "collect": lambda keys: analyzer.search_vendor_bugs(
             nvd_keyword="Fortinet FortiOS", translate_engine="google",
+            nvd_api_key=keys["nvd"], deepl_api_key=keys["deepl"],
+            groq_api_key=keys["groq"], open_router_api_key=keys["openrouter"],
+            results_limit=CACHE_RESULTS_LIMIT, fetch_limit=CACHE_FETCH_LIMIT,
+        ),
+    },
+    {
+        "key": "catalyst9300",
+        "label": "Catalyst 9300",
+        "collect": lambda keys: analyzer.search_vendor_bugs(
+            nvd_keyword='"Catalyst 9300"', translate_engine="google",
+            nvd_api_key=keys["nvd"], deepl_api_key=keys["deepl"],
+            groq_api_key=keys["groq"], open_router_api_key=keys["openrouter"],
+            results_limit=CACHE_RESULTS_LIMIT, fetch_limit=CACHE_FETCH_LIMIT,
+        ),
+    },
+    {
+        "key": "iosxe",
+        "label": "Cisco IOS XE",
+        "collect": lambda keys: analyzer.search_vendor_bugs(
+            nvd_keyword='"IOS XE"', translate_engine="google",
             nvd_api_key=keys["nvd"], deepl_api_key=keys["deepl"],
             groq_api_key=keys["groq"], open_router_api_key=keys["openrouter"],
             results_limit=CACHE_RESULTS_LIMIT, fetch_limit=CACHE_FETCH_LIMIT,
