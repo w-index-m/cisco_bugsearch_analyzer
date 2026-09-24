@@ -31,7 +31,7 @@ TARGETS = [
         "key": "f5",
         "label": "F5 BIG-IP TMM",
         "collect": lambda nvd_api_key: analyzer.search_f5_bigip_tmm_bugs(
-            source="both", nvd_keyword="BIG-IP LTM",
+            source="both", nvd_keyword='"BIG-IP LTM"',
             translate_engine="google", nvd_api_key=nvd_api_key,
         ),
     },

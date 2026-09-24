@@ -2559,7 +2559,7 @@ def sort_bug_rows_by_date_desc(rows):
     )
 
 
-def search_f5_bigip_tmm_bugs(source="both", nvd_keyword="BIG-IP LTM", bug_ids=None,
+def search_f5_bigip_tmm_bugs(source="both", nvd_keyword='"BIG-IP LTM"', bug_ids=None,
                               translate_engine=None, deepl_api_key=None, nvidia_api_key=None,
                               nvd_api_key=None, target_version=None, fetch_limit=250,
                               include_kev_epss=True):
