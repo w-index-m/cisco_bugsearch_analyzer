@@ -2406,7 +2406,7 @@ def _split_or_terms(keyword):
     return [t for t in terms if t]
 
 
-def _fetch_nvd_results_or(keyword, fetch_limit, api_key, target_version):
+def _fetch_nvd_results_or(keyword, fetch_limit, api_key, target_version, timeout=35):
     """
     キーワードを複数語に分解し（_split_or_terms 参照）、語ごとに個別にNVDへ
     問い合わせて和集合（OR、CVE ID重複除去）にする。1語だけの場合は通常どおり
@@ -2418,22 +2418,33 @@ def _fetch_nvd_results_or(keyword, fetch_limit, api_key, target_version):
     ただし「Palo Alto」のように2語で1つの固有名詞になっているものをそのまま
     バラバラに分けてしまうと「Palo」「Alto」単体という無意味に広い検索語に
     なってしまうため、ダブルクォートで囲んだ部分は1つの語として扱う。
+
+    fetch_limit を大きくした分（既定250件）、NVD側の応答が遅くなることがある
+    ため、既定より長めのタイムアウトを使う。また、複数語のうち一部だけが
+    タイムアウト等で失敗しても、他の語で取得できていればその結果を返す
+    （全ての語が失敗した場合のみエラーにする）。1語だけ失敗して検索全体が
+    失敗扱いになるのを避けるため。
     """
     terms = _split_or_terms(keyword)
     if len(terms) <= 1:
         return search_cve_by_keyword(
-            keyword, results_limit=fetch_limit, api_key=api_key, target_version=target_version,
+            keyword, results_limit=fetch_limit, api_key=api_key, target_version=target_version, timeout=timeout,
         )
 
     merged = {}
+    errors = []
     for term in terms:
         result = search_cve_by_keyword(
-            term, results_limit=fetch_limit, api_key=api_key, target_version=target_version,
+            term, results_limit=fetch_limit, api_key=api_key, target_version=target_version, timeout=timeout,
         )
         if isinstance(result, dict) and "error" in result:
-            return result
+            errors.append(f'"{term}": {result["error"]}')
+            continue
         for r in result:
             merged[r["cve_id"]] = r
+
+    if not merged and errors:
+        return {"error": "; ".join(errors)}
     return list(merged.values())
 
 
