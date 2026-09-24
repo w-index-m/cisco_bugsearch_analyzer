@@ -185,6 +185,33 @@ def display_vendor_bug_cache(session_key, label):
     st.markdown("---")
 
 
+def render_shodan_exposure_check(session_key, version):
+    """
+    Shodan（インターネット上に公開されている機器を検索できるサービス）で、
+    指定バージョンの機器が実際に何台インターネットに露出しているかを確認する
+    ボタンを描画する。SHODAN_API_KEY が未設定、またはこのベンダー向けの
+    Shodanクエリが用意されていない場合は何も表示しない。
+    /shodan/host/count エンドポイントを使うため、通常の検索と違って
+    Shodanのクエリクレジットを消費しない。
+    """
+    product_query = analyzer.SHODAN_PRODUCT_QUERIES.get(session_key)
+    if not shodan_api_key or not product_query:
+        return
+    if st.button(f"🌐 Shodanでインターネット露出数を確認", key=f"{session_key}_shodan_btn"):
+        with st.spinner("Shodanに問い合わせ中..."):
+            result = analyzer.fetch_shodan_exposure_count(
+                product_query, version=version or None, api_key=shodan_api_key
+            )
+        if "error" in result:
+            st.error(f"Shodanへの問い合わせに失敗しました: {result['error']}")
+        else:
+            st.info(
+                f"🌐 推定インターネット露出台数: **{result['total']:,} 件**"
+                f"（クエリ: `{result['query']}`）\n\n"
+                f"[Shodanで直接確認する]({result['shodan_url']})"
+            )
+
+
 # ファイルアップロード（必須。デフォルトのバグ一覧は読み込まない）
 uploaded_file = st.file_uploader(
     "CSV / Excel ファイルをアップロード",
@@ -319,6 +346,10 @@ if use_ai_analysis:
             "Open Router キー", type="password", placeholder="sk-or-...",
             label_visibility="collapsed", key="open_router_api_key_input"
         )
+
+# Shodan（インターネット露出数の確認）は独立した機能のため、AI解説の
+# チェックボックスとは関係なく、Secretsにキーがあれば常に有効にする
+shodan_api_key = get_secret("SHODAN_API_KEY")
 
 st.markdown("**テキストを翻訳（単体ツール）**")
 st.caption(
@@ -1075,6 +1106,8 @@ f5_nvd_api_key = get_secret("NVD_API_KEY") or st.text_input(
     type="password", key="f5_nvd_api_key_input"
 )
 
+render_shodan_exposure_check("f5", f5_target_version)
+
 if st.button("🔎 F5 BIG-IP バグを検索", key="f5_search_btn"):
     _f5_source_map = {"両方": "both", "NVDのみ": "nvd", "F5バグトラッカーのみ": "bugtracker"}
     _f5_bug_ids = (
@@ -1153,6 +1186,8 @@ def render_vendor_bug_search(title, icon, session_key, default_keyword, version_
         "NVD API キー（任意、無くても検索可・レート制限が緩和される）",
         type="password", key=f"{session_key}_nvd_api_key_input"
     )
+
+    render_shodan_exposure_check(session_key, target_version)
 
     if st.button(f"🔎 {title}", key=f"{session_key}_search_btn"):
         with st.spinner("検索中..."):

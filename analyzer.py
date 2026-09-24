@@ -14,6 +14,7 @@ import concurrent.futures
 from html import unescape
 from datetime import datetime, date as _date
 from functools import wraps
+from urllib.parse import quote
 
 import pandas as pd
 import requests
@@ -2679,6 +2680,57 @@ def sort_bug_rows_by_date_desc(rows):
         key=lambda r: (r.get("date") or "0000-00-00", r.get("cvss") if r.get("cvss") is not None else -1),
         reverse=True,
     )
+
+
+# ==================== Shodan（インターネット露出数の確認） ====================
+#
+# 対象バージョンが実際にインターネット上にどれだけ露出しているかを確認する。
+# Shodanの /shodan/host/count エンドポイントは、検索結果そのもの（ホストの
+# 詳細情報）を返さずヒット件数だけを返すため、通常の検索と違ってクエリ
+# クレジットを消費しない（Shodan公式ドキュメント記載の仕様）。
+#
+# 製品ごとのShodanクエリ文字列（Shodanのプロダクトフィンガープリント）は
+# 一般的に使われているものだが、Shodan側のデータベース更新で変わる可能性が
+# あるため、結果と一緒に実際に使ったクエリとShodan上で直接確認できる
+# リンクも返す（クエリが古くなっていた場合にユーザー側で調整できるように）。
+SHODAN_PRODUCT_QUERIES = {
+    "f5": 'product:"F5 BIG-IP"',
+    "paloalto": 'product:"Palo Alto Networks PAN-OS"',
+    "fortigate": 'product:"Fortinet FortiGate Firewall Http Config"',
+}
+
+
+def fetch_shodan_exposure_count(product_query, version=None, api_key=None, timeout=15):
+    """
+    Shodanで、指定した製品（・バージョン）がインターネット上に何件露出して
+    いるかを調べる。version を指定すると、製品クエリにバージョン文字列を
+    自由語として追加する（Shodan側のバージョン検出精度に依存するため、
+    あくまで目安の件数になる）。
+
+    Returns:
+        {"total": int, "query": str, "shodan_url": str} 成功時
+        {"error": str} 失敗時（APIキー未設定・無効、通信エラー等）
+    """
+    if not api_key:
+        return {"error": "Shodan APIキーが設定されていません"}
+
+    query = f'{product_query} "{version}"' if version else product_query
+    try:
+        response = requests.get(
+            "https://api.shodan.io/shodan/host/count",
+            params={"key": api_key, "query": query},
+            timeout=timeout,
+        )
+        response.raise_for_status()
+        data = response.json()
+    except Exception as e:
+        return {"error": str(e)}
+
+    return {
+        "total": data.get("total", 0),
+        "query": query,
+        "shodan_url": f"https://www.shodan.io/search?query={quote(query)}",
+    }
 
 
 def search_f5_bigip_tmm_bugs(source="both", nvd_keyword="BIG-IP", bug_ids=None,
