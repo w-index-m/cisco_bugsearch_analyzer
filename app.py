@@ -1007,14 +1007,14 @@ st.info(
     "- Cisco Bug Search Tool（Cisco公式バグ検索、要ログイン）: https://bst.cloudapps.cisco.com/bugsearch/"
 )
 
-st.markdown("### ⚡ F5 / Palo Alto / FortiGate をまとめて検索")
+st.markdown("### ⚡ F5 / Palo Alto / FortiGate / Catalyst 9300 / IOS XE をまとめて検索")
 st.caption(
-    "3ベンダーのNVD検索をスレッドで並列実行します。1件ずつ検索ボタンを押す場合に"
-    "比べ、待ち時間が『3件の合計』ではなく『一番遅い1件』に近くなります。"
+    "5機種分のNVD検索をスレッドで並列実行します。1件ずつ検索ボタンを押す場合に"
+    "比べ、待ち時間が『5件の合計』ではなく『一番遅い1件』に近くなります。"
     "各セクションの検索キーワード・対象バージョンの入力欄はそのまま使われます。"
 )
-if st.button("🚀 3ベンダーをまとめて検索（並列実行）", key="combo_vendor_search_btn"):
-    with st.spinner("F5 / Palo Alto / FortiGate を並列検索中..."):
+if st.button("🚀 5機種をまとめて検索（並列実行）", key="combo_vendor_search_btn"):
+    with st.spinner("F5 / Palo Alto / FortiGate / Catalyst 9300 / IOS XE を並列検索中..."):
         _combo_results = analyzer.search_vendor_bugs_parallel({
             "f5": (analyzer.search_f5_bigip_tmm_bugs, dict(
                 source={"両方": "both", "NVDのみ": "nvd", "F5バグトラッカーのみ": "bugtracker"}[st.session_state.get("f5_source", "両方")],
@@ -1044,8 +1044,27 @@ if st.button("🚀 3ベンダーをまとめて検索（並列実行）", key="c
                 nvd_api_key=get_secret("NVD_API_KEY") or st.session_state.get("fortigate_nvd_api_key_input") or None,
                 target_version=st.session_state.get("fortigate_target_version") or None,
             )),
+            "catalyst9300": (analyzer.search_vendor_bugs, dict(
+                nvd_keyword=st.session_state.get("catalyst9300_keyword", "\"Catalyst 9300\""),
+                translate_engine=translation_engine_key,
+                deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key,
+                groq_api_key=groq_api_key, open_router_api_key=open_router_api_key,
+                nvd_api_key=get_secret("NVD_API_KEY") or st.session_state.get("catalyst9300_nvd_api_key_input") or None,
+                target_version=st.session_state.get("catalyst9300_target_version") or None,
+            )),
+            "iosxe": (analyzer.search_vendor_bugs, dict(
+                nvd_keyword=st.session_state.get("iosxe_keyword", "\"IOS XE\""),
+                translate_engine=translation_engine_key,
+                deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key,
+                groq_api_key=groq_api_key, open_router_api_key=open_router_api_key,
+                nvd_api_key=get_secret("NVD_API_KEY") or st.session_state.get("iosxe_nvd_api_key_input") or None,
+                target_version=st.session_state.get("iosxe_target_version") or None,
+            )),
         })
-    for _key, _label in [("f5", "F5 BIG-IP"), ("paloalto", "Palo Alto (PAN-OS)"), ("fortigate", "FortiGate (FortiOS)")]:
+    for _key, _label in [
+        ("f5", "F5 BIG-IP"), ("paloalto", "Palo Alto (PAN-OS)"), ("fortigate", "FortiGate (FortiOS)"),
+        ("catalyst9300", "Catalyst 9300"), ("iosxe", "Cisco IOS XE"),
+    ]:
         st.session_state[f"{_key}_live_results"] = _combo_results.get(_key)
         st.session_state[f"{_key}_live_label"] = f"{_label}(並列検索)"
     st.success("並列検索が完了しました。各セクションの結果表示をご確認ください。")
@@ -1232,6 +1251,20 @@ render_vendor_bug_search(
     "FortiGate (FortiOS) バグ検索", "🛡️", "fortigate", "Fortinet FortiOS", version_placeholder="例: 7.4.8",
     official_links=[
         ("Fortinet PSIRT アドバイザリ一覧", "https://www.fortiguard.com/psirt"),
+    ],
+)
+render_vendor_bug_search(
+    "Catalyst 9300 バグ検索", "🔀", "catalyst9300", "\"Catalyst 9300\"", version_placeholder="例: 17.12.4",
+    official_links=[
+        ("Cisco Security Advisories（製品別に絞り込み可能）", "https://sec.cloudapps.cisco.com/security/center/publicationListing.x"),
+        ("Catalyst 9300 シリーズ リリースノート", "https://www.cisco.com/c/en/us/support/switches/catalyst-9300-series-switches/products-release-notes-list.html"),
+    ],
+)
+render_vendor_bug_search(
+    "Cisco IOS XE バグ検索", "🖥️", "iosxe", "\"IOS XE\"", version_placeholder="例: 17.12.4",
+    official_links=[
+        ("Cisco IOS XE Software セキュリティアドバイザリ", "https://sec.cloudapps.cisco.com/security/center/publicationListing.x"),
+        ("Cisco IOS XE リリースノート一覧", "https://www.cisco.com/c/en/us/support/ios-nx-os-software/ios-xe/products-release-notes-list.html"),
     ],
 )
 
