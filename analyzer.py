@@ -1565,14 +1565,30 @@ def search_cve_by_keyword(keyword, results_limit=20, api_key=None, timeout=20, t
     headers = {"apiKey": api_key} if api_key else {}
     params = {"keywordSearch": keyword, "resultsPerPage": results_limit}
 
-    try:
-        response = requests.get(NVD_API_BASE, params=params, headers=headers, timeout=timeout)
-        response.raise_for_status()
-        data = response.json()
-    except Exception as e:
-        return {"error": str(e)}
+    # NVDは複数リクエストを間隔を空けずに送ると、HTTPステータスは200のまま
+    # totalResultsは正しい値を返しつつ vulnerabilities を空配列（resultsPerPage=0）
+    # にして「静かにスロットリング」することがある（実際に "Catalyst 9300" を
+    # 連続で問い合わせて確認済み）。HTTPエラーにならないため見た目上は成功に
+    # 見えるが、実質的には0件と誤認してしまう。totalResults>0なのに
+    # vulnerabilitiesが空、というこの兆候を検知したら短い間隔を空けて
+    # 再試行する。
+    last_data = None
+    for attempt in range(3):
+        try:
+            response = requests.get(NVD_API_BASE, params=params, headers=headers, timeout=timeout)
+            response.raise_for_status()
+            data = response.json()
+        except Exception as e:
+            return {"error": str(e)}
 
-    return _parse_nvd_response(data, target_version=target_version)
+        last_data = data
+        throttled = data.get("totalResults", 0) > 0 and not data.get("vulnerabilities")
+        if not throttled:
+            break
+        if attempt < 2:
+            time.sleep(2 * (attempt + 1))
+
+    return _parse_nvd_response(last_data, target_version=target_version)
 
 
 def _parse_nvd_response(data, target_version=None):
@@ -2562,7 +2578,12 @@ def _fetch_nvd_results_or(keyword, fetch_limit, api_key, target_version, timeout
 
     merged = {}
     errors = []
-    for term in terms:
+    for i, term in enumerate(terms):
+        if i > 0:
+            # 間隔を空けずに連続でNVDへ問い合わせると、NVD側が静かに
+            # スロットリングすることがある（search_cve_by_keyword内の
+            # リトライで検知・救済しているが、そもそも起きにくくする）
+            time.sleep(1)
         result = search_cve_by_keyword(
             term, results_limit=fetch_limit, api_key=api_key, target_version=target_version, timeout=timeout,
         )
