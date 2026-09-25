@@ -1541,7 +1541,8 @@ def check_version_affected(cve, target_version):
     return None
 
 
-def search_cve_by_keyword(keyword, results_limit=20, api_key=None, timeout=20, target_version=None):
+def search_cve_by_keyword(keyword, results_limit=20, api_key=None, timeout=20, target_version=None,
+                           exact_match=False):
     """
     NVD の公開APIをキーワード検索し、該当する CVE の一覧を返す。
 
@@ -1556,6 +1557,13 @@ def search_cve_by_keyword(keyword, results_limit=20, api_key=None, timeout=20, t
             を結果に追加する（Cisco の version_affects_bug 相当）。数値として
             解釈できないバージョンを渡した場合や configurations が無い CVE では
             affected は None（判定不可）になる。
+        exact_match: True にすると NVD の keywordExactMatch パラメータを付与し、
+            keyword が複数語のフレーズの場合に「語順通りの完全一致」のみを
+            対象にする（既定はNVDの通常仕様通り、語ごとの独立したAND＝
+            語順を無視して全語が本文のどこかに含まれていればヒット）。
+            例えば "Catalyst 9300" を通常のAND検索すると、「Catalyst」と
+            「9300」が別々の文脈（例: Nexus 9300関連の脆弱性）で登場するだけの
+            無関係なCVEも拾ってしまうため、厳密フレーズ一致で誤検出を減らす。
 
     Returns:
         成功時: [{"cve_id", "description_en", "cvss_score", "severity",
@@ -1564,6 +1572,9 @@ def search_cve_by_keyword(keyword, results_limit=20, api_key=None, timeout=20, t
     """
     headers = {"apiKey": api_key} if api_key else {}
     params = {"keywordSearch": keyword, "resultsPerPage": results_limit}
+    if exact_match:
+        # NVD公式ドキュメント記載の通り、値を持たないパラメータとして付与する
+        params["keywordExactMatch"] = ""
 
     # NVDは複数リクエストを間隔を空けずに送ると、HTTPステータスは200のまま
     # totalResultsは正しい値を返しつつ vulnerabilities を空配列（resultsPerPage=0）
@@ -2553,6 +2564,12 @@ def _fetch_nvd_results_or(keyword, fetch_limit, api_key, target_version, timeout
     バラバラに分けてしまうと「Palo」「Alto」単体という無意味に広い検索語に
     なってしまうため、ダブルクォートで囲んだ部分は1つの語として扱う。
 
+    ダブルクォートで囲んだ語（"Catalyst 9300" 等）自体が複数単語からなる
+    フレーズの場合は、NVDの keywordExactMatch を付与し語順通りの完全一致に
+    絞り込む。通常のAND検索のままだと「Catalyst」と「9300」が別々の文脈
+    （例: Nexus 9300関連の脆弱性の説明文中にたまたまCatalystも登場する等）
+    で登場するだけの無関係なCVEまで拾ってしまうため。
+
     fetch_limit は NVD の resultsPerPage にそのまま渡る値で、ここで1回に
     取得する件数の上限になる（ページネーションはしない）。NVDは日付降順で
     結果を返す保証が無いため、totalResults が fetch_limit を超える語
@@ -2571,9 +2588,10 @@ def _fetch_nvd_results_or(keyword, fetch_limit, api_key, target_version, timeout
         # クォート文字を含んだ元の keyword をそのままNVDに渡すと、クォート文字も
         # 検索対象に含まれてしまい実際には一致しなくなる（0件になる）。
         # 必ずクォートを除去済みの terms[0] を使う
+        term0 = terms[0] if terms else keyword
         return search_cve_by_keyword(
-            terms[0] if terms else keyword,
-            results_limit=fetch_limit, api_key=api_key, target_version=target_version, timeout=timeout,
+            term0, results_limit=fetch_limit, api_key=api_key, target_version=target_version, timeout=timeout,
+            exact_match=" " in term0,
         )
 
     merged = {}
@@ -2586,6 +2604,7 @@ def _fetch_nvd_results_or(keyword, fetch_limit, api_key, target_version, timeout
             time.sleep(1)
         result = search_cve_by_keyword(
             term, results_limit=fetch_limit, api_key=api_key, target_version=target_version, timeout=timeout,
+            exact_match=" " in term,
         )
         if isinstance(result, dict) and "error" in result:
             errors.append(f'"{term}": {result["error"]}')
