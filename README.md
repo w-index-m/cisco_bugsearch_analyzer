@@ -23,7 +23,7 @@ Cisco のバグ情報（CSV/Excel）だけでなく、F5 BIG-IP / Palo Alto (PAN
 - 🔥 **Palo Alto (PAN-OS)** / 🛡️ **FortiGate (FortiOS)** / 🔀 **Catalyst 9300** / 🖥️ **Cisco IOS XE** バグ検索 - NVDキーワード検索（スペース区切りでOR、ダブルクォートでAND句）。対象バージョンを指定すると影響有無を判定
 - ⚡ **5機種まとめて検索（並列実行）** - F5 / Palo Alto / FortiGate / Catalyst 9300 / Cisco IOS XE を並列でNVD検索し、待ち時間を短縮
 - 🛡️ **KEV / EPSS 表示** - CISA KEV（実際に悪用が確認された既知の脆弱性）と FIRST EPSS（悪用予測確率スコア）を各CVE行に自動付与し、CVSSだけに頼らない優先度判断が可能
-- 📇 **Cisco PSIRT openVuln API 連携（任意）** - `CISCO_PSIRT_CLIENT_ID` / `CISCO_PSIRT_CLIENT_SECRET` を設定すると、Catalyst 9300 / Cisco IOS XE の検索でCisco公式セキュリティアドバイザリ（NVDより早く出ることが多い）もNVD結果に自動合流表示
+- 📇 **Cisco PSIRT openVuln API 連携（任意）** - `PSIRT_CLIENT_ID` / `PSIRT_CLIENT_SECRET` を設定すると、Catalyst 9300 / Cisco IOS XE の検索でCisco公式セキュリティアドバイザリ（NVDより早く出ることが多い）もNVD結果に自動合流表示
 - 🌐 **Shodan 露出数チェック（任意）** - `SHODAN_API_KEY` を設定すると、対象バージョンの機器が実際に何台インターネットに露出しているかをワンクリックで確認（クエリクレジットを消費しない `/shodan/host/count` を使用）
 - 📦 **GitHub Actions によるキャッシュ収集** - `.github/workflows/collect-vendor-bugs.yml` が毎日自動で5機種分のデータを収集し `data/vendor_bugs/` にコミット。アプリはまずこのキャッシュを即座に表示し、必要ならライブ検索も可能
 - 🔍 **表の絞り込み検索ボックス** - 結果テーブルは Canvas 描画のため、ブラウザ標準のCtrl+F検索が効かない。アプリ内の専用テキストボックスでCVE ID・バージョン・見出し等を絞り込み可能
@@ -79,8 +79,8 @@ OPENROUTER_API_KEY = "xxx"
 NVD_API_KEY = "xxx"
 SHODAN_API_KEY = "xxx"
 # Cisco API Console（https://apiconsole.cisco.com/）でアプリを登録して取得
-CISCO_PSIRT_CLIENT_ID = "xxx"
-CISCO_PSIRT_CLIENT_SECRET = "xxx"
+PSIRT_CLIENT_ID = "xxx"
+PSIRT_CLIENT_SECRET = "xxx"
 ```
 
 > **Streamlit Secrets と GitHub Actions Secrets は別物です。** ライブ検索（アプリ画面からの検索）には Streamlit Secrets、`.github/workflows/collect-vendor-bugs.yml` の自動収集には GitHub リポジトリの Secrets（Settings → Secrets and variables → Actions）が必要です。同じキーでも両方に登録してください。
@@ -131,7 +131,7 @@ CISCO_PSIRT_CLIENT_SECRET = "xxx"
 - 対象バージョンを入力すると、NVDのバージョン範囲データから影響有無を判定
 - 結果テーブルには CVSS 由来の重大度に加え、**KEV**（実際に悪用が確認された既知の脆弱性）・**EPSS**（悪用予測確率スコア）が自動付与されます
 - **F5のみ**: NVD検索に加え、F5公式バグトラッカー（CVEにならない一般的な既知の問題）から対象製品（BIG-IP Next(BNK)等）・対象OS・見出しも収集
-- **Catalyst 9300 / Cisco IOS XEのみ**: `CISCO_PSIRT_CLIENT_ID`/`CISCO_PSIRT_CLIENT_SECRET`（Cisco API Consoleで取得）を設定していれば、Cisco公式セキュリティアドバイザリ（PSIRT openVuln API）もNVD検索結果に自動合流
+- **Catalyst 9300 / Cisco IOS XEのみ**: `PSIRT_CLIENT_ID`/`PSIRT_CLIENT_SECRET`（Cisco API Consoleで取得）を設定していれば、Cisco公式セキュリティアドバイザリ（PSIRT openVuln API）もNVD検索結果に自動合流
 - `SHODAN_API_KEY` を設定していれば、**「🌐 Shodanでインターネット露出数を確認」** ボタンで対象バージョンの機器が実際に何台露出しているかを確認可能
 - 表の上部にある **「🔍 この表をキーワードで絞り込み」** ボックスでCVE ID・バージョン・見出し等を絞り込み表示（ブラウザ標準のCtrl+Fは表内を検索できないため）
 - **「🚀 5機種をまとめて検索（並列実行）」** で5機種のライブ検索を同時実行可能
@@ -264,7 +264,7 @@ python f5_bigip_tmm_bugs.py --nvd-keyword "BIG-IP" --bugtracker-limit 100
 **Other vendors/products (F5 BIG-IP / Palo Alto PAN-OS / FortiGate FortiOS / Catalyst 9300 / Cisco IOS XE)**
 - Dedicated search sections that query the NVD (National Vulnerability Database) by keyword (space-separated terms are OR'd; quote a phrase for AND/exact matching), plus F5's official bug tracker for non-CVE known issues (F5's tracker index is crawled dynamically to discover recent Bug IDs, and affected product info such as "BIG-IP Next (BNK)" is captured)
 - Every CVE result is enriched with **CVSS**, **CISA KEV** (confirmed real-world exploitation) and **FIRST EPSS** (predicted exploitation probability) so you're not relying on CVSS alone
-- Optional **Cisco PSIRT openVuln API integration**: with `CISCO_PSIRT_CLIENT_ID`/`CISCO_PSIRT_CLIENT_SECRET` configured, official Cisco security advisories (often published ahead of NVD) are merged into the Catalyst 9300 / Cisco IOS XE search results
+- Optional **Cisco PSIRT openVuln API integration**: with `PSIRT_CLIENT_ID`/`PSIRT_CLIENT_SECRET` configured, official Cisco security advisories (often published ahead of NVD) are merged into the Catalyst 9300 / Cisco IOS XE search results
 - Optional **Shodan exposure check**: with a `SHODAN_API_KEY` configured, one click shows how many internet-facing devices match the target version, using Shodan's credit-free `/shodan/host/count` endpoint
 - **Parallel combined search** across all five products, and an **in-table filter box** (the results table is Canvas-rendered, so browser-native Ctrl+F can't search it — use the app's own search box instead)
 - A daily **GitHub Actions job** pre-collects all five products' data into `data/vendor_bugs/*.json` so the app can display results instantly even before you run a live search
@@ -307,8 +307,8 @@ OPENROUTER_API_KEY = "xxx"
 NVD_API_KEY = "xxx"
 SHODAN_API_KEY = "xxx"
 # register an app at https://apiconsole.cisco.com/ to get these
-CISCO_PSIRT_CLIENT_ID = "xxx"
-CISCO_PSIRT_CLIENT_SECRET = "xxx"
+PSIRT_CLIENT_ID = "xxx"
+PSIRT_CLIENT_SECRET = "xxx"
 ```
 
 > **Streamlit Secrets and GitHub Actions Secrets are separate stores.** The live app reads from Streamlit Secrets; the scheduled collection workflow (`.github/workflows/collect-vendor-bugs.yml`) reads from the GitHub repository's Actions secrets (Settings → Secrets and variables → Actions). Add the same keys to both if you want both to work.

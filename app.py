@@ -357,8 +357,8 @@ shodan_api_key = get_secret("SHODAN_API_KEY")
 
 # Cisco PSIRT openVuln API（Cisco公式セキュリティアドバイザリAPI）も同様に、
 # AI解説のチェックボックスとは独立してSecretsにキーがあれば常に有効にする
-cisco_psirt_client_id = get_secret("CISCO_PSIRT_CLIENT_ID")
-cisco_psirt_client_secret = get_secret("CISCO_PSIRT_CLIENT_SECRET")
+cisco_psirt_client_id = get_secret("PSIRT_CLIENT_ID")
+cisco_psirt_client_secret = get_secret("PSIRT_CLIENT_SECRET")
 
 st.markdown("**テキストを翻訳（単体ツール）**")
 st.caption(
@@ -1190,7 +1190,7 @@ def render_vendor_bug_search(title, icon, session_key, default_keyword, version_
         NVDより早く・網羅的に情報が出る参考リンクがあれば併せて案内する。
     psirt_os_type / psirt_product: 指定すると、NVD検索結果にCisco PSIRT
         openVuln API（Cisco公式セキュリティアドバイザリAPI）のアドバイザリも
-        合流させる（Secretsに CISCO_PSIRT_CLIENT_ID / CISCO_PSIRT_CLIENT_SECRET
+        合流させる（Secretsに PSIRT_CLIENT_ID / PSIRT_CLIENT_SECRET
         が設定されている場合のみ）。psirt_os_type はOS種別+対象バージョンでの
         検索（例: "iosxe"）、psirt_product は製品名での検索（例:
         "Cisco Catalyst 9300"）に使う。
