@@ -41,6 +41,7 @@ def main():
     check("PAN-OS (single word)", "PAN-OS", args.nvd_api_key, False)
     check("Fortinet (single word, brand)", "Fortinet", args.nvd_api_key, False)
     check("FortiOS (single word, product)", "FortiOS", args.nvd_api_key, False)
+    check("FortiGate (single word, hardware)", "FortiGate", args.nvd_api_key, False)
 
 
 if __name__ == "__main__":
