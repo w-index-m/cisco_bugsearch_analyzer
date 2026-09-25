@@ -194,7 +194,11 @@ def render_shodan_exposure_check(session_key, version):
     /shodan/host/count エンドポイントを使うため、通常の検索と違って
     Shodanのクエリクレジットを消費しない。
     """
-    product_query = analyzer.SHODAN_PRODUCT_QUERIES.get(session_key)
+    # getattr で防御的に取得する。Streamlit Cloud側のモジュールキャッシュが
+    # 古いままの状態（デプロイ直後、プロセス再起動が完了する前など）で
+    # SHODAN_PRODUCT_QUERIES が一時的に見つからずAttributeErrorでアプリ全体が
+    # 落ちるのを避けるため
+    product_query = getattr(analyzer, "SHODAN_PRODUCT_QUERIES", {}).get(session_key)
     if not shodan_api_key or not product_query:
         return
     if st.button(f"🌐 Shodanでインターネット露出数を確認", key=f"{session_key}_shodan_btn"):
