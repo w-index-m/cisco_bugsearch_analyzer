@@ -135,6 +135,12 @@ def display_bug_rows_table(rows, session_key, name, key_suffix):
         display_table = table[mask]
         st.caption(f"「{filter_text}」に一致: {len(display_table)} / {len(table)} 件")
 
+    # st.dataframe はCanvas描画のため、通常のテキストのようにドラッグして
+    # 選択することはできない。代わりにセルをクリック→ドラッグして範囲選択→
+    # Ctrl+C（Macは⌘+C）でコピーする操作に対応している（見た目の色は薄いが
+    # 選択状態になっている）。この操作に気づきにくいため案内を出す。
+    st.caption("📋 見出し等をコピーしたい場合: セルをクリックしてドラッグで範囲選択 →Ctrl+C（Macは⌘+C）でコピーできます")
+
     st.dataframe(
         display_table,
         use_container_width=True,
@@ -664,6 +670,7 @@ if df is not None:
                 "自動推定であり、統計的根拠のある値ではありません。"
                 "件数が多いと翻訳に時間がかかることがあります。 " + ai_summary_note
             )
+            st.caption("📋 見出し等をコピーしたい場合: セルをクリックしてドラッグで範囲選択 →Ctrl+C（Macは⌘+C）でコピーできます")
             st.dataframe(
                 display_results[display_cols],
                 use_container_width=True,
