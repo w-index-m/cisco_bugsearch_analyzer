@@ -1602,6 +1602,37 @@ def search_cve_by_keyword(keyword, results_limit=20, api_key=None, timeout=20, t
     return _parse_nvd_response(last_data, target_version=target_version)
 
 
+# Ciscoの定期ハードニングリリース（"cisco-sa-hardening-*"）アドバイソリでは、
+# 1つのアドバイザリに紐づく多数のCVEが、いずれも同じ定型文
+# 「As part of Cisco's ongoing commitment to...internally discovered
+# vulnerabilities.」から書き出され、CVEごとに異なる具体的な内容（CWE分類等）は
+# 2段落目以降にしか現れない。表の見出し列は先頭部分しか見えないため、その
+# ままでは全CVEが同じ文言に見えてしまう（実際には別々の脆弱性）。CVE固有の
+# 内容を先頭に出し、定型文を後ろに回すことで、表を見ただけで各行の違いが
+# 分かるようにする。
+_CISCO_HARDENING_BOILERPLATE_RE = re.compile(
+    r"^(As part of Cisco's ongoing commitment to proactive security and product "
+    r"quality,.*?internally discovered vulnerabilities\.)\s*(.*)$",
+    re.DOTALL,
+)
+
+
+def _reorder_cisco_hardening_headline(text):
+    """
+    上記の定型文＋CVE固有内容という構成の説明文を検知し、CVE固有内容を
+    先頭に、定型文を末尾に並べ替える。パターンに一致しない場合はそのまま返す。
+    """
+    if not text:
+        return text
+    m = _CISCO_HARDENING_BOILERPLATE_RE.match(text.strip())
+    if not m:
+        return text
+    boilerplate, specific = m.group(1), m.group(2).strip()
+    if not specific:
+        return text
+    return f"{specific}\n\n{boilerplate}"
+
+
 def _parse_nvd_response(data, target_version=None):
     """NVD API v2.0 の生JSONレスポンスを扱いやすい辞書のリストに変換する"""
     results = []
@@ -1612,6 +1643,10 @@ def _parse_nvd_response(data, target_version=None):
 
         descriptions = cve.get("descriptions", [])
         description_en = next((d["value"] for d in descriptions if d.get("lang") == "en"), "")
+        # NVDが取り込んだ元テキストにHTMLエンティティ（&nbsp;等）が残ったまま
+        # のことがあるため、表示前にデコードしておく
+        description_en = unescape(description_en)
+        description_en = _reorder_cisco_hardening_headline(description_en)
 
         score, severity = _extract_cvss(cve.get("metrics", {}))
 
@@ -2819,7 +2854,9 @@ def _psirt_advisory_to_row(advisory):
     return {
         "source": f"Cisco PSIRT (CVSS {cvss if cvss is not None else '-'})",
         "id": (cve_ids[0] if cve_ids else advisory.get("advisoryId")) or "-",
-        "headline_en": advisory.get("advisoryTitle") or advisory.get("summary") or "",
+        "headline_en": _reorder_cisco_hardening_headline(
+            unescape(advisory.get("advisoryTitle") or advisory.get("summary") or "")
+        ),
         "headline_ja": "",
         "versions": ", ".join(advisory.get("firstFixed") or []) or "(不明)",
         "url": advisory.get("publicationUrl", ""),
@@ -2910,7 +2947,11 @@ def search_vendor_bugs_with_psirt(nvd_keyword, version_extractor=_extract_generi
             groq_api_key=groq_api_key, open_router_api_key=open_router_api_key,
             include_kev_epss=include_kev_epss,
         )
-        existing_ids = {r["id"] for r in rows}
+        # rowsの"id"は_merge_same_advisory_rows()でカンマ区切りに統合済みのことが
+        # あるため、単純な完全一致ではなくカンマ区切りを展開して比較する
+        existing_ids = set()
+        for r in rows:
+            existing_ids.update(cid.strip() for cid in r["id"].split(","))
         rows += [r for r in psirt_rows if r["id"] not in existing_ids]
 
     return sort_bug_rows_by_date_desc(rows)
@@ -3064,12 +3105,63 @@ def search_fortigate_bugs(nvd_keyword="FortiOS", source="both",
     return sort_bug_rows_by_date_desc(all_rows)
 
 
+def _merge_same_advisory_rows(rows):
+    """
+    同じアドバイザリ（url）・完全に同じ説明文（headline_en）を指しているのに
+    別々のCVE IDが割り当てられている行（例: Ciscoの1つのセキュリティ
+    アドバイザリに複数の技術的に異なる脆弱性がCVE単位で採番されている場合）を
+    1行にまとめる。IDはカンマ区切りで連結し、CVSS/EPSSはより深刻な方
+    （最大値）、KEVはいずれかの行がTrueならTrueを採用する。
+
+    url または headline_en が空の行、あるいは説明文の一部だけが偶然一致する
+    行（Ciscoの定期ハードニングリリースのように、複数のCVEが同じ定型文から
+    始まるが内容自体は別物のケース）は完全一致しない限り統合しない。
+    """
+    groups = {}
+    order = []
+    for r in rows:
+        url, headline = r.get("url"), r.get("headline_en")
+        key = (url, headline) if url and headline else ("__no_merge__", id(r))
+        if key not in groups:
+            groups[key] = []
+            order.append(key)
+        groups[key].append(r)
+
+    merged_rows = []
+    for key in order:
+        group = groups[key]
+        if len(group) == 1:
+            merged_rows.append(group[0])
+            continue
+        ids = sorted({r["id"] for r in group})
+        cvss_values = [r["cvss"] for r in group if r.get("cvss") is not None]
+        epss_values = [r["epss"] for r in group if r.get("epss") is not None]
+        kev_values = [r.get("kev") for r in group]
+        merged = dict(group[0])
+        merged["id"] = ", ".join(ids)
+        merged["cvss"] = max(cvss_values) if cvss_values else None
+        merged["epss"] = max(epss_values) if epss_values else None
+        if any(k is True for k in kev_values):
+            merged["kev"] = True
+        elif any(k is None for k in kev_values):
+            merged["kev"] = None
+        else:
+            merged["kev"] = False
+        cvss_str = f"{merged['cvss']}" if merged["cvss"] is not None else "-"
+        merged["source"] = re.sub(r"\(CVSS [^)]*\)", f"(CVSS {cvss_str})", merged.get("source") or "")
+        merged_rows.append(merged)
+    return merged_rows
+
+
 def sort_bug_rows_by_date_desc(rows):
     """
     F5 BIG-IP バグ収集結果（NVD・F5バグトラッカー混在）を、日付が新しい順に
     並べ替える。日付が取得できなかった行（date=None）は末尾にまとめる。
     同じ日付の行同士は、CVSSスコアが高い順（CVSSが無い行は最後）にする。
+    並べ替えの前に、同じアドバイザリを指す行を_merge_same_advisory_rows()で
+    1行にまとめる。
     """
+    rows = _merge_same_advisory_rows(rows)
     return sorted(
         rows,
         key=lambda r: (r.get("date") or "0000-00-00", r.get("cvss") if r.get("cvss") is not None else -1),
