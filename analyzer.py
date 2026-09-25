@@ -2674,6 +2674,201 @@ def search_vendor_bugs(nvd_keyword, version_extractor=_extract_generic_versions,
     return sort_bug_rows_by_date_desc(rows)
 
 
+# ==================== Cisco PSIRT openVuln API ====================
+#
+# NVDへの登録はCisco公式のセキュリティアドバイザリ公開より遅れることがあり、
+# また「Catalyst 9300」のような具体的な製品名はNVDのCVE本文にほとんど
+# 登場しないため、NVDのキーワード検索だけでは拾いきれないことがある。
+# Cisco PSIRT openVuln API（Cisco公式のセキュリティアドバイザリAPI）を使うと、
+# OS種別+バージョン（例: IOS XE 17.12.4）や製品名で直接アドバイザリを検索でき、
+# NVD検索の弱点を補える。
+#
+# 利用にはCisco API Console（https://apiconsole.cisco.com/）でアプリを登録し、
+# Client ID / Client Secret を取得する必要がある（無料）。未設定の場合は
+# この節の関数は空リストを返すか静かにスキップし、NVD検索結果のみで
+# 従来通り動作する。
+CISCO_PSIRT_TOKEN_URL = "https://id.cisco.com/oauth2/default/v1/token"
+CISCO_PSIRT_API_BASE = "https://apix.cisco.com/security/advisories/v2"
+
+_cisco_psirt_token_cache = {"token": None, "expires_at": 0}
+
+
+def _get_cisco_psirt_token(client_id, client_secret, timeout=15):
+    """
+    OAuth2 client_credentials フローでアクセストークンを取得する。
+    トークンは1時間有効なため、期限切れ間近になるまでプロセス内でキャッシュして
+    再利用する（アドバイザリを複数回問い合わせるたびに毎回トークン取得しない）。
+    """
+    now = time.time()
+    if _cisco_psirt_token_cache["token"] and _cisco_psirt_token_cache["expires_at"] > now + 30:
+        return _cisco_psirt_token_cache["token"]
+    try:
+        response = requests.post(
+            CISCO_PSIRT_TOKEN_URL,
+            data={"client_id": client_id, "client_secret": client_secret, "grant_type": "client_credentials"},
+            headers={"Content-Type": "application/x-www-form-urlencoded"},
+            timeout=timeout,
+        )
+        response.raise_for_status()
+        data = response.json()
+    except Exception:
+        return None
+    token = data.get("access_token")
+    if token:
+        _cisco_psirt_token_cache["token"] = token
+        _cisco_psirt_token_cache["expires_at"] = now + data.get("expires_in", 3599)
+    return token
+
+
+def _fetch_cisco_psirt_advisories(path_and_query, client_id, client_secret, timeout=20):
+    """CISCO_PSIRT_API_BASE 配下のエンドポイントを叩き、advisories配列を返す。
+    APIキー未設定・トークン取得失敗・通信エラー時は {"error": ...} を返す。"""
+    if not client_id or not client_secret:
+        return {"error": "Cisco PSIRT APIキー（Client ID/Secret）が設定されていません"}
+    token = _get_cisco_psirt_token(client_id, client_secret, timeout=timeout)
+    if not token:
+        return {"error": "Cisco PSIRT APIのアクセストークン取得に失敗しました"}
+    try:
+        response = requests.get(
+            f"{CISCO_PSIRT_API_BASE}/{path_and_query}",
+            headers={"Accept": "application/json", "Authorization": f"Bearer {token}"},
+            timeout=timeout,
+        )
+        response.raise_for_status()
+        data = response.json()
+    except Exception as e:
+        return {"error": str(e)}
+    return data.get("advisories", [])
+
+
+def fetch_cisco_psirt_by_os_version(os_type, version, client_id, client_secret, timeout=20):
+    """OS種別（例: 'iosxe'）とバージョンで、影響するアドバイザリ一覧を取得する。"""
+    return _fetch_cisco_psirt_advisories(
+        f"OSType/{os_type}?version={quote(version)}", client_id, client_secret, timeout=timeout,
+    )
+
+
+def fetch_cisco_psirt_by_product(product, client_id, client_secret, timeout=20):
+    """製品名（例: 'Cisco Catalyst 9300'）でアドバイザリ一覧を取得する。"""
+    return _fetch_cisco_psirt_advisories(
+        f"product?product={quote(product)}", client_id, client_secret, timeout=timeout,
+    )
+
+
+def _psirt_advisory_to_row(advisory):
+    """
+    Cisco PSIRT openVuln APIのアドバイザリ1件を、このモジュール共通の行フォーマット
+    に変換する。フィールド名はCisco公式ドキュメント記載の代表的なもの
+    （advisoryId, advisoryTitle, firstPublished, cvssBaseScore, publicationUrl,
+    firstFixed, cves）を想定しているが、実際のAPIレスポンスと差異があり得るため、
+    存在しないキーは安全に空/Noneへフォールバックする。
+    """
+    cve_ids = advisory.get("cves") or []
+    cvss = advisory.get("cvssBaseScore")
+    try:
+        cvss = float(cvss) if cvss not in (None, "") else None
+    except (TypeError, ValueError):
+        cvss = None
+    return {
+        "source": f"Cisco PSIRT (CVSS {cvss if cvss is not None else '-'})",
+        "id": (cve_ids[0] if cve_ids else advisory.get("advisoryId")) or "-",
+        "headline_en": advisory.get("advisoryTitle") or advisory.get("summary") or "",
+        "headline_ja": "",
+        "versions": ", ".join(advisory.get("firstFixed") or []) or "(不明)",
+        "url": advisory.get("publicationUrl", ""),
+        "date": (advisory.get("firstPublished") or "")[:10] or None,
+        "cvss": cvss,
+        "kev": None,
+        "epss": None,
+        "_psirt_cve_ids": cve_ids,
+    }
+
+
+def collect_cisco_psirt_rows(os_type=None, product=None, version=None, client_id=None, client_secret=None,
+                              translate_engine=None, deepl_api_key=None, nvidia_api_key=None,
+                              groq_api_key=None, open_router_api_key=None, include_kev_epss=True):
+    """
+    Cisco PSIRT openVuln APIからアドバイザリを取得し、このモジュール共通の行
+    フォーマットのリストに変換する。os_type+version（OS種別+バージョン指定）を
+    優先し、無ければproduct（製品名）で検索する。APIキー未設定やAPIエラー時は
+    致命的にせず、空リストを返す（呼び出し元はNVD検索結果のみで表示を継続できる）。
+    """
+    if not client_id or not client_secret:
+        return []
+    if os_type and version:
+        advisories = fetch_cisco_psirt_by_os_version(os_type, version, client_id, client_secret)
+    elif product:
+        advisories = fetch_cisco_psirt_by_product(product, client_id, client_secret)
+    else:
+        return []
+    if isinstance(advisories, dict) and "error" in advisories:
+        return []
+
+    rows = [_psirt_advisory_to_row(a) for a in advisories if isinstance(a, dict)]
+
+    if translate_engine:
+        for r in rows:
+            if r["headline_en"]:
+                r["headline_ja"] = translate_headline(
+                    r["headline_en"], engine=translate_engine,
+                    deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key,
+                    groq_api_key=groq_api_key, open_router_api_key=open_router_api_key,
+                )
+
+    if include_kev_epss:
+        all_cve_ids = [cid for r in rows for cid in (r.get("_psirt_cve_ids") or [])]
+        kev_ids = fetch_cisa_kev_ids()
+        epss_scores = fetch_epss_scores(all_cve_ids) if all_cve_ids else {}
+        for r in rows:
+            cids = r.pop("_psirt_cve_ids", [])
+            if cids:
+                r["kev"] = any(c in kev_ids for c in cids) if kev_ids is not None else None
+                scores = [epss_scores[c] for c in cids if epss_scores.get(c) is not None]
+                r["epss"] = max(scores) if scores else None
+    else:
+        for r in rows:
+            r.pop("_psirt_cve_ids", None)
+
+    return rows
+
+
+def search_vendor_bugs_with_psirt(nvd_keyword, version_extractor=_extract_generic_versions,
+                                   translate_engine=None, deepl_api_key=None, nvidia_api_key=None,
+                                   groq_api_key=None, open_router_api_key=None,
+                                   nvd_api_key=None, target_version=None, results_limit=20, fetch_limit=250,
+                                   include_kev_epss=True, psirt_os_type=None, psirt_product=None,
+                                   cisco_psirt_client_id=None, cisco_psirt_client_secret=None):
+    """
+    search_vendor_bugs()（NVD検索）に、Cisco PSIRT openVuln APIのアドバイザリを
+    追加で合流させる版。Cisco PSIRT APIキー（Client ID/Secret）が未設定、または
+    psirt_os_type/psirt_product のいずれも指定されていない場合は、PSIRT部分を
+    単純にスキップしてNVD検索結果のみを返す（既存の挙動を維持）。
+    CVE IDが重複する行はNVD側を優先し、PSIRT側の重複行は除外する。
+    """
+    rows = search_vendor_bugs(
+        nvd_keyword, version_extractor=version_extractor,
+        translate_engine=translate_engine, deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key,
+        groq_api_key=groq_api_key, open_router_api_key=open_router_api_key,
+        nvd_api_key=nvd_api_key, target_version=target_version, results_limit=results_limit, fetch_limit=fetch_limit,
+        include_kev_epss=include_kev_epss,
+    )
+    if isinstance(rows, dict) and "error" in rows:
+        return rows
+
+    if cisco_psirt_client_id and cisco_psirt_client_secret and (psirt_os_type or psirt_product):
+        psirt_rows = collect_cisco_psirt_rows(
+            os_type=psirt_os_type, product=psirt_product, version=target_version,
+            client_id=cisco_psirt_client_id, client_secret=cisco_psirt_client_secret,
+            translate_engine=translate_engine, deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key,
+            groq_api_key=groq_api_key, open_router_api_key=open_router_api_key,
+            include_kev_epss=include_kev_epss,
+        )
+        existing_ids = {r["id"] for r in rows}
+        rows += [r for r in psirt_rows if r["id"] not in existing_ids]
+
+    return sort_bug_rows_by_date_desc(rows)
+
+
 def sort_bug_rows_by_date_desc(rows):
     """
     F5 BIG-IP バグ収集結果（NVD・F5バグトラッカー混在）を、日付が新しい順に
