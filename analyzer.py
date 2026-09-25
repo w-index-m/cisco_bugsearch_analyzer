@@ -2544,8 +2544,13 @@ def _fetch_nvd_results_or(keyword, fetch_limit, api_key, target_version, timeout
     """
     terms = _split_or_terms(keyword)
     if len(terms) <= 1:
+        # ダブルクォートで囲んだだけの単一フレーズ（例: '"Catalyst 9300"'）の場合、
+        # クォート文字を含んだ元の keyword をそのままNVDに渡すと、クォート文字も
+        # 検索対象に含まれてしまい実際には一致しなくなる（0件になる）。
+        # 必ずクォートを除去済みの terms[0] を使う
         return search_cve_by_keyword(
-            keyword, results_limit=fetch_limit, api_key=api_key, target_version=target_version, timeout=timeout,
+            terms[0] if terms else keyword,
+            results_limit=fetch_limit, api_key=api_key, target_version=target_version, timeout=timeout,
         )
 
     merged = {}
