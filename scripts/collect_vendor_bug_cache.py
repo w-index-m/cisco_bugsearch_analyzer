@@ -79,21 +79,25 @@ TARGETS = [
     {
         "key": "catalyst9300",
         "label": "Catalyst 9300",
-        "collect": lambda keys: analyzer.search_vendor_bugs(
+        "collect": lambda keys: analyzer.search_vendor_bugs_with_psirt(
             nvd_keyword='"Catalyst 9300"', translate_engine="google",
             nvd_api_key=keys["nvd"], deepl_api_key=keys["deepl"],
             groq_api_key=keys["groq"], open_router_api_key=keys["openrouter"],
             results_limit=CACHE_RESULTS_LIMIT, fetch_limit=CACHE_FETCH_LIMIT,
+            psirt_product="Cisco Catalyst 9300",
+            cisco_psirt_client_id=keys["psirt_client_id"], cisco_psirt_client_secret=keys["psirt_client_secret"],
         ),
     },
     {
         "key": "iosxe",
         "label": "Cisco IOS XE",
-        "collect": lambda keys: analyzer.search_vendor_bugs(
+        "collect": lambda keys: analyzer.search_vendor_bugs_with_psirt(
             nvd_keyword='"IOS XE"', translate_engine="google",
             nvd_api_key=keys["nvd"], deepl_api_key=keys["deepl"],
             groq_api_key=keys["groq"], open_router_api_key=keys["openrouter"],
             results_limit=CACHE_RESULTS_LIMIT, fetch_limit=CACHE_FETCH_LIMIT,
+            psirt_os_type="iosxe", psirt_product="Cisco IOS XE",
+            cisco_psirt_client_id=keys["psirt_client_id"], cisco_psirt_client_secret=keys["psirt_client_secret"],
         ),
     },
 ]
@@ -114,6 +118,14 @@ def main():
         "--openrouter-api-key",
         help="OpenRouter APIキー（任意。他の翻訳手段が全て失敗した場合の最後のフォールバック）"
     )
+    parser.add_argument(
+        "--cisco-psirt-client-id",
+        help="Cisco PSIRT openVuln API の Client ID（任意。Catalyst 9300/IOS XEでCisco公式アドバイザリも合流収集する）"
+    )
+    parser.add_argument(
+        "--cisco-psirt-client-secret",
+        help="Cisco PSIRT openVuln API の Client Secret（任意、--cisco-psirt-client-id とセットで使う）"
+    )
     parser.add_argument("--only", help="収集対象を絞る（カンマ区切り、例: f5,paloalto）")
     args = parser.parse_args()
 
@@ -122,6 +134,7 @@ def main():
     keys = {
         "nvd": args.nvd_api_key, "deepl": args.deepl_api_key,
         "groq": args.groq_api_key, "openrouter": args.openrouter_api_key,
+        "psirt_client_id": args.cisco_psirt_client_id, "psirt_client_secret": args.cisco_psirt_client_secret,
     }
 
     exit_code = 0

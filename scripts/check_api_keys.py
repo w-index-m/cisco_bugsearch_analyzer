@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-NVD / DeepL / Groq / OpenRouter の各APIキーが実際に機能するか、軽量な
-呼び出しで素早く確認するスクリプト。
+NVD / DeepL / Groq / OpenRouter / Cisco PSIRT の各APIキーが実際に機能するか、
+軽量な呼び出しで素早く確認するスクリプト。
 
 data/vendor_bugs/ の収集ジョブ（数十分かかることがある）を実行してから
 「翻訳されていない」「NVDに繋がらない」と分かるのは非効率なため、
@@ -93,12 +93,33 @@ def check_openrouter(api_key):
         return False, str(e)
 
 
+def check_cisco_psirt(client_id, client_secret):
+    """Cisco PSIRT openVuln APIはOAuth2のトークン取得のみ確認する
+    （アドバイザリ検索自体はクレジット消費が無いためトークン取得成功で十分）"""
+    if not client_id or not client_secret:
+        return None, "未設定"
+    try:
+        r = requests.post(
+            "https://id.cisco.com/oauth2/default/v1/token",
+            data={"client_id": client_id, "client_secret": client_secret, "grant_type": "client_credentials"},
+            headers={"Content-Type": "application/x-www-form-urlencoded"},
+            timeout=15,
+        )
+        if r.status_code == 200 and r.json().get("access_token"):
+            return True, "OK（トークン取得成功）"
+        return False, f"HTTP {r.status_code}: {r.text[:200]}"
+    except Exception as e:
+        return False, str(e)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--nvd-api-key")
     parser.add_argument("--deepl-api-key")
     parser.add_argument("--groq-api-key")
     parser.add_argument("--openrouter-api-key")
+    parser.add_argument("--cisco-psirt-client-id")
+    parser.add_argument("--cisco-psirt-client-secret")
     args = parser.parse_args()
 
     checks = [
@@ -115,6 +136,10 @@ def main():
         ok, detail = fn(key)
         icon = "⚪" if ok is None else ("✅" if ok else "❌")
         print(f"{icon} {name}: {detail}")
+
+    ok, detail = check_cisco_psirt(args.cisco_psirt_client_id, args.cisco_psirt_client_secret)
+    icon = "⚪" if ok is None else ("✅" if ok else "❌")
+    print(f"{icon} Cisco PSIRT: {detail}")
     print("=" * 60)
 
 

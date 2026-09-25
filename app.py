@@ -355,6 +355,11 @@ if use_ai_analysis:
 # チェックボックスとは関係なく、Secretsにキーがあれば常に有効にする
 shodan_api_key = get_secret("SHODAN_API_KEY")
 
+# Cisco PSIRT openVuln API（Cisco公式セキュリティアドバイザリAPI）も同様に、
+# AI解説のチェックボックスとは独立してSecretsにキーがあれば常に有効にする
+cisco_psirt_client_id = get_secret("CISCO_PSIRT_CLIENT_ID")
+cisco_psirt_client_secret = get_secret("CISCO_PSIRT_CLIENT_SECRET")
+
 st.markdown("**テキストを翻訳（単体ツール）**")
 st.caption(
     "バグ検索とは独立して、任意のテキストを上で選んだ翻訳エンジンで日本語に翻訳できます。"
@@ -1048,21 +1053,25 @@ if st.button("🚀 5機種をまとめて検索（並列実行）", key="combo_v
                 nvd_api_key=get_secret("NVD_API_KEY") or st.session_state.get("fortigate_nvd_api_key_input") or None,
                 target_version=st.session_state.get("fortigate_target_version") or None,
             )),
-            "catalyst9300": (analyzer.search_vendor_bugs, dict(
+            "catalyst9300": (analyzer.search_vendor_bugs_with_psirt, dict(
                 nvd_keyword=st.session_state.get("catalyst9300_keyword", "\"Catalyst 9300\""),
                 translate_engine=translation_engine_key,
                 deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key,
                 groq_api_key=groq_api_key, open_router_api_key=open_router_api_key,
                 nvd_api_key=get_secret("NVD_API_KEY") or st.session_state.get("catalyst9300_nvd_api_key_input") or None,
                 target_version=st.session_state.get("catalyst9300_target_version") or None,
+                psirt_product="Cisco Catalyst 9300",
+                cisco_psirt_client_id=cisco_psirt_client_id, cisco_psirt_client_secret=cisco_psirt_client_secret,
             )),
-            "iosxe": (analyzer.search_vendor_bugs, dict(
+            "iosxe": (analyzer.search_vendor_bugs_with_psirt, dict(
                 nvd_keyword=st.session_state.get("iosxe_keyword", "\"IOS XE\""),
                 translate_engine=translation_engine_key,
                 deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key,
                 groq_api_key=groq_api_key, open_router_api_key=open_router_api_key,
                 nvd_api_key=get_secret("NVD_API_KEY") or st.session_state.get("iosxe_nvd_api_key_input") or None,
                 target_version=st.session_state.get("iosxe_target_version") or None,
+                psirt_os_type="iosxe", psirt_product="Cisco IOS XE",
+                cisco_psirt_client_id=cisco_psirt_client_id, cisco_psirt_client_secret=cisco_psirt_client_secret,
             )),
         })
     for _key, _label in [
@@ -1167,7 +1176,7 @@ st.markdown("---")
 
 
 def render_vendor_bug_search(title, icon, session_key, default_keyword, version_placeholder="例: 11.1.2",
-                              official_links=None):
+                              official_links=None, psirt_os_type=None, psirt_product=None):
     """
     Palo Alto / FortiGate 等、F5のような個別バグIDページの公開トラッカーが
     確認できていないベンダー向けの、NVDベースのバグ検索UIを描画する共通関数。
@@ -1176,6 +1185,12 @@ def render_vendor_bug_search(title, icon, session_key, default_keyword, version_
     official_links: [(表示名, URL), ...]。NVDはセキュリティ脆弱性（CVE）のみを
         対象とするため、ベンダー公式のセキュリティアドバイザリ一覧など、
         NVDより早く・網羅的に情報が出る参考リンクがあれば併せて案内する。
+    psirt_os_type / psirt_product: 指定すると、NVD検索結果にCisco PSIRT
+        openVuln API（Cisco公式セキュリティアドバイザリAPI）のアドバイザリも
+        合流させる（Secretsに CISCO_PSIRT_CLIENT_ID / CISCO_PSIRT_CLIENT_SECRET
+        が設定されている場合のみ）。psirt_os_type はOS種別+対象バージョンでの
+        検索（例: "iosxe"）、psirt_product は製品名での検索（例:
+        "Cisco Catalyst 9300"）に使う。
     """
     st.markdown(f"### {icon} {title}")
     st.caption(
@@ -1183,6 +1198,11 @@ def render_vendor_bug_search(title, icon, session_key, default_keyword, version_
         "対象OS（バージョン）と見出し（日本語）を新しい順（日付が新しいもの順、"
         "不明なものは末尾）に一覧表示します。"
     )
+    if psirt_os_type or psirt_product:
+        st.caption(
+            "🔗 Cisco PSIRT openVuln API（Cisco公式セキュリティアドバイザリAPI）のキーが"
+            "設定されている場合は、Cisco公式アドバイザリもNVD検索結果に自動的に合流表示されます。"
+        )
     if official_links:
         links_md = "\n".join(f"- {label}: {url}" for label, url in official_links)
         st.info(
@@ -1214,13 +1234,15 @@ def render_vendor_bug_search(title, icon, session_key, default_keyword, version_
 
     if st.button(f"🔎 {title}", key=f"{session_key}_search_btn"):
         with st.spinner("検索中..."):
-            results = analyzer.search_vendor_bugs(
+            results = analyzer.search_vendor_bugs_with_psirt(
                 nvd_keyword=keyword,
                 translate_engine=translation_engine_key,
                 deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key,
                 groq_api_key=groq_api_key, open_router_api_key=open_router_api_key,
                 nvd_api_key=nvd_api_key or None,
                 target_version=target_version or None,
+                psirt_os_type=psirt_os_type, psirt_product=psirt_product,
+                cisco_psirt_client_id=cisco_psirt_client_id, cisco_psirt_client_secret=cisco_psirt_client_secret,
             )
         st.session_state[f"{session_key}_live_results"] = results
         st.session_state[f"{session_key}_live_label"] = f"{title}({keyword[:15]})"
@@ -1263,6 +1285,7 @@ render_vendor_bug_search(
         ("Cisco Security Advisories（製品別に絞り込み可能）", "https://sec.cloudapps.cisco.com/security/center/publicationListing.x"),
         ("Catalyst 9300 シリーズ リリースノート", "https://www.cisco.com/c/en/us/support/switches/catalyst-9300-series-switches/products-release-notes-list.html"),
     ],
+    psirt_product="Cisco Catalyst 9300",
 )
 render_vendor_bug_search(
     "Cisco IOS XE バグ検索", "🖥️", "iosxe", "\"IOS XE\"", version_placeholder="例: 17.12.4",
@@ -1270,6 +1293,7 @@ render_vendor_bug_search(
         ("Cisco IOS XE Software セキュリティアドバイザリ", "https://sec.cloudapps.cisco.com/security/center/publicationListing.x"),
         ("Cisco IOS XE リリースノート一覧", "https://www.cisco.com/c/en/us/support/ios-nx-os-software/ios-xe/products-release-notes-list.html"),
     ],
+    psirt_os_type="iosxe", psirt_product="Cisco IOS XE",
 )
 
 st.markdown("**一般的な既知の問題を貼り付けて分析**")
