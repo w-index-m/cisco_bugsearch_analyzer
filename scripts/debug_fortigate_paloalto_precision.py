@@ -13,8 +13,10 @@ Palo Alto / FortiGate のNVD検索キーワードについて、Catalyst 9300で
 """
 import argparse
 import sys
+from pathlib import Path
 
-import analyzer
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+import analyzer  # noqa: E402
 
 
 def check(label, term, api_key, exact_match):
