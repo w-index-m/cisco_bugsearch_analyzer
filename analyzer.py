@@ -447,7 +447,7 @@ def assess_bug_with_groq(headline, release_note, user_comment, api_key):
         prompt = _build_assessment_prompt(headline, release_note, user_comment)
 
         message = client.chat.completions.create(
-            model="llama-3.3-70b-versatile",
+            model="openai/gpt-oss-120b",
             max_tokens=200,
             messages=[
                 {"role": "user", "content": prompt}
@@ -563,7 +563,7 @@ def _call_groq_prompt(prompt, api_key, max_tokens=150):
         try:
             client = Groq(api_key=api_key)
             message = client.chat.completions.create(
-                model="llama-3.3-70b-versatile",
+                model="openai/gpt-oss-120b",
                 max_tokens=max_tokens,
                 messages=[{"role": "user", "content": prompt}]
             )
