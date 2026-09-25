@@ -1214,7 +1214,8 @@ st.markdown("---")
 
 
 def render_vendor_bug_search(title, icon, session_key, default_keyword, version_placeholder="例: 11.1.2",
-                              official_links=None, psirt_os_type=None, psirt_product=None, fortiguard=False):
+                              official_links=None, psirt_os_type=None, psirt_product=None, fortiguard=False,
+                              extra_note=None):
     """
     Palo Alto / FortiGate 等、F5のような個別バグIDページの公開トラッカーが
     確認できていないベンダー向けの、NVDベースのバグ検索UIを描画する共通関数。
@@ -1232,6 +1233,8 @@ def render_vendor_bug_search(title, icon, session_key, default_keyword, version_
     fortiguard: Trueにすると、NVD検索結果にFortiGuard PSIRTアドバイザリRSS
         フィード（認証不要、全Fortinet製品横断で直近50件）のうち、タイトル/
         本文に"FortiGate"/"FortiOS"を含むものを合流させる収集元セレクトを表示する。
+    extra_note: 指定すると、official_linksの案内ボックスの後に追加のst.info()を
+        表示する（このベンダー固有の注意事項がある場合に使う）。
     """
     st.markdown(f"### {icon} {title}")
     st.caption(
@@ -1256,6 +1259,8 @@ def render_vendor_bug_search(title, icon, session_key, default_keyword, version_
             "💡 NVDへの登録はベンダー公式発表より遅れることがあります。"
             f"最新情報は下記のベンダー公式ページも合わせてご確認ください。\n\n{links_md}"
         )
+    if extra_note:
+        st.info(extra_note)
 
     display_vendor_bug_cache(session_key, title)
 
@@ -1350,6 +1355,16 @@ render_vendor_bug_search(
         ("Catalyst 9300 シリーズ リリースノート", "https://www.cisco.com/c/en/us/support/switches/catalyst-9300-series-switches/products-release-notes-list.html"),
     ],
     psirt_product="Cisco Catalyst 9300",
+    extra_note=(
+        "⚠️ Ciscoのセキュリティ勧告は基本的に「Cisco IOS XE Software」という"
+        "ソフトウェア側の脆弱性として書かれ、影響を受ける具体的なハードウェア機種"
+        "（Catalyst 9200/9300/9400/9500等）はNVDの説明文（フリーテキスト検索の対象）"
+        "ではなく別の構造化データ（Affected Products）に列挙されます。そのため"
+        "ここでの検索結果は「説明文にCatalyst 9300と明記されている案件」のみに"
+        "絞られ、件数が少なく見えることがあります。実質的な脆弱性のカバレッジ"
+        "としては、Catalyst 9300が動作するソフトウェアである下の「Cisco IOS XE"
+        "バグ検索」も合わせてご確認いただくことをおすすめします。"
+    ),
 )
 render_vendor_bug_search(
     "Cisco IOS XE バグ検索", "🖥️", "iosxe", "\"IOS XE\"", version_placeholder="例: 17.12.4",
