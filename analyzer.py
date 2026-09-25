@@ -3024,7 +3024,7 @@ def collect_fortiguard_psirt_rows(keyword_filter=None, translate_engine=None, de
     return rows
 
 
-def search_fortigate_bugs(nvd_keyword="Fortinet FortiOS", source="both",
+def search_fortigate_bugs(nvd_keyword="FortiOS", source="both",
                            version_extractor=_extract_generic_versions,
                            translate_engine=None, deepl_api_key=None, nvidia_api_key=None,
                            groq_api_key=None, open_router_api_key=None,

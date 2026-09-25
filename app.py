@@ -1081,7 +1081,7 @@ if st.button("🚀 5機種をまとめて検索（並列実行）", key="combo_v
                 target_version=st.session_state.get("paloalto_target_version") or None,
             )),
             "fortigate": (analyzer.search_fortigate_bugs, dict(
-                nvd_keyword=st.session_state.get("fortigate_keyword", "Fortinet FortiOS"),
+                nvd_keyword=st.session_state.get("fortigate_keyword", "FortiOS"),
                 source={"両方": "both", "NVDのみ": "nvd", "FortiGuard PSIRTのみ": "fortiguard"}[
                     st.session_state.get("fortigate_source", "両方")
                 ],
@@ -1342,7 +1342,7 @@ render_vendor_bug_search(
     ],
 )
 render_vendor_bug_search(
-    "FortiGate (FortiOS) バグ検索", "🛡️", "fortigate", "Fortinet FortiOS", version_placeholder="例: 7.4.8",
+    "FortiGate (FortiOS) バグ検索", "🛡️", "fortigate", "FortiOS", version_placeholder="例: 7.4.8",
     official_links=[
         ("Fortinet PSIRT アドバイザリ一覧", "https://www.fortiguard.com/psirt"),
     ],
