@@ -1045,8 +1045,11 @@ if st.button("🚀 5機種をまとめて検索（並列実行）", key="combo_v
                 nvd_api_key=get_secret("NVD_API_KEY") or st.session_state.get("paloalto_nvd_api_key_input") or None,
                 target_version=st.session_state.get("paloalto_target_version") or None,
             )),
-            "fortigate": (analyzer.search_vendor_bugs, dict(
+            "fortigate": (analyzer.search_fortigate_bugs, dict(
                 nvd_keyword=st.session_state.get("fortigate_keyword", "Fortinet FortiOS"),
+                source={"両方": "both", "NVDのみ": "nvd", "FortiGuard PSIRTのみ": "fortiguard"}[
+                    st.session_state.get("fortigate_source", "両方")
+                ],
                 translate_engine=translation_engine_key,
                 deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key,
                 groq_api_key=groq_api_key, open_router_api_key=open_router_api_key,
@@ -1176,7 +1179,7 @@ st.markdown("---")
 
 
 def render_vendor_bug_search(title, icon, session_key, default_keyword, version_placeholder="例: 11.1.2",
-                              official_links=None, psirt_os_type=None, psirt_product=None):
+                              official_links=None, psirt_os_type=None, psirt_product=None, fortiguard=False):
     """
     Palo Alto / FortiGate 等、F5のような個別バグIDページの公開トラッカーが
     確認できていないベンダー向けの、NVDベースのバグ検索UIを描画する共通関数。
@@ -1191,6 +1194,9 @@ def render_vendor_bug_search(title, icon, session_key, default_keyword, version_
         が設定されている場合のみ）。psirt_os_type はOS種別+対象バージョンでの
         検索（例: "iosxe"）、psirt_product は製品名での検索（例:
         "Cisco Catalyst 9300"）に使う。
+    fortiguard: Trueにすると、NVD検索結果にFortiGuard PSIRTアドバイザリRSS
+        フィード（認証不要、全Fortinet製品横断で直近50件）のうち、タイトル/
+        本文に"FortiGate"/"FortiOS"を含むものを合流させる収集元セレクトを表示する。
     """
     st.markdown(f"### {icon} {title}")
     st.caption(
@@ -1202,6 +1208,12 @@ def render_vendor_bug_search(title, icon, session_key, default_keyword, version_
         st.caption(
             "🔗 Cisco PSIRT openVuln API（Cisco公式セキュリティアドバイザリAPI）のキーが"
             "設定されている場合は、Cisco公式アドバイザリもNVD検索結果に自動的に合流表示されます。"
+        )
+    if fortiguard:
+        st.caption(
+            "🔗 FortiGuard PSIRT（Fortinet公式アドバイザリ、認証不要）のRSSフィードから、"
+            "直近のFortiGate関連アドバイザリも合流表示します（全Fortinet製品横断で直近50件"
+            "までのフィードのため、古い/少数のアドバイザリしか無い場合があります）。"
         )
     if official_links:
         links_md = "\n".join(f"- {label}: {url}" for label, url in official_links)
@@ -1225,6 +1237,11 @@ def render_vendor_bug_search(title, icon, session_key, default_keyword, version_
             placeholder=version_placeholder, key=f"{session_key}_target_version"
         )
 
+    if fortiguard:
+        source = st.selectbox(
+            "収集元", options=["両方", "NVDのみ", "FortiGuard PSIRTのみ"], key=f"{session_key}_source"
+        )
+
     nvd_api_key = get_secret("NVD_API_KEY") or st.text_input(
         "NVD API キー（任意、無くても検索可・レート制限が緩和される）",
         type="password", key=f"{session_key}_nvd_api_key_input"
@@ -1234,16 +1251,27 @@ def render_vendor_bug_search(title, icon, session_key, default_keyword, version_
 
     if st.button(f"🔎 {title}", key=f"{session_key}_search_btn"):
         with st.spinner("検索中..."):
-            results = analyzer.search_vendor_bugs_with_psirt(
-                nvd_keyword=keyword,
-                translate_engine=translation_engine_key,
-                deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key,
-                groq_api_key=groq_api_key, open_router_api_key=open_router_api_key,
-                nvd_api_key=nvd_api_key or None,
-                target_version=target_version or None,
-                psirt_os_type=psirt_os_type, psirt_product=psirt_product,
-                cisco_psirt_client_id=cisco_psirt_client_id, cisco_psirt_client_secret=cisco_psirt_client_secret,
-            )
+            if fortiguard:
+                _source_map = {"両方": "both", "NVDのみ": "nvd", "FortiGuard PSIRTのみ": "fortiguard"}
+                results = analyzer.search_fortigate_bugs(
+                    nvd_keyword=keyword, source=_source_map[source],
+                    translate_engine=translation_engine_key,
+                    deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key,
+                    groq_api_key=groq_api_key, open_router_api_key=open_router_api_key,
+                    nvd_api_key=nvd_api_key or None,
+                    target_version=target_version or None,
+                )
+            else:
+                results = analyzer.search_vendor_bugs_with_psirt(
+                    nvd_keyword=keyword,
+                    translate_engine=translation_engine_key,
+                    deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key,
+                    groq_api_key=groq_api_key, open_router_api_key=open_router_api_key,
+                    nvd_api_key=nvd_api_key or None,
+                    target_version=target_version or None,
+                    psirt_os_type=psirt_os_type, psirt_product=psirt_product,
+                    cisco_psirt_client_id=cisco_psirt_client_id, cisco_psirt_client_secret=cisco_psirt_client_secret,
+                )
         st.session_state[f"{session_key}_live_results"] = results
         st.session_state[f"{session_key}_live_label"] = f"{title}({keyword[:15]})"
 
@@ -1278,6 +1306,7 @@ render_vendor_bug_search(
     official_links=[
         ("Fortinet PSIRT アドバイザリ一覧", "https://www.fortiguard.com/psirt"),
     ],
+    fortiguard=True,
 )
 render_vendor_bug_search(
     "Catalyst 9300 バグ検索", "🔀", "catalyst9300", "\"Catalyst 9300\"", version_placeholder="例: 17.12.4",
