@@ -137,9 +137,12 @@ def display_bug_rows_table(rows, session_key, name, key_suffix):
 
     # st.dataframe はCanvas描画のため、通常のテキストのようにドラッグして
     # 選択することはできない。代わりにセルをクリック→ドラッグして範囲選択→
-    # Ctrl+C（Macは⌘+C）でコピーする操作に対応している（見た目の色は薄いが
-    # 選択状態になっている）。この操作に気づきにくいため案内を出す。
-    st.caption("📋 見出し等をコピーしたい場合: セルをクリックしてドラッグで範囲選択 →Ctrl+C（Macは⌘+C）でコピーできます")
+    # Ctrl+C（Macは⌘+C）でコピーする操作に対応しているが、環境によっては
+    # （報告例: Windows環境）うまく動作しないことがあるため、Canvas描画に
+    # 依存しないプレーンテキスト表示（st.text_area、通常のブラウザの
+    # テキスト選択・コピーがそのまま使える）も併せて用意する。
+    st.caption("📋 見出し等をコピーしたい場合: セルをクリックしてドラッグで範囲選択 →Ctrl+C（Macは⌘+C）でコピーできます"
+               "（うまくいかない場合は下の「テキストでコピー」を開いてください）")
 
     st.dataframe(
         display_table,
@@ -149,6 +152,18 @@ def display_bug_rows_table(rows, session_key, name, key_suffix):
             "参考リンク": st.column_config.LinkColumn("参考リンク", display_text="開く ↗"),
         },
     )
+
+    with st.expander("📋 テキストでコピー（表がコピーできない場合用）"):
+        text_lines = [
+            f"{r['日付']}\t{r['ID']}\t{r['見出し(日本語)']}\t{r['見出し(原文)']}\t{r['参考リンク']}"
+            for _, r in display_table.iterrows()
+        ]
+        st.text_area(
+            "クリックして全選択（Ctrl+A/⌘+A）→コピー（Ctrl+C/⌘+C）",
+            value="日付\tID\t見出し(日本語)\t見出し(原文)\t参考リンク\n" + "\n".join(text_lines),
+            height=200,
+            key=f"{session_key}_table_text_{key_suffix}",
+        )
 
     export_rows = [
         [r.get("date") or "不明", r["source"], r["id"], r["versions"], r.get("product") or "-",
@@ -670,12 +685,25 @@ if df is not None:
                 "自動推定であり、統計的根拠のある値ではありません。"
                 "件数が多いと翻訳に時間がかかることがあります。 " + ai_summary_note
             )
-            st.caption("📋 見出し等をコピーしたい場合: セルをクリックしてドラッグで範囲選択 →Ctrl+C（Macは⌘+C）でコピーできます")
+            st.caption("📋 見出し等をコピーしたい場合: セルをクリックしてドラッグで範囲選択 →Ctrl+C（Macは⌘+C）でコピーできます"
+                       "（うまくいかない場合は下の「テキストでコピー」を開いてください）")
             st.dataframe(
                 display_results[display_cols],
                 use_container_width=True,
                 hide_index=True
             )
+
+            with st.expander("📋 テキストでコピー（表がコピーできない場合用）"):
+                _copy_table = display_results[display_cols].fillna("")
+                _copy_text = "\t".join(display_cols) + "\n" + "\n".join(
+                    "\t".join(str(v) for v in row) for row in _copy_table.itertuples(index=False)
+                )
+                st.text_area(
+                    "クリックして全選択（Ctrl+A/⌘+A）→コピー（Ctrl+C/⌘+C）",
+                    value=_copy_text,
+                    height=200,
+                    key="cisco_results_table_text",
+                )
 
             st.markdown("---")
             st.markdown("### 📥 結果のエクスポート")
