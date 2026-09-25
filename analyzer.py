@@ -11,6 +11,7 @@ import json
 import time
 import shlex
 import concurrent.futures
+import xml.etree.ElementTree as ET
 from html import unescape
 from datetime import datetime, date as _date
 from functools import wraps
@@ -2873,6 +2874,154 @@ def search_vendor_bugs_with_psirt(nvd_keyword, version_extractor=_extract_generi
         rows += [r for r in psirt_rows if r["id"] not in existing_ids]
 
     return sort_bug_rows_by_date_desc(rows)
+
+
+# ==================== FortiGuard PSIRT アドバイザリ（RSSフィード） ====================
+#
+# FortiGuard（Fortinet公式PSIRT）は、Cisco PSIRTのようなOAuth2 APIは無いが、
+# 認証不要のRSS/XMLフィードで直近のセキュリティアドバイザリを公開している。
+# ただしこのフィードは全Fortinet製品（FortiGate/FortiClient/FortiSOAR等）
+# 横断で直近50件のみを返す仕様のため、FortiGate向けにはタイトル・本文に
+# 「FortiGate」「FortiOS」等が含まれるものだけをキーワードで絞り込んで使う。
+# また、CVE IDが含まれておらずFortinet独自のアドバイザリID（FG-IR-XX-XXX）
+# のみのため、NVD由来の行とはID空間が異なる別行として扱う
+# （KEV/EPSSもCVEベースのため対象外＝None）。F5公式バグトラッカーを
+# NVD結果に追加合流させているのと同じ考え方。
+FORTIGUARD_RSS_URL = "https://filestore.fortinet.com/fortiguard/rss/ir.xml"
+
+
+def fetch_fortiguard_psirt_advisories(timeout=20):
+    """
+    FortiGuard PSIRTアドバイザリのRSSフィードを取得し、直近のアドバイザリ一覧を
+    返す（直近50件程度、日付降順とは限らない）。失敗時は {"error": ...} を返す。
+    """
+    try:
+        response = requests.get(FORTIGUARD_RSS_URL, timeout=timeout)
+        response.raise_for_status()
+        root = ET.fromstring(response.content)
+    except Exception as e:
+        return {"error": str(e)}
+
+    advisories = []
+    for item in root.findall(".//item"):
+        link = item.findtext("link") or ""
+        title = item.findtext("title") or ""
+        description_html = item.findtext("description") or ""
+        pub_date = item.findtext("pubDate") or ""
+
+        cvss_match = re.search(r"CVSSv3 Score:\s*</strong>\s*([\d.]+)", description_html)
+        cvss = None
+        if cvss_match:
+            try:
+                cvss = float(cvss_match.group(1))
+            except ValueError:
+                cvss = None
+
+        try:
+            date_iso = _date_parser.parse(pub_date).date().isoformat() if pub_date else None
+        except (ValueError, OverflowError):
+            date_iso = None
+
+        advisories.append({
+            "id": link.rstrip("/").rsplit("/", 1)[-1] or link,
+            "title": title,
+            "description_en": clean_html_tags(description_html),
+            "cvss": cvss,
+            "date": date_iso,
+            "url": link,
+        })
+    return advisories
+
+
+def _fortiguard_advisory_to_row(advisory):
+    """FortiGuard PSIRTアドバイザリ1件を、このモジュール共通の行フォーマットに変換する。"""
+    product_match = re.search(r"\bForti[A-Za-z]+\b", f"{advisory['title']} {advisory['description_en']}")
+    return {
+        "source": f"FortiGuard PSIRT (CVSS {advisory['cvss'] if advisory['cvss'] is not None else '-'})",
+        "id": advisory["id"],
+        "headline_en": advisory["title"],
+        "headline_ja": "",
+        "versions": "(不明)",
+        "product": product_match.group(0) if product_match else None,
+        "url": advisory["url"],
+        "date": advisory["date"],
+        "cvss": advisory["cvss"],
+        "kev": None,
+        "epss": None,
+    }
+
+
+def collect_fortiguard_psirt_rows(keyword_filter=None, translate_engine=None, deepl_api_key=None,
+                                   nvidia_api_key=None, groq_api_key=None, open_router_api_key=None):
+    """
+    FortiGuard PSIRTアドバイザリRSSフィードを取得し、行フォーマットのリストに
+    変換する。keyword_filter（文字列のリスト）を指定すると、タイトルまたは
+    本文にいずれかのキーワードを含む行だけに絞り込む（大文字小文字区別なし）。
+    フィード取得に失敗しても致命的にせず、空リストを返す。
+    """
+    advisories = fetch_fortiguard_psirt_advisories()
+    if isinstance(advisories, dict) and "error" in advisories:
+        return []
+
+    if keyword_filter:
+        needles = [k.lower() for k in keyword_filter]
+        advisories = [
+            a for a in advisories
+            if any(n in f"{a['title']} {a['description_en']}".lower() for n in needles)
+        ]
+
+    rows = [_fortiguard_advisory_to_row(a) for a in advisories]
+
+    if translate_engine:
+        for r in rows:
+            if r["headline_en"]:
+                r["headline_ja"] = translate_headline(
+                    r["headline_en"], engine=translate_engine,
+                    deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key,
+                    groq_api_key=groq_api_key, open_router_api_key=open_router_api_key,
+                )
+
+    return rows
+
+
+def search_fortigate_bugs(nvd_keyword="Fortinet FortiOS", source="both",
+                           version_extractor=_extract_generic_versions,
+                           translate_engine=None, deepl_api_key=None, nvidia_api_key=None,
+                           groq_api_key=None, open_router_api_key=None,
+                           nvd_api_key=None, target_version=None, results_limit=20, fetch_limit=2000,
+                           include_kev_epss=True, fortiguard_keywords=("FortiGate", "FortiOS")):
+    """
+    FortiGate関連バグを NVD / FortiGuard PSIRTアドバイザリRSSフィードの
+    指定した組み合わせで収集し、最近の日付順（新しい順、日付不明は末尾）に
+    並べて返す。search_f5_bigip_tmm_bugs のFortiGate版。
+
+    Args:
+        source: "both" | "nvd" | "fortiguard"
+        fortiguard_keywords: FortiGuardの全製品横断フィードから、FortiGate関連
+            とみなすタイトル/本文キーワード（いずれかを含めば採用）
+    """
+    all_rows = []
+
+    if source in ("both", "nvd"):
+        nvd_rows = collect_nvd_vendor_rows(
+            nvd_keyword, version_extractor=version_extractor,
+            translate_engine=translate_engine, deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key,
+            groq_api_key=groq_api_key, open_router_api_key=open_router_api_key,
+            api_key=nvd_api_key, target_version=target_version, results_limit=results_limit, fetch_limit=fetch_limit,
+            include_kev_epss=include_kev_epss,
+        )
+        if isinstance(nvd_rows, dict) and "error" in nvd_rows:
+            return nvd_rows
+        all_rows += nvd_rows
+
+    if source in ("both", "fortiguard"):
+        all_rows += collect_fortiguard_psirt_rows(
+            keyword_filter=list(fortiguard_keywords),
+            translate_engine=translate_engine, deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key,
+            groq_api_key=groq_api_key, open_router_api_key=open_router_api_key,
+        )
+
+    return sort_bug_rows_by_date_desc(all_rows)
 
 
 def sort_bug_rows_by_date_desc(rows):
