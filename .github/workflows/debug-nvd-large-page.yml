@@ -1,0 +1,17 @@
+name: Debug NVD large resultsPerPage
+
+on:
+  workflow_dispatch: {}
+
+jobs:
+  debug:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Probe NVD with resultsPerPage=2000
+        run: python scripts/debug_nvd_large_page.py
