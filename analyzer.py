@@ -2523,7 +2523,7 @@ def _split_or_terms(keyword):
     return [t for t in terms if t]
 
 
-def _fetch_nvd_results_or(keyword, fetch_limit, api_key, target_version, timeout=35):
+def _fetch_nvd_results_or(keyword, fetch_limit, api_key, target_version, timeout=60):
     """
     キーワードを複数語に分解し（_split_or_terms 参照）、語ごとに個別にNVDへ
     問い合わせて和集合（OR、CVE ID重複除去）にする。1語だけの場合は通常どおり
@@ -2536,11 +2536,17 @@ def _fetch_nvd_results_or(keyword, fetch_limit, api_key, target_version, timeout
     バラバラに分けてしまうと「Palo」「Alto」単体という無意味に広い検索語に
     なってしまうため、ダブルクォートで囲んだ部分は1つの語として扱う。
 
-    fetch_limit を大きくした分（既定250件）、NVD側の応答が遅くなることがある
-    ため、既定より長めのタイムアウトを使う。また、複数語のうち一部だけが
-    タイムアウト等で失敗しても、他の語で取得できていればその結果を返す
-    （全ての語が失敗した場合のみエラーにする）。1語だけ失敗して検索全体が
-    失敗扱いになるのを避けるため。
+    fetch_limit は NVD の resultsPerPage にそのまま渡る値で、ここで1回に
+    取得する件数の上限になる（ページネーションはしない）。NVDは日付降順で
+    結果を返す保証が無いため、totalResults が fetch_limit を超える語
+    （例: 「IOS XE」で総ヒット数585件に対しfetch_limit=300だった場合）では、
+    実際には最新のCVEが1件も取得できず古い順の断片だけが返ってくることが
+    あった。これを避けるため fetch_limit は既定でNVD側の上限である2000
+    （resultsPerPageの最大値）まで引き上げている。件数が多い分、応答が
+    遅くなることがあるため、既定より長めのタイムアウトを使う。また、複数語の
+    うち一部だけがタイムアウト等で失敗しても、他の語で取得できていればその
+    結果を返す（全ての語が失敗した場合のみエラーにする）。1語だけ失敗して
+    検索全体が失敗扱いになるのを避けるため。
     """
     terms = _split_or_terms(keyword)
     if len(terms) <= 1:
@@ -2573,7 +2579,7 @@ def _fetch_nvd_results_or(keyword, fetch_limit, api_key, target_version, timeout
 def collect_nvd_vendor_rows(keyword, version_extractor=_extract_generic_versions,
                              translate_engine=None, deepl_api_key=None, nvidia_api_key=None,
                              groq_api_key=None, open_router_api_key=None,
-                             api_key=None, results_limit=20, target_version=None, fetch_limit=250,
+                             api_key=None, results_limit=20, target_version=None, fetch_limit=2000,
                              include_kev_epss=True):
     """
     NVD（CVE/CVSSを集約する米国立脆弱性データベース）をキーワード検索し、
@@ -2639,7 +2645,7 @@ def collect_nvd_vendor_rows(keyword, version_extractor=_extract_generic_versions
 
 def collect_nvd_tmm_rows(keyword, translate_engine=None, deepl_api_key=None, nvidia_api_key=None,
                           groq_api_key=None, open_router_api_key=None,
-                          api_key=None, results_limit=20, target_version=None, fetch_limit=250,
+                          api_key=None, results_limit=20, target_version=None, fetch_limit=2000,
                           include_kev_epss=True):
     """collect_nvd_vendor_rows() のF5 BIG-IP専用版（バージョン抽出にBIG-IP形式を使う）"""
     return collect_nvd_vendor_rows(
@@ -2654,7 +2660,7 @@ def collect_nvd_tmm_rows(keyword, translate_engine=None, deepl_api_key=None, nvi
 def search_vendor_bugs(nvd_keyword, version_extractor=_extract_generic_versions,
                         translate_engine=None, deepl_api_key=None, nvidia_api_key=None,
                         groq_api_key=None, open_router_api_key=None,
-                        nvd_api_key=None, target_version=None, results_limit=20, fetch_limit=250,
+                        nvd_api_key=None, target_version=None, results_limit=20, fetch_limit=2000,
                         include_kev_epss=True):
     """
     汎用のベンダーバグ収集（NVDのみ）。Palo Alto / FortiGate 等、F5のような
@@ -2835,7 +2841,7 @@ def collect_cisco_psirt_rows(os_type=None, product=None, version=None, client_id
 def search_vendor_bugs_with_psirt(nvd_keyword, version_extractor=_extract_generic_versions,
                                    translate_engine=None, deepl_api_key=None, nvidia_api_key=None,
                                    groq_api_key=None, open_router_api_key=None,
-                                   nvd_api_key=None, target_version=None, results_limit=20, fetch_limit=250,
+                                   nvd_api_key=None, target_version=None, results_limit=20, fetch_limit=2000,
                                    include_kev_epss=True, psirt_os_type=None, psirt_product=None,
                                    cisco_psirt_client_id=None, cisco_psirt_client_secret=None):
     """
@@ -2936,7 +2942,7 @@ def fetch_shodan_exposure_count(product_query, version=None, api_key=None, timeo
 def search_f5_bigip_tmm_bugs(source="both", nvd_keyword="BIG-IP", bug_ids=None,
                               translate_engine=None, deepl_api_key=None, nvidia_api_key=None,
                               groq_api_key=None, open_router_api_key=None,
-                              nvd_api_key=None, target_version=None, results_limit=20, fetch_limit=250,
+                              nvd_api_key=None, target_version=None, results_limit=20, fetch_limit=2000,
                               include_kev_epss=True, bugtracker_limit=100):
     """
     F5 BIG-IP関連バグを NVD / F5公式バグトラッカーの指定した組み合わせで収集し、
