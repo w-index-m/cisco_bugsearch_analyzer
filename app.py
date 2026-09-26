@@ -237,6 +237,8 @@ def render_shodan_exposure_check(session_key, version):
             )
 
 
+st.subheader("Cisco バグ検索（CSV/Excelアップロード）")
+
 # ファイルアップロード（必須。デフォルトのバグ一覧は読み込まない）
 uploaded_file = st.file_uploader(
     "CSV / Excel ファイルをアップロード",
@@ -446,7 +448,7 @@ if df is not None:
             )
 
     st.markdown("---")
-    st.subheader("IOS バージョンから検索")
+    st.subheader("Cisco IOS バージョンから検索")
 
     sorted_releases = list_affected_releases(df)
 
