@@ -18,7 +18,7 @@ from analyzer import (
     DEEPL_AVAILABLE,
 )
 
-st.set_page_config(page_title="Cisco Bug Search Analyzer", layout="wide")
+st.set_page_config(page_title="Bug Search Analyzer", layout="wide")
 
 # 「機能を入力」欄にチェックボックスでまとめて追記できる用語カテゴリ。
 # 増やす場合はここに 1 行追加するだけでチェックボックスも増える
@@ -55,8 +55,8 @@ if "feature" not in st.session_state:
     st.session_state["feature_cat_重大障害系"] = True
     _rebuild_feature_keywords()
 
-st.title("🔍 Cisco Bug Search Analyzer")
-st.markdown("Cisco バグ検索システム - 機能とバージョンから該当するバグを検索")
+st.title("🔍 Bug Search Analyzer")
+st.markdown("バグ検索システム - 機能とバージョンから該当するバグを検索")
 
 
 def get_secret(key):
