@@ -44,18 +44,18 @@ CACHE_FETCH_LIMIT = 2000
 CACHE_F5_BUGTRACKER_LIMIT = 100
 
 # (session_key, ファイル名, 表示名, 収集関数を呼ぶための設定)
-# 翻訳は既定でGoogle Translate（無料の非公式エンドポイント）を使うが、
-# GitHub Actionsランナーの共有IPからはボット対策でブロックされ翻訳できない
-# ことが多いため、キーを渡した場合はGoogle失敗時に
-# DeepL → Groq → OpenRouter の順にフォールバックする
-# （analyzer.translate_headline の既存フォールバック機構）。
+# 翻訳エンジンはGroqを既定にする。Google Translate（無料の非公式エンドポイント）は
+# GitHub Actionsランナーの共有IPからはボット対策でブロックされることが多く、
+# DeepLも無料枠の月間文字数上限に達しやすいため、実際に安定して動作するGroqを
+# 優先エンジンにした（Groq失敗時はGoogle→DeepL→OpenRouterの順にフォールバック、
+# analyzer.translate_headline の既存フォールバック機構）。
 TARGETS = [
     {
         "key": "f5",
         "label": "F5 BIG-IP",
         "collect": lambda keys: analyzer.search_f5_bigip_tmm_bugs(
             source="both", nvd_keyword="BIG-IP",
-            translate_engine="google", nvd_api_key=keys["nvd"], deepl_api_key=keys["deepl"],
+            translate_engine="groq", nvd_api_key=keys["nvd"], deepl_api_key=keys["deepl"],
             groq_api_key=keys["groq"], open_router_api_key=keys["openrouter"],
             results_limit=CACHE_RESULTS_LIMIT, fetch_limit=CACHE_FETCH_LIMIT,
             bugtracker_limit=CACHE_F5_BUGTRACKER_LIMIT,
@@ -65,7 +65,7 @@ TARGETS = [
         "key": "paloalto",
         "label": "Palo Alto (PAN-OS)",
         "collect": lambda keys: analyzer.search_vendor_bugs(
-            nvd_keyword='"Palo Alto" PAN-OS', translate_engine="google",
+            nvd_keyword='"Palo Alto" PAN-OS', translate_engine="groq",
             nvd_api_key=keys["nvd"], deepl_api_key=keys["deepl"],
             groq_api_key=keys["groq"], open_router_api_key=keys["openrouter"],
             results_limit=CACHE_RESULTS_LIMIT, fetch_limit=CACHE_FETCH_LIMIT,
@@ -75,7 +75,7 @@ TARGETS = [
         "key": "fortigate",
         "label": "FortiGate (FortiOS)",
         "collect": lambda keys: analyzer.search_fortigate_bugs(
-            nvd_keyword="FortiOS", source="both", translate_engine="google",
+            nvd_keyword="FortiOS", source="both", translate_engine="groq",
             nvd_api_key=keys["nvd"], deepl_api_key=keys["deepl"],
             groq_api_key=keys["groq"], open_router_api_key=keys["openrouter"],
             results_limit=CACHE_RESULTS_LIMIT, fetch_limit=CACHE_FETCH_LIMIT,
@@ -85,7 +85,7 @@ TARGETS = [
         "key": "catalyst9300",
         "label": "Catalyst 9300",
         "collect": lambda keys: analyzer.search_vendor_bugs_with_psirt(
-            nvd_keyword='"Catalyst 9300"', translate_engine="google",
+            nvd_keyword='"Catalyst 9300"', translate_engine="groq",
             nvd_api_key=keys["nvd"], deepl_api_key=keys["deepl"],
             groq_api_key=keys["groq"], open_router_api_key=keys["openrouter"],
             results_limit=CACHE_RESULTS_LIMIT, fetch_limit=CACHE_FETCH_LIMIT,
@@ -97,7 +97,7 @@ TARGETS = [
         "key": "iosxe",
         "label": "Cisco IOS XE",
         "collect": lambda keys: analyzer.search_vendor_bugs_with_psirt(
-            nvd_keyword='"IOS XE"', translate_engine="google",
+            nvd_keyword='"IOS XE"', translate_engine="groq",
             nvd_api_key=keys["nvd"], deepl_api_key=keys["deepl"],
             groq_api_key=keys["groq"], open_router_api_key=keys["openrouter"],
             results_limit=CACHE_RESULTS_LIMIT, fetch_limit=CACHE_FETCH_LIMIT,
