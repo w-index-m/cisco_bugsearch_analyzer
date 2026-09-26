@@ -323,11 +323,28 @@ def translate_headline_openrouter(text, api_key):
     return _call_open_router_prompt(prompt, api_key, max_tokens=1024)
 
 
+
+# 前回のキャッシュ収集で既に翻訳済みの「原文 -> 訳文」対応表。
+# Groq等の無料枠APIは1日あたりのトークン上限（例: Groqの無料枠は
+# 200,000トークン/日）が、毎日ほぼ同じ数百件を再翻訳するだけで
+# 使い切ってしまうほど小さいことが分かったため、内容が変わっていない
+# 行は前回の訳文をそのまま再利用し、新規・変更分だけAPIを呼ぶようにする
+# （scripts/collect_vendor_bug_cache.py が set_known_translations() で設定する）。
+_KNOWN_TRANSLATIONS = {}
+
+
+def set_known_translations(mapping):
+    """前回収集済みキャッシュ由来の「原文 -> 訳文」対応表を設定する"""
+    global _KNOWN_TRANSLATIONS
+    _KNOWN_TRANSLATIONS = mapping or {}
+
+
 def translate_headline(text, engine='google', deepl_api_key=None, nvidia_api_key=None,
                         groq_api_key=None, open_router_api_key=None):
     """
     翻訳エンジンを指定してヘッドラインを翻訳する。
-    フォールバック順: 指定エンジン → Google → （Googleが失敗した場合）DeepL →
+    フォールバック順: 既知の訳文（前回キャッシュに同じ原文があれば再利用、
+    APIを呼ばない）→ 指定エンジン → Google →（Googleが失敗した場合）DeepL →
     Groq → OpenRouter → 原文のまま（指定エンジンとして既に試したものは
     フォールバックで二重に試さない）。
 
@@ -337,6 +354,10 @@ def translate_headline(text, engine='google', deepl_api_key=None, nvidia_api_key
     """
     if not text or len(text) < 3:
         return text
+
+    known = _KNOWN_TRANSLATIONS.get(text)
+    if known:
+        return known
 
     if engine == 'nvidia' and nvidia_api_key:
         result = translate_headline_nvidia(text, nvidia_api_key)
