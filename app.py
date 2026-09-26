@@ -1347,6 +1347,8 @@ render_vendor_bug_search(
     "FortiGate (FortiOS) バグ検索", "🛡️", "fortigate", "FortiOS", version_placeholder="例: 7.4.8",
     official_links=[
         ("Fortinet PSIRT アドバイザリ一覧", "https://www.fortiguard.com/psirt"),
+        ("Fortinet 公式ファームウェアダウンロード（要ログイン）", "https://support.fortinet.com/Download/FirmwareImages.aspx"),
+        ("Fortinet Upgrade Path Tool（現在バージョンから推奨アップグレード経路を確認）", "https://docs.fortinet.com/upgrade-tool"),
     ],
     fortiguard=True,
 )
