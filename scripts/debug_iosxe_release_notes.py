@@ -19,6 +19,11 @@ EXAMPLE_URL = (
 )
 # Palo Alto PAN-OS リリースノート（Known and Addressed Issues）一覧
 PALOALTO_URL = "https://docs.paloaltonetworks.com/ngfw/release-notes"
+# ユーザー提示の具体例（PAN-OS 11.1.0 Known and Addressed Issues）
+PALOALTO_EXAMPLE_URL = (
+    "https://docs.paloaltonetworks.com/pan-os/11-1/pan-os-release-notes/"
+    "pan-os-11-1-0-known-and-addressed-issues"
+)
 
 
 def main():
@@ -82,6 +87,23 @@ def main():
     ))
     print("--- Palo Alto page HTML (first 5000 chars) ---")
     print(pa.text[:5000])
+
+    print()
+    print("=" * 80)
+    print("fetching Palo Alto PAN-OS 11.1.0 Known and Addressed Issues page:", PALOALTO_EXAMPLE_URL)
+    pa_example = requests.get(PALOALTO_EXAMPLE_URL, timeout=20, headers=headers)
+    print("status_code:", pa_example.status_code)
+    print("content length:", len(pa_example.text))
+    print("contains 'Addressed Issues':", "Addressed Issues" in pa_example.text)
+    pan_ids = sorted(set(re.findall(r"PAN-\d{6,}", pa_example.text)))
+    print(f"PAN-xxxxxx issue IDs found: {len(pan_ids)}")
+    print(pan_ids[:20])
+    print("--- Palo Alto example page HTML around first PAN id (if any) ---")
+    if pan_ids:
+        idx = pa_example.text.find(pan_ids[0])
+        print(pa_example.text[max(0, idx - 500):idx + 1000])
+    else:
+        print(pa_example.text[:5000])
 
 
 if __name__ == "__main__":
