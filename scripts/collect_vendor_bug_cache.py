@@ -148,6 +148,25 @@ def main():
             continue
 
         print(f"[{target['key']}] {target['label']} を収集中...", file=sys.stderr)
+
+        # 前回このスクリプトが書き出したキャッシュ（今回上書きする前のもの）から
+        # 「原文 -> 訳文」対応表を読み込み、既に翻訳済みの行はAPIを呼ばずに
+        # 再利用する（Groq等の無料枠の1日あたりトークン上限が、毎日ほぼ同じ
+        # 数百件を再翻訳するだけで枯渇してしまう問題への対策）
+        prev_path = OUTPUT_DIR / f"{target['key']}.json"
+        known_translations = {}
+        if prev_path.exists():
+            try:
+                prev_payload = json.loads(prev_path.read_text(encoding="utf-8"))
+                for r in prev_payload.get("rows", []):
+                    en, ja = r.get("headline_en"), r.get("headline_ja")
+                    if en and ja and ja != en:
+                        known_translations[en] = ja
+            except Exception as e:
+                print(f"  -> 前回キャッシュの読み込みに失敗（無視して続行）: {e}", file=sys.stderr)
+        analyzer.set_known_translations(known_translations)
+        print(f"  -> 前回訳文の再利用可能件数: {len(known_translations)}", file=sys.stderr)
+
         try:
             rows = target["collect"](keys)
         except Exception as e:
