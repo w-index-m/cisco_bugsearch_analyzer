@@ -2679,7 +2679,12 @@ def collect_nvd_vendor_rows(keyword, version_extractor=_extract_generic_versions
     results = results[:results_limit]
 
     if translate_engine:
-        for r in results:
+        for i, r in enumerate(results):
+            if i > 0:
+                # 間隔を空けずに大量の翻訳リクエストを連投すると、Groq等の
+                # 無料枠APIがレート制限にかかり、そこから先が軒並み未翻訳の
+                # ままになることがあるため、呼び出しごとに短い間隔を空ける
+                time.sleep(0.3)
             r["description_ja"] = translate_headline(
                 r["description_en"], engine=translate_engine,
                 deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key,
@@ -2891,8 +2896,10 @@ def collect_cisco_psirt_rows(os_type=None, product=None, version=None, client_id
     rows = [_psirt_advisory_to_row(a) for a in advisories if isinstance(a, dict)]
 
     if translate_engine:
-        for r in rows:
+        for i, r in enumerate(rows):
             if r["headline_en"]:
+                if i > 0:
+                    time.sleep(0.3)
                 r["headline_ja"] = translate_headline(
                     r["headline_en"], engine=translate_engine,
                     deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key,
@@ -3054,8 +3061,10 @@ def collect_fortiguard_psirt_rows(keyword_filter=None, translate_engine=None, de
     rows = [_fortiguard_advisory_to_row(a) for a in advisories]
 
     if translate_engine:
-        for r in rows:
+        for i, r in enumerate(rows):
             if r["headline_en"]:
+                if i > 0:
+                    time.sleep(0.3)
                 r["headline_ja"] = translate_headline(
                     r["headline_en"], engine=translate_engine,
                     deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key,
