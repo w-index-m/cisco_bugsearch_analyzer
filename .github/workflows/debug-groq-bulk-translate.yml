@@ -1,0 +1,19 @@
+name: Debug Groq bulk translation failure
+
+on:
+  workflow_dispatch: {}
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install dependencies
+        run: pip install groq
+      - name: Reproduce bulk Groq translation calls (diagnostic only)
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+        run: python scripts/debug_groq_bulk_translate.py --groq-api-key "$GROQ_API_KEY" --count 20
