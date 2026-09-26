@@ -1,0 +1,17 @@
+name: Debug FortiGuard RSS full description check
+
+on:
+  workflow_dispatch: {}
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install dependencies
+        run: pip install requests
+      - name: Check FortiGuard RSS full description (diagnostic only)
+        run: python scripts/debug_fortiguard_full_description.py
