@@ -89,6 +89,22 @@ def _format_epss_score(v):
     return f"{v * 100:.1f}%" if isinstance(v, (int, float)) else "不明"
 
 
+def _translated_headline_or_fallback(r):
+    """
+    行の headline_ja を返す。translate_headline() は翻訳に失敗すると原文
+    （headline_en）をそのまま返す仕様のため、headline_ja が存在すること
+    だけでは翻訳成功の判定にならない（常に非空文字列になってしまう）。
+    headline_ja が headline_en と一致する＝翻訳できていない、とみなして
+    フォールバック表示にする（前回訳文の再利用キャッシュが順次埋まって
+    いく運用のため、翻訳済みの行から順に正しく日本語表示されるようになる）。
+    """
+    ja = r.get("headline_ja")
+    en = r.get("headline_en")
+    if ja and ja != en:
+        return ja
+    return "(翻訳できませんでした)"
+
+
 def display_bug_rows_table(rows, session_key, name, key_suffix):
     """
     F5/Palo Alto/FortiGateのバグ収集結果（新しい順ソート済み）を、テーブル表示・
@@ -110,7 +126,7 @@ def display_bug_rows_table(rows, session_key, name, key_suffix):
             "対象製品": r.get("product") or "-",
             # Ciscoバグ検索の表（BUG headline (日本語)/(英語原文)）と同じく、
             # 日本語訳と英語原文を別カラムに分けて両方見えるようにする
-            "見出し(日本語)": r.get("headline_ja") or "(翻訳できませんでした)",
+            "見出し(日本語)": _translated_headline_or_fallback(r),
             "見出し(原文)": r["headline_en"],
             "KEV": _format_kev_flag(r.get("kev")),
             "EPSS": _format_epss_score(r.get("epss")),
@@ -167,7 +183,7 @@ def display_bug_rows_table(rows, session_key, name, key_suffix):
 
     export_rows = [
         [r.get("date") or "不明", r["source"], r["id"], r["versions"], r.get("product") or "-",
-         r.get("headline_ja", ""), r["headline_en"],
+         _translated_headline_or_fallback(r), r["headline_en"],
          _format_kev_flag(r.get("kev")), _format_epss_score(r.get("epss")), r["url"]]
         for r in rows
     ]
