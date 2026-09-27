@@ -1,6 +1,6 @@
 {
   "label": "FortiGate (FortiOS)",
-  "generated_at": "2026-09-26T17:17:34+00:00",
+  "generated_at": "2026-09-27T04:02:23+00:00",
   "count": 216,
   "rows": [
     {
@@ -429,7 +429,7 @@
       "source": "NVD (CVSS 3.2)",
       "id": "CVE-2026-25815",
       "headline_en": "Fortinet FortiOS through 7.6.6 allows attackers to decrypt LDAP credentials stored in device configuration files, as exploited in the wild from 2025-12-16 through 2026 (by default, the encryption key is the same across all customers' installations). NOTE: the Supplier's position is that the instance of CWE-1394 is not a vulnerability because customers \"are supposed to enable\" a non-default option that eliminates the weakness. However, that non-default option can disrupt functionality as shown in the \"Managing FortiGates with private data encryption\" document, and is therefore intentionally not a default option.",
-      "headline_ja": "Fortinet FortiOS through 7.6.6 allows attackers to decrypt LDAP credentials stored in device configuration files, as exploited in the wild from 2025-12-16 through 2026 (by default, the encryption key is the same across all customers' installations). NOTE: the Supplier's position is that the instance of CWE-1394 is not a vulnerability because customers \"are supposed to enable\" a non-default option that eliminates the weakness. However, that non-default option can disrupt functionality as shown in the \"Managing FortiGates with private data encryption\" document, and is therefore intentionally not a default option.",
+      "headline_ja": "Fortinet FortiOS 7.6.6までのバージョンでは、攻撃者がデバイス設定ファイルに保存されたLDAP認証情報を復号できるようになっており、2025年12月16日から2026年にかけて実際に悪用されています（デフォルトでは、暗号化キーがすべての顧客のインストールで同一です）。※サプライヤーの見解では、CWE‑1394の事例は脆弱性ではなく、顧客が「有効にすべき」デフォルト以外のオプションを有効化すれば弱点が解消されるとしています。しかし、そのデフォルト以外のオプションは「Managing FortiGates with private data encryption」文書に示されているように機能を阻害する可能性があるため、意図的にデフォルト設定にはされていません。",
       "versions": "7.6.6",
       "url": "https://docs.fortinet.com/document/fortimanager/7.6.6/administration-guide/30332/managing-fortigates-with-private-data-encryption",
       "date": "2026-02-05",
