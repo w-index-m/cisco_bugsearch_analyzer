@@ -1,6 +1,6 @@
 {
   "label": "Cisco IOS XE",
-  "generated_at": "2026-09-27T04:44:12+00:00",
+  "generated_at": "2026-09-28T04:53:54+00:00",
   "count": 193,
   "rows": [
     {
@@ -31,7 +31,7 @@
       "source": "NVD (CVSS 8.6)",
       "id": "CVE-2026-20301",
       "headline_en": "A vulnerability in the Extensible Messaging Client Protocol (XMCP), also referred to as the External Client protocol, of Cisco IOS Software and Cisco IOS XE Software could allow an unauthenticated, remote attacker to cause a denial of service (DoS) condition on an affected device.\r\n\r\nThis vulnerability is due to improper handling of malformed XMCP packets. An attacker could exploit this vulnerability by sending a malformed XMCP packet to an affected device. A successful exploit could allow the attacker to cause the affected device to reload unexpectedly, resulting in a DoS condition. The attacker does not need the XMCP client username to exploit this vulnerability.",
-      "headline_ja": "A vulnerability in the Extensible Messaging Client Protocol (XMCP), also referred to as the External Client protocol, of Cisco IOS Software and Cisco IOS XE Software could allow an unauthenticated, remote attacker to cause a denial of service (DoS) condition on an affected device.\r\n\r\nThis vulnerability is due to improper handling of malformed XMCP packets. An attacker could exploit this vulnerability by sending a malformed XMCP packet to an affected device. A successful exploit could allow the attacker to cause the affected device to reload unexpectedly, resulting in a DoS condition. The attacker does not need the XMCP client username to exploit this vulnerability.",
+      "headline_ja": "Cisco IOS ソフトウェアおよび Cisco IOS XE ソフトウェアの拡張メッセージングクライアントプロトコル（XMCP、外部クライアントプロトコルとも呼ばれる）における脆弱性により、認証されていないリモート攻撃者が対象デバイスでサービス拒否（DoS）状態を引き起こす可能性があります。\n\nこの脆弱性は、XMCP パケットが不正に処理されることに起因します。攻撃者は、改ざんされた XMCP パケットを対象デバイスに送信することでこの脆弱性を悪用できる可能性があります。攻撃が成功すると、対象デバイスが予期せずリロードされ、DoS 状態が発生します。攻撃者はこの脆弱性を悪用するために XMCP クライアントのユーザー名を必要としません。",
       "versions": "(本文から検出できず)",
       "url": "https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-ios-xmcp-thbAr34t",
       "date": "2026-08-05",
@@ -127,7 +127,7 @@
       "source": "NVD (CVSS 6.3)",
       "id": "CVE-2026-20311",
       "headline_en": "A vulnerability in the web-based management interface of Cisco IOS XE Software could allow an authenticated, remote attacker with low privileges to cause a denial of service (DoS) condition on an affected device.\r\n\r\nThis vulnerability is due to insufficient error handling in the web-based management interface. An attacker could exploit this vulnerability by authenticating with a malformed certificate. A successful exploit could allow the attacker to cause the affected device to reload, resulting in a DoS condition.",
-      "headline_ja": "A vulnerability in the web-based management interface of Cisco IOS XE Software could allow an authenticated, remote attacker with low privileges to cause a denial of service (DoS) condition on an affected device.\r\n\r\nThis vulnerability is due to insufficient error handling in the web-based management interface. An attacker could exploit this vulnerability by authenticating with a malformed certificate. A successful exploit could allow the attacker to cause the affected device to reload, resulting in a DoS condition.",
+      "headline_ja": "Cisco IOS XEソフトウェアのウェブベース管理インターフェイスに存在する脆弱性により、低権限の認証済みリモート攻撃者が影響を受けたデバイスでサービス拒否（DoS）状態を引き起こす可能性があります。\n\nこの脆弱性は、ウェブベース管理インターフェイスにおける不十分なエラー処理が原因です。攻撃者は、改ざんされた証明書で認証することによりこの脆弱性を悪用できる可能性があります。攻撃が成功すると、攻撃者は影響を受けたデバイスをリロードさせ、DoS状態を引き起こすことができます。",
       "versions": "(本文から検出できず)",
       "url": "https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-xe-webui-dos-PtAODAWW",
       "date": "2026-08-05",
@@ -427,7 +427,7 @@
       "source": "NVD (CVSS 6.1)",
       "id": "CVE-2025-20240",
       "headline_en": "A vulnerability in the Web Authentication feature of Cisco IOS XE Software could allow an unauthenticated, remote attacker to conduct a reflected cross-site scripting attack (XSS) on an affected device.\r\n\r This vulnerability is due to improper sanitization of user-supplied input. An attacker could exploit this vulnerability by persuading a user to click a malicious link. A successful exploit could allow the attacker to execute a reflected XSS attack and steal user cookies from the affected device.",
-      "headline_ja": "A vulnerability in the Web Authentication feature of Cisco IOS XE Software could allow an unauthenticated, remote attacker to conduct a reflected cross-site scripting attack (XSS) on an affected device.\r\n\r This vulnerability is due to improper sanitization of user-supplied input. An attacker could exploit this vulnerability by persuading a user to click a malicious link. A successful exploit could allow the attacker to execute a reflected XSS attack and steal user cookies from the affected device.",
+      "headline_ja": "Cisco IOS XE SoftwareのWeb認証機能にある脆弱性により、認証されていないリモート攻撃者が影響を受けたデバイス上でリフレクト型クロスサイトスクリプティング（XSS）攻撃を実行できる可能性があります。\n\nこの脆弱性は、ユーザー提供入力の不適切なサニタイズが原因です。攻撃者は、ユーザーに悪意のあるリンクをクリックさせることでこの脆弱性を悪用できます。攻撃が成功すると、攻撃者はリフレクト型XSS攻撃を実行し、影響を受けたデバイスからユーザーのクッキーを盗むことができます。",
       "versions": "(本文から検出できず)",
       "url": "https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-webui-xss-VWyDgjOU",
       "date": "2025-09-24",
@@ -991,7 +991,7 @@
       "source": "NVD (CVSS 8.6)",
       "id": "CVE-2024-20259",
       "headline_en": "A vulnerability in the DHCP snooping feature of Cisco IOS XE Software could allow an unauthenticated, remote attacker to cause an affected device to reload unexpectedly, resulting in a denial of service (DoS) condition.\r\n\r This vulnerability is due to a crafted IPv4 DHCP request packet being mishandled when endpoint analytics are enabled. An attacker could exploit this vulnerability by sending a crafted DHCP request through an affected device. A successful exploit could allow the attacker to cause the device to reload, resulting in a DoS condition.\r\n\r Note: The attack vector is listed as network because a DHCP relay anywhere on the network could allow exploits from networks other than the adjacent one.",
-      "headline_ja": "A vulnerability in the DHCP snooping feature of Cisco IOS XE Software could allow an unauthenticated, remote attacker to cause an affected device to reload unexpectedly, resulting in a denial of service (DoS) condition.\r\n\r This vulnerability is due to a crafted IPv4 DHCP request packet being mishandled when endpoint analytics are enabled. An attacker could exploit this vulnerability by sending a crafted DHCP request through an affected device. A successful exploit could allow the attacker to cause the device to reload, resulting in a DoS condition.\r\n\r Note: The attack vector is listed as network because a DHCP relay anywhere on the network could allow exploits from networks other than the adjacent one.",
+      "headline_ja": "Cisco IOS XE Software の DHCP スヌーピング機能にある脆弱性により、認証されていないリモート攻撃者が影響を受けたデバイスを予期せずリロードさせ、サービス拒否（DoS）状態を引き起こす可能性があります。\n\nこの脆弱性は、エンドポイント アナリティクスが有効になっているときに、細工された IPv4 DHCP リクエストパケットが誤って処理されることが原因です。攻撃者は、影響を受けたデバイスを通じて細工された DHCP リクエストを送信することでこの脆弱性を悪用できる可能性があります。悪用が成功すると、攻撃者はデバイスをリロードさせ、DoS 状態を引き起こすことができます。\n\n注: 攻撃ベクタはネットワークとして記載されています。これは、ネットワーク上の任意の場所にある DHCP リレーが、隣接ネットワーク以外からの攻撃を可能にするためです。",
       "versions": "(本文から検出できず)",
       "url": "https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-dhcp-dos-T3CXPO9z",
       "date": "2024-03-27",
@@ -1465,7 +1465,7 @@
       "date": "2022-09-30",
       "cvss": 8.6,
       "kev": false,
-      "epss": 0.01103
+      "epss": 0.01199
     },
     {
       "source": "NVD (CVSS 8.6)",
@@ -1477,19 +1477,19 @@
       "date": "2022-09-30",
       "cvss": 8.6,
       "kev": false,
-      "epss": 0.01177
+      "epss": 0.01279
     },
     {
       "source": "NVD (CVSS 8.6)",
       "id": "CVE-2022-20848",
       "headline_en": "A vulnerability in the UDP processing functionality of Cisco IOS XE Software for Embedded Wireless Controllers on Catalyst 9100 Series Access Points could allow an unauthenticated, remote attacker to cause a denial of service (DoS) condition. This vulnerability is due to the improper processing of UDP datagrams. An attacker could exploit this vulnerability by sending malicious UDP datagrams to an affected device. A successful exploit could allow the attacker to cause the device to reload, resulting in a DoS condition.",
-      "headline_ja": "A vulnerability in the UDP processing functionality of Cisco IOS XE Software for Embedded Wireless Controllers on Catalyst 9100 Series Access Points could allow an unauthenticated, remote attacker to cause a denial of service (DoS) condition. This vulnerability is due to the improper processing of UDP datagrams. An attacker could exploit this vulnerability by sending malicious UDP datagrams to an affected device. A successful exploit could allow the attacker to cause the device to reload, resulting in a DoS condition.",
+      "headline_ja": "Cisco IOS XE ソフトウェア（Catalyst 9100 シリーズアクセスポイント上の組込みワイヤレスコントローラ用）の UDP 処理機能にある脆弱性により、認証されていないリモート攻撃者がサービス拒否（DoS）状態を引き起こす可能性があります。この脆弱性は UDP データグラムの不適切な処理が原因です。攻撃者は悪意のある UDP データグラムを対象デバイスに送信することでこの脆弱性を悪用できる可能性があります。攻撃が成功すると、攻撃者はデバイスを再起動させ、DoS 状態をもたらすことができます。",
       "versions": "(本文から検出できず)",
       "url": "https://tools.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-wlc-udp-dos-XDyEwhNz",
       "date": "2022-09-30",
       "cvss": 8.6,
       "kev": false,
-      "epss": 0.00926
+      "epss": 0.01006
     },
     {
       "source": "NVD (CVSS 8.6)",
@@ -1501,7 +1501,7 @@
       "date": "2022-09-30",
       "cvss": 8.6,
       "kev": false,
-      "epss": 0.01153
+      "epss": 0.01253
     },
     {
       "source": "NVD (CVSS 7.9)",
@@ -1513,7 +1513,7 @@
       "date": "2022-09-30",
       "cvss": 7.9,
       "kev": false,
-      "epss": 0.00353
+      "epss": 0.00362
     },
     {
       "source": "NVD (CVSS 6.5)",
@@ -1525,7 +1525,7 @@
       "date": "2022-09-30",
       "cvss": 6.5,
       "kev": false,
-      "epss": 0.00719
+      "epss": 0.00798
     },
     {
       "source": "NVD (CVSS 5.5)",
@@ -1537,7 +1537,7 @@
       "date": "2022-09-30",
       "cvss": 5.5,
       "kev": false,
-      "epss": 0.00974
+      "epss": 0.01082
     },
     {
       "source": "NVD (CVSS 5.5)",
@@ -1549,7 +1549,7 @@
       "date": "2022-09-30",
       "cvss": 5.5,
       "kev": false,
-      "epss": 0.00203
+      "epss": 0.0021
     },
     {
       "source": "NVD (CVSS 8.6)",
@@ -1903,7 +1903,7 @@
       "source": "NVD (CVSS 5.8)",
       "id": "CVE-2021-34697",
       "headline_en": "A vulnerability in the Protection Against Distributed Denial of Service Attacks feature of Cisco IOS XE Software could allow an unauthenticated, remote attacker to conduct denial of service (DoS) attacks to or through the affected device. This vulnerability is due to incorrect programming of the half-opened connections limit, TCP SYN flood limit, or TCP SYN cookie features when the features are configured in vulnerable releases of Cisco IOS XE Software. An attacker could exploit this vulnerability by attempting to flood traffic to or through the affected device. A successful exploit could allow the attacker to initiate a DoS attack to or through an affected device.",
-      "headline_ja": "A vulnerability in the Protection Against Distributed Denial of Service Attacks feature of Cisco IOS XE Software could allow an unauthenticated, remote attacker to conduct denial of service (DoS) attacks to or through the affected device. This vulnerability is due to incorrect programming of the half-opened connections limit, TCP SYN flood limit, or TCP SYN cookie features when the features are configured in vulnerable releases of Cisco IOS XE Software. An attacker could exploit this vulnerability by attempting to flood traffic to or through the affected device. A successful exploit could allow the attacker to initiate a DoS attack to or through an affected device.",
+      "headline_ja": "Cisco IOS XE ソフトウェアの「分散型サービス拒否（DDoS）攻撃への保護」機能に存在する脆弱性により、認証されていないリモート攻撃者が対象デバイスに対して、またはデバイスを経由してサービス拒否（DoS）攻撃を実行できる可能性があります。この脆弱性は、Cisco IOS XE ソフトウェアの脆弱なリリースで機能が設定されている際に、半開接続の上限、TCP SYN フラッド上限、または TCP SYN クッキー機能が正しくプログラムされていないことが原因です。攻撃者は、対象デバイスに対してトラフィックをフラッドしようとすることでこの脆弱性を悪用できる可能性があります。攻撃が成功すると、攻撃者は対象デバイスに対して、またはデバイスを経由して DoS 攻撃を開始できるようになります。",
       "versions": "(本文から検出できず)",
       "url": "https://tools.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-zbfw-tguGuYq",
       "date": "2021-09-23",
@@ -2035,7 +2035,7 @@
       "source": "NVD (CVSS 7.5)",
       "id": "CVE-2021-1431",
       "headline_en": "A vulnerability in the vDaemon process of Cisco IOS XE SD-WAN Software could allow an unauthenticated, remote attacker to cause a device to reload, resulting a denial of service (DoS) condition. This vulnerability is due to insufficient handling of malformed packets. An attacker could exploit this vulnerability by sending crafted traffic to an affected device. A successful exploit could allow the attacker to cause the device to reload, resulting in a DoS condition.",
-      "headline_ja": "A vulnerability in the vDaemon process of Cisco IOS XE SD-WAN Software could allow an unauthenticated, remote attacker to cause a device to reload, resulting a denial of service (DoS) condition. This vulnerability is due to insufficient handling of malformed packets. An attacker could exploit this vulnerability by sending crafted traffic to an affected device. A successful exploit could allow the attacker to cause the device to reload, resulting in a DoS condition.",
+      "headline_ja": "Cisco IOS XE SD-WAN ソフトウェアの vDaemon プロセスにある脆弱性により、認証されていない遠隔攻撃者がデバイスをリロードさせ、サービス拒否 (DoS) 状態を引き起こす可能性があります。この脆弱性は、異常なパケットの処理が不十分であることが原因です。攻撃者は、影響を受けたデバイスに細工したトラフィックを送信することでこの脆弱性を悪用できる可能性があります。攻撃が成功すると、攻撃者はデバイスをリロードさせ、DoS 状態を引き起こすことができます。",
       "versions": "(本文から検出できず)",
       "url": "https://tools.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-iosxe-sdwdos-4zeEeC9w",
       "date": "2021-03-24",
@@ -2215,7 +2215,7 @@
       "source": "NVD (CVSS 5.1)",
       "id": "CVE-2021-1281",
       "headline_en": "A vulnerability in CLI management in Cisco IOS XE SD-WAN Software could allow an authenticated, local attacker to access the underlying operating system as the root user. This vulnerability is due to the way the software handles concurrent CLI sessions. An attacker could exploit this vulnerability by authenticating to the device as an administrative user and executing a sequence of commands. A successful exploit could allow the attacker to obtain access to the underlying operating system as the root user.",
-      "headline_ja": "A vulnerability in CLI management in Cisco IOS XE SD-WAN Software could allow an authenticated, local attacker to access the underlying operating system as the root user. This vulnerability is due to the way the software handles concurrent CLI sessions. An attacker could exploit this vulnerability by authenticating to the device as an administrative user and executing a sequence of commands. A successful exploit could allow the attacker to obtain access to the underlying operating system as the root user.",
+      "headline_ja": "Cisco IOS XE SD-WAN ソフトウェアの CLI 管理における脆弱性により、認証されたローカル攻撃者がルートユーザーとして基盤となるオペレーティングシステムにアクセスできる可能性があります。この脆弱性は、ソフトウェアが同時 CLI セッションを処理する方法に起因します。攻撃者は管理者ユーザーとしてデバイスに認証し、一連のコマンドを実行することでこの脆弱性を悪用できる可能性があります。攻撃が成功すると、攻撃者はルートユーザーとして基盤となるオペレーティングシステムへのアクセス権を取得できるようになります。",
       "versions": "(本文から検出できず)",
       "url": "https://tools.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-sdwan-clipriv-9TO2QGVp",
       "date": "2021-03-24",
