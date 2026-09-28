@@ -1,74 +1,47 @@
 """
-一時デバッグ: Palo Alto PAN-OS の Known / Addressed Issues ページの HTML 構造と、
-バージョン別サブページへのリンク構造を確認する（パーサー実装用）。確認後に削除する。
+一時デバッグ: analyzer.fetch_panos_known_issue_rows() を実際に動かし、
+トレインごとの取得件数・サンプル行・取得したページを確認する。確認後に削除する。
 """
+import collections
 import re
 import sys
+from pathlib import Path
 
-import requests
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+import requests  # noqa: E402
 
-HEADERS = {
-    "User-Agent": (
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
-        "(KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
-    )
-}
-
-INDEX_URLS = [
-    "https://docs.paloaltonetworks.com/pan-os/11-1/pan-os-release-notes",
-    "https://docs.paloaltonetworks.com/pan-os/11-1/pan-os-release-notes/pan-os-11-1-0-known-and-addressed-issues",
-    "https://docs.paloaltonetworks.com/ngfw/release-notes",
-    "https://docs.paloaltonetworks.com/ngfw/release-notes/12-2",
-    "https://docs.paloaltonetworks.com/pan-os/10-2/pan-os-release-notes",
-]
-
-ISSUE_URLS = [
-    "https://docs.paloaltonetworks.com/pan-os/11-1/pan-os-release-notes/"
-    "pan-os-11-1-0-known-and-addressed-issues/pan-os-11-1-0-known-issues",
-    "https://docs.paloaltonetworks.com/pan-os/11-1/pan-os-release-notes/"
-    "pan-os-11-1-0-known-and-addressed-issues/pan-os-11-1-0-h4-addressed-issues",
-    "https://docs.paloaltonetworks.com/ngfw/release-notes/12-2/"
-    "pan-os-12-2-3-known-and-addressed-issues",
-]
-
-
-def fetch(url):
-    try:
-        r = requests.get(url, timeout=30, headers=HEADERS)
-        print(f"  status={r.status_code} len={len(r.text)} final_url={r.url}")
-        return r.text
-    except Exception as e:
-        print(f"  ERROR {e}")
-        return ""
+import analyzer  # noqa: E402
 
 
 def main():
-    for url in INDEX_URLS:
-        print("=" * 100)
-        print("[INDEX]", url)
-        html = fetch(url)
-        hrefs = sorted(set(re.findall(r'href="([^"]+)"', html)))
-        rel = [h for h in hrefs if "addressed" in h or "known" in h or "release-notes" in h]
-        print(f"  release-note related hrefs: {len(rel)}")
-        for h in rel[:120]:
-            print("   ", h)
+    for train in analyzer.PANOS_TRACKED_TRAINS:
+        url = analyzer._panos_train_landing_url(train)
+        try:
+            r = requests.get(url, timeout=30, headers={"User-Agent": "Mozilla/5.0"})
+            paths = [p for p in dict.fromkeys(analyzer._PANOS_KNOWN_ISSUES_HREF_RE.findall(r.text)) if f"/{train}/" in p]
+            print(f"[{train}] landing status={r.status_code} final={r.url} known-issues pages={paths}")
+        except Exception as e:
+            print(f"[{train}] landing ERROR {e}")
 
-    for url in ISSUE_URLS:
-        print("=" * 100)
-        print("[ISSUES]", url)
-        html = fetch(url)
-        ids = re.findall(r"PAN-\d{5,7}", html)
-        print(f"  PAN-ID occurrences={len(ids)} unique={len(set(ids))}")
-        for tag in ("<table", "<tr", "<td", "<dl", "<li", "<h2", "<h3", "<p "):
-            print(f"  count {tag!r}: {html.count(tag)}")
-        headings = re.findall(r"<h[1-4][^>]*>(.*?)</h[1-4]>", html, re.S)
-        print("  headings:", [re.sub(r"<[^>]+>", "", h).strip()[:80] for h in headings[:30]])
-        starts = [m.start() for m in re.finditer(r"PAN-\d{5,7}", html)]
-        for i in (0, 1, 2, len(starts) // 2, len(starts) - 1):
-            if 0 <= i < len(starts):
-                s = starts[i]
-                print(f"  --- raw snippet around occurrence #{i} ---")
-                print(html[max(0, s - 700): s + 1300])
+    rows = analyzer.fetch_panos_known_issue_rows()
+    print()
+    print("total rows:", len(rows))
+    by_source = collections.Counter(r["source"] for r in rows)
+    for k, v in by_source.items():
+        open_count = sum(1 for r in rows if r["source"] == k and "未修正" in r["versions"])
+        print(f"  {k}: {v} rows (未修正 {open_count})")
+    by_url = collections.Counter(r["url"] for r in rows)
+    for k, v in by_url.items():
+        print(f"  page {k}: {v}")
+    for r in rows[:3] + rows[-3:]:
+        print("-" * 80)
+        print(r["id"], "|", r["versions"])
+        print(r["headline_en"][:300])
+    lengths = sorted(len(r["headline_en"]) for r in rows)
+    if lengths:
+        print("headline length min/median/max:", lengths[0], lengths[len(lengths) // 2], lengths[-1])
+    odd = [r for r in rows if re.search(r"<|&[a-z]+;", r["headline_en"])]
+    print("rows with leftover markup:", len(odd))
 
 
 if __name__ == "__main__":

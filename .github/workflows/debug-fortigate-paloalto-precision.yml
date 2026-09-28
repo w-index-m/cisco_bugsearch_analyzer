@@ -12,6 +12,6 @@ jobs:
         with:
           python-version: "3.11"
       - name: Install dependencies
-        run: pip install requests
+        run: pip install -r requirements.txt
       - name: Inspect PAN-OS known/addressed issues page structure (diagnostic only)
         run: python scripts/debug_fortigate_paloalto_precision.py

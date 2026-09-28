@@ -64,8 +64,8 @@ TARGETS = [
     {
         "key": "paloalto",
         "label": "Palo Alto (PAN-OS)",
-        "collect": lambda keys: analyzer.search_vendor_bugs(
-            nvd_keyword='"Palo Alto" PAN-OS', translate_engine="groq",
+        "collect": lambda keys: analyzer.search_paloalto_bugs(
+            nvd_keyword='"Palo Alto" PAN-OS', source="both", translate_engine="groq",
             nvd_api_key=keys["nvd"], deepl_api_key=keys["deepl"],
             groq_api_key=keys["groq"], open_router_api_key=keys["openrouter"],
             results_limit=CACHE_RESULTS_LIMIT, fetch_limit=CACHE_FETCH_LIMIT,
