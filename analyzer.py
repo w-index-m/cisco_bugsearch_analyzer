@@ -3159,13 +3159,19 @@ _PANOS_PAGE_VERSION_RE = re.compile(r'pan-os-(\d+)-(\d+)-(\d+)-known-issues$')
 
 def _html_fragment_to_text(fragment):
     """タグを空白に置き換えてからテキスト化する（隣接要素の文字がくっつかないように）"""
-    return re.sub(r'\s+', ' ', unescape(re.sub(r'<[^>]+>', ' ', fragment or ''))).strip()
+    text = re.sub(r'\s+', ' ', unescape(re.sub(r'<[^>]+>', ' ', fragment or ''))).strip()
+    text = re.sub(r'\(\s+', '(', text)
+    return re.sub(r'\s+([).,;:])', r'\1', text)
+
+
+def _panos_train_base_path(train):
+    if int(train.split("-")[0]) >= 12:
+        return f"/ngfw/release-notes/{train}"
+    return f"/pan-os/{train}/pan-os-release-notes"
 
 
 def _panos_train_landing_url(train):
-    if int(train.split("-")[0]) >= 12:
-        return f"{PANOS_DOCS_BASE}/ngfw/release-notes/{train}"
-    return f"{PANOS_DOCS_BASE}/pan-os/{train}/pan-os-release-notes"
+    return PANOS_DOCS_BASE + _panos_train_base_path(train)
 
 
 def parse_panos_known_issues_html(html, page_url, train):
@@ -3207,9 +3213,12 @@ def parse_panos_known_issues_html(html, page_url, train):
 def fetch_panos_known_issue_rows(trains=PANOS_TRACKED_TRAINS, timeout=30, delay=0.5):
     """
     各トレインのリリースノートの入口ページからKnown Issuesページへのリンクを
-    探し、全て取得・解析して返す。同じトレインで同じIDが複数ページに載る
-    場合は、より新しいバージョンのページの内容を優先する。取得に失敗した
-    トレイン・ページは飛ばす（他の収集を止めない）。
+    探し、全て取得・解析して返す。入口が「新機能」ページ等にリダイレクトされて
+    リンクが見つからないトレイン（11.2 / 12.1 等）は、バージョン別の親ページ
+    （pan-os-11-2-{n}-known-and-addressed-issues）を n=0 から順に試して探す
+    （3回連続で見つからなければ打ち切る。12.1のように .0/.1 が無いトレインもある）。
+    同じトレインで同じIDが複数ページに載る場合は、より新しいバージョンの
+    ページの内容を優先する。取得に失敗したトレイン・ページは飛ばす。
     """
     headers = {
         "User-Agent": (
@@ -3226,6 +3235,27 @@ def fetch_panos_known_issue_rows(trains=PANOS_TRACKED_TRAINS, timeout=30, delay=
             continue
 
         paths = [p for p in dict.fromkeys(_PANOS_KNOWN_ISSUES_HREF_RE.findall(landing.text)) if f"/{train}/" in p]
+
+        if not paths:
+            major, minor = train.split("-")
+            misses = 0
+            for n in range(0, 30):
+                if misses >= 3:
+                    break
+                parent_url = (f"{PANOS_DOCS_BASE}{_panos_train_base_path(train)}"
+                              f"/pan-os-{major}-{minor}-{n}-known-and-addressed-issues")
+                time.sleep(delay)
+                try:
+                    parent = requests.get(parent_url, headers=headers, timeout=timeout)
+                except Exception:
+                    misses += 1
+                    continue
+                if parent.status_code != 200:
+                    misses += 1
+                    continue
+                misses = 0
+                paths += [p for p in _PANOS_KNOWN_ISSUES_HREF_RE.findall(parent.text)
+                          if f"/{train}/" in p and p not in paths]
 
         def _version_key(path):
             m = _PANOS_PAGE_VERSION_RE.search(path)
