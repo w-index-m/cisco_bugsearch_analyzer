@@ -142,8 +142,22 @@ def main():
         "psirt_client_id": args.cisco_psirt_client_id, "psirt_client_secret": args.cisco_psirt_client_secret,
     }
 
+    # Groq無料枠の1日あたりトークン上限（TPD）に達すると、その日はそれ以降の
+    # 機種を翻訳できずに終わる。TARGETSが常に同じ順序（F5→...→IOS XE）だと、
+    # 毎日必ず同じ機種（先頭のF5）が優先され、後方の機種（件数の多いIOS XEなど）
+    # が慢性的に割を食う。日替わりで開始位置をローテーションし、どの機種も
+    # 順番に「その日の最優先」になれるようにする（UTC日付ベースなので、
+    # 1日1回の定期実行と噛み合う）。
+    rotation = datetime.now(timezone.utc).date().toordinal() % len(TARGETS)
+    ordered_targets = TARGETS[rotation:] + TARGETS[:rotation]
+    print(
+        f"本日の処理順（{rotation}件ローテーション): "
+        + " -> ".join(t["key"] for t in ordered_targets),
+        file=sys.stderr,
+    )
+
     exit_code = 0
-    for target in TARGETS:
+    for target in ordered_targets:
         if only and target["key"] not in only:
             continue
 
