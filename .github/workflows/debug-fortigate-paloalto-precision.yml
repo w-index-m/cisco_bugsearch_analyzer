@@ -13,9 +13,5 @@ jobs:
           python-version: "3.11"
       - name: Install dependencies
         run: pip install requests
-      - name: Check keyword precision (diagnostic only)
-        env:
-          NVD_API_KEY: ${{ secrets.NVD_API_KEY }}
-        run: |
-          python scripts/debug_fortigate_paloalto_precision.py \
-            ${NVD_API_KEY:+--nvd-api-key "$NVD_API_KEY"}
+      - name: Inspect PAN-OS known/addressed issues page structure (diagnostic only)
+        run: python scripts/debug_fortigate_paloalto_precision.py

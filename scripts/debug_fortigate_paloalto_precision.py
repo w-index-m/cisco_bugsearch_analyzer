@@ -1,44 +1,74 @@
 """
-Palo Alto / FortiGate のNVD検索キーワードについて、Catalyst 9300で見つかった
-ような「AND検索/OR検索による誤検出」がないかをざっと確認するための一時
-デバッグスクリプト。確認が終わり次第、対応するworkflowと合わせて削除する。
-
-確認内容:
-  - Palo Alto: 既定キーワード '"Palo Alto" PAN-OS' の各語（"Palo Alto" は
-    exact_match、"PAN-OS" はそのまま）の単独ヒット件数とタイトル例
-  - FortiGate: 既定キーワード "Fortinet FortiOS" の各語（OR検索、どちらも
-    exact_matchなし）の単独ヒット件数とタイトル例
-    -> "Fortinet" は同社の全製品を指すブランド名のため、FortiGate/FortiOS
-       と無関係な他製品（FortiMail等）のCVEまで拾っていないかを確認する
+一時デバッグ: Palo Alto PAN-OS の Known / Addressed Issues ページの HTML 構造と、
+バージョン別サブページへのリンク構造を確認する（パーサー実装用）。確認後に削除する。
 """
-import argparse
+import re
 import sys
 
-import analyzer
+import requests
 
-
-def check(label, term, api_key, exact_match):
-    result = analyzer.search_cve_by_keyword(
-        term, results_limit=2000, api_key=api_key, exact_match=exact_match,
+HEADERS = {
+    "User-Agent": (
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+        "(KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
     )
-    print(f"\n=== {label}: term={term!r} exact_match={exact_match} ===")
-    if isinstance(result, dict) and "error" in result:
-        print(f"ERROR: {result['error']}")
-        return
-    print(f"total hits: {len(result)}")
-    for r in result[:8]:
-        print(f"  - {r['cve_id']}: {r['description_en'][:120]}")
+}
+
+INDEX_URLS = [
+    "https://docs.paloaltonetworks.com/pan-os/11-1/pan-os-release-notes",
+    "https://docs.paloaltonetworks.com/pan-os/11-1/pan-os-release-notes/pan-os-11-1-0-known-and-addressed-issues",
+    "https://docs.paloaltonetworks.com/ngfw/release-notes",
+    "https://docs.paloaltonetworks.com/ngfw/release-notes/12-2",
+    "https://docs.paloaltonetworks.com/pan-os/10-2/pan-os-release-notes",
+]
+
+ISSUE_URLS = [
+    "https://docs.paloaltonetworks.com/pan-os/11-1/pan-os-release-notes/"
+    "pan-os-11-1-0-known-and-addressed-issues/pan-os-11-1-0-known-issues",
+    "https://docs.paloaltonetworks.com/pan-os/11-1/pan-os-release-notes/"
+    "pan-os-11-1-0-known-and-addressed-issues/pan-os-11-1-0-h4-addressed-issues",
+    "https://docs.paloaltonetworks.com/ngfw/release-notes/12-2/"
+    "pan-os-12-2-3-known-and-addressed-issues",
+]
+
+
+def fetch(url):
+    try:
+        r = requests.get(url, timeout=30, headers=HEADERS)
+        print(f"  status={r.status_code} len={len(r.text)} final_url={r.url}")
+        return r.text
+    except Exception as e:
+        print(f"  ERROR {e}")
+        return ""
 
 
 def main():
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--nvd-api-key", default=None)
-    args = parser.parse_args()
+    for url in INDEX_URLS:
+        print("=" * 100)
+        print("[INDEX]", url)
+        html = fetch(url)
+        hrefs = sorted(set(re.findall(r'href="([^"]+)"', html)))
+        rel = [h for h in hrefs if "addressed" in h or "known" in h or "release-notes" in h]
+        print(f"  release-note related hrefs: {len(rel)}")
+        for h in rel[:120]:
+            print("   ", h)
 
-    check("Palo Alto (exact phrase)", "Palo Alto", args.nvd_api_key, True)
-    check("PAN-OS (single word)", "PAN-OS", args.nvd_api_key, False)
-    check("Fortinet (single word, brand)", "Fortinet", args.nvd_api_key, False)
-    check("FortiOS (single word, product)", "FortiOS", args.nvd_api_key, False)
+    for url in ISSUE_URLS:
+        print("=" * 100)
+        print("[ISSUES]", url)
+        html = fetch(url)
+        ids = re.findall(r"PAN-\d{5,7}", html)
+        print(f"  PAN-ID occurrences={len(ids)} unique={len(set(ids))}")
+        for tag in ("<table", "<tr", "<td", "<dl", "<li", "<h2", "<h3", "<p "):
+            print(f"  count {tag!r}: {html.count(tag)}")
+        headings = re.findall(r"<h[1-4][^>]*>(.*?)</h[1-4]>", html, re.S)
+        print("  headings:", [re.sub(r"<[^>]+>", "", h).strip()[:80] for h in headings[:30]])
+        starts = [m.start() for m in re.finditer(r"PAN-\d{5,7}", html)]
+        for i in (0, 1, 2, len(starts) // 2, len(starts) - 1):
+            if 0 <= i < len(starts):
+                s = starts[i]
+                print(f"  --- raw snippet around occurrence #{i} ---")
+                print(html[max(0, s - 700): s + 1300])
 
 
 if __name__ == "__main__":
