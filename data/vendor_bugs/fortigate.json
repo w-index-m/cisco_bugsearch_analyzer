@@ -1,6 +1,6 @@
 {
   "label": "FortiGate (FortiOS)",
-  "generated_at": "2026-09-28T04:01:53+00:00",
+  "generated_at": "2026-09-29T04:34:17+00:00",
   "count": 216,
   "rows": [
     {
@@ -13,7 +13,7 @@
       "date": "2026-09-08",
       "cvss": 8.1,
       "kev": false,
-      "epss": 0.00247
+      "epss": null
     },
     {
       "source": "FortiGuard PSIRT (CVSS 7.3)",
@@ -38,7 +38,7 @@
       "date": "2026-09-08",
       "cvss": 2.7,
       "kev": false,
-      "epss": 0.00495
+      "epss": null
     },
     {
       "source": "FortiGuard PSIRT (CVSS 2.5)",
@@ -76,7 +76,7 @@
       "date": "2026-08-12",
       "cvss": 5.6,
       "kev": false,
-      "epss": 0.00421
+      "epss": null
     },
     {
       "source": "NVD (CVSS 5.3)",
@@ -88,7 +88,7 @@
       "date": "2026-08-12",
       "cvss": 5.3,
       "kev": false,
-      "epss": 0.00402
+      "epss": null
     },
     {
       "source": "FortiGuard PSIRT (CVSS 5.1)",
@@ -107,7 +107,7 @@
       "source": "FortiGuard PSIRT (CVSS 5.0)",
       "id": "FG-IR-26-162",
       "headline_en": "UI DoS attack",
-      "headline_ja": "UI DoS attack",
+      "headline_ja": "UI DoS攻撃",
       "versions": "(不明)",
       "product": "FortiOS",
       "url": "https://fortiguard.fortinet.com/psirt/FG-IR-26-162",
@@ -126,7 +126,7 @@
       "date": "2026-07-14",
       "cvss": 6.6,
       "kev": false,
-      "epss": 0.0067
+      "epss": null
     },
     {
       "source": "NVD (CVSS 6.1)",
@@ -138,7 +138,7 @@
       "date": "2026-07-14",
       "cvss": 6.1,
       "kev": false,
-      "epss": 0.00385
+      "epss": null
     },
     {
       "source": "FortiGuard PSIRT (CVSS 6.1)",
@@ -176,7 +176,7 @@
       "date": "2026-07-14",
       "cvss": 5.5,
       "kev": false,
-      "epss": 0.00251
+      "epss": null
     },
     {
       "source": "FortiGuard PSIRT (CVSS 5.0)",
@@ -201,7 +201,7 @@
       "date": "2026-07-14",
       "cvss": 4.3,
       "kev": false,
-      "epss": 0.00313
+      "epss": null
     },
     {
       "source": "NVD (CVSS 4.3)",
@@ -213,13 +213,13 @@
       "date": "2026-07-14",
       "cvss": 4.3,
       "kev": false,
-      "epss": 0.00381
+      "epss": null
     },
     {
       "source": "FortiGuard PSIRT (CVSS 4.1)",
       "id": "FG-IR-26-154",
       "headline_en": "Buffer overread in authd and wad daemon",
-      "headline_ja": "Buffer overread in authd and wad daemon",
+      "headline_ja": "authd と wad デーモンにおけるバッファオーバーリード",
       "versions": "(不明)",
       "product": "FortiOS",
       "url": "https://fortiguard.fortinet.com/psirt/FG-IR-26-154",
@@ -238,13 +238,13 @@
       "date": "2026-07-14",
       "cvss": 3.4,
       "kev": false,
-      "epss": 0.00271
+      "epss": null
     },
     {
       "source": "FortiGuard PSIRT (CVSS 3.4)",
       "id": "FG-IR-26-152",
       "headline_en": "Header injection in Web Filter warning page",
-      "headline_ja": "Header injection in Web Filter warning page",
+      "headline_ja": "Webフィルタ警告ページのヘッダーインジェクション",
       "versions": "(不明)",
       "product": "FortiOS",
       "url": "https://fortiguard.fortinet.com/psirt/FG-IR-26-152",
@@ -263,13 +263,13 @@
       "date": "2026-07-14",
       "cvss": 3.1,
       "kev": false,
-      "epss": 0.00372
+      "epss": null
     },
     {
       "source": "FortiGuard PSIRT (CVSS 3.1)",
       "id": "FG-IR-26-153",
       "headline_en": "Header injection in captive portal authentication form",
-      "headline_ja": "Header injection in captive portal authentication form",
+      "headline_ja": "キャプティブポータル認証フォームにおけるヘッダーインジェクション",
       "versions": "(不明)",
       "product": "FortiOS",
       "url": "https://fortiguard.fortinet.com/psirt/FG-IR-26-153",
@@ -288,13 +288,13 @@
       "date": "2026-06-09",
       "cvss": 6.7,
       "kev": false,
-      "epss": 0.00149
+      "epss": null
     },
     {
       "source": "FortiGuard PSIRT (CVSS 6.0)",
       "id": "FG-IR-26-143",
       "headline_en": "Restricted CLI escape using Lua",
-      "headline_ja": "Restricted CLI escape using Lua",
+      "headline_ja": "Lua を使用した制限付き CLI エスケープ",
       "versions": "(不明)",
       "product": "FortiOS",
       "url": "https://fortiguard.fortinet.com/psirt/FG-IR-26-143",
@@ -313,13 +313,13 @@
       "date": "2026-05-12",
       "cvss": 8.8,
       "kev": false,
-      "epss": 0.00564
+      "epss": null
     },
     {
       "source": "FortiGuard PSIRT (CVSS 8.3)",
       "id": "FG-IR-26-123",
       "headline_en": "Out-of-bounds access in CAPWAP daemon",
-      "headline_ja": "Out-of-bounds access in CAPWAP daemon",
+      "headline_ja": "CAPWAP デーモンにおける範囲外アクセス",
       "versions": "(不明)",
       "product": "FortiOS",
       "url": "https://fortiguard.fortinet.com/psirt/FG-IR-26-123",
@@ -338,7 +338,7 @@
       "date": "2026-04-14",
       "cvss": 6.5,
       "kev": false,
-      "epss": 0.00283
+      "epss": null
     },
     {
       "source": "NVD (CVSS 6.0)",
@@ -350,7 +350,7 @@
       "date": "2026-04-14",
       "cvss": 6.0,
       "kev": false,
-      "epss": 0.00498
+      "epss": null
     },
     {
       "source": "NVD (CVSS 8.1)",
@@ -362,13 +362,13 @@
       "date": "2026-02-10",
       "cvss": 8.1,
       "kev": false,
-      "epss": 0.0071
+      "epss": null
     },
     {
       "source": "FortiGuard PSIRT (CVSS 7.5)",
       "id": "FG-IR-25-1052",
       "headline_en": "LDAP authentication bypass in Agentless VPN and FSSO",
-      "headline_ja": "LDAP authentication bypass in Agentless VPN and FSSO",
+      "headline_ja": "エージェントレス VPN と FSSO における LDAP 認証バイパス",
       "versions": "(不明)",
       "product": "FortiOS",
       "url": "https://fortiguard.fortinet.com/psirt/FG-IR-25-1052",
@@ -387,7 +387,7 @@
       "date": "2026-02-10",
       "cvss": 6.7,
       "kev": false,
-      "epss": 0.01418
+      "epss": null
     },
     {
       "source": "NVD (CVSS 5.9)",
@@ -399,7 +399,7 @@
       "date": "2026-02-10",
       "cvss": 5.9,
       "kev": true,
-      "epss": 0.29601
+      "epss": null
     },
     {
       "source": "NVD (CVSS 5.8)",
@@ -411,7 +411,7 @@
       "date": "2026-02-10",
       "cvss": 5.8,
       "kev": false,
-      "epss": 0.00364
+      "epss": null
     },
     {
       "source": "NVD (CVSS 4.2)",
@@ -423,7 +423,7 @@
       "date": "2026-02-10",
       "cvss": 4.2,
       "kev": false,
-      "epss": 0.00143
+      "epss": null
     },
     {
       "source": "NVD (CVSS 3.2)",
@@ -435,7 +435,7 @@
       "date": "2026-02-05",
       "cvss": 3.2,
       "kev": false,
-      "epss": 0.00094
+      "epss": null
     },
     {
       "source": "NVD (CVSS 9.8)",
@@ -447,7 +447,7 @@
       "date": "2026-01-27",
       "cvss": 9.8,
       "kev": true,
-      "epss": 0.85796
+      "epss": null
     },
     {
       "source": "NVD (CVSS 8.1)",
@@ -459,7 +459,7 @@
       "date": "2026-01-13",
       "cvss": 8.1,
       "kev": true,
-      "epss": 0.03859
+      "epss": null
     },
     {
       "source": "NVD (CVSS 6.0)",
@@ -471,7 +471,7 @@
       "date": "2025-12-11",
       "cvss": 6.0,
       "kev": false,
-      "epss": 0.00109
+      "epss": null
     },
     {
       "source": "NVD (CVSS 9.8)",
@@ -483,7 +483,7 @@
       "date": "2025-12-09",
       "cvss": 9.8,
       "kev": true,
-      "epss": 0.68293
+      "epss": null
     },
     {
       "source": "NVD (CVSS 6.6)",
@@ -495,7 +495,7 @@
       "date": "2025-12-09",
       "cvss": 6.6,
       "kev": false,
-      "epss": 0.00405
+      "epss": null
     },
     {
       "source": "NVD (CVSS 5.6)",
@@ -507,7 +507,7 @@
       "date": "2025-12-09",
       "cvss": 5.6,
       "kev": false,
-      "epss": 0.00301
+      "epss": null
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -519,7 +519,7 @@
       "date": "2025-11-18",
       "cvss": 7.5,
       "kev": false,
-      "epss": 0.00317
+      "epss": null
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -531,7 +531,7 @@
       "date": "2025-11-18",
       "cvss": 7.5,
       "kev": false,
-      "epss": 0.00585
+      "epss": null
     },
     {
       "source": "NVD (CVSS 1.9)",
@@ -543,7 +543,7 @@
       "date": "2025-11-18",
       "cvss": 1.9,
       "kev": false,
-      "epss": 0.00152
+      "epss": null
     },
     {
       "source": "FortiGuard PSIRT (CVSS 1.8)",
@@ -568,7 +568,7 @@
       "date": "2025-10-14",
       "cvss": 8.2,
       "kev": false,
-      "epss": 0.00287
+      "epss": null
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -580,7 +580,7 @@
       "date": "2025-10-14",
       "cvss": 7.5,
       "kev": false,
-      "epss": 0.00676
+      "epss": null
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -592,7 +592,7 @@
       "date": "2025-10-14",
       "cvss": 7.5,
       "kev": false,
-      "epss": 0.00113
+      "epss": null
     },
     {
       "source": "NVD (CVSS 7.2)",
@@ -604,13 +604,13 @@
       "date": "2025-10-14",
       "cvss": 7.2,
       "kev": false,
-      "epss": 0.00536
+      "epss": null
     },
     {
       "source": "NVD (CVSS 6.7)",
       "id": "CVE-2023-46718",
       "headline_en": "A stack-based buffer overflow in Fortinet FortiOS version 7.4.0 through 7.4.1 and 7.2.0 through 7.2.7 and 7.0.0 through 7.0.12 and 6.4.6 through 6.4.15 and 6.2.9 through 6.2.16 and 6.0.13 through 6.0.18 allows attacker to execute unauthorized code or commands via specially crafted CLI commands.",
-      "headline_ja": "Fortinet FortiOS バージョン 7.4.0 から 7.4.1、7.2.0 から 7.2.7、7.0.0 から 7.0.12、6.4.6 から 6.4.15、6.2.9 から 6.2.16、6.0.13 から 6.0.18 におけるスタックベースのバッファオーバーフローにより、攻撃者は特別に細工された CLI コマンドを介して不正なコードやコマンドを実行できる。",
+      "headline_ja": "Fortinet FortiOS バージョン 7.4.0 から 7.4.1、7.2.0 から 7.2.7、7.0.0 から 7.0.12、6.4.6 から 6.4.15、6.2.9 から 6.2.16、6.0.13 から 6.0.18 におけるスタックベースのバッファオーバーフローにより、攻撃者は特別に作成された CLI コマンドを通じて不正なコードやコマンドを実行できるようになります。",
       "versions": "7.4.0, 7.4.1, 7.2.0, 7.2.7, 7.0.0, 7.0.12, 6.4.6, 6.4.15, 6.2.9, 6.2.16, 6.0.13, 6.0.18",
       "url": "https://fortiguard.fortinet.com/psirt/FG-IR-23-354",
       "date": "2025-10-14",
@@ -628,7 +628,7 @@
       "date": "2025-10-14",
       "cvss": 6.5,
       "kev": false,
-      "epss": 0.00556
+      "epss": null
     },
     {
       "source": "NVD (CVSS 5.3)",
@@ -640,7 +640,7 @@
       "date": "2025-10-14",
       "cvss": 5.3,
       "kev": false,
-      "epss": 0.00427
+      "epss": null
     },
     {
       "source": "NVD (CVSS 5.3)",
@@ -664,7 +664,7 @@
       "date": "2025-10-14",
       "cvss": 4.8,
       "kev": false,
-      "epss": 0.00337
+      "epss": null
     },
     {
       "source": "NVD (CVSS 4.7)",
@@ -676,7 +676,7 @@
       "date": "2025-10-14",
       "cvss": 4.7,
       "kev": false,
-      "epss": 0.00398
+      "epss": null
     },
     {
       "source": "NVD (CVSS 4.3)",
@@ -688,7 +688,7 @@
       "date": "2025-10-14",
       "cvss": 4.3,
       "kev": false,
-      "epss": 0.00317
+      "epss": null
     },
     {
       "source": "NVD (CVSS 4.3)",
@@ -700,7 +700,7 @@
       "date": "2025-10-14",
       "cvss": 4.3,
       "kev": false,
-      "epss": 0.00473
+      "epss": null
     },
     {
       "source": "NVD (CVSS 2.7)",
@@ -712,7 +712,7 @@
       "date": "2025-10-14",
       "cvss": 2.7,
       "kev": false,
-      "epss": 0.00618
+      "epss": null
     },
     {
       "source": "NVD (CVSS 2.7)",
@@ -724,7 +724,7 @@
       "date": "2025-10-14",
       "cvss": 2.7,
       "kev": false,
-      "epss": 0.00361
+      "epss": null
     },
     {
       "source": "NVD (CVSS 2.6)",
@@ -736,7 +736,7 @@
       "date": "2025-10-14",
       "cvss": 2.6,
       "kev": false,
-      "epss": 0.00251
+      "epss": null
     },
     {
       "source": "FortiGuard PSIRT (CVSS 2.6)",
@@ -761,7 +761,7 @@
       "date": "2025-10-02",
       "cvss": 6.7,
       "kev": false,
-      "epss": 0.00252
+      "epss": null
     },
     {
       "source": "NVD (CVSS 8.1)",
@@ -785,7 +785,7 @@
       "date": "2025-08-12",
       "cvss": 7.2,
       "kev": false,
-      "epss": 0.00634
+      "epss": null
     },
     {
       "source": "NVD (CVSS 6.6)",
@@ -809,7 +809,7 @@
       "date": "2025-08-12",
       "cvss": 5.3,
       "kev": false,
-      "epss": 0.00481
+      "epss": null
     },
     {
       "source": "NVD (CVSS 4.2)",
@@ -821,7 +821,7 @@
       "date": "2025-07-15",
       "cvss": 4.2,
       "kev": false,
-      "epss": 0.00208
+      "epss": null
     },
     {
       "source": "NVD (CVSS 7.2)",
@@ -833,7 +833,7 @@
       "date": "2025-07-08",
       "cvss": 7.2,
       "kev": false,
-      "epss": 0.00258
+      "epss": null
     },
     {
       "source": "NVD (CVSS 5.3)",
@@ -845,7 +845,7 @@
       "date": "2025-07-08",
       "cvss": 5.3,
       "kev": false,
-      "epss": 0.00345
+      "epss": null
     },
     {
       "source": "NVD (CVSS 6.6)",
@@ -857,7 +857,7 @@
       "date": "2025-06-10",
       "cvss": 6.6,
       "kev": false,
-      "epss": 0.00849
+      "epss": null
     },
     {
       "source": "NVD (CVSS 6.5)",
@@ -869,7 +869,7 @@
       "date": "2025-06-10",
       "cvss": 6.5,
       "kev": false,
-      "epss": 0.00373
+      "epss": null
     },
     {
       "source": "NVD (CVSS 5.9)",
@@ -881,7 +881,7 @@
       "date": "2025-06-10",
       "cvss": 5.9,
       "kev": false,
-      "epss": 0.00446
+      "epss": null
     },
     {
       "source": "NVD (CVSS 4.8)",
@@ -893,7 +893,7 @@
       "date": "2025-06-10",
       "cvss": 4.8,
       "kev": false,
-      "epss": 0.0115
+      "epss": null
     },
     {
       "source": "NVD (CVSS 4.3)",
@@ -905,7 +905,7 @@
       "date": "2025-06-10",
       "cvss": 4.3,
       "kev": false,
-      "epss": 0.00536
+      "epss": null
     },
     {
       "source": "FortiGuard PSIRT (CVSS 3.9)",
@@ -942,7 +942,7 @@
       "date": "2025-06-10",
       "cvss": 3.1,
       "kev": false,
-      "epss": 0.00402
+      "epss": null
     },
     {
       "source": "NVD (CVSS 9.8)",
@@ -954,7 +954,7 @@
       "date": "2025-05-28",
       "cvss": 9.8,
       "kev": false,
-      "epss": 0.00944
+      "epss": null
     },
     {
       "source": "NVD (CVSS 5.3)",
@@ -966,7 +966,7 @@
       "date": "2025-05-28",
       "cvss": 5.3,
       "kev": false,
-      "epss": 0.00837
+      "epss": null
     },
     {
       "source": "NVD (CVSS 3.7)",
@@ -978,7 +978,7 @@
       "date": "2025-05-28",
       "cvss": 3.7,
       "kev": false,
-      "epss": 0.00785
+      "epss": null
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -1002,7 +1002,7 @@
       "date": "2025-04-08",
       "cvss": 3.1,
       "kev": false,
-      "epss": 0.00392
+      "epss": null
     },
     {
       "source": "NVD (CVSS 2.3)",
@@ -1014,7 +1014,7 @@
       "date": "2025-04-08",
       "cvss": 2.3,
       "kev": false,
-      "epss": 0.00218
+      "epss": null
     },
     {
       "source": "NVD (CVSS 9.8)",
@@ -1110,7 +1110,7 @@
       "date": "2025-03-11",
       "cvss": 7.2,
       "kev": false,
-      "epss": 0.00715
+      "epss": null
     },
     {
       "source": "NVD (CVSS 8.8)",
@@ -1122,7 +1122,7 @@
       "date": "2025-02-11",
       "cvss": 8.8,
       "kev": false,
-      "epss": 0.00621
+      "epss": null
     },
     {
       "source": "NVD (CVSS 8.1)",
@@ -1134,7 +1134,7 @@
       "date": "2025-02-11",
       "cvss": 8.1,
       "kev": true,
-      "epss": 0.07235
+      "epss": null
     },
     {
       "source": "NVD (CVSS 8.1)",
@@ -1146,7 +1146,7 @@
       "date": "2025-02-11",
       "cvss": 8.1,
       "kev": false,
-      "epss": 0.01024
+      "epss": null
     },
     {
       "source": "NVD (CVSS 9.8)",
@@ -1158,7 +1158,7 @@
       "date": "2025-01-14",
       "cvss": 9.8,
       "kev": true,
-      "epss": 0.94149
+      "epss": null
     },
     {
       "source": "NVD (CVSS 9.0)",
@@ -1170,7 +1170,7 @@
       "date": "2025-01-14",
       "cvss": 9.0,
       "kev": false,
-      "epss": 0.00479
+      "epss": null
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -1182,7 +1182,7 @@
       "date": "2025-01-14",
       "cvss": 7.5,
       "kev": false,
-      "epss": 0.15308
+      "epss": null
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -1194,7 +1194,7 @@
       "date": "2025-01-14",
       "cvss": 7.5,
       "kev": false,
-      "epss": 0.00632
+      "epss": null
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -1206,7 +1206,7 @@
       "date": "2025-01-14",
       "cvss": 7.5,
       "kev": false,
-      "epss": 0.00997
+      "epss": null
     },
     {
       "source": "NVD (CVSS 6.5)",
@@ -1218,7 +1218,7 @@
       "date": "2025-01-14",
       "cvss": 6.5,
       "kev": false,
-      "epss": 0.0078
+      "epss": null
     },
     {
       "source": "NVD (CVSS 6.5)",
@@ -1230,7 +1230,7 @@
       "date": "2025-01-14",
       "cvss": 6.5,
       "kev": false,
-      "epss": 0.00717
+      "epss": null
     },
     {
       "source": "NVD (CVSS 6.5)",
@@ -1254,7 +1254,7 @@
       "date": "2025-01-14",
       "cvss": 5.3,
       "kev": false,
-      "epss": 0.00693
+      "epss": null
     },
     {
       "source": "NVD (CVSS 5.0)",
@@ -1278,7 +1278,7 @@
       "date": "2025-01-14",
       "cvss": 3.7,
       "kev": false,
-      "epss": 0.00764
+      "epss": null
     },
     {
       "source": "NVD (CVSS 3.7)",
@@ -1290,7 +1290,7 @@
       "date": "2025-01-14",
       "cvss": 3.7,
       "kev": false,
-      "epss": 0.00543
+      "epss": null
     },
     {
       "source": "NVD (CVSS 3.5)",
@@ -1302,7 +1302,7 @@
       "date": "2025-01-14",
       "cvss": 3.5,
       "kev": false,
-      "epss": 0.006
+      "epss": null
     },
     {
       "source": "NVD (CVSS 5.4)",
@@ -1338,7 +1338,7 @@
       "date": "2024-11-12",
       "cvss": 4.3,
       "kev": false,
-      "epss": 0.00572
+      "epss": null
     },
     {
       "source": "NVD (CVSS 4.2)",
@@ -1362,7 +1362,7 @@
       "date": "2024-08-13",
       "cvss": 5.1,
       "kev": false,
-      "epss": 0.00159
+      "epss": null
     },
     {
       "source": "NVD (CVSS 3.7)",
