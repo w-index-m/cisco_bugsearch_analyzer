@@ -1,6 +1,6 @@
 {
   "label": "Palo Alto (PAN-OS)",
-  "generated_at": "2026-09-29T04:32:58+00:00",
+  "generated_at": "2026-09-30T04:04:22+00:00",
   "count": 200,
   "rows": [
     {
@@ -13,7 +13,7 @@
       "date": "2026-09-10",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.00218
     },
     {
       "source": "NVD (CVSS -)",
@@ -25,7 +25,7 @@
       "date": "2026-09-10",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.00189
     },
     {
       "source": "NVD (CVSS -)",
@@ -37,7 +37,7 @@
       "date": "2026-09-10",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.00824
     },
     {
       "source": "NVD (CVSS -)",
@@ -49,7 +49,7 @@
       "date": "2026-09-10",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.0037
     },
     {
       "source": "NVD (CVSS -)",
@@ -61,7 +61,7 @@
       "date": "2026-09-10",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.00447
     },
     {
       "source": "NVD (CVSS -)",
@@ -73,7 +73,7 @@
       "date": "2026-09-10",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.00265
     },
     {
       "source": "NVD (CVSS -)",
@@ -85,7 +85,7 @@
       "date": "2026-09-10",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.00105
     },
     {
       "source": "NVD (CVSS -)",
@@ -97,7 +97,7 @@
       "date": "2026-09-10",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.00105
     },
     {
       "source": "NVD (CVSS -)",
@@ -109,7 +109,7 @@
       "date": "2026-09-10",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.00099
     },
     {
       "source": "NVD (CVSS 8.1)",
@@ -121,7 +121,7 @@
       "date": "2026-08-13",
       "cvss": 8.1,
       "kev": false,
-      "epss": null
+      "epss": 0.00333
     },
     {
       "source": "NVD (CVSS 8.1)",
@@ -133,7 +133,7 @@
       "date": "2026-08-13",
       "cvss": 8.1,
       "kev": false,
-      "epss": null
+      "epss": 0.0031
     },
     {
       "source": "NVD (CVSS 7.8)",
@@ -145,7 +145,7 @@
       "date": "2026-08-13",
       "cvss": 7.8,
       "kev": false,
-      "epss": null
+      "epss": 0.00203
     },
     {
       "source": "NVD (CVSS 7.8)",
@@ -157,7 +157,7 @@
       "date": "2026-08-13",
       "cvss": 7.8,
       "kev": false,
-      "epss": null
+      "epss": 0.00115
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -169,7 +169,7 @@
       "date": "2026-08-13",
       "cvss": 7.5,
       "kev": false,
-      "epss": null
+      "epss": 0.00316
     },
     {
       "source": "NVD (CVSS 7.4)",
@@ -181,7 +181,7 @@
       "date": "2026-08-13",
       "cvss": 7.4,
       "kev": false,
-      "epss": null
+      "epss": 0.00138
     },
     {
       "source": "NVD (CVSS 7.0)",
@@ -193,7 +193,7 @@
       "date": "2026-08-13",
       "cvss": 7.0,
       "kev": false,
-      "epss": null
+      "epss": 0.00075
     },
     {
       "source": "NVD (CVSS 6.5)",
@@ -205,7 +205,7 @@
       "date": "2026-08-13",
       "cvss": 6.5,
       "kev": false,
-      "epss": null
+      "epss": 0.00225
     },
     {
       "source": "NVD (CVSS 6.0)",
@@ -217,7 +217,7 @@
       "date": "2026-08-13",
       "cvss": 6.0,
       "kev": false,
-      "epss": null
+      "epss": 0.00108
     },
     {
       "source": "NVD (CVSS 6.0)",
@@ -229,7 +229,7 @@
       "date": "2026-08-13",
       "cvss": 6.0,
       "kev": false,
-      "epss": null
+      "epss": 0.0013
     },
     {
       "source": "NVD (CVSS 5.5)",
@@ -241,7 +241,7 @@
       "date": "2026-08-13",
       "cvss": 5.5,
       "kev": false,
-      "epss": null
+      "epss": 0.00127
     },
     {
       "source": "NVD (CVSS 4.4)",
@@ -253,7 +253,7 @@
       "date": "2026-08-13",
       "cvss": 4.4,
       "kev": false,
-      "epss": null
+      "epss": 0.00111
     },
     {
       "source": "NVD (CVSS 9.9)",
@@ -265,7 +265,7 @@
       "date": "2026-07-09",
       "cvss": 9.9,
       "kev": false,
-      "epss": null
+      "epss": 0.00465
     },
     {
       "source": "NVD (CVSS 7.8)",
@@ -277,7 +277,7 @@
       "date": "2026-07-09",
       "cvss": 7.8,
       "kev": false,
-      "epss": null
+      "epss": 0.00144
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -289,7 +289,7 @@
       "date": "2026-07-09",
       "cvss": 7.5,
       "kev": false,
-      "epss": null
+      "epss": 0.00621
     },
     {
       "source": "NVD (CVSS 7.2)",
@@ -301,7 +301,7 @@
       "date": "2026-07-09",
       "cvss": 7.2,
       "kev": false,
-      "epss": null
+      "epss": 0.01673
     },
     {
       "source": "NVD (CVSS 7.2)",
@@ -313,7 +313,7 @@
       "date": "2026-07-09",
       "cvss": 7.2,
       "kev": false,
-      "epss": null
+      "epss": 0.00376
     },
     {
       "source": "NVD (CVSS 7.2)",
@@ -325,7 +325,7 @@
       "date": "2026-07-09",
       "cvss": 7.2,
       "kev": false,
-      "epss": null
+      "epss": 0.00337
     },
     {
       "source": "NVD (CVSS 7.1)",
@@ -337,7 +337,7 @@
       "date": "2026-07-09",
       "cvss": 7.1,
       "kev": false,
-      "epss": null
+      "epss": 0.00284
     },
     {
       "source": "NVD (CVSS 6.7)",
@@ -349,7 +349,7 @@
       "date": "2026-07-09",
       "cvss": 6.7,
       "kev": false,
-      "epss": null
+      "epss": 0.00165
     },
     {
       "source": "NVD (CVSS 6.5)",
@@ -361,7 +361,7 @@
       "date": "2026-07-09",
       "cvss": 6.5,
       "kev": false,
-      "epss": null
+      "epss": 0.00293
     },
     {
       "source": "NVD (CVSS 6.1)",
@@ -373,7 +373,7 @@
       "date": "2026-07-09",
       "cvss": 6.1,
       "kev": false,
-      "epss": null
+      "epss": 0.0075
     },
     {
       "source": "NVD (CVSS 4.9)",
@@ -385,7 +385,7 @@
       "date": "2026-07-09",
       "cvss": 4.9,
       "kev": false,
-      "epss": null
+      "epss": 0.00432
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -397,7 +397,7 @@
       "date": "2026-07-08",
       "cvss": 7.5,
       "kev": false,
-      "epss": null
+      "epss": 0.00832
     },
     {
       "source": "NVD (CVSS 7.8)",
@@ -409,7 +409,7 @@
       "date": "2026-06-10",
       "cvss": 7.8,
       "kev": false,
-      "epss": null
+      "epss": 0.00109
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -421,7 +421,7 @@
       "date": "2026-06-10",
       "cvss": 7.5,
       "kev": false,
-      "epss": null
+      "epss": 0.00199
     },
     {
       "source": "NVD (CVSS 7.2)",
@@ -433,7 +433,7 @@
       "date": "2026-06-10",
       "cvss": 7.2,
       "kev": false,
-      "epss": null
+      "epss": 0.01339
     },
     {
       "source": "NVD (CVSS 7.2)",
@@ -445,7 +445,7 @@
       "date": "2026-06-10",
       "cvss": 7.2,
       "kev": false,
-      "epss": null
+      "epss": 0.00261
     },
     {
       "source": "NVD (CVSS 5.7)",
@@ -457,7 +457,7 @@
       "date": "2026-06-10",
       "cvss": 5.7,
       "kev": false,
-      "epss": null
+      "epss": 0.00224
     },
     {
       "source": "NVD (CVSS 5.5)",
@@ -469,7 +469,7 @@
       "date": "2026-06-10",
       "cvss": 5.5,
       "kev": false,
-      "epss": null
+      "epss": 0.00104
     },
     {
       "source": "NVD (CVSS 4.8)",
@@ -481,7 +481,7 @@
       "date": "2026-06-10",
       "cvss": 4.8,
       "kev": false,
-      "epss": null
+      "epss": 0.00138
     },
     {
       "source": "NVD (CVSS 9.8)",
@@ -493,7 +493,7 @@
       "date": "2026-05-13",
       "cvss": 9.8,
       "kev": false,
-      "epss": null
+      "epss": 0.00474
     },
     {
       "source": "NVD (CVSS 9.8)",
@@ -505,7 +505,7 @@
       "date": "2026-05-13",
       "cvss": 9.8,
       "kev": false,
-      "epss": null
+      "epss": 0.00373
     },
     {
       "source": "NVD (CVSS 9.1)",
@@ -517,7 +517,7 @@
       "date": "2026-05-13",
       "cvss": 9.1,
       "kev": false,
-      "epss": null
+      "epss": 0.00328
     },
     {
       "source": "NVD (CVSS 9.1)",
@@ -529,7 +529,7 @@
       "date": "2026-05-13",
       "cvss": 9.1,
       "kev": true,
-      "epss": null
+      "epss": 0.96382
     },
     {
       "source": "NVD (CVSS 8.8)",
@@ -541,7 +541,7 @@
       "date": "2026-05-13",
       "cvss": 8.8,
       "kev": false,
-      "epss": null
+      "epss": 0.00336
     },
     {
       "source": "NVD (CVSS 8.1)",
@@ -553,7 +553,7 @@
       "date": "2026-05-13",
       "cvss": 8.1,
       "kev": false,
-      "epss": null
+      "epss": 0.00392
     },
     {
       "source": "NVD (CVSS 8.1)",
@@ -565,7 +565,7 @@
       "date": "2026-05-13",
       "cvss": 8.1,
       "kev": false,
-      "epss": null
+      "epss": 0.00217
     },
     {
       "source": "NVD (CVSS 8.1)",
@@ -577,7 +577,7 @@
       "date": "2026-05-13",
       "cvss": 8.1,
       "kev": false,
-      "epss": null
+      "epss": 0.01053
     },
     {
       "source": "NVD (CVSS 7.8)",
@@ -589,7 +589,7 @@
       "date": "2026-05-13",
       "cvss": 7.8,
       "kev": false,
-      "epss": null
+      "epss": 0.00185
     },
     {
       "source": "NVD (CVSS 7.8)",
@@ -601,7 +601,7 @@
       "date": "2026-05-13",
       "cvss": 7.8,
       "kev": false,
-      "epss": null
+      "epss": 0.00147
     },
     {
       "source": "NVD (CVSS 7.8)",
@@ -613,7 +613,7 @@
       "date": "2026-05-13",
       "cvss": 7.8,
       "kev": false,
-      "epss": null
+      "epss": 0.00158
     },
     {
       "source": "NVD (CVSS 7.8)",
@@ -625,7 +625,7 @@
       "date": "2026-05-13",
       "cvss": 7.8,
       "kev": false,
-      "epss": null
+      "epss": 0.0015
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -637,7 +637,7 @@
       "date": "2026-05-13",
       "cvss": 7.5,
       "kev": false,
-      "epss": null
+      "epss": 0.00359
     },
     {
       "source": "NVD (CVSS 7.2)",
@@ -649,7 +649,7 @@
       "date": "2026-05-13",
       "cvss": 7.2,
       "kev": false,
-      "epss": null
+      "epss": 0.01403
     },
     {
       "source": "NVD (CVSS 6.5)",
@@ -661,7 +661,7 @@
       "date": "2026-05-13",
       "cvss": 6.5,
       "kev": false,
-      "epss": null
+      "epss": 0.00173
     },
     {
       "source": "NVD (CVSS 6.5)",
@@ -673,7 +673,7 @@
       "date": "2026-05-13",
       "cvss": 6.5,
       "kev": false,
-      "epss": null
+      "epss": 0.00111
     },
     {
       "source": "NVD (CVSS 4.8)",
@@ -685,7 +685,7 @@
       "date": "2026-05-13",
       "cvss": 4.8,
       "kev": false,
-      "epss": null
+      "epss": 0.00179
     },
     {
       "source": "NVD (CVSS 4.7)",
@@ -697,7 +697,7 @@
       "date": "2026-05-13",
       "cvss": 4.7,
       "kev": false,
-      "epss": null
+      "epss": 0.0011
     },
     {
       "source": "NVD (CVSS 3.2)",
@@ -709,7 +709,7 @@
       "date": "2026-05-13",
       "cvss": 3.2,
       "kev": false,
-      "epss": null
+      "epss": 0.00098
     },
     {
       "source": "NVD (CVSS 9.8)",
@@ -721,7 +721,7 @@
       "date": "2026-05-06",
       "cvss": 9.8,
       "kev": true,
-      "epss": null
+      "epss": 0.31725
     },
     {
       "source": "NVD (CVSS 8.8)",
@@ -733,7 +733,7 @@
       "date": "2026-04-13",
       "cvss": 8.8,
       "kev": false,
-      "epss": null
+      "epss": 0.00175
     },
     {
       "source": "NVD (CVSS 4.4)",
@@ -745,7 +745,7 @@
       "date": "2026-04-13",
       "cvss": 4.4,
       "kev": false,
-      "epss": null
+      "epss": 0.00146
     },
     {
       "source": "NVD (CVSS -)",
@@ -757,7 +757,7 @@
       "date": "2026-03-11",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.00144
     },
     {
       "source": "NVD (CVSS -)",
@@ -769,19 +769,7 @@
       "date": "2026-02-11",
       "cvss": null,
       "kev": false,
-      "epss": null
-    },
-    {
-      "source": "NVD (CVSS -)",
-      "id": "CVE-2026-0228",
-      "headline_en": "An improper certificate validation vulnerability in PAN-OS allows users to connect Terminal Server Agents on Windows to PAN-OS using expired certificates even if the PAN-OS configuration would not normally permit them to do so.",
-      "headline_ja": "PAN-OS の不適切な証明書検証の脆弱性により、ユーザーは期限切れの証明書を使用して Windows 上のターミナルサーバーエージェントを PAN-OS に接続でき、通常の PAN-OS 設定では許可されない場合でも接続が可能です。",
-      "versions": "(本文から検出できず)",
-      "url": "https://security.paloaltonetworks.com/CVE-2026-0228",
-      "date": "2026-02-11",
-      "cvss": null,
-      "kev": false,
-      "epss": null
+      "epss": 0.00533
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -793,7 +781,7 @@
       "date": "2026-01-15",
       "cvss": 7.5,
       "kev": false,
-      "epss": null
+      "epss": 0.00749
     },
     {
       "source": "NVD (CVSS 2.7)",
@@ -805,7 +793,7 @@
       "date": "2025-11-26",
       "cvss": 2.7,
       "kev": false,
-      "epss": null
+      "epss": 0.00224
     },
     {
       "source": "NVD (CVSS -)",
@@ -817,7 +805,7 @@
       "date": "2025-11-14",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.00086
     },
     {
       "source": "NVD (CVSS -)",
@@ -829,7 +817,7 @@
       "date": "2025-11-14",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.00131
     },
     {
       "source": "NVD (CVSS -)",
@@ -841,7 +829,7 @@
       "date": "2025-11-14",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.00107
     },
     {
       "source": "NVD (CVSS -)",
@@ -853,7 +841,7 @@
       "date": "2025-11-13",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.00563
     },
     {
       "source": "NVD (CVSS 7.2)",
@@ -865,7 +853,7 @@
       "date": "2025-10-09",
       "cvss": 7.2,
       "kev": false,
-      "epss": null
+      "epss": 0.0079
     },
     {
       "source": "NVD (CVSS 2.7)",
@@ -877,7 +865,7 @@
       "date": "2025-10-09",
       "cvss": 2.7,
       "kev": false,
-      "epss": null
+      "epss": 0.00258
     },
     {
       "source": "NVD (CVSS -)",
@@ -889,7 +877,7 @@
       "date": "2025-09-12",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.00176
     },
     {
       "source": "NVD (CVSS -)",
@@ -901,7 +889,7 @@
       "date": "2025-09-12",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.00136
     },
     {
       "source": "NVD (CVSS -)",
@@ -913,7 +901,7 @@
       "date": "2025-08-13",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.00174
     },
     {
       "source": "NVD (CVSS -)",
@@ -925,7 +913,7 @@
       "date": "2025-08-13",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.00118
     },
     {
       "source": "NVD (CVSS -)",
@@ -937,7 +925,7 @@
       "date": "2025-08-13",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.00117
     },
     {
       "source": "NVD (CVSS -)",
@@ -949,7 +937,7 @@
       "date": "2025-08-13",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.00161
     },
     {
       "source": "NVD (CVSS -)",
@@ -961,7 +949,7 @@
       "date": "2025-08-13",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.00182
     },
     {
       "source": "NVD (CVSS -)",
@@ -973,7 +961,7 @@
       "date": "2025-07-29",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.00131
     },
     {
       "source": "NVD (CVSS -)",
@@ -985,7 +973,7 @@
       "date": "2025-07-09",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.0017
     },
     {
       "source": "NVD (CVSS -)",
@@ -997,7 +985,7 @@
       "date": "2025-07-09",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.00138
     },
     {
       "source": "NVD (CVSS -)",
@@ -1009,7 +997,7 @@
       "date": "2025-07-09",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.00138
     },
     {
       "source": "NVD (CVSS 8.8)",
@@ -1021,7 +1009,7 @@
       "date": "2025-06-13",
       "cvss": 8.8,
       "kev": false,
-      "epss": null
+      "epss": 0.00443
     },
     {
       "source": "NVD (CVSS 7.2)",
@@ -1033,7 +1021,7 @@
       "date": "2025-06-13",
       "cvss": 7.2,
       "kev": false,
-      "epss": null
+      "epss": 0.00975
     },
     {
       "source": "NVD (CVSS 3.5)",
@@ -1045,7 +1033,7 @@
       "date": "2025-06-13",
       "cvss": 3.5,
       "kev": false,
-      "epss": null
+      "epss": 0.00164
     },
     {
       "source": "NVD (CVSS -)",
@@ -1057,7 +1045,7 @@
       "date": "2025-06-13",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.00505
     },
     {
       "source": "NVD (CVSS -)",
@@ -1069,7 +1057,7 @@
       "date": "2025-06-13",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.00623
     },
     {
       "source": "NVD (CVSS -)",
@@ -1081,7 +1069,7 @@
       "date": "2025-06-13",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.00188
     },
     {
       "source": "NVD (CVSS -)",
@@ -1093,7 +1081,7 @@
       "date": "2025-06-12",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.00185
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -1105,7 +1093,7 @@
       "date": "2025-05-14",
       "cvss": 7.5,
       "kev": false,
-      "epss": null
+      "epss": 0.00424
     },
     {
       "source": "NVD (CVSS 3.3)",
@@ -1117,7 +1105,7 @@
       "date": "2025-05-14",
       "cvss": 3.3,
       "kev": false,
-      "epss": null
+      "epss": 0.00131
     },
     {
       "source": "NVD (CVSS -)",
@@ -1129,7 +1117,7 @@
       "date": "2025-05-14",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.0035
     },
     {
       "source": "NVD (CVSS -)",
@@ -1141,7 +1129,7 @@
       "date": "2025-05-14",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.00403
     },
     {
       "source": "NVD (CVSS -)",
@@ -1153,7 +1141,7 @@
       "date": "2025-05-14",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.00162
     },
     {
       "source": "NVD (CVSS -)",
@@ -1165,7 +1153,7 @@
       "date": "2025-05-14",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.00494
     },
     {
       "source": "NVD (CVSS -)",
@@ -1177,7 +1165,7 @@
       "date": "2025-05-14",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.46401
     },
     {
       "source": "NVD (CVSS -)",
@@ -1189,7 +1177,7 @@
       "date": "2025-05-14",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.00443
     },
     {
       "source": "NVD (CVSS -)",
@@ -1201,7 +1189,7 @@
       "date": "2025-05-14",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.00152
     },
     {
       "source": "NVD (CVSS 7.0)",
@@ -1213,7 +1201,7 @@
       "date": "2025-04-11",
       "cvss": 7.0,
       "kev": false,
-      "epss": null
+      "epss": 0.00161
     },
     {
       "source": "NVD (CVSS 3.8)",
@@ -1225,7 +1213,7 @@
       "date": "2025-04-11",
       "cvss": 3.8,
       "kev": false,
-      "epss": null
+      "epss": 0.00345
     },
     {
       "source": "NVD (CVSS -)",
@@ -1237,7 +1225,7 @@
       "date": "2025-04-11",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.00181
     },
     {
       "source": "NVD (CVSS -)",
@@ -1249,7 +1237,7 @@
       "date": "2025-04-11",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.00119
     },
     {
       "source": "NVD (CVSS -)",
@@ -1261,7 +1249,7 @@
       "date": "2025-04-11",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.00555
     },
     {
       "source": "NVD (CVSS -)",
@@ -1273,7 +1261,7 @@
       "date": "2025-04-11",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.00315
     },
     {
       "source": "NVD (CVSS -)",
@@ -1285,19 +1273,7 @@
       "date": "2025-04-11",
       "cvss": null,
       "kev": false,
-      "epss": null
-    },
-    {
-      "source": "NVD (CVSS -)",
-      "id": "CVE-2025-0126",
-      "headline_en": "When configured using SAML, a session fixation vulnerability in the GlobalProtect™ login enables an attacker to impersonate a legitimate authorized user and perform actions as that GlobalProtect user. This requires the legitimate user to first click on a malicious link provided by the attacker.\n\nThe SAML login for the PAN-OS® management interface is not affected. Additionally, this issue does not affect Cloud NGFW and all Prisma® Access instances are proactively patched.",
-      "headline_ja": "SAMLを使用して構成された場合、GlobalProtect™ ログインにおけるセッション固定脆弱性により、攻撃者は正当な認可ユーザーになりすまし、その GlobalProtect ユーザーとして操作を行うことができます。この攻撃は、正当なユーザーが攻撃者から提供された悪意のあるリンクを最初にクリックすることが前提です。\n\nPAN-OS® 管理インターフェースの SAML ログインは影響を受けません。また、この問題は Cloud NGFW には影響せず、すべての Prisma® Access インスタンスは事前にパッチが適用されています。",
-      "versions": "(本文から検出できず)",
-      "url": "https://security.paloaltonetworks.com/CVE-2025-0126",
-      "date": "2025-04-11",
-      "cvss": null,
-      "kev": false,
-      "epss": null
+      "epss": 0.00567
     },
     {
       "source": "NVD (CVSS -)",
@@ -1309,7 +1285,7 @@
       "date": "2025-04-11",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.00416
     },
     {
       "source": "NVD (CVSS -)",
@@ -1321,7 +1297,7 @@
       "date": "2025-04-11",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.00274
     },
     {
       "source": "NVD (CVSS -)",
@@ -1333,7 +1309,7 @@
       "date": "2025-04-11",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.00172
     },
     {
       "source": "NVD (CVSS 8.0)",
@@ -1345,7 +1321,7 @@
       "date": "2025-03-12",
       "cvss": 8.0,
       "kev": false,
-      "epss": null
+      "epss": 0.00447
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -1357,7 +1333,7 @@
       "date": "2025-03-12",
       "cvss": 7.5,
       "kev": false,
-      "epss": null
+      "epss": 0.00405
     },
     {
       "source": "NVD (CVSS -)",
@@ -1369,7 +1345,7 @@
       "date": "2025-03-12",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.00231
     },
     {
       "source": "NVD (CVSS -)",
@@ -1381,7 +1357,7 @@
       "date": "2025-03-12",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.00188
     },
     {
       "source": "NVD (CVSS -)",
@@ -1393,7 +1369,7 @@
       "date": "2025-02-20",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.00202
     },
     {
       "source": "NVD (CVSS 9.1)",
@@ -1405,7 +1381,7 @@
       "date": "2025-02-12",
       "cvss": 9.1,
       "kev": true,
-      "epss": null
+      "epss": 0.98455
     },
     {
       "source": "NVD (CVSS 6.5)",
@@ -1417,7 +1393,7 @@
       "date": "2025-02-12",
       "cvss": 6.5,
       "kev": true,
-      "epss": null
+      "epss": 0.01999
     },
     {
       "source": "NVD (CVSS -)",
@@ -1429,7 +1405,7 @@
       "date": "2025-02-12",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.00264
     },
     {
       "source": "NVD (CVSS -)",
@@ -1441,7 +1417,7 @@
       "date": "2025-02-12",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.01285
     },
     {
       "source": "NVD (CVSS -)",
@@ -1453,7 +1429,7 @@
       "date": "2025-02-12",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.00631
     },
     {
       "source": "NVD (CVSS 9.8)",
@@ -1465,7 +1441,7 @@
       "date": "2025-01-11",
       "cvss": 9.8,
       "kev": false,
-      "epss": null
+      "epss": 0.78532
     },
     {
       "source": "NVD (CVSS 9.1)",
@@ -1477,7 +1453,7 @@
       "date": "2025-01-11",
       "cvss": 9.1,
       "kev": false,
-      "epss": null
+      "epss": 0.13273
     },
     {
       "source": "NVD (CVSS 8.8)",
@@ -1489,7 +1465,7 @@
       "date": "2025-01-11",
       "cvss": 8.8,
       "kev": false,
-      "epss": null
+      "epss": 0.00619
     },
     {
       "source": "NVD (CVSS 6.1)",
@@ -1501,7 +1477,7 @@
       "date": "2025-01-11",
       "cvss": 6.1,
       "kev": false,
-      "epss": null
+      "epss": 0.00357
     },
     {
       "source": "NVD (CVSS 5.3)",
@@ -1513,7 +1489,7 @@
       "date": "2025-01-11",
       "cvss": 5.3,
       "kev": false,
-      "epss": null
+      "epss": 0.00483
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -1525,7 +1501,7 @@
       "date": "2024-12-27",
       "cvss": 7.5,
       "kev": true,
-      "epss": null
+      "epss": 0.28408
     },
     {
       "source": "NVD (CVSS 8.8)",
@@ -1537,7 +1513,7 @@
       "date": "2024-11-27",
       "cvss": 8.8,
       "kev": false,
-      "epss": null
+      "epss": 0.01456
     },
     {
       "source": "NVD (CVSS 9.8)",
@@ -1561,7 +1537,7 @@
       "date": "2024-11-18",
       "cvss": 7.2,
       "kev": true,
-      "epss": null
+      "epss": 0.94701
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -1597,7 +1573,7 @@
       "date": "2024-11-14",
       "cvss": 6.5,
       "kev": false,
-      "epss": null
+      "epss": 0.00339
     },
     {
       "source": "NVD (CVSS 6.0)",
@@ -1612,18 +1588,6 @@
       "epss": 0.00474
     },
     {
-      "source": "NVD (CVSS 4.9)",
-      "id": "CVE-2024-5917",
-      "headline_en": "A server-side request forgery in PAN-OS software enables an authenticated attacker with administrative privileges to use the administrative web interface as a proxy, which enables the attacker to view internal network resources not otherwise accessible.",
-      "headline_ja": "PAN‑OS ソフトウェアにおけるサーバー側リクエストフォージェリ（SSRF）により、管理者権限を持つ認証済み攻撃者は管理用ウェブインターフェースをプロキシとして利用でき、通常はアクセスできない内部ネットワークリソースを閲覧できるようになります。",
-      "versions": "(本文から検出できず)",
-      "url": "https://security.paloaltonetworks.com/CVE-2024-5917",
-      "date": "2024-11-14",
-      "cvss": 4.9,
-      "kev": false,
-      "epss": null
-    },
-    {
       "source": "NVD (CVSS 4.8)",
       "id": "CVE-2024-5920",
       "headline_en": "A cross-site scripting (XSS) vulnerability in Palo Alto Networks PAN-OS software enables an authenticated read-write Panorama administrator to push a specially crafted configuration to a PAN-OS node. This enables impersonation of a legitimate PAN-OS administrator who can perform restricted actions on the PAN-OS node after the execution of JavaScript in the legitimate PAN-OS administrator's browser.",
@@ -1633,7 +1597,7 @@
       "date": "2024-11-14",
       "cvss": 4.8,
       "kev": false,
-      "epss": null
+      "epss": 0.00339
     },
     {
       "source": "NVD (CVSS 4.3)",
@@ -1645,7 +1609,7 @@
       "date": "2024-11-14",
       "cvss": 4.3,
       "kev": false,
-      "epss": null
+      "epss": 0.00176
     },
     {
       "source": "NVD (CVSS -)",
@@ -1657,7 +1621,7 @@
       "date": "2024-11-14",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.00427
     },
     {
       "source": "NVD (CVSS 9.1)",
@@ -1669,7 +1633,7 @@
       "date": "2024-10-09",
       "cvss": 9.1,
       "kev": true,
-      "epss": null
+      "epss": 0.99626
     },
     {
       "source": "NVD (CVSS 7.8)",
@@ -1681,7 +1645,7 @@
       "date": "2024-10-09",
       "cvss": 7.8,
       "kev": false,
-      "epss": null
+      "epss": 0.00287
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -1693,7 +1657,7 @@
       "date": "2024-10-09",
       "cvss": 7.5,
       "kev": false,
-      "epss": null
+      "epss": 0.0041
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -1705,7 +1669,7 @@
       "date": "2024-10-09",
       "cvss": 7.5,
       "kev": true,
-      "epss": null
+      "epss": 0.98546
     },
     {
       "source": "NVD (CVSS 6.5)",
@@ -1717,7 +1681,7 @@
       "date": "2024-10-09",
       "cvss": 6.5,
       "kev": false,
-      "epss": null
+      "epss": 0.13584
     },
     {
       "source": "NVD (CVSS 6.5)",
@@ -1729,7 +1693,7 @@
       "date": "2024-10-09",
       "cvss": 6.5,
       "kev": false,
-      "epss": null
+      "epss": 0.82612
     },
     {
       "source": "NVD (CVSS 6.1)",
@@ -1741,7 +1705,7 @@
       "date": "2024-10-09",
       "cvss": 6.1,
       "kev": false,
-      "epss": null
+      "epss": 0.0067
     },
     {
       "source": "NVD (CVSS 5.5)",
@@ -1753,7 +1717,7 @@
       "date": "2024-10-09",
       "cvss": 5.5,
       "kev": false,
-      "epss": null
+      "epss": 0.00212
     },
     {
       "source": "NVD (CVSS 4.7)",
@@ -1765,7 +1729,7 @@
       "date": "2024-10-09",
       "cvss": 4.7,
       "kev": false,
-      "epss": null
+      "epss": 0.00294
     },
     {
       "source": "NVD (CVSS 7.2)",
@@ -1777,7 +1741,7 @@
       "date": "2024-09-11",
       "cvss": 7.2,
       "kev": false,
-      "epss": null
+      "epss": 0.01419
     },
     {
       "source": "NVD (CVSS 7.1)",
@@ -1789,7 +1753,7 @@
       "date": "2024-09-11",
       "cvss": 7.1,
       "kev": false,
-      "epss": null
+      "epss": 0.00322
     },
     {
       "source": "NVD (CVSS 7.1)",
@@ -1801,7 +1765,7 @@
       "date": "2024-09-11",
       "cvss": 7.1,
       "kev": false,
-      "epss": null
+      "epss": 0.00409
     },
     {
       "source": "NVD (CVSS 4.4)",
@@ -1813,7 +1777,7 @@
       "date": "2024-09-11",
       "cvss": 4.4,
       "kev": false,
-      "epss": null
+      "epss": 0.00188
     },
     {
       "source": "NVD (CVSS 4.4)",
@@ -1825,7 +1789,7 @@
       "date": "2024-09-11",
       "cvss": 4.4,
       "kev": false,
-      "epss": null
+      "epss": 0.00235
     },
     {
       "source": "NVD (CVSS 9.8)",
@@ -1837,7 +1801,7 @@
       "date": "2024-08-14",
       "cvss": 9.8,
       "kev": false,
-      "epss": null
+      "epss": 0.01234
     },
     {
       "source": "NVD (CVSS 7.8)",
@@ -1849,7 +1813,7 @@
       "date": "2024-08-14",
       "cvss": 7.8,
       "kev": false,
-      "epss": null
+      "epss": 0.00212
     },
     {
       "source": "NVD (CVSS 4.4)",
@@ -1861,7 +1825,7 @@
       "date": "2024-08-14",
       "cvss": 4.4,
       "kev": false,
-      "epss": null
+      "epss": 0.00249
     },
     {
       "source": "NVD (CVSS 9.8)",
@@ -1873,7 +1837,7 @@
       "date": "2024-07-10",
       "cvss": 9.8,
       "kev": true,
-      "epss": null
+      "epss": 0.91783
     },
     {
       "source": "NVD (CVSS 6.1)",
@@ -1885,7 +1849,7 @@
       "date": "2024-07-10",
       "cvss": 6.1,
       "kev": false,
-      "epss": null
+      "epss": 0.0023
     },
     {
       "source": "NVD (CVSS 4.9)",
@@ -1897,7 +1861,7 @@
       "date": "2024-07-10",
       "cvss": 4.9,
       "kev": false,
-      "epss": null
+      "epss": 0.00576
     },
     {
       "source": "NVD (CVSS -)",
@@ -1909,7 +1873,7 @@
       "date": "2024-07-10",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.00128
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -1921,7 +1885,7 @@
       "date": "2024-06-12",
       "cvss": 7.5,
       "kev": false,
-      "epss": null
+      "epss": 0.00366
     },
     {
       "source": "NVD (CVSS 7.0)",
@@ -1933,7 +1897,7 @@
       "date": "2024-06-12",
       "cvss": 7.0,
       "kev": false,
-      "epss": null
+      "epss": 0.0013
     },
     {
       "source": "NVD (CVSS 5.5)",
@@ -1945,7 +1909,7 @@
       "date": "2024-06-12",
       "cvss": 5.5,
       "kev": false,
-      "epss": null
+      "epss": 0.0041
     },
     {
       "source": "NVD (CVSS 4.8)",
@@ -1957,7 +1921,7 @@
       "date": "2024-06-12",
       "cvss": 4.8,
       "kev": false,
-      "epss": null
+      "epss": 0.00247
     },
     {
       "source": "NVD (CVSS 4.4)",
@@ -1969,7 +1933,7 @@
       "date": "2024-06-12",
       "cvss": 4.4,
       "kev": false,
-      "epss": null
+      "epss": 0.00089
     },
     {
       "source": "NVD (CVSS 10.0)",
@@ -1981,7 +1945,7 @@
       "date": "2024-04-12",
       "cvss": 10.0,
       "kev": true,
-      "epss": null
+      "epss": 0.99999
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -1993,7 +1957,7 @@
       "date": "2024-04-10",
       "cvss": 7.5,
       "kev": false,
-      "epss": null
+      "epss": 0.00909
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -2005,7 +1969,7 @@
       "date": "2024-04-10",
       "cvss": 7.5,
       "kev": false,
-      "epss": null
+      "epss": 0.00885
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -2017,7 +1981,7 @@
       "date": "2024-04-10",
       "cvss": 7.5,
       "kev": false,
-      "epss": null
+      "epss": 0.0093
     },
     {
       "source": "NVD (CVSS 7.4)",
@@ -2029,7 +1993,7 @@
       "date": "2024-04-10",
       "cvss": 7.4,
       "kev": false,
-      "epss": null
+      "epss": 0.00576
     },
     {
       "source": "NVD (CVSS 5.3)",
@@ -2041,7 +2005,7 @@
       "date": "2024-04-10",
       "cvss": 5.3,
       "kev": false,
-      "epss": null
+      "epss": 0.0017
     },
     {
       "source": "NVD (CVSS 5.3)",
@@ -2053,7 +2017,7 @@
       "date": "2024-04-10",
       "cvss": 5.3,
       "kev": false,
-      "epss": null
+      "epss": 0.00436
     },
     {
       "source": "NVD (CVSS 4.1)",
@@ -2065,7 +2029,7 @@
       "date": "2024-04-10",
       "cvss": 4.1,
       "kev": false,
-      "epss": null
+      "epss": 0.00349
     },
     {
       "source": "NVD (CVSS 6.5)",
@@ -2392,6 +2356,18 @@
       "epss": 0.01327
     },
     {
+      "source": "NVD (CVSS 6.0)",
+      "id": "CVE-2023-0001",
+      "headline_en": "An information exposure vulnerability in the Palo Alto Networks Cortex XDR agent on Windows devices allows a local system administrator to disclose the admin password for the agent in cleartext, which bad actors can then use to execute privileged cytool commands that disable or uninstall the agent.",
+      "headline_ja": "Windows デバイス上の Palo Alto Networks Cortex XDR エージェントにおける情報漏洩脆弱性により、ローカルのシステム管理者がエージェントの管理者パスワードを平文で開示できるようになります。このパスワードを悪意のある者が取得すると、特権的な cytool コマンドを実行してエージェントを無効化またはアンインストールすることが可能になります。",
+      "versions": "(本文から検出できず)",
+      "url": "https://security.paloaltonetworks.com/CVE-2023-0001",
+      "date": "2023-02-08",
+      "cvss": 6.0,
+      "kev": false,
+      "epss": 0.00213
+    },
+    {
       "source": "NVD (CVSS 5.5)",
       "id": "CVE-2023-0002",
       "headline_en": "A problem with a protection mechanism in the Palo Alto Networks Cortex XDR agent on Windows devices allows a local user to execute privileged cytool commands that disable or uninstall the agent.\n",
@@ -2402,6 +2378,30 @@
       "cvss": 5.5,
       "kev": false,
       "epss": 0.00295
+    },
+    {
+      "source": "NVD (CVSS 6.7)",
+      "id": "CVE-2022-0031",
+      "headline_en": "A local privilege escalation (PE) vulnerability in the Palo Alto Networks Cortex XSOAR engine software running on a Linux operating system allows a local attacker with shell access to the engine to execute programs with elevated privileges.",
+      "headline_ja": "ローカル権限昇格（PE）脆弱性は、Linux オペレーティングシステム上で実行されている Palo Alto Networks Cortex XSOAR エンジン ソフトウェアに存在し、エンジンへのシェルアクセスを持つローカル攻撃者が特権を昇格させてプログラムを実行できるようにします。",
+      "versions": "(本文から検出できず)",
+      "url": "https://security.paloaltonetworks.com/CVE-2022-0031",
+      "date": "2022-11-09",
+      "cvss": 6.7,
+      "kev": false,
+      "epss": 0.00124
+    },
+    {
+      "source": "NVD (CVSS 8.1)",
+      "id": "CVE-2022-0030",
+      "headline_en": "An authentication bypass vulnerability in the Palo Alto Networks PAN-OS 8.1 web interface allows a network-based attacker with specific knowledge of the target firewall or Panorama appliance to impersonate an existing PAN-OS administrator and perform privileged actions.",
+      "headline_ja": "Palo Alto Networks の PAN-OS 8.1 Web インターフェースにおける認証バイパス脆弱性により、対象のファイアウォールまたは Panorama アプライアンスに関する特定の知識を持つネットワークベースの攻撃者が、既存の PAN-OS 管理者になりすまして特権操作を実行できるようになります。",
+      "versions": "(本文から検出できず)",
+      "url": "https://security.paloaltonetworks.com/CVE-2022-0030",
+      "date": "2022-10-12",
+      "cvss": 8.1,
+      "kev": false,
+      "epss": 0.00902
     }
   ]
 }
