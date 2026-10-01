@@ -1,6 +1,6 @@
 {
   "label": "FortiGate (FortiOS)",
-  "generated_at": "2026-09-29T04:34:17+00:00",
+  "generated_at": "2026-10-01T04:16:04+00:00",
   "count": 216,
   "rows": [
     {
@@ -13,7 +13,7 @@
       "date": "2026-09-08",
       "cvss": 8.1,
       "kev": false,
-      "epss": null
+      "epss": 0.00247
     },
     {
       "source": "FortiGuard PSIRT (CVSS 7.3)",
@@ -38,7 +38,7 @@
       "date": "2026-09-08",
       "cvss": 2.7,
       "kev": false,
-      "epss": null
+      "epss": 0.00495
     },
     {
       "source": "FortiGuard PSIRT (CVSS 2.5)",
@@ -76,7 +76,7 @@
       "date": "2026-08-12",
       "cvss": 5.6,
       "kev": false,
-      "epss": null
+      "epss": 0.00421
     },
     {
       "source": "NVD (CVSS 5.3)",
@@ -88,7 +88,7 @@
       "date": "2026-08-12",
       "cvss": 5.3,
       "kev": false,
-      "epss": null
+      "epss": 0.00402
     },
     {
       "source": "FortiGuard PSIRT (CVSS 5.1)",
@@ -126,7 +126,7 @@
       "date": "2026-07-14",
       "cvss": 6.6,
       "kev": false,
-      "epss": null
+      "epss": 0.0067
     },
     {
       "source": "NVD (CVSS 6.1)",
@@ -138,7 +138,7 @@
       "date": "2026-07-14",
       "cvss": 6.1,
       "kev": false,
-      "epss": null
+      "epss": 0.00385
     },
     {
       "source": "FortiGuard PSIRT (CVSS 6.1)",
@@ -176,7 +176,7 @@
       "date": "2026-07-14",
       "cvss": 5.5,
       "kev": false,
-      "epss": null
+      "epss": 0.00251
     },
     {
       "source": "FortiGuard PSIRT (CVSS 5.0)",
@@ -201,7 +201,7 @@
       "date": "2026-07-14",
       "cvss": 4.3,
       "kev": false,
-      "epss": null
+      "epss": 0.00313
     },
     {
       "source": "NVD (CVSS 4.3)",
@@ -213,7 +213,7 @@
       "date": "2026-07-14",
       "cvss": 4.3,
       "kev": false,
-      "epss": null
+      "epss": 0.00381
     },
     {
       "source": "FortiGuard PSIRT (CVSS 4.1)",
@@ -238,7 +238,7 @@
       "date": "2026-07-14",
       "cvss": 3.4,
       "kev": false,
-      "epss": null
+      "epss": 0.00271
     },
     {
       "source": "FortiGuard PSIRT (CVSS 3.4)",
@@ -263,7 +263,7 @@
       "date": "2026-07-14",
       "cvss": 3.1,
       "kev": false,
-      "epss": null
+      "epss": 0.00372
     },
     {
       "source": "FortiGuard PSIRT (CVSS 3.1)",
@@ -288,7 +288,7 @@
       "date": "2026-06-09",
       "cvss": 6.7,
       "kev": false,
-      "epss": null
+      "epss": 0.00149
     },
     {
       "source": "FortiGuard PSIRT (CVSS 6.0)",
@@ -313,7 +313,7 @@
       "date": "2026-05-12",
       "cvss": 8.8,
       "kev": false,
-      "epss": null
+      "epss": 0.00564
     },
     {
       "source": "FortiGuard PSIRT (CVSS 8.3)",
@@ -338,7 +338,7 @@
       "date": "2026-04-14",
       "cvss": 6.5,
       "kev": false,
-      "epss": null
+      "epss": 0.00283
     },
     {
       "source": "NVD (CVSS 6.0)",
@@ -350,7 +350,7 @@
       "date": "2026-04-14",
       "cvss": 6.0,
       "kev": false,
-      "epss": null
+      "epss": 0.00498
     },
     {
       "source": "NVD (CVSS 8.1)",
@@ -362,7 +362,7 @@
       "date": "2026-02-10",
       "cvss": 8.1,
       "kev": false,
-      "epss": null
+      "epss": 0.0071
     },
     {
       "source": "FortiGuard PSIRT (CVSS 7.5)",
@@ -387,7 +387,7 @@
       "date": "2026-02-10",
       "cvss": 6.7,
       "kev": false,
-      "epss": null
+      "epss": 0.01418
     },
     {
       "source": "NVD (CVSS 5.9)",
@@ -399,7 +399,7 @@
       "date": "2026-02-10",
       "cvss": 5.9,
       "kev": true,
-      "epss": null
+      "epss": 0.29601
     },
     {
       "source": "NVD (CVSS 5.8)",
@@ -411,7 +411,7 @@
       "date": "2026-02-10",
       "cvss": 5.8,
       "kev": false,
-      "epss": null
+      "epss": 0.00364
     },
     {
       "source": "NVD (CVSS 4.2)",
@@ -423,7 +423,7 @@
       "date": "2026-02-10",
       "cvss": 4.2,
       "kev": false,
-      "epss": null
+      "epss": 0.00143
     },
     {
       "source": "NVD (CVSS 3.2)",
@@ -435,7 +435,7 @@
       "date": "2026-02-05",
       "cvss": 3.2,
       "kev": false,
-      "epss": null
+      "epss": 0.00094
     },
     {
       "source": "NVD (CVSS 9.8)",
@@ -447,7 +447,7 @@
       "date": "2026-01-27",
       "cvss": 9.8,
       "kev": true,
-      "epss": null
+      "epss": 0.85796
     },
     {
       "source": "NVD (CVSS 8.1)",
@@ -459,7 +459,7 @@
       "date": "2026-01-13",
       "cvss": 8.1,
       "kev": true,
-      "epss": null
+      "epss": 0.03859
     },
     {
       "source": "NVD (CVSS 6.0)",
@@ -471,7 +471,7 @@
       "date": "2025-12-11",
       "cvss": 6.0,
       "kev": false,
-      "epss": null
+      "epss": 0.00109
     },
     {
       "source": "NVD (CVSS 9.8)",
@@ -483,7 +483,7 @@
       "date": "2025-12-09",
       "cvss": 9.8,
       "kev": true,
-      "epss": null
+      "epss": 0.68293
     },
     {
       "source": "NVD (CVSS 6.6)",
@@ -495,7 +495,7 @@
       "date": "2025-12-09",
       "cvss": 6.6,
       "kev": false,
-      "epss": null
+      "epss": 0.00405
     },
     {
       "source": "NVD (CVSS 5.6)",
@@ -507,7 +507,7 @@
       "date": "2025-12-09",
       "cvss": 5.6,
       "kev": false,
-      "epss": null
+      "epss": 0.00301
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -519,7 +519,7 @@
       "date": "2025-11-18",
       "cvss": 7.5,
       "kev": false,
-      "epss": null
+      "epss": 0.00317
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -531,7 +531,7 @@
       "date": "2025-11-18",
       "cvss": 7.5,
       "kev": false,
-      "epss": null
+      "epss": 0.00585
     },
     {
       "source": "NVD (CVSS 1.9)",
@@ -543,7 +543,7 @@
       "date": "2025-11-18",
       "cvss": 1.9,
       "kev": false,
-      "epss": null
+      "epss": 0.00152
     },
     {
       "source": "FortiGuard PSIRT (CVSS 1.8)",
@@ -568,7 +568,7 @@
       "date": "2025-10-14",
       "cvss": 8.2,
       "kev": false,
-      "epss": null
+      "epss": 0.00287
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -580,7 +580,7 @@
       "date": "2025-10-14",
       "cvss": 7.5,
       "kev": false,
-      "epss": null
+      "epss": 0.00676
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -592,7 +592,7 @@
       "date": "2025-10-14",
       "cvss": 7.5,
       "kev": false,
-      "epss": null
+      "epss": 0.00113
     },
     {
       "source": "NVD (CVSS 7.2)",
@@ -604,7 +604,7 @@
       "date": "2025-10-14",
       "cvss": 7.2,
       "kev": false,
-      "epss": null
+      "epss": 0.00536
     },
     {
       "source": "NVD (CVSS 6.7)",
@@ -628,7 +628,7 @@
       "date": "2025-10-14",
       "cvss": 6.5,
       "kev": false,
-      "epss": null
+      "epss": 0.00556
     },
     {
       "source": "NVD (CVSS 5.3)",
@@ -640,7 +640,7 @@
       "date": "2025-10-14",
       "cvss": 5.3,
       "kev": false,
-      "epss": null
+      "epss": 0.00427
     },
     {
       "source": "NVD (CVSS 5.3)",
@@ -664,7 +664,7 @@
       "date": "2025-10-14",
       "cvss": 4.8,
       "kev": false,
-      "epss": null
+      "epss": 0.00337
     },
     {
       "source": "NVD (CVSS 4.7)",
@@ -676,7 +676,7 @@
       "date": "2025-10-14",
       "cvss": 4.7,
       "kev": false,
-      "epss": null
+      "epss": 0.00398
     },
     {
       "source": "NVD (CVSS 4.3)",
@@ -688,7 +688,7 @@
       "date": "2025-10-14",
       "cvss": 4.3,
       "kev": false,
-      "epss": null
+      "epss": 0.00317
     },
     {
       "source": "NVD (CVSS 4.3)",
@@ -700,7 +700,7 @@
       "date": "2025-10-14",
       "cvss": 4.3,
       "kev": false,
-      "epss": null
+      "epss": 0.00473
     },
     {
       "source": "NVD (CVSS 2.7)",
@@ -712,7 +712,7 @@
       "date": "2025-10-14",
       "cvss": 2.7,
       "kev": false,
-      "epss": null
+      "epss": 0.00618
     },
     {
       "source": "NVD (CVSS 2.7)",
@@ -724,7 +724,7 @@
       "date": "2025-10-14",
       "cvss": 2.7,
       "kev": false,
-      "epss": null
+      "epss": 0.00361
     },
     {
       "source": "NVD (CVSS 2.6)",
@@ -736,7 +736,7 @@
       "date": "2025-10-14",
       "cvss": 2.6,
       "kev": false,
-      "epss": null
+      "epss": 0.00251
     },
     {
       "source": "FortiGuard PSIRT (CVSS 2.6)",
@@ -761,7 +761,7 @@
       "date": "2025-10-02",
       "cvss": 6.7,
       "kev": false,
-      "epss": null
+      "epss": 0.00252
     },
     {
       "source": "NVD (CVSS 8.1)",
@@ -785,7 +785,7 @@
       "date": "2025-08-12",
       "cvss": 7.2,
       "kev": false,
-      "epss": null
+      "epss": 0.00634
     },
     {
       "source": "NVD (CVSS 6.6)",
@@ -809,7 +809,7 @@
       "date": "2025-08-12",
       "cvss": 5.3,
       "kev": false,
-      "epss": null
+      "epss": 0.00481
     },
     {
       "source": "NVD (CVSS 4.2)",
@@ -821,7 +821,7 @@
       "date": "2025-07-15",
       "cvss": 4.2,
       "kev": false,
-      "epss": null
+      "epss": 0.00208
     },
     {
       "source": "NVD (CVSS 7.2)",
@@ -833,7 +833,7 @@
       "date": "2025-07-08",
       "cvss": 7.2,
       "kev": false,
-      "epss": null
+      "epss": 0.00282
     },
     {
       "source": "NVD (CVSS 5.3)",
@@ -845,7 +845,7 @@
       "date": "2025-07-08",
       "cvss": 5.3,
       "kev": false,
-      "epss": null
+      "epss": 0.00366
     },
     {
       "source": "NVD (CVSS 6.6)",
@@ -857,7 +857,7 @@
       "date": "2025-06-10",
       "cvss": 6.6,
       "kev": false,
-      "epss": null
+      "epss": 0.00849
     },
     {
       "source": "NVD (CVSS 6.5)",
@@ -869,7 +869,7 @@
       "date": "2025-06-10",
       "cvss": 6.5,
       "kev": false,
-      "epss": null
+      "epss": 0.00373
     },
     {
       "source": "NVD (CVSS 5.9)",
@@ -881,7 +881,7 @@
       "date": "2025-06-10",
       "cvss": 5.9,
       "kev": false,
-      "epss": null
+      "epss": 0.00446
     },
     {
       "source": "NVD (CVSS 4.8)",
@@ -893,7 +893,7 @@
       "date": "2025-06-10",
       "cvss": 4.8,
       "kev": false,
-      "epss": null
+      "epss": 0.0115
     },
     {
       "source": "NVD (CVSS 4.3)",
@@ -905,7 +905,7 @@
       "date": "2025-06-10",
       "cvss": 4.3,
       "kev": false,
-      "epss": null
+      "epss": 0.00536
     },
     {
       "source": "FortiGuard PSIRT (CVSS 3.9)",
@@ -942,7 +942,7 @@
       "date": "2025-06-10",
       "cvss": 3.1,
       "kev": false,
-      "epss": null
+      "epss": 0.00402
     },
     {
       "source": "NVD (CVSS 9.8)",
@@ -954,7 +954,7 @@
       "date": "2025-05-28",
       "cvss": 9.8,
       "kev": false,
-      "epss": null
+      "epss": 0.00944
     },
     {
       "source": "NVD (CVSS 5.3)",
@@ -966,7 +966,7 @@
       "date": "2025-05-28",
       "cvss": 5.3,
       "kev": false,
-      "epss": null
+      "epss": 0.00837
     },
     {
       "source": "NVD (CVSS 3.7)",
@@ -978,7 +978,7 @@
       "date": "2025-05-28",
       "cvss": 3.7,
       "kev": false,
-      "epss": null
+      "epss": 0.00785
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -1002,7 +1002,7 @@
       "date": "2025-04-08",
       "cvss": 3.1,
       "kev": false,
-      "epss": null
+      "epss": 0.00392
     },
     {
       "source": "NVD (CVSS 2.3)",
@@ -1014,7 +1014,7 @@
       "date": "2025-04-08",
       "cvss": 2.3,
       "kev": false,
-      "epss": null
+      "epss": 0.00218
     },
     {
       "source": "NVD (CVSS 9.8)",
@@ -1110,7 +1110,7 @@
       "date": "2025-03-11",
       "cvss": 7.2,
       "kev": false,
-      "epss": null
+      "epss": 0.00715
     },
     {
       "source": "NVD (CVSS 8.8)",
@@ -1122,7 +1122,7 @@
       "date": "2025-02-11",
       "cvss": 8.8,
       "kev": false,
-      "epss": null
+      "epss": 0.00621
     },
     {
       "source": "NVD (CVSS 8.1)",
@@ -1134,7 +1134,7 @@
       "date": "2025-02-11",
       "cvss": 8.1,
       "kev": true,
-      "epss": null
+      "epss": 0.07235
     },
     {
       "source": "NVD (CVSS 8.1)",
@@ -1146,7 +1146,7 @@
       "date": "2025-02-11",
       "cvss": 8.1,
       "kev": false,
-      "epss": null
+      "epss": 0.01024
     },
     {
       "source": "NVD (CVSS 9.8)",
@@ -1158,7 +1158,7 @@
       "date": "2025-01-14",
       "cvss": 9.8,
       "kev": true,
-      "epss": null
+      "epss": 0.94149
     },
     {
       "source": "NVD (CVSS 9.0)",
@@ -1170,7 +1170,7 @@
       "date": "2025-01-14",
       "cvss": 9.0,
       "kev": false,
-      "epss": null
+      "epss": 0.00479
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -1182,7 +1182,7 @@
       "date": "2025-01-14",
       "cvss": 7.5,
       "kev": false,
-      "epss": null
+      "epss": 0.15308
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -1194,7 +1194,7 @@
       "date": "2025-01-14",
       "cvss": 7.5,
       "kev": false,
-      "epss": null
+      "epss": 0.00632
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -1206,7 +1206,7 @@
       "date": "2025-01-14",
       "cvss": 7.5,
       "kev": false,
-      "epss": null
+      "epss": 0.00997
     },
     {
       "source": "NVD (CVSS 6.5)",
@@ -1218,7 +1218,7 @@
       "date": "2025-01-14",
       "cvss": 6.5,
       "kev": false,
-      "epss": null
+      "epss": 0.0078
     },
     {
       "source": "NVD (CVSS 6.5)",
@@ -1230,7 +1230,7 @@
       "date": "2025-01-14",
       "cvss": 6.5,
       "kev": false,
-      "epss": null
+      "epss": 0.00717
     },
     {
       "source": "NVD (CVSS 6.5)",
@@ -1254,7 +1254,7 @@
       "date": "2025-01-14",
       "cvss": 5.3,
       "kev": false,
-      "epss": null
+      "epss": 0.00693
     },
     {
       "source": "NVD (CVSS 5.0)",
@@ -1278,7 +1278,7 @@
       "date": "2025-01-14",
       "cvss": 3.7,
       "kev": false,
-      "epss": null
+      "epss": 0.00764
     },
     {
       "source": "NVD (CVSS 3.7)",
@@ -1290,7 +1290,7 @@
       "date": "2025-01-14",
       "cvss": 3.7,
       "kev": false,
-      "epss": null
+      "epss": 0.00543
     },
     {
       "source": "NVD (CVSS 3.5)",
@@ -1302,7 +1302,7 @@
       "date": "2025-01-14",
       "cvss": 3.5,
       "kev": false,
-      "epss": null
+      "epss": 0.006
     },
     {
       "source": "NVD (CVSS 5.4)",
@@ -1338,7 +1338,7 @@
       "date": "2024-11-12",
       "cvss": 4.3,
       "kev": false,
-      "epss": null
+      "epss": 0.00572
     },
     {
       "source": "NVD (CVSS 4.2)",
@@ -1362,7 +1362,7 @@
       "date": "2024-08-13",
       "cvss": 5.1,
       "kev": false,
-      "epss": null
+      "epss": 0.00159
     },
     {
       "source": "NVD (CVSS 3.7)",
@@ -2358,7 +2358,7 @@
       "date": "2022-08-05",
       "cvss": 7.8,
       "kev": false,
-      "epss": 0.00209
+      "epss": 0.00211
     },
     {
       "source": "NVD (CVSS 4.3)",
