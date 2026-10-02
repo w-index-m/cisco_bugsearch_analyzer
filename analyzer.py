@@ -1604,12 +1604,24 @@ def search_cve_by_keyword(keyword, results_limit=20, api_key=None, timeout=20, t
     # 見えるが、実質的には0件と誤認してしまう。totalResults>0なのに
     # vulnerabilitiesが空、というこの兆候を検知したら短い間隔を空けて
     # 再試行する。
+    # 応答タイムアウト・接続エラー・5xx（NVD側の一時的な不調）も同様に、
+    # 間隔を空けて再試行する（実際に日次収集でRead timed outが連日発生した）。
     last_data = None
     for attempt in range(3):
         try:
             response = requests.get(NVD_API_BASE, params=params, headers=headers, timeout=timeout)
             response.raise_for_status()
             data = response.json()
+        except (requests.exceptions.Timeout, requests.exceptions.ConnectionError) as e:
+            if attempt < 2:
+                time.sleep(10 * (attempt + 1))
+                continue
+            return {"error": str(e)}
+        except requests.exceptions.HTTPError as e:
+            if e.response is not None and e.response.status_code >= 500 and attempt < 2:
+                time.sleep(10 * (attempt + 1))
+                continue
+            return {"error": str(e)}
         except Exception as e:
             return {"error": str(e)}
 
