@@ -1,7 +1,7 @@
 {
   "label": "FortiGate (FortiOS)",
-  "generated_at": "2026-10-01T04:16:04+00:00",
-  "count": 216,
+  "generated_at": "2026-10-02T04:04:07+00:00",
+  "count": 215,
   "rows": [
     {
       "source": "NVD (CVSS 8.1)",
@@ -314,19 +314,6 @@
       "cvss": 8.8,
       "kev": false,
       "epss": 0.00564
-    },
-    {
-      "source": "FortiGuard PSIRT (CVSS 8.3)",
-      "id": "FG-IR-26-123",
-      "headline_en": "Out-of-bounds access in CAPWAP daemon",
-      "headline_ja": "CAPWAP デーモンにおける範囲外アクセス",
-      "versions": "(不明)",
-      "product": "FortiOS",
-      "url": "https://fortiguard.fortinet.com/psirt/FG-IR-26-123",
-      "date": "2026-05-12",
-      "cvss": 8.3,
-      "kev": null,
-      "epss": null
     },
     {
       "source": "NVD (CVSS 6.5)",
@@ -694,7 +681,7 @@
       "source": "NVD (CVSS 4.3)",
       "id": "CVE-2024-47569",
       "headline_en": "A insertion of sensitive information into sent data vulnerability in Fortinet FortiMail 7.4.0 through 7.4.2, FortiMail 7.2.0 through 7.2.6, FortiMail 7.0 all versions, FortiManager 7.6.0 through 7.6.1, FortiManager 7.4.1 through 7.4.3, FortiManager Cloud 7.4.1 through 7.4.3, FortiNDR 7.6.0 through 7.6.1, FortiNDR 7.4.0 through 7.4.8, FortiNDR 7.2 all versions, FortiNDR 7.1 all versions, FortiNDR 7.0 all versions, FortiNDR 1.5 all versions, FortiOS 7.6.0, FortiOS 7.4.0 through 7.4.4, FortiOS 7.2.0 through 7.2.8, FortiOS 7.0.0 through 7.0.15, FortiOS 6.4.0 through 6.4.15, FortiOS 6.2 all versions, FortiOS 6.0 all versions, FortiPAM 1.3 all versions, FortiPAM 1.2 all versions, FortiPAM 1.1 all versions, FortiPAM 1.0 all versions, FortiProxy 7.4.0 through 7.4.4, FortiProxy 7.2.0 through 7.2.10, FortiProxy 7.0 all versions, FortiProxy 2.0 all versions, FortiProxy 1.2 all versions, FortiProxy 1.1 all versions, FortiProxy 1.0 all versions, FortiRecorder 7.2.0 through 7.2.1, FortiRecorder 7.0.0 through 7.0.4, FortiTester 7.4.0 through 7.4.2, FortiTester 7.3 all versions, FortiTester 7.2 all versions, FortiTester 7.1 all versions, FortiTester 7.0 all versions, FortiTester 4.2 all versions, FortiVoice 7.0.0 through 7.0.4, FortiVoice 6.4.0 through 6.4.9, FortiVoice 6.0.7 through 6.0.12, FortiWeb 7.6.0, FortiWeb 7.4.0 through 7.4.4, FortiWeb 7.2 all versions, FortiWeb 7.0 all versions, FortiWeb 6.4 all versions allows attacker to disclose sensitive information via specially crafted packets.",
-      "headline_ja": "A insertion of sensitive information into sent data vulnerability in Fortinet FortiMail 7.4.0 through 7.4.2, FortiMail 7.2.0 through 7.2.6, FortiMail 7.0 all versions, FortiManager 7.6.0 through 7.6.1, FortiManager 7.4.1 through 7.4.3, FortiManager Cloud 7.4.1 through 7.4.3, FortiNDR 7.6.0 through 7.6.1, FortiNDR 7.4.0 through 7.4.8, FortiNDR 7.2 all versions, FortiNDR 7.1 all versions, FortiNDR 7.0 all versions, FortiNDR 1.5 all versions, FortiOS 7.6.0, FortiOS 7.4.0 through 7.4.4, FortiOS 7.2.0 through 7.2.8, FortiOS 7.0.0 through 7.0.15, FortiOS 6.4.0 through 6.4.15, FortiOS 6.2 all versions, FortiOS 6.0 all versions, FortiPAM 1.3 all versions, FortiPAM 1.2 all versions, FortiPAM 1.1 all versions, FortiPAM 1.0 all versions, FortiProxy 7.4.0 through 7.4.4, FortiProxy 7.2.0 through 7.2.10, FortiProxy 7.0 all versions, FortiProxy 2.0 all versions, FortiProxy 1.2 all versions, FortiProxy 1.1 all versions, FortiProxy 1.0 all versions, FortiRecorder 7.2.0 through 7.2.1, FortiRecorder 7.0.0 through 7.0.4, FortiTester 7.4.0 through 7.4.2, FortiTester 7.3 all versions, FortiTester 7.2 all versions, FortiTester 7.1 all versions, FortiTester 7.0 all versions, FortiTester 4.2 all versions, FortiVoice 7.0.0 through 7.0.4, FortiVoice 6.4.0 through 6.4.9, FortiVoice 6.0.7 through 6.0.12, FortiWeb 7.6.0, FortiWeb 7.4.0 through 7.4.4, FortiWeb 7.2 all versions, FortiWeb 7.0 all versions, FortiWeb 6.4 all versions allows attacker to disclose sensitive information via specially crafted packets.",
+      "headline_ja": "Fortinet FortiMail 7.4.0 から 7.4.2、FortiMail 7.2.0 から 7.",
       "versions": "7.4.0, 7.4.2, 7.2.0, 7.2.6, 7.6.0, 7.6.1, 7.4.1, 7.4.3, 7.4.8, 7.4.4, 7.2.8, 7.0.0, 7.0.15, 6.4.0, 6.4.15, 7.2.10, 7.2.1, 7.0.4, 6.4.9, 6.0.7, 6.0.12",
       "url": "https://fortiguard.fortinet.com/psirt/FG-IR-24-228",
       "date": "2025-10-14",
@@ -2430,7 +2417,7 @@
       "date": "2022-05-11",
       "cvss": 6.1,
       "kev": false,
-      "epss": 0.00887
+      "epss": 0.00901
     },
     {
       "source": "NVD (CVSS 6.3)",
