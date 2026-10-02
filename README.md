@@ -21,6 +21,7 @@ Cisco のバグ情報（CSV/Excel）だけでなく、F5 BIG-IP / Palo Alto (PAN
 ### 他ベンダー・他製品（F5 / Palo Alto / FortiGate / Catalyst 9300 / Cisco IOS XE）のバグ・CVE検索
 - 🔧 **F5 BIG-IP バグ検索** - NVD（CVE/CVSS）と F5公式バグトラッカー（CVEにならない一般的な既知の問題）の両方から収集。バグトラッカー側は全件一覧ページから最新のBug IDを動的に発見し、対象製品（BIG-IP Next(BNK) 等）・対象OS（バージョン）・見出しを取得
 - 🔥 **Palo Alto (PAN-OS)** / 🛡️ **FortiGate (FortiOS)** / 🔀 **Catalyst 9300** / 🖥️ **Cisco IOS XE** バグ検索 - NVDキーワード検索（スペース区切りでOR、ダブルクォートでAND句）。対象バージョンを指定すると影響有無を判定
+- 🔥 **PAN-OS Known Issues（リリースノート）** - Palo Alto はNVDのCVEに加え、公式リリースノートの Known Issues（CVEにならない一般不具合 PAN-XXXXXX）をサポート中の各トレイン（10.2 / 11.1 / 11.2 / 12.1 / 12.2）から自動収集し、未修正/修正済みバージョン付きで合流表示
 - ⚡ **5機種まとめて検索（並列実行）** - F5 / Palo Alto / FortiGate / Catalyst 9300 / Cisco IOS XE を並列でNVD検索し、待ち時間を短縮
 - 🛡️ **KEV / EPSS 表示** - CISA KEV（実際に悪用が確認された既知の脆弱性）と FIRST EPSS（悪用予測確率スコア）を各CVE行に自動付与し、CVSSだけに頼らない優先度判断が可能
 - 📇 **Cisco PSIRT openVuln API 連携（任意）** - `PSIRT_CLIENT_ID` / `PSIRT_CLIENT_SECRET` を設定すると、Catalyst 9300 / Cisco IOS XE の検索でCisco公式セキュリティアドバイザリ（NVDより早く出ることが多い）もNVD結果に自動合流表示
@@ -200,6 +201,7 @@ python f5_bigip_tmm_bugs.py --nvd-keyword "BIG-IP" --bugtracker-limit 100
 - Cisco Bug Search: https://bst.cisco.com/bugsearch（CSV/Excelエクスポートをアップロード）
 - NVD（米国立脆弱性データベース）: F5/Palo Alto/FortiGate等のCVE情報
 - F5公式バグトラッカー: https://cdn.f5.com/product/bugtracker/（CVEにならない一般的な既知の問題）
+- PAN-OSリリースノート（Known Issues）: https://docs.paloaltonetworks.com/ngfw/release-notes（CVEにならない一般的な既知の問題）
 - CISA KEV / FIRST EPSS: 実際の悪用状況・悪用予測確率
 - endoflife.date: サポート終了日（EOL）情報
 
@@ -262,7 +264,7 @@ python f5_bigip_tmm_bugs.py --nvd-keyword "BIG-IP" --bugtracker-limit 100
 - Automatic tagging of "affected feature", "root cause hint", and "estimated likelihood" from headline keywords and status
 
 **Other vendors/products (F5 BIG-IP / Palo Alto PAN-OS / FortiGate FortiOS / Catalyst 9300 / Cisco IOS XE)**
-- Dedicated search sections that query the NVD (National Vulnerability Database) by keyword (space-separated terms are OR'd; quote a phrase for AND/exact matching), plus F5's official bug tracker for non-CVE known issues (F5's tracker index is crawled dynamically to discover recent Bug IDs, and affected product info such as "BIG-IP Next (BNK)" is captured)
+- Dedicated search sections that query the NVD (National Vulnerability Database) by keyword (space-separated terms are OR'd; quote a phrase for AND/exact matching), plus F5's official bug tracker for non-CVE known issues (F5's tracker index is crawled dynamically to discover recent Bug IDs, and affected product info such as "BIG-IP Next (BNK)" is captured), and PAN-OS release-note Known Issues (non-CVE PAN-XXXXXX bugs with open/fixed-in status) for each supported PAN-OS train
 - Every CVE result is enriched with **CVSS**, **CISA KEV** (confirmed real-world exploitation) and **FIRST EPSS** (predicted exploitation probability) so you're not relying on CVSS alone
 - Optional **Cisco PSIRT openVuln API integration**: with `PSIRT_CLIENT_ID`/`PSIRT_CLIENT_SECRET` configured, official Cisco security advisories (often published ahead of NVD) are merged into the Catalyst 9300 / Cisco IOS XE search results
 - Optional **Shodan exposure check**: with a `SHODAN_API_KEY` configured, one click shows how many internet-facing devices match the target version, using Shodan's credit-free `/shodan/host/count` endpoint

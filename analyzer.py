@@ -1604,12 +1604,24 @@ def search_cve_by_keyword(keyword, results_limit=20, api_key=None, timeout=20, t
     # 見えるが、実質的には0件と誤認してしまう。totalResults>0なのに
     # vulnerabilitiesが空、というこの兆候を検知したら短い間隔を空けて
     # 再試行する。
+    # 応答タイムアウト・接続エラー・5xx（NVD側の一時的な不調）も同様に、
+    # 間隔を空けて再試行する（実際に日次収集でRead timed outが連日発生した）。
     last_data = None
     for attempt in range(3):
         try:
             response = requests.get(NVD_API_BASE, params=params, headers=headers, timeout=timeout)
             response.raise_for_status()
             data = response.json()
+        except (requests.exceptions.Timeout, requests.exceptions.ConnectionError) as e:
+            if attempt < 2:
+                time.sleep(10 * (attempt + 1))
+                continue
+            return {"error": str(e)}
+        except requests.exceptions.HTTPError as e:
+            if e.response is not None and e.response.status_code >= 500 and attempt < 2:
+                time.sleep(10 * (attempt + 1))
+                continue
+            return {"error": str(e)}
         except Exception as e:
             return {"error": str(e)}
 
@@ -3128,6 +3140,211 @@ def search_fortigate_bugs(nvd_keyword="FortiOS", source="both",
     if source in ("both", "fortiguard"):
         all_rows += collect_fortiguard_psirt_rows(
             keyword_filter=list(fortiguard_keywords),
+            translate_engine=translate_engine, deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key,
+            groq_api_key=groq_api_key, open_router_api_key=open_router_api_key,
+        )
+
+    return sort_bug_rows_by_date_desc(all_rows)
+
+
+# ==================== Palo Alto PAN-OS リリースノート（Known Issues） ====================
+#
+# NVDはCVE（セキュリティ脆弱性）しか扱わないため、PAN-OSの一般的な不具合
+# （PAN-XXXXXX）は拾えない。docs.paloaltonetworks.com のリリースノートは
+# 静的HTML（ボット対策なし）で、各トレインの「X.Y.0 Known Issues」ページ
+# （12.x以降は各メンテナンスリリースのKnown Issuesページ）が、そのトレイン
+# 全体の既知バグを継続更新する累積リストになっている。修正済みの項目には
+# 「This issue is now resolved. See PAN-OS 11.1.10-h28 Addressed Issues」の
+# ように修正バージョンが併記されるため、ここから未修正/修正済みも分かる。
+# 各行にはリリース日が無いため date=None（表では日付不明として末尾に並ぶ）。
+PANOS_DOCS_BASE = "https://docs.paloaltonetworks.com"
+# 追跡するPAN-OSトレイン（サポート終了したものは外し、新トレインは追加する）
+PANOS_TRACKED_TRAINS = ("10-2", "11-1", "11-2", "12-1", "12-2")
+
+_PANOS_KNOWN_ISSUES_HREF_RE = re.compile(r'href="(/content/techdocs/en_US/[^"#]*?-known-issues)\.html')
+_PANOS_TR_RE = re.compile(r'<tr[^>]*>(.*?)</tr>', re.S)
+_PANOS_TD_RE = re.compile(r'<td[^>]*>(.*?)</td>', re.S)
+_PANOS_ID_RE = re.compile(r'PAN-\d{5,7}(?!\d)')
+_PANOS_FIXED_IN_RE = re.compile(r'PAN-OS\s+(\d+\.\d+\.\d+(?:-h\d+)?)\s+Addressed Issues')
+_PANOS_PAGE_VERSION_RE = re.compile(r'pan-os-(\d+)-(\d+)-(\d+)-known-issues$')
+
+
+def _html_fragment_to_text(fragment):
+    """タグを空白に置き換えてからテキスト化する（隣接要素の文字がくっつかないように）"""
+    text = re.sub(r'\s+', ' ', unescape(re.sub(r'<[^>]+>', ' ', fragment or ''))).strip()
+    text = re.sub(r'\(\s+', '(', text)
+    return re.sub(r'\s+([).,;:])', r'\1', text)
+
+
+def _panos_train_base_path(train):
+    if int(train.split("-")[0]) >= 12:
+        return f"/ngfw/release-notes/{train}"
+    return f"/pan-os/{train}/pan-os-release-notes"
+
+
+def _panos_train_landing_url(train):
+    return PANOS_DOCS_BASE + _panos_train_base_path(train)
+
+
+def parse_panos_known_issues_html(html, page_url, train):
+    """
+    PAN-OS Known Issues ページのHTML（Issue ID / Description の2列の表）を解析し、
+    共通の行フォーマットのリストにする。ヘッダー行（th）やIDの無い行は除外する。
+    """
+    train_label = train.replace("-", ".")
+    rows = []
+    for tr in _PANOS_TR_RE.findall(html):
+        cells = _PANOS_TD_RE.findall(tr)
+        if len(cells) < 2:
+            continue
+        ids = list(dict.fromkeys(_PANOS_ID_RE.findall(cells[0])))
+        if not ids:
+            continue
+        fixed_in = list(dict.fromkeys(_PANOS_FIXED_IN_RE.findall(_html_fragment_to_text(cells[0]))))
+        description = _html_fragment_to_text(cells[1])
+        description = re.split(r'\s*Workaround:', description, maxsplit=1)[0].strip()
+        if not description:
+            continue
+        status = f"修正済み: {', '.join(fixed_in)}" if fixed_in else "未修正（Known Issue）"
+        rows.append({
+            "source": f"PAN-OS Known Issues ({train_label})",
+            "id": ", ".join(ids),
+            "headline_en": description,
+            "headline_ja": "",
+            "versions": f"PAN-OS {train_label}系 / {status}",
+            "product": None,
+            "url": page_url,
+            "date": None,
+            "cvss": None,
+            "kev": None,
+            "epss": None,
+        })
+    return rows
+
+
+def fetch_panos_known_issue_rows(trains=PANOS_TRACKED_TRAINS, timeout=30, delay=0.5):
+    """
+    各トレインのリリースノートの入口ページからKnown Issuesページへのリンクを
+    探し、全て取得・解析して返す。入口が「新機能」ページ等にリダイレクトされて
+    リンクが見つからないトレイン（11.2 / 12.1 等）は、バージョン別の親ページ
+    （pan-os-11-2-{n}-known-and-addressed-issues）を n=0 から順に試して探す
+    （3回連続で見つからなければ打ち切る。12.1のように .0/.1 が無いトレインもある）。
+    同じトレインで同じIDが複数ページに載る場合は、より新しいバージョンの
+    ページの内容を優先する。取得に失敗したトレイン・ページは飛ばす。
+    """
+    headers = {
+        "User-Agent": (
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+            "(KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+        )
+    }
+    all_rows = []
+    for train in trains:
+        try:
+            landing = requests.get(_panos_train_landing_url(train), headers=headers, timeout=timeout)
+            landing.raise_for_status()
+        except Exception:
+            continue
+
+        paths = [p for p in dict.fromkeys(_PANOS_KNOWN_ISSUES_HREF_RE.findall(landing.text)) if f"/{train}/" in p]
+
+        if not paths:
+            major, minor = train.split("-")
+            misses = 0
+            for n in range(0, 30):
+                if misses >= 3:
+                    break
+                parent_url = (f"{PANOS_DOCS_BASE}{_panos_train_base_path(train)}"
+                              f"/pan-os-{major}-{minor}-{n}-known-and-addressed-issues")
+                time.sleep(delay)
+                try:
+                    parent = requests.get(parent_url, headers=headers, timeout=timeout)
+                except Exception:
+                    misses += 1
+                    continue
+                if parent.status_code != 200:
+                    misses += 1
+                    continue
+                misses = 0
+                paths += [p for p in _PANOS_KNOWN_ISSUES_HREF_RE.findall(parent.text)
+                          if f"/{train}/" in p and p not in paths]
+
+        def _version_key(path):
+            m = _PANOS_PAGE_VERSION_RE.search(path)
+            return tuple(int(x) for x in m.groups()) if m else (0, 0, 0)
+
+        by_id = {}
+        for path in sorted(paths, key=_version_key):
+            page_url = PANOS_DOCS_BASE + path.replace("/content/techdocs/en_US", "")
+            time.sleep(delay)
+            try:
+                page = requests.get(page_url, headers=headers, timeout=timeout)
+                page.raise_for_status()
+            except Exception:
+                continue
+            for row in parse_panos_known_issues_html(page.text, page_url, train):
+                by_id[row["id"]] = row
+        all_rows += list(by_id.values())
+    return all_rows
+
+
+def collect_panos_known_issue_rows(target_version=None, trains=PANOS_TRACKED_TRAINS,
+                                    translate_engine=None, deepl_api_key=None, nvidia_api_key=None,
+                                    groq_api_key=None, open_router_api_key=None):
+    """
+    fetch_panos_known_issue_rows() の結果を、対象バージョン指定時はそのトレイン
+    （例: 11.1.2 → 11.1系）に絞り込み、必要なら翻訳して返す。
+    """
+    if target_version:
+        m = re.match(r'\s*(\d+)\.(\d+)', target_version)
+        if m:
+            train = f"{m.group(1)}-{m.group(2)}"
+            trains = [t for t in trains if t == train] or [train]
+
+    rows = fetch_panos_known_issue_rows(trains=trains)
+
+    if translate_engine:
+        for i, r in enumerate(rows):
+            if i > 0:
+                time.sleep(0.3)
+            r["headline_ja"] = translate_headline(
+                r["headline_en"], engine=translate_engine,
+                deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key,
+                groq_api_key=groq_api_key, open_router_api_key=open_router_api_key,
+            )
+    return rows
+
+
+def search_paloalto_bugs(nvd_keyword='"Palo Alto" PAN-OS', source="both",
+                          version_extractor=_extract_generic_versions,
+                          translate_engine=None, deepl_api_key=None, nvidia_api_key=None,
+                          groq_api_key=None, open_router_api_key=None,
+                          nvd_api_key=None, target_version=None, results_limit=20, fetch_limit=2000,
+                          include_kev_epss=True):
+    """
+    Palo Alto関連バグを NVD（CVE） / PAN-OSリリースノートのKnown Issues（一般不具合）
+    の指定した組み合わせで収集し、日付の新しい順（日付不明は末尾）に並べて返す。
+
+    Args:
+        source: "both" | "nvd" | "release_notes"
+    """
+    all_rows = []
+
+    if source in ("both", "nvd"):
+        nvd_rows = collect_nvd_vendor_rows(
+            nvd_keyword, version_extractor=version_extractor,
+            translate_engine=translate_engine, deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key,
+            groq_api_key=groq_api_key, open_router_api_key=open_router_api_key,
+            api_key=nvd_api_key, target_version=target_version, results_limit=results_limit, fetch_limit=fetch_limit,
+            include_kev_epss=include_kev_epss,
+        )
+        if isinstance(nvd_rows, dict) and "error" in nvd_rows:
+            return nvd_rows
+        all_rows += nvd_rows
+
+    if source in ("both", "release_notes"):
+        all_rows += collect_panos_known_issue_rows(
+            target_version=target_version,
             translate_engine=translate_engine, deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key,
             groq_api_key=groq_api_key, open_router_api_key=open_router_api_key,
         )

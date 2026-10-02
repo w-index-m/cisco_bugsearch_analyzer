@@ -1090,8 +1090,11 @@ if st.button("🚀 5機種をまとめて検索（並列実行）", key="combo_v
                 nvd_api_key=get_secret("NVD_API_KEY") or st.session_state.get("f5_nvd_api_key_input") or None,
                 target_version=st.session_state.get("f5_target_version") or None,
             )),
-            "paloalto": (analyzer.search_vendor_bugs, dict(
+            "paloalto": (analyzer.search_paloalto_bugs, dict(
                 nvd_keyword=st.session_state.get("paloalto_keyword", "\"Palo Alto\" PAN-OS"),
+                source={"両方": "both", "NVDのみ": "nvd", "PAN-OSリリースノートのみ": "release_notes"}[
+                    st.session_state.get("paloalto_source", "両方")
+                ],
                 translate_engine=translation_engine_key,
                 deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key,
                 groq_api_key=groq_api_key, open_router_api_key=open_router_api_key,
@@ -1233,7 +1236,7 @@ st.markdown("---")
 
 def render_vendor_bug_search(title, icon, session_key, default_keyword, version_placeholder="例: 11.1.2",
                               official_links=None, psirt_os_type=None, psirt_product=None, fortiguard=False,
-                              extra_note=None):
+                              panos_release_notes=False, extra_note=None):
     """
     Palo Alto / FortiGate 等、F5のような個別バグIDページの公開トラッカーが
     確認できていないベンダー向けの、NVDベースのバグ検索UIを描画する共通関数。
@@ -1251,6 +1254,9 @@ def render_vendor_bug_search(title, icon, session_key, default_keyword, version_
     fortiguard: Trueにすると、NVD検索結果にFortiGuard PSIRTアドバイザリRSS
         フィード（認証不要、全Fortinet製品横断で直近50件）のうち、タイトル/
         本文に"FortiGate"/"FortiOS"を含むものを合流させる収集元セレクトを表示する。
+    panos_release_notes: Trueにすると、NVD検索結果にPAN-OSリリースノートの
+        Known Issues（CVEではない一般不具合 PAN-XXXXXX、修正済みバージョン付き）を
+        合流させる収集元セレクトを表示する。
     extra_note: 指定すると、official_linksの案内ボックスの後に追加のst.info()を
         表示する（このベンダー固有の注意事項がある場合に使う）。
     """
@@ -1270,6 +1276,13 @@ def render_vendor_bug_search(title, icon, session_key, default_keyword, version_
             "🔗 FortiGuard PSIRT（Fortinet公式アドバイザリ、認証不要）のRSSフィードから、"
             "直近のFortiGate関連アドバイザリも合流表示します（全Fortinet製品横断で直近50件"
             "までのフィードのため、古い/少数のアドバイザリしか無い場合があります）。"
+        )
+    if panos_release_notes:
+        st.caption(
+            "🔗 PAN-OSリリースノートの Known Issues（CVEではない一般不具合 PAN-XXXXXX）も"
+            "合流表示します。各項目には未修正/修正済みバージョンが付きます。リリース日の"
+            "情報が無いため、表では日付「不明」として末尾に並びます（表の絞り込み欄に"
+            "「PAN-」や「未修正」と入れると、この項目だけに絞り込めます）。"
         )
     if official_links:
         links_md = "\n".join(f"- {label}: {url}" for label, url in official_links)
@@ -1299,6 +1312,10 @@ def render_vendor_bug_search(title, icon, session_key, default_keyword, version_
         source = st.selectbox(
             "収集元", options=["両方", "NVDのみ", "FortiGuard PSIRTのみ"], key=f"{session_key}_source"
         )
+    elif panos_release_notes:
+        source = st.selectbox(
+            "収集元", options=["両方", "NVDのみ", "PAN-OSリリースノートのみ"], key=f"{session_key}_source"
+        )
 
     nvd_api_key = get_secret("NVD_API_KEY") or st.text_input(
         "NVD API キー（任意、無くても検索可・レート制限が緩和される）",
@@ -1312,6 +1329,16 @@ def render_vendor_bug_search(title, icon, session_key, default_keyword, version_
             if fortiguard:
                 _source_map = {"両方": "both", "NVDのみ": "nvd", "FortiGuard PSIRTのみ": "fortiguard"}
                 results = analyzer.search_fortigate_bugs(
+                    nvd_keyword=keyword, source=_source_map[source],
+                    translate_engine=translation_engine_key,
+                    deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key,
+                    groq_api_key=groq_api_key, open_router_api_key=open_router_api_key,
+                    nvd_api_key=nvd_api_key or None,
+                    target_version=target_version or None,
+                )
+            elif panos_release_notes:
+                _source_map = {"両方": "both", "NVDのみ": "nvd", "PAN-OSリリースノートのみ": "release_notes"}
+                results = analyzer.search_paloalto_bugs(
                     nvd_keyword=keyword, source=_source_map[source],
                     translate_engine=translation_engine_key,
                     deepl_api_key=deepl_api_key, nvidia_api_key=nvidia_api_key,
@@ -1358,6 +1385,7 @@ render_vendor_bug_search(
         ("Palo Alto Networks セキュリティアドバイザリ（PSIRT、CVE別ページ）", "https://security.paloaltonetworks.com/"),
         ("PAN-OS リリースノート（Known and Addressed Issues、バージョン別）", "https://docs.paloaltonetworks.com/ngfw/release-notes"),
     ],
+    panos_release_notes=True,
 )
 render_vendor_bug_search(
     "FortiGate (FortiOS) バグ検索", "🛡️", "fortigate", "FortiOS", version_placeholder="例: 7.4.8",
@@ -1397,7 +1425,7 @@ render_vendor_bug_search(
 
 st.markdown("**一般的な既知の問題を貼り付けて分析**")
 st.caption(
-    "Palo Alto の「Known and Addressed Issues」や YAMAHA のリリースノート等、自動取得できない"
+    "Palo Alto の「Addressed Issues」や YAMAHA のリリースノート等、自動取得していない"
     "公式ドキュメントの内容をブラウザからコピーしてここに貼り付けると、項目単位に分解して"
     "カテゴリ分け・日本語訳します。NVD検索はセキュリティ脆弱性（CVE）のみが対象のため、"
     "こちらは一般的な不具合情報を扱います。"
@@ -1405,7 +1433,8 @@ st.caption(
 st.info(
     "💡 **お願い**: 以下のような公式ページはこちらで自動取得できないため、"
     "ご自身のブラウザで開いてページ内のテキストをコピーし、下の欄に貼り付けてください。\n\n"
-    "- Palo Alto（PAN-OS Known and Addressed Issues、バージョンごとに存在）例:\n"
+    "- Palo Alto（PAN-OS Addressed Issues 等。※Known Issues は上の「Palo Alto (PAN-OS) バグ検索」で"
+    "自動取得済みです）例:\n"
     "  👉 https://docs.paloaltonetworks.com/ngfw/release-notes/12-2/pan-os-12-2-2-known-and-addressed-issues\n"
     "- YAMAHA（RTX/RTシリーズ リリースノート）例: 該当バージョンの「ファームウェアリビジョン」ページ\n\n"
     "他のバージョン・製品を調べたい場合も、同様に該当ページを開いて本文をコピーしてお知らせください。"
