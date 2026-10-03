@@ -1,6 +1,6 @@
 {
   "label": "F5 BIG-IP",
-  "generated_at": "2026-10-02T04:09:38+00:00",
+  "generated_at": "2026-10-03T03:51:02+00:00",
   "count": 300,
   "rows": [
     {
@@ -1361,7 +1361,7 @@
       "date": "2026-02-04",
       "cvss": 5.9,
       "kev": false,
-      "epss": 0.00196
+      "epss": 0.00211
     },
     {
       "source": "NVD (CVSS 4.9)",
@@ -1373,7 +1373,7 @@
       "date": "2026-02-04",
       "cvss": 4.9,
       "kev": false,
-      "epss": 0.00327
+      "epss": 0.00358
     },
     {
       "source": "NVD (CVSS 3.3)",
@@ -1385,7 +1385,7 @@
       "date": "2026-02-04",
       "cvss": 3.3,
       "kev": false,
-      "epss": 0.00106
+      "epss": 0.00116
     },
     {
       "source": "NVD (CVSS 3.1)",
@@ -1397,7 +1397,7 @@
       "date": "2026-02-04",
       "cvss": 3.1,
       "kev": false,
-      "epss": 0.00163
+      "epss": 0.00185
     },
     {
       "source": "NVD (CVSS 9.8)",

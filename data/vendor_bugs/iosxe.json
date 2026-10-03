@@ -1,6 +1,6 @@
 {
   "label": "Cisco IOS XE",
-  "generated_at": "2026-09-30T03:58:18+00:00",
+  "generated_at": "2026-10-03T03:48:51+00:00",
   "count": 193,
   "rows": [
     {
@@ -18,8 +18,8 @@
     {
       "source": "NVD (CVSS 9.0)",
       "id": "CVE-2026-20267",
-      "headline_en": "The vulnerabilities tracked by CVE-2026-20267 are related to improper access control issues that are grouped under the Common Weakness Enumeration (CWE) Pillar CWE-284.\n\nAs part of Cisco's ongoing commitment to proactive security and product quality, the Cisco IOS XE Software engineering team has conducted a comprehensive internal security review. This review resulted in software hardening releases that address multiple internally discovered vulnerabilities.",
-      "headline_ja": "CVE-2026-20267で追跡されている脆弱性は、共通弱点分類（CWE）柱CWE-284に分類される不適切なアクセス制御問題に関連しています。\n\nシスコが継続的に取り組んでいるプロアクティブなセキュリティと製品品質へのコミットメントの一環として、Cisco IOS XE ソフトウェアエンジニアリングチームは包括的な社内セキュリティレビューを実施しました。このレビューにより、社内で発見された複数の脆弱性に対処するソフトウェアハードニングリリースが行われました。",
+      "headline_en": "The vulnerabilities tracked by CVE-2026-20267 are related to improper access control issues that are grouped under the Common Weakness Enumeration (CWE) Pillar CWE-284.\n\nAs part of Cisco's ongoing commitment to proactive security and product quality, the Cisco IOS XE Software engineering team has conducted a comprehensive internal security review. This review resulted in software hardening releases that address multiple internally discovered vulnerabilities.",
+      "headline_ja": "CVE-2026-20267で追跡される脆弱性は、共通弱点分類（CWE）の柱であるCWE-284に分類される不適切なアクセス制御の問題に関連しています。\n\nCiscoは、プロアクティブなセキュリティと製品品質への継続的な取り組みの一環として、Cisco IOS XEソフトウェアエンジニアリングチームが包括的な内部セキュリティレビューを実施しました。このレビューの結果、内部で発見された複数の脆弱性に対処するためのソフトウェアハードニングリリースが行われました。",
       "versions": "(本文から検出できず)",
       "url": "https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-hardening-iosxe-V8NMuMZJ",
       "date": "2026-08-05",
@@ -1009,7 +1009,7 @@
       "date": "2024-03-27",
       "cvss": 7.4,
       "kev": false,
-      "epss": 0.00258
+      "epss": 0.00256
     },
     {
       "source": "NVD (CVSS 7.4)",
