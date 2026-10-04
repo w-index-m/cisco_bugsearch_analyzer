@@ -10,6 +10,7 @@ import re
 import json
 import time
 import shlex
+import zipfile
 import concurrent.futures
 import xml.etree.ElementTree as ET
 from html import unescape
@@ -2769,6 +2770,94 @@ def collect_nvd_tmm_rows(keyword, translate_engine=None, deepl_api_key=None, nvi
         api_key=api_key, results_limit=results_limit, target_version=target_version, fetch_limit=fetch_limit,
         include_kev_epss=include_kev_epss,
     )
+
+
+# ==================== CVE List V5（NVDに繋がらない時の予備データ源） ====================
+#
+# NVD（services.nvd.nist.gov）は応答タイムアウトで日次収集が失敗することがある。
+# CVE公式のcvelistV5リポジトリは、その日に公開・更新されたCVEレコード一式を
+# 日次リリースのzip（1日分で数MB・2千件程度）として公開しているため、NVDの
+# 取得に失敗した場合は、前回収集以降の差分をここから補う。CNA（Cisco/F5/
+# Palo Alto/Fortinet自身）が登録したCVSSや影響バージョンも含まれている。
+CVELIST_DELTA_ZIP_URL = (
+    "https://github.com/CVEProject/cvelistV5/releases/download/"
+    "cve_{date}_at_end_of_day/{date}_delta_CVEs_at_end_of_day.zip"
+)
+
+
+def fetch_cvelist_daily_records(date_str, timeout=120):
+    """cvelistV5の指定日（YYYY-MM-DD、UTC）の差分zipを取得し、CVEレコードのリストを返す。
+    失敗時は {"error": ...} を返す（まだ公開されていない当日分など）。"""
+    try:
+        response = requests.get(CVELIST_DELTA_ZIP_URL.format(date=date_str), timeout=timeout)
+        response.raise_for_status()
+        archive = zipfile.ZipFile(io.BytesIO(response.content))
+    except Exception as e:
+        return {"error": str(e)}
+    records = []
+    for name in archive.namelist():
+        if not name.endswith(".json"):
+            continue
+        try:
+            records.append(json.loads(archive.read(name)))
+        except ValueError:
+            continue
+    return records
+
+
+def _cvelist_cvss(record):
+    """CNA→ADP（CISA等）の順に、CVSS v3.1 / v3.0 / v4.0 の基本値を探す"""
+    containers = record.get("containers", {})
+    for container in [containers.get("cna", {})] + containers.get("adp", []):
+        for metric in container.get("metrics", []):
+            for key in ("cvssV3_1", "cvssV3_0", "cvssV4_0"):
+                score = (metric.get(key) or {}).get("baseScore")
+                if isinstance(score, (int, float)):
+                    return float(score)
+    return None
+
+
+def cvelist_records_to_rows(records, keyword, version_extractor=_extract_generic_versions):
+    """
+    cvelistV5のCVEレコードから、NVD検索と同じキーワード指定（スペース区切りの
+    OR、ダブルクォートで複合語）に一致する公開済みレコードを、NVD由来と同じ
+    行フォーマットに変換する。一致判定は英語の説明文と affected の
+    vendor/product に対する大文字小文字を区別しない部分一致。
+    """
+    terms = [(quoted or word).lower() for quoted, word in re.findall(r'"([^"]+)"|(\S+)', keyword or "")]
+    rows = []
+    for record in records:
+        meta = record.get("cveMetadata", {})
+        if meta.get("state") != "PUBLISHED":
+            continue
+        cna = record.get("containers", {}).get("cna", {})
+        description = next(
+            (d.get("value", "") for d in cna.get("descriptions", []) if d.get("lang", "").startswith("en")),
+            "",
+        )
+        products = " ".join(
+            f"{a.get('vendor', '')} {a.get('product', '')}" for a in cna.get("affected", [])
+        )
+        haystack = f"{description} {products}".lower()
+        if not description or not any(t in haystack for t in terms):
+            continue
+        cve_id = meta.get("cveId")
+        references = cna.get("references", [])
+        cvss = _cvelist_cvss(record)
+        versions = version_extractor(description)
+        rows.append({
+            "source": f"CVE List (CVSS {cvss if cvss is not None else '-'})",
+            "id": cve_id,
+            "headline_en": description,
+            "headline_ja": "",
+            "versions": ", ".join(versions) if versions else "(本文から検出できず)",
+            "url": references[0]["url"] if references else f"https://www.cve.org/CVERecord?id={cve_id}",
+            "date": (meta.get("datePublished") or "")[:10] or None,
+            "cvss": cvss,
+            "kev": None,
+            "epss": None,
+        })
+    return rows
 
 
 def search_vendor_bugs(nvd_keyword, version_extractor=_extract_generic_versions,

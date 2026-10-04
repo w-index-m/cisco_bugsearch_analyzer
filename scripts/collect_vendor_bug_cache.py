@@ -17,7 +17,8 @@ Streamlit アプリ（app.py）は、まずこのキャッシュを読み込ん�
 import argparse
 import json
 import sys
-from datetime import datetime, timezone
+import time
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
@@ -108,6 +109,77 @@ TARGETS = [
 ]
 
 
+# NVDの取得に失敗した日に、cvelistV5の日次差分から補完する際のキーワード
+# （各TARGETのNVD検索キーワードと同じ指定方法）と、遡る日数の上限
+CVELIST_FALLBACK_KEYWORDS = {
+    "f5": "BIG-IP",
+    "paloalto": '"Palo Alto" PAN-OS',
+    "fortigate": "FortiOS",
+    "catalyst9300": '"Catalyst 9300"',
+    "iosxe": '"IOS XE"',
+}
+CVELIST_FALLBACK_MAX_DAYS = 14
+
+
+def _fallback_from_cvelist(target, prev_payload, keys):
+    """
+    NVDに繋がらず収集に失敗した機種について、前回キャッシュの行を維持したまま、
+    前回の収集日以降にcvelistV5で公開・更新されたCVEのうちキーワードに一致し、
+    まだキャッシュに無いものを追加する。当日分の差分は日付が変わってから公開
+    されるため、前回収集日〜前日までを対象にする。
+
+    Returns:
+        (rows, 追加件数)
+    """
+    prev_rows = prev_payload.get("rows", [])
+    try:
+        since = datetime.fromisoformat(prev_payload["generated_at"]).date()
+    except (KeyError, ValueError):
+        since = datetime.now(timezone.utc).date() - timedelta(days=CVELIST_FALLBACK_MAX_DAYS)
+    yesterday = datetime.now(timezone.utc).date() - timedelta(days=1)
+    since = max(since, yesterday - timedelta(days=CVELIST_FALLBACK_MAX_DAYS - 1))
+
+    records_by_id = {}
+    day = since
+    while day <= yesterday:
+        records = analyzer.fetch_cvelist_daily_records(day.isoformat())
+        if isinstance(records, dict):
+            print(f"  -> cvelistV5 {day} の取得に失敗（スキップ）: {records['error']}", file=sys.stderr)
+        else:
+            for record in records:
+                records_by_id[record.get("cveMetadata", {}).get("cveId")] = record
+        day += timedelta(days=1)
+
+    extractor = analyzer._extract_bigip_versions if target["key"] == "f5" else analyzer._extract_generic_versions
+    candidates = analyzer.cvelist_records_to_rows(
+        list(records_by_id.values()), CVELIST_FALLBACK_KEYWORDS[target["key"]], version_extractor=extractor,
+    )
+    existing_ids = {i.strip() for r in prev_rows for i in str(r.get("id", "")).split(",")}
+    # 差分には「CISAが情報を追記した」等で更新されただけの古いCVEも大量に
+    # 含まれるため、前回収集日以降に新規公開されたものだけを追加する
+    new_rows = [
+        r for r in candidates
+        if r["id"] not in existing_ids and r["date"] and r["date"] >= since.isoformat()
+    ]
+
+    for i, r in enumerate(new_rows):
+        if i > 0:
+            time.sleep(0.3)
+        r["headline_ja"] = analyzer.translate_headline(
+            r["headline_en"], engine="groq", deepl_api_key=keys["deepl"],
+            groq_api_key=keys["groq"], open_router_api_key=keys["openrouter"],
+        )
+
+    if new_rows:
+        kev_ids = analyzer.fetch_cisa_kev_ids()
+        epss_scores = analyzer.fetch_epss_scores([r["id"] for r in new_rows])
+        for r in new_rows:
+            r["kev"] = (r["id"] in kev_ids) if kev_ids is not None else None
+            r["epss"] = epss_scores.get(r["id"])
+
+    return analyzer.sort_bug_rows_by_date_desc(prev_rows + new_rows), len(new_rows)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--nvd-api-key", help="NVD APIキー（任意、無くても収集可・レート制限が厳しくなる）")
@@ -169,6 +241,7 @@ def main():
         # 数百件を再翻訳するだけで枯渇してしまう問題への対策）
         prev_path = OUTPUT_DIR / f"{target['key']}.json"
         known_translations = {}
+        prev_payload = None
         if prev_path.exists():
             try:
                 prev_payload = json.loads(prev_path.read_text(encoding="utf-8"))
@@ -184,14 +257,18 @@ def main():
         try:
             rows = target["collect"](keys)
         except Exception as e:
-            print(f"  -> 収集中に例外が発生しました: {e}", file=sys.stderr)
-            exit_code = 1
-            continue
+            rows = {"error": f"収集中に例外が発生しました: {e}"}
 
+        fallback_note = None
         if isinstance(rows, dict) and "error" in rows:
-            print(f"  -> 収集に失敗しました: {rows['error']}", file=sys.stderr)
-            exit_code = 1
-            continue
+            error_text = rows["error"]
+            print(f"  -> 収集に失敗しました: {error_text}", file=sys.stderr)
+            if not prev_payload:
+                exit_code = 1
+                continue
+            rows, added = _fallback_from_cvelist(target, prev_payload, keys)
+            fallback_note = f"収集失敗（{error_text}）のため前回データを維持し、cvelistV5から新規 {added} 件を補完"
+            print(f"  -> 前回キャッシュを維持し、cvelistV5から新規 {added} 件を補完しました", file=sys.stderr)
 
         out_path = OUTPUT_DIR / f"{target['key']}.json"
         payload = {
@@ -200,6 +277,8 @@ def main():
             "count": len(rows),
             "rows": rows,
         }
+        if fallback_note:
+            payload["fallback"] = fallback_note
         with open(out_path, "w", encoding="utf-8") as f:
             json.dump(payload, f, ensure_ascii=False, indent=2)
         print(f"  -> {len(rows)} 件を {out_path} に保存しました", file=sys.stderr)
