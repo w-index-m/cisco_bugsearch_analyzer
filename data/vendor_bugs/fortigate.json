@@ -1,6 +1,6 @@
 {
   "label": "FortiGate (FortiOS)",
-  "generated_at": "2026-10-05T04:12:57+00:00",
+  "generated_at": "2026-10-06T04:54:32+00:00",
   "count": 215,
   "rows": [
     {
@@ -808,7 +808,7 @@
       "date": "2025-07-15",
       "cvss": 4.2,
       "kev": false,
-      "epss": 0.00208
+      "epss": 0.00221
     },
     {
       "source": "NVD (CVSS 7.2)",

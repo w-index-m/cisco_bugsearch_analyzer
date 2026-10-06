@@ -1,8 +1,188 @@
 {
   "label": "F5 BIG-IP",
-  "generated_at": "2026-10-05T04:07:15+00:00",
+  "generated_at": "2026-10-06T04:49:03+00:00",
   "count": 300,
   "rows": [
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2555325",
+      "headline_en": "Continuous cores on tmm startup after upgrading to 17.5.1.9",
+      "headline_ja": "バージョン 17.5.1.9 にアップグレードした後、tmm 起動時に連続してコアが発生。",
+      "versions": "17.1.3.5, 17.5.1.9",
+      "product": "BIG-IP, BIG-IP TMOS",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2555325.html",
+      "date": "2026-10-06"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2553085",
+      "headline_en": "REST endpoint device-info returns empty slots after reboot on BIG-IP VE deployed in Azure",
+      "headline_ja": "RESTエンドポイント「device-info」は、Azure にデプロイされた BIG‑IP VE の再起動後に空のスロットを返します。",
+      "versions": "17.5.0, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9",
+      "product": "BIG-IP, BIG-IP TMOS",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2553085.html",
+      "date": "2026-10-05"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2549533",
+      "headline_en": "DoS vector \"TCP ACK (TS)\" triggered after upgrade to v17.5.1.8",
+      "headline_ja": "DoSベクトル「TCP ACK (TS)」が v17.5.1.8 へのアップグレード後にトリガーされました。",
+      "versions": "17.5.1.8, 17.5.1.9",
+      "product": "BIG-IP, BIG-IP AFM",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2549533.html",
+      "date": "2026-10-05"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2547493",
+      "headline_en": "[APM]httpd_sam logs are not rotated causing /var/log exhaustion",
+      "headline_ja": "[APM]httpd_sam のログがローテーションされず、/var/log が枯渇しています",
+      "versions": "17.5.1.6, 17.5.1.8, 17.5.1.9",
+      "product": "BIG-IP, BIG-IP APM",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2547493.html",
+      "date": "2026-10-05"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2534965",
+      "headline_en": "TMM may crash when an L7 policy condition has a specific number of match values",
+      "headline_ja": "L7 ポリシー条件に特定の数のマッチ値がある場合、TMM がクラッシュする可能性があります。",
+      "versions": "21.1.0, 21.1.0.1, 21.1.0.2",
+      "product": "BIG-IP, BIG-IP LTM",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2534965.html",
+      "date": "2026-10-05"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2533557",
+      "headline_en": "Virtual server traffic may be reset after removing an ASM policy and performing a full configuration synchronization",
+      "headline_ja": "ASM ポリシーを削除し、完全な構成同期を実行した後、仮想サーバーのトラフィックがリセットされることがあります。",
+      "versions": "17.5.1.6, 17.5.1.8, 17.5.1.9, 21.1.0, 21.1.0.1, 21.1.0.2",
+      "product": "BIG-IP, BIG-IP TMOS",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2533557.html",
+      "date": "2026-10-05"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2524525",
+      "headline_en": "Error: \"General database error retrieving information\" seen in GUI, while accessing \"System > Logs > Audit\" page",
+      "headline_ja": "エラー: GUIで「General database error retrieving information」が表示され、「System > Logs > Audit」ページにアクセス中です。",
+      "versions": "21.1.0.1, 21.1.0.2",
+      "product": "BIG-IP, BIG-IP All",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2524525.html",
+      "date": "2026-10-05"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2524081",
+      "headline_en": "Successful REST API requests are not logged in the restjavad audit log",
+      "headline_ja": "成功したREST APIリクエストはrestjavad監査ログに記録されません。",
+      "versions": "17.5.0, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9",
+      "product": "BIG-IP, BIG-IP TMOS",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2524081.html",
+      "date": "2026-10-05"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2523653",
+      "headline_en": "Sorting by column does not work in GUI Statistics page for virtual servers",
+      "headline_ja": "仮想サーバーの GUI 統計ページで列のソートが機能しません",
+      "versions": "21.1.0.2",
+      "product": "BIG-IP, BIG-IP TMOS",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2523653.html",
+      "date": "2026-10-05"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2513409",
+      "headline_en": "TMM enters a crash loop when an empty string is configured in SAML auth-context-methods",
+      "headline_ja": "TMMは、SAML auth-context-methodsに空文字列が設定されると、クラッシュループに陥ります。",
+      "versions": "17.5.1.8, 17.5.1.9, 21.1.0, 21.1.0.1, 21.1.0.2",
+      "product": "BIG-IP, BIG-IP TMOS",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2513409.html",
+      "date": "2026-10-05"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2503861",
+      "headline_en": "Certificate serial-number is displayed as decimal instead of hex",
+      "headline_ja": "証明書のシリアル番号が16進数ではなく10進数で表示されます",
+      "versions": "21.0.0, 21.0.0.1, 21.0.0.2, 21.0.0.3, 21.1.0, 21.1.0.1, 21.1.0.2",
+      "product": "BIG-IP, BIG-IP TMOS",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2503861.html",
+      "date": "2026-10-05"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2502353",
+      "headline_en": "IP reputation database availability immediately after download",
+      "headline_ja": "IPレピュテーションデータベースはダウンロード直後に利用可能です",
+      "versions": "17.5.1.8, 17.5.1.9",
+      "product": "BIG-IP, BIG-IP AFM",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2502353.html",
+      "date": "2026-10-05"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2493485",
+      "headline_en": "Modified iRule procedures continue using the previous procedure body on BIG-IP 17.5.1.8",
+      "headline_ja": "BIG‑IP 17.5.1.8 では、変更された iRule 手順が以前の手順本体を引き続き使用します。",
+      "versions": "17.5.1.8, 17.5.1.9",
+      "product": "BIG-IP, BIG-IP LTM",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2493485.html",
+      "date": "2026-10-05"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2489017",
+      "headline_en": "Unexpected web server worker restarts during Configuration utility use",
+      "headline_ja": "設定ユーティリティ使用中に予期しないWebサーバーワーカーの再起動",
+      "versions": "21.1.0, 21.1.0.1, 21.1.0.2",
+      "product": "BIG-IP, BIG-IP TMOS",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2489017.html",
+      "date": "2026-10-05"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2488477",
+      "headline_en": "The Configuration utility becomes unresponsive and does not recover until the httpd service is restarted",
+      "headline_ja": "構成ユーティリティが応答しなくなり、httpd サービスを再起動するまで回復しません。",
+      "versions": "21.1.0, 21.1.0.1, 21.1.0.2",
+      "product": "BIG-IP, BIG-IP TMOS",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2488477.html",
+      "date": "2026-10-05"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2488365",
+      "headline_en": "BD may crash while handling certain websockets traffic",
+      "headline_ja": "BDは特定のWebSocketトラフィックを処理中にクラッシュする可能性があります。",
+      "versions": "21.1.0, 21.1.0.1, 21.1.0.2",
+      "product": "BIG-IP, BIG-IP ASM",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2488365.html",
+      "date": "2026-10-05"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2459237",
+      "headline_en": "Disk provisioning error does not identify available volume group capacity",
+      "headline_ja": "ディスクプロビジョニングエラーは、利用可能なボリュームグループの容量を特定できません。",
+      "versions": "17.5.1.8, 17.5.1.9",
+      "product": "BIG-IP, BIG-IP TMOS",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2459237.html",
+      "date": "2026-10-05"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2448153",
+      "headline_en": "TMUI displays \"Instance not found\" for Virtual Servers with a colon (:) in the name",
+      "headline_ja": "TMUIは、名前にコロン（:）が含まれる仮想サーバーに対して「Instance not found」を表示します。",
+      "versions": "17.1.3.4, 17.1.3.5, 17.5.1.8, 17.5.1.9, 21.1.0.1, 21.1.0.2",
+      "product": "BIG-IP, BIG-IP TMOS",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2448153.html",
+      "date": "2026-10-05"
+    },
     {
       "source": "F5 Bug Tracker",
       "id": "ID2552245",
@@ -601,6 +781,16 @@
     },
     {
       "source": "F5 Bug Tracker",
+      "id": "ID2452089",
+      "headline_en": "TMM may crash when using PQC DH group",
+      "headline_ja": "TMMはPQC DHグループを使用するとクラッシュする可能性があります。",
+      "versions": "21.1.0.1",
+      "product": "BIG-IP, BIG-IP LTM",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2452089.html",
+      "date": "2026-08-25"
+    },
+    {
+      "source": "F5 Bug Tracker",
       "id": "ID2450009",
       "headline_en": "SSL handshake failures between high availability peers when ConfigSync uses the management IP",
       "headline_ja": "ConfigSync が管理IP を使用する場合の高可用性ピア間の SSL ハンドシェイク失敗",
@@ -771,66 +961,6 @@
     },
     {
       "source": "F5 Bug Tracker",
-      "id": "ID2431857",
-      "headline_en": "BIG-IP DNS DNSSEC AXFR response incorrectly emits OPT pseudo-record in the Answer section, causing malformed zone-transfer data",
-      "headline_ja": "BIG-IP DNS の DNSSEC AXFR 応答が Answer セクションに誤って OPT 疑似レコードを出力し、ゾーン転送データが不正な形式になります。",
-      "versions": "17.5.1.6, 17.5.1.8, 17.5.1.9",
-      "product": "BIG-IP, BIG-IP DNS",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2431857.html",
-      "date": "2026-08-25"
-    },
-    {
-      "source": "F5 Bug Tracker",
-      "id": "ID2397785",
-      "headline_en": "TCL error \"Invalid index 0 in class\" thrown in ltm log for external data group",
-      "headline_ja": "外部データグループの ltm ログで「Invalid index 0 in class」エラーがスローされました",
-      "versions": "17.5.1.9, 17.1.3.5",
-      "product": "BIG-IP, BIG-IP LTM",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2397785.html",
-      "date": "2026-08-25"
-    },
-    {
-      "source": "F5 Bug Tracker",
-      "id": "ID2389757",
-      "headline_en": "ICMP with ID 0 flows with ipother profile does not work",
-      "headline_ja": "ID 0 の ICMP フローは ipother プロファイルで動作しません",
-      "versions": "17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 21.0.0, 21.0.0.1, 21.0.0.2, 21.0.0.3, 21.1.0, 21.1.0.1, 21.1.0.2",
-      "product": "BIG-IP, BIG-IP LTM",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2389757.html",
-      "date": "2026-08-25"
-    },
-    {
-      "source": "F5 Bug Tracker",
-      "id": "ID2389729",
-      "headline_en": "BIG-IP DNS Wide IP status icon does not update immediately after enable or disable",
-      "headline_ja": "BIG‑IP DNS ワイド IP のステータスアイコンは、無効化または有効化した直後にはすぐに更新されません。",
-      "versions": "17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5",
-      "product": "BIG-IP, BIG-IP DNS",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2389729.html",
-      "date": "2026-08-25"
-    },
-    {
-      "source": "F5 Bug Tracker",
-      "id": "ID2388377",
-      "headline_en": "APM Portal Access Fails to Parse \"from\" and \"as\" outside of import export cases",
-      "headline_ja": "APM ポータルアクセスは、インポート/エクスポートケース以外で「from」と「as」の解析に失敗します",
-      "versions": "(本文から検出できず)",
-      "product": "BIG-IP, BIG-IP APM",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2388377.html",
-      "date": "2026-08-25"
-    },
-    {
-      "source": "F5 Bug Tracker",
-      "id": "ID2390833",
-      "headline_en": "An unexpected connection error occurs when accessing servers.",
-      "headline_ja": "サーバーにアクセスすると、予期しない接続エラーが発生します。",
-      "versions": "7.2.7, 7.2.7.1",
-      "product": "APM-Clients, APM-Clients APM",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2390833.html",
-      "date": "2026-08-18"
-    },
-    {
-      "source": "F5 Bug Tracker",
       "id": "ID2449625",
       "headline_en": "On restart, TMM reserves NAT IP ranges used by another active TMM",
       "headline_ja": "再起動時、TMM は別のアクティブな TMM が使用している NAT IP 範囲を予約します。",
@@ -881,16 +1011,6 @@
     },
     {
       "source": "F5 Bug Tracker",
-      "id": "ID2405133",
-      "headline_en": "Fix for external/database monitor status issue",
-      "headline_ja": "外部/データベースモニタのステータス問題の修正",
-      "versions": "17.1.3.4, 17.5.1.8, 21.0.0.3, 21.1.0.1",
-      "product": "BIG-IP, BIG-IP LTM",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2405133.html",
-      "date": "2026-08-14"
-    },
-    {
-      "source": "F5 Bug Tracker",
       "id": "ID2449609",
       "headline_en": "Installing a hotfix via TMUI fails with \"Hotfix test failed due to version incompatibility\"",
       "headline_ja": "TMUI でホットフィックスをインストールしようとすると、「バージョンの非互換性によりホットフィックステストが失敗しました」というエラーが表示されます",
@@ -898,16 +1018,6 @@
       "product": "BIG-IP, BIG-IP TMOS",
       "url": "https://cdn.f5.com/product/bugtracker/ID2449609.html",
       "date": "2026-08-07"
-    },
-    {
-      "source": "F5 Bug Tracker",
-      "id": "ID2399785",
-      "headline_en": "Using a mac masquerade address of 02:F5:F5:xx:xx:xx causes traffic degradation.",
-      "headline_ja": "マックのマスクアドレス02:F5:F5:xx:xx:xxを使用すると、トラフィックが低下します。",
-      "versions": "F5OS v2.0.0, F5OS v2.0.0-HR1, F5OS v2.0.0-HR2, F5OS-A 1.8.3, F5OS-A 1.8.4, F5OS-A 1.8.4-HR1, F5OS-A 1.8.4-HR2, F5OS-C 1.8.2, F5OS-C 1.8.2-HR1, F5OS-C 1.8.2-HR2",
-      "product": "F5OS, F5OS F5OS-A, F5OS F5OS-C",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2399785.html",
-      "date": "2026-08-05"
     },
     {
       "source": "F5 Bug Tracker",
@@ -930,36 +1040,6 @@
       "date": "2026-07-29"
     },
     {
-      "source": "F5 Bug Tracker",
-      "id": "ID2395777",
-      "headline_en": "Radius monitor password encryption is incorrect",
-      "headline_ja": "Radiusモニタのパスワード暗号化が正しくありません。",
-      "versions": "21.1.0, 21.1.0.1, 21.1.0.2",
-      "product": "BIG-IP, BIG-IP LTM",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2395777.html",
-      "date": "2026-07-16"
-    },
-    {
-      "source": "F5 Bug Tracker",
-      "id": "ID2391145",
-      "headline_en": "HTTP/2 egress traffic is not forwarded on OpenShift 4.18.39 with ConnectX-7 (CX7) adapters",
-      "headline_ja": "OpenShift 4.18.39 で ConnectX-7（CX7）アダプタを使用した場合、HTTP/2 の送信トラフィックは転送されません。",
-      "versions": "2.3.2",
-      "product": "BIG_IP_NEXT(BNK), BIG_IP_NEXT(BNK) BNK",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2391145.html",
-      "date": "2026-07-16"
-    },
-    {
-      "source": "F5 Bug Tracker",
-      "id": "ID2389713",
-      "headline_en": "Intermittent retention of HTTP profile settings after detachment",
-      "headline_ja": "切り離し後のHTTPプロファイル設定が断続的に保持される",
-      "versions": "2.3.2",
-      "product": "BIG_IP_NEXT(BNK), BIG_IP_NEXT(BNK) BNK",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2389713.html",
-      "date": "2026-07-16"
-    },
-    {
       "source": "NVD (CVSS 7.5)",
       "id": "CVE-2026-59762",
       "headline_en": "When an HTTP/2 profile is configured on a virtual server, undisclosed requests can cause an increase in memory resource utilization.  \n\n\n\n\n\n\n\n\n\nImpact:\nSystem performance can degrade until the TMM process is either forced to restart or is manually restarted. This vulnerability allows a remote, unauthenticated attacker to cause a degradation of service that can lead to a denial-of-service (DoS) on the BIG-IP system. There is no control plane exposure; this is a data plane issue only.\n\n\n\n\n\nNote: Software versions which have reached End of Technical Support (EoTS) are not evaluated.",
@@ -970,86 +1050,6 @@
       "cvss": 7.5,
       "kev": false,
       "epss": 0.00573
-    },
-    {
-      "source": "F5 Bug Tracker",
-      "id": "ID2391333",
-      "headline_en": "Bigd: Failed to find EAV pinger script file for imported external monitor",
-      "headline_ja": "Bigd: インポートされた外部モニター用のEAVピンガースクリプトファイルが見つかりませんでした",
-      "versions": "17.1.3.4, 17.5.1.8, 21.0.0.3, 21.1.0.1",
-      "product": "BIG-IP, BIG-IP Install/Upgrade, BIG-IP TMOS",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2391333.html",
-      "date": "2026-07-15"
-    },
-    {
-      "source": "F5 Bug Tracker",
-      "id": "ID2391209",
-      "headline_en": "Intermittent traffic failures when tenant is running BIG-IP v17.5.1.6 or above and host is on version prior to F5OS-A 1.8.0 or F5OS-C 1.8.0",
-      "headline_ja": "テナントが BIG‑IP v17.5.1.6 以上で実行中で、ホストが F5OS‑A 1.8.0 または F5OS‑C 1.8.0 より前のバージョンの場合、断続的なトラフィック障害が発生します。",
-      "versions": "17.5.1.6, 17.5.1.8, 17.5.1.9",
-      "product": "BIG-IP, BIG-IP Install/Upgrade, BIG-IP LTM",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2391209.html",
-      "date": "2026-07-15"
-    },
-    {
-      "source": "F5 Bug Tracker",
-      "id": "ID2389797",
-      "headline_en": "Subscriber ID is missing in the `rsyslog` logs following the termination of all DSSM pods",
-      "headline_ja": "すべての DSSM ポッドが終了した後、`rsyslog` のログにサブスクライバー ID が欠落しています。",
-      "versions": "2.3.2",
-      "product": "BIG_IP_NEXT(BNK), BIG_IP_NEXT(BNK) BNK",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2389797.html",
-      "date": "2026-07-15"
-    },
-    {
-      "source": "F5 Bug Tracker",
-      "id": "ID2389277",
-      "headline_en": "ASM GUI Learning and Blocking page search result returning extra unnecessary items",
-      "headline_ja": "ASM GUI 学習およびブロッキングページの検索結果が余分な不要項目を返す",
-      "versions": "17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 21.1.0, 21.1.0.1, 21.1.0.2",
-      "product": "BIG-IP, BIG-IP ASM",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2389277.html",
-      "date": "2026-07-15"
-    },
-    {
-      "source": "F5 Bug Tracker",
-      "id": "ID2389273",
-      "headline_en": "Incorrect GUI HTTP Protocol Sub-Violation counts under Learning and Blocking Settings",
-      "headline_ja": "学習・ブロッキング設定における不正な GUI HTTP プロトコルサブ違反カウント",
-      "versions": "17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 21.1.0, 21.1.0.1, 21.1.0.2",
-      "product": "BIG-IP, BIG-IP ASM",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2389273.html",
-      "date": "2026-07-15"
-    },
-    {
-      "source": "F5 Bug Tracker",
-      "id": "ID2388333",
-      "headline_en": "BIG-IP terminates HTTP/2 with GOAWAY/PROTOCOL_ERROR when client sends empty initial SETTINGS frame",
-      "headline_ja": "BIG-IP は、クライアントが空の初期 SETTINGS フレームを送信したときに、GOAWAY/PROTOCOL_ERROR で HTTP/2 を終了します",
-      "versions": "21.1.0, 21.1.0.1, 21.1.0.2",
-      "product": "BIG-IP, BIG-IP LTM",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2388333.html",
-      "date": "2026-07-15"
-    },
-    {
-      "source": "F5 Bug Tracker",
-      "id": "ID2386237",
-      "headline_en": "Traffic-matching-criteria with no route-domain specified fails to match traffic in non-default route-domain partition",
-      "headline_ja": "ルートドメインが指定されていないトラフィックマッチング基準は、デフォルト以外のルートドメインパーティションのトラフィックにマッチしません。",
-      "versions": "17.1.0, 17.1.0.1, 17.1.0.2, 17.1.0.3, 17.1.1, 17.1.1.1, 17.1.1.2, 17.1.1.3, 17.1.1.4, 17.1.2, 17.1.2.1, 17.1.2.2, 17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5, 17.5.0, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 21.0.0, 21.0.0.1, 21.0.0.2, 21.0.0.3, 21.1.0, 21.1.0.1, 21.1.0.2",
-      "product": "BIG-IP, BIG-IP LTM",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2386237.html",
-      "date": "2026-07-15"
-    },
-    {
-      "source": "F5 Bug Tracker",
-      "id": "ID2388309",
-      "headline_en": "Error (TypeError: \"x\" is not a function) in jquery-ui-1.8.17.min.js:49:4075",
-      "headline_ja": "エラー (TypeError: 「x」は関数ではありません) jquery-ui-1.8.17.min.js の 49:4075",
-      "versions": "17.1.3.2, 17.1.3.4, 17.1.3.5, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 21.1.0, 21.1.0.1, 21.1.0.2",
-      "product": "BIG-IP, BIG-IP AFM",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2388309.html",
-      "date": "2026-07-10"
     },
     {
       "source": "NVD (CVSS 8.8)",

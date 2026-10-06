@@ -1,6 +1,6 @@
 {
   "label": "Cisco IOS XE",
-  "generated_at": "2026-10-05T04:01:56+00:00",
+  "generated_at": "2026-10-06T04:59:47+00:00",
   "count": 193,
   "rows": [
     {
@@ -1141,7 +1141,7 @@
       "date": "2023-10-04",
       "cvss": 6.5,
       "kev": false,
-      "epss": 0.00509
+      "epss": 0.00682
     },
     {
       "source": "NVD (CVSS 8.8)",
