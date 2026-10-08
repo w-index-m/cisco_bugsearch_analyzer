@@ -1,6 +1,6 @@
 {
   "label": "Cisco IOS XE",
-  "generated_at": "2026-10-06T04:59:47+00:00",
+  "generated_at": "2026-10-08T04:36:08+00:00",
   "count": 193,
   "rows": [
     {
@@ -1393,7 +1393,7 @@
       "date": "2022-10-10",
       "cvss": 8.6,
       "kev": false,
-      "epss": 0.00914
+      "epss": 0.00994
     },
     {
       "source": "NVD (CVSS 8.6)",
@@ -1405,7 +1405,7 @@
       "date": "2022-10-10",
       "cvss": 8.6,
       "kev": false,
-      "epss": 0.00942
+      "epss": 0.01023
     },
     {
       "source": "NVD (CVSS 7.7)",
@@ -1417,7 +1417,7 @@
       "date": "2022-10-10",
       "cvss": 7.7,
       "kev": false,
-      "epss": 0.00871
+      "epss": 0.00947
     },
     {
       "source": "NVD (CVSS 7.4)",
@@ -1429,7 +1429,7 @@
       "date": "2022-10-10",
       "cvss": 7.4,
       "kev": false,
-      "epss": 0.00293
+      "epss": 0.00304
     },
     {
       "source": "NVD (CVSS 6.1)",
@@ -1441,7 +1441,7 @@
       "date": "2022-10-10",
       "cvss": 6.1,
       "kev": false,
-      "epss": 0.00213
+      "epss": 0.00221
     },
     {
       "source": "NVD (CVSS 4.6)",
@@ -1453,7 +1453,7 @@
       "date": "2022-10-10",
       "cvss": 4.6,
       "kev": false,
-      "epss": 0.00279
+      "epss": 0.00289
     },
     {
       "source": "NVD (CVSS 8.6)",
