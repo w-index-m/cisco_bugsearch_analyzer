@@ -1,8 +1,48 @@
 {
   "label": "F5 BIG-IP",
-  "generated_at": "2026-10-08T04:39:28+00:00",
+  "generated_at": "2026-10-09T04:34:50+00:00",
   "count": 300,
   "rows": [
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2471785",
+      "headline_en": "In rare cases partition upgrade may fail but proceed as if it succeeded",
+      "headline_ja": "まれなケースでは、パーティションのアップグレードが失敗することがありますが、成功したかのように進めてください。",
+      "versions": "F5OS v2.0.0, F5OS v2.0.0-HR1, F5OS v2.0.0-HR2, F5OS-C 1.8.0, F5OS-C 1.8.1, F5OS-C 1.8.2, F5OS-C 1.8.2-HR1, F5OS-C 1.8.2-HR2",
+      "product": "F5OS, F5OS F5OS-C, F5OS Install/Upgrade",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2471785.html",
+      "date": "2026-10-09"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2471425",
+      "headline_en": "Configuration Restore Fails When a known-hosts SSH Server Is Unreachable",
+      "headline_ja": "設定復元が失敗する（既知のホストSSHサーバーにアクセスできない場合）",
+      "versions": "F5OS v2.0.0, F5OS v2.0.0-HR1, F5OS v2.0.0-HR2",
+      "product": "F5OS, F5OS F5OS-A, F5OS F5OS-C",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2471425.html",
+      "date": "2026-10-09"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2471321",
+      "headline_en": "SNMP sysName resets after device reboot",
+      "headline_ja": "SNMP sysName がデバイス再起動後にリセットされる",
+      "versions": "F5OS v2.0.0, F5OS v2.0.0-HR1, F5OS v2.0.0-HR2, F5OS-A 1.8.4, F5OS-A 1.8.4-HR1, F5OS-A 1.8.4-HR2",
+      "product": "F5OS, F5OS F5OS-C",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2471321.html",
+      "date": "2026-10-09"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2456525",
+      "headline_en": "Edge Client application icon is not visible on macOS menu bar when in disconnected mode",
+      "headline_ja": "Edge Client アプリケーションのアイコンは、切断モードのとき macOS のメニューバーに表示されません。",
+      "versions": "7.2.7.1, 7.2.7.2",
+      "product": "APM-Clients, APM-Clients TMOS",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2456525.html",
+      "date": "2026-10-09"
+    },
     {
       "source": "F5 Bug Tracker",
       "id": "ID2561821",
@@ -11,6 +51,16 @@
       "versions": "17.1.3.5, 17.5.1.9, 21.1.0.2",
       "product": "BIG-IP, BIG-IP LTM",
       "url": "https://cdn.f5.com/product/bugtracker/ID2561821.html",
+      "date": "2026-10-08"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2549661",
+      "headline_en": "BIG-IP VE: eal-intr-thread uses 100% CPU after VF removal on some Engineering Hotfixes",
+      "headline_ja": "BIG‑IP VE：一部のエンジニアリングホットフィックスで VF を削除した後、eal‑intr‑thread が CPU を 100％ 使用します",
+      "versions": "17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 21.1.0, 21.1.0.1, 21.1.0.2",
+      "product": "BIG-IP, BIG-IP TMOS",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2549661.html",
       "date": "2026-10-08"
     },
     {
@@ -31,6 +81,16 @@
       "versions": "17.5.1.9",
       "product": "BIG-IP",
       "url": "https://cdn.f5.com/product/bugtracker/ID2547377.html",
+      "date": "2026-10-08"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2534861",
+      "headline_en": "FastL4 with late binding enabled, if the connection is offloaded to PVA, the connection may break",
+      "headline_ja": "FastL4でレイテンシバインディングが有効になっている場合、接続がPVAにオフロードされると、接続が切断される可能性があります",
+      "versions": "17.1.0, 17.1.0.1, 17.1.0.2, 17.1.0.3, 17.1.1, 17.1.1.1, 17.1.1.2, 17.1.1.3, 17.1.1.4, 17.1.2, 17.1.2.1, 17.1.2.2, 17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5, 17.5.1.9",
+      "product": "BIG-IP, BIG-IP LTM",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2534861.html",
       "date": "2026-10-08"
     },
     {
@@ -65,6 +125,16 @@
     },
     {
       "source": "F5 Bug Tracker",
+      "id": "ID2453621",
+      "headline_en": "BIG-IQ system disk statistics are missing from the Directory Usage and File System Usage pages",
+      "headline_ja": "BIG‑IQ システムのディスク統計が、ディレクトリ使用量およびファイルシステム使用量ページに表示されていません。",
+      "versions": "8.4.2.1, 8.4.2.2",
+      "product": "BIG-IQ, BIG-IQ Platform",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2453621.html",
+      "date": "2026-10-08"
+    },
+    {
+      "source": "F5 Bug Tracker",
       "id": "ID2453441",
       "headline_en": "SNMP hrStorageTable GET-NEXT returns a genErr",
       "headline_ja": "SNMP hrStorageTable の GET‑NEXT は genErr を返します。",
@@ -75,33 +145,13 @@
     },
     {
       "source": "F5 Bug Tracker",
-      "id": "ID2449101",
-      "headline_en": "Rebooting a VELOS blade with deployed tenants using a mgmt-vlan may cause the tenants not to return to Running state",
-      "headline_ja": "管理 VLAN を使用してデプロイ済みテナントがある VELOS ブレードを再起動すると、テナントが Running 状態に戻らない可能性があります。",
-      "versions": "F5OS-C 1.8.2, F5OS-C 1.8.2-HR1, F5OS-C 1.8.2-HR2",
-      "product": "F5OS, F5OS F5OS-C",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2449101.html",
+      "id": "ID2452673",
+      "headline_en": "Error icons may appear in multiple UI sections when the DoS module is provisioned",
+      "headline_ja": "DoSモジュールがプロビジョニングされると、エラーアイコンが複数のUIセクションに表示されることがあります。",
+      "versions": "17.5.1.8, 17.5.1.9",
+      "product": "BIG-IP, BIG-IP AFM",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2452673.html",
       "date": "2026-10-08"
-    },
-    {
-      "source": "F5 Bug Tracker",
-      "id": "ID2448261",
-      "headline_en": "Snmpd cores while processing fan-tray statistics",
-      "headline_ja": "Snmpdがファントレイ統計の処理中にコアダンプしました",
-      "versions": "F5OS v2.0.0, F5OS v2.0.0-HR1, F5OS v2.0.0-HR2, F5OS-A 1.8.0, F5OS-A 1.8.1, F5OS-A 1.8.2, F5OS-A 1.8.3, F5OS-A 1.8.4, F5OS-A 1.8.4-HR1, F5OS-A 1.8.4-HR2",
-      "product": "F5OS, F5OS F5OS-A",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2448261.html",
-      "date": "2026-10-08"
-    },
-    {
-      "source": "F5 Bug Tracker",
-      "id": "ID2565605",
-      "headline_en": "PEM tethering detection may fail when network path modifies TTL values between subscriber device and BIG-IP",
-      "headline_ja": "ネットワーク経路がサブスクライバー機器と BIG‑IP 間の TTL 値を変更すると、PEM テザリング検出が失敗する可能性があります。",
-      "versions": "17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9",
-      "product": "BIG-IP, BIG-IP PEM",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2565605.html",
-      "date": "2026-10-07"
     },
     {
       "source": "F5 Bug Tracker",
@@ -315,16 +365,6 @@
     },
     {
       "source": "F5 Bug Tracker",
-      "id": "ID2448153",
-      "headline_en": "TMUI displays \"Instance not found\" for Virtual Servers with a colon (:) in the name",
-      "headline_ja": "TMUIは、名前にコロン（:）が含まれる仮想サーバーに対して「Instance not found」を表示します。",
-      "versions": "17.1.3.4, 17.1.3.5, 17.5.1.8, 17.5.1.9, 21.1.0.1, 21.1.0.2",
-      "product": "BIG-IP, BIG-IP TMOS",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2448153.html",
-      "date": "2026-10-05"
-    },
-    {
-      "source": "F5 Bug Tracker",
       "id": "ID2552245",
       "headline_en": "APM logs an error message similar to 'Duplicate entry found for [oauth-jwt-result]' when using an OAuth Client",
       "headline_ja": "OAuth クライアントを使用したとき、APM は「Duplicate entry found for [oauth-jwt-result]」に似たエラーメッセージを記録します。",
@@ -515,16 +555,6 @@
     },
     {
       "source": "F5 Bug Tracker",
-      "id": "ID2524317",
-      "headline_en": "Error applying hotfix",
-      "headline_ja": "ホットフィックスの適用エラー",
-      "versions": "17.1.3.2, 17.1.3.4, 17.1.3.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 21.1.0.2",
-      "product": "BIG-IP, BIG-IP Install/Upgrade, BIG-IP TMOS",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2524317.html",
-      "date": "2026-09-30"
-    },
-    {
-      "source": "F5 Bug Tracker",
       "id": "ID2503533",
       "headline_en": "HTTP AAA form-based authentication fails with multiple hidden form fields",
       "headline_ja": "HTTP AAA フォームベース認証は、複数の隠しフォームフィールドで失敗する",
@@ -688,6 +718,16 @@
       "cvss": 3.1,
       "kev": false,
       "epss": 0.0023
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2489213",
+      "headline_en": "Missing Elasticsearch plugins result in failures with aggregation and UI graph rendering.",
+      "headline_ja": "Elasticsearch のプラグインが欠如していると、集約や UI グラフのレンダリングで失敗が発生します。",
+      "versions": "8.4.2.1, 8.4.2.2",
+      "product": "BIG-IQ, BIG-IQ AppIQ",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2489213.html",
+      "date": "2026-09-02"
     },
     {
       "source": "F5 Bug Tracker",
@@ -881,6 +921,16 @@
     },
     {
       "source": "F5 Bug Tracker",
+      "id": "ID2455197",
+      "headline_en": "Guest users can save the BIG-IP system configuration through tmsh and the iControl REST API",
+      "headline_ja": "ゲストユーザーは tmsh と iControl REST API を使用して BIG‑IP システムの設定を保存できます。",
+      "versions": "17.5.1.6, 17.5.1.8, 17.5.1.9",
+      "product": "BIG-IP, BIG-IP TMOS",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2455197.html",
+      "date": "2026-08-25"
+    },
+    {
+      "source": "F5 Bug Tracker",
       "id": "ID2454733",
       "headline_en": "[APM][Portal Access] [PA] APM session times out despite user activity in Network Access (NA)",
       "headline_ja": "[APM][ポータルアクセス] [PA] ネットワークアクセス（NA）でユーザーがアクティブでもAPMセッションがタイムアウトする",
@@ -951,62 +1001,12 @@
     },
     {
       "source": "F5 Bug Tracker",
-      "id": "ID2449389",
-      "headline_en": "AFM DoS Network Events incorrectly show event=Attack None with attack ID=0 during active attacks.",
-      "headline_ja": "AFM DoSネットワークイベントは、アクティブな攻撃中にもかかわらず、event=Attack None と攻撃ID=0 を誤って表示します。",
-      "versions": "17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9",
-      "product": "BIG-IP, BIG-IP AVR",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2449389.html",
-      "date": "2026-08-25"
-    },
-    {
-      "source": "F5 Bug Tracker",
-      "id": "ID2448129",
-      "headline_en": "HMAC missing from HMAC DB for few modules in FIPS enabled device",
-      "headline_ja": "FIPS対応デバイスの一部モジュールで、HMACがHMAC DBに欠落しています。",
-      "versions": "17.1.3.4, 17.5.1.8, 21.0.0.3, 21.1.0.1",
-      "product": "BIG-IP, BIG-IP Install/Upgrade",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2448129.html",
-      "date": "2026-08-25"
-    },
-    {
-      "source": "F5 Bug Tracker",
-      "id": "ID2447941",
-      "headline_en": "Manager role cannot modify a virtual server that uses a port list or address list",
-      "headline_ja": "マネージャーロールは、ポートリストまたはアドレスリストを使用している仮想サーバーを変更できません。",
-      "versions": "17.1.0, 17.1.0.1, 17.1.0.2, 17.1.0.3, 17.1.1, 17.1.1.1, 17.1.1.2, 17.1.1.3, 17.1.1.4, 17.1.2, 17.1.2.1, 17.1.2.2, 17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5, 17.5.0, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 21.1.0, 21.1.0.1, 21.1.0.2",
-      "product": "BIG-IP, BIG-IP TMOS",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2447941.html",
-      "date": "2026-08-25"
-    },
-    {
-      "source": "F5 Bug Tracker",
       "id": "ID2449625",
       "headline_en": "On restart, TMM reserves NAT IP ranges used by another active TMM",
       "headline_ja": "再起動時、TMM は別のアクティブな TMM が使用している NAT IP 範囲を予約します。",
       "versions": "2.2.1, 2.2.2, 2.2.3, 2.3.0, 2.3.1, 2.3.2",
       "product": "BIG_IP_NEXT(BNK), BIG_IP_NEXT(BNK) BNK",
       "url": "https://cdn.f5.com/product/bugtracker/ID2449625.html",
-      "date": "2026-08-15"
-    },
-    {
-      "source": "F5 Bug Tracker",
-      "id": "ID2448441",
-      "headline_en": "APM VPE Unable to load Access Policies containing starts_with expressions after upgrading to 17.5.1.8",
-      "headline_ja": "APM VPEは、バージョン17.5.1.8にアップグレードした後、starts_with式を含むアクセスポリシーをロードできません。",
-      "versions": "17.1.3.4, 17.1.3.5, 17.5.1.8, 17.5.1.9, 21.1.0.1, 21.1.0.2",
-      "product": "BIG-IP, BIG-IP APM",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2448441.html",
-      "date": "2026-08-15"
-    },
-    {
-      "source": "F5 Bug Tracker",
-      "id": "ID2448133",
-      "headline_en": "MCP Fails to Validate Dos Profile while attaching to a Virtual Server",
-      "headline_ja": "MCP が仮想サーバーにアタッチ中に DoS プロファイルの検証に失敗しました",
-      "versions": "17.5.1.8, 17.5.1.9",
-      "product": "BIG-IP",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2448133.html",
       "date": "2026-08-15"
     },
     {

@@ -1,6 +1,6 @@
 {
   "label": "FortiGate (FortiOS)",
-  "generated_at": "2026-10-08T04:25:39+00:00",
+  "generated_at": "2026-10-09T04:40:54+00:00",
   "count": 215,
   "rows": [
     {
@@ -313,7 +313,7 @@
       "date": "2026-05-12",
       "cvss": 8.8,
       "kev": false,
-      "epss": 0.00561
+      "epss": 0.00564
     },
     {
       "source": "NVD (CVSS 6.5)",
@@ -325,7 +325,7 @@
       "date": "2026-04-14",
       "cvss": 6.5,
       "kev": false,
-      "epss": 0.00245
+      "epss": 0.00283
     },
     {
       "source": "NVD (CVSS 6.0)",
@@ -349,7 +349,7 @@
       "date": "2026-02-10",
       "cvss": 8.1,
       "kev": false,
-      "epss": 0.0071
+      "epss": 0.00759
     },
     {
       "source": "FortiGuard PSIRT (CVSS 7.5)",
@@ -374,7 +374,7 @@
       "date": "2026-02-10",
       "cvss": 6.7,
       "kev": false,
-      "epss": 0.01418
+      "epss": 0.01516
     },
     {
       "source": "NVD (CVSS 5.9)",
@@ -386,7 +386,7 @@
       "date": "2026-02-10",
       "cvss": 5.9,
       "kev": true,
-      "epss": 0.29601
+      "epss": 0.29499
     },
     {
       "source": "NVD (CVSS 5.8)",
@@ -398,7 +398,7 @@
       "date": "2026-02-10",
       "cvss": 5.8,
       "kev": false,
-      "epss": 0.00364
+      "epss": 0.00402
     },
     {
       "source": "NVD (CVSS 4.2)",
@@ -410,7 +410,7 @@
       "date": "2026-02-10",
       "cvss": 4.2,
       "kev": false,
-      "epss": 0.00143
+      "epss": 0.00158
     },
     {
       "source": "NVD (CVSS 3.2)",
@@ -2225,7 +2225,7 @@
       "date": "2022-11-02",
       "cvss": 4.7,
       "kev": false,
-      "epss": 0.00474
+      "epss": 0.00501
     },
     {
       "source": "NVD (CVSS 4.3)",
@@ -2249,7 +2249,7 @@
       "date": "2022-11-02",
       "cvss": 3.9,
       "kev": false,
-      "epss": 0.00472
+      "epss": 0.00482
     },
     {
       "source": "NVD (CVSS 3.7)",
@@ -2261,7 +2261,7 @@
       "date": "2022-11-02",
       "cvss": 3.7,
       "kev": false,
-      "epss": 0.00653
+      "epss": 0.00676
     },
     {
       "source": "NVD (CVSS 9.8)",
