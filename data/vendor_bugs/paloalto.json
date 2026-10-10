@@ -1,6 +1,6 @@
 {
   "label": "Palo Alto (PAN-OS)",
-  "generated_at": "2026-10-09T04:39:37+00:00",
+  "generated_at": "2026-10-10T04:33:43+00:00",
   "count": 631,
   "rows": [
     {
@@ -685,7 +685,7 @@
       "date": "2026-05-13",
       "cvss": 4.8,
       "kev": false,
-      "epss": 0.00179
+      "epss": 0.00164
     },
     {
       "source": "NVD (CVSS 4.7)",
@@ -769,7 +769,7 @@
       "date": "2026-02-11",
       "cvss": null,
       "kev": false,
-      "epss": 0.00545
+      "epss": 0.00582
     },
     {
       "source": "NVD (CVSS -)",
@@ -781,7 +781,7 @@
       "date": "2026-02-11",
       "cvss": null,
       "kev": false,
-      "epss": 0.00195
+      "epss": 0.00205
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -1777,7 +1777,7 @@
       "date": "2024-09-11",
       "cvss": 7.2,
       "kev": false,
-      "epss": 0.01419
+      "epss": 0.01407
     },
     {
       "source": "NVD (CVSS 7.1)",
@@ -1993,7 +1993,7 @@
       "date": "2024-04-10",
       "cvss": 7.5,
       "kev": false,
-      "epss": 0.00909
+      "epss": 0.00901
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -2017,7 +2017,7 @@
       "date": "2024-04-10",
       "cvss": 7.5,
       "kev": false,
-      "epss": 0.0093
+      "epss": 0.00922
     },
     {
       "source": "NVD (CVSS 7.4)",
@@ -2053,7 +2053,7 @@
       "date": "2024-04-10",
       "cvss": 5.3,
       "kev": false,
-      "epss": 0.00436
+      "epss": 0.00433
     },
     {
       "source": "NVD (CVSS 4.1)",
@@ -2113,7 +2113,7 @@
       "date": "2024-03-13",
       "cvss": 4.3,
       "kev": false,
-      "epss": 0.00568
+      "epss": 0.00563
     },
     {
       "source": "NVD (CVSS 6.8)",
