@@ -1,6 +1,6 @@
 {
   "label": "F5 BIG-IP",
-  "generated_at": "2026-10-10T04:28:01+00:00",
+  "generated_at": "2026-10-11T03:54:38+00:00",
   "count": 300,
   "rows": [
     {
@@ -841,6 +841,16 @@
     },
     {
       "source": "F5 Bug Tracker",
+      "id": "ID2489213",
+      "headline_en": "Missing Elasticsearch plugins result in failures with aggregation and UI graph rendering.",
+      "headline_ja": "Elasticsearchのプラグインが欠如していると、集計や UI グラフのレンダリングで失敗が発生します。",
+      "versions": "8.4.2.1, 8.4.2.2",
+      "product": "BIG-IQ, BIG-IQ AppIQ",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2489213.html",
+      "date": "2026-09-02"
+    },
+    {
+      "source": "F5 Bug Tracker",
       "id": "ID2487809",
       "headline_en": "TMM may restart after a geolocation database update when a FastL4 virtual server collects city or postal code analytics",
       "headline_ja": "FastL4 仮想サーバが都市または郵便番号の分析を収集した際、ジオロケーションデータベースが更新された後に TMM が再起動することがあります。",
@@ -878,16 +888,6 @@
       "product": "BIG-IP, BIG-IP TMOS",
       "url": "https://cdn.f5.com/product/bugtracker/ID2483197.html",
       "date": "2026-08-31"
-    },
-    {
-      "source": "F5 Bug Tracker",
-      "id": "ID2456769",
-      "headline_en": "Gradual increase in TMM memory usage",
-      "headline_ja": "TMMメモリ使用量の徐々の増加",
-      "versions": "2.1.0, 2.1.1, 2.2.0, 2.2.1, 2.2.2, 2.2.3, 2.3.0, 2.3.1, 2.3.2",
-      "product": "BIG_IP_NEXT(BNK), BIG_IP_NEXT(BNK) BNK",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2456769.html",
-      "date": "2026-08-28"
     },
     {
       "source": "F5 Bug Tracker",
