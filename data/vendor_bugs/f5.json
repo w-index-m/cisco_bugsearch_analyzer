@@ -1,6 +1,6 @@
 {
   "label": "F5 BIG-IP",
-  "generated_at": "2026-10-11T03:54:38+00:00",
+  "generated_at": "2026-10-12T04:29:58+00:00",
   "count": 300,
   "rows": [
     {
@@ -2249,7 +2249,7 @@
       "date": "2023-10-10",
       "cvss": 9.9,
       "kev": false,
-      "epss": 0.02375
+      "epss": 0.0229
     },
     {
       "source": "NVD (CVSS 8.7)",
@@ -2261,7 +2261,7 @@
       "date": "2023-10-10",
       "cvss": 8.7,
       "kev": false,
-      "epss": 0.00435
+      "epss": 0.00533
     },
     {
       "source": "NVD (CVSS 8.1)",
@@ -2273,7 +2273,7 @@
       "date": "2023-10-10",
       "cvss": 8.1,
       "kev": false,
-      "epss": 0.00457
+      "epss": 0.00547
     },
     {
       "source": "NVD (CVSS 7.8)",
@@ -2285,7 +2285,7 @@
       "date": "2023-10-10",
       "cvss": 7.8,
       "kev": false,
-      "epss": 0.00146
+      "epss": 0.00157
     },
     {
       "source": "NVD (CVSS 7.4)",
@@ -2297,7 +2297,7 @@
       "date": "2023-10-10",
       "cvss": 7.4,
       "kev": false,
-      "epss": 0.00376
+      "epss": 0.00456
     },
     {
       "source": "NVD (CVSS 7.3)",
@@ -2309,7 +2309,7 @@
       "date": "2023-10-10",
       "cvss": 7.3,
       "kev": false,
-      "epss": 0.0014
+      "epss": 0.00154
     },
     {
       "source": "NVD (CVSS 7.2)",
@@ -2321,7 +2321,7 @@
       "date": "2023-10-10",
       "cvss": 7.2,
       "kev": false,
-      "epss": 0.00533
+      "epss": 0.00652
     },
     {
       "source": "NVD (CVSS 5.5)",
@@ -2333,7 +2333,7 @@
       "date": "2023-10-10",
       "cvss": 5.5,
       "kev": false,
-      "epss": 0.00171
+      "epss": 0.00184
     },
     {
       "source": "NVD (CVSS 5.5)",
@@ -2345,7 +2345,7 @@
       "date": "2023-10-10",
       "cvss": 5.5,
       "kev": false,
-      "epss": 0.00171
+      "epss": 0.00184
     },
     {
       "source": "NVD (CVSS 4.4)",
@@ -2357,7 +2357,7 @@
       "date": "2023-10-10",
       "cvss": 4.4,
       "kev": false,
-      "epss": 0.00175
+      "epss": 0.00188
     },
     {
       "source": "NVD (CVSS 4.4)",
@@ -2369,7 +2369,7 @@
       "date": "2023-10-10",
       "cvss": 4.4,
       "kev": false,
-      "epss": 0.00175
+      "epss": 0.00188
     },
     {
       "source": "NVD (CVSS 4.3)",
@@ -2381,7 +2381,7 @@
       "date": "2023-10-10",
       "cvss": 4.3,
       "kev": false,
-      "epss": 0.00244
+      "epss": 0.00298
     },
     {
       "source": "NVD (CVSS 6.8)",
