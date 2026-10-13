@@ -1,6 +1,6 @@
 {
   "label": "FortiGate (FortiOS)",
-  "generated_at": "2026-10-12T04:20:47+00:00",
+  "generated_at": "2026-10-13T05:24:29+00:00",
   "count": 215,
   "rows": [
     {
@@ -16,7 +16,7 @@
       "epss": 0.00247
     },
     {
-      "source": "FortiGuard PSIRT (CVSS 7.3)",
+      "source": "FortiGuard PSIRT (CVSS 8.1)",
       "id": "FG-IR-26-174",
       "headline_en": "ZTNA Portal Improper Certificate Validation",
       "headline_ja": "ZTNAポータルの不適切な証明書検証",
@@ -24,7 +24,7 @@
       "product": "FortiOS",
       "url": "https://fortiguard.fortinet.com/psirt/FG-IR-26-174",
       "date": "2026-09-08",
-      "cvss": 7.3,
+      "cvss": 8.1,
       "kev": null,
       "epss": null
     },
@@ -41,7 +41,7 @@
       "epss": 0.00495
     },
     {
-      "source": "FortiGuard PSIRT (CVSS 2.5)",
+      "source": "FortiGuard PSIRT (CVSS 2.7)",
       "id": "FG-IR-26-173",
       "headline_en": "Null Pointer Dereference in Log Report",
       "headline_ja": "ログレポートにおけるヌルポインタ参照",
@@ -49,12 +49,12 @@
       "product": "FortiOS",
       "url": "https://fortiguard.fortinet.com/psirt/FG-IR-26-173",
       "date": "2026-09-08",
-      "cvss": 2.5,
+      "cvss": 2.7,
       "kev": null,
       "epss": null
     },
     {
-      "source": "FortiGuard PSIRT (CVSS 7.3)",
+      "source": "FortiGuard PSIRT (CVSS 8.1)",
       "id": "FG-IR-26-160",
       "headline_en": "FGFM Authentication Weakening via CLI Configuration",
       "headline_ja": "CLI構成によるFGFM認証の弱体化",
@@ -62,7 +62,7 @@
       "product": "FortiManager",
       "url": "https://fortiguard.fortinet.com/psirt/FG-IR-26-160",
       "date": "2026-08-12",
-      "cvss": 7.3,
+      "cvss": 8.1,
       "kev": null,
       "epss": null
     },
@@ -79,6 +79,19 @@
       "epss": 0.00421
     },
     {
+      "source": "FortiGuard PSIRT (CVSS 5.6)",
+      "id": "FG-IR-26-161",
+      "headline_en": "Stack buffer overflow in WAD",
+      "headline_ja": "WAD のスタックバッファオーバーフロー",
+      "versions": "(不明)",
+      "product": "FortiOS",
+      "url": "https://fortiguard.fortinet.com/psirt/FG-IR-26-161",
+      "date": "2026-08-12",
+      "cvss": 5.6,
+      "kev": null,
+      "epss": null
+    },
+    {
       "source": "NVD (CVSS 5.3)",
       "id": "CVE-2026-71408",
       "headline_en": "A allocation of resources without limits or throttling vulnerability in Fortinet FortiOS 7.6.0 through 7.6.6, FortiOS 7.4 all versions, FortiOS 7.2 all versions may allow attacker to denial of service via <insert attack vector here>",
@@ -91,20 +104,7 @@
       "epss": 0.00402
     },
     {
-      "source": "FortiGuard PSIRT (CVSS 5.1)",
-      "id": "FG-IR-26-161",
-      "headline_en": "Stack buffer overflow in WAD",
-      "headline_ja": "WAD のスタックバッファオーバーフロー",
-      "versions": "(不明)",
-      "product": "FortiOS",
-      "url": "https://fortiguard.fortinet.com/psirt/FG-IR-26-161",
-      "date": "2026-08-12",
-      "cvss": 5.1,
-      "kev": null,
-      "epss": null
-    },
-    {
-      "source": "FortiGuard PSIRT (CVSS 5.0)",
+      "source": "FortiGuard PSIRT (CVSS 5.3)",
       "id": "FG-IR-26-162",
       "headline_en": "UI DoS attack",
       "headline_ja": "UI DoS攻撃",
@@ -112,7 +112,7 @@
       "product": "FortiOS",
       "url": "https://fortiguard.fortinet.com/psirt/FG-IR-26-162",
       "date": "2026-08-12",
-      "cvss": 5.0,
+      "cvss": 5.3,
       "kev": null,
       "epss": null
     },
@@ -127,6 +127,19 @@
       "cvss": 6.6,
       "kev": false,
       "epss": 0.0067
+    },
+    {
+      "source": "FortiGuard PSIRT (CVSS 6.6)",
+      "id": "FG-IR-26-148",
+      "headline_en": "Stack Buffer Overflow in Log Report",
+      "headline_ja": "ログレポートにおけるスタックバッファオーバーフロー",
+      "versions": "(不明)",
+      "product": "FortiOS",
+      "url": "https://fortiguard.fortinet.com/psirt/FG-IR-26-148",
+      "date": "2026-07-14",
+      "cvss": 6.6,
+      "kev": null,
+      "epss": null
     },
     {
       "source": "NVD (CVSS 6.1)",
@@ -154,19 +167,6 @@
       "epss": null
     },
     {
-      "source": "FortiGuard PSIRT (CVSS 5.9)",
-      "id": "FG-IR-26-148",
-      "headline_en": "Stack Buffer Overflow in Log Report",
-      "headline_ja": "ログレポートにおけるスタックバッファオーバーフロー",
-      "versions": "(不明)",
-      "product": "FortiOS",
-      "url": "https://fortiguard.fortinet.com/psirt/FG-IR-26-148",
-      "date": "2026-07-14",
-      "cvss": 5.9,
-      "kev": null,
-      "epss": null
-    },
-    {
       "source": "NVD (CVSS 5.5)",
       "id": "CVE-2026-59839",
       "headline_en": "A improper limitation of a pathname to a restricted directory ('path traversal') vulnerability in Fortinet FortiOS 7.6.0 through 7.6.6, FortiOS 7.4.0 through 7.4.9, FortiOS 7.2 all versions, FortiOS 7.0 all versions, FortiOS 6.4 all versions, FortiPAM 1.8.0, FortiPAM 1.7.0 through 1.7.2, FortiPAM 1.6 all versions, FortiPAM 1.5 all versions, FortiPAM 1.4 all versions, FortiPAM 1.3 all versions, FortiPAM 1.2 all versions, FortiPAM 1.1 all versions, FortiPAM 1.0 all versions, FortiProxy 7.6.0 through 7.6.5, FortiProxy 7.4 through 7.4.13, FortiProxy 7.2 all versions, FortiProxy 7.0 all versions may allow attacker to execute unauthorized code or commands via <insert attack vector here>",
@@ -179,7 +179,7 @@
       "epss": 0.00251
     },
     {
-      "source": "FortiGuard PSIRT (CVSS 5.0)",
+      "source": "FortiGuard PSIRT (CVSS 5.5)",
       "id": "FG-IR-26-151",
       "headline_en": "Path traversal in CLI command allows deletion of root file system",
       "headline_ja": "CLIコマンドにおけるパストラバーサルは、ルートファイルシステムの削除を可能にします",
@@ -187,7 +187,7 @@
       "product": "FortiOS",
       "url": "https://fortiguard.fortinet.com/psirt/FG-IR-26-151",
       "date": "2026-07-14",
-      "cvss": 5.0,
+      "cvss": 5.5,
       "kev": null,
       "epss": null
     },
@@ -216,7 +216,7 @@
       "epss": 0.00381
     },
     {
-      "source": "FortiGuard PSIRT (CVSS 4.1)",
+      "source": "FortiGuard PSIRT (CVSS 4.3)",
       "id": "FG-IR-26-154",
       "headline_en": "Buffer overread in authd and wad daemon",
       "headline_ja": "authd と wad デーモンにおけるバッファオーバーリード",
@@ -224,7 +224,7 @@
       "product": "FortiOS",
       "url": "https://fortiguard.fortinet.com/psirt/FG-IR-26-154",
       "date": "2026-07-14",
-      "cvss": 4.1,
+      "cvss": 4.3,
       "kev": null,
       "epss": null
     },
@@ -291,7 +291,7 @@
       "epss": 0.00149
     },
     {
-      "source": "FortiGuard PSIRT (CVSS 6.0)",
+      "source": "FortiGuard PSIRT (CVSS 6.7)",
       "id": "FG-IR-26-143",
       "headline_en": "Restricted CLI escape using Lua",
       "headline_ja": "Lua を使用した制限付き CLI エスケープ",
@@ -299,7 +299,7 @@
       "product": "FortiOS",
       "url": "https://fortiguard.fortinet.com/psirt/FG-IR-26-143",
       "date": "2026-06-09",
-      "cvss": 6.0,
+      "cvss": 6.7,
       "kev": null,
       "epss": null
     },
@@ -352,7 +352,7 @@
       "epss": 0.00759
     },
     {
-      "source": "FortiGuard PSIRT (CVSS 7.5)",
+      "source": "FortiGuard PSIRT (CVSS 8.1)",
       "id": "FG-IR-25-1052",
       "headline_en": "LDAP authentication bypass in Agentless VPN and FSSO",
       "headline_ja": "エージェントレス VPN と FSSO における LDAP 認証バイパス",
@@ -360,7 +360,7 @@
       "product": "FortiOS",
       "url": "https://fortiguard.fortinet.com/psirt/FG-IR-25-1052",
       "date": "2026-02-10",
-      "cvss": 7.5,
+      "cvss": 8.1,
       "kev": null,
       "epss": null
     },
@@ -533,7 +533,7 @@
       "epss": 0.00152
     },
     {
-      "source": "FortiGuard PSIRT (CVSS 1.8)",
+      "source": "FortiGuard PSIRT (CVSS 1.9)",
       "id": "FG-IR-25-545",
       "headline_en": "Trusted hosts bypass via SSH",
       "headline_ja": "SSHを介した信頼ホストのバイパス",
@@ -541,7 +541,7 @@
       "product": "FortiOS",
       "url": "https://fortiguard.fortinet.com/psirt/FG-IR-25-545",
       "date": "2025-11-18",
-      "cvss": 1.8,
+      "cvss": 1.9,
       "kev": null,
       "epss": null
     },
@@ -714,6 +714,19 @@
       "epss": 0.00361
     },
     {
+      "source": "FortiGuard PSIRT (CVSS 2.7)",
+      "id": "FG-IR-24-452",
+      "headline_en": "Insertion of Sensitive 2FA Information in logs and debug command",
+      "headline_ja": "ログやデバッグコマンドへの機密2要素認証情報の挿入",
+      "versions": "(不明)",
+      "product": "FortiOS",
+      "url": "https://fortiguard.fortinet.com/psirt/FG-IR-24-452",
+      "date": "2025-10-14",
+      "cvss": 2.7,
+      "kev": null,
+      "epss": null
+    },
+    {
       "source": "NVD (CVSS 2.6)",
       "id": "CVE-2025-47890",
       "headline_en": "An URL Redirection to Untrusted Site vulnerabilities [CWE-601] vulnerability in Fortinet FortiOS 7.6.0 through 7.6.3, FortiOS 7.4.0 through 7.4.8, FortiOS 7.2 all versions, FortiOS 7.0 all versions, FortiOS 6.4 all versions, FortiProxy 7.6.0 through 7.6.3, FortiProxy 7.4 all versions, FortiProxy 7.2 all versions, FortiProxy 7.0 all versions, FortiSASE 25.2.a may allow an unauthenticated attacker to perform an open redirect attack via crafted HTTP requests.",
@@ -724,19 +737,6 @@
       "cvss": 2.6,
       "kev": false,
       "epss": 0.00254
-    },
-    {
-      "source": "FortiGuard PSIRT (CVSS 2.6)",
-      "id": "FG-IR-24-452",
-      "headline_en": "Insertion of Sensitive 2FA Information in logs and debug command",
-      "headline_ja": "ログやデバッグコマンドへの機密2要素認証情報の挿入",
-      "versions": "(不明)",
-      "product": "FortiOS",
-      "url": "https://fortiguard.fortinet.com/psirt/FG-IR-24-452",
-      "date": "2025-10-14",
-      "cvss": 2.6,
-      "kev": null,
-      "epss": null
     },
     {
       "source": "NVD (CVSS 6.7)",
@@ -895,7 +895,7 @@
       "epss": 0.00536
     },
     {
-      "source": "FortiGuard PSIRT (CVSS 3.9)",
+      "source": "FortiGuard PSIRT (CVSS 4.3)",
       "id": "FG-IR-24-257",
       "headline_en": "Information Disclosure on SSLVPN endpoint",
       "headline_ja": "SSLVPNエンドポイントの情報開示",
@@ -903,7 +903,7 @@
       "product": "FortiOS",
       "url": "https://fortiguard.fortinet.com/psirt/FG-IR-24-257",
       "date": "2025-06-10",
-      "cvss": 3.9,
+      "cvss": 4.3,
       "kev": null,
       "epss": null
     },

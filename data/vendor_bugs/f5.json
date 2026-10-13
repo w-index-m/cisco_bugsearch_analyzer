@@ -1,8 +1,88 @@
 {
   "label": "F5 BIG-IP",
-  "generated_at": "2026-10-12T04:29:58+00:00",
+  "generated_at": "2026-10-13T05:35:07+00:00",
   "count": 300,
   "rows": [
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2553501",
+      "headline_en": "DLP - Missing help text for DLP Policy anf Peofile",
+      "headline_ja": "DLP - DLP ポリシーとプロファイルのヘルプテキストがありません",
+      "versions": "21.1.0.2",
+      "product": "BIG-IP, BIG-IP LTM",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2553501.html",
+      "date": "2026-10-13"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2552745",
+      "headline_en": "F5CTU (f5wininfo.exe) does not compress the generated report when the Compressed option is selected",
+      "headline_ja": "F5CTU（f5wininfo.exe）は、圧縮オプションが選択されている場合、生成されたレポートを圧縮しません。",
+      "versions": "7.2.6, 7.2.6.1, 7.2.6.2, 7.2.7, 7.2.7.1, 7.2.7.2",
+      "product": "APM-Clients, APM-Clients APM",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2552745.html",
+      "date": "2026-10-13"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2552397",
+      "headline_en": "PVA acceleration at embryonic should be disabled when mss-override is set",
+      "headline_ja": "胚発生期のPVA加速は、mss-overrideが設定されている場合に無効にすべきです",
+      "versions": "17.5.1.9",
+      "product": "BIG-IP, BIG-IP LTM",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2552397.html",
+      "date": "2026-10-13"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2533641",
+      "headline_en": "DAGv2 table distribution may change after TMM restart or chassis reboot",
+      "headline_ja": "DAGv2 テーブルの配分は、TMM の再起動やシャーシのリブート後に変更される可能性があります。",
+      "versions": "17.5.0, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9",
+      "product": "BIG-IP, BIG-IP LTM",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2533641.html",
+      "date": "2026-10-13"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2524697",
+      "headline_en": "Aggregated management port links are bounced during switchd initialization or failover",
+      "headline_ja": "スイッチデーモンの初期化またはフェイルオーバー時に、集約管理ポートリンクがリセットされます。",
+      "versions": "F5OS-C 1.8.2, F5OS-C 1.8.2-HR1, F5OS-C 1.8.2-HR2",
+      "product": "F5OS, F5OS F5OS-C",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2524697.html",
+      "date": "2026-10-13"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2524309",
+      "headline_en": "ConfigSync fails for a certificate with an existing OCSP cert-validator",
+      "headline_ja": "既存の OCSP 証明書バリデーターがある証明書で ConfigSync が失敗する",
+      "versions": "21.1.0, 21.1.0.1, 21.1.0.2",
+      "product": "BIG-IP, BIG-IP LTM",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2524309.html",
+      "date": "2026-10-13"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2524241",
+      "headline_en": "QKViews can no longer be downloaded in the GUI after five canceled downloads",
+      "headline_ja": "QKViewsは、5回のダウンロードがキャンセルされた後、GUIでダウンロードできなくなりました。",
+      "versions": "F5OS v2.0.0, F5OS v2.0.0-HR1, F5OS v2.0.0-HR2",
+      "product": "F5OS, F5OS F5OS-A, F5OS F5OS-C",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2524241.html",
+      "date": "2026-10-13"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2515513",
+      "headline_en": "F5OS GUI does not correctly handle LDAP authentication with multiple base DNs",
+      "headline_ja": "F5OS GUI は、複数のベース DN を使用した LDAP 認証を正しく処理できません。",
+      "versions": "F5OS v2.0.0, F5OS v2.0.0-HR1, F5OS v2.0.0-HR2",
+      "product": "F5OS, F5OS F5OS-A, F5OS F5OS-C",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2515513.html",
+      "date": "2026-10-13"
+    },
     {
       "source": "F5 Bug Tracker",
       "id": "ID2567745",
@@ -466,21 +546,11 @@
     {
       "source": "F5 Bug Tracker",
       "id": "ID2488365",
-      "headline_en": "BD may crash while handling certain websockets traffic",
-      "headline_ja": "BDは特定のWebSocketトラフィックを処理中にクラッシュする可能性があります。",
+      "headline_en": "BD crashes",
+      "headline_ja": "BDがクラッシュします",
       "versions": "21.1.0, 21.1.0.1, 21.1.0.2",
       "product": "BIG-IP, BIG-IP ASM",
       "url": "https://cdn.f5.com/product/bugtracker/ID2488365.html",
-      "date": "2026-10-05"
-    },
-    {
-      "source": "F5 Bug Tracker",
-      "id": "ID2459237",
-      "headline_en": "Disk provisioning error does not identify available volume group capacity",
-      "headline_ja": "ディスクのプロビジョニングエラーは、利用可能なボリュームグループの容量を特定できません",
-      "versions": "17.5.1.8, 17.5.1.9",
-      "product": "BIG-IP, BIG-IP TMOS",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2459237.html",
       "date": "2026-10-05"
     },
     {
@@ -581,16 +651,6 @@
       "versions": "17.5.1.9",
       "product": "BIG-IP, BIG-IP TMOS",
       "url": "https://cdn.f5.com/product/bugtracker/ID2489273.html",
-      "date": "2026-10-01"
-    },
-    {
-      "source": "F5 Bug Tracker",
-      "id": "ID2457521",
-      "headline_en": "F5OS blades unable to join cluster after downgrading from F5OS 2.0.0",
-      "headline_ja": "F5OSブレードがF5OS 2.0.0からダウングレードした後、クラスターに参加できません",
-      "versions": "F5OS-C 1.8.0, F5OS-C 1.8.1, F5OS-C 1.8.2, F5OS-C 1.8.2-HR1, F5OS-C 1.8.2-HR2",
-      "product": "F5OS, F5OS F5OS-C",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2457521.html",
       "date": "2026-10-01"
     },
     {
@@ -978,66 +1038,6 @@
       "product": "BIG-IP, BIG-IP TMOS",
       "url": "https://cdn.f5.com/product/bugtracker/ID2461221.html",
       "date": "2026-08-25"
-    },
-    {
-      "source": "F5 Bug Tracker",
-      "id": "ID2460741",
-      "headline_en": "FDB entries may not always be deleted when a tenant is rebooted or upgraded",
-      "headline_ja": "テナントが再起動またはアップグレードされたときに、FDBエントリが必ずしも削除されるわけではありません。",
-      "versions": "17.1.3.5, 21.1.0.2",
-      "product": "BIG-IP, BIG-IP TMOS",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2460741.html",
-      "date": "2026-08-25"
-    },
-    {
-      "source": "F5 Bug Tracker",
-      "id": "ID2460637",
-      "headline_en": "Intermittent MCPD database errors for partition_object_join on BIG-IP VE HA pairs",
-      "headline_ja": "BIG‑IP VE HA ペアにおける partition_object_join の断続的な MCPD データベースエラー",
-      "versions": "17.1.2, 17.1.2.1, 17.1.2.2, 17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5",
-      "product": "BIG-IP, BIG-IP TMOS",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2460637.html",
-      "date": "2026-08-25"
-    },
-    {
-      "source": "F5 Bug Tracker",
-      "id": "ID2459589",
-      "headline_en": "[APM][VDI]VMware Horizon WebTop \"Settings > here\" link uses obsolete VMware client download URL and opens HTTP 404",
-      "headline_ja": "[APM][VDI]VMware Horizon WebTop の「Settings > here」リンクが古い VMware クライアントのダウンロード URL を使用し、HTTP 404 が表示される",
-      "versions": "17.1.0, 17.1.0.1, 17.1.0.2, 17.1.0.3, 17.1.1, 17.1.1.1, 17.1.1.2, 17.1.1.3, 17.1.1.4, 17.1.2, 17.1.2.1, 17.1.2.2, 17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5, 17.5.0, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 21.0.0, 21.0.0.1, 21.0.0.2, 21.0.0.3, 21.1.0, 21.1.0.1, 21.1.0.2",
-      "product": "BIG-IP, BIG-IP APM",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2459589.html",
-      "date": "2026-08-25"
-    },
-    {
-      "source": "F5 Bug Tracker",
-      "id": "ID2459393",
-      "headline_en": "TMM crash when PEM policy tcl-filter uses PEM::session info attr on multi-blade system",
-      "headline_ja": "マルチブレードシステムで PEM ポリシー tcl-filter が PEM::session 情報属性を使用した際に TMM がクラッシュする",
-      "versions": "17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9",
-      "product": "BIG-IP, BIG-IP PEM",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2459393.html",
-      "date": "2026-08-25"
-    },
-    {
-      "source": "F5 Bug Tracker",
-      "id": "ID2457377",
-      "headline_en": "Missing MAILTO=\"\" statement in cron files",
-      "headline_ja": "cron ファイルに MAILTO=\"\" ステートメントがありません",
-      "versions": "17.1.0, 17.1.0.1, 17.1.0.2, 17.1.0.3, 17.1.1, 17.1.1.1, 17.1.1.2, 17.1.1.3, 17.1.1.4, 17.1.2, 17.1.2.1, 17.1.2.2, 17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5, 17.5.0, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 21.1.0, 21.1.0.1, 21.1.0.2",
-      "product": "BIG-IP, BIG-IP TMOS",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2457377.html",
-      "date": "2026-08-25"
-    },
-    {
-      "source": "F5 Bug Tracker",
-      "id": "ID2457541",
-      "headline_en": "Warning: The current license is not valid - Fault code: 51133",
-      "headline_ja": "警告: 現在のライセンスは無効です - エラーコード: 51133",
-      "versions": "8.1.0, 8.1.0.1, 8.1.0.2, 8.2.0, 8.2.0.1, 8.3.0, 8.4.0, 8.4.1, 8.4.2, 8.4.2.1, 8.4.2.2",
-      "product": "BIG-IQ, BIG-IQ Device",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2457541.html",
-      "date": "2026-08-14"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -1817,7 +1817,7 @@
       "date": "2025-02-05",
       "cvss": 7.5,
       "kev": false,
-      "epss": 0.00411
+      "epss": 0.00408
     },
     {
       "source": "NVD (CVSS 7.5)",
