@@ -1,8 +1,46 @@
 {
   "label": "FortiGate (FortiOS)",
-  "generated_at": "2026-10-13T05:24:29+00:00",
-  "count": 215,
+  "generated_at": "2026-10-14T03:41:33+00:00",
+  "count": 216,
   "rows": [
+    {
+      "source": "FortiGuard PSIRT (CVSS 6.7)",
+      "id": "FG-IR-26-181",
+      "headline_en": "GUI Denial of Service",
+      "headline_ja": "GUI のサービス拒否",
+      "versions": "(不明)",
+      "product": "FortiOS",
+      "url": "https://fortiguard.fortinet.com/psirt/FG-IR-26-181",
+      "date": "2026-10-13",
+      "cvss": 6.7,
+      "kev": null,
+      "epss": null
+    },
+    {
+      "source": "NVD (CVSS 2.3)",
+      "id": "CVE-2026-106175",
+      "headline_en": "A Double Free vulnerability [CWE-415] vulnerability in Fortinet FortiOS 7.6.0 through 7.6.7, FortiOS 7.4 all versions, FortiOS 7.2 all versions, FortiProxy 7.6.0 through 7.6.6, FortiProxy 7.4 all versions, FortiProxy 7.2 all versions, FortiSwitch 7.6.0 through 7.6.6, FortiSwitch 7.4 all versions, FortiSwitch 7.2 all versions may allow a local authenticated attacker to crash the newcli daemon via crafted CLI commands.",
+      "headline_ja": "Fortinet FortiOS 7.6.0 から 7.6.7、FortiOS 7.4 の全バージョン、FortiOS 7.2 の全バージョン、FortiProxy 7.6.0 から 7.6.6、FortiProxy 7.4 の全バージョン、FortiProxy 7.2 の全バージョン、FortiSwitch 7.6.0 から 7.6.6、FortiSwitch 7.4 の全バージョン、FortiSwitch 7.2 の全バージョンに存在する Double Free 脆弱性（CWE-415）は、ローカルで認証された攻撃者が細工された CLI コマンドを使用して newcli デーモンをクラッシュさせる可能性があります。",
+      "versions": "7.6.0, 7.6.7, 7.6.6",
+      "url": "https://fortiguard.fortinet.com/psirt/FG-IR-26-182",
+      "date": "2026-10-13",
+      "cvss": 2.3,
+      "kev": false,
+      "epss": null
+    },
+    {
+      "source": "FortiGuard PSIRT (CVSS 2.1)",
+      "id": "FG-IR-26-182",
+      "headline_en": "Double free in signal handler",
+      "headline_ja": "シグナルハンドラでの二重解放",
+      "versions": "(不明)",
+      "product": "FortiOS",
+      "url": "https://fortiguard.fortinet.com/psirt/FG-IR-26-182",
+      "date": "2026-10-13",
+      "cvss": 2.1,
+      "kev": null,
+      "epss": null
+    },
     {
       "source": "NVD (CVSS 8.1)",
       "id": "CVE-2026-84393",
@@ -531,19 +569,6 @@
       "cvss": 1.9,
       "kev": false,
       "epss": 0.00152
-    },
-    {
-      "source": "FortiGuard PSIRT (CVSS 1.9)",
-      "id": "FG-IR-25-545",
-      "headline_en": "Trusted hosts bypass via SSH",
-      "headline_ja": "SSHを介した信頼ホストのバイパス",
-      "versions": "(不明)",
-      "product": "FortiOS",
-      "url": "https://fortiguard.fortinet.com/psirt/FG-IR-25-545",
-      "date": "2025-11-18",
-      "cvss": 1.9,
-      "kev": null,
-      "epss": null
     },
     {
       "source": "NVD (CVSS 8.2)",
@@ -2405,7 +2430,7 @@
       "date": "2022-05-24",
       "cvss": 5.4,
       "kev": false,
-      "epss": 0.00201
+      "epss": 0.00204
     },
     {
       "source": "NVD (CVSS 6.1)",
@@ -2586,18 +2611,6 @@
       "cvss": 4.3,
       "kev": false,
       "epss": 0.01035
-    },
-    {
-      "source": "NVD (CVSS 5.4)",
-      "id": "CVE-2019-17656",
-      "headline_en": "A Stack-based Buffer Overflow vulnerability in the HTTPD daemon of FortiOS 6.0.10 and below, 6.2.2 and below and FortiProxy 1.0.x, 1.1.x, 1.2.9 and below, 2.0.0 and below may allow an authenticated remote attacker to crash the service by sending a malformed PUT request to the server. Fortinet is not aware of any successful exploitation of this vulnerability that would lead to code execution.",
-      "headline_ja": "FortiOS 6.0.10以前および6.2.2以前、そしてFortiProxy 1.0.x、1.1.x、1.2.9以前、2.0.0以前のHTTPDデーモンに存在するスタックベースのバッファオーバーフロー脆弱性により、認証済みのリモート攻撃者がサーバーに不正なPUTリクエストを送信することでサービスをクラッシュさせる可能性があります。Fortinetは、コード実行につながるこの脆弱性の成功した実証例を把握していません。",
-      "versions": "6.0.10, 6.2.2, 1.2.9, 2.0.0",
-      "url": "https://fortiguard.com/advisory/FG-IR-19-248",
-      "date": "2021-04-12",
-      "cvss": 5.4,
-      "kev": false,
-      "epss": 0.01566
     }
   ]
 }

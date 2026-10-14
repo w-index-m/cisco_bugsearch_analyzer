@@ -1,8 +1,98 @@
 {
   "label": "F5 BIG-IP",
-  "generated_at": "2026-10-13T05:35:07+00:00",
+  "generated_at": "2026-10-14T03:35:57+00:00",
   "count": 300,
   "rows": [
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2483173",
+      "headline_en": "f5ingress debug endpoint conflicts with f5-tmm-pod-manager metrics server on port 8080",
+      "headline_ja": "f5ingress のデバッグエンドポイントが、ポート 8080 の f5-tmm-pod-manager メトリクスサーバーと競合しています。",
+      "versions": "2.2.0, 2.2.1, 2.2.2, 2.2.3, 2.3.0, 2.3.1, 2.3.2",
+      "product": "BIG_IP_NEXT(BNK), BIG_IP_NEXT(BNK) BNK",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2483173.html",
+      "date": "2026-10-14"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2570321",
+      "headline_en": "MCPD restart loop during full configuration reload when configuration contains a large CLI script object (i.e. more than ~4 MiB)",
+      "headline_ja": "MCPDは、構成に約4 MiBを超える大きなCLIスクリプトオブジェクトが含まれている場合、フル構成リロード中に再起動ループが発生します。",
+      "versions": "17.5.0, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 21.0.0, 21.0.0.1, 21.0.0.2, 21.0.0.3, 21.1.0, 21.1.0.1, 21.1.0.2",
+      "product": "BIG-IP, BIG-IP TMOS",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2570321.html",
+      "date": "2026-10-13"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2568665",
+      "headline_en": "iControl REST Table of Contents app has a broken link for the services page under IControl REST Resources",
+      "headline_ja": "iControl REST Table of Contents アプリには、IControl REST Resources の下にある services ページへのリンクが壊れています。",
+      "versions": "17.1.0, 17.1.0.1, 17.1.0.2, 17.1.0.3, 17.1.1, 17.1.1.1, 17.1.1.2, 17.1.1.3, 17.1.1.4, 17.1.2, 17.1.2.1, 17.1.2.2, 17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5, 17.5.0, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 21.1.0, 21.1.0.1, 21.1.0.2",
+      "product": "BIG-IP, BIG-IP LTM",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2568665.html",
+      "date": "2026-10-13"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2568469",
+      "headline_en": "ICAP connection remains in use after a send failure, causing requests to bypass antivirus scanning",
+      "headline_ja": "送信失敗後もICAP接続が使用されたままで、リクエストがウイルススキャンをバイパスする",
+      "versions": "17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9",
+      "product": "BIG-IP, BIG-IP ASM",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2568469.html",
+      "date": "2026-10-13"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2567365",
+      "headline_en": "Network packet loss to ICAP servers results in transaction pileup in BD",
+      "headline_ja": "ICAPサーバへのネットワークパケットロスは、BDでトランザクションの蓄積を引き起こします。",
+      "versions": "17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 21.1.0, 21.1.0.1, 21.1.0.2",
+      "product": "BIG-IP, BIG-IP ASM",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2567365.html",
+      "date": "2026-10-13"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2567321",
+      "headline_en": "Applications that set tiny SO_SNDBUF values may experience a tcp connection stall from the Linux host",
+      "headline_ja": "SO_SNDBUF の値を極端に小さく設定したアプリケーションは、Linux ホストで TCP 接続が停止することがあります。",
+      "versions": "17.5.0, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 21.1.0, 21.1.0.1, 21.1.0.2",
+      "product": "BIG-IP, BIG-IP ASM, BIG-IP LTM",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2567321.html",
+      "date": "2026-10-13"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2566965",
+      "headline_en": "LB_FAILED [event info] returns \"connection limit\" when pool member is down.",
+      "headline_ja": "LB_FAILED [event info] は、プールメンバーがダウンしているときに「connection limit」を返します。",
+      "versions": "17.5.1.9",
+      "product": "BIG-IP, BIG-IP LTM",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2566965.html",
+      "date": "2026-10-13"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2564817",
+      "headline_en": "Replacement blade does not show up when running \"show system diagnostics os-utils docker nodes\" on controller",
+      "headline_ja": "コントローラで「show system diagnostics os-utils docker nodes」を実行しても、交換用ブレードが表示されません。",
+      "versions": "F5OS v2.0.0, F5OS v2.0.0-HR1, F5OS v2.0.0-HR2, F5OS-C 1.8.0, F5OS-C 1.8.1, F5OS-C 1.8.2, F5OS-C 1.8.2-HR1, F5OS-C 1.8.2-HR2",
+      "product": "F5OS, F5OS F5OS-C",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2564817.html",
+      "date": "2026-10-13"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2561121",
+      "headline_en": "Full configuration sync (force-full-load-push) may remain in \"Changes Pending\" after completing successfully when a virtual server is recreated with a different performance profile.",
+      "headline_ja": "フル構成同期（force-full-load-push）は、仮想サーバーが別のパフォーマンスプロファイルで再作成された場合、正常に完了しても「変更保留」のままになることがあります。",
+      "versions": "21.1.0, 21.1.0.1, 21.1.0.2",
+      "product": "BIG-IP, BIG-IP LTM",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2561121.html",
+      "date": "2026-10-13"
+    },
     {
       "source": "F5 Bug Tracker",
       "id": "ID2553501",
@@ -11,6 +101,16 @@
       "versions": "21.1.0.2",
       "product": "BIG-IP, BIG-IP LTM",
       "url": "https://cdn.f5.com/product/bugtracker/ID2553501.html",
+      "date": "2026-10-13"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2553445",
+      "headline_en": "AVR/SSL Orchestrator URL, host name, URL category and user statistics are lost after upgrade",
+      "headline_ja": "AVR/SSL Orchestrator の URL、ホスト名、URL カテゴリ、ユーザー統計がアップグレード後に失われます。",
+      "versions": "21.1.0.2",
+      "product": "BIG-IP, BIG-IP AVR",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2553445.html",
       "date": "2026-10-13"
     },
     {
@@ -98,7 +198,7 @@
       "id": "ID2567669",
       "headline_en": "Secondary blade config load failure loop fills /config partition with filestore trash_bin_d backups",
       "headline_ja": "セカンダリーブレードの構成ロード失敗ループが /config パーティションを filestore の trash_bin_d バックアップで埋め尽くす。",
-      "versions": "17.5.0, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9",
+      "versions": "17.1.0, 17.1.0.1, 17.1.0.2, 17.1.0.3, 17.1.1, 17.1.1.1, 17.1.1.2, 17.1.1.3, 17.1.1.4, 17.1.2, 17.1.2.1, 17.1.2.2, 17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5, 17.5.0, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 21.0.0, 21.0.0.1, 21.0.0.2, 21.0.0.3, 21.1.0, 21.1.0.1, 21.1.0.2",
       "product": "BIG-IP, BIG-IP TMOS",
       "url": "https://cdn.f5.com/product/bugtracker/ID2567669.html",
       "date": "2026-10-10"
@@ -255,26 +355,6 @@
     },
     {
       "source": "F5 Bug Tracker",
-      "id": "ID2471425",
-      "headline_en": "Configuration Restore Fails When a known-hosts SSH Server Is Unreachable",
-      "headline_ja": "設定復元が失敗する（既知のホストSSHサーバーにアクセスできない場合）",
-      "versions": "F5OS v2.0.0, F5OS v2.0.0-HR1, F5OS v2.0.0-HR2",
-      "product": "F5OS, F5OS F5OS-A, F5OS F5OS-C",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2471425.html",
-      "date": "2026-10-09"
-    },
-    {
-      "source": "F5 Bug Tracker",
-      "id": "ID2471321",
-      "headline_en": "SNMP sysName resets after device reboot",
-      "headline_ja": "SNMP sysName がデバイス再起動後にリセットされる",
-      "versions": "F5OS v2.0.0, F5OS v2.0.0-HR1, F5OS v2.0.0-HR2, F5OS-A 1.8.4, F5OS-A 1.8.4-HR1, F5OS-A 1.8.4-HR2",
-      "product": "F5OS, F5OS F5OS-C",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2471321.html",
-      "date": "2026-10-09"
-    },
-    {
-      "source": "F5 Bug Tracker",
       "id": "ID2561821",
       "headline_en": "iStats counter resets might not clear cluster-wide values on multi-blade systems",
       "headline_ja": "iStats カウンタのリセットは、マルチブレードシステムにおいてクラスタ全体の値をクリアしない可能性があります。",
@@ -331,26 +411,6 @@
       "versions": "17.1.0, 17.1.0.1, 17.1.0.2, 17.1.0.3, 17.1.1, 17.1.1.1, 17.1.1.2, 17.1.1.3, 17.1.1.4, 17.1.2, 17.1.2.1, 17.1.2.2, 17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5, 17.5.0, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 21.1.0, 21.1.0.1, 21.1.0.2",
       "product": "BIG-IP, BIG-IP TMOS",
       "url": "https://cdn.f5.com/product/bugtracker/ID2525033.html",
-      "date": "2026-10-08"
-    },
-    {
-      "source": "F5 Bug Tracker",
-      "id": "ID2471649",
-      "headline_en": "cloud-init chpasswd passwords are not masked when using hyphenated arrays",
-      "headline_ja": "cloud-init の chpasswd パスワードは、ハイフン付き配列を使用するとマスクされません。",
-      "versions": "F5OS v2.0.0, F5OS v2.0.0-HR1, F5OS v2.0.0-HR2",
-      "product": "F5OS, F5OS F5OS",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2471649.html",
-      "date": "2026-10-08"
-    },
-    {
-      "source": "F5 Bug Tracker",
-      "id": "ID2471309",
-      "headline_en": "The k3s service may crash with a nil pointer dereference in flannel VXLAN during prolonged host stalls or heavy I/O",
-      "headline_ja": "k3sサービスは、長時間のホストスタックや高負荷I/O時に、flannel VXLANでのヌルポインタ参照によりクラッシュする可能性があります。",
-      "versions": "F5OS v2.0.0, F5OS v2.0.0-HR1, F5OS v2.0.0-HR2",
-      "product": "F5OS, F5OS F5OS-A, F5OS F5OS-C",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2471309.html",
       "date": "2026-10-08"
     },
     {
@@ -765,16 +825,6 @@
     },
     {
       "source": "F5 Bug Tracker",
-      "id": "ID2471469",
-      "headline_en": "BIG-IP APM OAuth Scope selects the incoming request bearer token instead of the OAuth Client access token after PRP subroutine expiration",
-      "headline_ja": "BIG-IP APM の OAuth スコープは、PRP サブルーチンの有効期限切れ後、OAuth クライアントのアクセストークンではなく、受信リクエストのベアラートークンを選択します。",
-      "versions": "17.5.0, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9",
-      "product": "BIG-IP, BIG-IP APM",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2471469.html",
-      "date": "2026-09-30"
-    },
-    {
-      "source": "F5 Bug Tracker",
       "id": "ID2502361",
       "headline_en": "TMM SIGSEGV crash when trying to access stale entry for /var/IpRep/F5IpV6Rep.dat",
       "headline_ja": "TMM が /var/IpRep/F5IpV6Rep.dat の古いエントリにアクセスしようとして SIGSEGV クラッシュする",
@@ -847,16 +897,6 @@
     },
     {
       "source": "F5 Bug Tracker",
-      "id": "ID2471597",
-      "headline_en": "ACME: Account Status remains Updating after updating account for ACME Provider",
-      "headline_ja": "ACME: アカウントのステータスが、ACMEプロバイダーのアカウントを更新した後も「更新中」のままです",
-      "versions": "21.1.0, 21.1.0.1, 21.1.0.2",
-      "product": "BIG-IP, BIG-IP LTM",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2471597.html",
-      "date": "2026-09-14"
-    },
-    {
-      "source": "F5 Bug Tracker",
       "id": "ID2482505",
       "headline_en": "HA (High Availability) peers are unable to connect when ConfigSync uses the management IP",
       "headline_ja": "HA（高可用性）ピアは、ConfigSync が管理 IP を使用している場合に接続できません。",
@@ -864,16 +904,6 @@
       "product": "BIG-IP, BIG-IP TMOS",
       "url": "https://cdn.f5.com/product/bugtracker/ID2482505.html",
       "date": "2026-09-08"
-    },
-    {
-      "source": "F5 Bug Tracker",
-      "id": "ID2460921",
-      "headline_en": "Malformed `tmctl --csv` output from embedded commas in text columns",
-      "headline_ja": "テキスト列に埋め込まれたコンマが原因で、`tmctl --csv` の出力が不正な形式になっています",
-      "versions": "2.2.0, 2.2.1, 2.2.2, 2.2.3",
-      "product": "BIG_IP_NEXT(BNK), BIG_IP_NEXT(BNK) BNK",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2460921.html",
-      "date": "2026-09-04"
     },
     {
       "source": "NVD (CVSS 8.8)",
@@ -961,16 +991,6 @@
     },
     {
       "source": "F5 Bug Tracker",
-      "id": "ID2461325",
-      "headline_en": "Removing or adding monitors to a FQDN pool on the Active device will result in a config-sync failure that does not self-heal",
-      "headline_ja": "Active デバイス上で FQDN プールに対してモニタを削除または追加すると、自己修復しない構成同期の失敗が発生します。",
-      "versions": "17.5.1.6, 17.5.1.8, 17.5.1.9, 21.1.0, 21.1.0.1, 21.1.0.2",
-      "product": "BIG-IP, BIG-IP TMOS",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2461325.html",
-      "date": "2026-08-26"
-    },
-    {
-      "source": "F5 Bug Tracker",
       "id": "ID2472313",
       "headline_en": "BIG-IP system offline post upgrade",
       "headline_ja": "BIG‑IPシステムはアップグレード後にオフラインです",
@@ -1017,26 +1037,6 @@
       "versions": "17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9",
       "product": "BIG-IP, BIG-IP APM",
       "url": "https://cdn.f5.com/product/bugtracker/ID2471725.html",
-      "date": "2026-08-25"
-    },
-    {
-      "source": "F5 Bug Tracker",
-      "id": "ID2471421",
-      "headline_en": "Stale iControlPortal.cgi processes accumulate after repeated httpd restarts on BIG-IP 21.1.x",
-      "headline_ja": "BIG-IP 21.1.x で httpd を繰り返し再起動すると、古い iControlPortal.cgi プロセスが蓄積します。",
-      "versions": "21.1.0, 21.1.0.1, 21.1.0.2",
-      "product": "BIG-IP, BIG-IP TMOS",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2471421.html",
-      "date": "2026-08-25"
-    },
-    {
-      "source": "F5 Bug Tracker",
-      "id": "ID2461221",
-      "headline_en": "The workaround for Bug ID 694707 (Hardware Crypto Offload is not compatible with HTTP/3 / QUIC) may result in performance degradation for other virtual servers that use encryption.",
-      "headline_ja": "バグID 694707（ハードウェア暗号オフロードがHTTP/3 / QUICと互換性がない）の回避策は、暗号化を使用する他の仮想サーバーのパフォーマンス低下を引き起こす可能性があります。",
-      "versions": "16.1.6.1, 17.1.3.4, 17.1.3.5, 17.5.1.8, 17.5.1.9, 21.0.0.3, 21.1.0.1, 21.1.0.2",
-      "product": "BIG-IP, BIG-IP TMOS",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2461221.html",
       "date": "2026-08-25"
     },
     {

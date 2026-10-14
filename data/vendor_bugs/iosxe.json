@@ -1,6 +1,6 @@
 {
   "label": "Cisco IOS XE",
-  "generated_at": "2026-10-13T05:31:32+00:00",
+  "generated_at": "2026-10-14T03:33:16+00:00",
   "count": 193,
   "rows": [
     {
@@ -1969,7 +1969,7 @@
       "date": "2021-03-24",
       "cvss": 8.6,
       "kev": false,
-      "epss": 0.01493
+      "epss": 0.01546
     },
     {
       "source": "NVD (CVSS 8.6)",
@@ -1981,7 +1981,7 @@
       "date": "2021-03-24",
       "cvss": 8.6,
       "kev": false,
-      "epss": 0.01494
+      "epss": 0.01547
     },
     {
       "source": "NVD (CVSS 8.1)",
@@ -1993,7 +1993,7 @@
       "date": "2021-03-24",
       "cvss": 8.1,
       "kev": false,
-      "epss": 0.03209
+      "epss": 0.03322
     },
     {
       "source": "NVD (CVSS 8.1)",
@@ -2005,7 +2005,7 @@
       "date": "2021-03-24",
       "cvss": 8.1,
       "kev": false,
-      "epss": 0.02256
+      "epss": 0.02336
     },
     {
       "source": "NVD (CVSS 7.8)",
@@ -2017,7 +2017,7 @@
       "date": "2021-03-24",
       "cvss": 7.8,
       "kev": false,
-      "epss": 0.00241
+      "epss": 0.00249
     },
     {
       "source": "NVD (CVSS 7.8)",
@@ -2029,7 +2029,7 @@
       "date": "2021-03-24",
       "cvss": 7.8,
       "kev": false,
-      "epss": 0.0022
+      "epss": 0.00228
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -2041,7 +2041,7 @@
       "date": "2021-03-24",
       "cvss": 7.5,
       "kev": false,
-      "epss": 0.01601
+      "epss": 0.01658
     },
     {
       "source": "NVD (CVSS 7.4)",
@@ -2053,7 +2053,7 @@
       "date": "2021-03-24",
       "cvss": 7.4,
       "kev": false,
-      "epss": 0.00402
+      "epss": 0.00417
     },
     {
       "source": "NVD (CVSS 7.4)",
@@ -2065,7 +2065,7 @@
       "date": "2021-03-24",
       "cvss": 7.4,
       "kev": false,
-      "epss": 0.006
+      "epss": 0.00621
     },
     {
       "source": "NVD (CVSS 7.3)",
@@ -2077,7 +2077,7 @@
       "date": "2021-03-24",
       "cvss": 7.3,
       "kev": false,
-      "epss": 0.0034
+      "epss": 0.00353
     },
     {
       "source": "NVD (CVSS 7.2)",
@@ -2089,7 +2089,7 @@
       "date": "2021-03-24",
       "cvss": 7.2,
       "kev": false,
-      "epss": 0.08091
+      "epss": 0.08544
     },
     {
       "source": "NVD (CVSS 6.8)",
@@ -2101,7 +2101,7 @@
       "date": "2021-03-24",
       "cvss": 6.8,
       "kev": false,
-      "epss": 0.00223
+      "epss": 0.00231
     },
     {
       "source": "NVD (CVSS 6.8)",
@@ -2113,7 +2113,7 @@
       "date": "2021-03-24",
       "cvss": 6.8,
       "kev": false,
-      "epss": 0.00372
+      "epss": 0.00385
     },
     {
       "source": "NVD (CVSS 6.8)",
@@ -2125,7 +2125,7 @@
       "date": "2021-03-24",
       "cvss": 6.8,
       "kev": false,
-      "epss": 0.00377
+      "epss": 0.0039
     },
     {
       "source": "NVD (CVSS 6.7)",
@@ -2137,7 +2137,7 @@
       "date": "2021-03-24",
       "cvss": 6.7,
       "kev": false,
-      "epss": 0.00232
+      "epss": 0.0024
     },
     {
       "source": "NVD (CVSS 6.7)",
@@ -2149,7 +2149,7 @@
       "date": "2021-03-24",
       "cvss": 6.7,
       "kev": false,
-      "epss": 0.00308
+      "epss": 0.00319
     },
     {
       "source": "NVD (CVSS 6.6)",
@@ -2161,7 +2161,7 @@
       "date": "2021-03-24",
       "cvss": 6.6,
       "kev": false,
-      "epss": 0.00254
+      "epss": 0.00263
     },
     {
       "source": "NVD (CVSS 6.1)",
@@ -2173,7 +2173,7 @@
       "date": "2021-03-24",
       "cvss": 6.1,
       "kev": false,
-      "epss": 0.00268
+      "epss": 0.00277
     },
     {
       "source": "NVD (CVSS 6.0)",
@@ -2185,7 +2185,7 @@
       "date": "2021-03-24",
       "cvss": 6.0,
       "kev": false,
-      "epss": 0.0028
+      "epss": 0.0029
     },
     {
       "source": "NVD (CVSS 5.5)",
@@ -2197,7 +2197,7 @@
       "date": "2021-03-24",
       "cvss": 5.5,
       "kev": false,
-      "epss": 0.02262
+      "epss": 0.02342
     },
     {
       "source": "NVD (CVSS 5.3)",
@@ -2209,7 +2209,7 @@
       "date": "2021-03-24",
       "cvss": 5.3,
       "kev": false,
-      "epss": 0.01274
+      "epss": 0.01319
     },
     {
       "source": "NVD (CVSS 5.1)",
@@ -2221,7 +2221,7 @@
       "date": "2021-03-24",
       "cvss": 5.1,
       "kev": false,
-      "epss": 0.00275
+      "epss": 0.00285
     },
     {
       "source": "NVD (CVSS 5.1)",
@@ -2233,7 +2233,7 @@
       "date": "2021-03-24",
       "cvss": 5.1,
       "kev": false,
-      "epss": 0.00307
+      "epss": 0.00318
     },
     {
       "source": "NVD (CVSS 5.1)",
@@ -2245,7 +2245,7 @@
       "date": "2021-03-24",
       "cvss": 5.1,
       "kev": false,
-      "epss": 0.00328
+      "epss": 0.0034
     },
     {
       "source": "NVD (CVSS 4.8)",
@@ -2257,7 +2257,7 @@
       "date": "2021-03-24",
       "cvss": 4.8,
       "kev": false,
-      "epss": 0.00638
+      "epss": 0.00661
     },
     {
       "source": "NVD (CVSS 4.4)",
@@ -2269,7 +2269,7 @@
       "date": "2021-03-24",
       "cvss": 4.4,
       "kev": false,
-      "epss": 0.00313
+      "epss": 0.00324
     },
     {
       "source": "NVD (CVSS 4.4)",
@@ -2281,7 +2281,7 @@
       "date": "2021-03-24",
       "cvss": 4.4,
       "kev": false,
-      "epss": 0.0023
+      "epss": 0.00238
     },
     {
       "source": "NVD (CVSS 4.3)",
@@ -2293,7 +2293,7 @@
       "date": "2021-03-24",
       "cvss": 4.3,
       "kev": false,
-      "epss": 0.00944
+      "epss": 0.00977
     },
     {
       "source": "Cisco PSIRT (CVSS 9.8)",

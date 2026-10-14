@@ -1,6 +1,6 @@
 {
   "label": "Catalyst 9300",
-  "generated_at": "2026-10-13T05:24:31+00:00",
+  "generated_at": "2026-10-14T03:27:28+00:00",
   "count": 2,
   "rows": [
     {
@@ -25,7 +25,7 @@
       "date": "2021-03-24",
       "cvss": 6.7,
       "kev": false,
-      "epss": 0.00232
+      "epss": 0.0024
     }
   ]
 }
