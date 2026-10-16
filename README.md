@@ -201,6 +201,7 @@ python f5_bigip_tmm_bugs.py --nvd-keyword "BIG-IP" --bugtracker-limit 100
 - Cisco Bug Search: https://bst.cisco.com/bugsearch（CSV/Excelエクスポートをアップロード）
 - NVD（米国立脆弱性データベース）: F5/Palo Alto/FortiGate等のCVE情報
 - F5公式バグトラッカー: https://cdn.f5.com/product/bugtracker/（CVEにならない一般的な既知の問題）
+- CVE List V5（CVEProject/cvelistV5）: NVDに繋がらない日の予備データ源。日次収集でNVDの取得に失敗した場合、前回データを維持したまま、その後に新規公開されたCVEを日次差分から補完
 - PAN-OSリリースノート（Known Issues）: https://docs.paloaltonetworks.com/ngfw/release-notes（CVEにならない一般的な既知の問題）
 - CISA KEV / FIRST EPSS: 実際の悪用状況・悪用予測確率
 - endoflife.date: サポート終了日（EOL）情報
