@@ -1,8 +1,20 @@
 {
   "label": "Palo Alto (PAN-OS)",
-  "generated_at": "2026-10-15T03:14:26+00:00",
-  "count": 631,
+  "generated_at": "2026-10-16T03:12:10+00:00",
+  "count": 636,
   "rows": [
+    {
+      "source": "NVD (CVSS 7.2)",
+      "id": "CVE-2026-0322",
+      "headline_en": "A remote code execution (RCE) vulnerability in the management interface of Palo Alto Networks PAN-OS® software enables an authenticated attacker with network access to execute arbitrary code with root privileges on the firewall.\n\n\n\nThe security risk posed by this issue is minimized by restricting access to the management interface to only trusted internal IP addresses according to our recommended  best practice deployment guidelines https://live.paloaltonetworks.com/t5/community-blogs/tips-amp-tricks-how-to-secure-the-management-access-of-your-palo/ba-p/464431 .\n\n\n\nThis issue is applicable to PAN-OS software on PA-Series and VM-Series firewalls and on Panorama (virtual and M-Series).\n\n\n\nCloud NGFW and Prisma® Access are not impacted by this vulnerability.",
+      "headline_ja": "パロアルトネットワークスの PAN-OS® ソフトウェアの管理インターフェイスに存在するリモートコード実行（RCE）脆弱性により、ネットワークにアクセスできる認証済み攻撃者がファイアウォール上でルート権限の任意コードを実行できるようになります。\n\nこの問題によるセキュリティリスクは、推奨されるベストプラクティスの展開ガイドライン https://live.paloaltonetworks.com/t5/community-blogs/tips-amp-tricks-how-to-secure-the-management-access-of-your-palo/ba-p/464431 に従い、管理インターフェイスへのアクセスを信頼できる内部IPアドレスのみに制限することで最小化されます。\n\nこの問題は、PAシリーズおよびVMシリーズのファイアウォール、ならびに Panorama（仮想およびMシリーズ）上の PAN-OS ソフトウェアに適用されます。\n\nCloud NGFW および Prisma® Access はこの脆弱性の影響を受けません。",
+      "versions": "(本文から検出できず)",
+      "url": "https://security.paloaltonetworks.com/CVE-2026-0322",
+      "date": "2026-10-14",
+      "cvss": 7.2,
+      "kev": true,
+      "epss": 0.01076
+    },
     {
       "source": "NVD (CVSS -)",
       "id": "CVE-2026-0320",
@@ -13,7 +25,7 @@
       "date": "2026-10-14",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.00842
     },
     {
       "source": "NVD (CVSS -)",
@@ -25,7 +37,7 @@
       "date": "2026-10-14",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.00279
     },
     {
       "source": "NVD (CVSS -)",
@@ -37,7 +49,7 @@
       "date": "2026-10-14",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.00317
     },
     {
       "source": "NVD (CVSS -)",
@@ -49,7 +61,7 @@
       "date": "2026-10-14",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.00298
     },
     {
       "source": "NVD (CVSS -)",
@@ -61,7 +73,7 @@
       "date": "2026-10-14",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.00265
     },
     {
       "source": "NVD (CVSS -)",
@@ -73,7 +85,7 @@
       "date": "2026-10-14",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.00105
     },
     {
       "source": "NVD (CVSS -)",
@@ -85,7 +97,7 @@
       "date": "2026-10-14",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.00099
     },
     {
       "source": "NVD (CVSS -)",
@@ -97,7 +109,7 @@
       "date": "2026-10-14",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.00833
     },
     {
       "source": "NVD (CVSS -)",
@@ -109,7 +121,7 @@
       "date": "2026-10-14",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.00141
     },
     {
       "source": "NVD (CVSS -)",
@@ -121,7 +133,7 @@
       "date": "2026-10-14",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.00107
     },
     {
       "source": "NVD (CVSS -)",
@@ -133,19 +145,7 @@
       "date": "2026-10-14",
       "cvss": null,
       "kev": false,
-      "epss": null
-    },
-    {
-      "source": "NVD (CVSS -)",
-      "id": "CVE-2026-0322",
-      "headline_en": "A remote code execution (RCE) vulnerability in the management interface of Palo Alto Networks PAN-OS® software enables an authenticated attacker with network access to execute arbitrary code with root privileges on the firewall.\n\n\n\nThe security risk posed by this issue is minimized by restricting access to the management interface to only trusted internal IP addresses according to our recommended  best practice deployment guidelines https://live.paloaltonetworks.com/t5/community-blogs/tips-amp-tricks-how-to-secure-the-management-access-of-your-palo/ba-p/464431 .\n\n\n\nThis issue is applicable to PAN-OS software on PA-Series and VM-Series firewalls and on Panorama (virtual and M-Series).\n\n\n\nCloud NGFW and Prisma® Access are not impacted by this vulnerability.",
-      "headline_ja": "パロアルトネットワークスの PAN-OS® ソフトウェアの管理インターフェイスに存在するリモートコード実行（RCE）脆弱性により、ネットワークにアクセスできる認証済み攻撃者がファイアウォール上でルート権限の任意コードを実行できるようになります。\n\nこの問題によるセキュリティリスクは、推奨されるベストプラクティスの展開ガイドライン https://live.paloaltonetworks.com/t5/community-blogs/tips-amp-tricks-how-to-secure-the-management-access-of-your-palo/ba-p/464431 に従い、管理インターフェイスへのアクセスを信頼できる内部IPアドレスのみに制限することで最小化されます。\n\nこの問題は、PAシリーズおよびVMシリーズのファイアウォール、ならびに Panorama（仮想およびMシリーズ）上の PAN-OS ソフトウェアに適用されます。\n\nCloud NGFW および Prisma® Access はこの脆弱性の影響を受けません。",
-      "versions": "(本文から検出できず)",
-      "url": "https://security.paloaltonetworks.com/CVE-2026-0322",
-      "date": "2026-10-14",
-      "cvss": null,
-      "kev": true,
-      "epss": null
+      "epss": 0.00326
     },
     {
       "source": "NVD (CVSS -)",
@@ -193,7 +193,7 @@
       "date": "2026-09-10",
       "cvss": null,
       "kev": false,
-      "epss": 0.0037
+      "epss": 0.00444
     },
     {
       "source": "NVD (CVSS -)",
@@ -205,7 +205,7 @@
       "date": "2026-09-10",
       "cvss": null,
       "kev": false,
-      "epss": 0.00447
+      "epss": 0.00509
     },
     {
       "source": "NVD (CVSS -)",
@@ -217,7 +217,7 @@
       "date": "2026-09-10",
       "cvss": null,
       "kev": false,
-      "epss": 0.00265
+      "epss": 0.00276
     },
     {
       "source": "NVD (CVSS -)",
@@ -313,7 +313,7 @@
       "date": "2026-08-13",
       "cvss": 7.5,
       "kev": false,
-      "epss": 0.00316
+      "epss": 0.00328
     },
     {
       "source": "NVD (CVSS 7.4)",
@@ -961,7 +961,7 @@
       "date": "2025-11-14",
       "cvss": null,
       "kev": false,
-      "epss": 0.00086
+      "epss": 0.00093
     },
     {
       "source": "NVD (CVSS -)",
@@ -973,7 +973,7 @@
       "date": "2025-11-14",
       "cvss": null,
       "kev": false,
-      "epss": 0.00132
+      "epss": 0.00142
     },
     {
       "source": "NVD (CVSS -)",
@@ -985,7 +985,7 @@
       "date": "2025-11-14",
       "cvss": null,
       "kev": false,
-      "epss": 0.00108
+      "epss": 0.00116
     },
     {
       "source": "NVD (CVSS -)",
@@ -7636,7 +7636,7 @@
       "headline_ja": "Azureのホットプラグイベントが発生すると、ファイアウォールがクラッシュし、データインターフェースが不明な状態に遷移して、トラフィックが中断する可能性があります。",
       "versions": "PAN-OS 12.2系 / 未修正（Known Issue）",
       "product": null,
-      "url": "https://docs.paloaltonetworks.com/ngfw/release-notes/12-2/pan-os-12-2-2-known-and-addressed-issues/pan-os-12-2-2-known-issues",
+      "url": "https://docs.paloaltonetworks.com/ngfw/release-notes/12-2/pan-os-12-2-4-known-and-addressed-issues/pan-os-12-2-4-known-issues",
       "date": null,
       "cvss": null,
       "kev": null,
@@ -7658,11 +7658,11 @@
     {
       "source": "PAN-OS Known Issues (12.2)",
       "id": "PAN-330381",
-      "headline_en": "When firewalls are configured in a cluster operating in default mode, IP-Tag, User-Tag, and IP-Port mappings registered on the leader node do not synchronize to the follower node. On the follower node, commands such as `show object registered-ip all` and `show object registered-user all` display no registered entries for these data types, even though they are present on the leader. This prevents Dynamic Address Group (DAG) and Dynamic User Group (DUG) based security policies, which rely on these mappings, from functioning correctly on the follower node. As a result, traffic routed through the follower node does not match these policies, leading to an inconsistent security posture across the cluster.",
-      "headline_ja": "ファイアウォールがデフォルトモードで動作するクラスターに設定されている場合、リーダーノードに登録された IP‑Tag、User‑Tag、IP‑Port のマッピングはフォロワーノードへ同期されません。フォロワーノード上で `show object registered-ip all` や `show object registered-user all` といったコマンドを実行しても、リーダーに存在しているにもかかわらず、これらのデータタイプの登録エントリは表示されません。このため、これらのマッピングに依存する Dynamic Address Group（DAG）および Dynamic User Group（DUG）ベースのセキュリティポリシーがフォロワーノードで正しく機能しなくなります。その結果、フォロワーノードを経由するトラフィックがこれらのポリシーに一致せず、クラスター全体で一貫性のないセキュリティ姿勢となります。",
+      "headline_en": "When firewalls are configured in a cluster operating in default mode, IP-Tag, User-Tag, and IP-Port mappings registered on the leader node do not synchronize to the follower node. On the follower node, commands such as show object registered-ip all and show object registered-user all display no registered entries for these data types, even though they are present on the leader. This prevents Dynamic Address Group (DAG) and Dynamic User Group (DUG) based security policies, which rely on these mappings, from functioning correctly on the follower node. As a result, traffic routed through the follower node does not match these policies, leading to an inconsistent security posture across the cluster.",
+      "headline_ja": "ファイアウォールがデフォルトモードで動作するクラスターに構成されている場合、リーダーノードで登録された IP タグ、ユーザー タグ、および IP ポートのマッピングはフォロワーノードに同期されません。フォロワーノードでは、`show object registered-ip all` や `show object registered-user all` といったコマンドを実行しても、これらのデータタイプに対する登録エントリが表示されません（リーダーには存在しています）。このため、これらのマッピングに依存するダイナミックアドレスグループ（DAG）およびダイナミックユーザーグループ（DUG）ベースのセキュリティポリシーがフォロワーノードで正しく機能しません。その結果、フォロワーノードを経由するトラフィックはこれらのポリシーに一致せず、クラスター全体で一貫性のないセキュリティ姿勢が生じます。",
       "versions": "PAN-OS 12.2系 / 未修正（Known Issue）",
       "product": null,
-      "url": "https://docs.paloaltonetworks.com/ngfw/release-notes/12-2/pan-os-12-2-2-known-and-addressed-issues/pan-os-12-2-2-known-issues",
+      "url": "https://docs.paloaltonetworks.com/ngfw/release-notes/12-2/pan-os-12-2-4-known-and-addressed-issues/pan-os-12-2-4-known-issues",
       "date": null,
       "cvss": null,
       "kev": null,
@@ -7671,11 +7671,11 @@
     {
       "source": "PAN-OS Known Issues (12.2)",
       "id": "PAN-329606",
-      "headline_en": "On PA-54R-POE (BH) firewalls, SCP export and import of cellular firmware files fail from the CLI. Running request cellular firmware scp-export or request cellular firmware scp-import returns a server error.",
-      "headline_ja": "PA-54R-POE (BH) ファイアウォールでは、CLIからのセルラーファームウェアファイルのSCPエクスポートおよびインポートが失敗します。`request cellular firmware scp-export` または `request cellular firmware scp-import` を実行すると、サーバーエラーが返されます。",
+      "headline_en": "On BH (PA-54R-POE) firewalls, SCP export and import of cellular firmware files fail from the CLI. Running request cellular firmware scp-export or request cellular firmware scp-import returns a server error.",
+      "headline_ja": "BH（PA-54R-POE）ファイアウォールでは、CLI からセルラーファームウェアファイルの SCP エクスポートおよびインポートが失敗します。`request cellular firmware scp-export` または `request cellular firmware scp-import` を実行すると、サーバーエラーが返されます。",
       "versions": "PAN-OS 12.2系 / 未修正（Known Issue）",
       "product": null,
-      "url": "https://docs.paloaltonetworks.com/ngfw/release-notes/12-2/pan-os-12-2-2-known-and-addressed-issues/pan-os-12-2-2-known-issues",
+      "url": "https://docs.paloaltonetworks.com/ngfw/release-notes/12-2/pan-os-12-2-4-known-and-addressed-issues/pan-os-12-2-4-known-issues",
       "date": null,
       "cvss": null,
       "kev": null,
@@ -7684,11 +7684,11 @@
     {
       "source": "PAN-OS Known Issues (12.2)",
       "id": "PAN-329515",
-      "headline_en": "When scheduling cellular firmware downloads on Panorama (Device Deployment > Cellular Firmware > Schedule), the Files and Devices fields are not populated in the UI for PA-54R-POE-5G (BH/Eagle) devices. As a result, scheduled Download Only and Download and Install operations for cellular firmware cannot be configured through Panorama.",
-      "headline_ja": "Panoramaでセルラー Firmware のダウンロードをスケジュールする際（Device Deployment > Cellular Firmware > Schedule）、PA-54R-POE-5G（BH/Eagle）デバイスに対して UI の Files 項目と Devices 項目が入力されません。その結果、セルラー Firmware の「Download Only」および「Download and Install」のスケジュール設定を Panorama から行うことができません。",
+      "headline_en": "When scheduling cellular firmware downloads on Panorama (Device Deployment > Cellular Firmware > Schedule), the Files and Devices fields are not populated in the UI for PA-54R-POE-5G (BH/Eagle) devices. As a result, scheduled \"Download Only\" and \"Download and Install\" operations for cellular firmware cannot be configured through Panorama.",
+      "headline_ja": "Panorama（Device Deployment > Cellular Firmware > Schedule）でセルラー ファームウェアのダウンロードをスケジュールする際、PA-54R-POE-5G（BH/Eagle）デバイスの UI では「Files」および「Devices」フィールドが自動的に入力されません。そのため、セルラー ファームウェアの「ダウンロードのみ」および「ダウンロードとインストール」操作を Panorama から設定することができません。",
       "versions": "PAN-OS 12.2系 / 未修正（Known Issue）",
       "product": null,
-      "url": "https://docs.paloaltonetworks.com/ngfw/release-notes/12-2/pan-os-12-2-2-known-and-addressed-issues/pan-os-12-2-2-known-issues",
+      "url": "https://docs.paloaltonetworks.com/ngfw/release-notes/12-2/pan-os-12-2-4-known-and-addressed-issues/pan-os-12-2-4-known-issues",
       "date": null,
       "cvss": null,
       "kev": null,
@@ -7736,11 +7736,11 @@
     {
       "source": "PAN-OS Known Issues (12.2)",
       "id": "PAN-327390",
-      "headline_en": "When the DNS IP is changed, system logs are not received by the new Simple Network Management Protocol (SNMP) trap server when the server is identified by a Fully Qualified Domain Name (FQDN).",
-      "headline_ja": "DNS IP が変更されると、サーバーが完全修飾ドメイン名（FQDN）で識別されている場合、新しいシンプルネットワーク管理プロトコル（SNMP）トラップサーバーでシステムログが受信されません。",
+      "headline_en": "(PA-5510 firewalls only) When a Quality of Service (QoS) profile is configured with an Egress Max bandwidth limit on an interface, the firewall does not enforce the configured limit. Traffic throughput can exceed the specified Egress Max value. For example, if a QoS profile is set to an Egress Max of 5000 Mbps, the actual traffic throughput might be higher, such as 5.57 Gbps. Despite exceeding the configured limit, no traffic drops occur, indicating that the shaping is not active. You can observe this by using the show qos interface &lt;interface_name&gt; throughput &lt;qid&gt; command, which displays total throughput exceeding the configured maximum.",
+      "headline_ja": "(PA-5510 ファイアウォールのみ) インターフェイスでイグレス最大帯域幅制限を設定した QoS プロファイルを構成すると、ファイアウォールは設定された制限を適用しません。トラフィックのスループットが指定されたイグレス最大値を超えることがあります。たとえば、QoS プロファイルのイグレス最大が 5000 Mbps に設定されていても、実際のトラフィックスループットは 5.57 Gbps など、より高い値になることがあります。設定された制限を超えてもトラフィックのドロップは発生せず、シェーピングが有効になっていないことが示されます。これは、`show qos interface <interface_name> throughput <qid>` コマンドを使用して、設定された最大値を超える合計スループットが表示されることで確認できます。",
       "versions": "PAN-OS 12.2系 / 未修正（Known Issue）",
       "product": null,
-      "url": "https://docs.paloaltonetworks.com/ngfw/release-notes/12-2/pan-os-12-2-2-known-and-addressed-issues/pan-os-12-2-2-known-issues",
+      "url": "https://docs.paloaltonetworks.com/ngfw/release-notes/12-2/pan-os-12-2-4-known-and-addressed-issues/pan-os-12-2-4-known-issues",
       "date": null,
       "cvss": null,
       "kev": null,
@@ -7857,7 +7857,7 @@
       "headline_ja": "5Gセルラーインターフェースを備えたファイアウォールでは、デフォルトの自動MTU値である1428バイトがIPフラグメンテーションエラーと順序外パケットを引き起こし、セルラー接続のスループット性能が低下します。",
       "versions": "PAN-OS 12.2系 / 未修正（Known Issue）",
       "product": null,
-      "url": "https://docs.paloaltonetworks.com/ngfw/release-notes/12-2/pan-os-12-2-2-known-and-addressed-issues/pan-os-12-2-2-known-issues",
+      "url": "https://docs.paloaltonetworks.com/ngfw/release-notes/12-2/pan-os-12-2-4-known-and-addressed-issues/pan-os-12-2-4-known-issues",
       "date": null,
       "cvss": null,
       "kev": null,
@@ -7948,7 +7948,7 @@
       "headline_ja": "任意の15秒間隔で、GWノード（Pノードではない）上の接続性（CIまたは管理）が複数回変化し、各変化が別々のノードで発生し、別々のリンクに影響する場合、クラスタはリーダーを失い、すべてのルーティングプロトコルが失敗し、ネットワークで経路変更が起こるとトラフィックがブラックホール化します。",
       "versions": "PAN-OS 12.2系 / 未修正（Known Issue）",
       "product": null,
-      "url": "https://docs.paloaltonetworks.com/ngfw/release-notes/12-2/pan-os-12-2-2-known-and-addressed-issues/pan-os-12-2-2-known-issues",
+      "url": "https://docs.paloaltonetworks.com/ngfw/release-notes/12-2/pan-os-12-2-4-known-and-addressed-issues/pan-os-12-2-4-known-issues",
       "date": null,
       "cvss": null,
       "kev": null,
@@ -7987,7 +7987,7 @@
       "headline_ja": "PAN-OS 12.1.2 以降および PAN-OS 12.2.2 以降のリリースでは、PAN-OS はロードバランスされた DNS サーバーから解決された IP アドレスを取得し、ポリシーマッチに使用できます。ただし、DNS キャッシュ再利用フラグが有効になっている場合、この機能は期待通りに動作しません。DNS キャッシュ再利用フラグが有効になると、DNS の解決はロードバランス DNS フラグ（アドレスオブジェクト用）が無効になっているかのように動作します。",
       "versions": "PAN-OS 12.2系 / 未修正（Known Issue）",
       "product": null,
-      "url": "https://docs.paloaltonetworks.com/ngfw/release-notes/12-2/pan-os-12-2-2-known-and-addressed-issues/pan-os-12-2-2-known-issues",
+      "url": "https://docs.paloaltonetworks.com/ngfw/release-notes/12-2/pan-os-12-2-4-known-and-addressed-issues/pan-os-12-2-4-known-issues",
       "date": null,
       "cvss": null,
       "kev": null,
@@ -8001,6 +8001,71 @@
       "versions": "PAN-OS 12.2系 / 未修正（Known Issue）",
       "product": null,
       "url": "https://docs.paloaltonetworks.com/ngfw/release-notes/12-2/pan-os-12-2-2-known-and-addressed-issues/pan-os-12-2-2-known-issues",
+      "date": null,
+      "cvss": null,
+      "kev": null,
+      "epss": null
+    },
+    {
+      "source": "PAN-OS Known Issues (12.2)",
+      "id": "PAN-337866",
+      "headline_en": "NGFWs operating an Advanced Threat Prevention Plus license may experience reduced throughput when a security policy references a Vulnerability Protection profile when Frontier Virtual Patching is enabled. The pre-filtering evaluation runs on all sessions matched by the policy, which can reduce throughput compared to the same policy without Frontier Virtual Patching enabled.",
+      "headline_ja": "Advanced Threat Prevention Plus ライセンスで動作する NGFW は、Frontier Virtual Patching が有効な状態でセキュリティポリシーが脆弱性保護プロファイルを参照している場合、スループットが低下する可能性があります。プレフィルタリング評価はポリシーでマッチしたすべてのセッションで実行されるため、Frontier Virtual Patching が無効な同じポリシーと比較してスループットが低下することがあります。",
+      "versions": "PAN-OS 12.2系 / 未修正（Known Issue）",
+      "product": null,
+      "url": "https://docs.paloaltonetworks.com/ngfw/release-notes/12-2/pan-os-12-2-4-known-and-addressed-issues/pan-os-12-2-4-known-issues",
+      "date": null,
+      "cvss": null,
+      "kev": null,
+      "epss": null
+    },
+    {
+      "source": "PAN-OS Known Issues (12.2)",
+      "id": "PAN-336055",
+      "headline_en": "Currently VIMS is available to enable and commit even with LV/HV PSU, which will be limited in 12.2.4",
+      "headline_ja": "現在、VIMSはLV/HV PSUでも有効にしてコミットできるようになっていますが、これは12.2.4で制限されます。",
+      "versions": "PAN-OS 12.2系 / 未修正（Known Issue）",
+      "product": null,
+      "url": "https://docs.paloaltonetworks.com/ngfw/release-notes/12-2/pan-os-12-2-4-known-and-addressed-issues/pan-os-12-2-4-known-issues",
+      "date": null,
+      "cvss": null,
+      "kev": null,
+      "epss": null
+    },
+    {
+      "source": "PAN-OS Known Issues (12.2)",
+      "id": "PAN-335314",
+      "headline_en": "After you download new cellular firmware, the firmware does not always appear in the output of the CLI show command, although it is listed as expected in the web interface.",
+      "headline_ja": "新しいセルラーファームウェアをダウンロードした後、CLI の show コマンドの出力にファームウェアが必ずしも表示されませんが、Web インターフェースでは期待通りに一覧表示されます。",
+      "versions": "PAN-OS 12.2系 / 未修正（Known Issue）",
+      "product": null,
+      "url": "https://docs.paloaltonetworks.com/ngfw/release-notes/12-2/pan-os-12-2-4-known-and-addressed-issues/pan-os-12-2-4-known-issues",
+      "date": null,
+      "cvss": null,
+      "kev": null,
+      "epss": null
+    },
+    {
+      "source": "PAN-OS Known Issues (12.2)",
+      "id": "PAN-330183",
+      "headline_en": "On NGFW and PanoramaÂ® management server running PAN-OS 12.2.2 or earlier, the Source column for Advanced IP Defense predefined external dynamic lists (EDLs) displays the human-readable Name instead of the actual source identifier. For example, the Source column shows Palo Alto Networks - Adv. IP Defense: Exposed vulnerable services rather than panw-aipd-vuln-svcs-ip-list.",
+      "headline_ja": "NGFW および Panorama® 管理サーバー（PAN-OS 12.2.2 以前）では、Advanced IP Defense の事前定義された外部動的リスト（EDL）の「Source」列に、実際のソース識別子の代わりに人が読みやすい名前が表示されます。たとえば、Source 列は panw-aipd-vuln-svcs-ip-list の代わりに 「Palo Alto Networks - Adv. IP Defense: Exposed vulnerable services」 と表示されます。",
+      "versions": "PAN-OS 12.2系 / 未修正（Known Issue）",
+      "product": null,
+      "url": "https://docs.paloaltonetworks.com/ngfw/release-notes/12-2/pan-os-12-2-4-known-and-addressed-issues/pan-os-12-2-4-known-issues",
+      "date": null,
+      "cvss": null,
+      "kev": null,
+      "epss": null
+    },
+    {
+      "source": "PAN-OS Known Issues (12.2)",
+      "id": "PAN-312914",
+      "headline_en": "When you click the help icon (?) in the user interface to access documentation for the Advance Mode CUID feature, the system redirects you to a blank page. As a result, the required configuration documentation for this feature is not displayed.",
+      "headline_ja": "ユーザーインターフェースでヘルプアイコン（?）をクリックして Advance Mode CUID 機能のドキュメントにアクセスすると、システムは空白ページにリダイレクトします。その結果、この機能に必要な設定ドキュメントが表示されません。",
+      "versions": "PAN-OS 12.2系 / 未修正（Known Issue）",
+      "product": null,
+      "url": "https://docs.paloaltonetworks.com/ngfw/release-notes/12-2/pan-os-12-2-4-known-and-addressed-issues/pan-os-12-2-4-known-issues",
       "date": null,
       "cvss": null,
       "kev": null,
