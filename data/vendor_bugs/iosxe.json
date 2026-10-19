@@ -1,6 +1,6 @@
 {
   "label": "Cisco IOS XE",
-  "generated_at": "2026-10-18T03:02:29+00:00",
+  "generated_at": "2026-10-19T03:20:45+00:00",
   "count": 193,
   "rows": [
     {
@@ -361,7 +361,7 @@
       "date": "2025-09-24",
       "cvss": 7.7,
       "kev": true,
-      "epss": 0.40169
+      "epss": 0.41502
     },
     {
       "source": "NVD (CVSS 7.7)",
@@ -1117,7 +1117,7 @@
       "date": "2023-10-25",
       "cvss": 7.2,
       "kev": true,
-      "epss": 0.89634
+      "epss": 0.92992
     },
     {
       "source": "NVD (CVSS 10.0)",
@@ -1129,7 +1129,7 @@
       "date": "2023-10-16",
       "cvss": 10.0,
       "kev": true,
-      "epss": 0.99571
+      "epss": 0.99609
     },
     {
       "source": "NVD (CVSS 6.5)",
@@ -1465,7 +1465,7 @@
       "date": "2022-09-30",
       "cvss": 8.6,
       "kev": false,
-      "epss": 0.01199
+      "epss": 0.01207
     },
     {
       "source": "NVD (CVSS 8.6)",
@@ -1477,7 +1477,7 @@
       "date": "2022-09-30",
       "cvss": 8.6,
       "kev": false,
-      "epss": 0.01279
+      "epss": 0.01288
     },
     {
       "source": "NVD (CVSS 8.6)",
@@ -1489,7 +1489,7 @@
       "date": "2022-09-30",
       "cvss": 8.6,
       "kev": false,
-      "epss": 0.01006
+      "epss": 0.0103
     },
     {
       "source": "NVD (CVSS 8.6)",
@@ -1501,7 +1501,7 @@
       "date": "2022-09-30",
       "cvss": 8.6,
       "kev": false,
-      "epss": 0.01253
+      "epss": 0.01262
     },
     {
       "source": "NVD (CVSS 7.9)",
@@ -1525,7 +1525,7 @@
       "date": "2022-09-30",
       "cvss": 6.5,
       "kev": false,
-      "epss": 0.00798
+      "epss": 0.00804
     },
     {
       "source": "NVD (CVSS 5.5)",
@@ -1537,7 +1537,7 @@
       "date": "2022-09-30",
       "cvss": 5.5,
       "kev": false,
-      "epss": 0.01082
+      "epss": 0.01108
     },
     {
       "source": "NVD (CVSS 5.5)",
