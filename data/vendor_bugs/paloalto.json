@@ -1,7 +1,7 @@
 {
   "label": "Palo Alto (PAN-OS)",
-  "generated_at": "2026-10-19T03:28:44+00:00",
-  "count": 636,
+  "generated_at": "2026-10-20T03:31:50+00:00",
+  "count": 638,
   "rows": [
     {
       "source": "NVD (CVSS 7.2)",
@@ -1117,7 +1117,7 @@
       "date": "2025-07-29",
       "cvss": null,
       "kev": false,
-      "epss": 0.00131
+      "epss": 0.00138
     },
     {
       "source": "NVD (CVSS -)",
@@ -5655,6 +5655,19 @@
     },
     {
       "source": "PAN-OS Known Issues (11.2)",
+      "id": "PAN-326677",
+      "headline_en": "Panorama reports a selective commit and push to a managed firewall as successful even when a rename operation included in the selective push does not apply successfully. As a result, configurations on the firewall can be unintentionally deleted.",
+      "headline_ja": "Panorama は、選択的コミットとプッシュが成功したと報告しますが、選択的プッシュに含まれるリネーム操作が正常に適用されない場合でも、成功とみなされます。その結果、ファイアウォール上の設定が意図せず削除されることがあります。",
+      "versions": "PAN-OS 11.2系 / 未修正（Known Issue）",
+      "product": null,
+      "url": "https://docs.paloaltonetworks.com/pan-os/11-2/pan-os-release-notes/pan-os-11-2-4-known-and-addressed-issues/pan-os-11-2-4-known-issues",
+      "date": null,
+      "cvss": null,
+      "kev": null,
+      "epss": null
+    },
+    {
+      "source": "PAN-OS Known Issues (11.2)",
       "id": "PAN-303959",
       "headline_en": "Traffic that is incorrectly identified as unknown-tcp/unknown-udp eventually drops due to an App-ID resource limitation issue.",
       "headline_ja": "誤って unknown‑tcp/unknown‑udp と判別されたトラフィックは、App‑ID のリソース制限問題により最終的にドロップされます。",
@@ -7475,6 +7488,32 @@
     },
     {
       "source": "PAN-OS Known Issues (12.2)",
+      "id": "PAN-336055",
+      "headline_en": "On PA-54R-POE and PA-54R-POE-D-5G firewalls, the web interface lets you enable and commit Vehicle Ignition Monitoring System (VIMS) settings even when the firewall is connected to a low-voltage power supply unit (LVPSU) or high-voltage power supply unit (HVPSU). VIMS operates only with an Automotive Power Supply Unit (AMPSU), so the settings do not take effect with a non-AMPSU power supply.",
+      "headline_ja": "PA-54R-POE および PA-54R-POE-D-5G ファイアウォールでは、Web インターフェイスからファイアウォールが低電圧電源ユニット (LVPSU) または高電圧電源ユニット (HVPSU) に接続されている場合でも、Vehicle Ignition Monitoring System (VIMS) 設定を有効化およびコミットできます。VIMS は Automotive Power Supply Unit (AMPSU) と併用した場合にのみ動作するため、非 AMPSU 電源では設定は有効になりません。",
+      "versions": "PAN-OS 12.2系 / 未修正（Known Issue）",
+      "product": null,
+      "url": "https://docs.paloaltonetworks.com/ngfw/release-notes/12-2/pan-os-12-2-4-known-and-addressed-issues/pan-os-12-2-4-known-issues",
+      "date": null,
+      "cvss": null,
+      "kev": null,
+      "epss": null
+    },
+    {
+      "source": "PAN-OS Known Issues (12.2)",
+      "id": "PAN-338304",
+      "headline_en": "On PA-54R-POE and PA-54R-POE-D-5G firewalls managed by Panorama, you can enable Vehicle Ignition Monitoring System (VIMS) in a template and push it to firewalls connected to a low-voltage power supply unit (LVPSU) or high-voltage power supply unit (HVPSU). Because VIMS requires an Automotive Power Supply Unit (AMPSU), the configuration does not take effect on firewalls that use a non-AMPSU power supply.",
+      "headline_ja": "Panoramaで管理されているPA-54R-POEおよびPA-54R-POE-D-5Gファイアウォールでは、テンプレートで車両点火モニタリングシステム（VIMS）を有効にし、低電圧電源ユニット（LVPSU）または高電圧電源ユニット（HVPSU）に接続されたファイアウォールへプッシュできます。VIMSは自動車用電源ユニット（AMPSU）が必要なため、非AMPSU電源を使用しているファイアウォールでは設定が有効になりません。",
+      "versions": "PAN-OS 12.2系 / 未修正（Known Issue）",
+      "product": null,
+      "url": "https://docs.paloaltonetworks.com/ngfw/release-notes/12-2/pan-os-12-2-4-known-and-addressed-issues/pan-os-12-2-4-known-issues",
+      "date": null,
+      "cvss": null,
+      "kev": null,
+      "epss": null
+    },
+    {
+      "source": "PAN-OS Known Issues (12.2)",
       "id": "PAN-332951",
       "headline_en": "When a PA-54R-POE firewall is connected to third-party network devices (such as Cisco) using 1G transceivers, and both sides are set to the default auto-negotiation configuration, the link may show as up/up on the PAN-OS side while the third-party device reports the link as down/down, resulting in traffic failure.",
       "headline_ja": "PA-54R-POE ファイアウォールを 1G トランシーバーで Cisco などのサードパーティ製ネットワーク機器に接続し、両側がデフォルトのオートネゴシエーション設定になっている場合、PAN‑OS 側ではリンクが up/up と表示される一方で、サードパーティ機器側ではリンクが down/down と報告され、トラフィックが失敗することがあります。",
@@ -8011,19 +8050,6 @@
       "id": "PAN-337866",
       "headline_en": "NGFWs operating an Advanced Threat Prevention Plus license may experience reduced throughput when a security policy references a Vulnerability Protection profile when Frontier Virtual Patching is enabled. The pre-filtering evaluation runs on all sessions matched by the policy, which can reduce throughput compared to the same policy without Frontier Virtual Patching enabled.",
       "headline_ja": "Advanced Threat Prevention Plus ライセンスで動作する NGFW は、Frontier Virtual Patching が有効な状態でセキュリティポリシーが脆弱性保護プロファイルを参照している場合、スループットが低下する可能性があります。プレフィルタリング評価はポリシーでマッチしたすべてのセッションで実行されるため、Frontier Virtual Patching が無効な同じポリシーと比較してスループットが低下することがあります。",
-      "versions": "PAN-OS 12.2系 / 未修正（Known Issue）",
-      "product": null,
-      "url": "https://docs.paloaltonetworks.com/ngfw/release-notes/12-2/pan-os-12-2-4-known-and-addressed-issues/pan-os-12-2-4-known-issues",
-      "date": null,
-      "cvss": null,
-      "kev": null,
-      "epss": null
-    },
-    {
-      "source": "PAN-OS Known Issues (12.2)",
-      "id": "PAN-336055",
-      "headline_en": "Currently VIMS is available to enable and commit even with LV/HV PSU, which will be limited in 12.2.4",
-      "headline_ja": "現在、VIMSはLV/HV PSUでも有効にしてコミットできるようになっていますが、これは12.2.4で制限されます。",
       "versions": "PAN-OS 12.2系 / 未修正（Known Issue）",
       "product": null,
       "url": "https://docs.paloaltonetworks.com/ngfw/release-notes/12-2/pan-os-12-2-4-known-and-addressed-issues/pan-os-12-2-4-known-issues",

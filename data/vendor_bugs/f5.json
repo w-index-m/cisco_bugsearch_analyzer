@@ -1,6 +1,6 @@
 {
   "label": "F5 BIG-IP",
-  "generated_at": "2026-10-19T03:23:02+00:00",
+  "generated_at": "2026-10-20T03:27:15+00:00",
   "count": 300,
   "rows": [
     {
@@ -88,7 +88,7 @@
       "id": "ID2564817",
       "headline_en": "Replacement blade does not show up when running \"show system diagnostics os-utils docker nodes\" on controller",
       "headline_ja": "コントローラで「show system diagnostics os-utils docker nodes」を実行しても、交換用ブレードが表示されません。",
-      "versions": "F5OS v2.0.0, F5OS v2.0.0-HR1, F5OS v2.0.0-HR2, F5OS-C 1.8.0, F5OS-C 1.8.1, F5OS-C 1.8.2, F5OS-C 1.8.2-HR1, F5OS-C 1.8.2-HR2",
+      "versions": "F5OS v2.0.0, F5OS v2.0.0-HR1, F5OS v2.0.0-HR2, F5OS v2.0.0-HR3, F5OS-C 1.8.0, F5OS-C 1.8.1, F5OS-C 1.8.2, F5OS-C 1.8.2-HR1, F5OS-C 1.8.2-HR2, F5OS-C 1.8.2-HR3",
       "product": "F5OS, F5OS F5OS-C",
       "url": "https://cdn.f5.com/product/bugtracker/ID2564817.html",
       "date": "2026-10-13"
@@ -128,7 +128,7 @@
       "id": "ID2552745",
       "headline_en": "F5CTU (f5wininfo.exe) does not compress the generated report when the Compressed option is selected",
       "headline_ja": "F5CTU（f5wininfo.exe）は、圧縮オプションが選択されている場合、生成されたレポートを圧縮しません。",
-      "versions": "7.2.6, 7.2.6.1, 7.2.6.2, 7.2.7, 7.2.7.1, 7.2.7.2",
+      "versions": "7.2.6, 7.2.6.0, 7.2.6.1, 7.2.6.2, 7.2.7, 7.2.7.0, 7.2.7.1, 7.2.7.2, 7.2.7.3",
       "product": "APM-Clients, APM-Clients APM",
       "url": "https://cdn.f5.com/product/bugtracker/ID2552745.html",
       "date": "2026-10-13"
@@ -158,7 +158,7 @@
       "id": "ID2524697",
       "headline_en": "Aggregated management port links are bounced during switchd initialization or failover",
       "headline_ja": "スイッチデーモンの初期化またはフェイルオーバー時に、集約管理ポートリンクがリセットされます。",
-      "versions": "F5OS-C 1.8.2, F5OS-C 1.8.2-HR1, F5OS-C 1.8.2-HR2",
+      "versions": "F5OS-C 1.8.2, F5OS-C 1.8.2-HR1, F5OS-C 1.8.2-HR2, F5OS-C 1.8.2-HR3",
       "product": "F5OS, F5OS F5OS-C",
       "url": "https://cdn.f5.com/product/bugtracker/ID2524697.html",
       "date": "2026-10-13"
@@ -178,7 +178,7 @@
       "id": "ID2524241",
       "headline_en": "QKViews can no longer be downloaded in the GUI after five canceled downloads",
       "headline_ja": "QKViewsは、5回のダウンロードがキャンセルされた後、GUIでダウンロードできなくなりました。",
-      "versions": "F5OS v2.0.0, F5OS v2.0.0-HR1, F5OS v2.0.0-HR2",
+      "versions": "F5OS v2.0.0, F5OS v2.0.0-HR1, F5OS v2.0.0-HR2, F5OS v2.0.0-HR3",
       "product": "F5OS, F5OS F5OS-A, F5OS F5OS-C",
       "url": "https://cdn.f5.com/product/bugtracker/ID2524241.html",
       "date": "2026-10-13"
@@ -188,7 +188,7 @@
       "id": "ID2515513",
       "headline_en": "F5OS GUI does not correctly handle LDAP authentication with multiple base DNs",
       "headline_ja": "F5OS GUI は、複数のベース DN を使用した LDAP 認証を正しく処理できません。",
-      "versions": "F5OS v2.0.0, F5OS v2.0.0-HR1, F5OS v2.0.0-HR2",
+      "versions": "F5OS v2.0.0, F5OS v2.0.0-HR1, F5OS v2.0.0-HR2, F5OS v2.0.0-HR3",
       "product": "F5OS, F5OS F5OS-A, F5OS F5OS-C",
       "url": "https://cdn.f5.com/product/bugtracker/ID2515513.html",
       "date": "2026-10-13"
@@ -225,10 +225,30 @@
     },
     {
       "source": "F5 Bug Tracker",
+      "id": "ID2535101",
+      "headline_en": "VPN may disconnect during endpoint checks.",
+      "headline_ja": "VPNはエンドポイントチェック中に切断されることがあります。",
+      "versions": "(本文から検出できず)",
+      "product": "APM-Clients",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2535101.html",
+      "date": "2026-10-10"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2525249",
+      "headline_en": "Machine Tunnel may fail to connect.",
+      "headline_ja": "Machine Tunnelが接続に失敗する可能性があります。",
+      "versions": "(本文から検出できず)",
+      "product": "APM-Clients",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2525249.html",
+      "date": "2026-10-10"
+    },
+    {
+      "source": "F5 Bug Tracker",
       "id": "ID2524873",
       "headline_en": "[Windows] Edge Client may experience VPN disconnections.",
       "headline_ja": "[Windows] EdgeクライアントはVPN切断が発生する可能性があります。",
-      "versions": "7.2.7, 7.2.7.1, 7.2.7.2",
+      "versions": "7.2.7, 7.2.7.0, 7.2.7.1, 7.2.7.2",
       "product": "APM-Clients",
       "url": "https://cdn.f5.com/product/bugtracker/ID2524873.html",
       "date": "2026-10-10"
@@ -238,7 +258,7 @@
       "id": "ID2515421",
       "headline_en": "F5 VPN Tunnel Server crashing on macOS 27 during Port Reuse",
       "headline_ja": "F5 VPNトンネルサーバーがポート再利用中にmacOS 27でクラッシュする",
-      "versions": "7.2.7, 7.2.7.1, 7.2.7.2",
+      "versions": "7.2.7, 7.2.7.0, 7.2.7.1, 7.2.7.2",
       "product": "APM-Clients, APM-Clients TMOS",
       "url": "https://cdn.f5.com/product/bugtracker/ID2515421.html",
       "date": "2026-10-10"
@@ -248,7 +268,7 @@
       "id": "ID2504945",
       "headline_en": "[App Tunnel] Connections may respond slowly.",
       "headline_ja": "[App Tunnel] 接続が遅くなることがあります。",
-      "versions": "7.2.7, 7.2.7.1, 7.2.7.2",
+      "versions": "7.2.7, 7.2.7.0, 7.2.7.1, 7.2.7.2",
       "product": "APM-Clients, APM-Clients APM",
       "url": "https://cdn.f5.com/product/bugtracker/ID2504945.html",
       "date": "2026-10-10"
@@ -285,6 +305,16 @@
     },
     {
       "source": "F5 Bug Tracker",
+      "id": "ID2493933",
+      "headline_en": "Edge client crash during reconnect",
+      "headline_ja": "再接続時に Edge クライアントがクラッシュ。",
+      "versions": "(本文から検出できず)",
+      "product": "APM-Clients, APM-Clients All",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2493933.html",
+      "date": "2026-10-10"
+    },
+    {
+      "source": "F5 Bug Tracker",
       "id": "ID2493513",
       "headline_en": "APM Linux CLI Client (f5fpc) fails to restore /etc/resolv.conf symbolic link after VPN disconnect on Debian 13",
       "headline_ja": "APM Linux CLI クライアント (f5fpc) は、Debian 13 で VPN 切断後に /etc/resolv.conf のシンボリックリンクを復元できません。",
@@ -298,7 +328,7 @@
       "id": "ID2493253",
       "headline_en": "[f5vpn][Windows]APM Browser VPN: Persistent status popup remains after successful Network Access connection in Chrome/Edge with Edge Client 7.2.7.x",
       "headline_ja": "[f5vpn][Windows]APM ブラウザ VPN: Chrome/Edge で Edge Client 7.2.7.x を使用したネットワークアクセス接続成功後もステータス ポップアップが残り続ける",
-      "versions": "7.2.7, 7.2.7.1, 7.2.7.2",
+      "versions": "7.2.7, 7.2.7.0, 7.2.7.1, 7.2.7.2, 7.2.7.3",
       "product": "APM-Clients, APM-Clients APM, APM-Clients Install/Upgrade",
       "url": "https://cdn.f5.com/product/bugtracker/ID2493253.html",
       "date": "2026-10-10"
@@ -321,16 +351,6 @@
       "versions": "17.1.0, 17.1.0.1, 17.1.0.2, 17.1.0.3, 17.1.1, 17.1.1.1, 17.1.1.2, 17.1.1.3, 17.1.1.4, 17.1.2, 17.1.2.1, 17.1.2.2, 17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5, 17.1.3.6, 17.5.0, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 17.5.1.10, 21.0.0, 21.0.0.1, 21.0.0.2, 21.0.0.3",
       "product": "BIG-IP, BIG-IP TMOS",
       "url": "https://cdn.f5.com/product/bugtracker/ID2489061.html",
-      "date": "2026-10-10"
-    },
-    {
-      "source": "F5 Bug Tracker",
-      "id": "ID2488049",
-      "headline_en": "F5OS-A downgrade may downgrade Kubernetes pods unable to retrieve the pause image",
-      "headline_ja": "F5OS-Aのダウングレードにより、Kubernetesポッドがpauseイメージを取得できなくなる可能性があります",
-      "versions": "F5OS v2.0.0, F5OS v2.0.0-HR1, F5OS v2.0.0-HR2",
-      "product": "F5OS, F5OS F5OS-A, F5OS Install/Upgrade",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2488049.html",
       "date": "2026-10-10"
     },
     {
@@ -421,6 +441,26 @@
       "versions": "17.1.3.5, 17.5.0, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 21.0.0, 21.0.0.1, 21.0.0.2, 21.0.0.3, 21.1.0, 21.1.0.1, 21.1.0.2",
       "product": "BIG-IP, BIG-IP TMOS",
       "url": "https://cdn.f5.com/product/bugtracker/ID2524777.html",
+      "date": "2026-10-08"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2505405",
+      "headline_en": "EDR license entitlement may briefly display \"Missing\" in logs following a controller reboot",
+      "headline_ja": "EDR ライセンスエンタイトルメントは、コントローラの再起動後、ログに一時的に「Missing」と表示されることがあります。",
+      "versions": "(本文から検出できず)",
+      "product": "F5OS, F5OS F5OS-C",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2505405.html",
+      "date": "2026-10-08"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2488981",
+      "headline_en": "FPGA datapath issue allows packets to be sent from host to network out of order",
+      "headline_ja": "FPGA データパスの問題により、ホストからネットワークへ送信されるパケットが順序通りに送られません。",
+      "versions": "(本文から検出できず)",
+      "product": "F5OS, F5OS F5OS-C",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2488981.html",
       "date": "2026-10-08"
     },
     {
@@ -878,7 +918,7 @@
       "id": "ID2502185",
       "headline_en": "Long-lived ePVA connections timeout on F5OS tenants",
       "headline_ja": "F5OS テナントで長時間維持される ePVA 接続がタイムアウトする。",
-      "versions": "F5OS v2.0.0, F5OS v2.0.0-HR1, F5OS v2.0.0-HR2",
+      "versions": "F5OS v2.0.0, F5OS v2.0.0-HR1, F5OS v2.0.0-HR2, F5OS v2.0.0-HR3",
       "product": "F5OS, F5OS F5OS-A, F5OS F5OS-C",
       "url": "https://cdn.f5.com/product/bugtracker/ID2502185.html",
       "date": "2026-09-26"
@@ -920,7 +960,7 @@
       "id": "ID2515105",
       "headline_en": "Tenant images uploaded by WinSCP are not detected in F5OS",
       "headline_ja": "WinSCPでアップロードされたテナント画像がF5OSで検出されません",
-      "versions": "F5OS-A 1.8.0, F5OS-A 1.8.1, F5OS-A 1.8.2, F5OS-A 1.8.3, F5OS-A 1.8.4, F5OS-A 1.8.4-HR1, F5OS-A 1.8.4-HR2, F5OS-C 1.8.0, F5OS-C 1.8.1, F5OS-C 1.8.2, F5OS-C 1.8.2-HR1, F5OS-C 1.8.2-HR2",
+      "versions": "F5OS-A 1.8.0, F5OS-A 1.8.1, F5OS-A 1.8.2, F5OS-A 1.8.3, F5OS-A 1.8.4, F5OS-A 1.8.4-HR1, F5OS-A 1.8.4-HR2, F5OS-A 1.8.4-HR3, F5OS-C 1.8.0, F5OS-C 1.8.1, F5OS-C 1.8.2, F5OS-C 1.8.2-HR1, F5OS-C 1.8.2-HR2, F5OS-C 1.8.2-HR3",
       "product": "F5OS, F5OS F5OS-A, F5OS F5OS-C",
       "url": "https://cdn.f5.com/product/bugtracker/ID2515105.html",
       "date": "2026-09-17"
@@ -944,16 +984,6 @@
       "product": "BIG_IP_NEXT(BNK), BIG_IP_NEXT(BNK) BNK",
       "url": "https://cdn.f5.com/product/bugtracker/ID2503217.html",
       "date": "2026-09-10"
-    },
-    {
-      "source": "F5 Bug Tracker",
-      "id": "ID2482985",
-      "headline_en": "TODA operator cannot persist status updates after forced pod termination",
-      "headline_ja": "TODAオペレーターは、強制的にポッドが終了された後、ステータス更新を永続させることができません",
-      "versions": "2.4.0",
-      "product": "BIG_IP_NEXT(BNK), BIG_IP_NEXT(BNK) BNK",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2482985.html",
-      "date": "2026-09-07"
     },
     {
       "source": "NVD (CVSS 8.8)",
@@ -981,16 +1011,6 @@
     },
     {
       "source": "F5 Bug Tracker",
-      "id": "ID2487809",
-      "headline_en": "TMM may restart after a geolocation database update when a FastL4 virtual server collects city or postal code analytics",
-      "headline_ja": "FastL4 仮想サーバが都市または郵便番号の分析を収集した際、ジオロケーションデータベースが更新された後に TMM が再起動することがあります。",
-      "versions": "17.1.0, 17.1.0.1, 17.1.0.2, 17.1.0.3, 17.1.1, 17.1.1.1, 17.1.1.2, 17.1.1.3, 17.1.1.4, 17.1.2, 17.1.2.1, 17.1.2.2, 17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5, 17.1.3.6, 17.5.0, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 17.5.1.10, 21.1.0, 21.1.0.1, 21.1.0.2, 21.1.0.3",
-      "product": "BIG-IP, BIG-IP TMOS",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2487809.html",
-      "date": "2026-09-02"
-    },
-    {
-      "source": "F5 Bug Tracker",
       "id": "ID2493409",
       "headline_en": "DNS queries forwarded with duplicate EDNS0 OPT records when ECS insertion is enabled and process-rd is disabled",
       "headline_ja": "ECS 挿入が有効で process‑rd が無効な場合、重複した EDNS0 OPT レコードを伴う DNS クエリが転送されます",
@@ -1007,26 +1027,6 @@
       "versions": "17.1.3.4, 17.1.3.5",
       "product": "BIG-IP, BIG-IP Install/Upgrade",
       "url": "https://cdn.f5.com/product/bugtracker/ID2489085.html",
-      "date": "2026-08-31"
-    },
-    {
-      "source": "F5 Bug Tracker",
-      "id": "ID2488077",
-      "headline_en": "iControl LX extension installation may fail with IP-based HTTPS URLs using cloud-init",
-      "headline_ja": "iControl LX拡張機能のインストールは、cloud‑init を使用した IP ベースの HTTPS URL で失敗する可能性があります。",
-      "versions": "17.1.3.6",
-      "product": "BIG-IP, BIG-IP LTM",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2488077.html",
-      "date": "2026-08-31"
-    },
-    {
-      "source": "F5 Bug Tracker",
-      "id": "ID2483197",
-      "headline_en": "For BIGIPAuthCookie/BIGIPAuthUsernameCookie  change SameSite value to Lax",
-      "headline_ja": "BIGIPAuthCookie/BIGIPAuthUsernameCookie の SameSite の値を Lax に変更してください。",
-      "versions": "17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 21.0.0.1, 21.0.0.2, 21.0.0.3",
-      "product": "BIG-IP, BIG-IP TMOS",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2483197.html",
       "date": "2026-08-31"
     },
     {
