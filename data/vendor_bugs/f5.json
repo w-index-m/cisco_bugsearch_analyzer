@@ -1,8 +1,58 @@
 {
   "label": "F5 BIG-IP",
-  "generated_at": "2026-10-20T03:27:15+00:00",
+  "generated_at": "2026-10-21T03:24:13+00:00",
   "count": 300,
   "rows": [
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2567693",
+      "headline_en": "BIG-IP DNS Oracle monitor intermittently reports DOWN",
+      "headline_ja": "BIG-IP DNS Oracleモニターが断続的にDOWNを報告します",
+      "versions": "17.1.0, 17.1.0.1, 17.1.0.2, 17.1.0.3, 17.1.1, 17.1.1.1, 17.1.1.2, 17.1.1.3, 17.1.1.4, 17.1.2, 17.1.2.1, 17.1.2.2, 17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5, 17.1.3.6, 17.5.0, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 17.5.1.10, 21.0.0, 21.0.0.1, 21.0.0.2, 21.0.0.3, 21.1.0, 21.1.0.1, 21.1.0.2, 21.1.0.3",
+      "product": "BIG-IP, BIG-IP TMOS",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2567693.html",
+      "date": "2026-10-20"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2566501",
+      "headline_en": "F5-dssm installation fails when the Helm release name is long",
+      "headline_ja": "F5-dssm のインストールは、Helm リリース名が長いと失敗します。",
+      "versions": "(本文から検出できず)",
+      "product": "BIG_IP_NEXT(BNK), BIG_IP_NEXT(BNK) BNK",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2566501.html",
+      "date": "2026-10-20"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2513953",
+      "headline_en": "Configview shows empty output for some `f5-tmm` configuration object types starting in CNF 2.3.0.",
+      "headline_ja": "Configviewは、CNF 2.3.0以降でいくつかの `f5-tmm` 設定オブジェクトタイプに対して空の出力を表示します。",
+      "versions": "2.3.0, 2.3.1, 2.3.2, 2.3.3, 2.3.4",
+      "product": "BIG_IP_NEXT(BNK), BIG_IP_NEXT(BNK) BNK",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2513953.html",
+      "date": "2026-10-20"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2503133",
+      "headline_en": "Recreated VLAN with AUTO_LASTHOP_DISABLED can disrupt traffic using dynamic routes",
+      "headline_ja": "AUTO_LASTHOP_DISABLED を設定した VLAN を再作成すると、動的ルートを使用したトラフィックが妨げられる可能性があります。",
+      "versions": "2.4.0",
+      "product": "BIG_IP_NEXT(BNK), BIG_IP_NEXT(BNK) BNK",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2503133.html",
+      "date": "2026-10-20"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2501809",
+      "headline_en": "Minimum versions requirement for KAL functionality is Kubernetes 1.3/OpenShift 4.17",
+      "headline_ja": "KAL機能の最低バージョン要件はKubernetes 1.3およびOpenShift 4.17です。",
+      "versions": "2.4.0",
+      "product": "BIG_IP_NEXT(BNK), BIG_IP_NEXT(BNK) BNK",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2501809.html",
+      "date": "2026-10-20"
+    },
     {
       "source": "F5 Bug Tracker",
       "id": "ID2589617",
@@ -345,16 +395,6 @@
     },
     {
       "source": "F5 Bug Tracker",
-      "id": "ID2489061",
-      "headline_en": "Many empty records in an external datagroup can lower performance of some lookups and stall the tmm process",
-      "headline_ja": "外部データグループに多数の空レコードがあると、いくつかのルックアップのパフォーマンスが低下し、tmm プロセスが停止することがあります。",
-      "versions": "17.1.0, 17.1.0.1, 17.1.0.2, 17.1.0.3, 17.1.1, 17.1.1.1, 17.1.1.2, 17.1.1.3, 17.1.1.4, 17.1.2, 17.1.2.1, 17.1.2.2, 17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5, 17.1.3.6, 17.5.0, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 17.5.1.10, 21.0.0, 21.0.0.1, 21.0.0.2, 21.0.0.3",
-      "product": "BIG-IP, BIG-IP TMOS",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2489061.html",
-      "date": "2026-10-10"
-    },
-    {
-      "source": "F5 Bug Tracker",
       "id": "ID2567377",
       "headline_en": "Higher control plane CPU usage from the ASM JavaScript obfuscator after upgrade",
       "headline_ja": "アップグレード後、ASM JavaScript難読化ツールによるコントロールプレーンのCPU使用率が上昇しています。",
@@ -451,16 +491,6 @@
       "versions": "(本文から検出できず)",
       "product": "F5OS, F5OS F5OS-C",
       "url": "https://cdn.f5.com/product/bugtracker/ID2505405.html",
-      "date": "2026-10-08"
-    },
-    {
-      "source": "F5 Bug Tracker",
-      "id": "ID2488981",
-      "headline_en": "FPGA datapath issue allows packets to be sent from host to network out of order",
-      "headline_ja": "FPGA データパスの問題により、ホストからネットワークへ送信されるパケットが順序通りに送られません。",
-      "versions": "(本文から検出できず)",
-      "product": "F5OS, F5OS F5OS-C",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2488981.html",
       "date": "2026-10-08"
     },
     {
@@ -645,33 +675,13 @@
     },
     {
       "source": "F5 Bug Tracker",
-      "id": "ID2489017",
-      "headline_en": "Unexpected web server worker restarts during Configuration utility use",
-      "headline_ja": "設定ユーティリティ使用中に予期しないWebサーバーワーカーの再起動",
-      "versions": "21.1.0, 21.1.0.1, 21.1.0.2, 21.1.0.3",
-      "product": "BIG-IP, BIG-IP TMOS",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2489017.html",
-      "date": "2026-10-05"
-    },
-    {
-      "source": "F5 Bug Tracker",
-      "id": "ID2488477",
-      "headline_en": "The Configuration utility becomes unresponsive and does not recover until the httpd service is restarted",
-      "headline_ja": "構成ユーティリティが応答しなくなり、httpd サービスを再起動するまで回復しません。",
-      "versions": "21.1.0, 21.1.0.1, 21.1.0.2, 21.1.0.3",
-      "product": "BIG-IP, BIG-IP TMOS",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2488477.html",
-      "date": "2026-10-05"
-    },
-    {
-      "source": "F5 Bug Tracker",
-      "id": "ID2488365",
-      "headline_en": "BD crashes",
-      "headline_ja": "BDがクラッシュします",
-      "versions": "21.1.0, 21.1.0.1, 21.1.0.2",
-      "product": "BIG-IP, BIG-IP ASM",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2488365.html",
-      "date": "2026-10-05"
+      "id": "ID2552769",
+      "headline_en": "CGNAT PBA: Negative or incorrect \"Active Port Blocks\" statistics displayed in fw_lsn_pool_pba_stat",
+      "headline_ja": "CGNAT PBA：fw_lsn_pool_pba_stat に表示される「Active Port Blocks」統計が負の値または不正確です",
+      "versions": "17.1.3.4, 17.1.3.5, 17.1.3.6",
+      "product": "BIG-IP, BIG-IP AFM",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2552769.html",
+      "date": "2026-10-01"
     },
     {
       "source": "F5 Bug Tracker",
@@ -986,6 +996,16 @@
       "date": "2026-09-10"
     },
     {
+      "source": "F5 Bug Tracker",
+      "id": "ID2502537",
+      "headline_en": "BNK fails to provision VXLAN CRs on TMM when deployed with OcNOS and Vxlan on an OCP cluster",
+      "headline_ja": "BNK は OcNOS と OCP クラスター上の Vxlan と共にデプロイされた場合、TMM 上で VXLAN CR のプロビジョニングに失敗します。",
+      "versions": "2.4.0",
+      "product": "BIG_IP_NEXT(BNK), BIG_IP_NEXT(BNK) BNK",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2502537.html",
+      "date": "2026-09-07"
+    },
+    {
       "source": "NVD (CVSS 8.8)",
       "id": "CVE-2026-66842",
       "headline_en": "BIG-IP has a vulnerability where an authenticated user of any role may be able to create administrative user accounts through an undisclosed request to Traffic Management User Interface (TMUI).\n\n\n\n\nImpact:\n\nThis vulnerability may allow an authenticated attacker with network access to the BIG-IP management interface to escalate privileges by creating administrative accounts on the BIG-IP system. There is no data plane exposure; this is a control plane issue only.\n\n\n\n\nNote: Software versions which have reached End of Technical Support (EoTS) are not evaluated.",
@@ -1018,26 +1038,6 @@
       "product": "BIG-IP, BIG-IP DNS",
       "url": "https://cdn.f5.com/product/bugtracker/ID2493409.html",
       "date": "2026-09-01"
-    },
-    {
-      "source": "F5 Bug Tracker",
-      "id": "ID2489085",
-      "headline_en": "Fix For encrypted UCS archive failing from UI",
-      "headline_ja": "UI から暗号化された UCS アーカイブが失敗する問題の修正",
-      "versions": "17.1.3.4, 17.1.3.5",
-      "product": "BIG-IP, BIG-IP Install/Upgrade",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2489085.html",
-      "date": "2026-08-31"
-    },
-    {
-      "source": "F5 Bug Tracker",
-      "id": "ID2488345",
-      "headline_en": "FQDN pool member stays offline if the FQDN template node object is forced down and then re-enabled",
-      "headline_ja": "FQDNプールメンバーは、FQDNテンプレートノードオブジェクトが強制的にダウンされ、再度有効化された場合、オフラインのままになります。",
-      "versions": "17.1.3.4, 17.1.3.5, 17.1.3.6, 17.5.1.8, 17.5.1.9, 17.5.1.10, 21.0.0.3, 21.1.0.1, 21.1.0.2, 21.1.0.3",
-      "product": "BIG-IP, BIG-IP TMOS",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2488345.html",
-      "date": "2026-08-27"
     },
     {
       "source": "NVD (CVSS 7.5)",

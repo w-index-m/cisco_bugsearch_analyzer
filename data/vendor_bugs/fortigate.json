@@ -1,6 +1,6 @@
 {
   "label": "FortiGate (FortiOS)",
-  "generated_at": "2026-10-20T03:33:03+00:00",
+  "generated_at": "2026-10-21T03:38:56+00:00",
   "count": 216,
   "rows": [
     {
@@ -561,9 +561,9 @@
     {
       "source": "NVD (CVSS 1.9)",
       "id": "CVE-2025-54821",
-      "headline_en": "An Improper Privilege Management vulnerability [CWE-269] vulnerability in Fortinet FortiOS 7.6.0 through 7.6.3, FortiOS 7.4.0 through 7.4.11, FortiOS 7.2 all versions, FortiOS 7.0 all versions, FortiOS 6.4 all versions, FortiPAM 1.6.0, FortiPAM 1.5 all versions, FortiPAM 1.4 all versions, FortiPAM 1.3 all versions, FortiPAM 1.2 all versions, FortiPAM 1.1 all versions, FortiPAM 1.0 all versions may allow an authenticated administrator to bypass the trusted host policy via crafted CLI command.",
-      "headline_ja": "不適切な権限管理（CWE-269）脆弱性が、Fortinet FortiOS 7.6.0〜7.6.3、FortiOS 7.4.0〜7.4.11、FortiOS 7.2全バージョン、FortiOS 7.0全バージョン、FortiOS 6.4全バージョン、FortiPAM 1.6.0、FortiPAM 1.5全バージョン、FortiPAM 1.4全バージョン、FortiPAM 1.3全バージョン、FortiPAM 1.2全バージョン、FortiPAM 1.1全バージョン、FortiPAM 1.0全バージョンに存在し、認証済みの管理者が細工されたCLIコマンドを使用して信頼ホストポリシーを回避できる可能性があります。",
-      "versions": "7.6.0, 7.6.3, 7.4.0, 7.4.11, 1.6.0",
+      "headline_en": "An Improper Privilege Management vulnerability [CWE-269] vulnerability in Fortinet FortiOS 7.6.0 through 7.6.3, FortiOS 7.4.0 through 7.4.11, FortiOS 7.2 all versions, FortiOS 7.0 all versions, FortiOS 6.4 all versions, FortiPAM 1.6.0, FortiPAM 1.5 all versions, FortiPAM 1.4 all versions, FortiPAM 1.3 all versions, FortiPAM 1.2 all versions, FortiPAM 1.1 all versions, FortiPAM 1.0 all versions, FortiProxy 7.6.0 through 7.6.3, FortiProxy 7.4.0 through 7.4.13, FortiProxy 7.2 all versions, FortiProxy 7.0 all versions may allow an authenticated administrator to bypass the trusted host policy via crafted CLI command.",
+      "headline_ja": "不適切な特権管理（CWE-269）脆弱性が、Fortinet FortiOS 7.6.0 から 7.6.3、FortiOS 7.4.0 から 7.4.11、FortiOS 7.2 のすべてのバージョン、FortiOS 7.0 のすべてのバージョン、FortiOS 6.4 のすべてのバージョン、FortiPAM 1.6.0、FortiPAM 1.5 のすべてのバージョン、FortiPAM 1.4 のすべてのバージョン、FortiPAM 1.3 のすべてのバージョン、FortiPAM 1.2 のすべてのバージョン、FortiPAM 1.1 のすべてのバージョン、FortiPAM 1.0 のすべてのバージョン、FortiProxy 7.6.0 から 7.6.3、FortiProxy 7.4.0 から 7.4.13、FortiProxy 7.2 のすべてのバージョン、FortiProxy 7.0 のすべてのバージョンに存在し、認証された管理者が細工された CLI コマンドを使用して信頼されたホストポリシーを迂回できる可能性があります。",
+      "versions": "7.6.0, 7.6.3, 7.4.0, 7.4.11, 1.6.0, 7.4.13",
       "url": "https://fortiguard.fortinet.com/psirt/FG-IR-25-545",
       "date": "2025-11-18",
       "cvss": 1.9,
@@ -2382,7 +2382,7 @@
       "date": "2022-08-03",
       "cvss": 4.3,
       "kev": false,
-      "epss": 0.00558
+      "epss": 0.00575
     },
     {
       "source": "NVD (CVSS 6.7)",
