@@ -1,8 +1,78 @@
 {
   "label": "F5 BIG-IP",
-  "generated_at": "2026-10-21T03:24:13+00:00",
+  "generated_at": "2026-10-22T03:37:10+00:00",
   "count": 300,
   "rows": [
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2621657",
+      "headline_en": "XML exported ASM policy containing login pages and session awareness cannot reimport",
+      "headline_ja": "XMLでエクスポートされたASMポリシー（ログインページとセッション認識を含む）は再インポートできません。",
+      "versions": "17.1.3.4, 17.1.3.5, 17.1.3.6, 17.5.1.8, 17.5.1.9, 17.5.1.10, 21.1.0, 21.1.0.1, 21.1.0.2, 21.1.0.3",
+      "product": "BIG-IP, BIG-IP ASM",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2621657.html",
+      "date": "2026-10-21"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2602601",
+      "headline_en": "iControl REST Table of Contents app /mgmt/tm/services page does not display properly",
+      "headline_ja": "iControl REST 目次アプリ /mgmt/tm/services ページが正しく表示されません",
+      "versions": "17.1.0, 17.1.0.1, 17.1.0.2, 17.1.0.3, 17.1.1, 17.1.1.1, 17.1.1.2, 17.1.1.3, 17.1.1.4, 17.1.2, 17.1.2.1, 17.1.2.2, 17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5, 17.1.3.6, 17.5.0, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 17.5.1.10, 21.1.0, 21.1.0.1, 21.1.0.2, 21.1.0.3",
+      "product": "BIG-IP, BIG-IP LTM",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2602601.html",
+      "date": "2026-10-21"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2599241",
+      "headline_en": "Pkcs11d may crash during SafeNet RSA-PSS signing after HA activation or HSM reconnection",
+      "headline_ja": "HA有効化後またはHSM再接続後のSafeNet RSA-PSS署名中に、Pkcs11dがクラッシュする可能性があります。",
+      "versions": "17.1.0, 17.1.0.1, 17.1.0.2, 17.1.0.3, 17.1.1, 17.1.1.1, 17.1.1.2, 17.1.1.3, 17.1.1.4, 17.1.2, 17.1.2.1, 17.1.2.2, 17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5, 17.1.3.6, 17.5.1.9, 17.5.1.10, 21.1.0, 21.1.0.1, 21.1.0.2, 21.1.0.3",
+      "product": "BIG-IP, BIG-IP LTM",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2599241.html",
+      "date": "2026-10-21"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2570477",
+      "headline_en": "Possible snatpool configuration mismatch in tmm.",
+      "headline_ja": "tmm の snatpool 設定に不一致がある可能性があります。",
+      "versions": "21.1.0, 21.1.0.1, 21.1.0.2, 21.1.0.3",
+      "product": "BIG-IP, BIG-IP TMOS",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2570477.html",
+      "date": "2026-10-21"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2567485",
+      "headline_en": "Intel E810 VF RX/TX Queue Size Restored to 1024",
+      "headline_ja": "Intel E810 VF の RX/TX キューサイズが 1024 に復元されました",
+      "versions": "2.1.0, 2.1.1, 2.2.0, 2.2.1, 2.2.2, 2.2.3, 2.2.4, 2.2.5, 2.3.0, 2.3.1, 2.3.2, 2.3.3, 2.3.4, 2.4.0",
+      "product": "BIG_IP_NEXT(BNK), BIG_IP_NEXT(BNK) BNK",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2567485.html",
+      "date": "2026-10-21"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2561029",
+      "headline_en": "Gradual memory growth in the internal Kubernetes (k3s) service can lead to system instability after extended uptime",
+      "headline_ja": "内部のKubernetes（k3s）サービスでの徐々に増加するメモリ使用は、長時間の稼働後にシステムの不安定化を引き起こす可能性があります。",
+      "versions": "F5OS v2.0.0, F5OS v2.0.0-HR1, F5OS v2.0.0-HR2, F5OS v2.0.0-HR3",
+      "product": "F5OS, F5OS F5OS-A",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2561029.html",
+      "date": "2026-10-21"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2549941",
+      "headline_en": "F5OS daemons operate with default log severity immediately after reboot",
+      "headline_ja": "F5OS デーモンは、再起動直後にデフォルトのログ重大度で動作します。",
+      "versions": "F5OS v2.0.0, F5OS v2.0.0-HR1, F5OS v2.0.0-HR2, F5OS v2.0.0-HR3, F5OS-A 1.8.4, F5OS-A 1.8.4-HR1, F5OS-A 1.8.4-HR2, F5OS-A 1.8.4-HR3",
+      "product": "F5OS, F5OS F5OS-A",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2549941.html",
+      "date": "2026-10-21"
+    },
     {
       "source": "F5 Bug Tracker",
       "id": "ID2567693",
@@ -365,36 +435,6 @@
     },
     {
       "source": "F5 Bug Tracker",
-      "id": "ID2493513",
-      "headline_en": "APM Linux CLI Client (f5fpc) fails to restore /etc/resolv.conf symbolic link after VPN disconnect on Debian 13",
-      "headline_ja": "APM Linux CLI クライアント (f5fpc) は、Debian 13 で VPN 切断後に /etc/resolv.conf のシンボリックリンクを復元できません。",
-      "versions": "(本文から検出できず)",
-      "product": "APM-Clients, APM-Clients TMOS",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2493513.html",
-      "date": "2026-10-10"
-    },
-    {
-      "source": "F5 Bug Tracker",
-      "id": "ID2493253",
-      "headline_en": "[f5vpn][Windows]APM Browser VPN: Persistent status popup remains after successful Network Access connection in Chrome/Edge with Edge Client 7.2.7.x",
-      "headline_ja": "[f5vpn][Windows]APM ブラウザ VPN: Chrome/Edge で Edge Client 7.2.7.x を使用したネットワークアクセス接続成功後もステータス ポップアップが残り続ける",
-      "versions": "7.2.7, 7.2.7.0, 7.2.7.1, 7.2.7.2, 7.2.7.3",
-      "product": "APM-Clients, APM-Clients APM, APM-Clients Install/Upgrade",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2493253.html",
-      "date": "2026-10-10"
-    },
-    {
-      "source": "F5 Bug Tracker",
-      "id": "ID2490153",
-      "headline_en": "ASM policies with near-identical names and parameter exclusions may cause database collisions",
-      "headline_ja": "ほぼ同一の名前とパラメータ除外を持つASMポリシーは、データベースの衝突を引き起こす可能性があります。",
-      "versions": "17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5, 17.1.3.6, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 17.5.1.10, 21.1.0, 21.1.0.1, 21.1.0.2, 21.1.0.3",
-      "product": "BIG-IP, BIG-IP ASM",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2490153.html",
-      "date": "2026-10-10"
-    },
-    {
-      "source": "F5 Bug Tracker",
       "id": "ID2567377",
       "headline_en": "Higher control plane CPU usage from the ASM JavaScript obfuscator after upgrade",
       "headline_ja": "アップグレード後、ASM JavaScript難読化ツールによるコントロールプレーンのCPU使用率が上昇しています。",
@@ -501,6 +541,16 @@
       "versions": "17.1.3.5, 17.1.3.6, 17.5.1.6, 17.5.1.8, 17.5.1.9, 17.5.1.10, 21.1.0.2, 21.1.0.3",
       "product": "BIG-IP, BIG-IP AFM, BIG-IP CGN, BIG-IP LTM",
       "url": "https://cdn.f5.com/product/bugtracker/ID2564781.html",
+      "date": "2026-10-07"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2547761",
+      "headline_en": "ASM remote logging may record the X-Forwarded-For value from a previous request",
+      "headline_ja": "ASM のリモートロギングは、前回のリクエストの X-Forwarded-For 値を記録することがあります。",
+      "versions": "17.5.1.9, 17.5.1.10",
+      "product": "BIG-IP, BIG-IP ASM",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2547761.html",
       "date": "2026-10-07"
     },
     {
@@ -665,16 +715,6 @@
     },
     {
       "source": "F5 Bug Tracker",
-      "id": "ID2493485",
-      "headline_en": "Modified iRule procedures continue using the previous procedure body on BIG-IP 17.5.1.8",
-      "headline_ja": "BIG‑IP 17.5.1.8 では、変更された iRule 手順が以前の手順本体を引き続き使用します。",
-      "versions": "17.5.1.8, 17.5.1.9, 17.5.1.10",
-      "product": "BIG-IP, BIG-IP LTM",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2493485.html",
-      "date": "2026-10-05"
-    },
-    {
-      "source": "F5 Bug Tracker",
       "id": "ID2552769",
       "headline_en": "CGNAT PBA: Negative or incorrect \"Active Port Blocks\" statistics displayed in fw_lsn_pool_pba_stat",
       "headline_ja": "CGNAT PBA：fw_lsn_pool_pba_stat に表示される「Active Port Blocks」統計が負の値または不正確です",
@@ -761,26 +801,6 @@
       "versions": "17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5, 17.1.3.6",
       "product": "BIG-IP, BIG-IP ASM",
       "url": "https://cdn.f5.com/product/bugtracker/ID2501501.html",
-      "date": "2026-10-01"
-    },
-    {
-      "source": "F5 Bug Tracker",
-      "id": "ID2489301",
-      "headline_en": "Big3d may run oom if Big3d.Ssl.SessionSizeMultiplier is set to 15 or over",
-      "headline_ja": "Big3d.Ssl.SessionSizeMultiplier が 15 以上に設定されている場合、Big3d が OOM になる可能性があります。",
-      "versions": "17.1.3.4, 17.1.3.5, 17.1.3.6, 17.5.1.9, 17.5.1.10, 21.1.0, 21.1.0.1, 21.1.0.2, 21.1.0.3",
-      "product": "BIG-IP, BIG-IP DNS",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2489301.html",
-      "date": "2026-10-01"
-    },
-    {
-      "source": "F5 Bug Tracker",
-      "id": "ID2489273",
-      "headline_en": "Masquerade MAC removed and not re-added on a standalone VELOS tenant across 'tmsh run sys offline'  and 'tmsh run sys online'",
-      "headline_ja": "Masquerade MAC が削除され、単独の VELOS テナントで「tmsh run sys offline」および「tmsh run sys online」の間に再追加されませんでした。",
-      "versions": "17.5.1.9, 17.5.1.10",
-      "product": "BIG-IP, BIG-IP TMOS",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2489273.html",
       "date": "2026-10-01"
     },
     {
@@ -977,16 +997,6 @@
     },
     {
       "source": "F5 Bug Tracker",
-      "id": "ID2493641",
-      "headline_en": "IPSD blob updates can crash TMM during traffic processing",
-      "headline_ja": "IPSD ブロブの更新は、トラフィック処理中に TMM をクラッシュさせる可能性があります。",
-      "versions": "(本文から検出できず)",
-      "product": "BIG_IP_NEXT(BNK), BIG_IP_NEXT(BNK) BNK",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2493641.html",
-      "date": "2026-09-16"
-    },
-    {
-      "source": "F5 Bug Tracker",
       "id": "ID2503217",
       "headline_en": "Egress traffic load balancing failure after TMM internal IP reconfiguration",
       "headline_ja": "TMM内部IP再構成後の送出トラフィックのロードバランシング失敗",
@@ -1028,16 +1038,6 @@
       "cvss": 3.1,
       "kev": false,
       "epss": 0.0023
-    },
-    {
-      "source": "F5 Bug Tracker",
-      "id": "ID2493409",
-      "headline_en": "DNS queries forwarded with duplicate EDNS0 OPT records when ECS insertion is enabled and process-rd is disabled",
-      "headline_ja": "ECS 挿入が有効で process‑rd が無効な場合、重複した EDNS0 OPT レコードを伴う DNS クエリが転送されます",
-      "versions": "17.1.3.4, 17.1.3.5, 17.1.3.6, 17.5.1.8, 17.5.1.9, 17.5.1.10, 21.1.0.1, 21.1.0.2, 21.1.0.3",
-      "product": "BIG-IP, BIG-IP DNS",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2493409.html",
-      "date": "2026-09-01"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -2873,7 +2873,7 @@
       "date": "2022-08-04",
       "cvss": 8.7,
       "kev": false,
-      "epss": 0.00718
+      "epss": 0.00739
     },
     {
       "source": "NVD (CVSS 8.1)",
@@ -2885,7 +2885,7 @@
       "date": "2022-08-04",
       "cvss": 8.1,
       "kev": false,
-      "epss": 0.0067
+      "epss": 0.0069
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -2897,7 +2897,7 @@
       "date": "2022-08-04",
       "cvss": 7.5,
       "kev": false,
-      "epss": 0.00468
+      "epss": 0.00482
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -2909,7 +2909,7 @@
       "date": "2022-08-04",
       "cvss": 7.5,
       "kev": false,
-      "epss": 0.00762
+      "epss": 0.00784
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -2921,7 +2921,7 @@
       "date": "2022-08-04",
       "cvss": 7.5,
       "kev": false,
-      "epss": 0.00762
+      "epss": 0.00784
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -2933,7 +2933,7 @@
       "date": "2022-08-04",
       "cvss": 7.5,
       "kev": false,
-      "epss": 0.00762
+      "epss": 0.00784
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -2945,7 +2945,7 @@
       "date": "2022-08-04",
       "cvss": 7.5,
       "kev": false,
-      "epss": 0.01294
+      "epss": 0.01278
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -2957,7 +2957,7 @@
       "date": "2022-08-04",
       "cvss": 7.5,
       "kev": false,
-      "epss": 0.00762
+      "epss": 0.00784
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -2969,7 +2969,7 @@
       "date": "2022-08-04",
       "cvss": 7.5,
       "kev": false,
-      "epss": 0.00762
+      "epss": 0.00784
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -2981,7 +2981,7 @@
       "date": "2022-08-04",
       "cvss": 7.5,
       "kev": false,
-      "epss": 0.00762
+      "epss": 0.00784
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -2993,7 +2993,7 @@
       "date": "2022-08-04",
       "cvss": 7.5,
       "kev": false,
-      "epss": 0.00506
+      "epss": 0.00521
     },
     {
       "source": "NVD (CVSS 7.2)",
@@ -3005,7 +3005,7 @@
       "date": "2022-08-04",
       "cvss": 7.2,
       "kev": false,
-      "epss": 0.00886
+      "epss": 0.00912
     },
     {
       "source": "NVD (CVSS 6.8)",
@@ -3017,7 +3017,7 @@
       "date": "2022-08-04",
       "cvss": 6.8,
       "kev": false,
-      "epss": 0.02019
+      "epss": 0.02079
     },
     {
       "source": "NVD (CVSS 6.7)",
@@ -3041,7 +3041,7 @@
       "date": "2022-08-04",
       "cvss": 5.9,
       "kev": false,
-      "epss": 0.00716
+      "epss": 0.00737
     },
     {
       "source": "NVD (CVSS 5.4)",
@@ -3053,7 +3053,7 @@
       "date": "2022-08-04",
       "cvss": 5.4,
       "kev": false,
-      "epss": 0.007
+      "epss": 0.0072
     },
     {
       "source": "NVD (CVSS 4.8)",
@@ -3065,7 +3065,7 @@
       "date": "2022-08-04",
       "cvss": 4.8,
       "kev": false,
-      "epss": 0.00434
+      "epss": 0.00446
     },
     {
       "source": "NVD (CVSS 4.3)",
@@ -3077,7 +3077,7 @@
       "date": "2022-08-04",
       "cvss": 4.3,
       "kev": false,
-      "epss": 0.00736
+      "epss": 0.00758
     },
     {
       "source": "NVD (CVSS 3.7)",
@@ -3089,7 +3089,7 @@
       "date": "2022-08-04",
       "cvss": 3.7,
       "kev": false,
-      "epss": 0.00527
+      "epss": 0.00543
     },
     {
       "source": "NVD (CVSS 8.7)",
