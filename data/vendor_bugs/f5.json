@@ -1,8 +1,128 @@
 {
   "label": "F5 BIG-IP",
-  "generated_at": "2026-10-22T03:37:10+00:00",
+  "generated_at": "2026-10-24T03:21:50+00:00",
   "count": 300,
   "rows": [
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2690333",
+      "headline_en": "BIG-IQ certificate list associates a certificate with a key from another silo",
+      "headline_ja": "BIG‑IQ 証明書リストは、別のサイロのキーと証明書を関連付けます。",
+      "versions": "8.4.0, 8.4.1, 8.4.2, 8.4.2.1, 8.4.2.2, 8.4.2.3",
+      "product": "BIG-IQ, BIG-IQ Configuration - Local Traffic",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2690333.html",
+      "date": "2026-10-23"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2567821",
+      "headline_en": "BIG-IQ RegKey Pool API fails to assign licenses to unreachable BIG-IP devices",
+      "headline_ja": "BIG-IQ RegKeyプールAPIが到達できないBIG‑IPデバイスにライセンスを割り当てられません。",
+      "versions": "8.4.2.2, 8.4.2.3",
+      "product": "BIG-IQ, BIG-IQ 1UX Search",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2567821.html",
+      "date": "2026-10-23"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2693653",
+      "headline_en": "An image may still be imported on a standby controller even if active controller import fails due to insufficient disk space",
+      "headline_ja": "アクティブコントローラでディスク容量不足によりイメージのインポートが失敗した場合でも、スタンバイコントローラにイメージをインポートできることがあります。",
+      "versions": "F5OS v2.0.0, F5OS v2.0.0-HR1, F5OS v2.0.0-HR2, F5OS v2.0.0-HR3, F5OS-C 1.8.0, F5OS-C 1.8.1, F5OS-C 1.8.2, F5OS-C 1.8.2-HR1, F5OS-C 1.8.2-HR2, F5OS-C 1.8.2-HR3",
+      "product": "F5OS, F5OS F5OS-C, F5OS Install/Upgrade",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2693653.html",
+      "date": "2026-10-22"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2693549",
+      "headline_en": "[APM][VDI] VMware Horizon client name strings on WebTop not updated to Omnissa",
+      "headline_ja": "[APM][VDI] WebTop 上の VMware Horizon クライアント名文字列が Omnissa に更新されていない",
+      "versions": "17.1.0, 17.1.0.1, 17.1.0.2, 17.1.0.3, 17.1.1, 17.1.1.1, 17.1.1.2, 17.1.1.3, 17.1.1.4, 17.1.2, 17.1.2.1, 17.1.2.2, 17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5, 17.1.3.6, 17.5.0, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 17.5.1.10, 21.0.0, 21.0.0.1, 21.0.0.2, 21.0.0.3, 21.1.0, 21.1.0.1, 21.1.0.2, 21.1.0.3",
+      "product": "BIG-IP, BIG-IP APM",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2693549.html",
+      "date": "2026-10-22"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2690677",
+      "headline_en": "Per-blade historical statistics are missing for chassis slots above 8",
+      "headline_ja": "8 以上のシャーシスロットに対するブレード単位の履歴統計が欠如しています。",
+      "versions": "17.1.0, 17.1.0.1, 17.1.0.2, 17.1.0.3, 17.1.1, 17.1.1.1, 17.1.1.2, 17.1.1.3, 17.1.1.4, 17.1.2, 17.1.2.1, 17.1.2.2, 17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5, 17.1.3.6, 17.5.0, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 17.5.1.10, 21.1.0, 21.1.0.1, 21.1.0.2, 21.1.0.3",
+      "product": "BIG-IP, BIG-IP LTM",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2690677.html",
+      "date": "2026-10-22"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2690389",
+      "headline_en": "A DNS cache containing many resource records may cause a tmm restart when the last Virtual Server referencing it is deleted",
+      "headline_ja": "多数のリソースレコードを含む DNS キャッシュは、参照している最後の仮想サーバーが削除されたときに tmm の再起動を引き起こす可能性があります。",
+      "versions": "17.1.3.6, 17.5.1.10, 21.1.0.3",
+      "product": "BIG-IP, BIG-IP DNS",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2690389.html",
+      "date": "2026-10-22"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2690357",
+      "headline_en": "Config sync fails after AS3 tenant partition deletion - partition objects not removed from Standby device",
+      "headline_ja": "AS3テナントパーティション削除後に設定同期が失敗する - スタンバイデバイスからパーティションオブジェクトが削除されない",
+      "versions": "21.1.0.2, 21.1.0.3",
+      "product": "BIG-IP, BIG-IP TMOS",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2690357.html",
+      "date": "2026-10-22"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2690329",
+      "headline_en": "REST API TACACS+ authentication returns 401 when the primary TACACS+ server rejects the connection, instead of failing over to the next server",
+      "headline_ja": "REST API の TACACS+ 認証は、プライマリ TACACS+ サーバーが接続を拒否した際に、次のサーバーへフェイルオーバーせずに 401 を返します。",
+      "versions": "17.5.1.9, 17.5.1.10",
+      "product": "BIG-IP, BIG-IP TMOS",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2690329.html",
+      "date": "2026-10-22"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2687873",
+      "headline_en": "Invalid REST endpoint when DoS profile name contains an iApp folder separator (/)",
+      "headline_ja": "DoS プロファイル名に iApp フォルダー区切り文字 (/) が含まれている場合、REST エンドポイントが無効です",
+      "versions": "17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 17.5.1.10",
+      "product": "BIG-IP, BIG-IP AFM",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2687873.html",
+      "date": "2026-10-22"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2687781",
+      "headline_en": "QUIC/HTTP3 virtual with server-side UDP shows proxy initialization failure and repeated BD restarts",
+      "headline_ja": "サーバー側UDPのQUIC/HTTP3仮想環境で、プロキシ初期化失敗とBDの再起動が繰り返し発生しています。",
+      "versions": "21.1.0.1, 21.1.0.2, 21.1.0.3",
+      "product": "BIG-IP, BIG-IP TMOS",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2687781.html",
+      "date": "2026-10-22"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2687673",
+      "headline_en": "Edge Client 7273 GA: severe VPN throughput degradation and client UI unresponsiveness",
+      "headline_ja": "Edge Client 7273 GA: VPNスループットの深刻な低下とクライアントUIの応答なし",
+      "versions": "7.2.7.3",
+      "product": "APM-Clients, APM-Clients TMOS",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2687673.html",
+      "date": "2026-10-22"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2567293",
+      "headline_en": "[SELinux] AVC denial: logrotate_t denied { getattr } on /shared/.tp_edr_mon_logs/tp_edr_mon.log (default_t)",
+      "headline_ja": "[SELinux] AVC拒否: logrotate_t が /shared/.tp_edr_mon_logs/tp_edr_mon.log (default_t) に対して { getattr } を拒否されました",
+      "versions": "21.1.0.3",
+      "product": "BIG-IP, BIG-IP TMOS",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2567293.html",
+      "date": "2026-10-22"
+    },
     {
       "source": "F5 Bug Tracker",
       "id": "ID2621657",
@@ -111,16 +231,6 @@
       "versions": "2.4.0",
       "product": "BIG_IP_NEXT(BNK), BIG_IP_NEXT(BNK) BNK",
       "url": "https://cdn.f5.com/product/bugtracker/ID2503133.html",
-      "date": "2026-10-20"
-    },
-    {
-      "source": "F5 Bug Tracker",
-      "id": "ID2501809",
-      "headline_en": "Minimum versions requirement for KAL functionality is Kubernetes 1.3/OpenShift 4.17",
-      "headline_ja": "KAL機能の最低バージョン要件はKubernetes 1.3およびOpenShift 4.17です。",
-      "versions": "2.4.0",
-      "product": "BIG_IP_NEXT(BNK), BIG_IP_NEXT(BNK) BNK",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2501809.html",
       "date": "2026-10-20"
     },
     {
@@ -415,26 +525,6 @@
     },
     {
       "source": "F5 Bug Tracker",
-      "id": "ID2501457",
-      "headline_en": "Windows Edge Client - Update dark mode, Webvpn, EPI and LAN specific application icons for Windows Client",
-      "headline_ja": "Windows Edge クライアント - ダークモード、WebVPN、EPI、LAN 向けの特定アプリケーションアイコンを Windows クライアント用に更新",
-      "versions": "7.2.7.2",
-      "product": "APM-Clients, APM-Clients APM",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2501457.html",
-      "date": "2026-10-10"
-    },
-    {
-      "source": "F5 Bug Tracker",
-      "id": "ID2493933",
-      "headline_en": "Edge client crash during reconnect",
-      "headline_ja": "再接続時に Edge クライアントがクラッシュ。",
-      "versions": "(本文から検出できず)",
-      "product": "APM-Clients, APM-Clients All",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2493933.html",
-      "date": "2026-10-10"
-    },
-    {
-      "source": "F5 Bug Tracker",
       "id": "ID2567377",
       "headline_en": "Higher control plane CPU usage from the ASM JavaScript obfuscator after upgrade",
       "headline_ja": "アップグレード後、ASM JavaScript難読化ツールによるコントロールプレーンのCPU使用率が上昇しています。",
@@ -585,16 +675,6 @@
     },
     {
       "source": "F5 Bug Tracker",
-      "id": "ID2501837",
-      "headline_en": "F5OS 2.0 BIG-IP 21.1 tenant deployment failed when using cloud-init tmos_declared module",
-      "headline_ja": "F5OS 2.0 BIG‑IP 21.1 テナントのデプロイが、cloud‑init tmos_declared モジュールを使用したときに失敗しました。",
-      "versions": "21.1.0, 21.1.0.1, 21.1.0.2, 21.1.0.3",
-      "product": "BIG-IP, BIG-IP TMOS",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2501837.html",
-      "date": "2026-10-06"
-    },
-    {
-      "source": "F5 Bug Tracker",
       "id": "ID2553085",
       "headline_en": "REST endpoint device-info returns empty slots after reboot on BIG-IP VE deployed in Azure",
       "headline_ja": "RESTエンドポイント「device-info」は、Azure にデプロイされた BIG‑IP VE の再起動後に空のスロットを返します。",
@@ -695,26 +775,6 @@
     },
     {
       "source": "F5 Bug Tracker",
-      "id": "ID2502353",
-      "headline_en": "IP reputation database availability immediately after download",
-      "headline_ja": "IPレピュテーションデータベースはダウンロード直後に利用可能です",
-      "versions": "17.5.1.8, 17.5.1.9, 17.5.1.10",
-      "product": "BIG-IP, BIG-IP AFM",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2502353.html",
-      "date": "2026-10-05"
-    },
-    {
-      "source": "F5 Bug Tracker",
-      "id": "ID2501929",
-      "headline_en": "BIND Component Upgrade to Version 9.20.26",
-      "headline_ja": "BINDコンポーネントをバージョン9.20.26にアップグレード",
-      "versions": "17.5.1.10, 17.1.3.6",
-      "product": "BIG-IP, BIG-IP TMOS",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2501929.html",
-      "date": "2026-10-05"
-    },
-    {
-      "source": "F5 Bug Tracker",
       "id": "ID2552769",
       "headline_en": "CGNAT PBA: Negative or incorrect \"Active Port Blocks\" statistics displayed in fw_lsn_pool_pba_stat",
       "headline_ja": "CGNAT PBA：fw_lsn_pool_pba_stat に表示される「Active Port Blocks」統計が負の値または不正確です",
@@ -791,16 +851,6 @@
       "versions": "17.5.1.6, 17.5.1.8, 17.5.1.9, 17.5.1.10",
       "product": "BIG-IP, BIG-IP LTM",
       "url": "https://cdn.f5.com/product/bugtracker/ID2502589.html",
-      "date": "2026-10-01"
-    },
-    {
-      "source": "F5 Bug Tracker",
-      "id": "ID2501501",
-      "headline_en": "Datasync generator liveness check can start duplicate generators, leading to memory pressure",
-      "headline_ja": "データ同期ジェネレータのライブネスチェックは、重複したジェネレータを起動させ、メモリ圧迫を招く可能性があります。",
-      "versions": "17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5, 17.1.3.6",
-      "product": "BIG-IP, BIG-IP ASM",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2501501.html",
       "date": "2026-10-01"
     },
     {
@@ -905,52 +955,12 @@
     },
     {
       "source": "F5 Bug Tracker",
-      "id": "ID2502029",
-      "headline_en": "zxfrd should force DB commit when huge pages are low or dirty page count is high",
-      "headline_ja": "zxfrdは、ヒュージページが不足しているか、ダーティページ数が多いときにDBコミットを強制すべきです。",
-      "versions": "17.1.3.5, 17.1.3.6, 17.5.1.9, 17.5.1.10, 21.1.0.2, 21.1.0.3",
-      "product": "BIG-IP, BIG-IP DNS",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2502029.html",
-      "date": "2026-09-30"
-    },
-    {
-      "source": "F5 Bug Tracker",
-      "id": "ID2502005",
-      "headline_en": "zxfrd should log COW mmap failure through standard logging and exit without core dump",
-      "headline_ja": "zxfrdは、標準のロギングを通じてCOW mmapの失敗を記録し、コアダンプせずに終了すべきです。",
-      "versions": "17.1.3.5, 17.1.3.6, 17.5.1.9, 17.5.1.10, 21.1.0.2, 21.1.0.3",
-      "product": "BIG-IP, BIG-IP TMOS",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2502005.html",
-      "date": "2026-09-30"
-    },
-    {
-      "source": "F5 Bug Tracker",
-      "id": "ID2502361",
-      "headline_en": "TMM SIGSEGV crash when trying to access stale entry for /var/IpRep/F5IpV6Rep.dat",
-      "headline_ja": "TMM が /var/IpRep/F5IpV6Rep.dat の古いエントリにアクセスしようとして SIGSEGV クラッシュする",
-      "versions": "17.5.1.8, 17.5.1.9",
-      "product": "BIG-IP, BIG-IP AFM",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2502361.html",
-      "date": "2026-09-29"
-    },
-    {
-      "source": "F5 Bug Tracker",
       "id": "ID2535289",
       "headline_en": "BIG-IP DNS resolver cache TCP messages flood logs",
       "headline_ja": "BIG-IP DNS リゾルバキャッシュ TCP メッセージ フラッド ログ",
       "versions": "17.1.3.5, 17.1.3.6, 17.5.1.9, 17.5.1.10, 21.1.0.2, 21.1.0.3",
       "product": "BIG-IP, BIG-IP DNS",
       "url": "https://cdn.f5.com/product/bugtracker/ID2535289.html",
-      "date": "2026-09-26"
-    },
-    {
-      "source": "F5 Bug Tracker",
-      "id": "ID2502185",
-      "headline_en": "Long-lived ePVA connections timeout on F5OS tenants",
-      "headline_ja": "F5OS テナントで長時間維持される ePVA 接続がタイムアウトする。",
-      "versions": "F5OS v2.0.0, F5OS v2.0.0-HR1, F5OS v2.0.0-HR2, F5OS v2.0.0-HR3",
-      "product": "F5OS, F5OS F5OS-A, F5OS F5OS-C",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2502185.html",
       "date": "2026-09-26"
     },
     {
@@ -964,16 +974,6 @@
       "cvss": 9.8,
       "kev": true,
       "epss": 0.02226
-    },
-    {
-      "source": "F5 Bug Tracker",
-      "id": "ID2501773",
-      "headline_en": "NAT46/DNS64 translation entries expire during active use, causing intermittent connection failures",
-      "headline_ja": "NAT46/DNS64 の変換エントリは使用中に期限切れとなり、断続的な接続失敗を引き起こす。",
-      "versions": "2.2.3, 2.2.4",
-      "product": "BIG_IP_NEXT(BNK), BIG_IP_NEXT(BNK) BNK",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2501773.html",
-      "date": "2026-09-21"
     },
     {
       "source": "F5 Bug Tracker",
