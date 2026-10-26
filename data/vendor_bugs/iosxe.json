@@ -1,6 +1,6 @@
 {
   "label": "Cisco IOS XE",
-  "generated_at": "2026-10-25T03:11:48+00:00",
+  "generated_at": "2026-10-26T03:21:14+00:00",
   "count": 193,
   "rows": [
     {
@@ -145,7 +145,7 @@
       "date": "2026-08-05",
       "cvss": 4.3,
       "kev": false,
-      "epss": 0.0032
+      "epss": 0.00436
     },
     {
       "source": "Cisco PSIRT (CVSS -)",
@@ -229,7 +229,7 @@
       "date": "2026-03-25",
       "cvss": 6.5,
       "kev": false,
-      "epss": 0.00096
+      "epss": 0.00133
     },
     {
       "source": "NVD (CVSS 6.5)",
@@ -277,7 +277,7 @@
       "date": "2026-03-25",
       "cvss": 5.4,
       "kev": false,
-      "epss": 0.00296
+      "epss": 0.00353
     },
     {
       "source": "NVD (CVSS 5.3)",
@@ -289,7 +289,7 @@
       "date": "2026-03-25",
       "cvss": 5.3,
       "kev": false,
-      "epss": 0.00301
+      "epss": 0.00367
     },
     {
       "source": "NVD (CVSS 4.8)",
@@ -301,7 +301,7 @@
       "date": "2026-03-25",
       "cvss": 4.8,
       "kev": false,
-      "epss": 0.00202
+      "epss": 0.00246
     },
     {
       "source": "NVD (CVSS 9.0)",
@@ -421,7 +421,7 @@
       "date": "2025-09-24",
       "cvss": 6.5,
       "kev": false,
-      "epss": 0.00123
+      "epss": 0.00238
     },
     {
       "source": "NVD (CVSS 6.1)",
@@ -433,7 +433,7 @@
       "date": "2025-09-24",
       "cvss": 6.1,
       "kev": false,
-      "epss": 0.0029
+      "epss": 0.00336
     },
     {
       "source": "NVD (CVSS 6.0)",
@@ -445,7 +445,7 @@
       "date": "2025-09-24",
       "cvss": 6.0,
       "kev": false,
-      "epss": 0.00161
+      "epss": 0.00296
     },
     {
       "source": "NVD (CVSS 5.3)",
@@ -709,7 +709,7 @@
       "date": "2025-05-07",
       "cvss": 5.3,
       "kev": false,
-      "epss": 0.00522
+      "epss": 0.00641
     },
     {
       "source": "NVD (CVSS 5.3)",
@@ -1129,7 +1129,7 @@
       "date": "2023-10-16",
       "cvss": 10.0,
       "kev": true,
-      "epss": 0.99609
+      "epss": 0.99613
     },
     {
       "source": "NVD (CVSS 6.5)",
@@ -1141,7 +1141,7 @@
       "date": "2023-10-04",
       "cvss": 6.5,
       "kev": false,
-      "epss": 0.00682
+      "epss": 0.00863
     },
     {
       "source": "NVD (CVSS 8.8)",
@@ -1285,7 +1285,7 @@
       "date": "2023-03-23",
       "cvss": 7.8,
       "kev": false,
-      "epss": 0.00206
+      "epss": 0.00439
     },
     {
       "source": "NVD (CVSS 7.8)",

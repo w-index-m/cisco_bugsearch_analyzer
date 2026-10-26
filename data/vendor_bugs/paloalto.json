@@ -1,6 +1,6 @@
 {
   "label": "Palo Alto (PAN-OS)",
-  "generated_at": "2026-10-25T03:18:28+00:00",
+  "generated_at": "2026-10-26T03:14:13+00:00",
   "count": 638,
   "rows": [
     {
@@ -13,7 +13,7 @@
       "date": "2026-10-14",
       "cvss": 7.2,
       "kev": true,
-      "epss": 0.01215
+      "epss": 0.0174
     },
     {
       "source": "NVD (CVSS -)",
@@ -157,7 +157,7 @@
       "date": "2026-09-10",
       "cvss": null,
       "kev": false,
-      "epss": 0.00218
+      "epss": 0.00344
     },
     {
       "source": "NVD (CVSS -)",
@@ -169,7 +169,7 @@
       "date": "2026-09-10",
       "cvss": null,
       "kev": false,
-      "epss": 0.00189
+      "epss": 0.00184
     },
     {
       "source": "NVD (CVSS -)",
@@ -181,7 +181,7 @@
       "date": "2026-09-10",
       "cvss": null,
       "kev": false,
-      "epss": 0.00824
+      "epss": 0.00766
     },
     {
       "source": "NVD (CVSS -)",
@@ -193,7 +193,7 @@
       "date": "2026-09-10",
       "cvss": null,
       "kev": false,
-      "epss": 0.00444
+      "epss": 0.00666
     },
     {
       "source": "NVD (CVSS -)",
@@ -205,7 +205,7 @@
       "date": "2026-09-10",
       "cvss": null,
       "kev": false,
-      "epss": 0.00509
+      "epss": 0.00785
     },
     {
       "source": "NVD (CVSS -)",
@@ -217,7 +217,7 @@
       "date": "2026-09-10",
       "cvss": null,
       "kev": false,
-      "epss": 0.00276
+      "epss": 0.00513
     },
     {
       "source": "NVD (CVSS -)",
@@ -229,7 +229,7 @@
       "date": "2026-09-10",
       "cvss": null,
       "kev": false,
-      "epss": 0.00105
+      "epss": 0.00156
     },
     {
       "source": "NVD (CVSS -)",
@@ -241,7 +241,7 @@
       "date": "2026-09-10",
       "cvss": null,
       "kev": false,
-      "epss": 0.00105
+      "epss": 0.00151
     },
     {
       "source": "NVD (CVSS -)",
@@ -253,7 +253,7 @@
       "date": "2026-09-10",
       "cvss": null,
       "kev": false,
-      "epss": 0.00099
+      "epss": 0.00142
     },
     {
       "source": "NVD (CVSS 8.1)",
@@ -265,7 +265,7 @@
       "date": "2026-08-13",
       "cvss": 8.1,
       "kev": false,
-      "epss": 0.00333
+      "epss": 0.00659
     },
     {
       "source": "NVD (CVSS 8.1)",
@@ -277,7 +277,7 @@
       "date": "2026-08-13",
       "cvss": 8.1,
       "kev": false,
-      "epss": 0.0031
+      "epss": 0.00599
     },
     {
       "source": "NVD (CVSS 7.8)",
@@ -289,7 +289,7 @@
       "date": "2026-08-13",
       "cvss": 7.8,
       "kev": false,
-      "epss": 0.00203
+      "epss": 0.00169
     },
     {
       "source": "NVD (CVSS 7.8)",
@@ -301,7 +301,7 @@
       "date": "2026-08-13",
       "cvss": 7.8,
       "kev": false,
-      "epss": 0.00115
+      "epss": 0.00169
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -313,7 +313,7 @@
       "date": "2026-08-13",
       "cvss": 7.5,
       "kev": false,
-      "epss": 0.00328
+      "epss": 0.00559
     },
     {
       "source": "NVD (CVSS 7.4)",
@@ -325,7 +325,7 @@
       "date": "2026-08-13",
       "cvss": 7.4,
       "kev": false,
-      "epss": 0.00138
+      "epss": 0.00255
     },
     {
       "source": "NVD (CVSS 7.0)",
@@ -337,7 +337,7 @@
       "date": "2026-08-13",
       "cvss": 7.0,
       "kev": false,
-      "epss": 0.00075
+      "epss": 0.00107
     },
     {
       "source": "NVD (CVSS 6.5)",
@@ -349,7 +349,7 @@
       "date": "2026-08-13",
       "cvss": 6.5,
       "kev": false,
-      "epss": 0.00225
+      "epss": 0.00308
     },
     {
       "source": "NVD (CVSS 6.0)",
@@ -361,7 +361,7 @@
       "date": "2026-08-13",
       "cvss": 6.0,
       "kev": false,
-      "epss": 0.00108
+      "epss": 0.0016
     },
     {
       "source": "NVD (CVSS 6.0)",
@@ -373,7 +373,7 @@
       "date": "2026-08-13",
       "cvss": 6.0,
       "kev": false,
-      "epss": 0.0013
+      "epss": 0.00194
     },
     {
       "source": "NVD (CVSS 5.5)",
@@ -385,7 +385,7 @@
       "date": "2026-08-13",
       "cvss": 5.5,
       "kev": false,
-      "epss": 0.00127
+      "epss": 0.00147
     },
     {
       "source": "NVD (CVSS 4.4)",
@@ -397,7 +397,7 @@
       "date": "2026-08-13",
       "cvss": 4.4,
       "kev": false,
-      "epss": 0.00111
+      "epss": 0.00148
     },
     {
       "source": "NVD (CVSS 9.9)",
@@ -673,7 +673,7 @@
       "date": "2026-05-13",
       "cvss": 9.1,
       "kev": true,
-      "epss": 0.96895
+      "epss": 0.95012
     },
     {
       "source": "NVD (CVSS 8.8)",
@@ -865,7 +865,7 @@
       "date": "2026-05-06",
       "cvss": 9.8,
       "kev": true,
-      "epss": 0.31725
+      "epss": 0.41714
     },
     {
       "source": "NVD (CVSS 8.8)",
@@ -1549,7 +1549,7 @@
       "date": "2025-02-12",
       "cvss": 9.1,
       "kev": true,
-      "epss": 0.98455
+      "epss": 0.98141
     },
     {
       "source": "NVD (CVSS 6.5)",
@@ -1693,7 +1693,7 @@
       "date": "2024-11-18",
       "cvss": 9.8,
       "kev": true,
-      "epss": 0.99855
+      "epss": 0.99786
     },
     {
       "source": "NVD (CVSS 7.2)",
@@ -1705,7 +1705,7 @@
       "date": "2024-11-18",
       "cvss": 7.2,
       "kev": true,
-      "epss": 0.94824
+      "epss": 0.93751
     },
     {
       "source": "NVD (CVSS 7.5)",
