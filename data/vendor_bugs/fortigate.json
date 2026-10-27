@@ -1,7 +1,7 @@
 {
   "label": "FortiGate (FortiOS)",
-  "generated_at": "2026-10-26T03:15:24+00:00",
-  "count": 216,
+  "generated_at": "2026-10-27T03:45:04+00:00",
+  "count": 215,
   "rows": [
     {
       "source": "FortiGuard PSIRT (CVSS 6.7)",
@@ -737,19 +737,6 @@
       "cvss": 2.7,
       "kev": false,
       "epss": 0.00361
-    },
-    {
-      "source": "FortiGuard PSIRT (CVSS 2.7)",
-      "id": "FG-IR-24-452",
-      "headline_en": "Insertion of Sensitive 2FA Information in logs and debug command",
-      "headline_ja": "ログやデバッグコマンドへの機密2要素認証情報の挿入",
-      "versions": "(不明)",
-      "product": "FortiOS",
-      "url": "https://fortiguard.fortinet.com/psirt/FG-IR-24-452",
-      "date": "2025-10-14",
-      "cvss": 2.7,
-      "kev": null,
-      "epss": null
     },
     {
       "source": "NVD (CVSS 2.6)",

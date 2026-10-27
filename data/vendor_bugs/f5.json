@@ -1,6 +1,6 @@
 {
   "label": "F5 BIG-IP",
-  "generated_at": "2026-10-26T03:09:36+00:00",
+  "generated_at": "2026-10-27T03:54:41+00:00",
   "count": 300,
   "rows": [
     {
@@ -91,16 +91,6 @@
       "versions": "17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 17.5.1.10",
       "product": "BIG-IP, BIG-IP AFM",
       "url": "https://cdn.f5.com/product/bugtracker/ID2687873.html",
-      "date": "2026-10-22"
-    },
-    {
-      "source": "F5 Bug Tracker",
-      "id": "ID2687781",
-      "headline_en": "QUIC/HTTP3 virtual with server-side UDP shows proxy initialization failure and repeated BD restarts",
-      "headline_ja": "サーバー側UDPのQUIC/HTTP3仮想環境で、プロキシ初期化失敗とBDの再起動が繰り返し発生しています。",
-      "versions": "21.1.0.1, 21.1.0.2, 21.1.0.3",
-      "product": "BIG-IP, BIG-IP TMOS",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2687781.html",
       "date": "2026-10-22"
     },
     {
@@ -952,6 +942,16 @@
       "product": "BIG-IP, BIG-IP APM",
       "url": "https://cdn.f5.com/product/bugtracker/ID2503533.html",
       "date": "2026-09-30"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2502361",
+      "headline_en": "TMM SIGSEGV crash when trying to access stale entry for /var/IpRep/F5IpV6Rep.dat",
+      "headline_ja": "TMMが/var/IpRep/F5IpV6Rep.datの古いエントリにアクセスしようとするとSIGSEGVクラッシュが発生する",
+      "versions": "17.5.1.8, 17.5.1.9",
+      "product": "BIG-IP, BIG-IP AFM",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2502361.html",
+      "date": "2026-09-29"
     },
     {
       "source": "F5 Bug Tracker",
