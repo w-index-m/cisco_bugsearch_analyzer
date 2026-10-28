@@ -1,6 +1,6 @@
 {
   "label": "F5 BIG-IP",
-  "generated_at": "2026-10-27T03:54:41+00:00",
+  "generated_at": "2026-10-28T04:05:07+00:00",
   "count": 300,
   "rows": [
     {
@@ -159,7 +159,7 @@
       "headline_en": "Intel E810 VF RX/TX Queue Size Restored to 1024",
       "headline_ja": "Intel E810 VF の RX/TX キューサイズが 1024 に復元されました",
       "versions": "2.1.0, 2.1.1, 2.2.0, 2.2.1, 2.2.2, 2.2.3, 2.2.4, 2.2.5, 2.3.0, 2.3.1, 2.3.2, 2.3.3, 2.3.4, 2.4.0",
-      "product": "BIG_IP_NEXT(BNK), BIG_IP_NEXT(BNK) BNK",
+      "product": "BIG-IP NEXT BNK",
       "url": "https://cdn.f5.com/product/bugtracker/ID2567485.html",
       "date": "2026-10-21"
     },
@@ -199,7 +199,7 @@
       "headline_en": "F5-dssm installation fails when the Helm release name is long",
       "headline_ja": "F5-dssm のインストールは、Helm リリース名が長いと失敗します。",
       "versions": "(本文から検出できず)",
-      "product": "BIG_IP_NEXT(BNK), BIG_IP_NEXT(BNK) BNK",
+      "product": "BIG-IP NEXT BNK",
       "url": "https://cdn.f5.com/product/bugtracker/ID2566501.html",
       "date": "2026-10-20"
     },
@@ -209,7 +209,7 @@
       "headline_en": "Configview shows empty output for some `f5-tmm` configuration object types starting in CNF 2.3.0.",
       "headline_ja": "Configviewは、CNF 2.3.0以降でいくつかの `f5-tmm` 設定オブジェクトタイプに対して空の出力を表示します。",
       "versions": "2.3.0, 2.3.1, 2.3.2, 2.3.3, 2.3.4",
-      "product": "BIG_IP_NEXT(BNK), BIG_IP_NEXT(BNK) BNK",
+      "product": "BIG-IP NEXT BNK",
       "url": "https://cdn.f5.com/product/bugtracker/ID2513953.html",
       "date": "2026-10-20"
     },
@@ -219,7 +219,7 @@
       "headline_en": "Recreated VLAN with AUTO_LASTHOP_DISABLED can disrupt traffic using dynamic routes",
       "headline_ja": "AUTO_LASTHOP_DISABLED を設定した VLAN を再作成すると、動的ルートを使用したトラフィックが妨げられる可能性があります。",
       "versions": "2.4.0",
-      "product": "BIG_IP_NEXT(BNK), BIG_IP_NEXT(BNK) BNK",
+      "product": "BIG-IP NEXT BNK",
       "url": "https://cdn.f5.com/product/bugtracker/ID2503133.html",
       "date": "2026-10-20"
     },
@@ -419,7 +419,7 @@
       "headline_en": "F5ngress Helm install fails with release names over 36 characters",
       "headline_ja": "F5ngressのHelmインストールは、リリース名が36文字を超えると失敗します",
       "versions": "(本文から検出できず)",
-      "product": "BIG_IP_NEXT(BNK), BIG_IP_NEXT(BNK) BNK",
+      "product": "BIG-IP NEXT BNK",
       "url": "https://cdn.f5.com/product/bugtracker/ID2560921.html",
       "date": "2026-10-12"
     },
@@ -1001,7 +1001,7 @@
       "headline_en": "Egress traffic load balancing failure after TMM internal IP reconfiguration",
       "headline_ja": "TMM内部IP再構成後の送出トラフィックのロードバランシング失敗",
       "versions": "2.4.0",
-      "product": "BIG_IP_NEXT(BNK), BIG_IP_NEXT(BNK) BNK",
+      "product": "BIG-IP NEXT BNK",
       "url": "https://cdn.f5.com/product/bugtracker/ID2503217.html",
       "date": "2026-09-10"
     },
@@ -1011,7 +1011,7 @@
       "headline_en": "BNK fails to provision VXLAN CRs on TMM when deployed with OcNOS and Vxlan on an OCP cluster",
       "headline_ja": "BNK は OcNOS と OCP クラスター上の Vxlan と共にデプロイされた場合、TMM 上で VXLAN CR のプロビジョニングに失敗します。",
       "versions": "2.4.0",
-      "product": "BIG_IP_NEXT(BNK), BIG_IP_NEXT(BNK) BNK",
+      "product": "BIG-IP NEXT BNK",
       "url": "https://cdn.f5.com/product/bugtracker/ID2502537.html",
       "date": "2026-09-07"
     },
@@ -2225,7 +2225,7 @@
       "date": "2023-10-26",
       "cvss": 9.8,
       "kev": true,
-      "epss": 0.96515
+      "epss": 0.9675
     },
     {
       "source": "NVD (CVSS 8.8)",
@@ -2237,7 +2237,7 @@
       "date": "2023-10-26",
       "cvss": 8.8,
       "kev": true,
-      "epss": 0.04468
+      "epss": 0.04228
     },
     {
       "source": "NVD (CVSS 9.9)",

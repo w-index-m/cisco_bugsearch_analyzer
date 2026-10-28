@@ -1,8 +1,20 @@
 {
   "label": "FortiGate (FortiOS)",
-  "generated_at": "2026-10-27T03:45:04+00:00",
+  "generated_at": "2026-10-28T03:55:20+00:00",
   "count": 215,
   "rows": [
+    {
+      "source": "NVD (CVSS 7.5)",
+      "id": "CVE-2026-106174",
+      "headline_en": "A improper locking vulnerability in Fortinet FortiOS 8.0.0, FortiOS 7.6.4 through 7.6.6 may allow an unauthenticated attacker with network access to the device to cause a denial of service of the HTTPS management interface via crafted HTTP requests.",
+      "headline_ja": "Fortinet FortiOS 8.0.0、FortiOS 7.6.4 から 7.6.6 における不適切なロック機構の脆弱性により、デバイスへのネットワークアクセス権を持つ認証されていない攻撃者が、細工された HTTP リクエストを使用して HTTPS 管理インターフェースのサービス拒否を引き起こす可能性があります。",
+      "versions": "8.0.0, 7.6.4, 7.6.6",
+      "url": "https://fortiguard.fortinet.com/psirt/FG-IR-26-181",
+      "date": "2026-10-27",
+      "cvss": 7.5,
+      "kev": false,
+      "epss": 0.00282
+    },
     {
       "source": "FortiGuard PSIRT (CVSS 6.7)",
       "id": "FG-IR-26-181",
@@ -2586,18 +2598,6 @@
       "cvss": 3.5,
       "kev": false,
       "epss": 0.00569
-    },
-    {
-      "source": "NVD (CVSS 4.3)",
-      "id": "CVE-2021-24018",
-      "headline_en": "A buffer underwrite vulnerability in the firmware verification routine of FortiOS before 7.0.1 may allow an attacker located in the adjacent network to potentially execute arbitrary code via a specifically crafted firmware image.",
-      "headline_ja": "FortiOS 7.0.1以前のファームウェア検証ルーチンに存在するバッファアンダーライト脆弱性により、隣接ネットワーク上にいる攻撃者が特別に作成されたファームウェアイメージを使用して、任意のコードを実行できる可能性があります。",
-      "versions": "7.0.1",
-      "url": "https://fortiguard.com/advisory/FG-IR-21-046",
-      "date": "2021-08-04",
-      "cvss": 4.3,
-      "kev": false,
-      "epss": 0.01035
     }
   ]
 }

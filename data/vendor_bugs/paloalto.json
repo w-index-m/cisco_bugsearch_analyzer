@@ -1,6 +1,6 @@
 {
   "label": "Palo Alto (PAN-OS)",
-  "generated_at": "2026-10-27T03:43:42+00:00",
+  "generated_at": "2026-10-28T04:11:35+00:00",
   "count": 639,
   "rows": [
     {
@@ -949,7 +949,7 @@
       "date": "2025-11-26",
       "cvss": 2.7,
       "kev": false,
-      "epss": 0.00224
+      "epss": 0.0024
     },
     {
       "source": "NVD (CVSS -)",
