@@ -1,6 +1,6 @@
 {
   "label": "FortiGate (FortiOS)",
-  "generated_at": "2026-10-29T04:32:51+00:00",
+  "generated_at": "2026-10-30T04:42:59+00:00",
   "count": 215,
   "rows": [
     {
@@ -31,9 +31,9 @@
     {
       "source": "NVD (CVSS 2.3)",
       "id": "CVE-2026-106175",
-      "headline_en": "A Double Free vulnerability [CWE-415] vulnerability in Fortinet FortiOS 7.6.0 through 7.6.7, FortiOS 7.4 all versions, FortiOS 7.2 all versions, FortiProxy 7.6.0 through 7.6.6, FortiProxy 7.4 all versions, FortiProxy 7.2 all versions, FortiSwitch 7.6.0 through 7.6.6, FortiSwitch 7.4 all versions, FortiSwitch 7.2 all versions may allow a local authenticated attacker to crash the newcli daemon via crafted CLI commands.",
-      "headline_ja": "Fortinet FortiOS 7.6.0 から 7.6.7、FortiOS 7.4 の全バージョン、FortiOS 7.2 の全バージョン、FortiProxy 7.6.0 から 7.6.6、FortiProxy 7.4 の全バージョン、FortiProxy 7.2 の全バージョン、FortiSwitch 7.6.0 から 7.6.6、FortiSwitch 7.4 の全バージョン、FortiSwitch 7.2 の全バージョンに存在する Double Free 脆弱性（CWE-415）は、ローカルで認証された攻撃者が細工された CLI コマンドを使用して newcli デーモンをクラッシュさせる可能性があります。",
-      "versions": "7.6.0, 7.6.7, 7.6.6",
+      "headline_en": "A Double Free vulnerability [CWE-415] vulnerability in Fortinet FortiOS 7.6.0 through 7.6.8, FortiOS 7.4 all versions, FortiOS 7.2 all versions, FortiOS 7.0 all versions, FortiProxy 7.6.0 through 7.6.6, FortiProxy 7.4 all versions, FortiProxy 7.2 all versions, FortiProxy 7.0 all versions, FortiSwitch 7.6.0 through 7.6.6, FortiSwitch 7.4 all versions, FortiSwitch 7.2 all versions may allow a local authenticated attacker to crash the newcli daemon via crafted CLI commands.",
+      "headline_ja": "Fortinet FortiOS 7.6.0〜7.6.8、FortiOS 7.4すべてのバージョン、FortiOS 7.2すべてのバージョン、FortiOS 7.0すべてのバージョン、FortiProxy 7.6.0〜7.6.6、FortiProxy 7.4すべてのバージョン、FortiProxy 7.2すべてのバージョン、FortiProxy 7.0すべてのバージョン、FortiSwitch 7.6.0〜7.6.6、FortiSwitch 7.4すべてのバージョン、FortiSwitch 7.2すべてのバージョンにおけるダブルフリー脆弱性（CWE-415）は、細工されたCLIコマンドにより、ローカル認証済みの攻撃者が newcli デーモンをクラッシュさせることを可能にする場合があります。",
+      "versions": "7.6.0, 7.6.8, 7.6.6",
       "url": "https://fortiguard.fortinet.com/psirt/FG-IR-26-182",
       "date": "2026-10-13",
       "cvss": 2.3,
@@ -81,8 +81,8 @@
     {
       "source": "NVD (CVSS 2.7)",
       "id": "CVE-2026-84392",
-      "headline_en": "A NULL Pointer Dereference vulnerability [CWE-476] vulnerability in Fortinet FortiOS 7.4 all versions, FortiOS 7.2 all versions, FortiPAM 1.9.0, FortiPAM 1.8 all versions, FortiPAM 1.7 all versions, FortiPAM 1.6 all versions, FortiPAM 1.5 all versions, FortiPAM 1.4 all versions, FortiPAM 1.3 all versions, FortiPAM 1.2 all versions, FortiPAM 1.1 all versions, FortiPAM 1.0 all versions, FortiProxy 7.6.0 through 7.6.6, FortiProxy 7.4 all versions, FortiProxy 7.2 all versions may allow an authenticated attacker to crash the httpsd daemon via crafted HTTP requests.",
-      "headline_ja": "NULL ポインタ参照の脆弱性（CWE-476）は、Fortinet の FortiOS 7.4 全バージョン、FortiOS 7.2 全バージョン、FortiPAM 1.9.0、FortiPAM 1.8 全バージョン、FortiPAM 1.7 全バージョン、FortiPAM 1.6 全バージョン、FortiPAM 1.5 全バージョン、FortiPAM 1.4 全バージョン、FortiPAM 1.3 全バージョン、FortiPAM 1.2 全バージョン、FortiPAM 1.1 全バージョン、FortiPAM 1.0 全バージョン、FortiProxy 7.6.0 から 7.6.6、FortiProxy 7.4 全バージョン、FortiProxy 7.2 全バージョンにおいて、認証された攻撃者が細工された HTTP リクエストを通じて httpsd デーモンをクラッシュさせる可能性があります。",
+      "headline_en": "A NULL Pointer Dereference vulnerability [CWE-476] vulnerability in Fortinet FortiOS 7.4 all versions, FortiOS 7.2 all versions, FortiOS 7.0 all versions, FortiOS 6.4 all versions, FortiPAM 1.9.0, FortiPAM 1.8 all versions, FortiPAM 1.7 all versions, FortiPAM 1.6 all versions, FortiPAM 1.5 all versions, FortiPAM 1.4 all versions, FortiPAM 1.3 all versions, FortiPAM 1.2 all versions, FortiPAM 1.1 all versions, FortiPAM 1.0 all versions, FortiProxy 7.6.0 through 7.6.6, FortiProxy 7.4 all versions, FortiProxy 7.2 all versions may allow an authenticated attacker to crash the httpsd daemon via crafted HTTP requests.",
+      "headline_ja": "Fortinet FortiOS 7.4 のすべてのバージョン、FortiOS 7.2 のすべてのバージョン、FortiOS 7.0 のすべてのバージョン、FortiOS 6.4 のすべてのバージョン、FortiPAM 1.9.0、FortiPAM 1.8 のすべてのバージョン、FortiPAM 1.7 のすべてのバージョン、FortiPAM 1.6 のすべてのバージョン、FortiPAM 1.5 のすべてのバージョン、FortiPAM 1.4 のすべてのバージョン、FortiPAM 1.3 のすべてのバージョン、FortiPAM 1.2 のすべてのバージョン、FortiPAM 1.1 のすべてのバージョン、FortiPAM 1.0 のすべてのバージョン、FortiProxy 7.6.0 から 7.6.6、FortiProxy 7.4 のすべてのバージョン、FortiProxy 7.2 のすべてのバージョンにおける NULL ポインタ参照（CWE-476）",
       "versions": "1.9.0, 7.6.0, 7.6.6",
       "url": "https://fortiguard.fortinet.com/psirt/FG-IR-26-173",
       "date": "2026-09-08",
@@ -91,7 +91,7 @@
       "epss": 0.01073
     },
     {
-      "source": "FortiGuard PSIRT (CVSS 2.7)",
+      "source": "FortiGuard PSIRT (CVSS 2.5)",
       "id": "FG-IR-26-173",
       "headline_en": "Null Pointer Dereference in Log Report",
       "headline_ja": "ログレポートにおけるヌルポインタ参照",
@@ -99,7 +99,7 @@
       "product": "FortiOS",
       "url": "https://fortiguard.fortinet.com/psirt/FG-IR-26-173",
       "date": "2026-09-08",
-      "cvss": 2.7,
+      "cvss": 2.5,
       "kev": null,
       "epss": null
     },
@@ -144,8 +144,8 @@
     {
       "source": "NVD (CVSS 5.3)",
       "id": "CVE-2026-71408",
-      "headline_en": "A allocation of resources without limits or throttling vulnerability in Fortinet FortiOS 7.6.0 through 7.6.6, FortiOS 7.4 all versions, FortiOS 7.2 all versions may allow attacker to denial of service via <insert attack vector here>",
-      "headline_ja": "リソースの割り当てが無制限またはスロットリングされない脆弱性が、Fortinet FortiOS 7.6.0から7.6.6、FortiOS 7.4のすべてのバージョン、FortiOS 7.2のすべてのバージョンに存在し、攻撃者が<insert attack vector here>を通じてサービス拒否を引き起こす可能性があります。",
+      "headline_en": "A allocation of resources without limits or throttling vulnerability in Fortinet FortiOS 7.6.0 through 7.6.6, FortiOS 7.4 all versions, FortiOS 7.2 all versions, FortiOS 7.0 all versions, FortiOS 6.4 all versions may allow an unauthenticated attacker to perform a slow HTTP DoS attack on the web interface via crafted HTTP requests.",
+      "headline_ja": "Fortinet FortiOS 7.6.0 から 7.6.6、FortiOS 7.4 のすべてのバージョン、FortiOS 7.2 のすべてのバージョン、FortiOS 7.0 のすべてのバージョン、FortiOS 6.4 のすべてのバージョンにおける、制限やスロットリングのないリソース割り当ての脆弱性により、認証されていない攻撃者が細工された HTTP リクエストを通じてウェブインターフェースに対しスロウ HTTP DoS 攻撃を実行できる可能性があります。",
       "versions": "7.6.0, 7.6.6",
       "url": "https://fortiguard.fortinet.com/psirt/FG-IR-26-162",
       "date": "2026-08-12",
@@ -154,7 +154,7 @@
       "epss": 0.00418
     },
     {
-      "source": "FortiGuard PSIRT (CVSS 5.3)",
+      "source": "FortiGuard PSIRT (CVSS 5.0)",
       "id": "FG-IR-26-162",
       "headline_en": "UI DoS attack",
       "headline_ja": "UI DoS攻撃",
@@ -162,34 +162,21 @@
       "product": "FortiOS",
       "url": "https://fortiguard.fortinet.com/psirt/FG-IR-26-162",
       "date": "2026-08-12",
-      "cvss": 5.3,
+      "cvss": 5.0,
       "kev": null,
       "epss": null
     },
     {
       "source": "NVD (CVSS 6.6)",
       "id": "CVE-2026-59837",
-      "headline_en": "A stack-based buffer overflow vulnerability in Fortinet FortiOS 7.4.0 through 7.4.1, FortiOS 7.2 all versions, FortiPAM 1.8.0 through 1.8.2, FortiPAM 1.7 all versions, FortiPAM 1.6 all versions, FortiPAM 1.5 all versions, FortiPAM 1.4 all versions, FortiPAM 1.3 all versions, FortiPAM 1.2 all versions, FortiPAM 1.1 all versions, FortiPAM 1.0 all versions, FortiProxy 7.4.0 through 7.4.13, FortiProxy 7.2 all versions may allow a privileged authenticated attacker who can bypass stack protection and ASLR to execute arbitrary code or commands via crafted HTTP requests.",
-      "headline_ja": "Fortinet FortiOS 7.4.0 から 7.4.1、FortiOS 7.2 の全バージョン、FortiPAM 1.8.0 から 1.8.2、FortiPAM 1.7 の全バージョン、FortiPAM 1.6 の全バージョン、FortiPAM 1.5 の全バージョン、FortiPAM 1.4 の全バージョン、FortiPAM 1.3 の全バージョン、FortiPAM 1.2 の全バージョン、FortiPAM 1.1 の全バージョン、FortiPAM 1.0 の全バージョン、FortiProxy 7.4.0 から 7.4.13、FortiProxy 7.2 の全バージョンにおけるスタックベースのバッファオーバーフロー脆弱性は、スタック保護と ASLR を回避できる特権認証済み攻撃者が、細工した HTTP リクエストを通じて任意のコードまたはコマンドを実行できる可能性があります。",
+      "headline_en": "A stack-based buffer overflow vulnerability in Fortinet FortiOS 7.4.0 through 7.4.1, FortiOS 7.2 all versions, FortiOS 7.0 all versions, FortiOS 6.4 all versions, FortiPAM 1.8.0 through 1.8.2, FortiPAM 1.7 all versions, FortiPAM 1.6 all versions, FortiPAM 1.5 all versions, FortiPAM 1.4 all versions, FortiPAM 1.3 all versions, FortiPAM 1.2 all versions, FortiPAM 1.1 all versions, FortiPAM 1.0 all versions, FortiProxy 7.4.0 through 7.4.13, FortiProxy 7.2 all versions may allow a privileged authenticated attacker who can bypass stack protection and ASLR to execute arbitrary code or commands via crafted HTTP requests.",
+      "headline_ja": "Fortinet FortiOS 7.4.0 から 7.4.1、FortiOS 7.2 のすべてのバージョン、FortiOS 7.0 のすべてのバージョン、FortiOS 6.4 のすべてのバージョン、FortiPAM 1.8.0 から 1.8.2、FortiPAM 1.7 のすべてのバージョン、FortiPAM 1.6 のすべてのバージョン、FortiPAM 1.5 のすべてのバージョン、FortiPAM 1.4 のすべてのバージョン、FortiPAM 1.3 のすべてのバージョン、FortiPAM 1.2 のすべてのバージョン、FortiPAM 1.1 のすべてのバージョン、FortiPAM 1.0 のすべてのバージョン、FortiProxy 7.4.0 から 7.4.13、FortiProxy 7.2 のすべてのバージョンにおけるスタックベースのバッファオーバーフロー脆弱性により、スタック保護と ASLR を回避できる特権認証済み攻撃者が、細工された HTTP リクエストを通じて任意のコードやコマンドを実行できる可能性があります。",
       "versions": "7.4.0, 7.4.1, 1.8.0, 1.8.2, 7.4.13",
       "url": "https://fortiguard.fortinet.com/psirt/FG-IR-26-148",
       "date": "2026-07-14",
       "cvss": 6.6,
       "kev": false,
       "epss": 0.0067
-    },
-    {
-      "source": "FortiGuard PSIRT (CVSS 6.6)",
-      "id": "FG-IR-26-148",
-      "headline_en": "Stack Buffer Overflow in Log Report",
-      "headline_ja": "ログレポートにおけるスタックバッファオーバーフロー",
-      "versions": "(不明)",
-      "product": "FortiOS",
-      "url": "https://fortiguard.fortinet.com/psirt/FG-IR-26-148",
-      "date": "2026-07-14",
-      "cvss": 6.6,
-      "kev": null,
-      "epss": null
     },
     {
       "source": "NVD (CVSS 6.1)",
@@ -213,6 +200,19 @@
       "url": "https://fortiguard.fortinet.com/psirt/FG-IR-26-150",
       "date": "2026-07-14",
       "cvss": 6.1,
+      "kev": null,
+      "epss": null
+    },
+    {
+      "source": "FortiGuard PSIRT (CVSS 5.9)",
+      "id": "FG-IR-26-148",
+      "headline_en": "Stack Buffer Overflow in Log Report",
+      "headline_ja": "ログレポートにおけるスタックバッファオーバーフロー",
+      "versions": "(不明)",
+      "product": "FortiOS",
+      "url": "https://fortiguard.fortinet.com/psirt/FG-IR-26-148",
+      "date": "2026-07-14",
+      "cvss": 5.9,
       "kev": null,
       "epss": null
     },

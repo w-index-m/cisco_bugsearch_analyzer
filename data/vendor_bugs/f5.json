@@ -1,8 +1,18 @@
 {
   "label": "F5 BIG-IP",
-  "generated_at": "2026-10-29T04:25:38+00:00",
+  "generated_at": "2026-10-30T04:33:53+00:00",
   "count": 300,
   "rows": [
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2687717",
+      "headline_en": "Internal registry port allocation collision on image import causes upgrade issues",
+      "headline_ja": "画像インポート時の内部レジストリポート割り当ての衝突がアップグレードの問題を引き起こす。",
+      "versions": "(本文から検出できず)",
+      "product": "F5OS",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2687717.html",
+      "date": "2026-10-28"
+    },
     {
       "source": "F5 Bug Tracker",
       "id": "ID2690333",
@@ -11,16 +21,6 @@
       "versions": "8.4.0, 8.4.1, 8.4.2, 8.4.2.1, 8.4.2.2, 8.4.2.3",
       "product": "BIG-IQ, BIG-IQ Configuration - Local Traffic",
       "url": "https://cdn.f5.com/product/bugtracker/ID2690333.html",
-      "date": "2026-10-23"
-    },
-    {
-      "source": "F5 Bug Tracker",
-      "id": "ID2567821",
-      "headline_en": "BIG-IQ RegKey Pool API fails to assign licenses to unreachable BIG-IP devices",
-      "headline_ja": "BIG-IQ RegKeyプールAPIが到達できないBIG‑IPデバイスにライセンスを割り当てられません。",
-      "versions": "8.4.2.2, 8.4.2.3",
-      "product": "BIG-IQ, BIG-IQ 1UX Search",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2567821.html",
       "date": "2026-10-23"
     },
     {
@@ -68,7 +68,7 @@
       "id": "ID2690357",
       "headline_en": "Config sync fails after AS3 tenant partition deletion - partition objects not removed from Standby device",
       "headline_ja": "AS3テナントパーティション削除後に設定同期が失敗する - スタンバイデバイスからパーティションオブジェクトが削除されない",
-      "versions": "21.1.0.2, 21.1.0.3",
+      "versions": "21.1.0, 21.1.0.1, 21.1.0.2, 21.1.0.3",
       "product": "BIG-IP, BIG-IP TMOS",
       "url": "https://cdn.f5.com/product/bugtracker/ID2690357.html",
       "date": "2026-10-22"
@@ -101,16 +101,6 @@
       "versions": "7.2.7.3",
       "product": "APM-Clients, APM-Clients TMOS",
       "url": "https://cdn.f5.com/product/bugtracker/ID2687673.html",
-      "date": "2026-10-22"
-    },
-    {
-      "source": "F5 Bug Tracker",
-      "id": "ID2567293",
-      "headline_en": "[SELinux] AVC denial: logrotate_t denied { getattr } on /shared/.tp_edr_mon_logs/tp_edr_mon.log (default_t)",
-      "headline_ja": "[SELinux] AVC拒否: logrotate_t が /shared/.tp_edr_mon_logs/tp_edr_mon.log (default_t) に対して { getattr } を拒否されました",
-      "versions": "21.1.0.3",
-      "product": "BIG-IP, BIG-IP TMOS",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2567293.html",
       "date": "2026-10-22"
     },
     {
@@ -761,6 +751,16 @@
       "versions": "21.0.0, 21.0.0.1, 21.0.0.2, 21.0.0.3, 21.1.0, 21.1.0.1, 21.1.0.2, 21.1.0.3",
       "product": "BIG-IP, BIG-IP TMOS",
       "url": "https://cdn.f5.com/product/bugtracker/ID2503861.html",
+      "date": "2026-10-05"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2502353",
+      "headline_en": "IP reputation database availability immediately after download",
+      "headline_ja": "IPレピュテーションデータベースの可用性はダウンロード直後に",
+      "versions": "17.5.1.8, 17.5.1.9, 17.5.1.10",
+      "product": "BIG-IP, BIG-IP AFM",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2502353.html",
       "date": "2026-10-05"
     },
     {
@@ -2225,7 +2225,7 @@
       "date": "2023-10-26",
       "cvss": 9.8,
       "kev": true,
-      "epss": 0.9675
+      "epss": 0.96715
     },
     {
       "source": "NVD (CVSS 8.8)",
@@ -2237,7 +2237,7 @@
       "date": "2023-10-26",
       "cvss": 8.8,
       "kev": true,
-      "epss": 0.04228
+      "epss": 0.04262
     },
     {
       "source": "NVD (CVSS 9.9)",
@@ -2525,7 +2525,7 @@
       "date": "2023-02-01",
       "cvss": 8.5,
       "kev": false,
-      "epss": 0.72646
+      "epss": 0.70782
     },
     {
       "source": "NVD (CVSS 7.8)",
