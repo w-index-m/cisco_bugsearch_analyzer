@@ -1,6 +1,6 @@
 {
   "label": "FortiGate (FortiOS)",
-  "generated_at": "2026-10-30T04:42:59+00:00",
+  "generated_at": "2026-10-31T04:08:44+00:00",
   "count": 215,
   "rows": [
     {
@@ -151,7 +151,7 @@
       "date": "2026-08-12",
       "cvss": 5.3,
       "kev": false,
-      "epss": 0.00418
+      "epss": 0.00624
     },
     {
       "source": "FortiGuard PSIRT (CVSS 5.0)",
@@ -2249,7 +2249,7 @@
       "date": "2022-11-02",
       "cvss": 4.7,
       "kev": false,
-      "epss": 0.00501
+      "epss": 0.00634
     },
     {
       "source": "NVD (CVSS 4.3)",
@@ -2273,7 +2273,7 @@
       "date": "2022-11-02",
       "cvss": 3.9,
       "kev": false,
-      "epss": 0.00482
+      "epss": 0.00535
     },
     {
       "source": "NVD (CVSS 3.7)",
@@ -2285,7 +2285,7 @@
       "date": "2022-11-02",
       "cvss": 3.7,
       "kev": false,
-      "epss": 0.00676
+      "epss": 0.00751
     },
     {
       "source": "NVD (CVSS 9.8)",

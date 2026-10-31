@@ -1,8 +1,18 @@
 {
   "label": "F5 BIG-IP",
-  "generated_at": "2026-10-30T04:33:53+00:00",
+  "generated_at": "2026-10-31T04:00:20+00:00",
   "count": 300,
   "rows": [
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2695537",
+      "headline_en": "IPv6 encapsulated transparent monitors fail with BGP multipath routes using link-local next hops",
+      "headline_ja": "IPv6 カプセル化された透過モニタは、リンクローカル次ホップを使用した BGP マルチパスルートで失敗します",
+      "versions": "21.1.0.1, 21.1.0.2, 21.1.0.3",
+      "product": "BIG-IP, BIG-IP TMOS",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2695537.html",
+      "date": "2026-10-30"
+    },
     {
       "source": "F5 Bug Tracker",
       "id": "ID2687717",
@@ -101,6 +111,16 @@
       "versions": "7.2.7.3",
       "product": "APM-Clients, APM-Clients TMOS",
       "url": "https://cdn.f5.com/product/bugtracker/ID2687673.html",
+      "date": "2026-10-22"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2567293",
+      "headline_en": "[SELinux] AVC denial: logrotate_t denied { getattr } on /shared/.tp_edr_mon_logs/tp_edr_mon.log (default_t)",
+      "headline_ja": "[SELinux] AVC 拒否: logrotate_t が /shared/.tp_edr_mon_logs/tp_edr_mon.log (default_t) に対する { getattr } を拒否しました",
+      "versions": "17.5.1.10, 21.1.0.3",
+      "product": "BIG-IP, BIG-IP TMOS",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2567293.html",
       "date": "2026-10-22"
     },
     {
@@ -755,16 +775,6 @@
     },
     {
       "source": "F5 Bug Tracker",
-      "id": "ID2502353",
-      "headline_en": "IP reputation database availability immediately after download",
-      "headline_ja": "IPレピュテーションデータベースの可用性はダウンロード直後に",
-      "versions": "17.5.1.8, 17.5.1.9, 17.5.1.10",
-      "product": "BIG-IP, BIG-IP AFM",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2502353.html",
-      "date": "2026-10-05"
-    },
-    {
-      "source": "F5 Bug Tracker",
       "id": "ID2552769",
       "headline_en": "CGNAT PBA: Negative or incorrect \"Active Port Blocks\" statistics displayed in fw_lsn_pool_pba_stat",
       "headline_ja": "CGNAT PBA：fw_lsn_pool_pba_stat に表示される「Active Port Blocks」統計が負の値または不正確です",
@@ -942,16 +952,6 @@
       "product": "BIG-IP, BIG-IP APM",
       "url": "https://cdn.f5.com/product/bugtracker/ID2503533.html",
       "date": "2026-09-30"
-    },
-    {
-      "source": "F5 Bug Tracker",
-      "id": "ID2502361",
-      "headline_en": "TMM SIGSEGV crash when trying to access stale entry for /var/IpRep/F5IpV6Rep.dat",
-      "headline_ja": "TMMが/var/IpRep/F5IpV6Rep.datの古いエントリにアクセスしようとするとSIGSEGVクラッシュが発生する",
-      "versions": "17.5.1.8, 17.5.1.9",
-      "product": "BIG-IP, BIG-IP AFM",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2502361.html",
-      "date": "2026-09-29"
     },
     {
       "source": "F5 Bug Tracker",

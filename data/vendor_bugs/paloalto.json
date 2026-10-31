@@ -1,6 +1,6 @@
 {
   "label": "Palo Alto (PAN-OS)",
-  "generated_at": "2026-10-30T04:41:10+00:00",
+  "generated_at": "2026-10-31T04:06:48+00:00",
   "count": 639,
   "rows": [
     {
@@ -1117,7 +1117,7 @@
       "date": "2025-07-29",
       "cvss": null,
       "kev": false,
-      "epss": 0.00138
+      "epss": 0.00148
     },
     {
       "source": "NVD (CVSS -)",
@@ -1213,7 +1213,7 @@
       "date": "2025-06-13",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.00623
     },
     {
       "source": "NVD (CVSS -)",
@@ -1225,7 +1225,7 @@
       "date": "2025-06-13",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.00188
     },
     {
       "source": "NVD (CVSS -)",
@@ -1237,7 +1237,7 @@
       "date": "2025-06-12",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.00187
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -1249,7 +1249,7 @@
       "date": "2025-05-14",
       "cvss": 7.5,
       "kev": false,
-      "epss": null
+      "epss": 0.00442
     },
     {
       "source": "NVD (CVSS 3.3)",
@@ -1261,7 +1261,7 @@
       "date": "2025-05-14",
       "cvss": 3.3,
       "kev": false,
-      "epss": null
+      "epss": 0.00137
     },
     {
       "source": "NVD (CVSS -)",
@@ -1273,7 +1273,7 @@
       "date": "2025-05-14",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.00366
     },
     {
       "source": "NVD (CVSS -)",
@@ -1285,7 +1285,7 @@
       "date": "2025-05-14",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.00417
     },
     {
       "source": "NVD (CVSS -)",
@@ -1297,7 +1297,7 @@
       "date": "2025-05-14",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.00169
     },
     {
       "source": "NVD (CVSS -)",
@@ -1309,7 +1309,7 @@
       "date": "2025-05-14",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.0053
     },
     {
       "source": "NVD (CVSS -)",
@@ -1321,7 +1321,7 @@
       "date": "2025-05-14",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.46297
     },
     {
       "source": "NVD (CVSS -)",
@@ -1333,7 +1333,7 @@
       "date": "2025-05-14",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.00462
     },
     {
       "source": "NVD (CVSS -)",
@@ -1345,7 +1345,7 @@
       "date": "2025-05-14",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.00157
     },
     {
       "source": "NVD (CVSS 7.0)",
@@ -1357,7 +1357,7 @@
       "date": "2025-04-11",
       "cvss": 7.0,
       "kev": false,
-      "epss": null
+      "epss": 0.00161
     },
     {
       "source": "NVD (CVSS 3.8)",
@@ -1369,7 +1369,7 @@
       "date": "2025-04-11",
       "cvss": 3.8,
       "kev": false,
-      "epss": null
+      "epss": 0.00351
     },
     {
       "source": "NVD (CVSS -)",
@@ -1381,7 +1381,7 @@
       "date": "2025-04-11",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.00183
     },
     {
       "source": "NVD (CVSS -)",
@@ -1393,7 +1393,7 @@
       "date": "2025-04-11",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.00119
     },
     {
       "source": "NVD (CVSS -)",
@@ -1405,7 +1405,7 @@
       "date": "2025-04-11",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.00555
     },
     {
       "source": "NVD (CVSS -)",
@@ -1417,7 +1417,7 @@
       "date": "2025-04-11",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.0032
     },
     {
       "source": "NVD (CVSS -)",
@@ -1429,7 +1429,7 @@
       "date": "2025-04-11",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.00567
     },
     {
       "source": "NVD (CVSS -)",
@@ -1441,7 +1441,7 @@
       "date": "2025-04-11",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.00404
     },
     {
       "source": "NVD (CVSS -)",
@@ -1453,7 +1453,7 @@
       "date": "2025-04-11",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.00423
     },
     {
       "source": "NVD (CVSS -)",
@@ -1465,7 +1465,7 @@
       "date": "2025-04-11",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.00274
     },
     {
       "source": "NVD (CVSS -)",
@@ -1477,7 +1477,7 @@
       "date": "2025-04-11",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.00172
     },
     {
       "source": "NVD (CVSS 8.0)",
@@ -1489,7 +1489,7 @@
       "date": "2025-03-12",
       "cvss": 8.0,
       "kev": false,
-      "epss": null
+      "epss": 0.00456
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -1501,7 +1501,7 @@
       "date": "2025-03-12",
       "cvss": 7.5,
       "kev": false,
-      "epss": null
+      "epss": 0.00413
     },
     {
       "source": "NVD (CVSS -)",
@@ -1513,7 +1513,7 @@
       "date": "2025-03-12",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.00235
     },
     {
       "source": "NVD (CVSS -)",
@@ -1525,7 +1525,7 @@
       "date": "2025-03-12",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.00192
     },
     {
       "source": "NVD (CVSS -)",
@@ -1537,7 +1537,7 @@
       "date": "2025-02-20",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.00202
     },
     {
       "source": "NVD (CVSS 9.1)",
@@ -1549,7 +1549,7 @@
       "date": "2025-02-12",
       "cvss": 9.1,
       "kev": true,
-      "epss": null
+      "epss": 0.98141
     },
     {
       "source": "NVD (CVSS 6.5)",
@@ -1561,7 +1561,7 @@
       "date": "2025-02-12",
       "cvss": 6.5,
       "kev": true,
-      "epss": null
+      "epss": 0.01999
     },
     {
       "source": "NVD (CVSS -)",
@@ -1573,7 +1573,7 @@
       "date": "2025-02-12",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.00264
     },
     {
       "source": "NVD (CVSS -)",
@@ -1585,7 +1585,7 @@
       "date": "2025-02-12",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.01275
     },
     {
       "source": "NVD (CVSS -)",
@@ -1597,7 +1597,7 @@
       "date": "2025-02-12",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.00625
     },
     {
       "source": "NVD (CVSS 9.8)",
@@ -1609,7 +1609,7 @@
       "date": "2025-01-11",
       "cvss": 9.8,
       "kev": false,
-      "epss": null
+      "epss": 0.78416
     },
     {
       "source": "NVD (CVSS 9.1)",
@@ -1621,7 +1621,7 @@
       "date": "2025-01-11",
       "cvss": 9.1,
       "kev": false,
-      "epss": null
+      "epss": 0.13189
     },
     {
       "source": "NVD (CVSS 8.8)",
@@ -1633,7 +1633,7 @@
       "date": "2025-01-11",
       "cvss": 8.8,
       "kev": false,
-      "epss": null
+      "epss": 0.00614
     },
     {
       "source": "NVD (CVSS 6.1)",
@@ -1645,7 +1645,7 @@
       "date": "2025-01-11",
       "cvss": 6.1,
       "kev": false,
-      "epss": null
+      "epss": 0.0035
     },
     {
       "source": "NVD (CVSS 5.3)",
@@ -1657,7 +1657,7 @@
       "date": "2025-01-11",
       "cvss": 5.3,
       "kev": false,
-      "epss": null
+      "epss": 0.00473
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -1669,7 +1669,7 @@
       "date": "2024-12-27",
       "cvss": 7.5,
       "kev": true,
-      "epss": null
+      "epss": 0.2912
     },
     {
       "source": "NVD (CVSS 8.8)",
@@ -1681,7 +1681,7 @@
       "date": "2024-11-27",
       "cvss": 8.8,
       "kev": false,
-      "epss": null
+      "epss": 0.01456
     },
     {
       "source": "NVD (CVSS 9.8)",
@@ -1693,7 +1693,7 @@
       "date": "2024-11-18",
       "cvss": 9.8,
       "kev": true,
-      "epss": null
+      "epss": 0.99786
     },
     {
       "source": "NVD (CVSS 7.2)",
@@ -1705,7 +1705,7 @@
       "date": "2024-11-18",
       "cvss": 7.2,
       "kev": true,
-      "epss": null
+      "epss": 0.93751
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -1717,7 +1717,7 @@
       "date": "2024-11-14",
       "cvss": 7.5,
       "kev": false,
-      "epss": null
+      "epss": 0.00483
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -1729,7 +1729,7 @@
       "date": "2024-11-14",
       "cvss": 7.5,
       "kev": false,
-      "epss": null
+      "epss": 0.00511
     },
     {
       "source": "NVD (CVSS 6.5)",
@@ -1741,7 +1741,7 @@
       "date": "2024-11-14",
       "cvss": 6.5,
       "kev": false,
-      "epss": null
+      "epss": 0.00339
     },
     {
       "source": "NVD (CVSS 6.0)",
@@ -1753,7 +1753,7 @@
       "date": "2024-11-14",
       "cvss": 6.0,
       "kev": false,
-      "epss": null
+      "epss": 0.00474
     },
     {
       "source": "NVD (CVSS 4.9)",
@@ -1765,7 +1765,7 @@
       "date": "2024-11-14",
       "cvss": 4.9,
       "kev": false,
-      "epss": null
+      "epss": 0.00471
     },
     {
       "source": "NVD (CVSS 4.8)",
@@ -1777,7 +1777,7 @@
       "date": "2024-11-14",
       "cvss": 4.8,
       "kev": false,
-      "epss": null
+      "epss": 0.00325
     },
     {
       "source": "NVD (CVSS 4.3)",
@@ -1789,7 +1789,7 @@
       "date": "2024-11-14",
       "cvss": 4.3,
       "kev": false,
-      "epss": null
+      "epss": 0.00176
     },
     {
       "source": "NVD (CVSS -)",
@@ -1801,7 +1801,7 @@
       "date": "2024-11-14",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.00427
     },
     {
       "source": "NVD (CVSS 9.1)",
@@ -1813,7 +1813,7 @@
       "date": "2024-10-09",
       "cvss": 9.1,
       "kev": true,
-      "epss": null
+      "epss": 0.99626
     },
     {
       "source": "NVD (CVSS 7.8)",
@@ -1825,7 +1825,7 @@
       "date": "2024-10-09",
       "cvss": 7.8,
       "kev": false,
-      "epss": null
+      "epss": 0.00287
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -1837,7 +1837,7 @@
       "date": "2024-10-09",
       "cvss": 7.5,
       "kev": false,
-      "epss": null
+      "epss": 0.0041
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -1849,7 +1849,7 @@
       "date": "2024-10-09",
       "cvss": 7.5,
       "kev": true,
-      "epss": null
+      "epss": 0.98546
     },
     {
       "source": "NVD (CVSS 6.5)",
@@ -1861,7 +1861,7 @@
       "date": "2024-10-09",
       "cvss": 6.5,
       "kev": false,
-      "epss": null
+      "epss": 0.13584
     },
     {
       "source": "NVD (CVSS 6.5)",
@@ -1873,7 +1873,7 @@
       "date": "2024-10-09",
       "cvss": 6.5,
       "kev": false,
-      "epss": null
+      "epss": 0.82612
     },
     {
       "source": "NVD (CVSS 6.1)",
@@ -1885,7 +1885,7 @@
       "date": "2024-10-09",
       "cvss": 6.1,
       "kev": false,
-      "epss": null
+      "epss": 0.00675
     },
     {
       "source": "NVD (CVSS 5.5)",
@@ -1897,7 +1897,7 @@
       "date": "2024-10-09",
       "cvss": 5.5,
       "kev": false,
-      "epss": null
+      "epss": 0.00212
     },
     {
       "source": "NVD (CVSS 4.7)",
@@ -1909,7 +1909,7 @@
       "date": "2024-10-09",
       "cvss": 4.7,
       "kev": false,
-      "epss": null
+      "epss": 0.00294
     },
     {
       "source": "NVD (CVSS 7.2)",
@@ -1921,7 +1921,7 @@
       "date": "2024-09-11",
       "cvss": 7.2,
       "kev": false,
-      "epss": null
+      "epss": 0.01407
     },
     {
       "source": "NVD (CVSS 7.1)",
@@ -1933,7 +1933,7 @@
       "date": "2024-09-11",
       "cvss": 7.1,
       "kev": false,
-      "epss": null
+      "epss": 0.00322
     },
     {
       "source": "NVD (CVSS 7.1)",
@@ -1945,7 +1945,7 @@
       "date": "2024-09-11",
       "cvss": 7.1,
       "kev": false,
-      "epss": null
+      "epss": 0.00409
     },
     {
       "source": "NVD (CVSS 4.4)",
@@ -1957,7 +1957,7 @@
       "date": "2024-09-11",
       "cvss": 4.4,
       "kev": false,
-      "epss": null
+      "epss": 0.00188
     },
     {
       "source": "NVD (CVSS 4.4)",
@@ -1969,7 +1969,7 @@
       "date": "2024-09-11",
       "cvss": 4.4,
       "kev": false,
-      "epss": null
+      "epss": 0.00235
     },
     {
       "source": "NVD (CVSS 9.8)",
@@ -1981,7 +1981,7 @@
       "date": "2024-08-14",
       "cvss": 9.8,
       "kev": false,
-      "epss": null
+      "epss": 0.01224
     },
     {
       "source": "NVD (CVSS 7.8)",
@@ -1993,7 +1993,7 @@
       "date": "2024-08-14",
       "cvss": 7.8,
       "kev": false,
-      "epss": null
+      "epss": 0.00212
     },
     {
       "source": "NVD (CVSS 4.4)",
@@ -2005,7 +2005,7 @@
       "date": "2024-08-14",
       "cvss": 4.4,
       "kev": false,
-      "epss": null
+      "epss": 0.00249
     },
     {
       "source": "NVD (CVSS 9.8)",
@@ -2017,7 +2017,7 @@
       "date": "2024-07-10",
       "cvss": 9.8,
       "kev": true,
-      "epss": null
+      "epss": 0.91684
     },
     {
       "source": "NVD (CVSS 6.1)",
@@ -2029,7 +2029,7 @@
       "date": "2024-07-10",
       "cvss": 6.1,
       "kev": false,
-      "epss": null
+      "epss": 0.0023
     },
     {
       "source": "NVD (CVSS 4.9)",
@@ -2041,7 +2041,7 @@
       "date": "2024-07-10",
       "cvss": 4.9,
       "kev": false,
-      "epss": null
+      "epss": 0.00576
     },
     {
       "source": "NVD (CVSS -)",
@@ -2053,7 +2053,7 @@
       "date": "2024-07-10",
       "cvss": null,
       "kev": false,
-      "epss": null
+      "epss": 0.00128
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -2065,7 +2065,7 @@
       "date": "2024-06-12",
       "cvss": 7.5,
       "kev": false,
-      "epss": null
+      "epss": 0.00366
     },
     {
       "source": "NVD (CVSS 7.0)",
@@ -2077,7 +2077,7 @@
       "date": "2024-06-12",
       "cvss": 7.0,
       "kev": false,
-      "epss": null
+      "epss": 0.0013
     },
     {
       "source": "NVD (CVSS 5.5)",
@@ -2089,7 +2089,7 @@
       "date": "2024-06-12",
       "cvss": 5.5,
       "kev": false,
-      "epss": null
+      "epss": 0.0041
     },
     {
       "source": "NVD (CVSS 4.8)",
@@ -2101,7 +2101,7 @@
       "date": "2024-06-12",
       "cvss": 4.8,
       "kev": false,
-      "epss": null
+      "epss": 0.00247
     },
     {
       "source": "NVD (CVSS 4.4)",
@@ -2113,7 +2113,7 @@
       "date": "2024-06-12",
       "cvss": 4.4,
       "kev": false,
-      "epss": null
+      "epss": 0.00089
     },
     {
       "source": "NVD (CVSS 10.0)",
@@ -2125,7 +2125,7 @@
       "date": "2024-04-12",
       "cvss": 10.0,
       "kev": true,
-      "epss": null
+      "epss": 0.99999
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -2137,7 +2137,7 @@
       "date": "2024-04-10",
       "cvss": 7.5,
       "kev": false,
-      "epss": null
+      "epss": 0.00901
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -2149,7 +2149,7 @@
       "date": "2024-04-10",
       "cvss": 7.5,
       "kev": false,
-      "epss": null
+      "epss": 0.00885
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -2161,7 +2161,7 @@
       "date": "2024-04-10",
       "cvss": 7.5,
       "kev": false,
-      "epss": null
+      "epss": 0.00922
     },
     {
       "source": "NVD (CVSS 7.4)",
@@ -2173,7 +2173,7 @@
       "date": "2024-04-10",
       "cvss": 7.4,
       "kev": false,
-      "epss": null
+      "epss": 0.00576
     },
     {
       "source": "NVD (CVSS 5.3)",
@@ -2185,7 +2185,7 @@
       "date": "2024-04-10",
       "cvss": 5.3,
       "kev": false,
-      "epss": null
+      "epss": 0.0017
     },
     {
       "source": "NVD (CVSS 5.3)",
@@ -2197,7 +2197,7 @@
       "date": "2024-04-10",
       "cvss": 5.3,
       "kev": false,
-      "epss": null
+      "epss": 0.00433
     },
     {
       "source": "NVD (CVSS 4.1)",
@@ -2209,7 +2209,7 @@
       "date": "2024-04-10",
       "cvss": 4.1,
       "kev": false,
-      "epss": null
+      "epss": 0.00349
     },
     {
       "source": "NVD (CVSS 6.5)",
@@ -2221,7 +2221,7 @@
       "date": "2024-03-26",
       "cvss": 6.5,
       "kev": false,
-      "epss": null
+      "epss": 0.00646
     },
     {
       "source": "NVD (CVSS 5.5)",
@@ -2233,7 +2233,7 @@
       "date": "2024-03-13",
       "cvss": 5.5,
       "kev": false,
-      "epss": null
+      "epss": 0.00153
     },
     {
       "source": "NVD (CVSS 4.5)",
@@ -2245,7 +2245,7 @@
       "date": "2024-03-13",
       "cvss": 4.5,
       "kev": false,
-      "epss": null
+      "epss": 0.00386
     },
     {
       "source": "NVD (CVSS 4.3)",
@@ -2257,7 +2257,7 @@
       "date": "2024-03-13",
       "cvss": 4.3,
       "kev": false,
-      "epss": null
+      "epss": 0.00563
     },
     {
       "source": "NVD (CVSS 6.8)",
@@ -2269,7 +2269,7 @@
       "date": "2024-02-14",
       "cvss": 6.8,
       "kev": false,
-      "epss": null
+      "epss": 0.00395
     },
     {
       "source": "NVD (CVSS 6.6)",
@@ -2281,7 +2281,7 @@
       "date": "2024-02-14",
       "cvss": 6.6,
       "kev": false,
-      "epss": null
+      "epss": 0.00503
     },
     {
       "source": "NVD (CVSS 6.3)",
@@ -2293,7 +2293,7 @@
       "date": "2024-02-14",
       "cvss": 6.3,
       "kev": false,
-      "epss": null
+      "epss": 0.00201
     },
     {
       "source": "NVD (CVSS 4.3)",
@@ -2305,7 +2305,7 @@
       "date": "2024-02-14",
       "cvss": 4.3,
       "kev": false,
-      "epss": null
+      "epss": 0.00379
     },
     {
       "source": "NVD (CVSS 4.3)",
@@ -2317,7 +2317,7 @@
       "date": "2024-02-14",
       "cvss": 4.3,
       "kev": false,
-      "epss": null
+      "epss": 0.00509
     },
     {
       "source": "NVD (CVSS 8.8)",
@@ -2329,7 +2329,7 @@
       "date": "2023-12-13",
       "cvss": 8.8,
       "kev": false,
-      "epss": null
+      "epss": 0.00659
     },
     {
       "source": "NVD (CVSS 5.5)",
@@ -2341,7 +2341,7 @@
       "date": "2023-12-13",
       "cvss": 5.5,
       "kev": false,
-      "epss": null
+      "epss": 0.01144
     },
     {
       "source": "NVD (CVSS 5.5)",
@@ -2353,7 +2353,7 @@
       "date": "2023-12-13",
       "cvss": 5.5,
       "kev": false,
-      "epss": null
+      "epss": 0.00572
     },
     {
       "source": "NVD (CVSS 5.5)",
@@ -2365,7 +2365,7 @@
       "date": "2023-12-13",
       "cvss": 5.5,
       "kev": false,
-      "epss": null
+      "epss": 0.01145
     },
     {
       "source": "NVD (CVSS 4.9)",
@@ -2377,7 +2377,7 @@
       "date": "2023-12-13",
       "cvss": 4.9,
       "kev": false,
-      "epss": null
+      "epss": 0.00624
     },
     {
       "source": "NVD (CVSS 4.3)",
@@ -2389,7 +2389,7 @@
       "date": "2023-12-13",
       "cvss": 4.3,
       "kev": false,
-      "epss": null
+      "epss": 0.00415
     },
     {
       "source": "NVD (CVSS 2.7)",
@@ -2401,7 +2401,7 @@
       "date": "2023-12-13",
       "cvss": 2.7,
       "kev": false,
-      "epss": null
+      "epss": 0.00555
     },
     {
       "source": "PAN-OS Known Issues (10.2)",
