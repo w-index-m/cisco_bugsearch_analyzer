@@ -1,6 +1,6 @@
 {
   "label": "F5 BIG-IP",
-  "generated_at": "2026-10-31T04:00:20+00:00",
+  "generated_at": "2026-11-01T04:45:33+00:00",
   "count": 300,
   "rows": [
     {
@@ -118,7 +118,7 @@
       "id": "ID2567293",
       "headline_en": "[SELinux] AVC denial: logrotate_t denied { getattr } on /shared/.tp_edr_mon_logs/tp_edr_mon.log (default_t)",
       "headline_ja": "[SELinux] AVC 拒否: logrotate_t が /shared/.tp_edr_mon_logs/tp_edr_mon.log (default_t) に対する { getattr } を拒否しました",
-      "versions": "17.5.1.10, 21.1.0.3",
+      "versions": "17.1.3.6, 17.5.1.10, 21.1.0.3",
       "product": "BIG-IP, BIG-IP TMOS",
       "url": "https://cdn.f5.com/product/bugtracker/ID2567293.html",
       "date": "2026-10-22"
@@ -973,7 +973,7 @@
       "date": "2026-09-22",
       "cvss": 9.8,
       "kev": true,
-      "epss": 0.24938
+      "epss": 0.2655
     },
     {
       "source": "F5 Bug Tracker",
@@ -1361,7 +1361,7 @@
       "date": "2026-02-04",
       "cvss": 5.9,
       "kev": false,
-      "epss": 0.00211
+      "epss": 0.00215
     },
     {
       "source": "NVD (CVSS 4.9)",
@@ -1373,7 +1373,7 @@
       "date": "2026-02-04",
       "cvss": 4.9,
       "kev": false,
-      "epss": 0.00358
+      "epss": 0.00366
     },
     {
       "source": "NVD (CVSS 3.3)",
@@ -1385,7 +1385,7 @@
       "date": "2026-02-04",
       "cvss": 3.3,
       "kev": false,
-      "epss": 0.00116
+      "epss": 0.00119
     },
     {
       "source": "NVD (CVSS 3.1)",
@@ -1397,7 +1397,7 @@
       "date": "2026-02-04",
       "cvss": 3.1,
       "kev": false,
-      "epss": 0.00185
+      "epss": 0.00189
     },
     {
       "source": "NVD (CVSS 9.8)",

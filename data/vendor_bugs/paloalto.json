@@ -1,6 +1,6 @@
 {
   "label": "Palo Alto (PAN-OS)",
-  "generated_at": "2026-10-31T04:06:48+00:00",
+  "generated_at": "2026-11-01T04:26:17+00:00",
   "count": 639,
   "rows": [
     {
@@ -916,18 +916,6 @@
       "epss": 0.00578
     },
     {
-      "source": "NVD (CVSS -)",
-      "id": "CVE-2026-0228",
-      "headline_en": "An improper certificate validation vulnerability in PAN-OS allows users to connect Terminal Server Agents on Windows to PAN-OS using expired certificates even if the PAN-OS configuration would not normally permit them to do so.",
-      "headline_ja": "PAN-OS の不適切な証明書検証の脆弱性により、ユーザーは期限切れの証明書を使用して Windows のターミナルサーバーエージェントを PAN-OS に接続でき、通常の PAN-OS 設定では許可されていない場合でも接続可能です。",
-      "versions": "(本文から検出できず)",
-      "url": "https://security.paloaltonetworks.com/CVE-2026-0228",
-      "date": "2026-02-11",
-      "cvss": null,
-      "kev": false,
-      "epss": 0.00203
-    },
-    {
       "source": "NVD (CVSS 7.5)",
       "id": "CVE-2026-0227",
       "headline_en": "A vulnerability in Palo Alto Networks PAN-OS software enables an unauthenticated attacker to cause a denial of service (DoS) to the firewall. Repeated attempts to trigger this issue results in the firewall entering into maintenance mode.",
@@ -1433,18 +1421,6 @@
     },
     {
       "source": "NVD (CVSS -)",
-      "id": "CVE-2025-0126",
-      "headline_en": "When configured using SAML, a session fixation vulnerability in the GlobalProtect™ login enables an attacker to impersonate a legitimate authorized user and perform actions as that GlobalProtect user. This requires the legitimate user to first click on a malicious link provided by the attacker.\n\nThe SAML login for the PAN-OS® management interface is not affected. Additionally, this issue does not affect Cloud NGFW and all Prisma® Access instances are proactively patched.",
-      "headline_ja": "SAML を使用して構成された場合、GlobalProtect™ ログインにおけるセッション固定脆弱性により、攻撃者は正当な認可ユーザーになりすましてその GlobalProtect ユーザーとして操作を実行できるようになります。これには、正当なユーザーがまず攻撃者から提供された悪意のあるリンクをクリックする必要があります。\n\nPAN-OS® 管理インターフェースの SAML ログインは影響を受けません。また、この問題は Cloud NGFW にも影響せず、すべての Prisma® Access インスタンスは事前にパッチが適用されています。",
-      "versions": "(本文から検出できず)",
-      "url": "https://security.paloaltonetworks.com/CVE-2025-0126",
-      "date": "2025-04-11",
-      "cvss": null,
-      "kev": false,
-      "epss": 0.00404
-    },
-    {
-      "source": "NVD (CVSS -)",
       "id": "CVE-2025-0125",
       "headline_en": "An improper input neutralization vulnerability in the management web interface of the Palo Alto Networks PAN-OS® software enables a malicious authenticated read-write administrator to impersonate another legitimate authenticated PAN-OS administrator.\n\n\nThe attacker must have network access to the management web interface to exploit this issue. You greatly reduce the risk of this issue by restricting access to the management web interface to only trusted internal IP addresses according to our recommended  critical deployment guidelines https://live.paloaltonetworks.com/t5/community-blogs/tips-amp-tricks-how-to-secure-the-management-access-of-your-palo/ba-p/464431 .\n\nThis issue does not affect Cloud NGFW and all Prisma® Access instances.",
       "headline_ja": "Palo Alto NetworksのPAN-OS®ソフトウェアの管理Webインターフェースにおける不適切な入力無効化脆弱性により、悪意のある認証済みの読み書き権限を持つ管理者が、別の正当な認証済みPAN-OS管理者になりすますことが可能になります。\n\n攻撃者はこの問題を悪用するために、管理Webインターフェースへのネットワークアクセス権を持っている必要があります。推奨する重要な導入ガイドライン（https://live.paloaltonetworks.com/t5/community-blogs/tips-amp-tricks-how-to-secure-the-management-access-of-your-palo/ba-p/464431）に従い、管理Webインターフェースへのアクセスを信頼できる内部IPアドレスのみに制限することで、リスクを大幅に低減できます。\n\nこの問題は Cloud NGFW およびすべての Prisma® Access インスタンスには影響しません。",
@@ -1549,7 +1525,7 @@
       "date": "2025-02-12",
       "cvss": 9.1,
       "kev": true,
-      "epss": 0.98141
+      "epss": 0.98455
     },
     {
       "source": "NVD (CVSS 6.5)",
@@ -1693,7 +1669,7 @@
       "date": "2024-11-18",
       "cvss": 9.8,
       "kev": true,
-      "epss": 0.99786
+      "epss": 0.99787
     },
     {
       "source": "NVD (CVSS 7.2)",
@@ -1705,7 +1681,7 @@
       "date": "2024-11-18",
       "cvss": 7.2,
       "kev": true,
-      "epss": 0.93751
+      "epss": 0.93767
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -1754,18 +1730,6 @@
       "cvss": 6.0,
       "kev": false,
       "epss": 0.00474
-    },
-    {
-      "source": "NVD (CVSS 4.9)",
-      "id": "CVE-2024-5917",
-      "headline_en": "A server-side request forgery in PAN-OS software enables an authenticated attacker with administrative privileges to use the administrative web interface as a proxy, which enables the attacker to view internal network resources not otherwise accessible.",
-      "headline_ja": "PAN-OSソフトウェアにおけるサーバーサイドリクエストフォージェリにより、管理者権限を持つ認証済み攻撃者が管理用ウェブインターフェースをプロキシとして使用できるようになり、これにより攻撃者は通常アクセスできない内部ネットワークリソースを閲覧できるようになります。",
-      "versions": "(本文から検出できず)",
-      "url": "https://security.paloaltonetworks.com/CVE-2024-5917",
-      "date": "2024-11-14",
-      "cvss": 4.9,
-      "kev": false,
-      "epss": 0.00471
     },
     {
       "source": "NVD (CVSS 4.8)",
@@ -2402,6 +2366,42 @@
       "cvss": 2.7,
       "kev": false,
       "epss": 0.00555
+    },
+    {
+      "source": "NVD (CVSS 6.4)",
+      "id": "CVE-2023-3282",
+      "headline_en": "A local privilege escalation (PE) vulnerability in the Palo Alto Networks Cortex XSOAR engine software running on a Linux operating system enables a local attacker to execute programs with elevated privileges if the attacker has shell access to the engine.",
+      "headline_ja": "Linux オペレーティングシステム上で動作している Palo Alto Networks の Cortex XSOAR エンジンソフトウェアに存在するローカル特権昇格（PE）脆弱性は、エンジンへのシェルアクセスを持つローカル攻撃者が特権を上げてプログラムを実行できるようにします。",
+      "versions": "(本文から検出できず)",
+      "url": "https://security.paloaltonetworks.com/CVE-2023-3282",
+      "date": "2023-11-08",
+      "cvss": 6.4,
+      "kev": false,
+      "epss": 0.00174
+    },
+    {
+      "source": "NVD (CVSS 5.5)",
+      "id": "CVE-2023-3280",
+      "headline_en": "A problem with a protection mechanism in the Palo Alto Networks Cortex XDR agent on Windows devices allows a local user to disable the agent.\n\n",
+      "headline_ja": "Windowsデバイス上のPalo Alto Networks Cortex XDRエージェントの保護メカニズムに問題があり、ローカルユーザーがエージェントを無効化できるようになっています。",
+      "versions": "(本文から検出できず)",
+      "url": "https://security.paloaltonetworks.com/CVE-2023-3280",
+      "date": "2023-09-13",
+      "cvss": 5.5,
+      "kev": false,
+      "epss": 0.00324
+    },
+    {
+      "source": "NVD (CVSS 5.5)",
+      "id": "CVE-2023-38046",
+      "headline_en": "A vulnerability exists in Palo Alto Networks PAN-OS software that enables an authenticated administrator with the privilege to commit a specifically created configuration to read local files and resources from the system.",
+      "headline_ja": "Palo Alto Networks PAN‑OS ソフトウェアには、認証された管理者が特別に作成された設定をコミットする権限を持つことで、システムからローカルファイルやリソースを読み取ることを可能にする脆弱性が存在します。",
+      "versions": "(本文から検出できず)",
+      "url": "https://security.paloaltonetworks.com/CVE-2023-38046",
+      "date": "2023-07-12",
+      "cvss": 5.5,
+      "kev": false,
+      "epss": 0.00461
     },
     {
       "source": "PAN-OS Known Issues (10.2)",
