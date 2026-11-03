@@ -1,13 +1,13 @@
 {
   "label": "F5 BIG-IP",
-  "generated_at": "2026-11-02T04:24:20+00:00",
+  "generated_at": "2026-11-03T05:27:32+00:00",
   "count": 300,
   "rows": [
     {
       "source": "F5 Bug Tracker",
       "id": "ID2695537",
-      "headline_en": "IPv6 encapsulated transparent monitors fail with BGP multipath routes using link-local next hops",
-      "headline_ja": "IPv6 カプセル化された透過モニタは、リンクローカル次ホップを使用した BGP マルチパスルートで失敗します",
+      "headline_en": "IPv6 encapsulated transparent monitors fail with multi-path routes, using link-local next hops",
+      "headline_ja": "IPv6 カプセル化された透過モニタは、リンクローカル次ホップを使用したマルチパスルートで失敗する。",
       "versions": "21.1.0.1, 21.1.0.2, 21.1.0.3",
       "product": "BIG-IP, BIG-IP TMOS",
       "url": "https://cdn.f5.com/product/bugtracker/ID2695537.html",
