@@ -1,13 +1,13 @@
 {
   "label": "F5 BIG-IP",
-  "generated_at": "2026-11-03T05:27:32+00:00",
+  "generated_at": "2026-11-04T04:56:32+00:00",
   "count": 300,
   "rows": [
     {
       "source": "F5 Bug Tracker",
       "id": "ID2695537",
-      "headline_en": "IPv6 encapsulated transparent monitors fail with multi-path routes, using link-local next hops",
-      "headline_ja": "IPv6 カプセル化された透過モニタは、リンクローカル次ホップを使用したマルチパスルートで失敗する。",
+      "headline_en": "IPv6 encapsulated transparent monitors fail with multi-path routes that use link-local next hops",
+      "headline_ja": "IPv6 カプセル化された透過モニターは、リンクローカル次ホップを使用するマルチパスルートで失敗します。",
       "versions": "21.1.0.1, 21.1.0.2, 21.1.0.3",
       "product": "BIG-IP, BIG-IP TMOS",
       "url": "https://cdn.f5.com/product/bugtracker/ID2695537.html",
@@ -31,6 +31,16 @@
       "versions": "8.4.0, 8.4.1, 8.4.2, 8.4.2.1, 8.4.2.2, 8.4.2.3",
       "product": "BIG-IQ, BIG-IQ Configuration - Local Traffic",
       "url": "https://cdn.f5.com/product/bugtracker/ID2690333.html",
+      "date": "2026-10-23"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2567821",
+      "headline_en": "BIG-IQ RegKey Pool API fails to assign licenses to unreachable BIG-IP devices",
+      "headline_ja": "BIG-IQ RegKey プール API が到達できない BIG‑IP デバイスにライセンスを割り当てられません",
+      "versions": "8.4.1, 8.4.2, 8.4.2.1, 8.4.2.2, 8.4.2.3",
+      "product": "BIG-IQ, BIG-IQ 1UX Search",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2567821.html",
       "date": "2026-10-23"
     },
     {
@@ -738,7 +748,7 @@
       "id": "ID2524081",
       "headline_en": "Successful REST API requests are not logged in the restjavad audit log",
       "headline_ja": "成功したREST APIリクエストはrestjavad監査ログに記録されません。",
-      "versions": "17.5.0, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 17.5.1.10",
+      "versions": "17.1.3.4, 17.1.3.5, 17.1.3.6, 17.5.1.6, 17.5.1.8, 17.5.1.9, 17.5.1.10, 21.1.0, 21.1.0.1, 21.1.0.2, 21.1.0.3",
       "product": "BIG-IP, BIG-IP TMOS",
       "url": "https://cdn.f5.com/product/bugtracker/ID2524081.html",
       "date": "2026-10-05"
@@ -891,16 +901,6 @@
       "versions": "17.5.0, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 17.5.1.10",
       "product": "BIG-IP, BIG-IP TMOS",
       "url": "https://cdn.f5.com/product/bugtracker/ID2533505.html",
-      "date": "2026-09-30"
-    },
-    {
-      "source": "F5 Bug Tracker",
-      "id": "ID2525373",
-      "headline_en": "DNS Express huge-page memory exhaustion does not fail gracefully and lacks proactive warnings",
-      "headline_ja": "DNS Express の大ページメモリ枯渇は、優雅に失敗せず、事前警告が不足しています。",
-      "versions": "17.1.3.5, 17.1.3.6, 17.5.1.9, 17.5.1.10, 21.1.0.2, 21.1.0.3",
-      "product": "BIG-IP, BIG-IP DNS",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2525373.html",
       "date": "2026-09-30"
     },
     {
@@ -1673,7 +1673,7 @@
       "date": "2025-08-13",
       "cvss": 7.5,
       "kev": false,
-      "epss": 0.00335
+      "epss": 0.00366
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -1685,7 +1685,7 @@
       "date": "2025-08-13",
       "cvss": 7.5,
       "kev": false,
-      "epss": 0.00335
+      "epss": 0.00366
     },
     {
       "source": "NVD (CVSS 8.7)",
@@ -1877,7 +1877,7 @@
       "date": "2025-02-05",
       "cvss": 3.1,
       "kev": false,
-      "epss": 0.0014
+      "epss": 0.00139
     },
     {
       "source": "NVD (CVSS 7.2)",
