@@ -1,6 +1,6 @@
 {
   "label": "Cisco IOS XE",
-  "generated_at": "2026-11-04T04:53:23+00:00",
+  "generated_at": "2026-11-05T05:14:57+00:00",
   "count": 193,
   "rows": [
     {
@@ -469,7 +469,7 @@
       "date": "2025-09-24",
       "cvss": 5.3,
       "kev": false,
-      "epss": 0.00198
+      "epss": 0.00208
     },
     {
       "source": "NVD (CVSS 8.6)",
@@ -481,7 +481,7 @@
       "date": "2025-08-14",
       "cvss": 8.6,
       "kev": false,
-      "epss": 0.00469
+      "epss": 0.00512
     },
     {
       "source": "NVD (CVSS 8.6)",
@@ -493,7 +493,7 @@
       "date": "2025-08-14",
       "cvss": 8.6,
       "kev": false,
-      "epss": 0.00715
+      "epss": 0.00739
     },
     {
       "source": "Cisco PSIRT (CVSS 8.6)",
@@ -505,7 +505,7 @@
       "date": "2025-08-14",
       "cvss": 8.6,
       "kev": false,
-      "epss": 0.00715
+      "epss": 0.00739
     },
     {
       "source": "NVD (CVSS 10.0)",

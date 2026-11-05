@@ -1,6 +1,6 @@
 {
   "label": "Palo Alto (PAN-OS)",
-  "generated_at": "2026-11-04T05:01:33+00:00",
+  "generated_at": "2026-11-05T05:08:16+00:00",
   "count": 639,
   "rows": [
     {
@@ -1369,7 +1369,7 @@
       "date": "2025-04-11",
       "cvss": 3.8,
       "kev": false,
-      "epss": 0.00351
+      "epss": 0.00358
     },
     {
       "source": "NVD (CVSS -)",
@@ -1381,7 +1381,7 @@
       "date": "2025-04-11",
       "cvss": null,
       "kev": false,
-      "epss": 0.00183
+      "epss": 0.00186
     },
     {
       "source": "NVD (CVSS -)",
@@ -1393,7 +1393,7 @@
       "date": "2025-04-11",
       "cvss": null,
       "kev": false,
-      "epss": 0.00119
+      "epss": 0.00122
     },
     {
       "source": "NVD (CVSS -)",
@@ -1405,7 +1405,7 @@
       "date": "2025-04-11",
       "cvss": null,
       "kev": false,
-      "epss": 0.00555
+      "epss": 0.00566
     },
     {
       "source": "NVD (CVSS -)",
@@ -1417,7 +1417,7 @@
       "date": "2025-04-11",
       "cvss": null,
       "kev": false,
-      "epss": 0.0032
+      "epss": 0.00327
     },
     {
       "source": "NVD (CVSS -)",
@@ -1429,7 +1429,7 @@
       "date": "2025-04-11",
       "cvss": null,
       "kev": false,
-      "epss": 0.00567
+      "epss": 0.00579
     },
     {
       "source": "NVD (CVSS -)",
@@ -1441,7 +1441,7 @@
       "date": "2025-04-11",
       "cvss": null,
       "kev": false,
-      "epss": 0.00404
+      "epss": 0.00412
     },
     {
       "source": "NVD (CVSS -)",
@@ -1453,7 +1453,7 @@
       "date": "2025-04-11",
       "cvss": null,
       "kev": false,
-      "epss": 0.00423
+      "epss": 0.00431
     },
     {
       "source": "NVD (CVSS -)",
@@ -1465,7 +1465,7 @@
       "date": "2025-04-11",
       "cvss": null,
       "kev": false,
-      "epss": 0.00274
+      "epss": 0.00279
     },
     {
       "source": "NVD (CVSS -)",
@@ -1477,7 +1477,7 @@
       "date": "2025-04-11",
       "cvss": null,
       "kev": false,
-      "epss": 0.00172
+      "epss": 0.00175
     },
     {
       "source": "NVD (CVSS 8.0)",
