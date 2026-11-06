@@ -1,7 +1,7 @@
 {
   "label": "Palo Alto (PAN-OS)",
-  "generated_at": "2026-11-05T05:08:16+00:00",
-  "count": 639,
+  "generated_at": "2026-11-06T05:04:20+00:00",
+  "count": 640,
   "rows": [
     {
       "source": "NVD (CVSS 7.2)",
@@ -6506,6 +6506,19 @@
       "versions": "PAN-OS 11.2系 / 未修正（Known Issue）",
       "product": null,
       "url": "https://docs.paloaltonetworks.com/pan-os/11-2/pan-os-release-notes/pan-os-11-2-13-known-and-addressed-issues/pan-os-11-2-13-known-issues",
+      "date": null,
+      "cvss": null,
+      "kev": null,
+      "epss": null
+    },
+    {
+      "source": "PAN-OS Known Issues (11.2)",
+      "id": "PAN-335750",
+      "headline_en": "(M-700 Panorama appliances) On M-700 Panoramaâ¢ appliances, the Panorama web interface does not display logs. This occurs because the Elasticsearch service, which is responsible for log indexing and searching, is not running.",
+      "headline_ja": "（M-700 Panorama アプライアンス）M-700 Panorama™ アプライアンスでは、Panorama の Web インターフェースにログが表示されません。これは、ログのインデックス作成と検索を担当する Elasticsearch サービスが実行されていないために発生します。",
+      "versions": "PAN-OS 11.2系 / 未修正（Known Issue）",
+      "product": null,
+      "url": "https://docs.paloaltonetworks.com/pan-os/11-2/pan-os-release-notes/pan-os-11-2-10-known-and-addressed-issues/pan-os-11-2-10-known-issues",
       "date": null,
       "cvss": null,
       "kev": null,

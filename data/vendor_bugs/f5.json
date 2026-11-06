@@ -1,8 +1,28 @@
 {
   "label": "F5 BIG-IP",
-  "generated_at": "2026-11-05T05:03:19+00:00",
+  "generated_at": "2026-11-06T05:12:19+00:00",
   "count": 300,
   "rows": [
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2707865",
+      "headline_en": "Bigd HTTPS monitors do not disable SSLv3 by default",
+      "headline_ja": "Bigd HTTPSモニターはデフォルトでSSLv3を無効にしません。",
+      "versions": "17.1.3.6, 17.5.1.10, 21.1.0.3",
+      "product": "BIG-IP, BIG-IP LTM",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2707865.html",
+      "date": "2026-11-06"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2707837",
+      "headline_en": "HTTPS monitors may send an unexpected supported SSL/TLS version",
+      "headline_ja": "HTTPSモニターは、予期しないサポートされているSSL/TLSバージョンを送信することがあります。",
+      "versions": "17.1.3.6, 17.5.1.10, 21.1.0.3",
+      "product": "BIG-IP, BIG-IP LTM",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2707837.html",
+      "date": "2026-11-06"
+    },
     {
       "source": "F5 Bug Tracker",
       "id": "ID2695537",
@@ -525,16 +545,6 @@
     },
     {
       "source": "F5 Bug Tracker",
-      "id": "ID2502781",
-      "headline_en": "Improve http error log \"Invalid request received from remote client. content-length from header\"",
-      "headline_ja": "HTTPエラーログを改善する「リモートクライアントから無効なリクエストが受信されました。ヘッダーのcontent-length」",
-      "versions": "17.5.1.8, 17.5.1.9, 17.5.1.10",
-      "product": "BIG-IP, BIG-IP APM",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2502781.html",
-      "date": "2026-10-10"
-    },
-    {
-      "source": "F5 Bug Tracker",
       "id": "ID2567377",
       "headline_en": "Higher control plane CPU usage from the ASM JavaScript obfuscator after upgrade",
       "headline_ja": "アップグレード後、ASM JavaScript難読化ツールによるコントロールプレーンのCPU使用率が上昇しています。",
@@ -551,6 +561,16 @@
       "versions": "17.1.0, 17.1.0.1, 17.1.0.2, 17.1.0.3, 17.1.1, 17.1.1.1, 17.1.1.2, 17.1.1.3, 17.1.1.4, 17.1.2, 17.1.2.1, 17.1.2.2, 17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5, 17.1.3.6",
       "product": "BIG-IP, BIG-IP TMOS",
       "url": "https://cdn.f5.com/product/bugtracker/ID2564877.html",
+      "date": "2026-10-09"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2549993",
+      "headline_en": "bdt_cli connection list does not filter by IP address",
+      "headline_ja": "bdt_cli 接続リストは IP アドレスでフィルタリングされません",
+      "versions": "2.2.0, 2.2.1, 2.2.2, 2.2.3, 2.2.4, 2.2.5",
+      "product": "BIG-IP NEXT CNF",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2549993.html",
       "date": "2026-10-09"
     },
     {
@@ -855,16 +875,6 @@
     },
     {
       "source": "F5 Bug Tracker",
-      "id": "ID2502589",
-      "headline_en": "Intermittently, virtual-wire PVA assisted flows may be reset with Flow expired (sweeper) (idle timeout)",
-      "headline_ja": "断続的に、バーチャルワイヤ PVA 支援フローは、フロー期限切れ（スイーパー）（アイドルタイムアウト）によりリセットされることがあります。",
-      "versions": "17.5.1.6, 17.5.1.8, 17.5.1.9, 17.5.1.10",
-      "product": "BIG-IP, BIG-IP LTM",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2502589.html",
-      "date": "2026-10-01"
-    },
-    {
-      "source": "F5 Bug Tracker",
       "id": "ID2551933",
       "headline_en": "The MCPD crashed because of an issue with the sod while validating TMC overlap with a complex set of traffic matching criteria.",
       "headline_ja": "MCPDは、複雑なトラフィックマッチング条件のセットでTMCのオーバーラップを検証中に、sodに問題があったためクラッシュしました。",
@@ -1004,16 +1014,6 @@
       "product": "BIG-IP NEXT BNK",
       "url": "https://cdn.f5.com/product/bugtracker/ID2503217.html",
       "date": "2026-09-10"
-    },
-    {
-      "source": "F5 Bug Tracker",
-      "id": "ID2502537",
-      "headline_en": "BNK fails to provision VXLAN CRs on TMM when deployed with OcNOS and Vxlan on an OCP cluster",
-      "headline_ja": "BNK は OcNOS と OCP クラスター上の Vxlan と共にデプロイされた場合、TMM 上で VXLAN CR のプロビジョニングに失敗します。",
-      "versions": "2.4.0",
-      "product": "BIG-IP NEXT BNK",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2502537.html",
-      "date": "2026-09-07"
     },
     {
       "source": "NVD (CVSS 8.8)",
@@ -2729,7 +2729,7 @@
       "date": "2022-10-19",
       "cvss": 7.5,
       "kev": false,
-      "epss": 0.00728
+      "epss": 0.00746
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -2741,7 +2741,7 @@
       "date": "2022-10-19",
       "cvss": 7.5,
       "kev": false,
-      "epss": 0.00728
+      "epss": 0.00746
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -2753,7 +2753,7 @@
       "date": "2022-10-19",
       "cvss": 7.5,
       "kev": false,
-      "epss": 0.00728
+      "epss": 0.00746
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -2765,7 +2765,7 @@
       "date": "2022-10-19",
       "cvss": 7.5,
       "kev": false,
-      "epss": 0.00728
+      "epss": 0.00746
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -2777,7 +2777,7 @@
       "date": "2022-10-19",
       "cvss": 7.5,
       "kev": false,
-      "epss": 0.00728
+      "epss": 0.00746
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -2789,7 +2789,7 @@
       "date": "2022-10-19",
       "cvss": 7.5,
       "kev": false,
-      "epss": 0.00728
+      "epss": 0.00746
     },
     {
       "source": "NVD (CVSS 7.2)",
@@ -2801,7 +2801,7 @@
       "date": "2022-10-19",
       "cvss": 7.2,
       "kev": false,
-      "epss": 0.01409
+      "epss": 0.01443
     },
     {
       "source": "NVD (CVSS 6.5)",
@@ -2813,7 +2813,7 @@
       "date": "2022-10-19",
       "cvss": 6.5,
       "kev": false,
-      "epss": 0.00704
+      "epss": 0.0072
     },
     {
       "source": "NVD (CVSS 6.5)",
@@ -2825,7 +2825,7 @@
       "date": "2022-10-19",
       "cvss": 6.5,
       "kev": false,
-      "epss": 0.00704
+      "epss": 0.0072
     },
     {
       "source": "NVD (CVSS 5.3)",
@@ -2837,7 +2837,7 @@
       "date": "2022-10-19",
       "cvss": 5.3,
       "kev": false,
-      "epss": 0.00728
+      "epss": 0.00746
     },
     {
       "source": "NVD (CVSS 4.9)",
@@ -2849,7 +2849,7 @@
       "date": "2022-10-19",
       "cvss": 4.9,
       "kev": false,
-      "epss": 0.00703
+      "epss": 0.0072
     },
     {
       "source": "NVD (CVSS 3.7)",
@@ -2861,7 +2861,7 @@
       "date": "2022-10-19",
       "cvss": 3.7,
       "kev": false,
-      "epss": 0.00305
+      "epss": 0.00312
     },
     {
       "source": "NVD (CVSS 8.7)",
