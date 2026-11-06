@@ -218,6 +218,13 @@ def display_vendor_bug_cache(session_key, label):
         f"📦 キャッシュ済みデータ（最終更新: {generated_at} UTC、GitHub Actionsで自動収集、"
         f"{cache.get('count', len(cache['rows']))} 件）。ライブでの最新検索は下のフォームから実行できます。"
     )
+    if cache.get("fallback"):
+        st.caption(f"⚠️ {cache['fallback']}（出所が「CVE List」の行が補完分です）")
+    if cache.get("retention_days"):
+        st.caption(
+            f"🗂️ 一度収集したバグは、最後に収集結果に現れた日から{cache['retention_days']}日間"
+            "保持しています（取得元の一覧から外れた古いバグも消えずに残ります）。"
+        )
     display_bug_rows_table(cache["rows"], session_key, f"{label}(キャッシュ)", "cache")
     st.markdown("---")
 
