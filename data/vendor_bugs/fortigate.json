@@ -1,6 +1,6 @@
 {
   "label": "FortiGate (FortiOS)",
-  "generated_at": "2026-11-06T05:05:26+00:00",
+  "generated_at": "2026-11-07T04:35:00+00:00",
   "count": 215,
   "rows": [
     {
@@ -399,7 +399,7 @@
       "date": "2026-02-10",
       "cvss": 8.1,
       "kev": false,
-      "epss": 0.00759
+      "epss": 0.00748
     },
     {
       "source": "FortiGuard PSIRT (CVSS 8.1)",
@@ -424,7 +424,7 @@
       "date": "2026-02-10",
       "cvss": 6.7,
       "kev": false,
-      "epss": 0.01516
+      "epss": 0.01494
     },
     {
       "source": "NVD (CVSS 5.9)",
@@ -448,7 +448,7 @@
       "date": "2026-02-10",
       "cvss": 5.8,
       "kev": false,
-      "epss": 0.00402
+      "epss": 0.00411
     },
     {
       "source": "NVD (CVSS 4.2)",
@@ -460,7 +460,7 @@
       "date": "2026-02-10",
       "cvss": 4.2,
       "kev": false,
-      "epss": 0.00158
+      "epss": 0.00162
     },
     {
       "source": "NVD (CVSS 3.2)",
@@ -868,7 +868,7 @@
       "date": "2025-06-10",
       "cvss": 6.6,
       "kev": false,
-      "epss": 0.00849
+      "epss": 0.00886
     },
     {
       "source": "NVD (CVSS 6.5)",
@@ -880,7 +880,7 @@
       "date": "2025-06-10",
       "cvss": 6.5,
       "kev": false,
-      "epss": 0.00376
+      "epss": 0.00393
     },
     {
       "source": "NVD (CVSS 5.9)",
@@ -892,7 +892,7 @@
       "date": "2025-06-10",
       "cvss": 5.9,
       "kev": false,
-      "epss": 0.00446
+      "epss": 0.00466
     },
     {
       "source": "NVD (CVSS 4.8)",
@@ -904,7 +904,7 @@
       "date": "2025-06-10",
       "cvss": 4.8,
       "kev": false,
-      "epss": 0.01159
+      "epss": 0.01209
     },
     {
       "source": "NVD (CVSS 4.3)",
@@ -916,7 +916,7 @@
       "date": "2025-06-10",
       "cvss": 4.3,
       "kev": false,
-      "epss": 0.00549
+      "epss": 0.00572
     },
     {
       "source": "FortiGuard PSIRT (CVSS 4.3)",
@@ -941,7 +941,7 @@
       "date": "2025-06-10",
       "cvss": 3.2,
       "kev": false,
-      "epss": 0.00211
+      "epss": 0.0022
     },
     {
       "source": "NVD (CVSS 3.1)",
@@ -953,7 +953,7 @@
       "date": "2025-06-10",
       "cvss": 3.1,
       "kev": false,
-      "epss": 0.00402
+      "epss": 0.00419
     },
     {
       "source": "NVD (CVSS 9.8)",

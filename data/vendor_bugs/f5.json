@@ -1,6 +1,6 @@
 {
   "label": "F5 BIG-IP",
-  "generated_at": "2026-11-06T05:12:19+00:00",
+  "generated_at": "2026-11-07T04:42:21+00:00",
   "count": 300,
   "rows": [
     {
@@ -121,16 +121,6 @@
       "versions": "17.5.1.9, 17.5.1.10",
       "product": "BIG-IP, BIG-IP TMOS",
       "url": "https://cdn.f5.com/product/bugtracker/ID2690329.html",
-      "date": "2026-10-22"
-    },
-    {
-      "source": "F5 Bug Tracker",
-      "id": "ID2687873",
-      "headline_en": "Invalid REST endpoint when DoS profile name contains an iApp folder separator (/)",
-      "headline_ja": "DoS プロファイル名に iApp フォルダー区切り文字 (/) が含まれている場合、REST エンドポイントが無効です",
-      "versions": "17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 17.5.1.10",
-      "product": "BIG-IP, BIG-IP AFM",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2687873.html",
       "date": "2026-10-22"
     },
     {
@@ -545,6 +535,16 @@
     },
     {
       "source": "F5 Bug Tracker",
+      "id": "ID2502781",
+      "headline_en": "Improve http error log \"Invalid request received from remote client. content-length from header\"",
+      "headline_ja": "httpエラーログを改善する「リモートクライアントから無効なリクエストが受信されました。ヘッダーからのcontent-length」",
+      "versions": "17.5.1.8, 17.5.1.9, 17.5.1.10",
+      "product": "BIG-IP, BIG-IP APM",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2502781.html",
+      "date": "2026-10-10"
+    },
+    {
+      "source": "F5 Bug Tracker",
       "id": "ID2567377",
       "headline_en": "Higher control plane CPU usage from the ASM JavaScript obfuscator after upgrade",
       "headline_ja": "アップグレード後、ASM JavaScript難読化ツールによるコントロールプレーンのCPU使用率が上昇しています。",
@@ -561,16 +561,6 @@
       "versions": "17.1.0, 17.1.0.1, 17.1.0.2, 17.1.0.3, 17.1.1, 17.1.1.1, 17.1.1.2, 17.1.1.3, 17.1.1.4, 17.1.2, 17.1.2.1, 17.1.2.2, 17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5, 17.1.3.6",
       "product": "BIG-IP, BIG-IP TMOS",
       "url": "https://cdn.f5.com/product/bugtracker/ID2564877.html",
-      "date": "2026-10-09"
-    },
-    {
-      "source": "F5 Bug Tracker",
-      "id": "ID2549993",
-      "headline_en": "bdt_cli connection list does not filter by IP address",
-      "headline_ja": "bdt_cli 接続リストは IP アドレスでフィルタリングされません",
-      "versions": "2.2.0, 2.2.1, 2.2.2, 2.2.3, 2.2.4, 2.2.5",
-      "product": "BIG-IP NEXT CNF",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2549993.html",
       "date": "2026-10-09"
     },
     {
@@ -871,6 +861,16 @@
       "versions": "17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5, 17.1.3.6",
       "product": "BIG-IP, BIG-IP DNS",
       "url": "https://cdn.f5.com/product/bugtracker/ID2503749.html",
+      "date": "2026-10-01"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2502589",
+      "headline_en": "Intermittently, virtual-wire PVA assisted flows may be reset with Flow expired (sweeper) (idle timeout)",
+      "headline_ja": "間欠的に、仮想ワイヤーPVA支援フローはフロー期限切れ（スイーパー）（アイドルタイムアウト）でリセットされることがあります。",
+      "versions": "17.5.1.6, 17.5.1.8, 17.5.1.9, 17.5.1.10",
+      "product": "BIG-IP, BIG-IP LTM",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2502589.html",
       "date": "2026-10-01"
     },
     {
