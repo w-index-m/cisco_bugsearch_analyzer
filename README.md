@@ -190,7 +190,7 @@ python f5_bigip_tmm_bugs.py --nvd-keyword "BIG-IP" --bugtracker-limit 100
 `analyzer.py` は NVD・F5公式サイト・CISA KEV・FIRST EPSS 等の外部APIに依存していますが、開発環境（サンドボックス）からはこれらの多くがネットワークポリシーでブロックされます。そのため `.github/workflows/collect-vendor-bugs.yml` が **毎日 09:00 JST（cron）または手動実行（workflow_dispatch）** で以下を行います。
 
 1. `scripts/check_api_keys.py` で NVD/DeepL/Groq/OpenRouterの各APIキーが実際に機能するか数秒〜十数秒で診断（診断のみ、失敗してもジョブは継続）
-2. `scripts/collect_vendor_bug_cache.py` で F5 BIG-IP / Palo Alto (PAN-OS) / FortiGate (FortiOS) のバグ・CVE情報を収集し、`data/vendor_bugs/*.json` として保存
+2. `scripts/collect_vendor_bug_cache.py` で F5 BIG-IP / Palo Alto (PAN-OS) / FortiGate (FortiOS) のバグ・CVE情報を収集し、`data/vendor_bugs/*.json` として保存（一度収集したバグは、最後に収集結果に現れてから1年間保持）
 3. 変更があればリポジトリに自動コミット・push（push競合時はrebaseして自動リトライ）
 
 これにより、Streamlit アプリはまずキャッシュを即座に表示しつつ、必要に応じてライブ検索もできます。このワークフローを実際に使うには、GitHubリポジトリの **Settings → Secrets and variables → Actions** に `NVD_API_KEY` / `DEEPL_API_KEY` / `GROQ_API_KEY` / `OPENROUTER_API_KEY` を登録してください（Streamlit Secretsとは別管理です）。
@@ -201,6 +201,7 @@ python f5_bigip_tmm_bugs.py --nvd-keyword "BIG-IP" --bugtracker-limit 100
 - Cisco Bug Search: https://bst.cisco.com/bugsearch（CSV/Excelエクスポートをアップロード）
 - NVD（米国立脆弱性データベース）: F5/Palo Alto/FortiGate等のCVE情報
 - F5公式バグトラッカー: https://cdn.f5.com/product/bugtracker/（CVEにならない一般的な既知の問題）
+- CVE List V5（CVEProject/cvelistV5）: NVDに繋がらない日の予備データ源。日次収集でNVDの取得に失敗した場合、前回データを維持したまま、その後に新規公開されたCVEを日次差分から補完
 - PAN-OSリリースノート（Known Issues）: https://docs.paloaltonetworks.com/ngfw/release-notes（CVEにならない一般的な既知の問題）
 - CISA KEV / FIRST EPSS: 実際の悪用状況・悪用予測確率
 - endoflife.date: サポート終了日（EOL）情報
@@ -320,7 +321,7 @@ PSIRT_CLIENT_SECRET = "xxx"
 Because the vendor/CVE data sources (NVD, F5's site, CISA, FIRST) are frequently unreachable from restricted sandboxes, a scheduled workflow (`.github/workflows/collect-vendor-bugs.yml`, daily at 00:00 UTC / 09:00 JST, or manually via `workflow_dispatch`) runs on a GitHub-hosted runner (unrestricted network) to:
 
 1. Run `scripts/check_api_keys.py` — a fast (seconds) connectivity check for the NVD/DeepL/Groq/OpenRouter API keys, diagnostic-only (never fails the job)
-2. Run `scripts/collect_vendor_bug_cache.py` to fetch F5 BIG-IP / Palo Alto (PAN-OS) / FortiGate (FortiOS) bug and CVE data, writing `data/vendor_bugs/*.json`
+2. Run `scripts/collect_vendor_bug_cache.py` to fetch F5 BIG-IP / Palo Alto (PAN-OS) / FortiGate (FortiOS) bug and CVE data, writing `data/vendor_bugs/*.json` (each bug is kept for one year after it was last seen)
 3. Commit and push any changes (retrying with a rebase loop if the push is rejected by a concurrent commit)
 
 The Streamlit app reads this cache first for instant results, and can still run a live search on demand.
