@@ -1,9 +1,83 @@
 {
   "label": "FortiGate (FortiOS)",
-  "generated_at": "2026-11-10T06:00:46+00:00",
-  "count": 215,
+  "generated_at": "2026-11-11T04:43:16+00:00",
+  "count": 220,
   "retention_days": 365,
   "rows": [
+    {
+      "source": "FortiGuard PSIRT (CVSS 9.3)",
+      "id": "FG-IR-26-267",
+      "headline_en": "Authentication bypass by primary weakness",
+      "headline_ja": "主要な弱点による認証回避",
+      "versions": "(不明)",
+      "product": "FortiOS",
+      "url": "https://fortiguard.fortinet.com/psirt/FG-IR-26-267",
+      "date": "2026-11-10",
+      "cvss": 9.3,
+      "kev": null,
+      "epss": null,
+      "first_seen": "2026-11-11",
+      "last_seen": "2026-11-11"
+    },
+    {
+      "source": "FortiGuard PSIRT (CVSS 8.4)",
+      "id": "FG-IR-26-225",
+      "headline_en": "Improper neutralization of special elements used in a template engine i",
+      "headline_ja": "テンプレートエンジンで使用される特殊要素の不適切な中和",
+      "versions": "(不明)",
+      "product": "FortiManager",
+      "url": "https://fortiguard.fortinet.com/psirt/FG-IR-26-225",
+      "date": "2026-11-10",
+      "cvss": 8.4,
+      "kev": null,
+      "epss": null,
+      "first_seen": "2026-11-11",
+      "last_seen": "2026-11-11"
+    },
+    {
+      "source": "FortiGuard PSIRT (CVSS 7.4)",
+      "id": "FG-IR-26-269",
+      "headline_en": "Improper neutralization of special elements in output used by a downstream component in sshd",
+      "headline_ja": "sshd の下流コンポーネントで使用される出力における特殊要素の不適切な無効化",
+      "versions": "(不明)",
+      "product": "FortiOS",
+      "url": "https://fortiguard.fortinet.com/psirt/FG-IR-26-269",
+      "date": "2026-11-10",
+      "cvss": 7.4,
+      "kev": null,
+      "epss": null,
+      "first_seen": "2026-11-11",
+      "last_seen": "2026-11-11"
+    },
+    {
+      "source": "NVD (CVSS 6.6)",
+      "id": "CVE-2026-121530",
+      "headline_en": "A improper authentication vulnerability in Fortinet FortiOS 7.6.0 through 7.6.6 may allow a remote authenticated attacker to gain improper access control via an invalid token after entering a valid username and password",
+      "headline_ja": "Fortinet FortiOS 7.6.0 から 7.6.6 における不適切な認証脆弱性により、リモートで認証された攻撃者が有効なユーザー名とパスワードを入力した後、無効なトークンを使用して不適切なアクセス制御を取得できる可能性があります。",
+      "versions": "7.6.0, 7.6.6",
+      "url": "https://fortiguard.fortinet.com/psirt/FG-IR-26-195",
+      "date": "2026-11-10",
+      "cvss": 6.6,
+      "kev": false,
+      "epss": null,
+      "first_seen": "2026-11-11",
+      "last_seen": "2026-11-11"
+    },
+    {
+      "source": "FortiGuard PSIRT (CVSS 5.9)",
+      "id": "FG-IR-26-195",
+      "headline_en": "Broken Access Control in Two-Factor-Authentication",
+      "headline_ja": "二要素認証におけるアクセス制御の不備",
+      "versions": "(不明)",
+      "product": "FortiOS",
+      "url": "https://fortiguard.fortinet.com/psirt/FG-IR-26-195",
+      "date": "2026-11-10",
+      "cvss": 5.9,
+      "kev": null,
+      "epss": null,
+      "first_seen": "2026-11-11",
+      "last_seen": "2026-11-11"
+    },
     {
       "source": "NVD (CVSS 7.5)",
       "id": "CVE-2026-106174",
@@ -16,7 +90,7 @@
       "kev": false,
       "epss": 0.00282,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "FortiGuard PSIRT (CVSS 6.7)",
@@ -45,7 +119,7 @@
       "kev": false,
       "epss": 0.00098,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "FortiGuard PSIRT (CVSS 2.1)",
@@ -74,7 +148,7 @@
       "kev": false,
       "epss": 0.00278,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "FortiGuard PSIRT (CVSS 8.1)",
@@ -103,7 +177,7 @@
       "kev": false,
       "epss": 0.01073,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "FortiGuard PSIRT (CVSS 2.5)",
@@ -147,7 +221,7 @@
       "kev": false,
       "epss": 0.00514,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "FortiGuard PSIRT (CVSS 5.6)",
@@ -176,7 +250,7 @@
       "kev": false,
       "epss": 0.00624,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "FortiGuard PSIRT (CVSS 5.0)",
@@ -205,7 +279,7 @@
       "kev": false,
       "epss": 0.0067,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 6.1)",
@@ -219,7 +293,7 @@
       "kev": false,
       "epss": 0.00385,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "FortiGuard PSIRT (CVSS 6.1)",
@@ -263,7 +337,7 @@
       "kev": false,
       "epss": 0.00251,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "FortiGuard PSIRT (CVSS 5.5)",
@@ -292,7 +366,7 @@
       "kev": false,
       "epss": 0.00313,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 4.3)",
@@ -306,7 +380,7 @@
       "kev": false,
       "epss": 0.00381,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "FortiGuard PSIRT (CVSS 4.3)",
@@ -335,7 +409,7 @@
       "kev": false,
       "epss": 0.00271,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "FortiGuard PSIRT (CVSS 3.4)",
@@ -364,7 +438,7 @@
       "kev": false,
       "epss": 0.00372,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "FortiGuard PSIRT (CVSS 3.1)",
@@ -393,7 +467,7 @@
       "kev": false,
       "epss": 0.00149,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "FortiGuard PSIRT (CVSS 6.7)",
@@ -422,7 +496,7 @@
       "kev": false,
       "epss": 0.00564,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 6.5)",
@@ -436,7 +510,7 @@
       "kev": false,
       "epss": 0.00283,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 6.0)",
@@ -450,7 +524,7 @@
       "kev": true,
       "epss": 0.01343,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 8.1)",
@@ -464,7 +538,7 @@
       "kev": false,
       "epss": 0.00748,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "FortiGuard PSIRT (CVSS 8.1)",
@@ -493,7 +567,7 @@
       "kev": false,
       "epss": 0.01494,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 5.9)",
@@ -507,7 +581,7 @@
       "kev": true,
       "epss": 0.29499,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 5.8)",
@@ -521,7 +595,7 @@
       "kev": false,
       "epss": 0.00411,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 4.2)",
@@ -535,7 +609,7 @@
       "kev": false,
       "epss": 0.00162,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 3.2)",
@@ -549,7 +623,7 @@
       "kev": false,
       "epss": 0.00112,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 9.8)",
@@ -563,7 +637,7 @@
       "kev": true,
       "epss": 0.86592,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 8.1)",
@@ -577,7 +651,7 @@
       "kev": true,
       "epss": 0.03742,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 6.0)",
@@ -591,7 +665,7 @@
       "kev": false,
       "epss": 0.0011,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 9.8)",
@@ -605,7 +679,7 @@
       "kev": true,
       "epss": 0.68087,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 6.6)",
@@ -619,7 +693,7 @@
       "kev": false,
       "epss": 0.00434,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 5.6)",
@@ -633,7 +707,7 @@
       "kev": false,
       "epss": 0.00322,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -647,7 +721,7 @@
       "kev": false,
       "epss": 0.00355,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -661,7 +735,7 @@
       "kev": false,
       "epss": 0.00655,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 1.9)",
@@ -675,7 +749,7 @@
       "kev": false,
       "epss": 0.00185,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 8.2)",
@@ -689,7 +763,7 @@
       "kev": false,
       "epss": 0.00287,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -703,7 +777,7 @@
       "kev": false,
       "epss": 0.00697,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -717,7 +791,7 @@
       "kev": false,
       "epss": 0.00114,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 7.2)",
@@ -731,7 +805,7 @@
       "kev": false,
       "epss": 0.00536,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 6.7)",
@@ -745,7 +819,7 @@
       "kev": false,
       "epss": 0.00188,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 6.5)",
@@ -759,7 +833,7 @@
       "kev": false,
       "epss": 0.00556,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 5.3)",
@@ -773,7 +847,7 @@
       "kev": false,
       "epss": 0.00437,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 5.3)",
@@ -785,9 +859,9 @@
       "date": "2025-10-14",
       "cvss": 5.3,
       "kev": false,
-      "epss": 0.00605,
+      "epss": 0.00576,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 4.8)",
@@ -801,7 +875,7 @@
       "kev": false,
       "epss": 0.0034,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 4.7)",
@@ -815,7 +889,7 @@
       "kev": false,
       "epss": 0.00401,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 4.3)",
@@ -829,7 +903,7 @@
       "kev": false,
       "epss": 0.00327,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 4.3)",
@@ -843,7 +917,7 @@
       "kev": false,
       "epss": 0.00484,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 2.7)",
@@ -857,7 +931,7 @@
       "kev": false,
       "epss": 0.00623,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 2.7)",
@@ -871,7 +945,7 @@
       "kev": false,
       "epss": 0.00361,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 2.6)",
@@ -885,7 +959,7 @@
       "kev": false,
       "epss": 0.00254,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 6.7)",
@@ -899,7 +973,7 @@
       "kev": false,
       "epss": 0.00252,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 8.1)",
@@ -913,7 +987,7 @@
       "kev": false,
       "epss": 0.00774,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 7.2)",
@@ -927,7 +1001,7 @@
       "kev": false,
       "epss": 0.00679,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 6.6)",
@@ -941,7 +1015,7 @@
       "kev": false,
       "epss": 0.0064,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 5.3)",
@@ -955,7 +1029,7 @@
       "kev": false,
       "epss": 0.00515,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 4.2)",
@@ -969,7 +1043,7 @@
       "kev": false,
       "epss": 0.00241,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 7.2)",
@@ -983,7 +1057,7 @@
       "kev": false,
       "epss": 0.00296,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 5.3)",
@@ -997,7 +1071,7 @@
       "kev": false,
       "epss": 0.00399,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 6.6)",
@@ -1011,7 +1085,7 @@
       "kev": false,
       "epss": 0.00886,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 6.5)",
@@ -1025,7 +1099,7 @@
       "kev": false,
       "epss": 0.00393,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 5.9)",
@@ -1039,7 +1113,7 @@
       "kev": false,
       "epss": 0.00466,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 4.8)",
@@ -1053,7 +1127,7 @@
       "kev": false,
       "epss": 0.01209,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 4.3)",
@@ -1067,7 +1141,7 @@
       "kev": false,
       "epss": 0.00572,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "FortiGuard PSIRT (CVSS 4.3)",
@@ -1096,7 +1170,7 @@
       "kev": false,
       "epss": 0.0022,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 3.1)",
@@ -1110,7 +1184,7 @@
       "kev": false,
       "epss": 0.00419,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 9.8)",
@@ -1124,7 +1198,7 @@
       "kev": false,
       "epss": 0.00949,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 5.3)",
@@ -1138,7 +1212,7 @@
       "kev": false,
       "epss": 0.00873,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 3.7)",
@@ -1152,7 +1226,7 @@
       "kev": false,
       "epss": 0.00819,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -1166,7 +1240,7 @@
       "kev": false,
       "epss": 0.00517,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 3.1)",
@@ -1180,7 +1254,7 @@
       "kev": false,
       "epss": 0.00407,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 2.3)",
@@ -1194,7 +1268,7 @@
       "kev": false,
       "epss": 0.00222,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 9.8)",
@@ -1208,7 +1282,7 @@
       "kev": false,
       "epss": 0.18331,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 4.7)",
@@ -1222,7 +1296,7 @@
       "kev": false,
       "epss": 0.00372,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 5.0)",
@@ -1236,7 +1310,7 @@
       "kev": false,
       "epss": 0.00567,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 4.7)",
@@ -1250,7 +1324,7 @@
       "kev": false,
       "epss": 0.00318,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 4.1)",
@@ -1264,7 +1338,7 @@
       "kev": false,
       "epss": 0.00432,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -1278,7 +1352,7 @@
       "kev": false,
       "epss": 0.0061,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 4.8)",
@@ -1292,7 +1366,7 @@
       "kev": false,
       "epss": 0.00173,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 7.2)",
@@ -1306,7 +1380,7 @@
       "kev": false,
       "epss": 0.00729,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 8.8)",
@@ -1320,7 +1394,7 @@
       "kev": false,
       "epss": 0.00621,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 8.1)",
@@ -1334,7 +1408,7 @@
       "kev": true,
       "epss": 0.07235,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 8.1)",
@@ -1348,7 +1422,7 @@
       "kev": false,
       "epss": 0.01024,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 9.8)",
@@ -1362,7 +1436,7 @@
       "kev": true,
       "epss": 0.9435,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 9.0)",
@@ -1376,7 +1450,7 @@
       "kev": false,
       "epss": 0.00476,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -1390,7 +1464,7 @@
       "kev": false,
       "epss": 0.15212,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -1404,7 +1478,7 @@
       "kev": false,
       "epss": 0.00628,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -1418,7 +1492,7 @@
       "kev": false,
       "epss": 0.00991,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 6.5)",
@@ -1432,7 +1506,7 @@
       "kev": false,
       "epss": 0.00763,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 6.5)",
@@ -1446,7 +1520,7 @@
       "kev": false,
       "epss": 0.00747,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 6.5)",
@@ -1460,7 +1534,7 @@
       "kev": false,
       "epss": 0.00916,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 5.3)",
@@ -1474,7 +1548,7 @@
       "kev": false,
       "epss": 0.00689,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 5.0)",
@@ -1488,7 +1562,7 @@
       "kev": false,
       "epss": 0.00936,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 3.7)",
@@ -1502,7 +1576,7 @@
       "kev": false,
       "epss": 0.00796,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 3.7)",
@@ -1516,7 +1590,7 @@
       "kev": false,
       "epss": 0.00531,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 3.5)",
@@ -1530,7 +1604,7 @@
       "kev": false,
       "epss": 0.00625,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 5.4)",
@@ -1544,7 +1618,7 @@
       "kev": false,
       "epss": 0.00887,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 5.3)",
@@ -1558,7 +1632,7 @@
       "kev": false,
       "epss": 0.00602,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 4.3)",
@@ -1572,7 +1646,7 @@
       "kev": false,
       "epss": 0.00607,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 4.2)",
@@ -1586,7 +1660,7 @@
       "kev": false,
       "epss": 0.00429,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 5.1)",
@@ -1600,7 +1674,7 @@
       "kev": false,
       "epss": 0.00159,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 3.7)",
@@ -1614,7 +1688,7 @@
       "kev": false,
       "epss": 0.00447,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 3.4)",
@@ -1628,7 +1702,7 @@
       "kev": false,
       "epss": 0.00467,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 7.8)",
@@ -1642,7 +1716,7 @@
       "kev": false,
       "epss": 0.00284,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -1656,7 +1730,7 @@
       "kev": false,
       "epss": 0.00786,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 6.8)",
@@ -1670,7 +1744,7 @@
       "kev": false,
       "epss": 0.01042,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 6.7)",
@@ -1684,7 +1758,7 @@
       "kev": false,
       "epss": 0.00279,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 1.8)",
@@ -1698,7 +1772,7 @@
       "kev": false,
       "epss": 0.03469,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 7.2)",
@@ -1712,7 +1786,7 @@
       "kev": false,
       "epss": 0.01411,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 6.7)",
@@ -1726,7 +1800,7 @@
       "kev": false,
       "epss": 0.00659,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 6.7)",
@@ -1740,7 +1814,7 @@
       "kev": false,
       "epss": 0.0028,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 6.6)",
@@ -1754,7 +1828,7 @@
       "kev": false,
       "epss": 0.01258,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 5.3)",
@@ -1768,7 +1842,7 @@
       "kev": false,
       "epss": 0.01161,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 5.0)",
@@ -1782,7 +1856,7 @@
       "kev": false,
       "epss": 0.0029,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -1796,7 +1870,7 @@
       "kev": false,
       "epss": 0.00753,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 6.7)",
@@ -1810,7 +1884,7 @@
       "kev": false,
       "epss": 0.00777,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 5.3)",
@@ -1824,7 +1898,7 @@
       "kev": false,
       "epss": 0.00701,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 9.8)",
@@ -1838,7 +1912,7 @@
       "kev": false,
       "epss": 0.03306,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 8.1)",
@@ -1852,7 +1926,7 @@
       "kev": false,
       "epss": 0.01083,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 8.0)",
@@ -1866,7 +1940,7 @@
       "kev": false,
       "epss": 0.00668,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -1880,7 +1954,7 @@
       "kev": false,
       "epss": 0.00644,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 8.8)",
@@ -1894,7 +1968,7 @@
       "kev": false,
       "epss": 0.00724,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -1908,7 +1982,7 @@
       "kev": false,
       "epss": 0.028,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 6.5)",
@@ -1922,7 +1996,7 @@
       "kev": false,
       "epss": 0.02454,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 9.8)",
@@ -1936,7 +2010,7 @@
       "kev": true,
       "epss": 0.61725,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 4.8)",
@@ -1950,7 +2024,7 @@
       "kev": false,
       "epss": 0.00216,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 9.8)",
@@ -1964,7 +2038,7 @@
       "kev": true,
       "epss": 0.84589,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 8.8)",
@@ -1978,7 +2052,7 @@
       "kev": false,
       "epss": 0.00906,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 8.8)",
@@ -1992,7 +2066,7 @@
       "kev": false,
       "epss": 0.01068,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 7.2)",
@@ -2006,7 +2080,7 @@
       "kev": false,
       "epss": 0.01059,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 3.1)",
@@ -2020,7 +2094,7 @@
       "kev": false,
       "epss": 0.00567,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 6.5)",
@@ -2034,7 +2108,7 @@
       "kev": false,
       "epss": 0.01362,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 6.4)",
@@ -2048,7 +2122,7 @@
       "kev": false,
       "epss": 0.00173,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 8.1)",
@@ -2062,7 +2136,7 @@
       "kev": false,
       "epss": 0.01071,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 6.5)",
@@ -2076,7 +2150,7 @@
       "kev": false,
       "epss": 0.01124,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 6.5)",
@@ -2090,7 +2164,7 @@
       "kev": false,
       "epss": 0.00559,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 5.3)",
@@ -2104,7 +2178,7 @@
       "kev": false,
       "epss": 0.0143,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 3.9)",
@@ -2118,7 +2192,7 @@
       "kev": false,
       "epss": 0.00446,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 8.0)",
@@ -2132,7 +2206,7 @@
       "kev": false,
       "epss": 0.01313,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 5.4)",
@@ -2146,7 +2220,7 @@
       "kev": false,
       "epss": 0.00479,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 6.4)",
@@ -2160,7 +2234,7 @@
       "kev": false,
       "epss": 0.00288,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 9.8)",
@@ -2174,7 +2248,7 @@
       "kev": false,
       "epss": 0.02121,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 6.7)",
@@ -2188,7 +2262,7 @@
       "kev": false,
       "epss": 0.00179,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 4.1)",
@@ -2202,7 +2276,7 @@
       "kev": false,
       "epss": 0.00506,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 6.5)",
@@ -2216,7 +2290,7 @@
       "kev": false,
       "epss": 0.00592,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 6.5)",
@@ -2230,7 +2304,7 @@
       "kev": false,
       "epss": 0.00839,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 9.8)",
@@ -2244,7 +2318,7 @@
       "kev": true,
       "epss": 0.8675,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 7.8)",
@@ -2258,7 +2332,7 @@
       "kev": false,
       "epss": 0.00126,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 6.7)",
@@ -2272,7 +2346,7 @@
       "kev": false,
       "epss": 0.00188,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 6.7)",
@@ -2286,7 +2360,7 @@
       "kev": false,
       "epss": 0.00249,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 6.5)",
@@ -2300,7 +2374,7 @@
       "kev": false,
       "epss": 0.00642,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 4.9)",
@@ -2314,7 +2388,7 @@
       "kev": false,
       "epss": 0.00827,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 4.8)",
@@ -2328,7 +2402,7 @@
       "kev": false,
       "epss": 0.00192,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 4.3)",
@@ -2342,7 +2416,7 @@
       "kev": false,
       "epss": 0.00949,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 3.3)",
@@ -2356,7 +2430,7 @@
       "kev": false,
       "epss": 0.005,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -2370,7 +2444,7 @@
       "kev": false,
       "epss": 0.0089,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 8.8)",
@@ -2384,7 +2458,7 @@
       "kev": false,
       "epss": 0.00645,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 5.0)",
@@ -2398,7 +2472,7 @@
       "kev": false,
       "epss": 0.00405,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 4.1)",
@@ -2412,7 +2486,7 @@
       "kev": false,
       "epss": 0.00298,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 8.2)",
@@ -2426,7 +2500,7 @@
       "kev": false,
       "epss": 0.00218,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 6.7)",
@@ -2440,7 +2514,7 @@
       "kev": true,
       "epss": 0.10682,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 6.5)",
@@ -2454,7 +2528,7 @@
       "kev": false,
       "epss": 0.00818,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 5.3)",
@@ -2468,7 +2542,7 @@
       "kev": false,
       "epss": 0.00559,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 8.8)",
@@ -2482,7 +2556,7 @@
       "kev": false,
       "epss": 0.00927,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 8.8)",
@@ -2496,7 +2570,7 @@
       "kev": false,
       "epss": 0.00656,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 4.8)",
@@ -2510,7 +2584,7 @@
       "kev": false,
       "epss": 0.00276,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 4.3)",
@@ -2524,7 +2598,7 @@
       "kev": false,
       "epss": 0.00287,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 4.2)",
@@ -2538,7 +2612,7 @@
       "kev": false,
       "epss": 0.00464,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 4.2)",
@@ -2552,7 +2626,7 @@
       "kev": false,
       "epss": 0.0024,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 3.3)",
@@ -2566,7 +2640,7 @@
       "kev": false,
       "epss": 0.00174,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 9.8)",
@@ -2580,7 +2654,7 @@
       "kev": true,
       "epss": 0.99474,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 8.1)",
@@ -2594,7 +2668,7 @@
       "kev": false,
       "epss": 0.00947,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 4.0)",
@@ -2608,7 +2682,7 @@
       "kev": false,
       "epss": 0.00405,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 4.7)",
@@ -2622,7 +2696,7 @@
       "kev": false,
       "epss": 0.00634,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 4.3)",
@@ -2636,7 +2710,7 @@
       "kev": false,
       "epss": 0.22991,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 3.9)",
@@ -2650,7 +2724,7 @@
       "kev": false,
       "epss": 0.00535,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 3.7)",
@@ -2664,7 +2738,7 @@
       "kev": false,
       "epss": 0.00751,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 9.8)",
@@ -2678,7 +2752,7 @@
       "kev": true,
       "epss": 0.99984,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -2692,7 +2766,7 @@
       "kev": false,
       "epss": 0.01131,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 9.0)",
@@ -2706,7 +2780,7 @@
       "kev": false,
       "epss": 0.01451,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 6.8)",
@@ -2720,7 +2794,7 @@
       "kev": false,
       "epss": 0.01483,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 4.6)",
@@ -2734,7 +2808,7 @@
       "kev": false,
       "epss": 0.00438,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 2.3)",
@@ -2748,7 +2822,7 @@
       "kev": false,
       "epss": 0.00266,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 7.8)",
@@ -2762,7 +2836,7 @@
       "kev": false,
       "epss": 0.00211,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 4.3)",
@@ -2776,7 +2850,7 @@
       "kev": false,
       "epss": 0.00575,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 6.7)",
@@ -2790,7 +2864,7 @@
       "kev": false,
       "epss": 0.00206,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 4.7)",
@@ -2804,7 +2878,7 @@
       "kev": false,
       "epss": 0.00708,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 4.3)",
@@ -2818,7 +2892,7 @@
       "kev": false,
       "epss": 0.004,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 5.4)",
@@ -2832,7 +2906,7 @@
       "kev": false,
       "epss": 0.00204,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 6.1)",
@@ -2846,7 +2920,7 @@
       "kev": false,
       "epss": 0.00901,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 6.3)",
@@ -2860,7 +2934,7 @@
       "kev": false,
       "epss": 0.00604,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 4.3)",
@@ -2874,7 +2948,7 @@
       "kev": false,
       "epss": 0.00821,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 4.7)",
@@ -2888,7 +2962,7 @@
       "kev": false,
       "epss": 0.01077,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 3.3)",
@@ -2902,7 +2976,7 @@
       "kev": true,
       "epss": 0.00906,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 4.2)",
@@ -2916,7 +2990,7 @@
       "kev": false,
       "epss": 0.00258,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 8.1)",
@@ -2930,7 +3004,7 @@
       "kev": false,
       "epss": 0.01883,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 8.0)",
@@ -2944,7 +3018,7 @@
       "kev": false,
       "epss": 0.01548,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 7.8)",
@@ -2958,7 +3032,7 @@
       "kev": false,
       "epss": 0.00255,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -2972,7 +3046,7 @@
       "kev": false,
       "epss": 0.01602,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -2986,7 +3060,7 @@
       "kev": false,
       "epss": 0.01121,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 6.7)",
@@ -3000,7 +3074,7 @@
       "kev": false,
       "epss": 0.00516,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 5.0)",
@@ -3014,7 +3088,7 @@
       "kev": false,
       "epss": 0.00592,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-10"
+      "last_seen": "2026-11-11"
     },
     {
       "source": "NVD (CVSS 3.5)",
