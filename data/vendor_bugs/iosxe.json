@@ -1,6 +1,6 @@
 {
   "label": "Cisco IOS XE",
-  "generated_at": "2026-11-13T05:03:32+00:00",
+  "generated_at": "2026-11-14T04:52:17+00:00",
   "count": 193,
   "retention_days": 365,
   "rows": [
@@ -2706,5 +2706,6 @@
       "first_seen": "2026-11-07",
       "last_seen": "2026-11-13"
     }
-  ]
+  ],
+  "fallback": "収集失敗（503 Server Error: Service Unavailable for url: https://services.nvd.nist.gov/rest/json/cves/2.0?keywordSearch=IOS+XE&resultsPerPage=2000&keywordExactMatch=）のため前回データを維持し、cvelistV5から新規 0 件を補完"
 }
