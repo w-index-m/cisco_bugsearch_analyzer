@@ -1,6 +1,6 @@
 {
   "label": "F5 BIG-IP",
-  "generated_at": "2026-11-15T04:45:41+00:00",
+  "generated_at": "2026-11-16T04:53:58+00:00",
   "count": 309,
   "retention_days": 365,
   "rows": [
@@ -14,7 +14,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2707865.html",
       "date": "2026-11-06",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -26,7 +26,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2707837.html",
       "date": "2026-11-06",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -38,7 +38,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2695537.html",
       "date": "2026-10-30",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -50,7 +50,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2687717.html",
       "date": "2026-10-28",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-14"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -62,7 +62,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2690333.html",
       "date": "2026-10-23",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -74,7 +74,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2567821.html",
       "date": "2026-10-23",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -86,55 +86,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2693653.html",
       "date": "2026-10-22",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
-    },
-    {
-      "source": "F5 Bug Tracker",
-      "id": "ID2690677",
-      "headline_en": "Per-blade historical statistics are missing for chassis slots above 8",
-      "headline_ja": "8 以上のシャーシスロットに対するブレード単位の履歴統計が欠如しています。",
-      "versions": "17.1.0, 17.1.0.1, 17.1.0.2, 17.1.0.3, 17.1.1, 17.1.1.1, 17.1.1.2, 17.1.1.3, 17.1.1.4, 17.1.2, 17.1.2.1, 17.1.2.2, 17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5, 17.1.3.6, 17.5.0, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 17.5.1.10, 21.1.0, 21.1.0.1, 21.1.0.2, 21.1.0.3",
-      "product": "BIG-IP, BIG-IP LTM",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2690677.html",
-      "date": "2026-10-22",
-      "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
-    },
-    {
-      "source": "F5 Bug Tracker",
-      "id": "ID2690389",
-      "headline_en": "A DNS cache containing many resource records may cause a tmm restart when the last Virtual Server referencing it is deleted",
-      "headline_ja": "多数のリソースレコードを含む DNS キャッシュは、参照している最後の仮想サーバーが削除されたときに tmm の再起動を引き起こす可能性があります。",
-      "versions": "17.1.3.6, 17.5.1.10, 21.1.0.3",
-      "product": "BIG-IP, BIG-IP DNS",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2690389.html",
-      "date": "2026-10-22",
-      "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
-    },
-    {
-      "source": "F5 Bug Tracker",
-      "id": "ID2690329",
-      "headline_en": "REST API TACACS+ authentication returns 401 when the primary TACACS+ server rejects the connection, instead of failing over to the next server",
-      "headline_ja": "REST API の TACACS+ 認証は、プライマリ TACACS+ サーバーが接続を拒否した際に、次のサーバーへフェイルオーバーせずに 401 を返します。",
-      "versions": "17.5.1.9, 17.5.1.10",
-      "product": "BIG-IP, BIG-IP TMOS",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2690329.html",
-      "date": "2026-10-22",
-      "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
-    },
-    {
-      "source": "F5 Bug Tracker",
-      "id": "ID2687673",
-      "headline_en": "Edge Client 7273 GA: severe VPN throughput degradation and client UI unresponsiveness",
-      "headline_ja": "Edge Client 7273 GA: VPNスループットの深刻な低下とクライアントUIの応答なし",
-      "versions": "7.2.7.3",
-      "product": "APM-Clients, APM-Clients TMOS",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2687673.html",
-      "date": "2026-10-22",
-      "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -146,7 +98,31 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2693549.html",
       "date": "2026-10-22",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-14"
+      "last_seen": "2026-11-16"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2690677",
+      "headline_en": "Per-blade historical statistics are missing for chassis slots above 8",
+      "headline_ja": "8 以上のシャーシスロットに対するブレード単位の履歴統計が欠如しています。",
+      "versions": "17.1.0, 17.1.0.1, 17.1.0.2, 17.1.0.3, 17.1.1, 17.1.1.1, 17.1.1.2, 17.1.1.3, 17.1.1.4, 17.1.2, 17.1.2.1, 17.1.2.2, 17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5, 17.1.3.6, 17.5.0, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 17.5.1.10, 21.1.0, 21.1.0.1, 21.1.0.2, 21.1.0.3",
+      "product": "BIG-IP, BIG-IP LTM",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2690677.html",
+      "date": "2026-10-22",
+      "first_seen": "2026-11-07",
+      "last_seen": "2026-11-16"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2690389",
+      "headline_en": "A DNS cache containing many resource records may cause a tmm restart when the last Virtual Server referencing it is deleted",
+      "headline_ja": "多数のリソースレコードを含む DNS キャッシュは、参照している最後の仮想サーバーが削除されたときに tmm の再起動を引き起こす可能性があります。",
+      "versions": "17.1.3.6, 17.5.1.10, 21.1.0.3",
+      "product": "BIG-IP, BIG-IP DNS",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2690389.html",
+      "date": "2026-10-22",
+      "first_seen": "2026-11-07",
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -158,7 +134,31 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2690357.html",
       "date": "2026-10-22",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-14"
+      "last_seen": "2026-11-16"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2690329",
+      "headline_en": "REST API TACACS+ authentication returns 401 when the primary TACACS+ server rejects the connection, instead of failing over to the next server",
+      "headline_ja": "REST API の TACACS+ 認証は、プライマリ TACACS+ サーバーが接続を拒否した際に、次のサーバーへフェイルオーバーせずに 401 を返します。",
+      "versions": "17.5.1.9, 17.5.1.10",
+      "product": "BIG-IP, BIG-IP TMOS",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2690329.html",
+      "date": "2026-10-22",
+      "first_seen": "2026-11-07",
+      "last_seen": "2026-11-16"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2687673",
+      "headline_en": "Edge Client 7273 GA: severe VPN throughput degradation and client UI unresponsiveness",
+      "headline_ja": "Edge Client 7273 GA: VPNスループットの深刻な低下とクライアントUIの応答なし",
+      "versions": "7.2.7.3",
+      "product": "APM-Clients, APM-Clients TMOS",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2687673.html",
+      "date": "2026-10-22",
+      "first_seen": "2026-11-07",
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -182,7 +182,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2621657.html",
       "date": "2026-10-21",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -194,7 +194,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2602601.html",
       "date": "2026-10-21",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -206,7 +206,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2599241.html",
       "date": "2026-10-21",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -218,7 +218,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2570477.html",
       "date": "2026-10-21",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -230,7 +230,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2567485.html",
       "date": "2026-10-21",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -242,7 +242,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2561029.html",
       "date": "2026-10-21",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -254,7 +254,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2549941.html",
       "date": "2026-10-21",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -266,7 +266,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2567693.html",
       "date": "2026-10-20",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -278,7 +278,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2566501.html",
       "date": "2026-10-20",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -290,7 +290,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2513953.html",
       "date": "2026-10-20",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -302,7 +302,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2503133.html",
       "date": "2026-10-20",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -314,7 +314,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2589617.html",
       "date": "2026-10-14",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -326,7 +326,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2570365.html",
       "date": "2026-10-14",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -338,7 +338,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2570321.html",
       "date": "2026-10-13",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -350,7 +350,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2568665.html",
       "date": "2026-10-13",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -362,7 +362,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2568469.html",
       "date": "2026-10-13",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -374,7 +374,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2567365.html",
       "date": "2026-10-13",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -386,7 +386,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2567321.html",
       "date": "2026-10-13",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -398,7 +398,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2566965.html",
       "date": "2026-10-13",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -410,7 +410,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2564817.html",
       "date": "2026-10-13",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -422,7 +422,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2561121.html",
       "date": "2026-10-13",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -434,7 +434,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2553501.html",
       "date": "2026-10-13",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -446,7 +446,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2553445.html",
       "date": "2026-10-13",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -458,7 +458,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2552397.html",
       "date": "2026-10-13",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -470,7 +470,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2533641.html",
       "date": "2026-10-13",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -482,7 +482,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2524697.html",
       "date": "2026-10-13",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -494,7 +494,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2524309.html",
       "date": "2026-10-13",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -506,7 +506,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2524241.html",
       "date": "2026-10-13",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -518,7 +518,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2515513.html",
       "date": "2026-10-13",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -542,7 +542,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2560921.html",
       "date": "2026-10-12",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -554,7 +554,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2567745.html",
       "date": "2026-10-10",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -566,7 +566,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2567669.html",
       "date": "2026-10-10",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -578,7 +578,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2535101.html",
       "date": "2026-10-10",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -590,7 +590,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2525249.html",
       "date": "2026-10-10",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -602,7 +602,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2524873.html",
       "date": "2026-10-10",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -614,7 +614,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2515421.html",
       "date": "2026-10-10",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -626,7 +626,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2504945.html",
       "date": "2026-10-10",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -638,7 +638,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2503205.html",
       "date": "2026-10-10",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -650,7 +650,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2502781.html",
       "date": "2026-10-10",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -662,7 +662,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2564877.html",
       "date": "2026-10-09",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -686,7 +686,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2561821.html",
       "date": "2026-10-08",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -698,7 +698,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2549661.html",
       "date": "2026-10-08",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -710,7 +710,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2547845.html",
       "date": "2026-10-08",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -722,7 +722,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2547377.html",
       "date": "2026-10-08",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -734,7 +734,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2525033.html",
       "date": "2026-10-08",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -746,7 +746,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2524777.html",
       "date": "2026-10-08",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -758,7 +758,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2505405.html",
       "date": "2026-10-08",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -782,7 +782,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2564781.html",
       "date": "2026-10-07",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -794,7 +794,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2547761.html",
       "date": "2026-10-07",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -806,7 +806,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2503489.html",
       "date": "2026-10-07",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -818,7 +818,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2502925.html",
       "date": "2026-10-07",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -830,7 +830,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2555325.html",
       "date": "2026-10-06",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -854,7 +854,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2553085.html",
       "date": "2026-10-05",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -866,7 +866,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2549533.html",
       "date": "2026-10-05",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -878,7 +878,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2547493.html",
       "date": "2026-10-05",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -890,7 +890,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2534965.html",
       "date": "2026-10-05",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -902,7 +902,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2533557.html",
       "date": "2026-10-05",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -914,7 +914,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2524525.html",
       "date": "2026-10-05",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -926,7 +926,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2524081.html",
       "date": "2026-10-05",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -938,7 +938,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2523653.html",
       "date": "2026-10-05",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -950,7 +950,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2513409.html",
       "date": "2026-10-05",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -962,7 +962,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2503861.html",
       "date": "2026-10-05",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -974,7 +974,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2502353.html",
       "date": "2026-10-05",
       "first_seen": "2026-11-11",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -998,7 +998,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2552769.html",
       "date": "2026-10-01",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -1010,7 +1010,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2552245.html",
       "date": "2026-10-01",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -1022,7 +1022,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2535209.html",
       "date": "2026-10-01",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -1034,7 +1034,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2525465.html",
       "date": "2026-10-01",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -1046,7 +1046,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2513645.html",
       "date": "2026-10-01",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -1058,7 +1058,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2503749.html",
       "date": "2026-10-01",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -1070,7 +1070,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2502589.html",
       "date": "2026-10-01",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -1094,7 +1094,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2551933.html",
       "date": "2026-09-30",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -1106,7 +1106,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2535125.html",
       "date": "2026-09-30",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -1118,7 +1118,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2534321.html",
       "date": "2026-09-30",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -1130,7 +1130,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2533505.html",
       "date": "2026-09-30",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -1142,7 +1142,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2525237.html",
       "date": "2026-09-30",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -1154,7 +1154,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2524609.html",
       "date": "2026-09-30",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -1166,7 +1166,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2524317.html",
       "date": "2026-09-30",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -1178,7 +1178,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2505293.html",
       "date": "2026-09-30",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -1190,7 +1190,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2503533.html",
       "date": "2026-09-30",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -1202,7 +1202,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2502029.html",
       "date": "2026-09-30",
       "first_seen": "2026-11-12",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -1214,7 +1214,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2502005.html",
       "date": "2026-09-30",
       "first_seen": "2026-11-12",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -1226,7 +1226,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2502361.html",
       "date": "2026-09-29",
       "first_seen": "2026-11-11",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -1238,7 +1238,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2535289.html",
       "date": "2026-09-26",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -1250,7 +1250,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2502185.html",
       "date": "2026-09-26",
       "first_seen": "2026-11-12",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 9.8)",
@@ -1264,7 +1264,7 @@
       "kev": true,
       "epss": 0.2655,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -1288,7 +1288,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2524745.html",
       "date": "2026-09-19",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -1300,7 +1300,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2515105.html",
       "date": "2026-09-17",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -1312,7 +1312,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2503217.html",
       "date": "2026-09-10",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "F5 Bug Tracker",
@@ -1338,7 +1338,7 @@
       "kev": false,
       "epss": 0.00468,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 3.1)",
@@ -1352,7 +1352,7 @@
       "kev": false,
       "epss": 0.0023,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -1366,7 +1366,7 @@
       "kev": false,
       "epss": 0.00573,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 8.8)",
@@ -1380,7 +1380,7 @@
       "kev": false,
       "epss": 0.00514,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 8.7)",
@@ -1394,7 +1394,7 @@
       "kev": false,
       "epss": 0.0048,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 8.7)",
@@ -1408,7 +1408,7 @@
       "kev": false,
       "epss": 0.0015,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 8.7)",
@@ -1422,7 +1422,7 @@
       "kev": false,
       "epss": 0.00248,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 8.7)",
@@ -1436,7 +1436,7 @@
       "kev": false,
       "epss": 0.00235,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 8.7)",
@@ -1450,7 +1450,7 @@
       "kev": false,
       "epss": 0.00235,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 8.7)",
@@ -1464,7 +1464,7 @@
       "kev": false,
       "epss": 0.00235,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 8.7)",
@@ -1478,7 +1478,7 @@
       "kev": false,
       "epss": 0.00156,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.9)",
@@ -1492,7 +1492,7 @@
       "kev": false,
       "epss": 0.00107,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -1506,7 +1506,7 @@
       "kev": false,
       "epss": 0.00263,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -1520,7 +1520,7 @@
       "kev": false,
       "epss": 0.00324,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -1534,7 +1534,7 @@
       "kev": false,
       "epss": 0.00324,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -1548,7 +1548,7 @@
       "kev": false,
       "epss": 0.00324,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -1562,7 +1562,7 @@
       "kev": false,
       "epss": 0.00263,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -1576,7 +1576,7 @@
       "kev": false,
       "epss": 0.003,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 6.7)",
@@ -1590,7 +1590,7 @@
       "kev": false,
       "epss": 0.00288,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 6.5)",
@@ -1604,7 +1604,7 @@
       "kev": false,
       "epss": 0.00203,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 6.5)",
@@ -1618,7 +1618,7 @@
       "kev": false,
       "epss": 0.00203,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 6.5)",
@@ -1632,7 +1632,7 @@
       "kev": false,
       "epss": 0.00277,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 5.4)",
@@ -1646,7 +1646,7 @@
       "kev": false,
       "epss": 0.00104,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 4.9)",
@@ -1660,7 +1660,7 @@
       "kev": false,
       "epss": 0.00886,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 4.4)",
@@ -1674,7 +1674,7 @@
       "kev": false,
       "epss": 0.00083,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 4.4)",
@@ -1688,7 +1688,7 @@
       "kev": false,
       "epss": 0.00083,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 4.3)",
@@ -1702,7 +1702,7 @@
       "kev": false,
       "epss": 0.00187,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -1716,7 +1716,7 @@
       "kev": false,
       "epss": 0.00332,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 5.9)",
@@ -1730,7 +1730,7 @@
       "kev": false,
       "epss": 0.00215,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 4.9)",
@@ -1744,7 +1744,7 @@
       "kev": false,
       "epss": 0.00366,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 3.3)",
@@ -1758,7 +1758,7 @@
       "kev": false,
       "epss": 0.00119,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 3.1)",
@@ -1772,7 +1772,7 @@
       "kev": false,
       "epss": 0.00187,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 9.8)",
@@ -1786,7 +1786,7 @@
       "kev": true,
       "epss": 0.02295,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 8.7)",
@@ -1800,7 +1800,7 @@
       "kev": false,
       "epss": 0.00393,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 8.7)",
@@ -1814,7 +1814,7 @@
       "kev": false,
       "epss": 0.00394,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -1828,7 +1828,7 @@
       "kev": false,
       "epss": 0.0037,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -1842,7 +1842,7 @@
       "kev": false,
       "epss": 0.00348,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -1856,7 +1856,7 @@
       "kev": false,
       "epss": 0.00348,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -1870,7 +1870,7 @@
       "kev": false,
       "epss": 0.00348,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -1884,7 +1884,7 @@
       "kev": false,
       "epss": 0.00368,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -1898,7 +1898,7 @@
       "kev": false,
       "epss": 0.00348,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -1912,7 +1912,7 @@
       "kev": false,
       "epss": 0.00384,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -1926,7 +1926,7 @@
       "kev": false,
       "epss": 0.00348,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -1940,7 +1940,7 @@
       "kev": false,
       "epss": 0.00348,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -1954,7 +1954,7 @@
       "kev": false,
       "epss": 0.00348,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -1968,7 +1968,7 @@
       "kev": false,
       "epss": 0.00348,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -1982,7 +1982,7 @@
       "kev": false,
       "epss": 0.00348,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 6.5)",
@@ -1996,7 +1996,7 @@
       "kev": false,
       "epss": 0.00313,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 6.5)",
@@ -2010,7 +2010,7 @@
       "kev": false,
       "epss": 0.00401,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 6.1)",
@@ -2024,7 +2024,7 @@
       "kev": false,
       "epss": 0.00202,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 6.1)",
@@ -2038,7 +2038,7 @@
       "kev": false,
       "epss": 0.00282,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 5.3)",
@@ -2052,7 +2052,7 @@
       "kev": false,
       "epss": 0.00405,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 5.3)",
@@ -2066,7 +2066,7 @@
       "kev": false,
       "epss": 0.00391,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 5.3)",
@@ -2080,7 +2080,7 @@
       "kev": false,
       "epss": 0.00246,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -2094,7 +2094,7 @@
       "kev": false,
       "epss": 0.00393,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -2108,7 +2108,7 @@
       "kev": false,
       "epss": 0.00393,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 8.7)",
@@ -2122,7 +2122,7 @@
       "kev": false,
       "epss": 0.24304,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -2136,7 +2136,7 @@
       "kev": false,
       "epss": 0.00445,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -2150,7 +2150,7 @@
       "kev": false,
       "epss": 0.00445,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -2164,7 +2164,7 @@
       "kev": false,
       "epss": 0.00445,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -2178,7 +2178,7 @@
       "kev": false,
       "epss": 0.00445,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 8.8)",
@@ -2192,7 +2192,7 @@
       "kev": false,
       "epss": 0.07103,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 8.0)",
@@ -2206,7 +2206,7 @@
       "kev": false,
       "epss": 0.00447,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -2220,7 +2220,7 @@
       "kev": false,
       "epss": 0.00425,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -2234,7 +2234,7 @@
       "kev": false,
       "epss": 0.00418,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -2248,7 +2248,7 @@
       "kev": false,
       "epss": 0.00425,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -2262,7 +2262,7 @@
       "kev": false,
       "epss": 0.00425,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -2276,7 +2276,7 @@
       "kev": false,
       "epss": 0.00449,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -2290,7 +2290,7 @@
       "kev": false,
       "epss": 0.00425,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 6.5)",
@@ -2304,7 +2304,7 @@
       "kev": false,
       "epss": 0.00406,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 4.4)",
@@ -2318,7 +2318,7 @@
       "kev": false,
       "epss": 0.00161,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 3.1)",
@@ -2332,7 +2332,7 @@
       "kev": false,
       "epss": 0.00143,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.2)",
@@ -2346,7 +2346,7 @@
       "kev": false,
       "epss": 0.10644,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -2360,7 +2360,7 @@
       "kev": false,
       "epss": 0.00481,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -2374,7 +2374,7 @@
       "kev": false,
       "epss": 0.00481,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 5.3)",
@@ -2388,7 +2388,7 @@
       "kev": false,
       "epss": 0.00448,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 4.3)",
@@ -2402,7 +2402,7 @@
       "kev": false,
       "epss": 0.00301,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 4.2)",
@@ -2416,7 +2416,7 @@
       "kev": false,
       "epss": 0.00154,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 8.0)",
@@ -2430,7 +2430,7 @@
       "kev": false,
       "epss": 0.00582,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -2444,7 +2444,7 @@
       "kev": false,
       "epss": 0.07163,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -2458,7 +2458,7 @@
       "kev": false,
       "epss": 0.00524,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -2472,7 +2472,7 @@
       "kev": false,
       "epss": 0.07086,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.4)",
@@ -2486,7 +2486,7 @@
       "kev": false,
       "epss": 0.00548,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.4)",
@@ -2500,7 +2500,7 @@
       "kev": false,
       "epss": 0.00205,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 6.8)",
@@ -2514,7 +2514,7 @@
       "kev": false,
       "epss": 0.00233,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 6.5)",
@@ -2528,7 +2528,7 @@
       "kev": false,
       "epss": 0.00461,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 6.1)",
@@ -2542,7 +2542,7 @@
       "kev": false,
       "epss": 0.00314,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 4.7)",
@@ -2556,7 +2556,7 @@
       "kev": false,
       "epss": 0.00272,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -2570,7 +2570,7 @@
       "kev": false,
       "epss": 0.00515,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -2584,7 +2584,7 @@
       "kev": false,
       "epss": 0.00515,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -2598,7 +2598,7 @@
       "kev": false,
       "epss": 0.00515,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -2612,7 +2612,7 @@
       "kev": false,
       "epss": 0.00515,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -2626,7 +2626,7 @@
       "kev": false,
       "epss": 0.00515,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -2640,7 +2640,7 @@
       "kev": false,
       "epss": 0.00515,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -2654,7 +2654,7 @@
       "kev": false,
       "epss": 0.00515,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.2)",
@@ -2668,7 +2668,7 @@
       "kev": false,
       "epss": 0.00497,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.1)",
@@ -2682,7 +2682,7 @@
       "kev": false,
       "epss": 0.00153,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 6.7)",
@@ -2696,7 +2696,7 @@
       "kev": false,
       "epss": 0.00178,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 6.0)",
@@ -2710,7 +2710,7 @@
       "kev": false,
       "epss": 0.00167,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 3.8)",
@@ -2724,7 +2724,7 @@
       "kev": false,
       "epss": 0.00302,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 9.8)",
@@ -2738,7 +2738,7 @@
       "kev": true,
       "epss": 0.96715,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 8.8)",
@@ -2752,7 +2752,7 @@
       "kev": true,
       "epss": 0.04262,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 9.9)",
@@ -2766,7 +2766,7 @@
       "kev": false,
       "epss": 0.0229,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 8.7)",
@@ -2780,7 +2780,7 @@
       "kev": false,
       "epss": 0.00533,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 8.1)",
@@ -2794,7 +2794,7 @@
       "kev": false,
       "epss": 0.00547,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.8)",
@@ -2808,7 +2808,7 @@
       "kev": false,
       "epss": 0.00157,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.4)",
@@ -2822,7 +2822,7 @@
       "kev": false,
       "epss": 0.00456,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.3)",
@@ -2836,7 +2836,7 @@
       "kev": false,
       "epss": 0.00154,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.2)",
@@ -2850,7 +2850,7 @@
       "kev": false,
       "epss": 0.00652,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 5.5)",
@@ -2864,7 +2864,7 @@
       "kev": false,
       "epss": 0.00184,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 5.5)",
@@ -2878,7 +2878,7 @@
       "kev": false,
       "epss": 0.00184,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 4.4)",
@@ -2892,7 +2892,7 @@
       "kev": false,
       "epss": 0.00188,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 4.4)",
@@ -2906,7 +2906,7 @@
       "kev": false,
       "epss": 0.00188,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 4.3)",
@@ -2920,7 +2920,7 @@
       "kev": false,
       "epss": 0.00298,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 6.8)",
@@ -2934,7 +2934,7 @@
       "kev": false,
       "epss": 0.00279,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 5.3)",
@@ -2948,7 +2948,7 @@
       "kev": false,
       "epss": 0.00172,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.8)",
@@ -2962,7 +2962,7 @@
       "kev": false,
       "epss": 0.00145,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -2976,7 +2976,7 @@
       "kev": false,
       "epss": 0.00387,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.1)",
@@ -2990,7 +2990,7 @@
       "kev": false,
       "epss": 0.00135,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 6.0)",
@@ -3004,7 +3004,7 @@
       "kev": false,
       "epss": 0.00176,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 5.4)",
@@ -3018,7 +3018,7 @@
       "kev": false,
       "epss": 0.00341,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -3032,7 +3032,7 @@
       "kev": false,
       "epss": 0.00387,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.4)",
@@ -3046,7 +3046,7 @@
       "kev": false,
       "epss": 0.00286,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 5.9)",
@@ -3060,7 +3060,7 @@
       "kev": false,
       "epss": 0.00219,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 4.3)",
@@ -3074,7 +3074,7 @@
       "kev": false,
       "epss": 0.01187,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 8.5)",
@@ -3088,7 +3088,7 @@
       "kev": false,
       "epss": 0.70782,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.8)",
@@ -3102,7 +3102,7 @@
       "kev": false,
       "epss": 0.00223,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -3116,7 +3116,7 @@
       "kev": false,
       "epss": 0.00644,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -3130,7 +3130,7 @@
       "kev": false,
       "epss": 0.01587,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -3144,7 +3144,7 @@
       "kev": false,
       "epss": 0.00644,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -3158,7 +3158,7 @@
       "kev": false,
       "epss": 0.00644,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -3172,7 +3172,7 @@
       "kev": false,
       "epss": 0.00644,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -3186,7 +3186,7 @@
       "kev": false,
       "epss": 0.00644,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -3200,7 +3200,7 @@
       "kev": false,
       "epss": 0.00644,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -3214,7 +3214,7 @@
       "kev": false,
       "epss": 0.00644,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -3228,7 +3228,7 @@
       "kev": false,
       "epss": 0.00644,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 6.5)",
@@ -3242,7 +3242,7 @@
       "kev": false,
       "epss": 0.00203,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 6.1)",
@@ -3256,7 +3256,7 @@
       "kev": false,
       "epss": 0.00357,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 5.9)",
@@ -3270,7 +3270,7 @@
       "kev": false,
       "epss": 0.00545,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 4.9)",
@@ -3284,7 +3284,7 @@
       "kev": false,
       "epss": 0.00535,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 8.8)",
@@ -3298,7 +3298,7 @@
       "kev": false,
       "epss": 0.92436,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 8.7)",
@@ -3312,7 +3312,7 @@
       "kev": false,
       "epss": 0.76866,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -3326,7 +3326,7 @@
       "kev": false,
       "epss": 0.00746,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -3340,7 +3340,7 @@
       "kev": false,
       "epss": 0.00746,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -3354,7 +3354,7 @@
       "kev": false,
       "epss": 0.00746,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -3368,7 +3368,7 @@
       "kev": false,
       "epss": 0.00746,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -3382,7 +3382,7 @@
       "kev": false,
       "epss": 0.00746,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -3396,7 +3396,7 @@
       "kev": false,
       "epss": 0.00746,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.2)",
@@ -3410,7 +3410,7 @@
       "kev": false,
       "epss": 0.01443,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 6.5)",
@@ -3424,7 +3424,7 @@
       "kev": false,
       "epss": 0.0072,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 6.5)",
@@ -3438,7 +3438,7 @@
       "kev": false,
       "epss": 0.0072,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 5.3)",
@@ -3452,7 +3452,7 @@
       "kev": false,
       "epss": 0.00746,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 4.9)",
@@ -3466,7 +3466,7 @@
       "kev": false,
       "epss": 0.0072,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 3.7)",
@@ -3480,7 +3480,7 @@
       "kev": false,
       "epss": 0.00312,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 8.7)",
@@ -3494,7 +3494,7 @@
       "kev": false,
       "epss": 0.00739,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 8.1)",
@@ -3508,7 +3508,7 @@
       "kev": false,
       "epss": 0.0069,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -3522,7 +3522,7 @@
       "kev": false,
       "epss": 0.00482,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -3536,7 +3536,7 @@
       "kev": false,
       "epss": 0.00784,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -3550,7 +3550,7 @@
       "kev": false,
       "epss": 0.00784,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -3564,7 +3564,7 @@
       "kev": false,
       "epss": 0.00784,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -3578,7 +3578,7 @@
       "kev": false,
       "epss": 0.01278,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -3592,7 +3592,7 @@
       "kev": false,
       "epss": 0.00784,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -3606,7 +3606,7 @@
       "kev": false,
       "epss": 0.00784,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -3620,7 +3620,7 @@
       "kev": false,
       "epss": 0.00784,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -3634,7 +3634,7 @@
       "kev": false,
       "epss": 0.00521,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.2)",
@@ -3648,7 +3648,7 @@
       "kev": false,
       "epss": 0.00912,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 6.8)",
@@ -3662,7 +3662,7 @@
       "kev": false,
       "epss": 0.02079,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 6.7)",
@@ -3676,7 +3676,7 @@
       "kev": false,
       "epss": 0.00193,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 5.9)",
@@ -3690,7 +3690,7 @@
       "kev": false,
       "epss": 0.00737,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 5.4)",
@@ -3704,7 +3704,7 @@
       "kev": false,
       "epss": 0.0072,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 4.8)",
@@ -3718,7 +3718,7 @@
       "kev": false,
       "epss": 0.00446,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 4.3)",
@@ -3732,7 +3732,7 @@
       "kev": false,
       "epss": 0.00758,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 3.7)",
@@ -3746,7 +3746,7 @@
       "kev": false,
       "epss": 0.00543,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 8.7)",
@@ -3760,7 +3760,7 @@
       "kev": false,
       "epss": 0.01519,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 8.0)",
@@ -3774,7 +3774,7 @@
       "kev": false,
       "epss": 0.00636,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.8)",
@@ -3788,7 +3788,7 @@
       "kev": false,
       "epss": 0.00208,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -3802,7 +3802,7 @@
       "kev": false,
       "epss": 0.0093,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -3816,7 +3816,7 @@
       "kev": false,
       "epss": 0.00762,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -3830,7 +3830,7 @@
       "kev": false,
       "epss": 0.0093,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -3844,7 +3844,7 @@
       "kev": false,
       "epss": 0.0093,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -3858,7 +3858,7 @@
       "kev": false,
       "epss": 0.0093,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -3872,7 +3872,7 @@
       "kev": false,
       "epss": 0.00536,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -3886,7 +3886,7 @@
       "kev": false,
       "epss": 0.0093,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -3900,7 +3900,7 @@
       "kev": false,
       "epss": 0.00956,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.3)",
@@ -3914,7 +3914,7 @@
       "kev": false,
       "epss": 0.003,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 7.2)",
@@ -3928,7 +3928,7 @@
       "kev": false,
       "epss": 0.00904,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 6.8)",
@@ -3942,7 +3942,7 @@
       "kev": false,
       "epss": 0.00787,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 6.5)",
@@ -3956,7 +3956,7 @@
       "kev": false,
       "epss": 0.00771,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 6.5)",
@@ -3970,7 +3970,7 @@
       "kev": false,
       "epss": 0.01418,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 5.9)",
@@ -3984,7 +3984,7 @@
       "kev": false,
       "epss": 0.00819,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 5.9)",
@@ -3998,7 +3998,7 @@
       "kev": false,
       "epss": 0.00816,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 5.9)",
@@ -4012,7 +4012,7 @@
       "kev": false,
       "epss": 0.00819,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 5.5)",
@@ -4026,7 +4026,7 @@
       "kev": false,
       "epss": 0.00233,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 5.3)",
@@ -4040,7 +4040,7 @@
       "kev": false,
       "epss": 0.00915,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 5.3)",
@@ -4054,7 +4054,7 @@
       "kev": false,
       "epss": 0.00915,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 5.3)",
@@ -4068,7 +4068,7 @@
       "kev": false,
       "epss": 0.00889,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 5.3)",
@@ -4082,7 +4082,7 @@
       "kev": false,
       "epss": 0.00915,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 4.3)",
@@ -4096,7 +4096,7 @@
       "kev": false,
       "epss": 0.01574,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     },
     {
       "source": "NVD (CVSS 4.3)",
@@ -4110,7 +4110,7 @@
       "kev": false,
       "epss": 0.00485,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-15"
+      "last_seen": "2026-11-16"
     }
   ]
 }
