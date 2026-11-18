@@ -1,6 +1,6 @@
 {
   "label": "F5 BIG-IP",
-  "generated_at": "2026-11-17T06:35:08+00:00",
+  "generated_at": "2026-11-18T05:57:23+00:00",
   "count": 310,
   "retention_days": 365,
   "rows": [
@@ -9,36 +9,36 @@
       "id": "ID2707865",
       "headline_en": "Bigd HTTPS monitors do not disable SSLv3 by default",
       "headline_ja": "Bigd HTTPSモニターはデフォルトでSSLv3を無効にしません。",
-      "versions": "17.1.3.6, 17.5.1.10, 21.1.0.3",
+      "versions": "17.1.3.6, 17.1.3.7, 17.5.1.10, 17.5.1.11, 21.1.0.3, 21.1.0.4",
       "product": "BIG-IP, BIG-IP LTM",
       "url": "https://cdn.f5.com/product/bugtracker/ID2707865.html",
       "date": "2026-11-06",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
       "id": "ID2707837",
       "headline_en": "HTTPS monitors may send an unexpected supported SSL/TLS version",
       "headline_ja": "HTTPSモニターは、予期しないサポートされているSSL/TLSバージョンを送信することがあります。",
-      "versions": "17.1.3.6, 17.5.1.10, 21.1.0.3",
+      "versions": "17.1.3.6, 17.1.3.7, 17.5.1.10, 17.5.1.11, 21.1.0.3, 21.1.0.4",
       "product": "BIG-IP, BIG-IP LTM",
       "url": "https://cdn.f5.com/product/bugtracker/ID2707837.html",
       "date": "2026-11-06",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
       "id": "ID2695537",
       "headline_en": "IPv6 encapsulated transparent monitors fail with multi-path routes that use link-local next hops",
       "headline_ja": "IPv6 カプセル化された透過モニターは、リンクローカル次ホップを使用するマルチパスルートで失敗します。",
-      "versions": "21.1.0.1, 21.1.0.2, 21.1.0.3",
+      "versions": "17.1.3.7, 17.5.1.11, 21.1.0.1, 21.1.0.2, 21.1.0.3, 21.1.0.4",
       "product": "BIG-IP, BIG-IP TMOS",
       "url": "https://cdn.f5.com/product/bugtracker/ID2695537.html",
       "date": "2026-10-30",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
@@ -50,7 +50,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2687717.html",
       "date": "2026-10-28",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-16"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
@@ -62,7 +62,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2690333.html",
       "date": "2026-10-23",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
@@ -74,7 +74,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2567821.html",
       "date": "2026-10-23",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
@@ -86,43 +86,67 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2693653.html",
       "date": "2026-10-22",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2693549",
+      "headline_en": "[APM][VDI] VMware Horizon client name strings on WebTop not updated to Omnissa",
+      "headline_ja": "[APM][VDI] WebTop 上の VMware Horizon クライアント名文字列が Omnissa に更新されていない",
+      "versions": "17.1.0, 17.1.0.1, 17.1.0.2, 17.1.0.3, 17.1.1, 17.1.1.1, 17.1.1.2, 17.1.1.3, 17.1.1.4, 17.1.2, 17.1.2.1, 17.1.2.2, 17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5, 17.1.3.6, 17.1.3.7, 17.5.0, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 17.5.1.10, 17.5.1.11, 21.0.0, 21.0.0.1, 21.0.0.2, 21.0.0.3, 21.1.0, 21.1.0.1, 21.1.0.2, 21.1.0.3, 21.1.0.4",
+      "product": "BIG-IP, BIG-IP APM",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2693549.html",
+      "date": "2026-10-22",
+      "first_seen": "2026-11-07",
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
       "id": "ID2690677",
       "headline_en": "Per-blade historical statistics are missing for chassis slots above 8",
       "headline_ja": "8 以上のシャーシスロットに対するブレード単位の履歴統計が欠如しています。",
-      "versions": "17.1.0, 17.1.0.1, 17.1.0.2, 17.1.0.3, 17.1.1, 17.1.1.1, 17.1.1.2, 17.1.1.3, 17.1.1.4, 17.1.2, 17.1.2.1, 17.1.2.2, 17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5, 17.1.3.6, 17.5.0, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 17.5.1.10, 21.1.0, 21.1.0.1, 21.1.0.2, 21.1.0.3",
+      "versions": "17.1.0, 17.1.0.1, 17.1.0.2, 17.1.0.3, 17.1.1, 17.1.1.1, 17.1.1.2, 17.1.1.3, 17.1.1.4, 17.1.2, 17.1.2.1, 17.1.2.2, 17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5, 17.1.3.6, 17.1.3.7, 17.5.0, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 17.5.1.10, 17.5.1.11, 21.1.0, 21.1.0.1, 21.1.0.2, 21.1.0.3, 21.1.0.4",
       "product": "BIG-IP, BIG-IP LTM",
       "url": "https://cdn.f5.com/product/bugtracker/ID2690677.html",
       "date": "2026-10-22",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
       "id": "ID2690389",
       "headline_en": "A DNS cache containing many resource records may cause a tmm restart when the last Virtual Server referencing it is deleted",
       "headline_ja": "多数のリソースレコードを含む DNS キャッシュは、参照している最後の仮想サーバーが削除されたときに tmm の再起動を引き起こす可能性があります。",
-      "versions": "17.1.3.6, 17.5.1.10, 21.1.0.3",
+      "versions": "17.1.3.6, 17.1.3.7, 17.5.1.10, 17.5.1.11, 21.1.0.3, 21.1.0.4",
       "product": "BIG-IP, BIG-IP DNS",
       "url": "https://cdn.f5.com/product/bugtracker/ID2690389.html",
       "date": "2026-10-22",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
+    },
+    {
+      "source": "F5 Bug Tracker",
+      "id": "ID2690357",
+      "headline_en": "Config sync fails after AS3 tenant partition deletion - partition objects not removed from Standby device",
+      "headline_ja": "AS3テナントパーティション削除後に設定同期が失敗する - スタンバイデバイスからパーティションオブジェクトが削除されない",
+      "versions": "21.1.0, 21.1.0.1, 21.1.0.2, 21.1.0.3, 21.1.0.4",
+      "product": "BIG-IP, BIG-IP TMOS",
+      "url": "https://cdn.f5.com/product/bugtracker/ID2690357.html",
+      "date": "2026-10-22",
+      "first_seen": "2026-11-07",
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
       "id": "ID2690329",
       "headline_en": "REST API TACACS+ authentication returns 401 when the primary TACACS+ server rejects the connection, instead of failing over to the next server",
       "headline_ja": "REST API の TACACS+ 認証は、プライマリ TACACS+ サーバーが接続を拒否した際に、次のサーバーへフェイルオーバーせずに 401 を返します。",
-      "versions": "17.5.1.9, 17.5.1.10",
+      "versions": "17.5.1.9, 17.5.1.10, 17.5.1.11",
       "product": "BIG-IP, BIG-IP TMOS",
       "url": "https://cdn.f5.com/product/bugtracker/ID2690329.html",
       "date": "2026-10-22",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
@@ -134,31 +158,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2687673.html",
       "date": "2026-10-22",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
-    },
-    {
-      "source": "F5 Bug Tracker",
-      "id": "ID2693549",
-      "headline_en": "[APM][VDI] VMware Horizon client name strings on WebTop not updated to Omnissa",
-      "headline_ja": "[APM][VDI] WebTop 上の VMware Horizon クライアント名文字列が Omnissa に更新されていない",
-      "versions": "17.1.0, 17.1.0.1, 17.1.0.2, 17.1.0.3, 17.1.1, 17.1.1.1, 17.1.1.2, 17.1.1.3, 17.1.1.4, 17.1.2, 17.1.2.1, 17.1.2.2, 17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5, 17.1.3.6, 17.5.0, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 17.5.1.10, 21.0.0, 21.0.0.1, 21.0.0.2, 21.0.0.3, 21.1.0, 21.1.0.1, 21.1.0.2, 21.1.0.3",
-      "product": "BIG-IP, BIG-IP APM",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2693549.html",
-      "date": "2026-10-22",
-      "first_seen": "2026-11-07",
-      "last_seen": "2026-11-16"
-    },
-    {
-      "source": "F5 Bug Tracker",
-      "id": "ID2690357",
-      "headline_en": "Config sync fails after AS3 tenant partition deletion - partition objects not removed from Standby device",
-      "headline_ja": "AS3テナントパーティション削除後に設定同期が失敗する - スタンバイデバイスからパーティションオブジェクトが削除されない",
-      "versions": "21.1.0, 21.1.0.1, 21.1.0.2, 21.1.0.3",
-      "product": "BIG-IP, BIG-IP TMOS",
-      "url": "https://cdn.f5.com/product/bugtracker/ID2690357.html",
-      "date": "2026-10-22",
-      "first_seen": "2026-11-07",
-      "last_seen": "2026-11-16"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
@@ -177,48 +177,48 @@
       "id": "ID2621657",
       "headline_en": "XML exported ASM policy containing login pages and session awareness cannot reimport",
       "headline_ja": "XMLでエクスポートされたASMポリシー（ログインページとセッション認識を含む）は再インポートできません。",
-      "versions": "17.1.3.4, 17.1.3.5, 17.1.3.6, 17.5.1.8, 17.5.1.9, 17.5.1.10, 21.1.0, 21.1.0.1, 21.1.0.2, 21.1.0.3",
+      "versions": "17.1.3.4, 17.1.3.5, 17.1.3.6, 17.1.3.7, 17.5.1.8, 17.5.1.9, 17.5.1.10, 17.5.1.11, 21.1.0, 21.1.0.1, 21.1.0.2, 21.1.0.3, 21.1.0.4",
       "product": "BIG-IP, BIG-IP ASM",
       "url": "https://cdn.f5.com/product/bugtracker/ID2621657.html",
       "date": "2026-10-21",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
       "id": "ID2602601",
       "headline_en": "iControl REST Table of Contents app /mgmt/tm/services page does not display properly",
       "headline_ja": "iControl REST 目次アプリ /mgmt/tm/services ページが正しく表示されません",
-      "versions": "17.1.0, 17.1.0.1, 17.1.0.2, 17.1.0.3, 17.1.1, 17.1.1.1, 17.1.1.2, 17.1.1.3, 17.1.1.4, 17.1.2, 17.1.2.1, 17.1.2.2, 17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5, 17.1.3.6, 17.5.0, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 17.5.1.10, 21.1.0, 21.1.0.1, 21.1.0.2, 21.1.0.3",
+      "versions": "17.1.0, 17.1.0.1, 17.1.0.2, 17.1.0.3, 17.1.1, 17.1.1.1, 17.1.1.2, 17.1.1.3, 17.1.1.4, 17.1.2, 17.1.2.1, 17.1.2.2, 17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5, 17.1.3.6, 17.1.3.7, 17.5.0, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 17.5.1.10, 17.5.1.11, 21.1.0, 21.1.0.1, 21.1.0.2, 21.1.0.3, 21.1.0.4",
       "product": "BIG-IP, BIG-IP LTM",
       "url": "https://cdn.f5.com/product/bugtracker/ID2602601.html",
       "date": "2026-10-21",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
       "id": "ID2599241",
       "headline_en": "Pkcs11d may crash during SafeNet RSA-PSS signing after HA activation or HSM reconnection",
       "headline_ja": "HA有効化後またはHSM再接続後のSafeNet RSA-PSS署名中に、Pkcs11dがクラッシュする可能性があります。",
-      "versions": "17.1.0, 17.1.0.1, 17.1.0.2, 17.1.0.3, 17.1.1, 17.1.1.1, 17.1.1.2, 17.1.1.3, 17.1.1.4, 17.1.2, 17.1.2.1, 17.1.2.2, 17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5, 17.1.3.6, 17.5.1.9, 17.5.1.10, 21.1.0, 21.1.0.1, 21.1.0.2, 21.1.0.3",
+      "versions": "17.1.0, 17.1.0.1, 17.1.0.2, 17.1.0.3, 17.1.1, 17.1.1.1, 17.1.1.2, 17.1.1.3, 17.1.1.4, 17.1.2, 17.1.2.1, 17.1.2.2, 17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5, 17.1.3.6, 17.1.3.7, 17.5.1.9, 17.5.1.10, 17.5.1.11, 21.1.0, 21.1.0.1, 21.1.0.2, 21.1.0.3, 21.1.0.4",
       "product": "BIG-IP, BIG-IP LTM",
       "url": "https://cdn.f5.com/product/bugtracker/ID2599241.html",
       "date": "2026-10-21",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
       "id": "ID2570477",
       "headline_en": "Possible snatpool configuration mismatch in tmm.",
       "headline_ja": "tmm の snatpool 設定に不一致がある可能性があります。",
-      "versions": "21.1.0, 21.1.0.1, 21.1.0.2, 21.1.0.3",
+      "versions": "21.1.0, 21.1.0.1, 21.1.0.2, 21.1.0.3, 21.1.0.4",
       "product": "BIG-IP, BIG-IP TMOS",
       "url": "https://cdn.f5.com/product/bugtracker/ID2570477.html",
       "date": "2026-10-21",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
@@ -230,7 +230,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2567485.html",
       "date": "2026-10-21",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
@@ -242,7 +242,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2561029.html",
       "date": "2026-10-21",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
@@ -254,19 +254,19 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2549941.html",
       "date": "2026-10-21",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
       "id": "ID2567693",
       "headline_en": "BIG-IP DNS Oracle monitor intermittently reports DOWN",
       "headline_ja": "BIG-IP DNS Oracleモニターが断続的にDOWNを報告します",
-      "versions": "17.1.0, 17.1.0.1, 17.1.0.2, 17.1.0.3, 17.1.1, 17.1.1.1, 17.1.1.2, 17.1.1.3, 17.1.1.4, 17.1.2, 17.1.2.1, 17.1.2.2, 17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5, 17.1.3.6, 17.5.0, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 17.5.1.10, 21.0.0, 21.0.0.1, 21.0.0.2, 21.0.0.3, 21.1.0, 21.1.0.1, 21.1.0.2, 21.1.0.3",
+      "versions": "17.1.0, 17.1.0.1, 17.1.0.2, 17.1.0.3, 17.1.1, 17.1.1.1, 17.1.1.2, 17.1.1.3, 17.1.1.4, 17.1.2, 17.1.2.1, 17.1.2.2, 17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5, 17.1.3.6, 17.1.3.7, 17.5.0, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 17.5.1.10, 17.5.1.11, 21.0.0, 21.0.0.1, 21.0.0.2, 21.0.0.3, 21.1.0, 21.1.0.1, 21.1.0.2, 21.1.0.3, 21.1.0.4",
       "product": "BIG-IP, BIG-IP TMOS",
       "url": "https://cdn.f5.com/product/bugtracker/ID2567693.html",
       "date": "2026-10-20",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
@@ -278,7 +278,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2566501.html",
       "date": "2026-10-20",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
@@ -290,7 +290,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2513953.html",
       "date": "2026-10-20",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
@@ -302,103 +302,103 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2503133.html",
       "date": "2026-10-20",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
       "id": "ID2589617",
       "headline_en": "BIG-IP iControl REST reboot request may close the HTTPS connection without returning an HTTP response or acknowledgment",
       "headline_ja": "BIG-IP iControl REST の再起動リクエストは、HTTP 応答や確認応答を返さずに HTTPS 接続を閉じることがあります。",
-      "versions": "17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 17.5.1.10, 21.0.0.3, 21.1.0, 21.1.0.1, 21.1.0.2, 21.1.0.3",
+      "versions": "17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 17.5.1.10, 17.5.1.11, 21.0.0.3, 21.1.0, 21.1.0.1, 21.1.0.2, 21.1.0.3, 21.1.0.4",
       "product": "BIG-IP, BIG-IP LTM",
       "url": "https://cdn.f5.com/product/bugtracker/ID2589617.html",
       "date": "2026-10-14",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
       "id": "ID2570365",
       "headline_en": "With a small numbers of total connections, Static Bandwidth Controllers can unexpectedly restrict the available bandwidth",
       "headline_ja": "総接続数が少ない場合、静的帯域幅コントローラは予期せず利用可能な帯域幅を制限することがあります。",
-      "versions": "17.1.3.6, 17.5.1.10, 21.1.0.3",
+      "versions": "17.1.3.6, 17.1.3.7, 17.5.1.10, 17.5.1.11, 21.1.0.3, 21.1.0.4",
       "product": "BIG-IP, BIG-IP LTM",
       "url": "https://cdn.f5.com/product/bugtracker/ID2570365.html",
       "date": "2026-10-14",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
       "id": "ID2570321",
       "headline_en": "MCPD restart loop during full configuration reload when configuration contains a large CLI script object (i.e. more than ~4 MiB)",
       "headline_ja": "MCPDは、構成に約4 MiBを超える大きなCLIスクリプトオブジェクトが含まれている場合、フル構成リロード中に再起動ループが発生します。",
-      "versions": "17.5.0, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 17.5.1.10, 21.0.0, 21.0.0.1, 21.0.0.2, 21.0.0.3, 21.1.0, 21.1.0.1, 21.1.0.2, 21.1.0.3",
+      "versions": "17.5.0, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 17.5.1.10, 17.5.1.11, 21.0.0, 21.0.0.1, 21.0.0.2, 21.0.0.3, 21.1.0, 21.1.0.1, 21.1.0.2, 21.1.0.3, 21.1.0.4",
       "product": "BIG-IP, BIG-IP TMOS",
       "url": "https://cdn.f5.com/product/bugtracker/ID2570321.html",
       "date": "2026-10-13",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
       "id": "ID2568665",
       "headline_en": "iControl REST Table of Contents app has a broken link for the services page under IControl REST Resources",
       "headline_ja": "iControl REST Table of Contents アプリには、IControl REST Resources の下にある services ページへのリンクが壊れています。",
-      "versions": "17.1.0, 17.1.0.1, 17.1.0.2, 17.1.0.3, 17.1.1, 17.1.1.1, 17.1.1.2, 17.1.1.3, 17.1.1.4, 17.1.2, 17.1.2.1, 17.1.2.2, 17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5, 17.1.3.6, 17.5.0, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 17.5.1.10, 21.1.0, 21.1.0.1, 21.1.0.2, 21.1.0.3",
+      "versions": "17.1.0, 17.1.0.1, 17.1.0.2, 17.1.0.3, 17.1.1, 17.1.1.1, 17.1.1.2, 17.1.1.3, 17.1.1.4, 17.1.2, 17.1.2.1, 17.1.2.2, 17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5, 17.1.3.6, 17.1.3.7, 17.5.0, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 17.5.1.10, 17.5.1.11, 21.1.0, 21.1.0.1, 21.1.0.2, 21.1.0.3, 21.1.0.4",
       "product": "BIG-IP, BIG-IP LTM",
       "url": "https://cdn.f5.com/product/bugtracker/ID2568665.html",
       "date": "2026-10-13",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
       "id": "ID2568469",
       "headline_en": "ICAP connection remains in use after a send failure, causing requests to bypass antivirus scanning",
       "headline_ja": "送信失敗後もICAP接続が使用されたままで、リクエストがウイルススキャンをバイパスする",
-      "versions": "17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 17.5.1.10",
+      "versions": "17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 17.5.1.10, 17.5.1.11",
       "product": "BIG-IP, BIG-IP ASM",
       "url": "https://cdn.f5.com/product/bugtracker/ID2568469.html",
       "date": "2026-10-13",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
       "id": "ID2567365",
       "headline_en": "Network packet loss to ICAP servers results in transaction pileup in BD",
       "headline_ja": "ICAPサーバへのネットワークパケットロスは、BDでトランザクションの蓄積を引き起こします。",
-      "versions": "17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5, 17.1.3.6, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 17.5.1.10, 21.1.0, 21.1.0.1, 21.1.0.2, 21.1.0.3",
+      "versions": "17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5, 17.1.3.6, 17.1.3.7, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 17.5.1.10, 17.5.1.11, 21.1.0, 21.1.0.1, 21.1.0.2, 21.1.0.3, 21.1.0.4",
       "product": "BIG-IP, BIG-IP ASM",
       "url": "https://cdn.f5.com/product/bugtracker/ID2567365.html",
       "date": "2026-10-13",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
       "id": "ID2567321",
       "headline_en": "Applications that set tiny SO_SNDBUF values may experience a tcp connection stall from the Linux host",
       "headline_ja": "SO_SNDBUF の値を極端に小さく設定したアプリケーションは、Linux ホストで TCP 接続が停止することがあります。",
-      "versions": "17.5.0, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 17.5.1.10, 21.1.0, 21.1.0.1, 21.1.0.2, 21.1.0.3",
+      "versions": "17.5.0, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 17.5.1.10, 17.5.1.11, 21.1.0, 21.1.0.1, 21.1.0.2, 21.1.0.3, 21.1.0.4",
       "product": "BIG-IP, BIG-IP ASM, BIG-IP LTM",
       "url": "https://cdn.f5.com/product/bugtracker/ID2567321.html",
       "date": "2026-10-13",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
       "id": "ID2566965",
       "headline_en": "LB_FAILED [event info] returns \"connection limit\" when pool member is down.",
       "headline_ja": "LB_FAILED [event info] は、プールメンバーがダウンしているときに「connection limit」を返します。",
-      "versions": "17.5.1.9, 17.5.1.10",
+      "versions": "17.5.1.9, 17.5.1.10, 17.5.1.11",
       "product": "BIG-IP, BIG-IP LTM",
       "url": "https://cdn.f5.com/product/bugtracker/ID2566965.html",
       "date": "2026-10-13",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
@@ -410,67 +410,67 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2564817.html",
       "date": "2026-10-13",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
       "id": "ID2561121",
       "headline_en": "Full configuration sync (force-full-load-push) may remain in \"Changes Pending\" after completing successfully when a virtual server is recreated with a different performance profile.",
       "headline_ja": "フル構成同期（force-full-load-push）は、仮想サーバーが別のパフォーマンスプロファイルで再作成された場合、正常に完了しても「変更保留」のままになることがあります。",
-      "versions": "21.1.0, 21.1.0.1, 21.1.0.2, 21.1.0.3",
+      "versions": "21.1.0, 21.1.0.1, 21.1.0.2, 21.1.0.3, 21.1.0.4",
       "product": "BIG-IP, BIG-IP LTM",
       "url": "https://cdn.f5.com/product/bugtracker/ID2561121.html",
       "date": "2026-10-13",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
       "id": "ID2553501",
       "headline_en": "DLP - Missing help text for DLP Policy anf Peofile",
       "headline_ja": "DLP - DLP ポリシーとプロファイルのヘルプテキストがありません",
-      "versions": "21.1.0.2, 21.1.0.3",
+      "versions": "21.1.0.2, 21.1.0.3, 21.1.0.4",
       "product": "BIG-IP, BIG-IP LTM",
       "url": "https://cdn.f5.com/product/bugtracker/ID2553501.html",
       "date": "2026-10-13",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
       "id": "ID2553445",
       "headline_en": "AVR/SSL Orchestrator URL, host name, URL category and user statistics are lost after upgrade",
       "headline_ja": "AVR/SSL Orchestrator の URL、ホスト名、URL カテゴリ、ユーザー統計がアップグレード後に失われます。",
-      "versions": "21.1.0.2, 21.1.0.3",
+      "versions": "21.1.0.2, 21.1.0.3, 21.1.0.4",
       "product": "BIG-IP, BIG-IP AVR",
       "url": "https://cdn.f5.com/product/bugtracker/ID2553445.html",
       "date": "2026-10-13",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
       "id": "ID2552397",
       "headline_en": "PVA acceleration at embryonic should be disabled when mss-override is set",
       "headline_ja": "胚発生期のPVA加速は、mss-overrideが設定されている場合に無効にすべきです",
-      "versions": "17.5.1.9, 17.5.1.10",
+      "versions": "17.5.1.9, 17.5.1.10, 17.5.1.11",
       "product": "BIG-IP, BIG-IP LTM",
       "url": "https://cdn.f5.com/product/bugtracker/ID2552397.html",
       "date": "2026-10-13",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
       "id": "ID2533641",
       "headline_en": "DAGv2 table distribution may change after TMM restart or chassis reboot",
       "headline_ja": "DAGv2 テーブルの配分は、TMM の再起動やシャーシのリブート後に変更される可能性があります。",
-      "versions": "17.5.0, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 17.5.1.10",
+      "versions": "17.5.0, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 17.5.1.10, 17.5.1.11",
       "product": "BIG-IP, BIG-IP LTM",
       "url": "https://cdn.f5.com/product/bugtracker/ID2533641.html",
       "date": "2026-10-13",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
@@ -482,19 +482,19 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2524697.html",
       "date": "2026-10-13",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
       "id": "ID2524309",
       "headline_en": "ConfigSync fails for a certificate with an existing OCSP cert-validator",
       "headline_ja": "既存の OCSP 証明書バリデーターがある証明書で ConfigSync が失敗する",
-      "versions": "21.1.0, 21.1.0.1, 21.1.0.2, 21.1.0.3",
+      "versions": "21.1.0, 21.1.0.1, 21.1.0.2, 21.1.0.3, 21.1.0.4",
       "product": "BIG-IP, BIG-IP LTM",
       "url": "https://cdn.f5.com/product/bugtracker/ID2524309.html",
       "date": "2026-10-13",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
@@ -506,7 +506,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2524241.html",
       "date": "2026-10-13",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
@@ -518,7 +518,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2515513.html",
       "date": "2026-10-13",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
@@ -542,31 +542,31 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2560921.html",
       "date": "2026-10-12",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
       "id": "ID2567745",
       "headline_en": "MCPD restart loop becomes unrecoverable after prolonged cycling, requiring full system reboot",
       "headline_ja": "MCPDの再起動ループは長時間のサイクル後に回復不能となり、システム全体の再起動が必要になる。",
-      "versions": "21.0.0, 21.0.0.1, 21.0.0.2, 21.0.0.3, 21.1.0, 21.1.0.1, 21.1.0.2, 21.1.0.3",
+      "versions": "21.0.0, 21.0.0.1, 21.0.0.2, 21.0.0.3, 21.1.0, 21.1.0.1, 21.1.0.2, 21.1.0.3, 21.1.0.4",
       "product": "BIG-IP, BIG-IP TMOS",
       "url": "https://cdn.f5.com/product/bugtracker/ID2567745.html",
       "date": "2026-10-10",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
       "id": "ID2567669",
       "headline_en": "Secondary blade config load failure loop fills /config partition with filestore trash_bin_d backups",
       "headline_ja": "セカンダリーブレードの構成ロード失敗ループが /config パーティションを filestore の trash_bin_d バックアップで埋め尽くす。",
-      "versions": "17.1.0, 17.1.0.1, 17.1.0.2, 17.1.0.3, 17.1.1, 17.1.1.1, 17.1.1.2, 17.1.1.3, 17.1.1.4, 17.1.2, 17.1.2.1, 17.1.2.2, 17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5, 17.1.3.6, 17.5.0, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 17.5.1.10, 21.0.0, 21.0.0.1, 21.0.0.2, 21.0.0.3, 21.1.0, 21.1.0.1, 21.1.0.2, 21.1.0.3",
+      "versions": "17.1.0, 17.1.0.1, 17.1.0.2, 17.1.0.3, 17.1.1, 17.1.1.1, 17.1.1.2, 17.1.1.3, 17.1.1.4, 17.1.2, 17.1.2.1, 17.1.2.2, 17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5, 17.1.3.6, 17.1.3.7, 17.5.0, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 17.5.1.10, 17.5.1.11, 21.0.0, 21.0.0.1, 21.0.0.2, 21.0.0.3, 21.1.0, 21.1.0.1, 21.1.0.2, 21.1.0.3, 21.1.0.4",
       "product": "BIG-IP, BIG-IP TMOS",
       "url": "https://cdn.f5.com/product/bugtracker/ID2567669.html",
       "date": "2026-10-10",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
@@ -578,7 +578,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2535101.html",
       "date": "2026-10-10",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
@@ -590,7 +590,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2525249.html",
       "date": "2026-10-10",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
@@ -602,7 +602,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2524873.html",
       "date": "2026-10-10",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
@@ -614,7 +614,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2515421.html",
       "date": "2026-10-10",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
@@ -626,43 +626,43 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2504945.html",
       "date": "2026-10-10",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
       "id": "ID2503205",
       "headline_en": "ClientSSL profile without explicit defaults-from /Common/clientssl is not migrated to clientssl-legacy during upgrade to BIG-IP 21.1.",
       "headline_ja": "明示的に defaults-from /Common/clientssl が設定されていない ClientSSL プロファイルは、BIG‑IP 21.1 へのアップグレード時に clientssl‑legacy に移行されません。",
-      "versions": "21.1.0.1, 21.1.0.2, 21.1.0.3",
+      "versions": "21.1.0.1, 21.1.0.2, 21.1.0.3, 21.1.0.4",
       "product": "BIG-IP, BIG-IP Install/Upgrade, BIG-IP LTM",
       "url": "https://cdn.f5.com/product/bugtracker/ID2503205.html",
       "date": "2026-10-10",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
       "id": "ID2502781",
       "headline_en": "Improve http error log \"Invalid request received from remote client. content-length from header\"",
       "headline_ja": "httpエラーログを改善する「リモートクライアントから無効なリクエストが受信されました。ヘッダーからのcontent-length」",
-      "versions": "17.5.1.8, 17.5.1.9, 17.5.1.10",
+      "versions": "17.5.1.8, 17.5.1.9, 17.5.1.10, 17.5.1.11",
       "product": "BIG-IP, BIG-IP APM",
       "url": "https://cdn.f5.com/product/bugtracker/ID2502781.html",
       "date": "2026-10-10",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
       "id": "ID2564877",
       "headline_en": "BIGIP GUI is not functioning properly after 3000 keycerts configuration",
       "headline_ja": "BIGIP GUIは3000のkeycerts設定後、正常に機能していません。",
-      "versions": "17.1.0, 17.1.0.1, 17.1.0.2, 17.1.0.3, 17.1.1, 17.1.1.1, 17.1.1.2, 17.1.1.3, 17.1.1.4, 17.1.2, 17.1.2.1, 17.1.2.2, 17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5, 17.1.3.6",
+      "versions": "17.1.0, 17.1.0.1, 17.1.0.2, 17.1.0.3, 17.1.1, 17.1.1.1, 17.1.1.2, 17.1.1.3, 17.1.1.4, 17.1.2, 17.1.2.1, 17.1.2.2, 17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5, 17.1.3.6, 17.1.3.7",
       "product": "BIG-IP, BIG-IP TMOS",
       "url": "https://cdn.f5.com/product/bugtracker/ID2564877.html",
       "date": "2026-10-09",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
@@ -681,12 +681,12 @@
       "id": "ID2561821",
       "headline_en": "iStats counter resets might not clear cluster-wide values on multi-blade systems",
       "headline_ja": "iStats カウンタのリセットは、マルチブレードシステムにおいてクラスタ全体の値をクリアしない可能性があります。",
-      "versions": "17.1.3.5, 17.1.3.6, 17.5.1.9, 17.5.1.10, 21.1.0.2, 21.1.0.3",
+      "versions": "17.1.3.5, 17.1.3.6, 17.1.3.7, 17.5.1.9, 17.5.1.10, 17.5.1.11, 21.1.0.2, 21.1.0.3, 21.1.0.4",
       "product": "BIG-IP, BIG-IP LTM",
       "url": "https://cdn.f5.com/product/bugtracker/ID2561821.html",
       "date": "2026-10-08",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
@@ -698,43 +698,43 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2549661.html",
       "date": "2026-10-08",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
       "id": "ID2547845",
       "headline_en": "Live Update: sync from active BIG-IP to standby fail under cirtain conditions",
       "headline_ja": "ライブアップデート：アクティブBIG‑IPからスタンバイへの同期が特定条件下で失敗する",
-      "versions": "17.1.0, 17.1.0.1, 17.1.0.2, 17.1.0.3, 17.1.1, 17.1.1.1, 17.1.1.2, 17.1.1.3, 17.1.1.4, 17.1.2, 17.1.2.1, 17.1.2.2, 17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5, 17.1.3.6, 17.5.0, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 17.5.1.10, 21.0.0, 21.0.0.1, 21.0.0.2, 21.0.0.3, 21.1.0, 21.1.0.1, 21.1.0.2, 21.1.0.3",
+      "versions": "17.1.0, 17.1.0.1, 17.1.0.2, 17.1.0.3, 17.1.1, 17.1.1.1, 17.1.1.2, 17.1.1.3, 17.1.1.4, 17.1.2, 17.1.2.1, 17.1.2.2, 17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5, 17.1.3.6, 17.1.3.7, 17.5.0, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 17.5.1.10, 17.5.1.11, 21.0.0, 21.0.0.1, 21.0.0.2, 21.0.0.3, 21.1.0, 21.1.0.1, 21.1.0.2, 21.1.0.3, 21.1.0.4",
       "product": "BIG-IP, BIG-IP ASM",
       "url": "https://cdn.f5.com/product/bugtracker/ID2547845.html",
       "date": "2026-10-08",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
       "id": "ID2547377",
       "headline_en": "APM OAuth Client may restart during token refresh involving ID-token validation",
       "headline_ja": "APM OAuth クライアントは、ID トークンの検証を伴うトークンリフレッシュ中に再起動する可能性があります。",
-      "versions": "17.5.1.9, 17.5.1.10",
+      "versions": "17.5.1.9, 17.5.1.10, 17.5.1.11",
       "product": "BIG-IP",
       "url": "https://cdn.f5.com/product/bugtracker/ID2547377.html",
       "date": "2026-10-08",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
       "id": "ID2525033",
       "headline_en": "BIG-IP TMUI may reset Client SSL Certificate Key Chain values after an entry is deleted and re-added",
       "headline_ja": "BIG‑IP TMUI は、エントリが削除されて再度追加された後に、クライアント SSL 証明書キー チェーンの値をリセットすることがあります。",
-      "versions": "17.1.0, 17.1.0.1, 17.1.0.2, 17.1.0.3, 17.1.1, 17.1.1.1, 17.1.1.2, 17.1.1.3, 17.1.1.4, 17.1.2, 17.1.2.1, 17.1.2.2, 17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5, 17.1.3.6, 17.5.0, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 17.5.1.10, 21.1.0, 21.1.0.1, 21.1.0.2, 21.1.0.3",
+      "versions": "17.1.0, 17.1.0.1, 17.1.0.2, 17.1.0.3, 17.1.1, 17.1.1.1, 17.1.1.2, 17.1.1.3, 17.1.1.4, 17.1.2, 17.1.2.1, 17.1.2.2, 17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5, 17.1.3.6, 17.1.3.7, 17.5.0, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 17.5.1.10, 17.5.1.11, 21.1.0, 21.1.0.1, 21.1.0.2, 21.1.0.3, 21.1.0.4",
       "product": "BIG-IP, BIG-IP TMOS",
       "url": "https://cdn.f5.com/product/bugtracker/ID2525033.html",
       "date": "2026-10-08",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
@@ -746,7 +746,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2524777.html",
       "date": "2026-10-08",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
@@ -758,7 +758,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2505405.html",
       "date": "2026-10-08",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
@@ -777,60 +777,60 @@
       "id": "ID2564781",
       "headline_en": "Virtual server stops responding to ICMP requests",
       "headline_ja": "仮想サーバーがICMP要求に応答しなくなる",
-      "versions": "17.1.3.5, 17.1.3.6, 17.5.1.6, 17.5.1.8, 17.5.1.9, 17.5.1.10, 21.1.0.2, 21.1.0.3",
+      "versions": "17.1.3.5, 17.1.3.6, 17.1.3.7, 17.5.1.6, 17.5.1.8, 17.5.1.9, 17.5.1.10, 17.5.1.11, 21.1.0.2, 21.1.0.3, 21.1.0.4",
       "product": "BIG-IP, BIG-IP AFM, BIG-IP CGN, BIG-IP LTM",
       "url": "https://cdn.f5.com/product/bugtracker/ID2564781.html",
       "date": "2026-10-07",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
       "id": "ID2547761",
       "headline_en": "ASM remote logging may record the X-Forwarded-For value from a previous request",
       "headline_ja": "ASM のリモートロギングは、前回のリクエストの X-Forwarded-For 値を記録することがあります。",
-      "versions": "17.1.3.5, 17.1.3.6, 17.5.1.9, 17.5.1.10, 21.1.0, 21.1.0.1, 21.1.0.2, 21.1.0.3",
+      "versions": "17.1.3.5, 17.1.3.6, 17.1.3.7, 17.5.1.9, 17.5.1.10, 17.5.1.11, 21.1.0, 21.1.0.1, 21.1.0.2, 21.1.0.3, 21.1.0.4",
       "product": "BIG-IP, BIG-IP ASM",
       "url": "https://cdn.f5.com/product/bugtracker/ID2547761.html",
       "date": "2026-10-07",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
       "id": "ID2503489",
       "headline_en": "HTTP chunk header with no value treated as size of zero",
       "headline_ja": "HTTPチャンクヘッダーに値がない場合は、サイズが0として扱われます",
-      "versions": "17.1.0, 17.1.0.1, 17.1.0.2, 17.1.0.3, 17.1.1, 17.1.1.1, 17.1.1.2, 17.1.1.3, 17.1.1.4, 17.1.2, 17.1.2.1, 17.1.2.2, 17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5, 17.1.3.6, 17.5.0, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 17.5.1.10, 21.0.0, 21.0.0.1, 21.0.0.2, 21.0.0.3, 21.1.0, 21.1.0.1, 21.1.0.2, 21.1.0.3",
+      "versions": "17.1.0, 17.1.0.1, 17.1.0.2, 17.1.0.3, 17.1.1, 17.1.1.1, 17.1.1.2, 17.1.1.3, 17.1.1.4, 17.1.2, 17.1.2.1, 17.1.2.2, 17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5, 17.1.3.6, 17.1.3.7, 17.5.0, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 17.5.1.10, 17.5.1.11, 21.0.0, 21.0.0.1, 21.0.0.2, 21.0.0.3, 21.1.0, 21.1.0.1, 21.1.0.2, 21.1.0.3, 21.1.0.4",
       "product": "BIG-IP, BIG-IP LTM",
       "url": "https://cdn.f5.com/product/bugtracker/ID2503489.html",
       "date": "2026-10-07",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
       "id": "ID2502925",
       "headline_en": "VE installer fails to proceed when multiple CD/DVD sources are detected during cloud-init installations",
       "headline_ja": "VEインストーラは、cloud‑initインストール中に複数のCD/DVDソースが検出されると、処理を続行できません。",
-      "versions": "17.1.0, 17.1.0.1, 17.1.0.2, 17.1.0.3, 17.1.1, 17.1.1.1, 17.1.1.2, 17.1.1.3, 17.1.1.4, 17.1.2, 17.1.2.1, 17.1.2.2, 17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5, 17.1.3.6, 17.5.0, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 17.5.1.10, 21.1.0, 21.1.0.1, 21.1.0.2, 21.1.0.3",
+      "versions": "17.1.0, 17.1.0.1, 17.1.0.2, 17.1.0.3, 17.1.1, 17.1.1.1, 17.1.1.2, 17.1.1.3, 17.1.1.4, 17.1.2, 17.1.2.1, 17.1.2.2, 17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5, 17.1.3.6, 17.1.3.7, 17.5.0, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 17.5.1.10, 17.5.1.11, 21.1.0, 21.1.0.1, 21.1.0.2, 21.1.0.3, 21.1.0.4",
       "product": "BIG-IP, BIG-IP TMOS",
       "url": "https://cdn.f5.com/product/bugtracker/ID2502925.html",
       "date": "2026-10-07",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
       "id": "ID2555325",
       "headline_en": "Continuous cores on tmm startup after upgrading to 17.5.1.9",
       "headline_ja": "バージョン 17.5.1.9 にアップグレードした後、tmm 起動時に連続してコアが発生。",
-      "versions": "17.1.3.4, 17.1.3.5, 17.1.3.6, 17.5.1.8, 17.5.1.9, 17.5.1.10, 21.1.0.1, 21.1.0.2, 21.1.0.3",
+      "versions": "17.1.3.4, 17.1.3.5, 17.1.3.6, 17.1.3.7, 17.5.1.8, 17.5.1.9, 17.5.1.10, 17.5.1.11, 21.1.0.1, 21.1.0.2, 21.1.0.3, 21.1.0.4",
       "product": "BIG-IP, BIG-IP TMOS",
       "url": "https://cdn.f5.com/product/bugtracker/ID2555325.html",
       "date": "2026-10-06",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
@@ -849,132 +849,132 @@
       "id": "ID2553085",
       "headline_en": "REST endpoint device-info returns empty slots after reboot on BIG-IP VE deployed in Azure",
       "headline_ja": "RESTエンドポイント「device-info」は、Azure にデプロイされた BIG‑IP VE の再起動後に空のスロットを返します。",
-      "versions": "17.5.0, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 17.5.1.10",
+      "versions": "17.5.0, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 17.5.1.10, 17.5.1.11",
       "product": "BIG-IP, BIG-IP TMOS",
       "url": "https://cdn.f5.com/product/bugtracker/ID2553085.html",
       "date": "2026-10-05",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
       "id": "ID2549533",
       "headline_en": "DoS vector \"TCP ACK (TS)\" triggered after upgrade to v17.5.1.8",
       "headline_ja": "DoSベクトル「TCP ACK (TS)」が v17.5.1.8 へのアップグレード後にトリガーされました。",
-      "versions": "17.5.1.8, 17.5.1.9, 17.5.1.10",
+      "versions": "17.5.1.8, 17.5.1.9, 17.5.1.10, 17.5.1.11",
       "product": "BIG-IP, BIG-IP AFM",
       "url": "https://cdn.f5.com/product/bugtracker/ID2549533.html",
       "date": "2026-10-05",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
       "id": "ID2547493",
       "headline_en": "[APM]httpd_sam logs are not rotated causing /var/log exhaustion",
       "headline_ja": "[APM]httpd_sam のログがローテーションされず、/var/log が枯渇しています",
-      "versions": "17.5.1.6, 17.5.1.8, 17.5.1.9, 17.5.1.10",
+      "versions": "17.5.1.6, 17.5.1.8, 17.5.1.9, 17.5.1.10, 17.5.1.11",
       "product": "BIG-IP, BIG-IP APM",
       "url": "https://cdn.f5.com/product/bugtracker/ID2547493.html",
       "date": "2026-10-05",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
       "id": "ID2534965",
       "headline_en": "TMM may crash when an L7 policy condition has a specific number of match values",
       "headline_ja": "L7 ポリシー条件に特定の数のマッチ値がある場合、TMM がクラッシュする可能性があります。",
-      "versions": "21.1.0, 21.1.0.1, 21.1.0.2, 21.1.0.3",
+      "versions": "21.1.0, 21.1.0.1, 21.1.0.2, 21.1.0.3, 21.1.0.4",
       "product": "BIG-IP, BIG-IP LTM",
       "url": "https://cdn.f5.com/product/bugtracker/ID2534965.html",
       "date": "2026-10-05",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
       "id": "ID2533557",
       "headline_en": "Virtual server traffic may be reset after removing an ASM policy and performing a full configuration synchronization",
       "headline_ja": "ASM ポリシーを削除し、完全な構成同期を実行した後、仮想サーバーのトラフィックがリセットされることがあります。",
-      "versions": "17.5.1.6, 17.5.1.8, 17.5.1.9, 17.5.1.10, 21.1.0, 21.1.0.1, 21.1.0.2, 21.1.0.3",
+      "versions": "17.5.1.6, 17.5.1.8, 17.5.1.9, 17.5.1.10, 17.5.1.11, 21.1.0, 21.1.0.1, 21.1.0.2, 21.1.0.3, 21.1.0.4",
       "product": "BIG-IP, BIG-IP TMOS",
       "url": "https://cdn.f5.com/product/bugtracker/ID2533557.html",
       "date": "2026-10-05",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
       "id": "ID2524525",
       "headline_en": "Error: \"General database error retrieving information\" seen in GUI, while accessing \"System > Logs > Audit\" page",
       "headline_ja": "エラー: GUIで「General database error retrieving information」が表示され、「System > Logs > Audit」ページにアクセス中です。",
-      "versions": "21.1.0.1, 21.1.0.2, 21.1.0.3",
+      "versions": "21.1.0.1, 21.1.0.2, 21.1.0.3, 21.1.0.4",
       "product": "BIG-IP, BIG-IP All",
       "url": "https://cdn.f5.com/product/bugtracker/ID2524525.html",
       "date": "2026-10-05",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
       "id": "ID2524081",
       "headline_en": "Successful REST API requests are not logged in the restjavad audit log",
       "headline_ja": "成功したREST APIリクエストはrestjavad監査ログに記録されません。",
-      "versions": "17.1.3.4, 17.1.3.5, 17.1.3.6, 17.5.1.6, 17.5.1.8, 17.5.1.9, 17.5.1.10, 21.1.0, 21.1.0.1, 21.1.0.2, 21.1.0.3",
+      "versions": "17.1.3.4, 17.1.3.5, 17.1.3.6, 17.1.3.7, 17.5.1.6, 17.5.1.8, 17.5.1.9, 17.5.1.10, 17.5.1.11, 21.1.0, 21.1.0.1, 21.1.0.2, 21.1.0.3, 21.1.0.4",
       "product": "BIG-IP, BIG-IP TMOS",
       "url": "https://cdn.f5.com/product/bugtracker/ID2524081.html",
       "date": "2026-10-05",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
       "id": "ID2523653",
       "headline_en": "Sorting by column does not work in GUI Statistics page for virtual servers",
       "headline_ja": "仮想サーバーの GUI 統計ページで列のソートが機能しません",
-      "versions": "21.1.0.2, 21.1.0.3",
+      "versions": "21.1.0.2, 21.1.0.3, 21.1.0.4",
       "product": "BIG-IP, BIG-IP TMOS",
       "url": "https://cdn.f5.com/product/bugtracker/ID2523653.html",
       "date": "2026-10-05",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
       "id": "ID2513409",
       "headline_en": "TMM enters a crash loop when an empty string is configured in SAML auth-context-methods",
       "headline_ja": "TMMは、SAML auth-context-methodsに空文字列が設定されると、クラッシュループに陥ります。",
-      "versions": "17.5.1.8, 17.5.1.9, 17.5.1.10, 21.1.0, 21.1.0.1, 21.1.0.2, 21.1.0.3",
+      "versions": "17.5.1.8, 17.5.1.9, 17.5.1.10, 17.5.1.11, 21.1.0, 21.1.0.1, 21.1.0.2, 21.1.0.3, 21.1.0.4",
       "product": "BIG-IP, BIG-IP TMOS",
       "url": "https://cdn.f5.com/product/bugtracker/ID2513409.html",
       "date": "2026-10-05",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
       "id": "ID2503861",
       "headline_en": "Certificate serial-number is displayed as decimal instead of hex",
       "headline_ja": "証明書のシリアル番号が16進数ではなく10進数で表示されます",
-      "versions": "21.0.0, 21.0.0.1, 21.0.0.2, 21.0.0.3, 21.1.0, 21.1.0.1, 21.1.0.2, 21.1.0.3",
+      "versions": "21.0.0, 21.0.0.1, 21.0.0.2, 21.0.0.3, 21.1.0, 21.1.0.1, 21.1.0.2, 21.1.0.3, 21.1.0.4",
       "product": "BIG-IP, BIG-IP TMOS",
       "url": "https://cdn.f5.com/product/bugtracker/ID2503861.html",
       "date": "2026-10-05",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
       "id": "ID2502353",
       "headline_en": "IP reputation database availability immediately after download",
       "headline_ja": "IPレピュテーションデータベースはダウンロード直後に利用可能です。",
-      "versions": "17.5.1.8, 17.5.1.9, 17.5.1.10",
+      "versions": "17.5.1.8, 17.5.1.9, 17.5.1.10, 17.5.1.11",
       "product": "BIG-IP, BIG-IP AFM",
       "url": "https://cdn.f5.com/product/bugtracker/ID2502353.html",
       "date": "2026-10-05",
       "first_seen": "2026-11-11",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
@@ -986,91 +986,91 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2501929.html",
       "date": "2026-10-05",
       "first_seen": "2026-11-15",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
       "id": "ID2552769",
       "headline_en": "CGNAT PBA: Negative or incorrect \"Active Port Blocks\" statistics displayed in fw_lsn_pool_pba_stat",
       "headline_ja": "CGNAT PBA：fw_lsn_pool_pba_stat に表示される「Active Port Blocks」統計が負の値または不正確です",
-      "versions": "17.1.3.4, 17.1.3.5, 17.1.3.6",
+      "versions": "17.1.3.4, 17.1.3.5, 17.1.3.6, 17.1.3.7",
       "product": "BIG-IP, BIG-IP AFM",
       "url": "https://cdn.f5.com/product/bugtracker/ID2552769.html",
       "date": "2026-10-01",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
       "id": "ID2552245",
       "headline_en": "APM logs an error message similar to 'Duplicate entry found for [oauth-jwt-result]' when using an OAuth Client",
       "headline_ja": "OAuth クライアントを使用したとき、APM は「Duplicate entry found for [oauth-jwt-result]」に似たエラーメッセージを記録します。",
-      "versions": "17.1.3.4, 17.1.3.5, 17.1.3.6",
+      "versions": "17.1.3.4, 17.1.3.5, 17.1.3.6, 17.1.3.7",
       "product": "BIG-IP, BIG-IP APM",
       "url": "https://cdn.f5.com/product/bugtracker/ID2552245.html",
       "date": "2026-10-01",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
       "id": "ID2535209",
       "headline_en": "Service-down-immediate-action \"reset\" is not honored after a restart or reboot when the associated pool has no members",
       "headline_ja": "サービスダウン即時アクション「リセット」は、関連プールにメンバーが存在しない場合、再起動またはリブート後に適用されません",
-      "versions": "17.1.0, 17.1.0.1, 17.1.0.2, 17.1.0.3, 17.1.1, 17.1.1.1, 17.1.1.2, 17.1.1.3, 17.1.1.4, 17.1.2, 17.1.2.1, 17.1.2.2, 17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5, 17.1.3.6, 17.5.0, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 17.5.1.10, 21.0.0, 21.0.0.1, 21.0.0.2, 21.0.0.3, 21.1.0, 21.1.0.1, 21.1.0.2, 21.1.0.3",
+      "versions": "17.1.0, 17.1.0.1, 17.1.0.2, 17.1.0.3, 17.1.1, 17.1.1.1, 17.1.1.2, 17.1.1.3, 17.1.1.4, 17.1.2, 17.1.2.1, 17.1.2.2, 17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5, 17.1.3.6, 17.1.3.7, 17.5.0, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 17.5.1.10, 17.5.1.11, 21.0.0, 21.0.0.1, 21.0.0.2, 21.0.0.3, 21.1.0, 21.1.0.1, 21.1.0.2, 21.1.0.3, 21.1.0.4",
       "product": "BIG-IP, BIG-IP TMOS",
       "url": "https://cdn.f5.com/product/bugtracker/ID2535209.html",
       "date": "2026-10-01",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
       "id": "ID2525465",
       "headline_en": "Update BIG-IP time zone data (tzdata) to IANA 2026c",
       "headline_ja": "BIG‑IPのタイムゾーンデータ（tzdata）をIANA 2026cに更新する",
-      "versions": "21.1.0.1, 21.1.0.2, 21.1.0.3",
+      "versions": "21.1.0.1, 21.1.0.2, 21.1.0.3, 21.1.0.4",
       "product": "BIG-IP, BIG-IP TMOS",
       "url": "https://cdn.f5.com/product/bugtracker/ID2525465.html",
       "date": "2026-10-01",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
       "id": "ID2513645",
       "headline_en": "Tmm crash during connectivity profile lifecycle changes",
       "headline_ja": "Tmmが接続プロファイルのライフサイクル変更中にクラッシュ。",
-      "versions": "17.5.0, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 17.5.1.10",
+      "versions": "17.5.0, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 17.5.1.10, 17.5.1.11",
       "product": "BIG-IP, BIG-IP APM",
       "url": "https://cdn.f5.com/product/bugtracker/ID2513645.html",
       "date": "2026-10-01",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
       "id": "ID2503749",
       "headline_en": "GTM virtual not marked down after prober disconnect with monitor require 1 from 2",
       "headline_ja": "プローバーの切断後、モニタが2から1を要求した場合、GTM仮想はマークダウンされません。",
-      "versions": "17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5, 17.1.3.6",
+      "versions": "17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5, 17.1.3.6, 17.1.3.7",
       "product": "BIG-IP, BIG-IP DNS",
       "url": "https://cdn.f5.com/product/bugtracker/ID2503749.html",
       "date": "2026-10-01",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
       "id": "ID2502589",
       "headline_en": "Intermittently, virtual-wire PVA assisted flows may be reset with Flow expired (sweeper) (idle timeout)",
       "headline_ja": "間欠的に、仮想ワイヤーPVA支援フローはフロー期限切れ（スイーパー）（アイドルタイムアウト）でリセットされることがあります。",
-      "versions": "17.5.1.6, 17.5.1.8, 17.5.1.9, 17.5.1.10",
+      "versions": "17.5.1.6, 17.5.1.8, 17.5.1.9, 17.5.1.10, 17.5.1.11",
       "product": "BIG-IP, BIG-IP LTM",
       "url": "https://cdn.f5.com/product/bugtracker/ID2502589.html",
       "date": "2026-10-01",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
@@ -1101,72 +1101,72 @@
       "id": "ID2551933",
       "headline_en": "The MCPD crashed because of an issue with the sod while validating TMC overlap with a complex set of traffic matching criteria.",
       "headline_ja": "MCPDは、複雑なトラフィックマッチング条件のセットでTMCのオーバーラップを検証中に、sodに問題があったためクラッシュしました。",
-      "versions": "17.5.0, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 17.5.1.10",
+      "versions": "17.5.0, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 17.5.1.10, 17.5.1.11",
       "product": "BIG-IP, BIG-IP TMOS",
       "url": "https://cdn.f5.com/product/bugtracker/ID2551933.html",
       "date": "2026-09-30",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
       "id": "ID2535125",
       "headline_en": "[APM][PA]Portal Access session timeout dialog buttons (Stay Connected / Disconnect) non-functional on Chrome 150+",
       "headline_ja": "[APM][PA]Portal Access セッションタイムアウトダイアログのボタン（Stay Connected / Disconnect）が Chrome 150+ で機能しません",
-      "versions": "17.5.1.8, 17.5.1.9, 17.5.1.10",
+      "versions": "17.5.1.8, 17.5.1.9, 17.5.1.10, 17.5.1.11",
       "product": "BIG-IP, BIG-IP APM",
       "url": "https://cdn.f5.com/product/bugtracker/ID2535125.html",
       "date": "2026-09-30",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
       "id": "ID2534321",
       "headline_en": "FQDN ephemeral nodes and pool members may not be removed after DNS changes",
       "headline_ja": "FQDNのエフェメラルノードとプールメンバーは、DNSの変更後に削除できないことがあります。",
-      "versions": "17.1.0, 17.1.0.1, 17.1.0.2, 17.1.0.3, 17.1.1, 17.1.1.1, 17.1.1.2, 17.1.1.3, 17.1.1.4, 17.1.2, 17.1.2.1, 17.1.2.2, 17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5, 17.1.3.6, 17.5.0, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 17.5.1.10, 21.0.0, 21.0.0.1, 21.0.0.2, 21.0.0.3, 21.1.0, 21.1.0.1, 21.1.0.2, 21.1.0.3",
+      "versions": "17.1.0, 17.1.0.1, 17.1.0.2, 17.1.0.3, 17.1.1, 17.1.1.1, 17.1.1.2, 17.1.1.3, 17.1.1.4, 17.1.2, 17.1.2.1, 17.1.2.2, 17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5, 17.1.3.6, 17.1.3.7, 17.5.0, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 17.5.1.10, 17.5.1.11, 21.0.0, 21.0.0.1, 21.0.0.2, 21.0.0.3, 21.1.0, 21.1.0.1, 21.1.0.2, 21.1.0.3, 21.1.0.4",
       "product": "BIG-IP, BIG-IP LTM",
       "url": "https://cdn.f5.com/product/bugtracker/ID2534321.html",
       "date": "2026-09-30",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
       "id": "ID2533505",
       "headline_en": "Network Map loads very slowly on BIG-IP 17.5.x with large configurations",
       "headline_ja": "Network Map は、大規模な設定で BIG-IP 17.5.x 上で非常に遅くロードされます。",
-      "versions": "17.5.0, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 17.5.1.10",
+      "versions": "17.5.0, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 17.5.1.10, 17.5.1.11",
       "product": "BIG-IP, BIG-IP TMOS",
       "url": "https://cdn.f5.com/product/bugtracker/ID2533505.html",
       "date": "2026-09-30",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
       "id": "ID2524609",
       "headline_en": "Missing FDB entries for mac masquerade addresses for additional traffic groups may cause packet loss",
       "headline_ja": "追加のトラフィックグループ用のMACマスカレードアドレスのFDBエントリが欠如していると、パケットロスが発生する可能性があります。",
-      "versions": "17.5.1.9, 17.5.1.10",
+      "versions": "17.5.1.9, 17.5.1.10, 17.5.1.11",
       "product": "BIG-IP, BIG-IP TMOS",
       "url": "https://cdn.f5.com/product/bugtracker/ID2524609.html",
       "date": "2026-09-30",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
       "id": "ID2524317",
       "headline_en": "Error installing hotfix on iSeries appliances",
       "headline_ja": "iSeries アプライアンスのホットフィックスインストール中にエラーが発生しました",
-      "versions": "17.1.3.2, 17.1.3.4, 17.1.3.5, 17.1.3.6, 17.5.1.6, 17.5.1.8, 17.5.1.9, 17.5.1.10, 21.1.0.2, 21.1.0.3",
+      "versions": "17.1.3.2, 17.1.3.4, 17.1.3.5, 17.1.3.6, 17.1.3.7, 17.5.1.6, 17.5.1.8, 17.5.1.9, 17.5.1.10, 17.5.1.11, 21.1.0.2, 21.1.0.3, 21.1.0.4",
       "product": "BIG-IP, BIG-IP Install/Upgrade, BIG-IP TMOS",
       "url": "https://cdn.f5.com/product/bugtracker/ID2524317.html",
       "date": "2026-09-30",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
@@ -1178,7 +1178,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2505293.html",
       "date": "2026-09-30",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
@@ -1190,31 +1190,31 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2503533.html",
       "date": "2026-09-30",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
       "id": "ID2502029",
       "headline_en": "zxfrd should force DB commit when huge pages are low or dirty page count is high",
       "headline_ja": "zxfrd は、ヒュージページが不足しているか、ダーティページ数が多い場合にデータベースのコミットを強制すべきです。",
-      "versions": "17.1.3.5, 17.1.3.6, 17.5.1.9, 17.5.1.10, 21.1.0.2, 21.1.0.3",
+      "versions": "17.1.3.5, 17.1.3.6, 17.1.3.7, 17.5.1.9, 17.5.1.10, 17.5.1.11, 21.1.0.2, 21.1.0.3, 21.1.0.4",
       "product": "BIG-IP, BIG-IP DNS",
       "url": "https://cdn.f5.com/product/bugtracker/ID2502029.html",
       "date": "2026-09-30",
       "first_seen": "2026-11-12",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
       "id": "ID2502005",
       "headline_en": "zxfrd should log COW mmap failure through standard logging and exit without core dump",
       "headline_ja": "zxfrd は、COW mmap の失敗を標準のロギングで記録し、コアダンプせずに終了すべきです。",
-      "versions": "17.1.3.5, 17.1.3.6, 17.5.1.9, 17.5.1.10, 21.1.0.2, 21.1.0.3",
+      "versions": "17.1.3.5, 17.1.3.6, 17.1.3.7, 17.5.1.9, 17.5.1.10, 17.5.1.11, 21.1.0.2, 21.1.0.3, 21.1.0.4",
       "product": "BIG-IP, BIG-IP TMOS",
       "url": "https://cdn.f5.com/product/bugtracker/ID2502005.html",
       "date": "2026-09-30",
       "first_seen": "2026-11-12",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
@@ -1238,19 +1238,19 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2502361.html",
       "date": "2026-09-29",
       "first_seen": "2026-11-11",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
       "id": "ID2535289",
       "headline_en": "BIG-IP DNS resolver cache TCP messages flood logs",
       "headline_ja": "BIG-IP DNS リゾルバキャッシュ TCP メッセージ フラッド ログ",
-      "versions": "17.1.3.5, 17.1.3.6, 17.5.1.9, 17.5.1.10, 21.1.0.2, 21.1.0.3",
+      "versions": "17.1.3.5, 17.1.3.6, 17.1.3.7, 17.5.1.9, 17.5.1.10, 17.5.1.11, 21.1.0.2, 21.1.0.3, 21.1.0.4",
       "product": "BIG-IP, BIG-IP DNS",
       "url": "https://cdn.f5.com/product/bugtracker/ID2535289.html",
       "date": "2026-09-26",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
@@ -1262,7 +1262,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2502185.html",
       "date": "2026-09-26",
       "first_seen": "2026-11-12",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 9.8)",
@@ -1276,7 +1276,7 @@
       "kev": true,
       "epss": 0.2655,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
@@ -1295,12 +1295,12 @@
       "id": "ID2524745",
       "headline_en": "Serverside Client Hello's may rarely be delayed with SSL mirroring",
       "headline_ja": "サーバー側のクライアントハローは、SSLミラーリングによりまれに遅延することがあります。",
-      "versions": "17.1.0, 17.1.0.1, 17.1.0.2, 17.1.0.3, 17.1.1, 17.1.1.1, 17.1.1.2, 17.1.1.3, 17.1.1.4, 17.1.2, 17.1.2.1, 17.1.2.2, 17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5, 17.1.3.6, 17.5.0, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 17.5.1.10, 21.1.0, 21.1.0.1, 21.1.0.2, 21.1.0.3",
+      "versions": "17.1.0, 17.1.0.1, 17.1.0.2, 17.1.0.3, 17.1.1, 17.1.1.1, 17.1.1.2, 17.1.1.3, 17.1.1.4, 17.1.2, 17.1.2.1, 17.1.2.2, 17.1.3, 17.1.3.1, 17.1.3.2, 17.1.3.4, 17.1.3.5, 17.1.3.6, 17.1.3.7, 17.5.0, 17.5.1, 17.5.1.2, 17.5.1.3, 17.5.1.4, 17.5.1.5, 17.5.1.6, 17.5.1.8, 17.5.1.9, 17.5.1.10, 17.5.1.11, 21.1.0, 21.1.0.1, 21.1.0.2, 21.1.0.3, 21.1.0.4",
       "product": "BIG-IP, BIG-IP TMOS",
       "url": "https://cdn.f5.com/product/bugtracker/ID2524745.html",
       "date": "2026-09-19",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
@@ -1312,7 +1312,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2515105.html",
       "date": "2026-09-17",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
@@ -1324,7 +1324,7 @@
       "url": "https://cdn.f5.com/product/bugtracker/ID2503217.html",
       "date": "2026-09-10",
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "F5 Bug Tracker",
@@ -1350,7 +1350,7 @@
       "kev": false,
       "epss": 0.00468,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 3.1)",
@@ -1364,7 +1364,7 @@
       "kev": false,
       "epss": 0.0023,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -1378,7 +1378,7 @@
       "kev": false,
       "epss": 0.00573,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 8.8)",
@@ -1392,7 +1392,7 @@
       "kev": false,
       "epss": 0.00514,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 8.7)",
@@ -1406,7 +1406,7 @@
       "kev": false,
       "epss": 0.0048,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 8.7)",
@@ -1420,7 +1420,7 @@
       "kev": false,
       "epss": 0.0015,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 8.7)",
@@ -1434,7 +1434,7 @@
       "kev": false,
       "epss": 0.00248,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 8.7)",
@@ -1448,7 +1448,7 @@
       "kev": false,
       "epss": 0.00235,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 8.7)",
@@ -1462,7 +1462,7 @@
       "kev": false,
       "epss": 0.00235,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 8.7)",
@@ -1476,7 +1476,7 @@
       "kev": false,
       "epss": 0.00235,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 8.7)",
@@ -1490,7 +1490,7 @@
       "kev": false,
       "epss": 0.00156,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.9)",
@@ -1504,7 +1504,7 @@
       "kev": false,
       "epss": 0.00107,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -1518,7 +1518,7 @@
       "kev": false,
       "epss": 0.00263,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -1532,7 +1532,7 @@
       "kev": false,
       "epss": 0.00324,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -1546,7 +1546,7 @@
       "kev": false,
       "epss": 0.00324,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -1560,7 +1560,7 @@
       "kev": false,
       "epss": 0.00324,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -1574,7 +1574,7 @@
       "kev": false,
       "epss": 0.00263,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -1588,7 +1588,7 @@
       "kev": false,
       "epss": 0.003,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 6.7)",
@@ -1602,7 +1602,7 @@
       "kev": false,
       "epss": 0.00288,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 6.5)",
@@ -1616,7 +1616,7 @@
       "kev": false,
       "epss": 0.00203,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 6.5)",
@@ -1630,7 +1630,7 @@
       "kev": false,
       "epss": 0.00203,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 6.5)",
@@ -1644,7 +1644,7 @@
       "kev": false,
       "epss": 0.00277,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 5.4)",
@@ -1658,7 +1658,7 @@
       "kev": false,
       "epss": 0.00104,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 4.9)",
@@ -1672,7 +1672,7 @@
       "kev": false,
       "epss": 0.00886,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 4.4)",
@@ -1686,7 +1686,7 @@
       "kev": false,
       "epss": 0.00083,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 4.4)",
@@ -1700,7 +1700,7 @@
       "kev": false,
       "epss": 0.00083,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 4.3)",
@@ -1714,7 +1714,7 @@
       "kev": false,
       "epss": 0.00187,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -1728,7 +1728,7 @@
       "kev": false,
       "epss": 0.00332,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 5.9)",
@@ -1742,7 +1742,7 @@
       "kev": false,
       "epss": 0.00215,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 4.9)",
@@ -1756,7 +1756,7 @@
       "kev": false,
       "epss": 0.00366,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 3.3)",
@@ -1770,7 +1770,7 @@
       "kev": false,
       "epss": 0.00119,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 3.1)",
@@ -1784,7 +1784,7 @@
       "kev": false,
       "epss": 0.00187,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 9.8)",
@@ -1798,7 +1798,7 @@
       "kev": true,
       "epss": 0.02295,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 8.7)",
@@ -1812,7 +1812,7 @@
       "kev": false,
       "epss": 0.00393,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 8.7)",
@@ -1826,7 +1826,7 @@
       "kev": false,
       "epss": 0.00394,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -1840,7 +1840,7 @@
       "kev": false,
       "epss": 0.0037,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -1854,7 +1854,7 @@
       "kev": false,
       "epss": 0.00348,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -1868,7 +1868,7 @@
       "kev": false,
       "epss": 0.00348,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -1882,7 +1882,7 @@
       "kev": false,
       "epss": 0.00348,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -1896,7 +1896,7 @@
       "kev": false,
       "epss": 0.00368,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -1910,7 +1910,7 @@
       "kev": false,
       "epss": 0.00348,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -1924,7 +1924,7 @@
       "kev": false,
       "epss": 0.00384,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -1938,7 +1938,7 @@
       "kev": false,
       "epss": 0.00348,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -1952,7 +1952,7 @@
       "kev": false,
       "epss": 0.00348,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -1966,7 +1966,7 @@
       "kev": false,
       "epss": 0.00348,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -1980,7 +1980,7 @@
       "kev": false,
       "epss": 0.00348,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -1994,7 +1994,7 @@
       "kev": false,
       "epss": 0.00348,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 6.5)",
@@ -2008,7 +2008,7 @@
       "kev": false,
       "epss": 0.00313,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 6.5)",
@@ -2022,7 +2022,7 @@
       "kev": false,
       "epss": 0.00401,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 6.1)",
@@ -2036,7 +2036,7 @@
       "kev": false,
       "epss": 0.00202,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 6.1)",
@@ -2050,7 +2050,7 @@
       "kev": false,
       "epss": 0.00282,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 5.3)",
@@ -2064,7 +2064,7 @@
       "kev": false,
       "epss": 0.00405,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 5.3)",
@@ -2078,7 +2078,7 @@
       "kev": false,
       "epss": 0.00391,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 5.3)",
@@ -2092,7 +2092,7 @@
       "kev": false,
       "epss": 0.00246,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -2106,7 +2106,7 @@
       "kev": false,
       "epss": 0.00393,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -2120,7 +2120,7 @@
       "kev": false,
       "epss": 0.00393,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 8.7)",
@@ -2134,7 +2134,7 @@
       "kev": false,
       "epss": 0.24304,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -2148,7 +2148,7 @@
       "kev": false,
       "epss": 0.00445,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -2162,7 +2162,7 @@
       "kev": false,
       "epss": 0.00445,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -2176,7 +2176,7 @@
       "kev": false,
       "epss": 0.00445,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -2190,7 +2190,7 @@
       "kev": false,
       "epss": 0.00445,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 8.8)",
@@ -2204,7 +2204,7 @@
       "kev": false,
       "epss": 0.07103,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 8.0)",
@@ -2218,7 +2218,7 @@
       "kev": false,
       "epss": 0.00447,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -2232,7 +2232,7 @@
       "kev": false,
       "epss": 0.00425,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -2246,7 +2246,7 @@
       "kev": false,
       "epss": 0.00418,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -2260,7 +2260,7 @@
       "kev": false,
       "epss": 0.00425,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -2274,7 +2274,7 @@
       "kev": false,
       "epss": 0.00425,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -2288,7 +2288,7 @@
       "kev": false,
       "epss": 0.00449,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -2302,7 +2302,7 @@
       "kev": false,
       "epss": 0.00425,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 6.5)",
@@ -2316,7 +2316,7 @@
       "kev": false,
       "epss": 0.00406,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 4.4)",
@@ -2330,7 +2330,7 @@
       "kev": false,
       "epss": 0.00161,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 3.1)",
@@ -2344,7 +2344,7 @@
       "kev": false,
       "epss": 0.00143,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.2)",
@@ -2358,7 +2358,7 @@
       "kev": false,
       "epss": 0.10644,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -2372,7 +2372,7 @@
       "kev": false,
       "epss": 0.00481,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -2386,7 +2386,7 @@
       "kev": false,
       "epss": 0.00481,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 5.3)",
@@ -2400,7 +2400,7 @@
       "kev": false,
       "epss": 0.00448,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 4.3)",
@@ -2414,7 +2414,7 @@
       "kev": false,
       "epss": 0.00301,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 4.2)",
@@ -2428,7 +2428,7 @@
       "kev": false,
       "epss": 0.00154,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 8.0)",
@@ -2442,7 +2442,7 @@
       "kev": false,
       "epss": 0.00582,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -2456,7 +2456,7 @@
       "kev": false,
       "epss": 0.07163,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -2470,7 +2470,7 @@
       "kev": false,
       "epss": 0.00524,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -2484,7 +2484,7 @@
       "kev": false,
       "epss": 0.07086,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.4)",
@@ -2498,7 +2498,7 @@
       "kev": false,
       "epss": 0.00548,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.4)",
@@ -2512,7 +2512,7 @@
       "kev": false,
       "epss": 0.00205,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 6.8)",
@@ -2526,7 +2526,7 @@
       "kev": false,
       "epss": 0.00233,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 6.5)",
@@ -2540,7 +2540,7 @@
       "kev": false,
       "epss": 0.00461,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 6.1)",
@@ -2554,7 +2554,7 @@
       "kev": false,
       "epss": 0.00314,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 4.7)",
@@ -2568,7 +2568,7 @@
       "kev": false,
       "epss": 0.00272,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -2582,7 +2582,7 @@
       "kev": false,
       "epss": 0.00515,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -2596,7 +2596,7 @@
       "kev": false,
       "epss": 0.00515,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -2610,7 +2610,7 @@
       "kev": false,
       "epss": 0.00515,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -2624,7 +2624,7 @@
       "kev": false,
       "epss": 0.00515,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -2638,7 +2638,7 @@
       "kev": false,
       "epss": 0.00515,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -2652,7 +2652,7 @@
       "kev": false,
       "epss": 0.00515,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -2666,7 +2666,7 @@
       "kev": false,
       "epss": 0.00515,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.2)",
@@ -2680,7 +2680,7 @@
       "kev": false,
       "epss": 0.00497,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.1)",
@@ -2694,7 +2694,7 @@
       "kev": false,
       "epss": 0.00153,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 6.7)",
@@ -2708,7 +2708,7 @@
       "kev": false,
       "epss": 0.00178,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 6.0)",
@@ -2722,7 +2722,7 @@
       "kev": false,
       "epss": 0.00167,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 3.8)",
@@ -2736,7 +2736,7 @@
       "kev": false,
       "epss": 0.00302,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 9.8)",
@@ -2750,7 +2750,7 @@
       "kev": true,
       "epss": 0.96715,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 8.8)",
@@ -2764,7 +2764,7 @@
       "kev": true,
       "epss": 0.04262,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 9.9)",
@@ -2778,7 +2778,7 @@
       "kev": false,
       "epss": 0.0229,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 8.7)",
@@ -2792,7 +2792,7 @@
       "kev": false,
       "epss": 0.00533,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 8.1)",
@@ -2806,7 +2806,7 @@
       "kev": false,
       "epss": 0.00547,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.8)",
@@ -2820,7 +2820,7 @@
       "kev": false,
       "epss": 0.00157,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.4)",
@@ -2834,7 +2834,7 @@
       "kev": false,
       "epss": 0.00456,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.3)",
@@ -2848,7 +2848,7 @@
       "kev": false,
       "epss": 0.00154,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.2)",
@@ -2862,7 +2862,7 @@
       "kev": false,
       "epss": 0.00652,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 5.5)",
@@ -2876,7 +2876,7 @@
       "kev": false,
       "epss": 0.00184,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 5.5)",
@@ -2890,7 +2890,7 @@
       "kev": false,
       "epss": 0.00184,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 4.4)",
@@ -2904,7 +2904,7 @@
       "kev": false,
       "epss": 0.00188,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 4.4)",
@@ -2918,7 +2918,7 @@
       "kev": false,
       "epss": 0.00188,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 4.3)",
@@ -2932,7 +2932,7 @@
       "kev": false,
       "epss": 0.00298,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 6.8)",
@@ -2946,7 +2946,7 @@
       "kev": false,
       "epss": 0.00279,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 5.3)",
@@ -2960,7 +2960,7 @@
       "kev": false,
       "epss": 0.00172,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.8)",
@@ -2974,7 +2974,7 @@
       "kev": false,
       "epss": 0.00145,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -2988,7 +2988,7 @@
       "kev": false,
       "epss": 0.00387,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.1)",
@@ -3002,7 +3002,7 @@
       "kev": false,
       "epss": 0.00135,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 6.0)",
@@ -3016,7 +3016,7 @@
       "kev": false,
       "epss": 0.00176,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 5.4)",
@@ -3030,7 +3030,7 @@
       "kev": false,
       "epss": 0.00341,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -3044,7 +3044,7 @@
       "kev": false,
       "epss": 0.00387,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.4)",
@@ -3058,7 +3058,7 @@
       "kev": false,
       "epss": 0.00286,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 5.9)",
@@ -3072,7 +3072,7 @@
       "kev": false,
       "epss": 0.00219,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 4.3)",
@@ -3086,7 +3086,7 @@
       "kev": false,
       "epss": 0.01187,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 8.5)",
@@ -3100,7 +3100,7 @@
       "kev": false,
       "epss": 0.70782,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.8)",
@@ -3114,7 +3114,7 @@
       "kev": false,
       "epss": 0.00223,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -3128,7 +3128,7 @@
       "kev": false,
       "epss": 0.00644,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -3142,7 +3142,7 @@
       "kev": false,
       "epss": 0.01587,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -3156,7 +3156,7 @@
       "kev": false,
       "epss": 0.00644,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -3170,7 +3170,7 @@
       "kev": false,
       "epss": 0.00644,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -3184,7 +3184,7 @@
       "kev": false,
       "epss": 0.00644,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -3198,7 +3198,7 @@
       "kev": false,
       "epss": 0.00644,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -3212,7 +3212,7 @@
       "kev": false,
       "epss": 0.00644,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -3226,7 +3226,7 @@
       "kev": false,
       "epss": 0.00644,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -3240,7 +3240,7 @@
       "kev": false,
       "epss": 0.00644,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 6.5)",
@@ -3254,7 +3254,7 @@
       "kev": false,
       "epss": 0.00203,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 6.1)",
@@ -3268,7 +3268,7 @@
       "kev": false,
       "epss": 0.00357,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 5.9)",
@@ -3282,7 +3282,7 @@
       "kev": false,
       "epss": 0.00545,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 4.9)",
@@ -3296,7 +3296,7 @@
       "kev": false,
       "epss": 0.00535,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 8.8)",
@@ -3310,7 +3310,7 @@
       "kev": false,
       "epss": 0.92436,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 8.7)",
@@ -3324,7 +3324,7 @@
       "kev": false,
       "epss": 0.76866,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -3338,7 +3338,7 @@
       "kev": false,
       "epss": 0.00746,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -3352,7 +3352,7 @@
       "kev": false,
       "epss": 0.00746,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -3366,7 +3366,7 @@
       "kev": false,
       "epss": 0.00746,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -3380,7 +3380,7 @@
       "kev": false,
       "epss": 0.00746,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -3394,7 +3394,7 @@
       "kev": false,
       "epss": 0.00746,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -3408,7 +3408,7 @@
       "kev": false,
       "epss": 0.00746,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.2)",
@@ -3422,7 +3422,7 @@
       "kev": false,
       "epss": 0.01443,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 6.5)",
@@ -3436,7 +3436,7 @@
       "kev": false,
       "epss": 0.0072,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 6.5)",
@@ -3450,7 +3450,7 @@
       "kev": false,
       "epss": 0.0072,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 5.3)",
@@ -3464,7 +3464,7 @@
       "kev": false,
       "epss": 0.00746,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 4.9)",
@@ -3478,7 +3478,7 @@
       "kev": false,
       "epss": 0.0072,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 3.7)",
@@ -3492,7 +3492,7 @@
       "kev": false,
       "epss": 0.00312,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 8.7)",
@@ -3506,7 +3506,7 @@
       "kev": false,
       "epss": 0.00739,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 8.1)",
@@ -3520,7 +3520,7 @@
       "kev": false,
       "epss": 0.0069,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -3534,7 +3534,7 @@
       "kev": false,
       "epss": 0.00482,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -3548,7 +3548,7 @@
       "kev": false,
       "epss": 0.00784,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -3562,7 +3562,7 @@
       "kev": false,
       "epss": 0.00784,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -3576,7 +3576,7 @@
       "kev": false,
       "epss": 0.00784,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -3590,7 +3590,7 @@
       "kev": false,
       "epss": 0.01278,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -3604,7 +3604,7 @@
       "kev": false,
       "epss": 0.00784,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -3618,7 +3618,7 @@
       "kev": false,
       "epss": 0.00784,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -3632,7 +3632,7 @@
       "kev": false,
       "epss": 0.00784,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -3646,7 +3646,7 @@
       "kev": false,
       "epss": 0.00521,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.2)",
@@ -3660,7 +3660,7 @@
       "kev": false,
       "epss": 0.00912,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 6.8)",
@@ -3674,7 +3674,7 @@
       "kev": false,
       "epss": 0.02079,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 6.7)",
@@ -3688,7 +3688,7 @@
       "kev": false,
       "epss": 0.00193,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 5.9)",
@@ -3702,7 +3702,7 @@
       "kev": false,
       "epss": 0.00737,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 5.4)",
@@ -3716,7 +3716,7 @@
       "kev": false,
       "epss": 0.0072,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 4.8)",
@@ -3730,7 +3730,7 @@
       "kev": false,
       "epss": 0.00446,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 4.3)",
@@ -3744,7 +3744,7 @@
       "kev": false,
       "epss": 0.00758,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 3.7)",
@@ -3758,7 +3758,7 @@
       "kev": false,
       "epss": 0.00543,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 8.7)",
@@ -3772,7 +3772,7 @@
       "kev": false,
       "epss": 0.01519,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 8.0)",
@@ -3786,7 +3786,7 @@
       "kev": false,
       "epss": 0.00636,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.8)",
@@ -3800,7 +3800,7 @@
       "kev": false,
       "epss": 0.00208,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -3814,7 +3814,7 @@
       "kev": false,
       "epss": 0.0093,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -3828,7 +3828,7 @@
       "kev": false,
       "epss": 0.00762,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -3842,7 +3842,7 @@
       "kev": false,
       "epss": 0.0093,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -3856,7 +3856,7 @@
       "kev": false,
       "epss": 0.0093,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -3870,7 +3870,7 @@
       "kev": false,
       "epss": 0.0093,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -3884,7 +3884,7 @@
       "kev": false,
       "epss": 0.00536,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -3898,7 +3898,7 @@
       "kev": false,
       "epss": 0.0093,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.5)",
@@ -3912,7 +3912,7 @@
       "kev": false,
       "epss": 0.00956,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.3)",
@@ -3926,7 +3926,7 @@
       "kev": false,
       "epss": 0.003,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 7.2)",
@@ -3940,7 +3940,7 @@
       "kev": false,
       "epss": 0.00904,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 6.8)",
@@ -3954,7 +3954,7 @@
       "kev": false,
       "epss": 0.00787,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 6.5)",
@@ -3968,7 +3968,7 @@
       "kev": false,
       "epss": 0.00771,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 6.5)",
@@ -3982,7 +3982,7 @@
       "kev": false,
       "epss": 0.01418,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 5.9)",
@@ -3996,7 +3996,7 @@
       "kev": false,
       "epss": 0.00819,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 5.9)",
@@ -4010,7 +4010,7 @@
       "kev": false,
       "epss": 0.00816,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 5.9)",
@@ -4024,7 +4024,7 @@
       "kev": false,
       "epss": 0.00819,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 5.5)",
@@ -4038,7 +4038,7 @@
       "kev": false,
       "epss": 0.00233,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 5.3)",
@@ -4052,7 +4052,7 @@
       "kev": false,
       "epss": 0.00915,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 5.3)",
@@ -4066,7 +4066,7 @@
       "kev": false,
       "epss": 0.00915,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 5.3)",
@@ -4080,7 +4080,7 @@
       "kev": false,
       "epss": 0.00889,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 5.3)",
@@ -4094,7 +4094,7 @@
       "kev": false,
       "epss": 0.00915,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 4.3)",
@@ -4108,7 +4108,7 @@
       "kev": false,
       "epss": 0.01574,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     },
     {
       "source": "NVD (CVSS 4.3)",
@@ -4122,7 +4122,7 @@
       "kev": false,
       "epss": 0.00485,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-17"
+      "last_seen": "2026-11-18"
     }
   ]
 }
