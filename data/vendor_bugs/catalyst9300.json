@@ -1,6 +1,6 @@
 {
   "label": "Catalyst 9300",
-  "generated_at": "2026-11-25T07:03:10+00:00",
+  "generated_at": "2026-11-26T06:51:10+00:00",
   "count": 2,
   "retention_days": 365,
   "rows": [
@@ -14,9 +14,9 @@
       "date": "2023-03-23",
       "cvss": 6.1,
       "kev": false,
-      "epss": 0.00375,
+      "epss": 0.00525,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-25"
+      "last_seen": "2026-11-26"
     },
     {
       "source": "NVD (CVSS 6.7)",
@@ -30,7 +30,7 @@
       "kev": false,
       "epss": 0.0024,
       "first_seen": "2026-11-07",
-      "last_seen": "2026-11-25"
+      "last_seen": "2026-11-26"
     }
   ]
 }
